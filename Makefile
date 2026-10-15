@@ -78,8 +78,8 @@ claims-check:
 submission-check:
 	$(UV) run python scripts/submission_check.py
 
-offline-demo:
-	$(call EXP,e10_offline)
+offline-demo:  ## on the droplet, as root: both guard layers
+	$(UV) run python -m eval.e10_offline
 
 e01 e02 e03 e04 e05 e06 e07 e08 e09 e10 e11 e12 e13 e14 e15 e16:
 	$(UV) run python -m eval.run $@

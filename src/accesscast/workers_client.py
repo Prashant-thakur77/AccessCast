@@ -59,8 +59,10 @@ def run_worker(
     }
     atomic_write_text(req_p, json.dumps(req, ensure_ascii=False))
     env = {**os.environ, "PYTHONNOUSERSITE": "1"}
+    # -E ignores PYTHONPATH; in offline mode the guard's sitecustomize hook must load, so keep PYTHONPATH then.
+    flags = ["-s"] if os.environ.get("ACCESSCAST_OFFLINE") == "1" else ["-E", "-s"]
     proc = subprocess.Popen(
-        [str(py), "-E", "-s", str(script), str(req_p), str(resp_p)],
+        [str(py), *flags, str(script), str(req_p), str(resp_p)],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.PIPE,
         text=True,
