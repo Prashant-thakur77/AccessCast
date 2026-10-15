@@ -100,6 +100,18 @@
   {
    "value": -16,
    "reason": "web loudness target −16 LUFS (constants.py LUFS_WEB)"
+  },
+  {
+   "value": 2.1,
+   "reason": "WCAG version number (WCAG 2.1)"
+  },
+  {
+   "value": 82,
+   "reason": "Italian decree identifier D.Lgs. 82/2022"
+  },
+  {
+   "value": 2.2,
+   "reason": "WCAG version number (WCAG 2.2)"
   }
  ]
 }
