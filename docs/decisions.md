@@ -132,3 +132,9 @@ Six NASA Goddard explainers (eclipse ×2, comet, exoplanets, a Worldview screen 
 
 ## D-015 Scene length clamp splits evenly (16 Oct 2026)
 PLAN §9 S1 says scenes longer than 45 s split "at the largest visual change". The first implementation splits them evenly into ≤ 45 s parts. Revisit if dev clips show splits landing mid-action.
+
+## D-016 Local integration runs with Gemma 4 E4B on Ollama (16 Oct 2026)
+Without the droplet, real-mode runs (not fake mode) use Ollama 0.33.2 serving `gemma4:e4b` on the development laptop through its OpenAI-compatible API, with `whisper-base` on CPU. Purpose: catch integration bugs (request shapes, JSON handling, worker paths, prompt ambiguities) before GPU time is spent. These runs are never evidence: they use a different model size and server, and their outputs stay in git-ignored `projects/_local_real/`. They already found three bugs (relative worker paths, frame times used as frame numbers, and the ASR model setting not reaching the worker; see `docs/incidents.md`).
+
+## D-017 W3C DAPT export is best effort (16 Oct 2026)
+`render` writes W3C DAPT TTML scripts (`asRecorded` description, `originalTranscript`, `translatedTranscript`) into `render/dapt/`. DAPT is a Candidate Recommendation Draft; we validate well-formedness only and say so. It is a P2 extra for broadcasters, not a claim of conformance.
