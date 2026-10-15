@@ -12,11 +12,12 @@ mkdirSync(out, { recursive: true });
 const SITE = process.env.SITE || "http://127.0.0.1:8080";
 const REVIEW = process.env.REVIEW || "";
 const PROJECT = process.env.PROJECT || "";
-const size = { width: 1920, height: 1080 };
+const size = { width: 1280, height: 720 }; // recorded larger on screen, scaled to 1080p
+const video = { width: 1920, height: 1080 };
 
 async function segment(name, fn) {
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: size, recordVideo: { dir: out, size }, deviceScaleFactor: 1 });
+  const ctx = await browser.newContext({ viewport: size, recordVideo: { dir: out, size: video }, deviceScaleFactor: 1.5 });
   const page = await ctx.newPage();
   try {
     await fn(page);
