@@ -120,6 +120,7 @@ def translate_ad(project: ProjectOpt) -> None:
 def review(port: int = 8081, host: str = "127.0.0.1") -> None:
     """Start the review app (keyboard-first; binds to localhost)."""
     import uvicorn
+
     from accesscast.review.server import create_app
 
     uvicorn.run(create_app(load_settings()), host=host, port=port, log_level="info")

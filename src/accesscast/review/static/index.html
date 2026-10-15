@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>AccessCast review</title>
+<link rel="stylesheet" href="review.css">
+<script src="review.js" defer></script>
+</head>
+<body>
+<nav class="skip" aria-label="Skip links">
+  <a href="#items-panel">Skip to the list of lines</a>
+  <a href="#centre-panel">Skip to the video and timeline</a>
+  <a href="#detail-panel">Skip to the line details</a>
+</nav>
+
+<header>
+<div class="top">
+  <div class="top-title">
+    <h1>AccessCast review</h1>
+    <p id="project-title" class="muted"></p>
+  </div>
+  <div class="top-controls">
+    <div class="field inline">
+      <label for="reviewer">Your name (saved with each decision)</label>
+      <input id="reviewer" type="text" autocomplete="name" maxlength="40">
+    </div>
+    <button type="button" id="btn-complete" disabled>Mark review complete</button>
+    <button type="button" id="btn-render" disabled>Render</button>
+    <button type="button" id="btn-help" aria-haspopup="dialog">Keys (?)</button>
+  </div>
+</div>
+<p id="fake-banner" class="banner" hidden>Demo fixture: canned model outputs. Nothing here came from a live model.</p>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<div id="gate-result" class="gate-result" hidden></div>
+</header>
+
+<main id="main">
+  <section id="picker" class="picker" aria-labelledby="picker-h" hidden>
+    <h2 id="picker-h">Choose a project</h2>
+    <ul id="project-list" class="project-list"></ul>
+  </section>
+
+  <div id="workspace" class="workspace" hidden>
+    <section id="items-panel" class="panel" aria-labelledby="items-h" tabindex="-1">
+      <h2 id="items-h">Lines to review <span id="pending-badge" class="badge"></span></h2>
+      <div class="filters" role="group" aria-labelledby="status-filter-label">
+        <p id="status-filter-label" class="filter-label">Show by status</p>
+        <div id="status-filters" class="filter-buttons"></div>
+      </div>
+      <div class="filters" role="group" aria-labelledby="kind-filter-label">
+        <p id="kind-filter-label" class="filter-label">Show by kind</p>
+        <div id="kind-filters" class="filter-buttons"></div>
+      </div>
+      <button type="button" id="btn-lowest">Jump to lowest confidence (l)</button>
+      <p id="list-summary" class="muted"></p>
+      <ul id="item-list" class="item-list" aria-label="Lines, sorted by time"></ul>
+    </section>
+
+    <section id="centre-panel" class="panel" aria-labelledby="centre-h" tabindex="-1">
+      <h2 id="centre-h">Video and timeline</h2>
+      <video id="video" controls preload="metadata" playsinline aria-label="Source video">
+        <p>Your browser cannot play this video.</p>
+      </video>
+      <p id="video-time" class="muted" aria-hidden="true"></p>
+      <h3 id="frames-h">Evidence frames for this line</h3>
+      <p id="frames-note" class="muted"></p>
+      <ul id="frames" class="frames" aria-labelledby="frames-h"></ul>
+
+      <h3 id="timeline-h">Timeline</h3>
+      <p class="muted">The picture below shows words, pauses and lines over time. The same timeline is listed as text after it.</p>
+      <div id="timeline" class="timeline" role="img" aria-label="Timeline picture. Use the Timeline as text section below to read it."></div>
+      <details id="timeline-text" class="timeline-text">
+        <summary>Timeline as text</summary>
+        <div id="timeline-text-body"></div>
+      </details>
+    </section>
+
+    <section id="detail-panel" class="panel" aria-labelledby="detail-h" tabindex="-1">
+      <h2 id="detail-h">Line details</h2>
+      <p id="no-item" class="muted">Choose a line from the list.</p>
+      <div id="detail" hidden>
+        <p id="item-head" class="item-head"></p>
+        <p id="item-save" class="muted"></p>
+
+        <div id="source-wrap" hidden>
+          <h3>Text it came from</h3>
+          <p id="source-text" class="quote"></p>
+        </div>
+
+        <h3>First draft</h3>
+        <p id="draft" class="quote"></p>
+
+        <div class="field">
+          <label for="final">Final text (edit here; saved as you type)</label>
+          <textarea id="final" rows="4" aria-describedby="meter"></textarea>
+        </div>
+        <p id="meter" class="meter"></p>
+        <div class="meter-bar" aria-hidden="true"><span id="meter-fill"></span></div>
+
+        <div id="override-wrap" class="override" hidden>
+          <div class="check">
+            <input type="checkbox" id="override">
+            <label for="override">Override: approve even though checks fail</label>
+          </div>
+          <div class="field">
+            <label for="override-reason">Reason for the override (required, logged)</label>
+            <input type="text" id="override-reason" maxlength="300">
+          </div>
+        </div>
+
+        <div class="actions" role="group" aria-label="Decide this line">
+          <button type="button" id="btn-approve" class="approve">Approve (a)</button>
+          <button type="button" id="btn-reject">Reject (r)</button>
+          <button type="button" id="btn-revise">Needs revision (n)</button>
+          <button type="button" id="btn-edit">Edit (e)</button>
+          <button type="button" id="btn-context">Play in context ±2 s (p)</button>
+          <button type="button" id="btn-hear">Hear it (h)</button>
+        </div>
+
+        <h3>Problems found</h3>
+        <div id="findings"></div>
+
+        <div id="bt-wrap" hidden>
+          <h3>Back-translation into English</h3>
+          <p id="back-translation" class="quote" lang="en"></p>
+        </div>
+
+        <h3>Facts used</h3>
+        <ul id="facts"></ul>
+
+        <h3>Confidence</h3>
+        <div id="confidence"></div>
+
+        <h3>Repair history</h3>
+        <ol id="repairs" class="repairs"></ol>
+      </div>
+    </section>
+  </div>
+</main>
+
+<dialog id="help" aria-labelledby="help-h">
+  <h2 id="help-h">Keys</h2>
+  <p>Keys work anywhere except while you type in a text field. Press Esc in a text field to go back to the list of lines. Use Enter to press a button.</p>
+  <table>
+    <caption class="visually-hidden">Keyboard shortcuts</caption>
+    <thead><tr><th scope="col">Key</th><th scope="col">What it does</th></tr></thead>
+    <tbody>
+      <tr><th scope="row"><kbd>Space</kbd></th><td>Play or pause the video</td></tr>
+      <tr><th scope="row"><kbd>,</kbd> and <kbd>.</kbd></th><td>One frame back or forward</td></tr>
+      <tr><th scope="row"><kbd>[</kbd> and <kbd>]</kbd></th><td>Previous or next line</td></tr>
+      <tr><th scope="row"><kbd>a</kbd></th><td>Approve</td></tr>
+      <tr><th scope="row"><kbd>r</kbd></th><td>Reject</td></tr>
+      <tr><th scope="row"><kbd>n</kbd></th><td>Needs revision</td></tr>
+      <tr><th scope="row"><kbd>e</kbd></th><td>Edit the final text</td></tr>
+      <tr><th scope="row"><kbd>p</kbd></th><td>Play the line in context, 2 seconds either side</td></tr>
+      <tr><th scope="row"><kbd>h</kbd></th><td>Hear it: make the voice for the current text and play it with 2 seconds of the video before and after</td></tr>
+      <tr><th scope="row"><kbd>l</kbd></th><td>Jump to the waiting line with the lowest confidence</td></tr>
+      <tr><th scope="row"><kbd>?</kbd></th><td>Open this list</td></tr>
+      <tr><th scope="row"><kbd>Esc</kbd></th><td>Close this list, or leave a text field</td></tr>
+    </tbody>
+  </table>
+  <form method="dialog"><button type="submit" id="help-close">Close</button></form>
+</dialog>
+
+<audio id="clip" preload="none" aria-hidden="true"></audio>
+</body>
+</html>

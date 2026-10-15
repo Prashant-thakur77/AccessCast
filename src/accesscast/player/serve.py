@@ -37,7 +37,7 @@ class RangeHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
         self.send_header("Content-Length", str(end - start + 1))
         self.end_headers()
-        self._remaining = end - start + 1
+        self._remaining: int | None = end - start + 1
         return f
 
     def copyfile(self, source, outputfile):  # type: ignore[no-untyped-def]

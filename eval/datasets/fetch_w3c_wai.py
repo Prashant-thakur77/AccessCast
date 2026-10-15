@@ -17,7 +17,6 @@ import shutil
 import subprocess
 import sys
 import urllib.request
-from pathlib import Path
 
 from accesscast.config import REPO_ROOT
 from accesscast.events import now_iso

@@ -149,7 +149,7 @@ def main() -> int:
                     measured = M.stem_line_spans(stem, expected)
                     n_fit_cap = n_fit_energy = 0
                     for lid, span in measured.items():
-                        ok_cap, worst_cap, why_cap = M.fits(span, cues) if cues else (None, None, "no captions")
+                        ok_cap, worst_cap, _why = M.fits(span, cues) if cues else (None, None, "no captions")
                         ok_en, worst_en, _ = M.fits(span, energy)
                         n_fit_cap += int(bool(ok_cap))
                         n_fit_energy += int(ok_en)
