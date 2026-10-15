@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="t d" font-family="DejaVu Sans, sans-serif">
+  <title id="t">AccessCast architecture</title>
+  <desc id="d">A video goes through analysis (ingest, shots and scenes, words with Whisper and forced alignment, a Gemma 4 E4B transcript cross-check and sound labels, the gap map, and Gemma 4 31B visual evidence). Then description is planned in code, written by Gemma 4 31B, checked by code and repaired by Gemma up to three times. Captions, easy-read, Hindi and Italian versions follow the same write, check and repair path. A person approves lines in the review app. A server-side gate refuses to render while anything is pending. Each audience version is rendered and checked, then published to the static player site. All model work runs on one AMD Instinct MI300X.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3b4a6b"/></marker>
+    <style>
+      .box{fill:#ffffff;stroke:#3b4a6b;stroke-width:2;rx:10}
+      .gem{fill:#fff4d6;stroke:#b07d00;stroke-width:2}
+      .code{fill:#e3f1ff;stroke:#2c6db5;stroke-width:2}
+      .hum{fill:#e6f6e9;stroke:#2e7d32;stroke-width:2}
+      .t{font-size:16px;fill:#13203a}
+      .s{font-size:13px;fill:#3b4a6b}
+      .h{font-size:20px;font-weight:bold;fill:#13203a}
+      .l{stroke:#3b4a6b;stroke-width:2;fill:none;marker-end:url(#a)}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="760" fill="#f7f9fc"/>
+  <rect x="20" y="20" width="1160" height="720" rx="18" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="40" y="52" class="h">One AMD Instinct MI300X (192 GB)</text>
+
+  <text x="40" y="96" class="t" font-weight="bold">1. Analyse once</text>
+  <rect x="40" y="110" width="150" height="54" class="code" rx="10"/><text x="115" y="142" text-anchor="middle" class="t">Ingest</text>
+  <rect x="210" y="110" width="170" height="54" class="code" rx="10"/><text x="295" y="134" text-anchor="middle" class="t">Shots, scenes</text><text x="295" y="153" text-anchor="middle" class="s">PySceneDetect + rules</text>
+  <rect x="400" y="110" width="190" height="54" class="code" rx="10"/><text x="495" y="134" text-anchor="middle" class="t">Words + timing</text><text x="495" y="153" text-anchor="middle" class="s">Whisper + forced alignment</text>
+  <rect x="610" y="110" width="190" height="54" class="gem" rx="10"/><text x="705" y="134" text-anchor="middle" class="t">Gemma 4 E4B listens</text><text x="705" y="153" text-anchor="middle" class="s">transcript check, sounds</text>
+  <rect x="820" y="110" width="150" height="54" class="code" rx="10"/><text x="895" y="134" text-anchor="middle" class="t">Gap map</text><text x="895" y="153" text-anchor="middle" class="s">pauses in dialogue</text>
+  <rect x="990" y="110" width="170" height="54" class="gem" rx="10"/><text x="1075" y="134" text-anchor="middle" class="t">Gemma 4 31B looks</text><text x="1075" y="153" text-anchor="middle" class="s">visible facts, temp 0</text>
+  <path class="l" d="M190 137 H208"/><path class="l" d="M380 137 H398"/><path class="l" d="M590 137 H608"/><path class="l" d="M800 137 H818"/><path class="l" d="M970 137 H988"/>
+
+  <text x="40" y="226" class="t" font-weight="bold">2. Write, check, repair (per audience)</text>
+  <rect x="40" y="240" width="190" height="60" class="code" rx="10"/><text x="135" y="266" text-anchor="middle" class="t">Plan in code</text><text x="135" y="286" text-anchor="middle" class="s">which pause, word budget</text>
+  <rect x="260" y="240" width="190" height="60" class="gem" rx="10"/><text x="355" y="266" text-anchor="middle" class="t">Gemma 4 31B writes</text><text x="355" y="286" text-anchor="middle" class="s">only from the facts</text>
+  <rect x="480" y="240" width="220" height="60" class="code" rx="10"/><text x="590" y="266" text-anchor="middle" class="t">Code checks every line</text><text x="590" y="286" text-anchor="middle" class="s">timing, names, claims, sounds</text>
+  <rect x="730" y="240" width="190" height="60" class="gem" rx="10"/><text x="825" y="266" text-anchor="middle" class="t">Gemma repairs</text><text x="825" y="286" text-anchor="middle" class="s">up to 3 times</text>
+  <path class="l" d="M230 270 H258"/><path class="l" d="M450 270 H478"/><path class="l" d="M700 262 H728"/><path class="l" d="M728 282 H702"/>
+  <rect x="950" y="240" width="210" height="60" class="box" rx="10"/><text x="1055" y="266" text-anchor="middle" class="t">Confidence in code</text><text x="1055" y="286" text-anchor="middle" class="s">never asked of the model</text>
+  <path class="l" d="M920 270 H948"/>
+  <text x="40" y="340" class="s">Same path for: description (en, hi, it) · SDH captions (rules only) · easy-read · Hindi and Italian subtitles and voice-over</text>
+
+  <text x="40" y="396" class="t" font-weight="bold">3. A person decides what the public hears</text>
+  <rect x="40" y="410" width="330" height="70" class="hum" rx="10"/><text x="205" y="438" text-anchor="middle" class="t">Review app (keyboard first)</text><text x="205" y="460" text-anchor="middle" class="s">approve, edit, reject; live re-check</text>
+  <rect x="410" y="410" width="330" height="70" class="code" rx="10"/><text x="575" y="438" text-anchor="middle" class="t">Render gate on the server</text><text x="575" y="460" text-anchor="middle" class="s">refuses while any line is pending</text>
+  <rect x="780" y="410" width="380" height="70" class="code" rx="10"/><text x="970" y="438" text-anchor="middle" class="t">Render each version, check it</text><text x="970" y="460" text-anchor="middle" class="s">duck, loudness, extended timeline, tracks</text>
+  <path class="l" d="M370 445 H408"/><path class="l" d="M740 445 H778"/>
+
+  <text x="40" y="536" class="t" font-weight="bold">4. Viewers choose who's watching</text>
+  <rect x="40" y="550" width="1120" height="70" class="box" rx="10"/>
+  <text x="600" y="580" text-anchor="middle" class="t">Static player site, always awake: "I can't see the screen" · "I can't hear" · "Simpler words, please" · हिन्दी · Italiano</text>
+  <text x="600" y="602" text-anchor="middle" class="s">plus "What the models decided" for every line, and report.json, decisions.json, cost.json</text>
+  <path class="l" d="M970 480 V548"/>
+
+  <rect x="40" y="650" width="22" height="16" class="gem"/><text x="70" y="663" class="s">Gemma 4 (vLLM on ROCm)</text>
+  <rect x="260" y="650" width="22" height="16" class="code"/><text x="290" y="663" class="s">Code and other models (Whisper, aligner, Kokoro TTS, ffmpeg)</text>
+  <rect x="740" y="650" width="22" height="16" class="hum"/><text x="770" y="663" class="s">A person</text>
+  <text x="40" y="710" class="s">Every stage reads and writes files under projects/&lt;sha12&gt;/. Workers that load torch run as separate processes.</text>
+</svg>
