@@ -63,7 +63,7 @@ def stage(
     captions | voiceover | ad_translate | review_init."""
     from accesscast import pipeline as P
 
-    fns = {"shots": P.stage_shots, "asr": P.stage_asr, "asr_crosscheck": P.stage_asr_crosscheck,
+    fns: dict[str, Any] = {"shots": P.stage_shots, "asr": P.stage_asr, "asr_crosscheck": P.stage_asr_crosscheck,
            "sounds": P.stage_sounds, "gaps": P.stage_gaps, "evidence": P.stage_evidence,
            "describe": P.stage_describe, "tts": P.stage_tts, "captions": P.stage_captions,
            "voiceover": P.stage_voiceover, "ad_translate": P.stage_ad_translate, "review_init": P.stage_review_init}

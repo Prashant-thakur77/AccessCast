@@ -10,7 +10,7 @@ Two modes:
 from __future__ import annotations
 
 import shutil
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -58,6 +58,10 @@ def _clip_end(it: Item) -> int:
 
 def _publishable(it: Item, mode: str) -> bool:
     return it.status in PUBLISHABLE
+
+
+def _remapper(rows: list[dict[str, Any]]) -> Callable[[int], int]:
+    return lambda ms: remap_ms(rows, ms)
 
 
 def run_gate(run: Run, versions: Sequence[str]) -> gate.GateResult:
@@ -151,7 +155,7 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
         approved_ids = [i.id for i in [*vo, *std_ad, *ext_ad]]
         if ext_clips:
             rows = M.mix_extended(master, ext_clips, [*vo_clips, *ad_clips], mixed, stem, tmp)
-            expected_ms = int(rows[-1]["output_end_ms"])
+            expected_ms = int(str(rows[-1]["output_end_ms"]))
             write_jsonl(rdir / f"source_to_output.{v}.jsonl", rows)
         else:
             M.mix_standard(master, [*vo_clips, *ad_clips], mixed, stem, tmp)
@@ -160,7 +164,7 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
             render_extended(video, normed, rows, out, watermark=watermark)
             for name in spec["tracks"]:  # remap tracks onto the extended timeline
                 src_items = track_items[name]
-                write_vtt(tdir / f"{name}.{v}.vtt", src_items, remap=lambda ms, r=rows: remap_ms(r, ms),
+                write_vtt(tdir / f"{name}.{v}.vtt", src_items, remap=_remapper(rows),
                           end_of=_clip_end if name.startswith("desc") else None, header_note=note)
         else:
             mux_standard(video, normed, out, watermark=watermark)

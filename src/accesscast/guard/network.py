@@ -90,11 +90,11 @@ def install() -> None:
         _record("create_connection", address)
         raise NetworkBlocked(f"offline guard blocked connection to {address}")
 
-    socket.socket.connect = connect  # type: ignore[method-assign]
-    socket.socket.connect_ex = connect_ex  # type: ignore[method-assign]
+    socket.socket.connect = connect  # type: ignore[method-assign,assignment]
+    socket.socket.connect_ex = connect_ex  # type: ignore[method-assign,assignment]
     socket.socket.sendto = sendto  # type: ignore[method-assign,assignment]
     socket.getaddrinfo = getaddrinfo
-    socket.create_connection = create_connection  # type: ignore[assignment]
+    socket.create_connection = create_connection
     os.environ.update(OFFLINE_ENV)
     _INSTALLED = True
 
