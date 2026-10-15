@@ -8,20 +8,20 @@ Gemma 4 on AMD Instinct MI300X · AMD Developer Hackathon ACT III · Create a Ne
 ---
 <!-- slide: problem -->
 # Most video says nothing to people who can't see it
-- <pending: cited.gbd.blind> people are blind and <pending: cited.gbd.mod_severe> have moderate to severe vision loss.
-- <pending: cited.who.hearing> people need rehabilitation for disabling hearing loss.
-- <pending: cited.oecd.literacy> of adults read at or below the lowest literacy level.
-- The largest free archive of described video holds about <pending: cited.market.youdescribe_hours> hours. YouTube received <pending: cited.market.youtube_uploads> hours a minute.
+- 43.3 million people are blind and 295 million have moderate to severe vision loss.
+- 430 million people need rehabilitation for disabling hearing loss.
+- 26% of adults read at or below the lowest literacy level.
+- The largest free archive of described video holds about 310 hours hours. YouTube received 500 hours hours a minute.
 
 ---
 <!-- slide: law -->
 # The law already asks for it
 | Where | Rule | When |
 |---|---|---|
-| EU | European Accessibility Act | <pending: cited.law.eaa_date> |
-| Italy | D.Lgs. 82/2022, fines <pending: cited.law.italy_fines> | in force |
-| India | MIB accessibility guidelines for OTT | <pending: cited.law.india_mib> |
-| US | ADA Title II web rule (WCAG 2.1 AA) | <pending: cited.law.ada_title2> |
+| EU | European Accessibility Act | 28 June 2025 |
+| Italy | D.Lgs. 82/2022, fines €5,000 to €40,000 | in force |
+| India | MIB accessibility guidelines for OTT | 6 February 2026 |
+| US | ADA Title II web rule (WCAG 2.1 AA) | 26 April 2027 |
 
 ---
 <!-- slide: product -->

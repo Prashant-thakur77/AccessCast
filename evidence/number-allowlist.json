@@ -66,10 +66,6 @@
    "reason": "MI300X memory size in GB (AMD product spec)"
   },
   {
-   "value": 1.99,
-   "reason": "AMD Developer Cloud MI300X list price per hour (event page)"
-  },
-  {
    "value": 2026,
    "reason": "year"
   },

@@ -997,7 +997,7 @@ Fails unless: README line 1 has only claim-backed numbers; every §5 must-have h
 ### 19.1 Demo video (≈3 min 30 s; check the form's limit)
 | Time | Picture | Words (plain, short) |
 |---|---|---|
-| 0:00–0:12 | Black screen; 8 s of a dev clip's audio only (NASA, Prelinger or our own recording; never a W3C excerpt). Then the same 8 s with AccessCast's description. | "43.9 million people are blind, and 295 million more have moderate to severe vision loss. For many of them, this is what a video sounds like. … And this is the same video with AccessCast." |
+| 0:00–0:12 | Black screen; 8 s of a dev clip's audio only (NASA, Prelinger or our own recording; never a W3C excerpt). Then the same 8 s with AccessCast's description. | "43.3 million people are blind, and 295 million more have moderate to severe vision loss. For many of them, this is what a video sounds like. … And this is the same video with AccessCast." |
 | 0:12–0:30 | One number at a time: the E1 headline; then GPU cost plus review minutes per minute of video | "On videos it was never tuned on…" (read the headline) |
 | 0:30–1:20 | Player: "Same 20 seconds, five ways" — blind (standard, then extended), deaf (SDH), simpler words (pause-to-read), Hindi, Italian | "One video. Five ways to watch. Same analysis, so they never disagree." |
 | 1:20–2:00 | "What the models decided" drawer; one line: Gemma's draft names a stranger and runs long → AD009 + AD007 fire → Gemma repairs → reviewer approves with the keyboard; render gate refuses while one line is pending | "Gemma writes. Code checks. Gemma fixes. A person approves." |
@@ -1010,7 +1010,7 @@ Fails unless: README line 1 has only claim-backed numbers; every §5 must-have h
 
 ### 19.2 Slide deck (12 slides; PDF + source in `docs/deck/`)
 1. Title + headline number
-2. What a video is like without description (GBD 2019 / Lancet: 43.9 million blind and 295 million with moderate-to-severe vision loss; WHO: 430 million with disabling hearing loss; OECD PIAAC 2023: 26% of adults at or below literacy Level 1, Italy 35%; the largest free description archive, YouDescribe, holds about 310 hours, while YouTube received over 500 hours per minute in 2019)
+2. What a video is like without description (GBD 2019 / Lancet: 43.3 million blind and 295 million with moderate-to-severe vision loss; WHO: 430 million with disabling hearing loss; OECD PIAAC 2023: 26% of adults at or below literacy Level 1, Italy 35%; the largest free description archive, YouDescribe, holds about 310 hours, while YouTube received over 500 hours per minute in 2019)
 3. The law and its dates (EAA, Italy, India, US)
 4. AccessCast: one video, five experiences (picture)
 5. How it works (pipeline; what Gemma does at each step)
@@ -1049,7 +1049,7 @@ Page, README, JUDGES.md, deck and video must show the same numbers. `make claims
 ## 20. Business case
 
 ### 20.1 The problem in numbers (sourced)
-- WHO (10 Feb 2026): at least 2.2 billion people have a near or distance vision impairment. GBD 2019 / Lancet Global Health: 43.9 million blind; 295 million moderate-to-severe.
+- WHO (10 Feb 2026): at least 2.2 billion people have a near or distance vision impairment. GBD 2019 / Lancet Global Health: 43.3 million blind; 295 million moderate-to-severe.
 - WHO (3 Mar 2026): 430 million people need rehabilitation for disabling hearing loss.
 - OECD PIAAC 2023: 26% of adults at or below Level 1 in literacy; Italy 35%.
 - About 80% of caption users are not deaf or hard of hearing (Ofcom, via 3Play).
