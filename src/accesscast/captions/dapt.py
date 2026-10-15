@@ -8,7 +8,7 @@ draft spec; validated here for XML well-formedness only, and labelled as such in
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -29,7 +29,8 @@ def _clock(ms: int) -> str:
     return f"{max(0, ms) / 1000:.3f}s"
 
 
-def build_dapt(items: Sequence[Item], *, script_type: str, represents: str, lang: str, end_of=None) -> str:  # type: ignore[no-untyped-def]
+def build_dapt(items: Sequence[Item], *, script_type: str, represents: str, lang: str,
+               end_of: Callable[[Item], int] | None = None) -> str:
     tt = ET.Element(f"{{{TT}}}tt", {
         f"{{{XML}}}lang": lang, f"{{{TTP}}}contentProfiles": PROFILE, f"{{{DAPTM}}}scriptType": script_type,
         f"{{{DAPTM}}}scriptRepresents": represents, f"{{{TTP}}}timeBase": "media"})
@@ -47,7 +48,7 @@ def build_dapt(items: Sequence[Item], *, script_type: str, represents: str, lang
 
 
 def export_all(out_dir: Path, ad_en: Sequence[Item], sdh: Sequence[Item], subs: dict[str, Sequence[Item]],
-               end_of_ad=None) -> list[Path]:  # type: ignore[no-untyped-def]
+               end_of_ad: Callable[[Item], int] | None = None) -> list[Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     files = []
     if ad_en:
