@@ -1,0 +1,18 @@
+# Reference only: deploy/serve_gemma.sh is the tested path. Host networking + 127.0.0.1 binding,
+# because Docker port mapping bypasses the droplet firewall (CLAUDE.md rule 9).
+services:
+  g4-31b:
+    image: ${IMAGE}
+    network_mode: host
+    ipc: host
+    privileged: true
+    devices: ["/dev/kfd", "/dev/dri"]
+    group_add: ["video"]
+    security_opt: ["seccomp=unconfined"]
+    shm_size: 16g
+    environment: [HF_TOKEN, VLLM_NO_USAGE_STATS=1, DO_NOT_TRACK=1, VLLM_CACHE_ROOT=/root/.cache/vllm-31b]
+    volumes: ["${HOME}/.cache/huggingface:/root/.cache/huggingface"]
+    command: >
+      --model google/gemma-4-31B-it --served-model-name gemma-4-31b --host 127.0.0.1 --port 8000
+      --max-model-len 32768 --gpu-memory-utilization 0.55 --limit-mm-per-prompt '{"image":16}'
+      --mm-processor-kwargs '{"max_soft_tokens":140}' --enable-prefix-caching --generation-config vllm --seed 0

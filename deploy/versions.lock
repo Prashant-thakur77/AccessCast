@@ -1,0 +1,3 @@
+# Filled by deploy/droplet_bootstrap.sh on the droplet (image digest, vLLM and ROCm versions).
+image=vllm/vllm-openai-rocm:gemma4
+digest=<pending: recorded on first droplet run>
