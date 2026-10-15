@@ -1,0 +1,338 @@
+{
+ "dataset": "W3C WAI Web Accessibility Perspectives (test set, never used for tuning)",
+ "wai_website_commit": "9112159662b8b9b4d0052d9d0f8703aa580448a4",
+ "fetched_at": "2026-10-15T21:27:55.679Z",
+ "terms": "https://www.w3.org/WAI/about/using-wai-material/",
+ "files": [
+  {
+   "video_id": "perspectives_keyboard",
+   "file": "data/w3c/perspectives_keyboard/perspectives_keyboard.en.vtt",
+   "sha256": "95c95094c35eebd7f77c9be0a0fd4203e7f5efe372c01c5dcb887d4c9ba9c93b",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_keyboard",
+   "file": "data/w3c/perspectives_keyboard/perspectives_keyboard_desc.en.vtt",
+   "sha256": "59279d0e89b33e63fceac49c597d9cd29822bd3fb874ac6ebf998ffc0583522f",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_keyboard",
+   "file": "data/w3c/perspectives_keyboard/perspectives_keyboard_ad.en.vtt",
+   "sha256": "baedc469d123be9d6cbc4071100585dc7697c9960787592a0f29e9b06c3f9b79",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_keyboard",
+   "file": "data/w3c/perspectives_keyboard/perspectives_keyboard_ad_desc.en.vtt",
+   "sha256": "50547cb9854ee0faceb75ffa91bd491161b348cd29876710f6287147160f5f03",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_keyboard",
+   "file": "data/w3c/perspectives_keyboard/perspectives_keyboard.mp4",
+   "sha256": "efcaf43529ec5f8930fe692d582bbae8231306cce2b242e606f1c4a363979bba",
+   "kind": "video",
+   "youtube_id": "93UgG72os8M",
+   "youtube_id_described": "1rBwxGMT9ZM",
+   "page": "https://www.w3.org/WAI/perspective-videos/keyboard/"
+  },
+  {
+   "video_id": "perspectives_captions",
+   "file": "data/w3c/perspectives_captions/perspectives_captions.en.vtt",
+   "sha256": "70905d47b28ee568f6be836001be4892c064b8890387c6e4c32ff87d91e71c7d",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_captions",
+   "file": "data/w3c/perspectives_captions/perspectives_captions_desc.en.vtt",
+   "sha256": "5c7aa152307173b92b2913f6f0881986f84b619398c8682b88538db3697f7aa5",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_captions",
+   "file": "data/w3c/perspectives_captions/perspectives_captions_ad.en.vtt",
+   "sha256": "1ecf6ffd299791cf53bc72f23c636855c74740f44a8a39345c40dd1ccc2d6690",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_captions",
+   "file": "data/w3c/perspectives_captions/perspectives_captions_ad_desc.en.vtt",
+   "sha256": "309ab6b005bc9e825d3e98cbcecb4599211fa693c6660521ba0067c1b048a8a9",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_captions",
+   "file": "data/w3c/perspectives_captions/perspectives_captions.mp4",
+   "sha256": "c984aeee10bf9a34b7f952fb52e57b820ef95f0d50e4d726a21a0bcf3cc83654",
+   "kind": "video",
+   "youtube_id": "iWO5N3n1DXU",
+   "youtube_id_described": "4qIordU8vT8",
+   "page": "https://www.w3.org/WAI/perspective-videos/captions/"
+  },
+  {
+   "video_id": "perspectives_contrast",
+   "file": "data/w3c/perspectives_contrast/perspectives_contrast.en.vtt",
+   "sha256": "ae5b7ad80ad25926aed28eb2f3d42fa9851b259dd96f9aad3019fe285f89b599",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_contrast",
+   "file": "data/w3c/perspectives_contrast/perspectives_contrast_desc.en.vtt",
+   "sha256": "b55fd8f3543e68f81c7646291d4290718b399826e8acca4c433d625c1ec19f35",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_contrast",
+   "file": "data/w3c/perspectives_contrast/perspectives_contrast_ad.en.vtt",
+   "sha256": "de73a2d3fb31d83ebd0e4852a9803dc300353212cc27e4016d6cfb54ca5fe720",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_contrast",
+   "file": "data/w3c/perspectives_contrast/perspectives_contrast_ad_desc.en.vtt",
+   "sha256": "5de5fea03170fdf28ecc049e694a2c0c06514f59d418ed71c297e155049af4e5",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_contrast",
+   "file": "data/w3c/perspectives_contrast/perspectives_contrast.mp4",
+   "sha256": "8748f4be53990b5279287f40d858fc009924ea86e055a48fccb7080ec3d34832",
+   "kind": "video",
+   "youtube_id": "Hui87z2Vx8o",
+   "youtube_id_described": "a9kNUv6N8Rk",
+   "page": "https://www.w3.org/WAI/perspective-videos/contrast/"
+  },
+  {
+   "video_id": "perspectives_controls",
+   "file": "data/w3c/perspectives_controls/perspectives_controls.en.vtt",
+   "sha256": "eeb22cc240271fabecb076bd4e7c5eb9eb7aaa1e68b34d19a932879d29d24092",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_controls",
+   "file": "data/w3c/perspectives_controls/perspectives_controls_desc.en.vtt",
+   "sha256": "14bf5064101d60b3bb6db5b08a0ede9c65f82db0a621cf8516f4d640d8a0bebc",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_controls",
+   "file": "data/w3c/perspectives_controls/perspectives_controls_ad.en.vtt",
+   "sha256": "286d77816930a0f5e500d3276bcb0a449138feb2f857998eb7e7c4680c57d3c7",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_controls",
+   "file": "data/w3c/perspectives_controls/perspectives_controls_ad_desc.en.vtt",
+   "sha256": "eabe9348b22f65863ccfc69473b15da1d2a6e1b0aa0f6f54e7f455ce9cdceab7",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_controls",
+   "file": "data/w3c/perspectives_controls/perspectives_controls.mp4",
+   "sha256": "1d4445a74f9d7724037a86cc06b94ebe0f078d80b4023b12ae33fd94c3997dbd",
+   "kind": "video",
+   "youtube_id": "CzfKB3PuuIY",
+   "youtube_id_described": "65G_twR47OQ",
+   "page": "https://www.w3.org/WAI/perspective-videos/controls/"
+  },
+  {
+   "video_id": "perspectives_customizable",
+   "file": "data/w3c/perspectives_customizable/perspectives_customizable.en.vtt",
+   "sha256": "d51415e3d32c72616e05ca72e7e3b721adae3d678367c3fab86266f3578a3584",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_customizable",
+   "file": "data/w3c/perspectives_customizable/perspectives_customizable_desc.en.vtt",
+   "sha256": "49e2f201a3dc884f60cdd02e5f6584f508b3ed89298bc0eb3aa4e7df4345fcf8",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_customizable",
+   "file": "data/w3c/perspectives_customizable/perspectives_customizable_ad.en.vtt",
+   "sha256": "9f3125db8dcfd457cbdd786bdcd34fe913d46cf05ede621fcfda13e3c1237d03",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_customizable",
+   "file": "data/w3c/perspectives_customizable/perspectives_customizable_ad_desc.en.vtt",
+   "sha256": "0faa0d3c91c844ff0ebc8c52246c6e787f9e26e8fb0eee2cd99dc0eb9f5beb37",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_customizable",
+   "file": "data/w3c/perspectives_customizable/perspectives_customizable.mp4",
+   "sha256": "e94ddb34c162225c88450ca5c4bceda26e8f5ebedcf21128b37637f36542fcd6",
+   "kind": "video",
+   "youtube_id": "rbiI65Jcz5s",
+   "youtube_id_described": "L4WLeVc5l5k",
+   "page": "https://www.w3.org/WAI/perspective-videos/customizable/"
+  },
+  {
+   "video_id": "perspectives_layout",
+   "file": "data/w3c/perspectives_layout/perspectives_layout.en.vtt",
+   "sha256": "6ce905a4217134b2459eb85aaa774aadabdfaac4e618d075bbdae556a96755c1",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_layout",
+   "file": "data/w3c/perspectives_layout/perspectives_layout_desc.en.vtt",
+   "sha256": "8996245c0a920c2e925eb06f3fa8d4121c4675cadbfc623423e25fa445553691",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_layout",
+   "file": "data/w3c/perspectives_layout/perspectives_layout_ad.en.vtt",
+   "sha256": "035224e2adc41409e0461241b60d147cf0c4c26a9921864c7be084c0fd5ad79f",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_layout",
+   "file": "data/w3c/perspectives_layout/perspectives_layout_ad_desc.en.vtt",
+   "sha256": "672744c4b49e212325cc1341ae8e6f41d724e6ebb38c95e41cc74c7e0dc4b360",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_layout",
+   "file": "data/w3c/perspectives_layout/perspectives_layout.mp4",
+   "sha256": "81efb91a4b4392898b76e2fdd5644064ee17e1b1821d40cdb4f7d88858e58bfd",
+   "kind": "video",
+   "youtube_id": "tfkzj5VC9P8",
+   "youtube_id_described": "w-2nFEUBELo",
+   "page": "https://www.w3.org/WAI/perspective-videos/layout/"
+  },
+  {
+   "video_id": "perspectives_notifications",
+   "file": "data/w3c/perspectives_notifications/perspectives_notifications.en.vtt",
+   "sha256": "decd3d989cebb1e11251e24a7c86dd6df585716447f626a1b579edfba902113f",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_notifications",
+   "file": "data/w3c/perspectives_notifications/perspectives_notifications_desc.en.vtt",
+   "sha256": "dd47e10842f817f2ae2ceeefba04d87f698207a9e7755b7413f5f39db4706580",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_notifications",
+   "file": "data/w3c/perspectives_notifications/perspectives_notifications_ad.en.vtt",
+   "sha256": "3889b159a03c127c1725f3d7718b448105ab33aab6440193af5011b86cacbb12",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_notifications",
+   "file": "data/w3c/perspectives_notifications/perspectives_notifications_ad_desc.en.vtt",
+   "sha256": "ac26393761460217cc7e0c90e45c94a6274357d0ad42d9346f78fc5f3a042799",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_notifications",
+   "file": "data/w3c/perspectives_notifications/perspectives_notifications.mp4",
+   "sha256": "d43b65f166b278ac9ab39be18f82f33316388a9111c0826d93793dcb88377133",
+   "kind": "video",
+   "youtube_id": "E1fEv4Vpexg",
+   "youtube_id_described": "jtteu0ilDXk",
+   "page": "https://www.w3.org/WAI/perspective-videos/notifications/"
+  },
+  {
+   "video_id": "perspectives_text-to-speech",
+   "file": "data/w3c/perspectives_text-to-speech/perspectives_text-to-speech.en.vtt",
+   "sha256": "dc3eefbf9443e53ba04f304b04e61b44c57296e23f9e8356ab32aad47114dc01",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_text-to-speech",
+   "file": "data/w3c/perspectives_text-to-speech/perspectives_text-to-speech_desc.en.vtt",
+   "sha256": "195ef0dc6e9043102f9aedf7d6c397e37dc5cf8d3c33412866be4a7814cce8a9",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_text-to-speech",
+   "file": "data/w3c/perspectives_text-to-speech/perspectives_text-to-speech_ad.en.vtt",
+   "sha256": "5030484165e93abdc7d9819bb4642729aae0931d839e27b334e0789d9610cc1d",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_text-to-speech",
+   "file": "data/w3c/perspectives_text-to-speech/perspectives_text-to-speech_ad_desc.en.vtt",
+   "sha256": "6f4eb5321362399f9c013669387eeb8bad8049e39001fa727e0c46728ced1d20",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_text-to-speech",
+   "file": "data/w3c/perspectives_text-to-speech/perspectives_text-to-speech.mp4",
+   "sha256": "372efada94cd2cfc8b68c9713ef93f5e83672ca8bac165f65c666f2fbb82cf5c",
+   "kind": "video",
+   "youtube_id": "8Rn5pXCdZWU",
+   "youtube_id_described": "F3A1VffiOH4",
+   "page": "https://www.w3.org/WAI/perspective-videos/speech/"
+  },
+  {
+   "video_id": "perspectives_understandable",
+   "file": "data/w3c/perspectives_understandable/perspectives_understandable.en.vtt",
+   "sha256": "687bf2bcf2144d7293a996bb63a98f2ff66a7d54980f482231287becc4a6950d",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_understandable",
+   "file": "data/w3c/perspectives_understandable/perspectives_understandable_desc.en.vtt",
+   "sha256": "60e0af87f9f152e07faa9f522fa5964ac3473e072f415705065d79f454c32005",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_understandable",
+   "file": "data/w3c/perspectives_understandable/perspectives_understandable_ad.en.vtt",
+   "sha256": "622c678bfd90dc70ef18bde2cb418b08cc57ce916337ce3dc76b45d7ab6abdd3",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_understandable",
+   "file": "data/w3c/perspectives_understandable/perspectives_understandable_ad_desc.en.vtt",
+   "sha256": "33b3356aa87c33d4db8f800c1f4394c099e301d0d9a898b2ca1080996c173c35",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_understandable",
+   "file": "data/w3c/perspectives_understandable/perspectives_understandable.mp4",
+   "sha256": "f30cef10b3abae19e2deeae68b5388795aeb44e1b17c4cb019322dd2db6b5569",
+   "kind": "video",
+   "youtube_id": "BYRxF2yInfA",
+   "youtube_id_described": "MNlT1Qy3pvQ",
+   "page": "https://www.w3.org/WAI/perspective-videos/understandable/"
+  },
+  {
+   "video_id": "perspectives_speech-recognition",
+   "file": "data/w3c/perspectives_speech-recognition/perspectives_speech-recognition.en.vtt",
+   "sha256": "7bde15ca5c2dd47290406f94d60815d068e89f0e8651b9ad9cca60215f708466",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_speech-recognition",
+   "file": "data/w3c/perspectives_speech-recognition/perspectives_speech-recognition_desc.en.vtt",
+   "sha256": "01896428ac59472b48cb4c772b6b674635213201eda436666c2b25e94640a23f",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_speech-recognition",
+   "file": "data/w3c/perspectives_speech-recognition/perspectives_speech-recognition_ad.en.vtt",
+   "sha256": "d0a2a563b9175266b63d17d3f0262083f137e243cce2a35625dcfb60b0f9d042",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_speech-recognition",
+   "file": "data/w3c/perspectives_speech-recognition/perspectives_speech-recognition_ad_desc.en.vtt",
+   "sha256": "d195a44bfb79a30b4fccca34647b462e23e72190ca2faf35cafeeb9aa56e8c1d",
+   "kind": "track"
+  },
+  {
+   "video_id": "perspectives_speech-recognition",
+   "file": "data/w3c/perspectives_speech-recognition/perspectives_speech-recognition.mp4",
+   "sha256": "f8b3247da4e015073f9bc78d758a56bd9301980789a605c695b6e2bbdcde53d1",
+   "kind": "video",
+   "youtube_id": "7RHG_XiQ0ck",
+   "youtube_id_described": "21yWr7evHTs",
+   "page": "https://www.w3.org/WAI/perspective-videos/voice/"
+  }
+ ]
+}
