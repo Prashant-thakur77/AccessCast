@@ -1,4 +1,4 @@
-from accesscast.schemas import ItemKind, Slot  # noqa: F401
+from accesscast.schemas import ItemKind, Slot
 from accesscast.verify.rules_text import cc002_chars_per_line
 from tests.unit.conftest import make_item
 
@@ -16,5 +16,7 @@ def test_cc002_chars_per_line_passes(ctx):
 
 def test_cc002_chars_per_line_fails(ctx):
     ctx.lang = "en"
-    found = cc002_chars_per_line(_item(draft="Press the key on the left side of the keyboard now please."), ctx)
+    found = cc002_chars_per_line(
+        _item(draft="Press the key on the left side of the keyboard now please."), ctx
+    )
     assert found and found[0].rule == "CC002"

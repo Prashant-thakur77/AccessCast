@@ -1,10 +1,17 @@
-from accesscast.schemas import ItemKind, Slot  # noqa: F401
+from accesscast.schemas import ItemKind, Slot
 from accesscast.verify.rules_text import cc008_untranslated
 from tests.unit.conftest import make_item
 
 
 def _item(**kw):
-    base = dict(kind=ItemKind.SUBTITLE, lang="hi", budget=None, anchor_ms=0, slot=Slot(start_ms=0, end_ms=3000), source_text='Press the key.')
+    base = dict(
+        kind=ItemKind.SUBTITLE,
+        lang="hi",
+        budget=None,
+        anchor_ms=0,
+        slot=Slot(start_ms=0, end_ms=3000),
+        source_text="Press the key.",
+    )
     base.update(kw)
     return make_item(base.pop("draft"), **base)
 

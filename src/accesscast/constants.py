@@ -82,6 +82,7 @@ AD_EVENT_AFTER_MS = 1_000  # PLAN §9 S6
 AD_PAD_BEFORE_MS = 150  # AudioSight pads; PLAN §9 S7
 AD_PAD_AFTER_MS = 150  # AudioSight pads; PLAN §9 S7
 AD_WORDS_MIN = 2  # PLAN §9 S7 clamp
+AD_MIN_USEFUL_WORDS = 3  # our setting: a pause too short for 3 words is not used (dev-tuned)
 AD_WORDS_MAX = 40  # PLAN §9 S7 clamp
 AD_MAX_WORDS_PER_LINE = 25  # PLAN §9 S7
 AD_BREATH_MS = 400  # PLAN §9 S7: breath between two lines in a long gap
@@ -143,6 +144,8 @@ SDH_AUTO_APPROVE_CONFIDENCE = 0.6  # PLAN §11.3
 VO_TEMPO_MAX = 1.15  # PLAN §9 S11 (video-voice-translator's 2.0x is too fast)
 VO_TOO_SHORT_FRACTION = 0.5  # PLAN §10.5 VO004
 VO_DIP_DB = 12.0  # PLAN §9 S11: original dipped -12 dB under voice-over
+VO_TAIL_MS = 1_500  # our setting: a voice-over may run up to 1.5 s into the following silence
+VO_GAP_BEFORE_NEXT_MS = 200  # our setting: and must end 200 ms before the next speech
 
 # ---------------------------------------------------------------- render (PLAN §9 S14, §10.6)
 DUCK_DB = 9.0  # Netflix AD guide: dip 6-12 dB; our default

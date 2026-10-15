@@ -1,4 +1,4 @@
-from accesscast.schemas import ItemKind, Slot  # noqa: F401
+from accesscast.schemas import ItemKind, Slot
 from accesscast.verify.rules_text import er003_more_than_one_idea
 from tests.unit.conftest import make_item
 
@@ -11,7 +11,9 @@ def _item(**kw):
 
 def test_er003_more_than_one_idea_passes(ctx):
     ctx.lang = "en"
-    assert [f for f in er003_more_than_one_idea(_item(draft="Press the button."), ctx) if f.rule == "ER003"] == []
+    assert [
+        f for f in er003_more_than_one_idea(_item(draft="Press the button."), ctx) if f.rule == "ER003"
+    ] == []
 
 
 def test_er003_more_than_one_idea_fails(ctx):

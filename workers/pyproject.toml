@@ -1,0 +1,30 @@
+[project]
+name = "accesscast-workers"
+version = "0.1.0"
+description = "GPU/CPU workers for AccessCast (the only code that imports torch)."
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = [
+  "numpy>=1.26",
+  "soundfile>=0.12",
+  "torch>=2.4",
+  "torchaudio>=2.4",
+  "transformers>=4.46",
+  "kokoro>=0.9.4",
+  "misaki[en]>=0.9.4",
+  "silero-vad>=5.1",
+  "jiwer>=3.0",
+  "pip",
+]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }

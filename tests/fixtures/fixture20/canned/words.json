@@ -1,0 +1,295 @@
+{
+ "lang": "en",
+ "model": "kokoro-82m-synth-timestamps",
+ "aligned": true,
+ "words": [
+  {
+   "i": 0,
+   "w": "Welcome.",
+   "start_ms": 1600,
+   "end_ms": 2075,
+   "prob": 1.0,
+   "seg": 0,
+   "speaker": "S1"
+  },
+  {
+   "i": 1,
+   "w": "Today",
+   "start_ms": 2150,
+   "end_ms": 2438,
+   "prob": 1.0,
+   "seg": 0,
+   "speaker": "S1"
+  },
+  {
+   "i": 2,
+   "w": "I",
+   "start_ms": 2438,
+   "end_ms": 2537,
+   "prob": 1.0,
+   "seg": 0,
+   "speaker": "S1"
+  },
+  {
+   "i": 3,
+   "w": "will",
+   "start_ms": 2537,
+   "end_ms": 2688,
+   "prob": 1.0,
+   "seg": 0,
+   "speaker": "S1"
+  },
+  {
+   "i": 4,
+   "w": "show",
+   "start_ms": 2688,
+   "end_ms": 2900,
+   "prob": 1.0,
+   "seg": 0,
+   "speaker": "S1"
+  },
+  {
+   "i": 5,
+   "w": "you",
+   "start_ms": 2900,
+   "end_ms": 3062,
+   "prob": 1.0,
+   "seg": 0,
+   "speaker": "S1"
+  },
+  {
+   "i": 6,
+   "w": "two",
+   "start_ms": 3062,
+   "end_ms": 3287,
+   "prob": 1.0,
+   "seg": 0,
+   "speaker": "S1"
+  },
+  {
+   "i": 7,
+   "w": "shortcuts.",
+   "start_ms": 3287,
+   "end_ms": 4250,
+   "prob": 1.0,
+   "seg": 0,
+   "speaker": "S1"
+  },
+  {
+   "i": 8,
+   "w": "Press",
+   "start_ms": 7925,
+   "end_ms": 8175,
+   "prob": 1.0,
+   "seg": 1,
+   "speaker": "S1"
+  },
+  {
+   "i": 9,
+   "w": "control",
+   "start_ms": 8175,
+   "end_ms": 8750,
+   "prob": 1.0,
+   "seg": 1,
+   "speaker": "S1"
+  },
+  {
+   "i": 10,
+   "w": "and",
+   "start_ms": 8750,
+   "end_ms": 8888,
+   "prob": 1.0,
+   "seg": 1,
+   "speaker": "S1"
+  },
+  {
+   "i": 11,
+   "w": "C",
+   "start_ms": 8888,
+   "end_ms": 9100,
+   "prob": 1.0,
+   "seg": 1,
+   "speaker": "S1"
+  },
+  {
+   "i": 12,
+   "w": "to",
+   "start_ms": 9100,
+   "end_ms": 9200,
+   "prob": 1.0,
+   "seg": 1,
+   "speaker": "S1"
+  },
+  {
+   "i": 13,
+   "w": "copy",
+   "start_ms": 9200,
+   "end_ms": 9550,
+   "prob": 1.0,
+   "seg": 1,
+   "speaker": "S1"
+  },
+  {
+   "i": 14,
+   "w": "the",
+   "start_ms": 9550,
+   "end_ms": 9688,
+   "prob": 1.0,
+   "seg": 1,
+   "speaker": "S1"
+  },
+  {
+   "i": 15,
+   "w": "text.",
+   "start_ms": 9688,
+   "end_ms": 10450,
+   "prob": 1.0,
+   "seg": 1,
+   "speaker": "S1"
+  },
+  {
+   "i": 16,
+   "w": "Then",
+   "start_ms": 13375,
+   "end_ms": 13525,
+   "prob": 1.0,
+   "seg": 2,
+   "speaker": "S2"
+  },
+  {
+   "i": 17,
+   "w": "press",
+   "start_ms": 13525,
+   "end_ms": 13800,
+   "prob": 1.0,
+   "seg": 2,
+   "speaker": "S2"
+  },
+  {
+   "i": 18,
+   "w": "control",
+   "start_ms": 13800,
+   "end_ms": 14350,
+   "prob": 1.0,
+   "seg": 2,
+   "speaker": "S2"
+  },
+  {
+   "i": 19,
+   "w": "and",
+   "start_ms": 14350,
+   "end_ms": 14475,
+   "prob": 1.0,
+   "seg": 2,
+   "speaker": "S2"
+  },
+  {
+   "i": 20,
+   "w": "V",
+   "start_ms": 14475,
+   "end_ms": 14725,
+   "prob": 1.0,
+   "seg": 2,
+   "speaker": "S2"
+  },
+  {
+   "i": 21,
+   "w": "to",
+   "start_ms": 14725,
+   "end_ms": 14825,
+   "prob": 1.0,
+   "seg": 2,
+   "speaker": "S2"
+  },
+  {
+   "i": 22,
+   "w": "paste",
+   "start_ms": 14825,
+   "end_ms": 15200,
+   "prob": 1.0,
+   "seg": 2,
+   "speaker": "S2"
+  },
+  {
+   "i": 23,
+   "w": "it.",
+   "start_ms": 15200,
+   "end_ms": 15675,
+   "prob": 1.0,
+   "seg": 2,
+   "speaker": "S2"
+  },
+  {
+   "i": 24,
+   "w": "Do",
+   "start_ms": 16575,
+   "end_ms": 16662,
+   "prob": 1.0,
+   "seg": 3,
+   "speaker": "S2"
+  },
+  {
+   "i": 25,
+   "w": "not",
+   "start_ms": 16662,
+   "end_ms": 16862,
+   "prob": 1.0,
+   "seg": 3,
+   "speaker": "S2"
+  },
+  {
+   "i": 26,
+   "w": "unplug",
+   "start_ms": 16862,
+   "end_ms": 17238,
+   "prob": 1.0,
+   "seg": 3,
+   "speaker": "S2"
+  },
+  {
+   "i": 27,
+   "w": "the",
+   "start_ms": 17238,
+   "end_ms": 17325,
+   "prob": 1.0,
+   "seg": 3,
+   "speaker": "S2"
+  },
+  {
+   "i": 28,
+   "w": "laptop",
+   "start_ms": 17325,
+   "end_ms": 17838,
+   "prob": 1.0,
+   "seg": 3,
+   "speaker": "S2"
+  },
+  {
+   "i": 29,
+   "w": "while",
+   "start_ms": 17838,
+   "end_ms": 18012,
+   "prob": 1.0,
+   "seg": 3,
+   "speaker": "S2"
+  },
+  {
+   "i": 30,
+   "w": "it",
+   "start_ms": 18012,
+   "end_ms": 18100,
+   "prob": 1.0,
+   "seg": 3,
+   "speaker": "S2"
+  },
+  {
+   "i": 31,
+   "w": "saves.",
+   "start_ms": 18100,
+   "end_ms": 18900,
+   "prob": 1.0,
+   "seg": 3,
+   "speaker": "S2"
+  }
+ ]
+}

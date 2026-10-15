@@ -1,0 +1,57 @@
+{"_note": "Canned evidence for fake mode only. Written by hand for the synthetic fixture; never used as evidence of model quality.",
+ "scenes": [
+  {"setting": "A plain dark blue title card.",
+   "characters": [],
+   "visible_facts": [
+     {"fid": "F001", "frames": [0, 1, 2], "text": "White text on a dark blue background reads Keyboard Shortcuts, Lesson 1.", "priority": 1, "important": true}],
+   "on_screen_text": [{"text": "Keyboard Shortcuts", "frame": 0, "kind": "title"}, {"text": "Lesson 1", "frame": 0, "kind": "title"}],
+   "inferences": ["This may be the start of a tutorial series."], "uncertainties": []},
+  {"setting": "A room with a beige wall and a brown desk.",
+   "characters": [{"cid": "C0001", "appearance": "person with short grey hair and a blue cardigan", "name": null, "name_source": null}],
+   "visible_facts": [
+     {"fid": "F002", "frames": [0, 1], "text": "A person with short grey hair and a blue cardigan sits at a desk with a laptop.", "priority": 3, "important": true},
+     {"fid": "F003", "frames": [1, 2, 3], "text": "The laptop screen shows Ctrl + C.", "priority": 1, "important": true},
+     {"fid": "F004", "frames": [2, 3], "text": "The person reaches toward the laptop keyboard.", "priority": 4, "important": false}],
+   "on_screen_text": [{"text": "Ctrl + C", "frame": 1, "kind": "slide"}],
+   "inferences": ["The person may be a teacher."], "uncertainties": ["The person's face has no detail."]},
+  {"setting": "The same desk against a pale green wall.",
+   "characters": [{"cid": "C0001", "appearance": "person with short grey hair and a blue cardigan", "name": null, "name_source": null}],
+   "visible_facts": [
+     {"fid": "F005", "frames": [0, 1], "text": "The wall behind the desk is now pale green.", "priority": 2, "important": false},
+     {"fid": "F006", "frames": [0, 1, 2, 3], "text": "The laptop screen shows Ctrl + V.", "priority": 1, "important": true},
+     {"fid": "F007", "frames": [2, 3], "text": "A yellow note on the wall reads Do not unplug while saving.", "priority": 1, "important": true}],
+   "on_screen_text": [{"text": "Ctrl + V", "frame": 0, "kind": "slide"}, {"text": "Do not unplug while saving", "frame": 2, "kind": "sign"}],
+   "inferences": [], "uncertainties": []}
+ ],
+ "first_drafts": {
+   "_note": "Fake mode's first draft per gap (in gap order). Draft 2 deliberately invents a name and runs long, so the demo shows the checks and the repair loop. Fake output, not a measured model failure.",
+   "0": "On screen: Keyboard Shortcuts, Lesson 1.",
+   "1": "Sarah, a teacher in a blue cardigan, sits at her desk because she wants to show the shortcut Ctrl + C on her laptop screen.",
+   "2": "The wall turns green. On screen: Ctrl + V. A note reads: Do not unplug while saving."
+ },
+ "translations": {
+   "hi": {
+     "Welcome. Today I will show you two shortcuts.": "स्वागत है। आज मैं आपको दो शॉर्टकट दिखाऊँगा।",
+     "Press control and C to copy the text.": "टेक्स्ट कॉपी करने के लिए कंट्रोल और C दबाएँ।",
+     "Then press control and V to paste it.": "फिर उसे पेस्ट करने के लिए कंट्रोल और V दबाएँ।",
+     "Do not unplug the laptop while it saves.": "सेव होते समय लैपटॉप का प्लग न निकालें।",
+     "On screen: Keyboard Shortcuts, Lesson 1.": "स्क्रीन पर: कीबोर्ड शॉर्टकट, पाठ 1।",
+     "A person in a blue cardigan sits at a laptop. On screen: Ctrl + C.": "नीले कार्डिगन में एक व्यक्ति लैपटॉप के सामने बैठा है। स्क्रीन पर: Ctrl + C।",
+     "The wall turns green. On screen: Ctrl + V. A note reads: Do not unplug while saving.": "दीवार हरी हो जाती है। स्क्रीन पर: Ctrl + V। एक नोट पर लिखा है: सेव होते समय प्लग न निकालें।"
+   },
+   "it": {
+     "Welcome. Today I will show you two shortcuts.": "Benvenuti. Oggi vi mostro due scorciatoie.",
+     "Press control and C to copy the text.": "Premete Ctrl e C per copiare il testo.",
+     "Then press control and V to paste it.": "Poi premete Ctrl e V per incollarlo.",
+     "Do not unplug the laptop while it saves.": "Non scollegate il portatile mentre salva.",
+     "On screen: Keyboard Shortcuts, Lesson 1.": "Sullo schermo: Scorciatoie da tastiera, Lezione 1.",
+     "A person in a blue cardigan sits at a laptop. On screen: Ctrl + C.": "Una persona con un cardigan blu siede davanti a un portatile. Sullo schermo: Ctrl + C.",
+     "The wall turns green. On screen: Ctrl + V. A note reads: Do not unplug while saving.": "La parete diventa verde. Sullo schermo: Ctrl + V. Un biglietto dice: Non scollegare durante il salvataggio."
+   }
+ },
+ "back_translations": {
+   "स्क्रीन पर: कीबोर्ड शॉर्टकट, पाठ 1।": "On screen: Keyboard shortcuts, lesson 1.",
+   "नीले कार्डिगन में एक व्यक्ति लैपटॉप के सामने बैठा है। स्क्रीन पर: Ctrl + C।": "A person in a blue cardigan is sitting in front of a laptop. On screen: Ctrl + C.",
+   "दीवार हरी हो जाती है। स्क्रीन पर: Ctrl + V। एक नोट पर लिखा है: सेव होते समय प्लग न निकालें।": "The wall becomes green. On screen: Ctrl + V. A note says: Do not unplug while saving."
+ }
+}

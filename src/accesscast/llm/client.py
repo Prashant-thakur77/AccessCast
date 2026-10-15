@@ -25,7 +25,7 @@ from accesscast.config import Settings
 from accesscast.errors import LlmOutputError, ModelEndpointError
 from accesscast.events import now_iso
 from accesscast.llm.json_utils import extract_last_object
-from accesscast.llm.prompts import Prompt, load_prompt
+from accesscast.llm.promptlib import Prompt, load_prompt
 from accesscast.project import canonical_json
 
 
@@ -175,13 +175,15 @@ class LlmClient:
                         obj = extract_last_object(raw)
                     except LlmOutputError:
                         # one retry asking for valid JSON only (PLAN §14.3), then fail closed
-                        retry = LlmRequest(**{**req.__dict__, "payload": {**req.payload,
-                                           "_note": "Return valid JSON only."}})
+                        retry = LlmRequest(
+                            **{**req.__dict__, "payload": {**req.payload, "_note": "Return valid JSON only."}}
+                        )
                         raw, served, tin2, tout2, a2 = self._http_call(prov, prompt, retry, temp, lim)
                         tin, tout, attempts = tin + tin2, tout + tout2, attempts + a2
                         obj = extract_last_object(raw)
-            return LlmResponse(obj, raw, prov, served, prompt, req.seed, temp, tin, tout,
-                               time.perf_counter() - t0, attempts)
+            return LlmResponse(
+                obj, raw, prov, served, prompt, req.seed, temp, tin, tout, time.perf_counter() - t0, attempts
+            )
         except LlmOutputError:
             status = "bad_json"
             raise
@@ -189,13 +191,26 @@ class LlmClient:
             status = "endpoint_error"
             raise
         finally:
-            self._log({
-                "ts": now_iso(), "provider": prov, "served_model_id": served, "prompt_id": prompt.ref,
-                "prompt_sha": prompt.sha256, "temperature": temp, "seed": req.seed, "label": req.label,
-                "tokens_in": tin, "tokens_out": tout, "latency_s": round(time.perf_counter() - t0, 3),
-                "status": status, "attempts": attempts, "n_images": len(req.images),
-                "has_audio": req.audio is not None, "output_head": raw[: C.LLM_LOG_TRUNCATE],
-            })
+            self._log(
+                {
+                    "ts": now_iso(),
+                    "provider": prov,
+                    "served_model_id": served,
+                    "prompt_id": prompt.ref,
+                    "prompt_sha": prompt.sha256,
+                    "temperature": temp,
+                    "seed": req.seed,
+                    "label": req.label,
+                    "tokens_in": tin,
+                    "tokens_out": tout,
+                    "latency_s": round(time.perf_counter() - t0, 3),
+                    "status": status,
+                    "attempts": attempts,
+                    "n_images": len(req.images),
+                    "has_audio": req.audio is not None,
+                    "output_head": raw[: C.LLM_LOG_TRUNCATE],
+                }
+            )
 
     def _http_call(
         self, prov: str, prompt: Prompt, req: LlmRequest, temp: float, lim: RateLimiter
@@ -233,15 +248,20 @@ class LlmClient:
             except (KeyError, IndexError, TypeError) as e:
                 raise LlmOutputError(f"malformed response envelope: {e}") from e
             usage = data.get("usage") or {}
-            return (text, str(data.get("model", model)), int(usage.get("prompt_tokens", 0)),
-                    int(usage.get("completion_tokens", 0)), attempt)
+            return (
+                text,
+                str(data.get("model", model)),
+                int(usage.get("prompt_tokens", 0)),
+                int(usage.get("completion_tokens", 0)),
+                attempt,
+            )
         raise ModelEndpointError(f"{prov} failed after retries: {last}")
 
     @staticmethod
     def _backoff(attempt: int, retry_after: str | None) -> None:
         if attempt > C.LLM_MAX_RETRIES:
             return
-        delay = min(60.0, 2.0 ** attempt) + random.uniform(0, 0.5)
+        delay = min(60.0, 2.0**attempt) + random.uniform(0, 0.5)
         if retry_after:
             try:
                 delay = min(60.0, float(retry_after))

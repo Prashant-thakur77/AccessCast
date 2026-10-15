@@ -183,6 +183,8 @@ def ad006_non_monotonic(item: Item, ctx: VerifyContext) -> list[Finding]:
         if other.id == item.id or other.kind != item.kind or other.lang != item.lang:
             continue
         o_start, o_end = clip_span(other, VerifyContext(wps_voice=ctx.wps_voice))
+        if not other.extended:  # AD001 keeps every sibling inside its own slot
+            o_end = min(o_end, other.slot.end_ms)
         if min(me_end, o_end) - max(me_start, o_start) > 0:
             return [
                 Finding(

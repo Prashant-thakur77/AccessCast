@@ -1,4 +1,4 @@
-from accesscast.schemas import ItemKind, Slot  # noqa: F401
+from accesscast.schemas import ItemKind, Slot
 from accesscast.verify.rules_text import er008_hard_word
 from tests.unit.conftest import make_item
 

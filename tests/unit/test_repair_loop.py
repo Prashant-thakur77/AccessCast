@@ -5,7 +5,9 @@ BAD = Finding("AD007", "error", "13 words", "≤ 10", "Shorten.", "write_ad")
 
 
 def _verify(text, facts):
-    return VerificationResult(ok=len(text.split()) <= 3, violations=[] if len(text.split()) <= 3 else [BAD], warnings=[])
+    return VerificationResult(
+        ok=len(text.split()) <= 3, violations=[] if len(text.split()) <= 3 else [BAD], warnings=[]
+    )
 
 
 def test_repairs_then_passes():
@@ -21,6 +23,7 @@ def test_never_promotes_failure():
 def test_generation_failure_fails_closed():
     def boom(k, t, v):
         raise RuntimeError("endpoint down")
+
     out = run_repair_loop("a b c d e", ["F1"], _verify, boom)
     assert not out.ok and out.stop_reason == "revision_generation_failed"
 

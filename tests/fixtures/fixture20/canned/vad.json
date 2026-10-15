@@ -1,0 +1,21 @@
+{
+ "model": "kokoro-82m-synth-timestamps",
+ "segments": [
+  {
+   "start_ms": 1600,
+   "end_ms": 4250
+  },
+  {
+   "start_ms": 7925,
+   "end_ms": 10450
+  },
+  {
+   "start_ms": 13375,
+   "end_ms": 15675
+  },
+  {
+   "start_ms": 16575,
+   "end_ms": 18900
+  }
+ ]
+}

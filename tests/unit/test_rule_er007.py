@@ -1,4 +1,4 @@
-from accesscast.schemas import ItemKind, Slot  # noqa: F401
+from accesscast.schemas import ItemKind, Slot
 from accesscast.verify.rules_text import er007_abbreviation
 from tests.unit.conftest import make_item
 
@@ -11,7 +11,9 @@ def _item(**kw):
 
 def test_er007_abbreviation_passes(ctx):
     ctx.lang = "en"
-    assert [f for f in er007_abbreviation(_item(draft="Use a key, for example Tab."), ctx) if f.rule == "ER007"] == []
+    assert [
+        f for f in er007_abbreviation(_item(draft="Use a key, for example Tab."), ctx) if f.rule == "ER007"
+    ] == []
 
 
 def test_er007_abbreviation_fails(ctx):
