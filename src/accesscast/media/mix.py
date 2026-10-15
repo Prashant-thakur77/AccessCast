@@ -121,7 +121,8 @@ def mix_standard(
         mixed *= 0.99 / peak
     sf.write(str(out_mix), mixed, SR, subtype="PCM_24")
     sf.write(str(out_stem), stem, SR, subtype="PCM_24")
-    return {"clips": len(clips), "duck_spans": len(spans)}
+    sf.write(str(out_stem.with_suffix(".bed.wav")), orig * env[:, None], SR, subtype="PCM_24")  # for RN004
+    return {"clips": len(clips), "duck_spans": len(spans), "spans": [(a, b) for a, b, _ in spans]}
 
 
 def mix_extended(
