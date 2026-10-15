@@ -176,6 +176,10 @@ SPECS: list[Spec] = [
         "outbound packets counted on the host during the offline run",
         "packets",
     ),
+    Spec("e16.player_passed", "e16_ui_a11y.json", "/summary/player/passed", "player accessibility tests passed (Playwright + axe-core)", "tests", split="none"),
+    Spec("e16.player_total", "e16_ui_a11y.json", "/summary/player/total", "player accessibility tests run", "tests", split="none"),
+    Spec("e16.review_passed", "e16_ui_a11y.json", "/summary/review/passed", "review-app accessibility tests passed (Playwright + axe-core)", "tests", split="none"),
+    Spec("e16.review_total", "e16_ui_a11y.json", "/summary/review/total", "review-app accessibility tests run", "tests", split="none"),
     Spec(
         "e15.guard_ms",
         "e15_asr.json",
