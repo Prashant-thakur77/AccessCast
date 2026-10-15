@@ -1,49 +1,58 @@
-<pending: e1.headline> <!-- line 1 is the E1 headline, filled only from evidence/public-claims.json -->
+<pending: e1.headline>
 
-Live demo: <pending: site.url> · [3-minute judge guide](JUDGES.md) · Demo video: <pending: video.url> · Deck (PDF): <pending: deck.url>
+[Live demo](https://accesscast.vercel.app/?audience=judge) · [3-minute judge guide](JUDGES.md) · Demo video: <pending: video.url> · Deck (PDF): <pending: deck.url>
 
 # AccessCast: one video, five ways to watch
 
-AccessCast takes one video and makes a version for each viewer. Gemma 4 on an AMD Instinct MI300X does the seeing, listening, writing and translating. Code checks every line it writes. Gemma repairs what fails. A person approves what the viewer hears.
+Most online video has no audio description, and most of it has captions only in one language, if any. AccessCast takes one video and makes a version for each viewer. Gemma 4, served on an AMD Instinct MI300X, does the seeing, listening, writing and translating. Code checks every line Gemma writes against the real audio timeline. Gemma repairs what fails. A person approves what the public hears.
 
-> **Status:** under construction for AMD Developer Hackathon ACT III. Sections marked `<pending: …>` are waiting for an experiment to run. We never type a number by hand; every number comes from a file in [`evidence/`](evidence/) through [`evidence/public-claims.json`](evidence/public-claims.json).
+> Built for AMD Developer Hackathon ACT III, track "Create a New Kind of Experience". Every number on this page comes from a file in [`evidence/`](evidence/) through [`evidence/public-claims.json`](evidence/public-claims.json); `make claims-check` fails if any number here is not registered. Places marked `<pending: …>` are waiting for an experiment to run.
 
 ## What it does
 
 | Who is watching | What they get |
 |---|---|
-| **"I can't see the screen"** | Spoken description placed in the pauses between dialogue. If the pauses are too short, the video can hold on a still frame while the description plays (extended description). |
-| **"I can't hear"** | Captions for deaf and hard-of-hearing viewers: every word, speaker changes and sounds like [door slams]. |
-| **"Simpler words, please"** | Easy-read captions: short sentences, one idea each, and a mode that waits for you to finish reading. |
-| **"हिन्दी"** | Hindi subtitles, a Hindi voice-over and Hindi description. |
-| **"Italiano"** | Italian subtitles, an Italian voice-over and Italian description. |
+| "I can't see the screen" | Spoken description placed in the pauses between dialogue, with the original sound dipped underneath. When the pauses are too short, an extended version holds a still frame while the description plays. A text description track is there for screen readers and braille displays. |
+| "I can't hear" | Captions for deaf and hard-of-hearing viewers: every word, speaker changes, and sounds like [door slams]. |
+| "Simpler words, please" | Easy-read captions with short sentences and one idea each. A "Give me time to read" mode pauses the video until you are ready. |
+| "हिन्दी" | Hindi subtitles, a Hindi voice-over in the same time slots as the original speech, and Hindi description. |
+| "Italiano" | Italian subtitles, an Italian voice-over and Italian description. |
 
-All five come from one analysis of the video, so they never disagree with each other.
+All five come from one analysis of the video (shots, scenes, every word with its timing, the pauses between words, sounds, on-screen text and what is visible), so they never disagree with each other. Profiles combine: a blind Hindi speaker gets the Hindi voice-over with Hindi description.
 
 ## Try it in 60 seconds (no GPU)
 
 ```bash
-make setup          # uv sync + assets
-make demo-fixture   # whole pipeline in fake mode on a 20-second fixture, then serves the player
+make setup          # Python env, worker env, voices and models pre-fetched
+make demo-fixture   # whole pipeline in fake mode on our 20-second clip, then serves the player
 # open http://127.0.0.1:8080/?audience=judge
 ```
 
-Fake mode uses canned model outputs and says so on screen. It shows the pipeline, the checks and the player. It is not evidence of model quality.
+Fake mode uses canned model outputs and says so on screen. It shows the pipeline, the checks, the review gate and the player. It is not evidence of model quality. The 20-second clip is ours: generated visuals and two Kokoro voices.
 
 ## Results
 
-<pending: results.tables> — every table states its data split ("test set, never used for tuning" or "dev set") and links its evidence file.
+<pending: results.tables>
+
+Each table names its data split. "Test set" means the 10 W3C WAI "Web Accessibility Perspectives" videos, which were never used for tuning: the ASR model, prompts, thresholds and every other setting were chosen on our dev set, and prompts were frozen at a git tag before the first test run ([`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md)). Gemma may have seen these public videos in pretraining, so we say "never used for tuning", not "never seen".
 
 ## How quality is controlled
 
-1. **Gemma proposes.** It lists what is visible first, then writes only from that list.
-2. **Code decides.** Every line is checked against the real audio timeline (pauses measured from aligned words), a word budget, and rules for names, claims, sounds and restated dialogue. See [`docs/rules.md`](docs/rules.md).
-3. **Gemma repairs.** A line that fails goes back to Gemma with the failed checks, up to three times.
-4. **A person approves.** Nothing reaches a viewer until a reviewer approves it. The render step refuses to run while any line is still waiting.
+Gemma proposes and code decides. Gemma first lists what is visible in a scene (temperature 0), then writes description only from that list. Code then checks every line: [`docs/rules.md`](docs/rules.md) lists each rule with its source and what it measures. For example, AD001 measures the spoken line against the pause it has to fit and reports both numbers, AD009 blocks a name nobody said or showed, and AD018 blocks a line that obeys instructions written on a slide. A line that fails goes back to Gemma with the failed checks, up to three times. A line that still fails goes to a person; it is never published by default.
+
+Nothing reaches a viewer until a person approves it. Confidence for each line is computed in code from measured signals (grounding, timing slack, ASR agreement, repairs), never asked of the model, and it orders the review queue. The render step is refused on the server while any line is waiting, and every render carries a `report.json` audit with `human_reviewed`, the reviewers and the review time.
+
+## Reliability and the live attack
+
+<pending: reliability.section>
 
 ## What runs on AMD
 
 <pending: amd.section>
+
+## Who pays
+
+<pending: business.section>
 
 ## What didn't work
 
@@ -53,18 +62,41 @@ Fake mode uses canned model outputs and says so on screen. It shows the pipeline
 
 | Claim | Real | Simplified or not done |
 |---|---|---|
-| Description fits pauses | Measured by a script that does not use our checks | Caption timings are a stand-in for speech |
-| Review tool for blind reviewers | Designed for it; keyboard-only; automatic accessibility checks | Not yet tested by a blind reviewer |
-| No sign language, no live streams, no lip-sync dubbing | — | Out of scope |
+| Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
+| Human review | Every description and easy-read line is approved by a person; captions and translations pass automatic checks, and a random sample is checked by people | Our reviewers are not professional describers |
+| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility checks (<pending: e16.axe>) | Not yet tested by a blind reviewer |
+| Hindi and Italian | Back-translation shown to reviewers | Not a full professional language QA; native-speaker spot checks are <pending: native.checks> |
+| "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
+| Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |
+| Scope | Pre-recorded video | No sign language, no live streams, no lip-sync dubbing |
 
 ## Prior work and how we differ
 
-See [PLAN.md §21.1](PLAN.md). In short: AudioSight and ViddyScribe also write AI description. AccessCast fits description inside the pauses, checks every line in code against the audio timeline, uses extended description only when it is needed, makes five audience versions from one pass, and requires a person to approve before anything is published.
+AudioSight (2nd place, AMD DevMaster Multimodal) writes audio description with Qwen on a Radeon GPU and pauses the source at every insertion. ViddyScribe (Gemini API Developer Competition) adds description with freeze frames. AutoAD-Zero is a training-free research method that also writes from evidence first. AccessCast differs in four ways: it fits description inside the dialogue pauses and checks the timing in code against aligned words, it uses extended description only where the pauses are too short, it makes five audience versions from one analysis, and it puts a person and a server-side render gate between the model and the viewer. Commercial services (3Play Media, Verbit, Accedo, Visonic) offer AI description too; Visonic already offers Hindi and Italian, so languages alone are not our difference.
+
+We reused or built on ideas from earlier hackathon winners; [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) lists each one with its licence.
+
+## Bugs that taught us something
+
+Dated entries with symptom, root cause and fix are in [`docs/incidents.md`](docs/incidents.md). One example: our determinism test found that the same description line came out a few milliseconds longer in one run than in the next, because the TTS vocoder draws random noise. Each line is now seeded from its own text, and the test reports the largest remaining difference instead of assuming there is none.
 
 ## Reproduce
 
-See [JUDGES.md](JUDGES.md#reproduce) and [`deploy/`](deploy/).
+```bash
+make setup && make check            # tests, lint, types
+bash deploy/droplet_bootstrap.sh    # on a fresh MI300X "vLLM Quick Start" droplet: images, Gemma, workers, weights
+make doctor                         # writes evidence/doctor.json
+make run VIDEO=path/to/video.mp4    # all stages into projects/<sha12>/
+make review                         # approve lines, keyboard first
+make render PROJECT=<sha12>         # refuses while anything is pending
+make e01 … make e16                 # each experiment writes evidence/eNN_*.json, even when it fails
+make submission-check
+```
 
 ## Licences and credits
 
-Our code is MIT ([LICENSE](LICENSE)). Reused code and ideas: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Models, voices, datasets and clips: [MODEL_LICENSES.md](MODEL_LICENSES.md).
+Our code is MIT ([LICENSE](LICENSE)). Reused code keeps its original licence header; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Models, voices, datasets and clips are listed with their licences in [MODEL_LICENSES.md](MODEL_LICENSES.md). Test videos: W3C WAI [Web Accessibility Perspectives](https://www.w3.org/WAI/perspective-videos/) (linked as their terms ask; our versions of them are never published). Dev clips: NASA (courtesy NASA), Prelinger Archives (public domain), Sintel (© copyright Blender Foundation | www.sintel.org) and Big Buck Bunny ((c) copyright 2008, Blender Foundation / www.bigbuckbunny.org).
+
+## Team
+
+<pending: team.names>

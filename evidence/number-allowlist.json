@@ -1,24 +1,89 @@
 {
-  "_note": "Numbers that may appear in public files without being a measured claim: standard thresholds, product names, list positions. Every entry says why.",
-  "numbers": [
-    {"value": 1, "reason": "list numbering / 'one video'"},
-    {"value": 2, "reason": "list numbering; '2 lines' Netflix caption limit"},
-    {"value": 3, "reason": "list numbering; 'up to 3 repairs' (design setting, constants.py)"},
-    {"value": 4, "reason": "list numbering; 'Gemma 4' model family name"},
-    {"value": 5, "reason": "list numbering; 'five audiences'"},
-    {"value": 6, "reason": "list numbering"},
-    {"value": 7, "reason": "list numbering"},
-    {"value": 8, "reason": "list numbering"},
-    {"value": 9, "reason": "list numbering"},
-    {"value": 10, "reason": "list numbering"},
-    {"value": 12, "reason": "easy-read sentence limit (Inclusion Europe-based setting, constants.py)"},
-    {"value": 20, "reason": "'20-second fixture'; Netflix English SDH 20 characters per second"},
-    {"value": 42, "reason": "Netflix 42 characters per line"},
-    {"value": 60, "reason": "'Try it in 60 seconds'"},
-    {"value": 130, "reason": "DCMP 130 words per minute for lower-level media"},
-    {"value": 192, "reason": "MI300X memory size in GB (AMD product spec)"},
-    {"value": 1.99, "reason": "AMD Developer Cloud MI300X list price per hour (event page)"},
-    {"value": 2026, "reason": "year"},
-    {"value": 3, "reason": "minutes in '3-minute judge guide'"}
-  ]
+ "_note": "Numbers that may appear in public files without being a measured claim: standard thresholds, product names, list positions. Every entry says why.",
+ "numbers": [
+  {
+   "value": 1,
+   "reason": "list numbering / 'one video'"
+  },
+  {
+   "value": 2,
+   "reason": "list numbering; '2 lines' Netflix caption limit"
+  },
+  {
+   "value": 3,
+   "reason": "list numbering; 'up to 3 repairs' (design setting, constants.py)"
+  },
+  {
+   "value": 4,
+   "reason": "list numbering; 'Gemma 4' model family name"
+  },
+  {
+   "value": 5,
+   "reason": "list numbering; 'five audiences'"
+  },
+  {
+   "value": 6,
+   "reason": "list numbering"
+  },
+  {
+   "value": 7,
+   "reason": "list numbering"
+  },
+  {
+   "value": 8,
+   "reason": "list numbering"
+  },
+  {
+   "value": 9,
+   "reason": "list numbering"
+  },
+  {
+   "value": 10,
+   "reason": "list numbering"
+  },
+  {
+   "value": 12,
+   "reason": "easy-read sentence limit (Inclusion Europe-based setting, constants.py)"
+  },
+  {
+   "value": 20,
+   "reason": "'20-second fixture'; Netflix English SDH 20 characters per second"
+  },
+  {
+   "value": 42,
+   "reason": "Netflix 42 characters per line"
+  },
+  {
+   "value": 60,
+   "reason": "'Try it in 60 seconds'"
+  },
+  {
+   "value": 130,
+   "reason": "DCMP 130 words per minute for lower-level media"
+  },
+  {
+   "value": 192,
+   "reason": "MI300X memory size in GB (AMD product spec)"
+  },
+  {
+   "value": 1.99,
+   "reason": "AMD Developer Cloud MI300X list price per hour (event page)"
+  },
+  {
+   "value": 2026,
+   "reason": "year"
+  },
+  {
+   "value": 3,
+   "reason": "minutes in '3-minute judge guide'"
+  },
+  {
+   "value": 0,
+   "reason": "temperature 0 for the evidence step (design setting, constants.py)"
+  },
+  {
+   "value": 2008,
+   "reason": "year in Blender Foundation's required Big Buck Bunny credit line"
+  }
+ ]
 }
