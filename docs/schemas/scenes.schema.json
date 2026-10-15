@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "Scene": {
+      "additionalProperties": false,
+      "properties": {
+        "scene_id": {
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "start_ms": {
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "end_ms": {
+          "title": "End Ms",
+          "type": "integer"
+        },
+        "shots": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Shots",
+          "type": "array"
+        },
+        "boundary_reason": {
+          "default": "START",
+          "title": "Boundary Reason",
+          "type": "string"
+        },
+        "boundary_similarity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Boundary Similarity"
+        }
+      },
+      "required": [
+        "scene_id",
+        "start_ms",
+        "end_ms",
+        "shots"
+      ],
+      "title": "Scene",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "scenes": {
+      "items": {
+        "$ref": "#/$defs/Scene"
+      },
+      "title": "Scenes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "scenes"
+  ],
+  "title": "Scenes",
+  "type": "object"
+}

@@ -1,0 +1,48 @@
+{
+  "$defs": {
+    "Shot": {
+      "additionalProperties": false,
+      "properties": {
+        "shot_id": {
+          "title": "Shot Id",
+          "type": "string"
+        },
+        "start_ms": {
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "end_ms": {
+          "title": "End Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "shot_id",
+        "start_ms",
+        "end_ms"
+      ],
+      "title": "Shot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "detector": {
+      "title": "Detector",
+      "type": "string"
+    },
+    "shots": {
+      "items": {
+        "$ref": "#/$defs/Shot"
+      },
+      "title": "Shots",
+      "type": "array"
+    }
+  },
+  "required": [
+    "detector",
+    "shots"
+  ],
+  "title": "Shots",
+  "type": "object"
+}

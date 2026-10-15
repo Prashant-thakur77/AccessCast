@@ -208,13 +208,9 @@ def demo_fixture(serve: bool = True, port: int = 8080) -> None:
     do_export(s, [r.project.sha12], out, allow_drafts=True)
     typer.echo(f"fixture project {r.project.sha12}; player at http://127.0.0.1:{port}/?audience=judge")
     if serve:
-        import http.server
-        import socketserver
-        from functools import partial
+        from accesscast.player.serve import serve as serve_dir
 
-        handler = partial(http.server.SimpleHTTPRequestHandler, directory=str(out))
-        with socketserver.TCPServer(("127.0.0.1", port), handler) as httpd:
-            httpd.serve_forever()
+        serve_dir(out, port)
 
 
 def main() -> None:

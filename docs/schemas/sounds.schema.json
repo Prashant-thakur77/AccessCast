@@ -1,0 +1,64 @@
+{
+  "$defs": {
+    "SoundEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "start_ms": {
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "end_ms": {
+          "title": "End Ms",
+          "type": "integer"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "source": {
+          "default": "model",
+          "enum": [
+            "model",
+            "energy_gate"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start_ms",
+        "end_ms",
+        "label"
+      ],
+      "title": "SoundEvent",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "model": {
+      "title": "Model",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/SoundEvent"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "rejected_labels": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Labels",
+      "type": "array"
+    }
+  },
+  "required": [
+    "model",
+    "events"
+  ],
+  "title": "Sounds",
+  "type": "object"
+}

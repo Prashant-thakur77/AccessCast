@@ -1,0 +1,274 @@
+{
+  "$defs": {
+    "Character": {
+      "additionalProperties": false,
+      "properties": {
+        "cid": {
+          "title": "Cid",
+          "type": "string"
+        },
+        "appearance": {
+          "title": "Appearance",
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "name_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name Source"
+        }
+      },
+      "required": [
+        "cid",
+        "appearance"
+      ],
+      "title": "Character",
+      "type": "object"
+    },
+    "ModelRef": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "endpoint": {
+          "title": "Endpoint",
+          "type": "string"
+        },
+        "temperature": {
+          "title": "Temperature",
+          "type": "number"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seed"
+        },
+        "prompt_id": {
+          "title": "Prompt Id",
+          "type": "string"
+        },
+        "prompt_sha": {
+          "title": "Prompt Sha",
+          "type": "string"
+        },
+        "served_model_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served Model Id"
+        }
+      },
+      "required": [
+        "name",
+        "endpoint",
+        "temperature",
+        "prompt_id",
+        "prompt_sha"
+      ],
+      "title": "ModelRef",
+      "type": "object"
+    },
+    "OnScreenText": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "frame": {
+          "title": "Frame",
+          "type": "integer"
+        },
+        "kind": {
+          "default": "other",
+          "title": "Kind",
+          "type": "string"
+        },
+        "ocr_agrees": {
+          "default": false,
+          "title": "Ocr Agrees",
+          "type": "boolean"
+        },
+        "source": {
+          "default": "model",
+          "enum": [
+            "model",
+            "ocr"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "frame"
+      ],
+      "title": "OnScreenText",
+      "type": "object"
+    },
+    "VisibleFact": {
+      "additionalProperties": false,
+      "properties": {
+        "fid": {
+          "title": "Fid",
+          "type": "string"
+        },
+        "frames": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Frames",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "priority": {
+          "default": 4,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "important": {
+          "default": false,
+          "title": "Important",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "fid",
+        "frames",
+        "text"
+      ],
+      "title": "VisibleFact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "frames": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Frames",
+      "type": "array"
+    },
+    "frame_ms": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Frame Ms",
+      "type": "array"
+    },
+    "setting": {
+      "default": "",
+      "title": "Setting",
+      "type": "string"
+    },
+    "characters": {
+      "items": {
+        "$ref": "#/$defs/Character"
+      },
+      "title": "Characters",
+      "type": "array"
+    },
+    "visible_facts": {
+      "items": {
+        "$ref": "#/$defs/VisibleFact"
+      },
+      "title": "Visible Facts",
+      "type": "array"
+    },
+    "on_screen_text": {
+      "items": {
+        "$ref": "#/$defs/OnScreenText"
+      },
+      "title": "On Screen Text",
+      "type": "array"
+    },
+    "inferences": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inferences",
+      "type": "array"
+    },
+    "uncertainties": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Uncertainties",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "status": {
+      "default": "ok",
+      "enum": [
+        "ok",
+        "evidence_failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ModelRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "scene_id",
+    "frames"
+  ],
+  "title": "SceneEvidence",
+  "type": "object"
+}

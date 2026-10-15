@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "unit": {
+          "default": "",
+          "title": "Unit",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "measured",
+            "verified",
+            "estimate",
+            "list_price",
+            "memory_accounting",
+            "cited"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "split": {
+          "default": "none",
+          "enum": [
+            "dev",
+            "test",
+            "none"
+          ],
+          "title": "Split",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/ClaimEvidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "accessed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accessed"
+        },
+        "quote": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote"
+        },
+        "public_files": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Public Files",
+          "type": "array"
+        },
+        "display": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Display",
+          "type": "array"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "value",
+        "status"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "ClaimEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "pointer"
+      ],
+      "title": "ClaimEvidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "default": "accesscast/public-claims/v1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Claims",
+      "type": "array"
+    }
+  },
+  "title": "ClaimsRegistry",
+  "type": "object"
+}

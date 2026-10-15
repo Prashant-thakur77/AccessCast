@@ -1,0 +1,43 @@
+{
+  "$defs": {
+    "VadSegment": {
+      "additionalProperties": false,
+      "properties": {
+        "start_ms": {
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "end_ms": {
+          "title": "End Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "start_ms",
+        "end_ms"
+      ],
+      "title": "VadSegment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "model": {
+      "title": "Model",
+      "type": "string"
+    },
+    "segments": {
+      "items": {
+        "$ref": "#/$defs/VadSegment"
+      },
+      "title": "Segments",
+      "type": "array"
+    }
+  },
+  "required": [
+    "model",
+    "segments"
+  ],
+  "title": "Vad",
+  "type": "object"
+}

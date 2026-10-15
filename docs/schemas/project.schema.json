@@ -1,0 +1,125 @@
+{
+  "$defs": {
+    "ToolVersion": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "licence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Licence"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "ToolVersion",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "accesscast/project/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sha256": {
+      "title": "Sha256",
+      "type": "string"
+    },
+    "sha12": {
+      "title": "Sha12",
+      "type": "string"
+    },
+    "source_name": {
+      "title": "Source Name",
+      "type": "string"
+    },
+    "duration_ms": {
+      "title": "Duration Ms",
+      "type": "integer"
+    },
+    "fps": {
+      "title": "Fps",
+      "type": "number"
+    },
+    "width": {
+      "title": "Width",
+      "type": "integer"
+    },
+    "height": {
+      "title": "Height",
+      "type": "integer"
+    },
+    "has_audio": {
+      "title": "Has Audio",
+      "type": "boolean"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "worker_mode": {
+      "enum": [
+        "real",
+        "fake"
+      ],
+      "title": "Worker Mode",
+      "type": "string"
+    },
+    "project_seed": {
+      "title": "Project Seed",
+      "type": "integer"
+    },
+    "settings": {
+      "additionalProperties": true,
+      "title": "Settings",
+      "type": "object"
+    },
+    "tools": {
+      "items": {
+        "$ref": "#/$defs/ToolVersion"
+      },
+      "title": "Tools",
+      "type": "array"
+    },
+    "models": {
+      "items": {
+        "$ref": "#/$defs/ToolVersion"
+      },
+      "title": "Models",
+      "type": "array"
+    }
+  },
+  "required": [
+    "sha256",
+    "sha12",
+    "source_name",
+    "duration_ms",
+    "fps",
+    "width",
+    "height",
+    "has_audio",
+    "created_at",
+    "worker_mode",
+    "project_seed"
+  ],
+  "title": "ProjectInfo",
+  "type": "object"
+}

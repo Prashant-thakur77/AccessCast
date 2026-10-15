@@ -1,0 +1,82 @@
+{
+  "$defs": {
+    "AsrChunkCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk": {
+          "title": "Chunk",
+          "type": "integer"
+        },
+        "start_ms": {
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "end_ms": {
+          "title": "End Ms",
+          "type": "integer"
+        },
+        "wer": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Wer"
+        },
+        "disagreement": {
+          "title": "Disagreement",
+          "type": "boolean"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error"
+        }
+      },
+      "required": [
+        "chunk",
+        "start_ms",
+        "end_ms",
+        "wer",
+        "disagreement"
+      ],
+      "title": "AsrChunkCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "model": {
+      "title": "Model",
+      "type": "string"
+    },
+    "threshold": {
+      "title": "Threshold",
+      "type": "number"
+    },
+    "chunks": {
+      "items": {
+        "$ref": "#/$defs/AsrChunkCheck"
+      },
+      "title": "Chunks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "model",
+    "threshold",
+    "chunks"
+  ],
+  "title": "AsrCrosscheck",
+  "type": "object"
+}

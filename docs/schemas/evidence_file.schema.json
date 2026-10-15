@@ -1,0 +1,88 @@
+{
+  "additionalProperties": true,
+  "properties": {
+    "schema": {
+      "default": "accesscast/evidence/v1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "experiment": {
+      "title": "Experiment",
+      "type": "string"
+    },
+    "split": {
+      "enum": [
+        "dev",
+        "test",
+        "none"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "git_commit": {
+      "title": "Git Commit",
+      "type": "string"
+    },
+    "freeze_tag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Freeze Tag"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "environment": {
+      "additionalProperties": true,
+      "title": "Environment",
+      "type": "object"
+    },
+    "config": {
+      "additionalProperties": true,
+      "title": "Config",
+      "type": "object"
+    },
+    "results": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Results",
+      "type": "array"
+    },
+    "summary": {
+      "additionalProperties": true,
+      "title": "Summary",
+      "type": "object"
+    }
+  },
+  "required": [
+    "experiment",
+    "split",
+    "passed",
+    "git_commit",
+    "started_at",
+    "finished_at",
+    "environment",
+    "config",
+    "results",
+    "summary"
+  ],
+  "title": "EvidenceFile",
+  "type": "object"
+}

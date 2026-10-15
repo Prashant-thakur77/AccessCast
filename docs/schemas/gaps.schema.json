@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "Gap": {
+      "additionalProperties": false,
+      "properties": {
+        "gap_id": {
+          "title": "Gap Id",
+          "type": "string"
+        },
+        "start_ms": {
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "end_ms": {
+          "title": "End Ms",
+          "type": "integer"
+        },
+        "len_ms": {
+          "title": "Len Ms",
+          "type": "integer"
+        },
+        "scene_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scene Id"
+        },
+        "prev_word_i": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prev Word I"
+        },
+        "next_word_i": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next Word I"
+        },
+        "under": {
+          "default": "silence",
+          "enum": [
+            "silence",
+            "non_speech_sound",
+            "music_no_lyrics"
+          ],
+          "title": "Under",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gap_id",
+        "start_ms",
+        "end_ms",
+        "len_ms"
+      ],
+      "title": "Gap",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "guard_ms": {
+      "title": "Guard Ms",
+      "type": "integer"
+    },
+    "min_gap_ms": {
+      "title": "Min Gap Ms",
+      "type": "integer"
+    },
+    "gaps": {
+      "items": {
+        "$ref": "#/$defs/Gap"
+      },
+      "title": "Gaps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "guard_ms",
+    "min_gap_ms",
+    "gaps"
+  ],
+  "title": "Gaps",
+  "type": "object"
+}

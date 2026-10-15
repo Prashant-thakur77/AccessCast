@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "Word": {
+      "additionalProperties": false,
+      "properties": {
+        "i": {
+          "title": "I",
+          "type": "integer"
+        },
+        "w": {
+          "title": "W",
+          "type": "string"
+        },
+        "start_ms": {
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "end_ms": {
+          "title": "End Ms",
+          "type": "integer"
+        },
+        "prob": {
+          "default": 1.0,
+          "title": "Prob",
+          "type": "number"
+        },
+        "seg": {
+          "default": 0,
+          "title": "Seg",
+          "type": "integer"
+        },
+        "speaker": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Speaker"
+        }
+      },
+      "required": [
+        "i",
+        "w",
+        "start_ms",
+        "end_ms"
+      ],
+      "title": "Word",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "lang": {
+      "title": "Lang",
+      "type": "string"
+    },
+    "model": {
+      "title": "Model",
+      "type": "string"
+    },
+    "aligned": {
+      "default": false,
+      "title": "Aligned",
+      "type": "boolean"
+    },
+    "words": {
+      "items": {
+        "$ref": "#/$defs/Word"
+      },
+      "title": "Words",
+      "type": "array"
+    }
+  },
+  "required": [
+    "lang",
+    "model",
+    "words"
+  ],
+  "title": "Words",
+  "type": "object"
+}

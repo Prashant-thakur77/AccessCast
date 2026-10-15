@@ -1,0 +1,523 @@
+{
+  "$defs": {
+    "Budget": {
+      "additionalProperties": false,
+      "properties": {
+        "words_max": {
+          "title": "Words Max",
+          "type": "integer"
+        },
+        "seconds_max": {
+          "title": "Seconds Max",
+          "type": "number"
+        },
+        "wps_voice": {
+          "title": "Wps Voice",
+          "type": "number"
+        }
+      },
+      "required": [
+        "words_max",
+        "seconds_max",
+        "wps_voice"
+      ],
+      "title": "Budget",
+      "type": "object"
+    },
+    "FindingModel": {
+      "additionalProperties": false,
+      "properties": {
+        "rule": {
+          "title": "Rule",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "warning"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "observed": {
+          "title": "Observed",
+          "type": "string"
+        },
+        "threshold": {
+          "title": "Threshold",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "owner_stage": {
+          "title": "Owner Stage",
+          "type": "string"
+        },
+        "repairable": {
+          "default": true,
+          "title": "Repairable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "rule",
+        "severity",
+        "observed",
+        "threshold",
+        "message",
+        "owner_stage"
+      ],
+      "title": "FindingModel",
+      "type": "object"
+    },
+    "ItemKind": {
+      "enum": [
+        "ad",
+        "sdh",
+        "easy",
+        "subtitle",
+        "voiceover",
+        "ad_translation"
+      ],
+      "title": "ItemKind",
+      "type": "string"
+    },
+    "ItemStatus": {
+      "enum": [
+        "pending",
+        "approved",
+        "auto_approved",
+        "rejected",
+        "needs_revision"
+      ],
+      "title": "ItemStatus",
+      "type": "string"
+    },
+    "ModelRef": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "endpoint": {
+          "title": "Endpoint",
+          "type": "string"
+        },
+        "temperature": {
+          "title": "Temperature",
+          "type": "number"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seed"
+        },
+        "prompt_id": {
+          "title": "Prompt Id",
+          "type": "string"
+        },
+        "prompt_sha": {
+          "title": "Prompt Sha",
+          "type": "string"
+        },
+        "served_model_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served Model Id"
+        }
+      },
+      "required": [
+        "name",
+        "endpoint",
+        "temperature",
+        "prompt_id",
+        "prompt_sha"
+      ],
+      "title": "ModelRef",
+      "type": "object"
+    },
+    "RepairInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "attempts": {
+          "default": 0,
+          "title": "Attempts",
+          "type": "integer"
+        },
+        "stop_reason": {
+          "default": "safe_initial_proposal",
+          "title": "Stop Reason",
+          "type": "string"
+        },
+        "history": {
+          "items": {
+            "$ref": "#/$defs/RepairStep"
+          },
+          "title": "History",
+          "type": "array"
+        }
+      },
+      "title": "RepairInfo",
+      "type": "object"
+    },
+    "RepairStep": {
+      "additionalProperties": false,
+      "properties": {
+        "attempt": {
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "rules": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rules",
+          "type": "array"
+        }
+      },
+      "required": [
+        "attempt",
+        "text",
+        "rules"
+      ],
+      "title": "RepairStep",
+      "type": "object"
+    },
+    "Slot": {
+      "additionalProperties": false,
+      "properties": {
+        "start_ms": {
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "end_ms": {
+          "title": "End Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "start_ms",
+        "end_ms"
+      ],
+      "title": "Slot",
+      "type": "object"
+    },
+    "TtsInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "voice": {
+          "title": "Voice",
+          "type": "string"
+        },
+        "speed": {
+          "default": 1.0,
+          "title": "Speed",
+          "type": "number"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "duration_ms": {
+          "title": "Duration Ms",
+          "type": "integer"
+        },
+        "engine": {
+          "default": "kokoro",
+          "title": "Engine",
+          "type": "string"
+        }
+      },
+      "required": [
+        "voice",
+        "sha256",
+        "duration_ms"
+      ],
+      "title": "TtsInfo",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/ItemKind"
+    },
+    "lang": {
+      "title": "Lang",
+      "type": "string"
+    },
+    "audiences": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Audiences",
+      "type": "array"
+    },
+    "scene_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scene Id"
+    },
+    "gap_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gap Id"
+    },
+    "anchor_ms": {
+      "title": "Anchor Ms",
+      "type": "integer"
+    },
+    "slot": {
+      "$ref": "#/$defs/Slot"
+    },
+    "budget": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Budget"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "fact_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Fact Ids",
+      "type": "array"
+    },
+    "source_text": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Text"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "draft": {
+      "title": "Draft",
+      "type": "string"
+    },
+    "final": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Final"
+    },
+    "status": {
+      "$ref": "#/$defs/ItemStatus",
+      "default": "pending"
+    },
+    "source": {
+      "default": "auto",
+      "enum": [
+        "auto",
+        "manual"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "extended": {
+      "default": false,
+      "title": "Extended",
+      "type": "boolean"
+    },
+    "needs_pause": {
+      "default": false,
+      "title": "Needs Pause",
+      "type": "boolean"
+    },
+    "flags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Flags",
+      "type": "array"
+    },
+    "violations": {
+      "items": {
+        "$ref": "#/$defs/FindingModel"
+      },
+      "title": "Violations",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "$ref": "#/$defs/FindingModel"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "repair": {
+      "$ref": "#/$defs/RepairInfo"
+    },
+    "tts": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TtsInfo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "confidence": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confidence"
+    },
+    "confidence_terms": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Confidence Terms",
+      "type": "object"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ModelRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "revision": {
+      "default": 0,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "reviewer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewer"
+    },
+    "reviewed_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewed At"
+    },
+    "reviewer_note": {
+      "default": "",
+      "title": "Reviewer Note",
+      "type": "string"
+    },
+    "override_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Override Reason"
+    },
+    "back_translation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Back Translation"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "lang",
+    "audiences",
+    "anchor_ms",
+    "slot",
+    "draft"
+  ],
+  "title": "Item",
+  "type": "object"
+}
