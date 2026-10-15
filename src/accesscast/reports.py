@@ -155,6 +155,7 @@ def build_reports(run: Run) -> dict[str, Any]:
                          "source_to_output": f"render/source_to_output.{k}.jsonl" if v.get("extended") else None}
                      for k, v in render.get("versions", {}).items() if v.get("ok")},
         "needs_pause_cues": [i.id for i in items.values() if i.kind == ItemKind.EASY and i.needs_pause],
+        "tts_engines": sorted({i.tts.engine for i in items.values() if i.tts is not None}),
     }
     write_json(proj.p("reports", "index.json"), index)
     return report
