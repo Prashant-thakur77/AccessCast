@@ -1,0 +1,38 @@
+[
+  {
+    "type": "source",
+    "source_start_sample": 0,
+    "source_end_sample": 795600,
+    "output_start_sample": 0,
+    "output_end_sample": 795600,
+    "source_start_ms": 0,
+    "source_end_ms": 16575,
+    "output_start_ms": 0,
+    "output_end_ms": 16575
+  },
+  {
+    "type": "insertion",
+    "narration_id": "ad.en.0004",
+    "source_anchor_sample": 795600,
+    "source_anchor_ms": 16575,
+    "output_start_sample": 795600,
+    "output_end_sample": 968972,
+    "output_start_ms": 16575,
+    "output_end_ms": 20187,
+    "speech_duration_samples": 158972,
+    "speech_duration_ms": 3312,
+    "padding_duration_samples": 14400,
+    "padding_duration_ms": 300
+  },
+  {
+    "type": "source",
+    "source_start_sample": 795600,
+    "source_end_sample": 960512,
+    "output_start_sample": 968972,
+    "output_end_sample": 1133884,
+    "source_start_ms": 16575,
+    "source_end_ms": 20011,
+    "output_start_ms": 20187,
+    "output_end_ms": 23623
+  }
+]

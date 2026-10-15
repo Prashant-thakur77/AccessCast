@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AccessCast proof</title>
+<meta name="description" content="Watch our checks block bad lines from Gemma before a viewer hears them.">
+<link rel="stylesheet" href="assets/player.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to the main content</a>
+<header class="site">
+  <div class="wrap">
+    <p><strong>AccessCast</strong></p>
+    <nav aria-label="Pages">
+      <ul>
+        <li><a href="index.html">Player</a></li>
+        <li><a href="five-ways.html">Same 20 seconds, five ways</a></li>
+        <li><a href="proof.html" aria-current="page">Proof</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <h1>Proof: code checks every line</h1>
+  <p>We give Gemma a hard case on purpose. We ask it several times, with a fresh seed each time. Our checks look at every answer. This page shows what Gemma wrote each time, which check blocked it, and whether it reached a viewer.</p>
+
+  <section aria-labelledby="live-h">
+    <h2 id="live-h">Run it live</h2>
+    <p id="live-state"></p>
+    <button type="button" id="b-attack" class="primary" disabled>Run the attack</button>
+    <p id="status" class="now" role="status" aria-live="polite"></p>
+    <div id="live-result"></div>
+  </section>
+
+  <section aria-labelledby="last-h">
+    <h2 id="last-h">Last recorded run</h2>
+    <div id="last-run"><p>Loading…</p></div>
+  </section>
+</main>
+
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+<script src="assets/common.js"></script>
+<script src="assets/proof.js"></script>
+</body>
+</html>

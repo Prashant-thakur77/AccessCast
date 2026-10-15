@@ -1,0 +1,1445 @@
+{
+  "schema_version": "accesscast/decisions/v1",
+  "generated_at": "2026-10-15T21:07:42.344Z",
+  "items": [
+    {
+      "id": "ad.en.0001",
+      "kind": "ad",
+      "lang": "en",
+      "audiences": [
+        "blind"
+      ],
+      "anchor_ms": 0,
+      "slot": {
+        "start_ms": 0,
+        "end_ms": 1480
+      },
+      "extended": false,
+      "budget": {
+        "words_max": 4,
+        "seconds_max": 1.48,
+        "wps_voice": 3.2165
+      },
+      "facts": [
+        {
+          "fid": "F001",
+          "frames": [
+            0,
+            1,
+            2
+          ],
+          "text": "White text on a dark blue background reads Keyboard Shortcuts, Lesson 1.",
+          "priority": 1,
+          "important": true
+        }
+      ],
+      "frames": [
+        "evidence/SC001/f00.jpg",
+        "evidence/SC001/f01.jpg",
+        "evidence/SC001/f02.jpg"
+      ],
+      "first_draft": "On screen: Keyboard Shortcuts, Lesson 1.",
+      "final_text": "White text on a",
+      "status": "needs_revision",
+      "rules_fired": [
+        "AD001",
+        "AD004",
+        "AD007"
+      ],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "On screen: Keyboard Shortcuts, Lesson 1.",
+          "rules": [
+            "AD001",
+            "AD004",
+            "AD007"
+          ]
+        },
+        {
+          "attempt": 1,
+          "text": "White text on a",
+          "rules": [
+            "AD001"
+          ]
+        },
+        {
+          "attempt": 2,
+          "text": "White text on a",
+          "rules": [
+            "AD001"
+          ]
+        },
+        {
+          "attempt": 3,
+          "text": "White text on a",
+          "rules": [
+            "AD001"
+          ]
+        }
+      ],
+      "stop_reason": "repair_limit_reached",
+      "violations": [
+        {
+          "rule": "AD001",
+          "severity": "error",
+          "observed": "1.54 s (estimated, incl. pads)",
+          "threshold": "≤ 1.48 s",
+          "message": "Spoken line is 0.06 s longer than the pause.",
+          "owner_stage": "write_ad",
+          "repairable": true
+        }
+      ],
+      "warnings": [],
+      "confidence": 0.0,
+      "confidence_terms": {
+        "grounding": 1.0,
+        "slack": 0.0,
+        "asr": 1.0,
+        "ocr": 1.0,
+        "repairs": -0.3,
+        "warnings": -0.0
+      },
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": {
+        "name": "google/gemma-4-31B-it",
+        "endpoint": "fake",
+        "temperature": 0.3,
+        "seed": 299413391,
+        "prompt_id": "write_ad@1",
+        "prompt_sha": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+        "served_model_id": "fake/canned"
+      },
+      "tts": {
+        "voice": "af_heart",
+        "speed": 1.0,
+        "sha256": "909e154f6091406156a935dffc7f01daedaa856ed4b75c893b72f6efc5a5850b",
+        "duration_ms": 954,
+        "engine": "kokoro-82m"
+      },
+      "source_text": null
+    },
+    {
+      "id": "ad.en.0002",
+      "kind": "ad",
+      "lang": "en",
+      "audiences": [
+        "blind"
+      ],
+      "anchor_ms": 4370,
+      "slot": {
+        "start_ms": 4370,
+        "end_ms": 7805
+      },
+      "extended": false,
+      "budget": {
+        "words_max": 10,
+        "seconds_max": 3.44,
+        "wps_voice": 3.2165
+      },
+      "facts": [
+        {
+          "fid": "F002",
+          "frames": [
+            0,
+            1
+          ],
+          "text": "A person with short grey hair and a blue cardigan sits at a desk with a laptop.",
+          "priority": 3,
+          "important": true
+        }
+      ],
+      "frames": [
+        "evidence/SC002/f00.jpg",
+        "evidence/SC002/f01.jpg"
+      ],
+      "first_draft": "Sarah, a teacher in a blue cardigan, sits at her desk because she wants to show the shortcut Ctrl + C on her laptop screen.",
+      "final_text": "A person in a blue cardigan sits at a laptop.",
+      "status": "auto_approved",
+      "rules_fired": [
+        "AD001",
+        "AD004",
+        "AD006",
+        "AD007",
+        "AD009",
+        "AD010"
+      ],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Sarah, a teacher in a blue cardigan, sits at her desk because she wants to show the shortcut Ctrl + C on her laptop screen.",
+          "rules": [
+            "AD001",
+            "AD004",
+            "AD006",
+            "AD007",
+            "AD009",
+            "AD010"
+          ]
+        },
+        {
+          "attempt": 1,
+          "text": "A person in a blue cardigan sits at a laptop.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_model_revision",
+      "violations": [],
+      "warnings": [],
+      "confidence": 0.0,
+      "confidence_terms": {
+        "grounding": 1.0,
+        "slack": 0.0433,
+        "asr": 1.0,
+        "ocr": 1.0,
+        "repairs": -0.1,
+        "warnings": -0.0
+      },
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": {
+        "name": "google/gemma-4-31B-it",
+        "endpoint": "fake",
+        "temperature": 0.3,
+        "seed": 299413391,
+        "prompt_id": "write_ad@1",
+        "prompt_sha": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+        "served_model_id": "fake/canned"
+      },
+      "tts": {
+        "voice": "af_heart",
+        "speed": 1.0,
+        "sha256": "b7f0f1e2019d0fa00e8d4b5b50fb647b6ec0aaddb3ea75f7de805c417bf0e319",
+        "duration_ms": 2606,
+        "engine": "kokoro-82m"
+      },
+      "source_text": null
+    },
+    {
+      "id": "ad.en.0003",
+      "kind": "ad",
+      "lang": "en",
+      "audiences": [
+        "blind"
+      ],
+      "anchor_ms": 10780,
+      "slot": {
+        "start_ms": 10570,
+        "end_ms": 13255
+      },
+      "extended": false,
+      "budget": {
+        "words_max": 7,
+        "seconds_max": 2.48,
+        "wps_voice": 3.2165
+      },
+      "facts": [
+        {
+          "fid": "F006",
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "text": "The laptop screen shows Ctrl + V.",
+          "priority": 1,
+          "important": true
+        }
+      ],
+      "frames": [
+        "evidence/SC003/f00.jpg",
+        "evidence/SC003/f01.jpg",
+        "evidence/SC003/f02.jpg",
+        "evidence/SC003/f03.jpg"
+      ],
+      "first_draft": "The wall turns green. On screen: Ctrl + V. A note reads: Do not unplug while saving.",
+      "final_text": "On screen: Ctrl + V.",
+      "status": "auto_approved",
+      "rules_fired": [
+        "AD001",
+        "AD004",
+        "AD007"
+      ],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "The wall turns green. On screen: Ctrl + V. A note reads: Do not unplug while saving.",
+          "rules": [
+            "AD001",
+            "AD004",
+            "AD007"
+          ]
+        },
+        {
+          "attempt": 1,
+          "text": "On screen: Ctrl + V.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_model_revision",
+      "violations": [],
+      "warnings": [],
+      "confidence": 0.9,
+      "confidence_terms": {
+        "grounding": 1.0,
+        "slack": 1.0,
+        "asr": 1.0,
+        "ocr": 1.0,
+        "repairs": -0.1,
+        "warnings": -0.0
+      },
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": {
+        "name": "google/gemma-4-31B-it",
+        "endpoint": "fake",
+        "temperature": 0.3,
+        "seed": 299413391,
+        "prompt_id": "write_ad@1",
+        "prompt_sha": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+        "served_model_id": "fake/canned"
+      },
+      "tts": {
+        "voice": "af_heart",
+        "speed": 1.0,
+        "sha256": "11431ce71ebb1e6b1c6c8d48727621da08201b0f6581fb36b85a217259ded7a5",
+        "duration_ms": 1785,
+        "engine": "kokoro-82m"
+      },
+      "source_text": null
+    },
+    {
+      "id": "ad.en.0004",
+      "kind": "ad",
+      "lang": "en",
+      "audiences": [
+        "blind"
+      ],
+      "anchor_ms": 16575,
+      "slot": {
+        "start_ms": 16575,
+        "end_ms": 16575
+      },
+      "extended": true,
+      "budget": {
+        "words_max": 14,
+        "seconds_max": 4.95,
+        "wps_voice": 3.2165
+      },
+      "facts": [
+        {
+          "fid": "F007",
+          "frames": [
+            2,
+            3
+          ],
+          "text": "A yellow note on the wall reads Do not unplug while saving.",
+          "priority": 1,
+          "important": true
+        }
+      ],
+      "frames": [
+        "evidence/SC003/f02.jpg",
+        "evidence/SC003/f03.jpg"
+      ],
+      "first_draft": "A yellow note on the wall reads Do not unplug while saving.",
+      "final_text": "A yellow note on the wall reads Do not unplug while saving.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "A yellow note on the wall reads Do not unplug while saving.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": 1.0,
+      "confidence_terms": {
+        "grounding": 1.0,
+        "slack": 1.0,
+        "asr": 1.0,
+        "ocr": 1.0,
+        "repairs": -0.0,
+        "warnings": -0.0
+      },
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": {
+        "name": "google/gemma-4-31B-it",
+        "endpoint": "fake",
+        "temperature": 0.3,
+        "seed": 299413391,
+        "prompt_id": "write_ad@1",
+        "prompt_sha": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+        "served_model_id": "fake/canned"
+      },
+      "tts": {
+        "voice": "af_heart",
+        "speed": 1.0,
+        "sha256": "7f47e8b196bf0e0378fc424eb316c89f81d56d6c24e15bf077ab4f1add6ba22b",
+        "duration_ms": 3312,
+        "engine": "kokoro-82m"
+      },
+      "source_text": null
+    },
+    {
+      "id": "easy.en.0001",
+      "kind": "easy",
+      "lang": "en",
+      "audiences": [
+        "easy"
+      ],
+      "anchor_ms": 1600,
+      "slot": {
+        "start_ms": 1600,
+        "end_ms": 4250
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Welcome! Today I will\nshow you two shortcuts.",
+      "final_text": "Welcome! Today I will\nshow you two shortcuts.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Welcome! Today I will\nshow you two shortcuts.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [
+        {
+          "rule": "ER008",
+          "severity": "warning",
+          "observed": "'shortcuts'",
+          "threshold": "Zipf ≥ 3.5",
+          "message": "This word may be hard. Use a common word or explain it.",
+          "owner_stage": "easy",
+          "repairable": true
+        }
+      ],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Welcome. Today I will show you two shortcuts."
+    },
+    {
+      "id": "easy.en.0002",
+      "kind": "easy",
+      "lang": "en",
+      "audiences": [
+        "easy"
+      ],
+      "anchor_ms": 7925,
+      "slot": {
+        "start_ms": 7925,
+        "end_ms": 10450
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Press control and C to copy the text.",
+      "final_text": "Press control and C to copy the text.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Press control and C to copy the text.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Press control and C to copy the text."
+    },
+    {
+      "id": "easy.en.0003",
+      "kind": "easy",
+      "lang": "en",
+      "audiences": [
+        "easy"
+      ],
+      "anchor_ms": 13375,
+      "slot": {
+        "start_ms": 13375,
+        "end_ms": 15675
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Next, press control and V to paste it.",
+      "final_text": "Next, press control and V to paste it.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Next, press control and V to paste it.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Then press control and V to paste it."
+    },
+    {
+      "id": "easy.en.0004",
+      "kind": "easy",
+      "lang": "en",
+      "audiences": [
+        "easy"
+      ],
+      "anchor_ms": 16575,
+      "slot": {
+        "start_ms": 16575,
+        "end_ms": 18900
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Do not unplug the laptop while it saves.",
+      "final_text": "Do not unplug the laptop while it saves.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Do not unplug the laptop while it saves.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [
+        {
+          "rule": "ER008",
+          "severity": "warning",
+          "observed": "'unplug'",
+          "threshold": "Zipf ≥ 3.5",
+          "message": "This word may be hard. Use a common word or explain it.",
+          "owner_stage": "easy",
+          "repairable": true
+        }
+      ],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Do not unplug the laptop while it saves."
+    },
+    {
+      "id": "sdh.en.0001",
+      "kind": "sdh",
+      "lang": "en",
+      "audiences": [
+        "deaf"
+      ],
+      "anchor_ms": 1600,
+      "slot": {
+        "start_ms": 1600,
+        "end_ms": 4250
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Welcome. Today I will\nshow you two shortcuts.",
+      "final_text": "Welcome. Today I will\nshow you two shortcuts.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": 1.0,
+      "confidence_terms": {
+        "grounding": 1.0,
+        "slack": 1.0,
+        "asr": 1.0,
+        "ocr": 1.0,
+        "repairs": -0.0,
+        "warnings": -0.0
+      },
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Welcome. Today I will show you two shortcuts."
+    },
+    {
+      "id": "sdh.en.0002",
+      "kind": "sdh",
+      "lang": "en",
+      "audiences": [
+        "deaf"
+      ],
+      "anchor_ms": 7925,
+      "slot": {
+        "start_ms": 7925,
+        "end_ms": 10450
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Press control and C to copy the text.",
+      "final_text": "Press control and C to copy the text.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": 1.0,
+      "confidence_terms": {
+        "grounding": 1.0,
+        "slack": 1.0,
+        "asr": 1.0,
+        "ocr": 1.0,
+        "repairs": -0.0,
+        "warnings": -0.0
+      },
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Press control and C to copy the text."
+    },
+    {
+      "id": "sdh.en.0003",
+      "kind": "sdh",
+      "lang": "en",
+      "audiences": [
+        "deaf"
+      ],
+      "anchor_ms": 13375,
+      "slot": {
+        "start_ms": 13375,
+        "end_ms": 15675
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "- Then press control and V to paste it.",
+      "final_text": "- Then press control and V to paste it.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": 1.0,
+      "confidence_terms": {
+        "grounding": 1.0,
+        "slack": 1.0,
+        "asr": 1.0,
+        "ocr": 1.0,
+        "repairs": -0.0,
+        "warnings": -0.0
+      },
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Then press control and V to paste it."
+    },
+    {
+      "id": "sdh.en.0004",
+      "kind": "sdh",
+      "lang": "en",
+      "audiences": [
+        "deaf"
+      ],
+      "anchor_ms": 16575,
+      "slot": {
+        "start_ms": 16575,
+        "end_ms": 18900
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Do not unplug the laptop while it saves.",
+      "final_text": "Do not unplug the laptop while it saves.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": 1.0,
+      "confidence_terms": {
+        "grounding": 1.0,
+        "slack": 1.0,
+        "asr": 1.0,
+        "ocr": 1.0,
+        "repairs": -0.0,
+        "warnings": -0.0
+      },
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Do not unplug the laptop while it saves."
+    },
+    {
+      "id": "subs.hi.0001",
+      "kind": "subtitle",
+      "lang": "hi",
+      "audiences": [
+        "hi"
+      ],
+      "anchor_ms": 1600,
+      "slot": {
+        "start_ms": 1600,
+        "end_ms": 4250
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "स्वागत है। आज मैं आपको\nदो शॉर्टकट दिखाऊँगा।",
+      "final_text": "स्वागत है। आज मैं आपको\nदो शॉर्टकट दिखाऊँगा।",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "स्वागत है। आज मैं आपको\nदो शॉर्टकट दिखाऊँगा।",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Welcome. Today I will show you two shortcuts."
+    },
+    {
+      "id": "subs.hi.0002",
+      "kind": "subtitle",
+      "lang": "hi",
+      "audiences": [
+        "hi"
+      ],
+      "anchor_ms": 7925,
+      "slot": {
+        "start_ms": 7925,
+        "end_ms": 10450
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "टेक्स्ट कॉपी करने के\nलिए कंट्रोल और C दबाएँ।",
+      "final_text": "टेक्स्ट कॉपी करने के\nलिए कंट्रोल और C दबाएँ।",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "टेक्स्ट कॉपी करने के\nलिए कंट्रोल और C दबाएँ।",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Press control and C to copy the text."
+    },
+    {
+      "id": "subs.hi.0003",
+      "kind": "subtitle",
+      "lang": "hi",
+      "audiences": [
+        "hi"
+      ],
+      "anchor_ms": 13375,
+      "slot": {
+        "start_ms": 13375,
+        "end_ms": 15675
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "फिर उसे पेस्ट करने के\nलिए कंट्रोल और V दबाएँ।",
+      "final_text": "फिर उसे पेस्ट करने के\nलिए कंट्रोल और V दबाएँ।",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "फिर उसे पेस्ट करने के\nलिए कंट्रोल और V दबाएँ।",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Then press control and V to paste it."
+    },
+    {
+      "id": "subs.hi.0004",
+      "kind": "subtitle",
+      "lang": "hi",
+      "audiences": [
+        "hi"
+      ],
+      "anchor_ms": 16575,
+      "slot": {
+        "start_ms": 16575,
+        "end_ms": 18900
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "सेव होते समय लैपटॉप का प्लग न निकालें।",
+      "final_text": "सेव होते समय लैपटॉप का प्लग न निकालें।",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "सेव होते समय लैपटॉप का प्लग न निकालें।",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Do not unplug the laptop while it saves."
+    },
+    {
+      "id": "subs.it.0001",
+      "kind": "subtitle",
+      "lang": "it",
+      "audiences": [
+        "it"
+      ],
+      "anchor_ms": 1600,
+      "slot": {
+        "start_ms": 1600,
+        "end_ms": 4250
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Benvenuti. Oggi vi mostro due scorciatoie.",
+      "final_text": "Benvenuti. Oggi vi mostro due scorciatoie.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Benvenuti. Oggi vi mostro due scorciatoie.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Welcome. Today I will show you two shortcuts."
+    },
+    {
+      "id": "subs.it.0002",
+      "kind": "subtitle",
+      "lang": "it",
+      "audiences": [
+        "it"
+      ],
+      "anchor_ms": 7925,
+      "slot": {
+        "start_ms": 7925,
+        "end_ms": 10450
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Premete Ctrl e C per copiare il testo.",
+      "final_text": "Premete Ctrl e C per copiare il testo.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Premete Ctrl e C per copiare il testo.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Press control and C to copy the text."
+    },
+    {
+      "id": "subs.it.0003",
+      "kind": "subtitle",
+      "lang": "it",
+      "audiences": [
+        "it"
+      ],
+      "anchor_ms": 13375,
+      "slot": {
+        "start_ms": 13375,
+        "end_ms": 15675
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Poi premete Ctrl e V per incollarlo.",
+      "final_text": "Poi premete Ctrl e V per incollarlo.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Poi premete Ctrl e V per incollarlo.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Then press control and V to paste it."
+    },
+    {
+      "id": "subs.it.0004",
+      "kind": "subtitle",
+      "lang": "it",
+      "audiences": [
+        "it"
+      ],
+      "anchor_ms": 16575,
+      "slot": {
+        "start_ms": 16575,
+        "end_ms": 18987
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Non scollegate il portatile mentre salva.",
+      "final_text": "Non scollegate il portatile mentre salva.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Non scollegate il portatile mentre salva.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": null,
+      "source_text": "Do not unplug the laptop while it saves."
+    },
+    {
+      "id": "vo.hi.0001",
+      "kind": "voiceover",
+      "lang": "hi",
+      "audiences": [
+        "hi"
+      ],
+      "anchor_ms": 1600,
+      "slot": {
+        "start_ms": 1600,
+        "end_ms": 5750
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "स्वागत है। आज मैं आपको दो शॉर्टकट दिखाऊँगा।",
+      "final_text": "स्वागत है। आज मैं आपको दो शॉर्टकट दिखाऊँगा।",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "स्वागत है। आज मैं आपको दो शॉर्टकट दिखाऊँगा।",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": {
+        "voice": "hm_omega",
+        "speed": 1.0,
+        "sha256": "a399cd9c27f412f03127f8d3b6d9746df0124df9becfdee9e24e001c7d42a85e",
+        "duration_ms": 3479,
+        "engine": "kokoro-82m"
+      },
+      "source_text": "Welcome. Today I will show you two shortcuts."
+    },
+    {
+      "id": "vo.hi.0002",
+      "kind": "voiceover",
+      "lang": "hi",
+      "audiences": [
+        "hi"
+      ],
+      "anchor_ms": 7925,
+      "slot": {
+        "start_ms": 7925,
+        "end_ms": 11950
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "टेक्स्ट कॉपी करने के लिए कंट्रोल और C दबाएँ।",
+      "final_text": "टेक्स्ट कॉपी करने के लिए कंट्रोल और C दबाएँ।",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "टेक्स्ट कॉपी करने के लिए कंट्रोल और C दबाएँ।",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": {
+        "voice": "hm_omega",
+        "speed": 1.0,
+        "sha256": "663a10806f763a7125bbb11ae72b684d260368b114cbcb4f8c1826aa1c3b5f50",
+        "duration_ms": 3260,
+        "engine": "kokoro-82m"
+      },
+      "source_text": "Press control and C to copy the text."
+    },
+    {
+      "id": "vo.hi.0003",
+      "kind": "voiceover",
+      "lang": "hi",
+      "audiences": [
+        "hi"
+      ],
+      "anchor_ms": 13375,
+      "slot": {
+        "start_ms": 13375,
+        "end_ms": 16375
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "फिर उसे पेस्ट करने के लिए कंट्रोल और V दबाएँ।",
+      "final_text": "फिर उसे पेस्ट करने के लिए कंट्रोल और V दबाएँ।",
+      "status": "needs_revision",
+      "rules_fired": [
+        "VO001"
+      ],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "फिर उसे पेस्ट करने के लिए कंट्रोल और V दबाएँ।",
+          "rules": [
+            "VO001"
+          ]
+        }
+      ],
+      "stop_reason": "repair_limit_reached",
+      "violations": [
+        {
+          "rule": "VO001",
+          "severity": "error",
+          "observed": "3.49 s of speech",
+          "threshold": "≤ 3.45 s (slot × 1.15)",
+          "message": "The voice-over is too long for its slot. Shorten it.",
+          "owner_stage": "voiceover",
+          "repairable": true
+        }
+      ],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": {
+        "voice": "hm_omega",
+        "speed": 1.0,
+        "sha256": "c912d1cd011906a7a6f021c3b4327ace1e82438d5f7ea92ad07426a34c17427b",
+        "duration_ms": 3492,
+        "engine": "kokoro-82m"
+      },
+      "source_text": "Then press control and V to paste it."
+    },
+    {
+      "id": "vo.hi.0004",
+      "kind": "voiceover",
+      "lang": "hi",
+      "audiences": [
+        "hi"
+      ],
+      "anchor_ms": 16575,
+      "slot": {
+        "start_ms": 16575,
+        "end_ms": 20000
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "सेव होते समय लैपटॉप का प्लग न निकालें।",
+      "final_text": "सेव होते समय लैपटॉप का प्लग न निकालें।",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "सेव होते समय लैपटॉप का प्लग न निकालें।",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": {
+        "voice": "hm_omega",
+        "speed": 1.0,
+        "sha256": "6b25ddc196fb099780d10e4ff8c9a6f2c5fae79eabafc3745ad42944a41b2421",
+        "duration_ms": 3055,
+        "engine": "kokoro-82m"
+      },
+      "source_text": "Do not unplug the laptop while it saves."
+    },
+    {
+      "id": "vo.it.0001",
+      "kind": "voiceover",
+      "lang": "it",
+      "audiences": [
+        "it"
+      ],
+      "anchor_ms": 1600,
+      "slot": {
+        "start_ms": 1600,
+        "end_ms": 5750
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Benvenuti. Oggi vi mostro due scorciatoie.",
+      "final_text": "Benvenuti. Oggi vi mostro due scorciatoie.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Benvenuti. Oggi vi mostro due scorciatoie.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": {
+        "voice": "im_nicola",
+        "speed": 1.0,
+        "sha256": "080c10505dbba3a10d8e227ba6ac1a91ef4b376cde459960753c9612b753ae29",
+        "duration_ms": 2725,
+        "engine": "kokoro-82m"
+      },
+      "source_text": "Welcome. Today I will show you two shortcuts."
+    },
+    {
+      "id": "vo.it.0002",
+      "kind": "voiceover",
+      "lang": "it",
+      "audiences": [
+        "it"
+      ],
+      "anchor_ms": 7925,
+      "slot": {
+        "start_ms": 7925,
+        "end_ms": 11950
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Premete Ctrl e C per copiare il testo.",
+      "final_text": "Premete Ctrl e C per copiare il testo.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Premete Ctrl e C per copiare il testo.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": {
+        "voice": "im_nicola",
+        "speed": 1.0,
+        "sha256": "49a72e946d5d729de91f5e5d2f8bdbad4ae54497c8a225dec06e2ec69c0f1f3a",
+        "duration_ms": 3250,
+        "engine": "kokoro-82m"
+      },
+      "source_text": "Press control and C to copy the text."
+    },
+    {
+      "id": "vo.it.0003",
+      "kind": "voiceover",
+      "lang": "it",
+      "audiences": [
+        "it"
+      ],
+      "anchor_ms": 13375,
+      "slot": {
+        "start_ms": 13375,
+        "end_ms": 16375
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Poi premete Ctrl e V per incollarlo.",
+      "final_text": "Poi premete Ctrl e V per incollarlo.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Poi premete Ctrl e V per incollarlo.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": {
+        "voice": "im_nicola",
+        "speed": 1.0,
+        "sha256": "43090b2e50799fe2184ce06297544084330614b6d317e7b1562c53f273618f92",
+        "duration_ms": 3094,
+        "engine": "kokoro-82m"
+      },
+      "source_text": "Then press control and V to paste it."
+    },
+    {
+      "id": "vo.it.0004",
+      "kind": "voiceover",
+      "lang": "it",
+      "audiences": [
+        "it"
+      ],
+      "anchor_ms": 16575,
+      "slot": {
+        "start_ms": 16575,
+        "end_ms": 20000
+      },
+      "extended": false,
+      "budget": null,
+      "facts": [],
+      "frames": [],
+      "first_draft": "Non scollegate il portatile mentre salva.",
+      "final_text": "Non scollegate il portatile mentre salva.",
+      "status": "auto_approved",
+      "rules_fired": [],
+      "repairs": [
+        {
+          "attempt": 0,
+          "text": "Non scollegate il portatile mentre salva.",
+          "rules": []
+        }
+      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
+      "warnings": [],
+      "confidence": null,
+      "confidence_terms": {},
+      "reviewer": null,
+      "reviewed_at": null,
+      "changed_by_person": false,
+      "back_translation": null,
+      "model": null,
+      "tts": {
+        "voice": "im_nicola",
+        "speed": 1.0,
+        "sha256": "a615f26c8a3b9a8f8f855f39a097d10ac933c649b1419e1c7b3148cc16581986",
+        "duration_ms": 2796,
+        "engine": "kokoro-82m"
+      },
+      "source_text": "Do not unplug the laptop while it saves."
+    }
+  ]
+}

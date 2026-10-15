@@ -44,3 +44,7 @@ logs/
 !src/**/logs/
 evidence/_smoke/
 eval/labels/*_key.json
+
+!site/p/**
+.vercel/
+site/.vercel/

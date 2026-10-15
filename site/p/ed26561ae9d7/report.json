@@ -1,0 +1,189 @@
+{
+  "schema_version": "accesscast/report/v1",
+  "generated_at": "2026-10-15T21:07:42.338Z",
+  "input": {
+    "sha256": "ed26561ae9d77a8094a2fbf2c4c292e0a9cc33dea091463269d1a68b35360d6c",
+    "duration_ms": 20000,
+    "source_name": "source.mp4"
+  },
+  "synthetic_test_data": true,
+  "outputs": [
+    {
+      "version": "blind.en",
+      "sha256": "c8ef33b2d3213865f99c3bb3955d0eda79532808e744d7711b2f9c97e66aa927",
+      "duration_ms": 20000,
+      "ok": true
+    },
+    {
+      "version": "blind_ext.en",
+      "sha256": "e0f7adfaa7b38a4c02c2b9d88e9dd1770795d5f8d0edb5f0f005140ee9708e27",
+      "duration_ms": 23623,
+      "ok": true
+    },
+    {
+      "version": "deaf.en",
+      "sha256": "68bd7b021299d00822daa85be6140215282e9d9989e08741ea810442ec88c2e1",
+      "duration_ms": 20000,
+      "ok": true
+    },
+    {
+      "version": "easy.en",
+      "sha256": "68bd7b021299d00822daa85be6140215282e9d9989e08741ea810442ec88c2e1",
+      "duration_ms": 20000,
+      "ok": true
+    },
+    {
+      "version": "hi",
+      "sha256": "843429a145a517628d1d9624c9f8319dc171b1fc7bdbe3e9bfeef61fa79d274d",
+      "duration_ms": 20000,
+      "ok": true
+    },
+    {
+      "version": "it",
+      "sha256": "9e8df6283e95b3ab02c2816c1b090fb206163c377df11cca5d094bcfac9643d6",
+      "duration_ms": 20000,
+      "ok": true
+    }
+  ],
+  "models": [
+    {
+      "name": "google/gemma-4-31B-it",
+      "licence": "Apache-2.0"
+    },
+    {
+      "name": "google/gemma-4-E4B-it",
+      "licence": "Apache-2.0"
+    },
+    {
+      "name": "hexgrad/Kokoro-82M",
+      "licence": "Apache-2.0"
+    }
+  ],
+  "environment": {
+    "worker_mode": "fake"
+  },
+  "stage_metrics": {
+    "asr": {
+      "wall_s": 0.006,
+      "fallbacks": []
+    },
+    "shots": {
+      "wall_s": 0.004,
+      "fallbacks": []
+    },
+    "scenes": {
+      "wall_s": 0.003,
+      "fallbacks": []
+    },
+    "asr_crosscheck": {
+      "wall_s": 0.041,
+      "fallbacks": []
+    },
+    "sounds": {
+      "wall_s": 0.003,
+      "fallbacks": []
+    },
+    "gaps": {
+      "wall_s": 0.003,
+      "fallbacks": []
+    },
+    "evidence": {
+      "wall_s": 3.494,
+      "fallbacks": []
+    },
+    "plan": {
+      "wall_s": 0.0,
+      "fallbacks": []
+    },
+    "write": {
+      "wall_s": 0.002,
+      "fallbacks": []
+    },
+    "verify_repair": {
+      "wall_s": 1.073,
+      "fallbacks": []
+    },
+    "tts": {
+      "wall_s": 7.017,
+      "fallbacks": []
+    },
+    "captions_sdh": {
+      "wall_s": 0.004,
+      "fallbacks": []
+    },
+    "captions_easy": {
+      "wall_s": 0.565,
+      "fallbacks": []
+    },
+    "subtitles_hi": {
+      "wall_s": 0.003,
+      "fallbacks": []
+    },
+    "subtitles_it": {
+      "wall_s": 0.055,
+      "fallbacks": []
+    },
+    "voiceover_hi": {
+      "wall_s": 20.668,
+      "fallbacks": []
+    },
+    "voiceover_it": {
+      "wall_s": 20.091,
+      "fallbacks": []
+    }
+  },
+  "checks": [
+    {
+      "item": "ad.en.0001",
+      "rule": "AD001",
+      "observed": "1.54 s (estimated, incl. pads)",
+      "threshold": "≤ 1.48 s",
+      "passed": false,
+      "severity": "error"
+    },
+    {
+      "item": "easy.en.0001",
+      "rule": "ER008",
+      "observed": "'shortcuts'",
+      "threshold": "Zipf ≥ 3.5",
+      "passed": false,
+      "severity": "warning"
+    },
+    {
+      "item": "easy.en.0004",
+      "rule": "ER008",
+      "observed": "'unplug'",
+      "threshold": "Zipf ≥ 3.5",
+      "passed": false,
+      "severity": "warning"
+    },
+    {
+      "item": "vo.hi.0003",
+      "rule": "VO001",
+      "observed": "3.49 s of speech",
+      "threshold": "≤ 3.45 s (slot × 1.15)",
+      "passed": false,
+      "severity": "error"
+    }
+  ],
+  "counts": {
+    "items_by_status": {
+      "needs_revision": 2,
+      "auto_approved": 26
+    },
+    "approvals": {
+      "person": 0,
+      "auto": 26
+    }
+  },
+  "review": {
+    "state_sha256": "6cc7d5dc3d5116a357098e11ab1eb1a1ef882b0fba8dd5d85028b111bbdc3cb8",
+    "human_reviewed": false,
+    "reviewers": [],
+    "review_seconds": 0.0,
+    "overrides": 0
+  },
+  "warnings": [
+    "fake worker mode: canned model outputs"
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "schema_version": "accesscast/index/v1",
+  "sha12": "ed26561ae9d7",
+  "title": "source.mp4",
+  "duration_ms": 20000,
+  "human_reviewed": false,
+  "synthetic_test_data": true,
+  "reviewed_at": null,
+  "versions": {
+    "blind.en": {
+      "label": "I can't see the screen",
+      "file": "render/blind.en.mp4",
+      "extended": false,
+      "tracks": [
+        {
+          "name": "desc.en",
+          "kind": "descriptions",
+          "srclang": "en",
+          "label": "Description (English)",
+          "file": "render/tracks/desc.en.vtt"
+        },
+        {
+          "name": "sdh.en",
+          "kind": "captions",
+          "srclang": "en",
+          "label": "English (deaf and hard of hearing)",
+          "file": "render/tracks/sdh.en.vtt"
+        }
+      ],
+      "source_to_output": null
+    },
+    "blind_ext.en": {
+      "label": "I can't see the screen (extended)",
+      "file": "render/blind_ext.en.mp4",
+      "extended": true,
+      "tracks": [
+        {
+          "name": "desc.en",
+          "kind": "descriptions",
+          "srclang": "en",
+          "label": "Description (English)",
+          "file": "render/tracks/desc.en.blind_ext.en.vtt"
+        },
+        {
+          "name": "sdh.en",
+          "kind": "captions",
+          "srclang": "en",
+          "label": "English (deaf and hard of hearing)",
+          "file": "render/tracks/sdh.en.blind_ext.en.vtt"
+        }
+      ],
+      "source_to_output": "render/source_to_output.blind_ext.en.json"
+    },
+    "deaf.en": {
+      "label": "I can't hear",
+      "file": "render/deaf.en.mp4",
+      "extended": false,
+      "tracks": [
+        {
+          "name": "sdh.en",
+          "kind": "captions",
+          "srclang": "en",
+          "label": "English (deaf and hard of hearing)",
+          "file": "render/tracks/sdh.en.vtt"
+        }
+      ],
+      "source_to_output": null
+    },
+    "easy.en": {
+      "label": "Simpler words, please",
+      "file": "render/easy.en.mp4",
+      "extended": false,
+      "tracks": [
+        {
+          "name": "easy.en",
+          "kind": "subtitles",
+          "srclang": "en",
+          "label": "English (easy-read)",
+          "file": "render/tracks/easy.en.vtt"
+        }
+      ],
+      "source_to_output": null
+    },
+    "hi": {
+      "label": "हिन्दी",
+      "file": "render/hi.mp4",
+      "extended": false,
+      "tracks": [
+        {
+          "name": "subs.hi",
+          "kind": "subtitles",
+          "srclang": "hi",
+          "label": "हिन्दी",
+          "file": "render/tracks/subs.hi.vtt"
+        }
+      ],
+      "source_to_output": null
+    },
+    "it": {
+      "label": "Italiano",
+      "file": "render/it.mp4",
+      "extended": false,
+      "tracks": [
+        {
+          "name": "subs.it",
+          "kind": "subtitles",
+          "srclang": "it",
+          "label": "Italiano",
+          "file": "render/tracks/subs.it.vtt"
+        }
+      ],
+      "source_to_output": null
+    }
+  },
+  "needs_pause_cues": [
+    "easy.en.0001",
+    "easy.en.0002",
+    "easy.en.0003",
+    "easy.en.0004"
+  ]
+}
