@@ -52,7 +52,19 @@ Nothing reaches a viewer until a person approves it. Confidence for each line is
 
 ## Who pays
 
-<pending: business.section>
+The law already asks for this. The European Accessibility Act has applied since 28 June 2025 to services that give access to audiovisual media, and it names audio description and subtitles for deaf and hard-of-hearing viewers among the access services they must carry. Italy's transposition sets fines from €5,000 to €40,000. India's guidelines for OTT platforms, issued on 6 February 2026, give platforms 36 months to add accessibility features to their content. In the US, the ADA Title II web rule (WCAG 2.1 AA, which includes audio description) applies to large public bodies, including public universities, from 26 April 2027.
+
+| Buyer | Why they pay |
+|---|---|
+| US public universities | ADA Title II deadline; large lecture archives; some already buy machine description |
+| EU e-commerce, banks and transport with video | European Accessibility Act |
+| Italian public bodies and private providers in scope | Stanca Law and D.Lgs. 82/2022 fines |
+| Broadcasters and OTT platforms in the EU, Italy and India | access-service rules; Hindi and Italian; unreleased content that can't leave the building, so on-premises open models matter |
+| MOOC and training platforms | reach: many viewers read at a low level or watch with the sound off |
+
+What description costs today (list prices, not our measurements): 3Play Media lists $4.25 a minute for AI description with a human spot check and $18 for a voice artist; the University of Michigan lists $0.90 a minute for machine description and $6.65 to $14.70 for human description. A human describer needs about 20 hours to script and voice a one-hour programme (Media Access Australia).
+
+Our cost is GPU time plus a person's review time, both measured: <pending: business.our_cost>. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, five audiences from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
 
 ## What didn't work
 
@@ -64,7 +76,7 @@ Nothing reaches a viewer until a person approves it. Confidence for each line is
 |---|---|---|
 | Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
 | Human review | Every description and easy-read line is approved by a person; captions and translations pass automatic checks, and a random sample is checked by people | Our reviewers are not professional describers |
-| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility checks (<pending: e16.axe>) | Not yet tested by a blind reviewer |
+| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player <pending: e16.player_passed> of <pending: e16.player_total>, review app <pending: e16.review_passed> of <pending: e16.review_total>, including axe-core scans) | Not yet tested by a blind reviewer |
 | Hindi and Italian | Back-translation shown to reviewers | Not a full professional language QA; native-speaker spot checks are <pending: native.checks> |
 | "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
 | Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |
