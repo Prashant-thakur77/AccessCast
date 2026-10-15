@@ -22,8 +22,8 @@ Status: `[x]` done and verified · `[~]` in progress · `[ ]` not started · `[!
 ## M2 Analysis (P0)
 - [x] Silero VAD licence resolved (MIT)
 - [~] S0 ingest, S1 shots + scene merge, S2 Whisper + forced alignment, S2b E4B cross-check, S3 sounds, S4 gap map (code done; real-model runs need the droplet)
-- [ ] debug timeline page; gap-map unit tests
-- [ ] E15 on FLEURS + dev clips → ASR choice, aligner on/off, `guard_ms`
+- [x] timeline view (review app lanes: words, gaps, description, captions, voice-over) ; gap-map unit tests
+- [~] E15 harness done and smoke-tested on CPU; FLEURS + synthetic boundary clips fetched; real run needs the GPU
 
 ## M3 First described video (P0) — from here `main` is always submittable
 - [ ] S5 evidence (+ Tesseract), S6 plan, S7 write, S8 verify + repair, S9 TTS (+ calibration), S14 standard mix
@@ -31,24 +31,24 @@ Status: `[x]` done and verified · `[~]` in progress · `[ ]` not started · `[!
 - [ ] `report.json`; a person listens
 
 ## M4 Review and gate (P0)
-- [ ] review app (keyboard, live re-verify, 409, history, timer, ARIA live region)
-- [ ] server-side gate, `auto_approved` routing, `human_reviewed` stamp
-- [ ] E16 on the review app (axe-core 0, keyboard-only e2e)
+- [x] review app (keyboard, live re-verify, 409, history, timer, ARIA live region)
+- [x] server-side gate, `auto_approved` routing, `human_reviewed` stamp
+- [x] E16 on the review app (axe-core 0, keyboard-only e2e) — `evidence/e16_ui_a11y.json`
 
 ## M5 Captions and player (P0)
-- [ ] SDH, easy-read, hi/it subtitles + rules
-- [ ] player: five-profile picker, "Give me time to read", decisions drawer, "Same 20 seconds, five ways"
-- [ ] E16 on the player; static site deployed (live URL from here on)
+- [x] SDH, easy-read, hi/it subtitles + rules (real-model quality needs the GPU)
+- [x] player: five-profile picker, "Give me time to read", decisions drawer, "Same 20 seconds, five ways"
+- [x] E16 on the player; static site deployed at https://accesscast.vercel.app (fixture draft; reviewed dev videos replace it)
 
 ## M6 Voice-over and extended (P1)
-- [ ] hi/it voice-over + description; extended version with `source_to_output`; remapped tracks; RN001–RN008
+- [~] hi/it voice-over + description; extended version with `source_to_output`; remapped tracks; RN001–RN008 (RN004 not wired yet; Chatterbox not added; Kokoro hi/it voices in use)
 
 ## M7 Evaluation (P0 for E1)
 - [~] datasets fetched + hashed; `eval/PREREGISTRATION.md` (done); `make freeze-prompts` (script done)
-- [ ] E1, E4, E5, E6, E7, E12, E15; claims added
+- [~] harnesses for E1, E4, E5, E6, E7, E12, E15 written and smoke-tested; 49 outside facts verified and registered; runs need the GPU / people
 
 ## M8 AMD and reliability (P0 for E13/E14)
-- [ ] E2 ladder, E3, E13, E14, E8, E9, E10, E11; memory table; users per GPU; `/proof`
+- [~] harnesses for E2, E3, E13, E14, E8, E9, E10, E11 written and smoke-tested; proof API written; runs need the GPU
 
 ## M9 Judge package and submission (P0)
 - [ ] README, JUDGES.md, deck PDF, demo video, cover, `docs/lablab.md`; `make submission-check` green; consistency pass; uptime check; competition re-check; release tag `act3-submission`
