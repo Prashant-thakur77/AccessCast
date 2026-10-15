@@ -12,6 +12,8 @@ Every item is listed here with its licence and link **before** it is used. No no
 | Silero VAD | speech / no speech | MIT (LICENSE file checked 16 Oct 2026) | https://github.com/snakers4/silero-vad | planned |
 | hexgrad/Kokoro-82M | English description voice `af_heart`; hi `hf_alpha`, it `if_sara` | Apache-2.0 | https://huggingface.co/hexgrad/Kokoro-82M | planned |
 | ResembleAI Chatterbox Multilingual | Hindi/Italian voice (adds an inaudible watermark — disclosed in the player) | MIT | https://github.com/resemble-ai/chatterbox | planned |
+| torchaudio `WAV2VEC2_ASR_BASE_960H` (fairseq wav2vec 2.0 base, LibriSpeech 960 h) | English forced alignment | MIT (fairseq) | https://pytorch.org/audio/stable/generated/torchaudio.pipelines.WAV2VEC2_ASR_BASE_960H.html | in use (kept only if E15 shows it helps) |
+| openai/whisper-base | local smoke tests only (never for published numbers) | MIT | https://huggingface.co/openai/whisper-base | dev only |
 | spaCy en_core_web_sm 3.8.0 | English rule NLP (lemmas, POS, names) | MIT | https://github.com/explosion/spacy-models | in use |
 
 ## Datasets and clips

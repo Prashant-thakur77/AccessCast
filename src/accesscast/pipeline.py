@@ -72,6 +72,7 @@ class Run:
     run_label: str = "run0"
     canned_dir: Path | None = None
     require_rocm: bool = False
+    asr_model: str = "openai/whisper-large-v3"  # E15 decides large-v3 vs large-v3-turbo (dev set only)
     timings: dict[str, float] = field(default_factory=dict)
 
     @property
@@ -271,6 +272,9 @@ def stage_asr(run: Run) -> None:
             )
             words = Words.model_validate(res["words"])
             vad = Vad.model_validate(res["vad"])
+            write_json(proj.p("analysis", "words_raw.json"), Words.model_validate(res["raw_words"]))
+            write_json(proj.p("analysis", "asr_meta.json"), {k: res[k] for k in ("timing", "device", "batch_size",
+                                                                                 "aligned_words", "chunks")})
         write_json(proj.p("analysis", "words.json"), words)
         write_json(proj.p("analysis", "vad.json"), vad)
 
