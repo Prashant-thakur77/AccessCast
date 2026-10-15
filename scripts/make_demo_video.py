@@ -76,9 +76,13 @@ def main() -> int:
         caps = []
         for i, ch in enumerate(chunks):
             a, b = dur * i / len(chunks), dur * (i + 1) / len(chunks)
-            two = "\n".join(textwrap.wrap(ch, 42)[:2])
-            caps.append(f"drawtext=fontfile={FONT}:text='{esc(two)}':x=(w-text_w)/2:y=h-170:fontsize=46:fontcolor=white:"
-                        f"box=1:boxcolor=black@0.75:boxborderw=14:line_spacing=10:enable='between(t,{a:.2f},{b:.2f})'")
+            lines = textwrap.wrap(ch, 42)[:2]
+            for j, line in enumerate(lines):  # one drawtext per line: this ffmpeg draws a newline as a glyph
+                tf = OUT / f"cap{k:02d}_{i:02d}_{j}.txt"
+                tf.write_text(line, encoding="utf-8")
+                y = f"h-{230 - 64 * j if len(lines) == 2 else 170}"
+                caps.append(f"drawtext=fontfile={FONT}:textfile='{tf}':x=(w-text_w)/2:y={y}:fontsize=46:fontcolor=white:"
+                            f"box=1:boxcolor=black@0.75:boxborderw=12:enable='between(t,{a:.2f},{b:.2f})'")
         vf = ",".join([vf, *caps]) if caps else vf
         ain = ["-i", str(wav)] if narr else ["-f", "lavfi", "-i", f"anullsrc=r=48000:cl=stereo:d={dur:.2f}"]
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", *vin, *ain, "-map", "0:v:0", "-map", "1:a:0", "-vf", vf,
