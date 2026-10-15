@@ -29,3 +29,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 - **Symptom:** a 14-second clip took minutes in the ASR stage and the worker used about 5 GB of RAM, although `whisper-base` had been selected.
 - **Root cause:** the request payload had no `model` key (an earlier edit did not apply after the formatter reflowed the code), so the worker used its own default, Whisper large-v3.
 - **Fix:** the pipeline passes `run.asr_model` explicitly. Lesson for every experiment: record the model a worker actually loaded, not the one we asked for. E15 and E2 read the model id back from the worker response.
+
+## 2026-10-16 — a failed scene silently produced no description
+- **Symptom:** in a local real-mode run, the whole clip got no description lines and nobody was told; the review queue had captions only.
+- **Root cause:** the local server rejected an 8-image evidence request; the evidence step correctly failed closed (`evidence_failed` after two tries), but the planner then skipped that scene's pauses instead of sending them to a person, as PLAN §9 S5 requires.
+- **Fix:** pauses in a scene whose evidence failed become `needs_revision` lines with no facts, marked `evidence_failed`; Gemma is never asked to write them, and the render gate blocks until a person writes or rejects them. Lesson: fail closed means "a person is told", not just "nothing is published".
