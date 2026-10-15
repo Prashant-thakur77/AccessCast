@@ -130,7 +130,7 @@ def align_chunk(audio: np.ndarray, words: list[dict[str, Any]], offset_s: float,
 def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     dev = device(require_rocm)
     lang = p.get("lang", "en")
-    model_id = p.get("model", "openai/whisper-large-v3")
+    model_id = p["model"]  # required: no silent default model (CLAUDE.md rule 6)
     bs = int(p.get("batch_size", 1))
     audio = load_audio(p["audio"])
     timing: dict[str, Any] = {}
