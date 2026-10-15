@@ -267,7 +267,7 @@ def stage_asr(run: Run) -> None:
             res = run_worker(
                 "asr",
                 "transcribe",
-                {"audio": str(proj.p("media", "asr16k.wav")), "lang": "en", "align": True},
+                {"audio": str(proj.p("media", "asr16k.wav")), "lang": "en", "align": True, "model": run.asr_model},
                 proj.p("logs", "worker"),
                 proj.events,
                 require_rocm=run.require_rocm,
