@@ -85,7 +85,7 @@ def load_settings(**overrides: object) -> Settings:
         gpu_hourly_cost_usd=cost,
         review_policy=policy,  # type: ignore[arg-type]
         project_seed=seed,
-        projects_dir=Path(projects) if projects else REPO_ROOT / "projects",
+        projects_dir=Path(projects).resolve() if projects else REPO_ROOT / "projects",
     )
     if overrides:
         from dataclasses import replace

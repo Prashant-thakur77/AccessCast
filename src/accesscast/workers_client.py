@@ -47,6 +47,7 @@ def run_worker(
         raise MissingDependencyError(f"worker environment missing ({py}); run `make setup`")
     script = WORKERS_DIR / f"{role}_worker.py"
     rid = uuid.uuid4().hex[:12]
+    workdir = workdir.resolve()  # workers run with cwd=workers/, so every path they get must be absolute
     workdir.mkdir(parents=True, exist_ok=True)
     req_p = workdir / f"{role}.{action}.{rid}.request.json"
     resp_p = workdir / f"{role}.{action}.{rid}.response.json"
