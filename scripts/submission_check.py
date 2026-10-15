@@ -15,19 +15,34 @@ from accesscast.config import REPO_ROOT
 from accesscast.project import sha256_file
 
 MUST_HAVE_EVIDENCE = {  # PLAN §5 → evidence files (two-digit eNN_)
-    1: ["e01_verifier_ab.json"], 2: ["e02_ladder_V0.json", "e03_model_size_*.json"],
-    3: ["test_freeze.json", "test_runs.jsonl"], 4: ["public-claims.json"], 6: ["e13_serving_*.json", "e14_cost.json",
-    "doctor.json"], 7: ["e11_adversarial.json"], 8: ["e08_soak.json", "e09_determinism.json", "e10_offline.json"],
+    1: ["e01_verifier_ab.json"],
+    2: ["e02_ladder_V0.json", "e03_model_size_*.json"],
+    3: ["test_freeze.json", "test_runs.jsonl"],
+    4: ["public-claims.json"],
+    6: ["e13_serving_*.json", "e14_cost.json", "doctor.json"],
+    7: ["e11_adversarial.json"],
+    8: ["e08_soak.json", "e09_determinism.json", "e10_offline.json"],
     10: ["uptime.json"],
 }
-SECRET_RES = [re.compile(p) for p in (r"rc-[A-Za-z0-9_\-]{16,}", r"hf_[A-Za-z0-9]{24,}", r"gh[opsu]_[A-Za-z0-9]{30,}",
-                                      r"sk-[A-Za-z0-9]{20,}", r"AKIA[0-9A-Z]{16}", r"-----BEGIN [A-Z ]*PRIVATE KEY-----")]
+SECRET_RES = [
+    re.compile(p)
+    for p in (
+        r"rc-[A-Za-z0-9_\-]{16,}",
+        r"hf_[A-Za-z0-9]{24,}",
+        r"gh[opsu]_[A-Za-z0-9]{30,}",
+        r"sk-[A-Za-z0-9]{20,}",
+        r"AKIA[0-9A-Z]{16}",
+        r"-----BEGIN [A-Z ]*PRIVATE KEY-----",
+    )
+]
 MEDIA_EXT = (".mp4", ".mov", ".mkv", ".webm", ".wav", ".mp3", ".m4a", ".flac")
 LIVE_URL = "https://accesscast.vercel.app/"
 
 
 def tracked() -> list[str]:
-    return subprocess.run(["git", "ls-files"], cwd=REPO_ROOT, capture_output=True, text=True, check=True).stdout.split()
+    return subprocess.run(
+        ["git", "ls-files"], cwd=REPO_ROOT, capture_output=True, text=True, check=True
+    ).stdout.split()
 
 
 def main() -> int:
@@ -49,11 +64,18 @@ def main() -> int:
         missing = [p for p in pats if not list(ev.glob(p))]
         chk(not missing, f"must-have #{k} evidence {missing or 'present'}")
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-    chk("## What didn't work" in readme and "<pending: negative.results>" not in readme, "must-have #5 negative results")
+    chk(
+        "## What didn't work" in readme and "<pending: negative.results>" not in readme,
+        "must-have #5 negative results",
+    )
     # 3. no W3C-derived media in git or site
     man = REPO_ROOT / "eval" / "datasets" / "manifests" / "w3c_wai.json"
     w3c = {r["sha256"] for r in json.loads(man.read_text())["files"]} if man.exists() else set()
-    bad = [f for f in files if f.endswith(MEDIA_EXT) and (REPO_ROOT / f).exists() and sha256_file(REPO_ROOT / f) in w3c]
+    bad = [
+        f
+        for f in files
+        if f.endswith(MEDIA_EXT) and (REPO_ROOT / f).exists() and sha256_file(REPO_ROOT / f) in w3c
+    ]
     bad += [f for f in files if "perspectives_" in f and f.endswith(MEDIA_EXT)]
     site_media = [p for p in (REPO_ROOT / "site").rglob("*") if p.suffix in MEDIA_EXT]
     bad += [str(p) for p in site_media if sha256_file(p) in w3c]
@@ -80,8 +102,15 @@ def main() -> int:
     chk(".env" not in files, ".env is not tracked")
     # 6. licences: every model/voice named in code or project.json files is in MODEL_LICENSES.md
     lic = (REPO_ROOT / "MODEL_LICENSES.md").read_text(encoding="utf-8")
-    names = {"google/gemma-4-31B-it", "google/gemma-4-E4B-it", "Kokoro-82M", "whisper-large-v3", "Silero VAD",
-             "WAV2VEC2_ASR_BASE_960H", "en_core_web_sm"}
+    names = {
+        "google/gemma-4-31B-it",
+        "google/gemma-4-E4B-it",
+        "Kokoro-82M",
+        "whisper-large-v3",
+        "Silero VAD",
+        "WAV2VEC2_ASR_BASE_960H",
+        "en_core_web_sm",
+    }
     for pj in (REPO_ROOT / "projects").glob("*/project.json"):
         for m in json.loads(pj.read_text()).get("models", []):
             names.add(m["name"])
@@ -98,8 +127,15 @@ def main() -> int:
     chk((REPO_ROOT / "docs" / "deck" / "deck.pdf").exists(), "deck PDF exists")
     chk(any((REPO_ROOT / "docs").glob("cover.*")), "cover image exists")
     lab = REPO_ROOT / "docs" / "lablab.md"
-    chk((lab.exists() and "youtu" in lab.read_text(encoding="utf-8").lower()) or (lab.exists() and "video" in
-        lab.read_text(encoding="utf-8").lower() and "http" in lab.read_text(encoding="utf-8")), "lablab text with demo video link")
+    chk(
+        (lab.exists() and "youtu" in lab.read_text(encoding="utf-8").lower())
+        or (
+            lab.exists()
+            and "video" in lab.read_text(encoding="utf-8").lower()
+            and "http" in lab.read_text(encoding="utf-8")
+        ),
+        "lablab text with demo video link",
+    )
     for m in oks:
         print(f"ok   {m}")
     for m in fails:

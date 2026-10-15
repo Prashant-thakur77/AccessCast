@@ -37,8 +37,15 @@ def main() -> int:
     args = ap.parse_args()
     s = load_settings()
     sessions = json.loads(Path(args.sessions).read_text())
-    exp = Experiment("e12_person_time", "dev", config={"design": "crossed (2 people × 2 minutes × 2 conditions)",
-                                                      "sessions": sessions, "timer": "active, idle > 60 s excluded"})
+    exp = Experiment(
+        "e12_person_time",
+        "dev",
+        config={
+            "design": "crossed (2 people × 2 minutes × 2 conditions)",
+            "sessions": sessions,
+            "timer": "active, idle > 60 s excluded",
+        },
+    )
 
     def body(e: Experiment) -> None:
         per_cond: dict[str, list[float]] = {"review": [], "scratch": []}
@@ -53,22 +60,37 @@ def main() -> int:
             minutes = read_json(root / "project.json")["duration_ms"] / 60000
             rate = (secs / 60) / minutes if minutes else None
             per_cond[sess["condition"]].append(rate or 0.0)
-            e.results.append({**sess, "active_seconds": round(secs, 1), "video_minutes": round(minutes, 3),
-                              "person_minutes_per_finished_minute": round(rate, 3) if rate else None,
-                              "lines": len(ad), "manual_lines": sum(1 for i in ad if i.source == "manual")})
+            e.results.append(
+                {
+                    **sess,
+                    "active_seconds": round(secs, 1),
+                    "video_minutes": round(minutes, 3),
+                    "person_minutes_per_finished_minute": round(rate, 3) if rate else None,
+                    "lines": len(ad),
+                    "manual_lines": sum(1 for i in ad if i.source == "manual"),
+                }
+            )
             if sess["condition"] == "review":
                 for i in ad:
                     if i.source == "auto" and i.confidence is not None and st.get(i.id, {}).get("reviewer"):
                         machine = i.repair.history[-1].text if i.repair.history else i.draft
                         conf.append(i.confidence)
                         changed.append(int((st[i.id].get("final") or machine) != machine))
-        e.summary["review_minutes_per_finished_minute"] = (sum(per_cond["review"]) / len(per_cond["review"])
-                                                          if per_cond["review"] else None)
-        e.summary["scratch_minutes_per_finished_minute"] = (sum(per_cond["scratch"]) / len(per_cond["scratch"])
-                                                           if per_cond["scratch"] else None)
-        e.summary["confidence_auroc_changed"] = {"auroc": auroc(conf, changed), "n_items": len(conf),
-                                                 "n_changed": sum(changed), "note": "small sample"}
-        e.summary["published_estimate_label"] = "≈20–30 min per finished minute (published estimate, not measured here)"
+        e.summary["review_minutes_per_finished_minute"] = (
+            sum(per_cond["review"]) / len(per_cond["review"]) if per_cond["review"] else None
+        )
+        e.summary["scratch_minutes_per_finished_minute"] = (
+            sum(per_cond["scratch"]) / len(per_cond["scratch"]) if per_cond["scratch"] else None
+        )
+        e.summary["confidence_auroc_changed"] = {
+            "auroc": auroc(conf, changed),
+            "n_items": len(conf),
+            "n_changed": sum(changed),
+            "note": "small sample",
+        }
+        e.summary["published_estimate_label"] = (
+            "≈20–30 min per finished minute (published estimate, not measured here)"
+        )
         e.checks["both_conditions"] = bool(per_cond["review"]) and bool(per_cond["scratch"])
 
     return run_experiment(exp, body)

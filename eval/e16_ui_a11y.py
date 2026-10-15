@@ -17,7 +17,9 @@ from eval.common import Experiment, run_experiment
 
 def run_suite(config: str | None, env: dict[str, str]) -> dict[str, object]:
     cmd = ["npx", "playwright", "test", "--reporter=json"] + (["-c", config] if config else [])
-    p = subprocess.run(cmd, cwd=REPO_ROOT, env={**os.environ, **env}, capture_output=True, text=True, timeout=1800)
+    p = subprocess.run(
+        cmd, cwd=REPO_ROOT, env={**os.environ, **env}, capture_output=True, text=True, timeout=1800
+    )
     try:
         rep = json.loads(p.stdout)
     except json.JSONDecodeError:
@@ -34,8 +36,12 @@ def run_suite(config: str | None, env: dict[str, str]) -> dict[str, object]:
 
     for s in rep.get("suites", []):
         walk(s)
-    return {"ok": p.returncode == 0, "tests": tests, "passed": sum(t["status"] == "passed" for t in tests),
-            "total": len(tests)}
+    return {
+        "ok": p.returncode == 0,
+        "tests": tests,
+        "passed": sum(t["status"] == "passed" for t in tests),
+        "total": len(tests),
+    }
 
 
 def main() -> int:
@@ -43,16 +49,24 @@ def main() -> int:
     ap.add_argument("--site", default=str(REPO_ROOT / "projects" / "_fixture_site"))
     ap.add_argument("--review-fixture", default=str(REPO_ROOT / "projects" / "_fixture"))
     args = ap.parse_args()
-    exp = Experiment("e16_ui_a11y", "none", config={"site": os.path.relpath(args.site, REPO_ROOT),
-                                                    "tools": "Playwright + @axe-core/playwright (chromium)"})
+    exp = Experiment(
+        "e16_ui_a11y",
+        "none",
+        config={
+            "site": os.path.relpath(args.site, REPO_ROOT),
+            "tools": "Playwright + @axe-core/playwright (chromium)",
+        },
+    )
 
     def body(e: Experiment) -> None:
         player = run_suite(None, {"ACCESSCAST_SITE_DIR": args.site})
         review = run_suite("playwright.review.config.ts", {"ACCESSCAST_REVIEW_FIXTURE": args.review_fixture})
         e.results = [{"suite": "player", **player}, {"suite": "review", **review}]
-        e.summary = {"player": {k: player.get(k) for k in ("passed", "total")},
-                     "review": {k: review.get(k) for k in ("passed", "total")},
-                     "screen_reader_test_by_person": None}
+        e.summary = {
+            "player": {k: player.get(k) for k in ("passed", "total")},
+            "review": {k: review.get(k) for k in ("passed", "total")},
+            "screen_reader_test_by_person": None,
+        }
         e.checks["player_suite"] = bool(player["ok"])
         e.checks["review_suite"] = bool(review["ok"])
 

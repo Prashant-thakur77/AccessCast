@@ -51,25 +51,62 @@ def main(fetch_video: bool = True) -> int:
             dst = d / f"{vid}{t}.en.vtt"
             if not dst.exists():
                 urllib.request.urlretrieve(f"{RAW}/{vid}{t}.en.vtt", dst)
-            rows.append({"video_id": vid, "file": f"data/w3c/{vid}/{dst.name}", "sha256": sha256_file(dst),
-                         "kind": "track"})
+            rows.append(
+                {
+                    "video_id": vid,
+                    "file": f"data/w3c/{vid}/{dst.name}",
+                    "sha256": sha256_file(dst),
+                    "kind": "track",
+                }
+            )
         mp4 = d / f"{vid}.mp4"
         if fetch_video and not mp4.exists():
             ytdlp = shutil.which("yt-dlp")
             if ytdlp is None:
                 print("yt-dlp not found: `uv tool install yt-dlp`", file=sys.stderr)
                 return 4
-            subprocess.run([ytdlp, "-q", "-f", "bv*[height<=720][ext=mp4]+ba[ext=m4a]/b[ext=mp4]", "--merge-output-format",
-                            "mp4", "-o", str(mp4), f"https://www.youtube.com/watch?v={yt}"], check=True)
+            subprocess.run(
+                [
+                    ytdlp,
+                    "-q",
+                    "-f",
+                    "bv*[height<=720][ext=mp4]+ba[ext=m4a]/b[ext=mp4]",
+                    "--merge-output-format",
+                    "mp4",
+                    "-o",
+                    str(mp4),
+                    f"https://www.youtube.com/watch?v={yt}",
+                ],
+                check=True,
+            )
         if mp4.exists():
-            rows.append({"video_id": vid, "file": f"data/w3c/{vid}/{mp4.name}", "sha256": sha256_file(mp4),
-                         "kind": "video", "youtube_id": yt, "youtube_id_described": yt_ad,
-                         "page": f"https://www.w3.org/WAI/perspective-videos/{page}/"})
-    MANIFEST.write_text(json.dumps({"dataset": "W3C WAI Web Accessibility Perspectives (test set, never used for tuning)",
-                                    "wai_website_commit": WAI_COMMIT, "fetched_at": now_iso(),
-                                    "terms": "https://www.w3.org/WAI/about/using-wai-material/",
-                                    "files": rows}, indent=1) + "\n")
-    print(f"{sum(r['kind'] == 'video' for r in rows)} videos, {sum(r['kind'] == 'track' for r in rows)} tracks → {MANIFEST}")
+            rows.append(
+                {
+                    "video_id": vid,
+                    "file": f"data/w3c/{vid}/{mp4.name}",
+                    "sha256": sha256_file(mp4),
+                    "kind": "video",
+                    "youtube_id": yt,
+                    "youtube_id_described": yt_ad,
+                    "page": f"https://www.w3.org/WAI/perspective-videos/{page}/",
+                }
+            )
+    MANIFEST.write_text(
+        json.dumps(
+            {
+                "dataset": "W3C WAI Web Accessibility Perspectives (test set, never used for tuning)",
+                "wai_website_commit": WAI_COMMIT,
+                "fetched_at": now_iso(),
+                "terms": "https://www.w3.org/WAI/about/using-wai-material/",
+                "files": rows,
+            },
+            indent=1,
+        )
+        + "\n"
+    )
+    print(
+        f"{sum(r['kind'] == 'video' for r in rows)} videos, {sum(r['kind'] == 'track' for r in rows)} tracks → {MANIFEST}"
+    )
     return 0
 
 

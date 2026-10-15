@@ -30,11 +30,22 @@ def clip_path(cid: str) -> Path:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--runs", type=int, default=5)
-    ap.add_argument("--clips", default="nasa_GSFC_20170614_Eclipse_m12534_Plane,nasa_GSFC_20180417_Worldview_m12928_Tutorial")
+    ap.add_argument(
+        "--clips",
+        default="nasa_GSFC_20170614_Eclipse_m12534_Plane,nasa_GSFC_20180417_Worldview_m12928_Tutorial",
+    )
     ap.add_argument("--no-rocm", action="store_true")
     args = ap.parse_args()
-    exp = Experiment("e09_determinism", "dev", config={"runs": args.runs, "clips": args.clips,
-                                                      "fresh_process_per_run": True, "separate_project_dirs": True})
+    exp = Experiment(
+        "e09_determinism",
+        "dev",
+        config={
+            "runs": args.runs,
+            "clips": args.clips,
+            "fresh_process_per_run": True,
+            "separate_project_dirs": True,
+        },
+    )
 
     def body(e: Experiment) -> None:
         shutil.rmtree(WORK, ignore_errors=True)
@@ -47,7 +58,9 @@ def main() -> int:
                     e.results.append({"clip": cid, "run": k, "ok": False, "error": r.error})
                     continue
                 root = WORK / cid / f"run{k}" / r.sha12
-                runs.append({"hashes": artefact_hashes(root), "ad": ad_texts(root), "wall_s": r.wall_s, "root": root})
+                runs.append(
+                    {"hashes": artefact_hashes(root), "ad": ad_texts(root), "wall_s": r.wall_s, "root": root}
+                )
             if not runs:
                 all_identical = False
                 continue
@@ -69,10 +82,13 @@ def main() -> int:
                         worst = max(worst, float(np.abs(a[:n] - b[:n]).max()) if n else 0.0)
                 stem_diff_db[stem.name] = None if worst == 0 else round(20 * np.log10(worst), 1)
             diff_lines = [sum(1 for i, t in x["ad"].items() if ref["ad"].get(i) != t) for x in runs[1:]]
-            e.summary.setdefault("clips", {})[cid] = {"runs_ok": len(runs), "identical_to_run1": per_art,
-                                                     "description_lines": len(ref["ad"]),
-                                                     "differing_description_lines_per_run": diff_lines,
-                                                     "stem_max_sample_difference_dbfs": stem_diff_db}
+            e.summary.setdefault("clips", {})[cid] = {
+                "runs_ok": len(runs),
+                "identical_to_run1": per_art,
+                "description_lines": len(ref["ad"]),
+                "differing_description_lines_per_run": diff_lines,
+                "stem_max_sample_difference_dbfs": stem_diff_db,
+            }
         e.summary["all_artefacts_identical"] = all_identical
         e.checks["all_runs_completed"] = all(not r.get("error") for r in e.results)
         e.checks["identical"] = all_identical  # a negative result is published as measured

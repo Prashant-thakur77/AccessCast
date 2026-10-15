@@ -20,17 +20,51 @@ OUT = REPO_ROOT / "data" / "dev"
 MANIFEST = REPO_ROOT / "eval" / "datasets" / "manifests" / "dev_clips.json"
 NASA = "https://images-assets.nasa.gov/video/{id}/{id}~medium.mp4"
 CLIPS = [  # (clip id, url, max seconds or None, source, licence, credit)
-    *[(f"nasa_{i}", NASA.format(id=i), 180, "NASA", "NASA media usage guidelines (generally not copyrighted in the US)",
-       "Courtesy NASA") for i in (
-        "GSFC_20170614_Eclipse_m12534_Plane", "GSFC_20140408_LRO_m11514_Eclipse", "GSFC_20131121_ISON_m11384_Comet",
-        "GSFC_20171115_m12776_LifeInTheUniverse", "GSFC_20180417_Worldview_m12928_Tutorial",
-        "GSFC_20130918_AACS_m11356_Food")],
-    *[(f"prelinger_{i}", f"https://archive.org/download/{i}/{i}_512kb.mp4", 180, "Prelinger Archives",
-       "Public domain", "Prelinger Archives, archive.org") for i in ("Televisi1970", "Operator1949_2", "WhenYouA1948")],
-    ("blender_sintel_trailer", "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4", None, "Blender",
-     "CC BY 3.0", "© copyright Blender Foundation | www.sintel.org"),
-    ("blender_bbb_excerpt", "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4.zip", 120,
-     "Blender", "CC BY 3.0", "(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org"),
+    *[
+        (
+            f"nasa_{i}",
+            NASA.format(id=i),
+            180,
+            "NASA",
+            "NASA media usage guidelines (generally not copyrighted in the US)",
+            "Courtesy NASA",
+        )
+        for i in (
+            "GSFC_20170614_Eclipse_m12534_Plane",
+            "GSFC_20140408_LRO_m11514_Eclipse",
+            "GSFC_20131121_ISON_m11384_Comet",
+            "GSFC_20171115_m12776_LifeInTheUniverse",
+            "GSFC_20180417_Worldview_m12928_Tutorial",
+            "GSFC_20130918_AACS_m11356_Food",
+        )
+    ],
+    *[
+        (
+            f"prelinger_{i}",
+            f"https://archive.org/download/{i}/{i}_512kb.mp4",
+            180,
+            "Prelinger Archives",
+            "Public domain",
+            "Prelinger Archives, archive.org",
+        )
+        for i in ("Televisi1970", "Operator1949_2", "WhenYouA1948")
+    ],
+    (
+        "blender_sintel_trailer",
+        "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+        None,
+        "Blender",
+        "CC BY 3.0",
+        "© copyright Blender Foundation | www.sintel.org",
+    ),
+    (
+        "blender_bbb_excerpt",
+        "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4.zip",
+        120,
+        "Blender",
+        "CC BY 3.0",
+        "(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org",
+    ),
 ]
 
 
@@ -42,7 +76,12 @@ def main() -> int:
         if not dst.exists():
             raw = OUT / f"{cid}.download.mp4"
             try:
-                req = urllib.request.Request(url, headers={"User-Agent": "AccessCast-dataset-fetch/0.1 (+github.com/Prashant-thakur77/AccessCast)"})
+                req = urllib.request.Request(
+                    url,
+                    headers={
+                        "User-Agent": "AccessCast-dataset-fetch/0.1 (+github.com/Prashant-thakur77/AccessCast)"
+                    },
+                )
                 with urllib.request.urlopen(req, timeout=300) as r, raw.open("wb") as fh:
                     fh.write(r.read())
                 if url.endswith(".zip"):
@@ -59,14 +98,46 @@ def main() -> int:
             args = ["ffmpeg", "-loglevel", "error", "-y", "-i", str(raw)]
             if max_s:
                 args += ["-t", str(max_s)]
-            args += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "128k",
-                     "-movflags", "+faststart", str(dst)]
+            args += [
+                "-c:v",
+                "libx264",
+                "-preset",
+                "veryfast",
+                "-crf",
+                "23",
+                "-c:a",
+                "aac",
+                "-b:a",
+                "128k",
+                "-movflags",
+                "+faststart",
+                str(dst),
+            ]
             subprocess.run(args, check=True)
             raw.unlink()
-        rows.append({"clip": cid, "url": url, "trimmed_to_s": max_s, "source": source, "licence": lic,
-                     "credit": credit, "file": f"data/dev/{dst.name}", "sha256": sha256_file(dst)})
-    MANIFEST.write_text(json.dumps({"dataset": "AccessCast development set (tuning allowed)", "fetched_at": now_iso(),
-                                    "clips": rows}, indent=1) + "\n")
+        rows.append(
+            {
+                "clip": cid,
+                "url": url,
+                "trimmed_to_s": max_s,
+                "source": source,
+                "licence": lic,
+                "credit": credit,
+                "file": f"data/dev/{dst.name}",
+                "sha256": sha256_file(dst),
+            }
+        )
+    MANIFEST.write_text(
+        json.dumps(
+            {
+                "dataset": "AccessCast development set (tuning allowed)",
+                "fetched_at": now_iso(),
+                "clips": rows,
+            },
+            indent=1,
+        )
+        + "\n"
+    )
     print(f"{sum('sha256' in r for r in rows)} dev clips → {MANIFEST}")
     return 0
 

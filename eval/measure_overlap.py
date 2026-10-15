@@ -74,7 +74,9 @@ def energy_speech_spans(wav: Path, *, frame_ms: int = 20, min_ms: int = 200, gap
     return [s for s in merged if s.end_ms - s.start_ms >= min_ms]
 
 
-def stem_line_spans(stem: Path, expected: list[tuple[str, int, int]], *, thr: float = 0.003) -> dict[str, Span]:
+def stem_line_spans(
+    stem: Path, expected: list[tuple[str, int, int]], *, thr: float = 0.003
+) -> dict[str, Span]:
     """Measure each line's actual rendered span from the stem around where it was placed."""
     a, sr = sf.read(str(stem), dtype="float32", always_2d=True)
     env = np.abs(a).max(axis=1)

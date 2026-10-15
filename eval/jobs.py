@@ -43,19 +43,38 @@ class JobResult:
     error: str | None
 
 
-def run_job(video: Path, projects_dir: Path, *, require_rocm: bool = True, env: dict[str, str] | None = None,
-            timeout_s: float = 7200) -> JobResult:
+def run_job(
+    video: Path,
+    projects_dir: Path,
+    *,
+    require_rocm: bool = True,
+    env: dict[str, str] | None = None,
+    timeout_s: float = 7200,
+) -> JobResult:
     projects_dir.mkdir(parents=True, exist_ok=True)
-    e = {**os.environ, "ACCESSCAST_PROJECTS_DIR": str(projects_dir), "ACCESSCAST_REVIEW_POLICY": "prototype-auto",
-         **(env or {})}
+    e = {
+        **os.environ,
+        "ACCESSCAST_PROJECTS_DIR": str(projects_dir),
+        "ACCESSCAST_REVIEW_POLICY": "prototype-auto",
+        **(env or {}),
+    }
     t0 = time.perf_counter()
-    p = subprocess.run([sys.executable, "-c", JOB_SCRIPT, str(video), "1" if require_rocm else "0"], cwd=REPO_ROOT,
-                       env=e, capture_output=True, text=True, timeout=timeout_s, check=False)
+    p = subprocess.run(
+        [sys.executable, "-c", JOB_SCRIPT, str(video), "1" if require_rocm else "0"],
+        cwd=REPO_ROOT,
+        env=e,
+        capture_output=True,
+        text=True,
+        timeout=timeout_s,
+        check=False,
+    )
     wall = time.perf_counter() - t0
     if p.returncode != 0:
         return JobResult(video.name, False, wall, None, None, {}, p.stderr.strip()[-600:])
     out = json.loads(p.stdout.strip().splitlines()[-1])
-    return JobResult(video.name, bool(out["render_ok"]), wall, out["duration_ms"], out["sha12"], out["timings"], None)
+    return JobResult(
+        video.name, bool(out["render_ok"]), wall, out["duration_ms"], out["sha12"], out["timings"], None
+    )
 
 
 def run_concurrent(videos: list[Path], base: Path, n: int, **kw: Any) -> list[JobResult]:
@@ -66,9 +85,15 @@ def run_concurrent(videos: list[Path], base: Path, n: int, **kw: Any) -> list[Jo
 
 
 ARTEFACTS = {
-    "words": "analysis/words.json", "gaps": "analysis/gaps.json", "scenes": "analysis/scenes.json",
-    "sounds": "analysis/sounds.json", "ad_drafts": "items/ad.en.jsonl", "sdh": "items/sdh.en.jsonl",
-    "easy": "items/easy.en.jsonl", "subs_hi": "items/subs.hi.jsonl", "subs_it": "items/subs.it.jsonl",
+    "words": "analysis/words.json",
+    "gaps": "analysis/gaps.json",
+    "scenes": "analysis/scenes.json",
+    "sounds": "analysis/sounds.json",
+    "ad_drafts": "items/ad.en.jsonl",
+    "sdh": "items/sdh.en.jsonl",
+    "easy": "items/easy.en.jsonl",
+    "subs_hi": "items/subs.hi.jsonl",
+    "subs_it": "items/subs.it.jsonl",
 }
 
 

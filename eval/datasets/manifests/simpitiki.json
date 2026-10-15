@@ -1,0 +1,12 @@
+{
+ "dataset": "SIMPITIKI v2",
+ "source": "https://raw.githubusercontent.com/dhfbk/simpitiki/13c119cb5e0377e7f4a41c384ecc24f6584c851f/corpus/simpitiki-v2.xml",
+ "commit": "13c119cb5e0377e7f4a41c384ecc24f6584c851f",
+ "licence": "CC-BY-4.0",
+ "credit": "Tonelli, Palmero Aprosio, Saltori (FBK), CLiC-it 2016",
+ "fetched_at": "2026-10-15T21:35:27.759Z",
+ "file": "data/simpitiki/simpitiki-v2.xml",
+ "sha256": "375d838229ff65ddce7ec2aff31d2ca03a3b3de55c5787acad8268a811f3f69e",
+ "pairs": 1163,
+ "committed": false
+}

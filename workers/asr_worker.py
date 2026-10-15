@@ -59,8 +59,12 @@ def vad(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
 
     model = _cache.setdefault("vad", load_silero_vad())
     ts = get_speech_timestamps(torch.from_numpy(audio), model, sampling_rate=SR, return_seconds=False)
-    return {"model": "silero-vad", "segments": [{"start_ms": round(t["start"] * 1000 / SR),
-                                                  "end_ms": round(t["end"] * 1000 / SR)} for t in ts]}
+    return {
+        "model": "silero-vad",
+        "segments": [
+            {"start_ms": round(t["start"] * 1000 / SR), "end_ms": round(t["end"] * 1000 / SR)} for t in ts
+        ],
+    }
 
 
 def _whisper(model_id: str, dev: str) -> Any:
@@ -69,8 +73,12 @@ def _whisper(model_id: str, dev: str) -> Any:
         import torch
         from transformers import pipeline
 
-        _cache[key] = pipeline("automatic-speech-recognition", model=model_id, device=0 if dev == "cuda" else -1,
-                               torch_dtype=torch.float16 if dev == "cuda" else torch.float32)
+        _cache[key] = pipeline(
+            "automatic-speech-recognition",
+            model=model_id,
+            device=0 if dev == "cuda" else -1,
+            torch_dtype=torch.float16 if dev == "cuda" else torch.float32,
+        )
     return _cache[key]
 
 
@@ -145,8 +153,12 @@ def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
         for ci in range(len(cuts) - 1):
             a, b = cuts[ci], cuts[ci + 1]
             chunk = audio[a:b]
-            out = asr({"raw": chunk, "sampling_rate": SR}, return_timestamps="word", batch_size=bs,
-                      generate_kwargs={"language": lang, "task": "transcribe"})
+            out = asr(
+                {"raw": chunk, "sampling_rate": SR},
+                return_timestamps="word",
+                batch_size=bs,
+                generate_kwargs={"language": lang, "task": "transcribe"},
+            )
             off = a / SR
             words = []
             for c in out.get("chunks") or []:
@@ -154,8 +166,14 @@ def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
                 if ts[0] is None or not c["text"].strip():
                     continue
                 end = ts[1] if ts[1] is not None else ts[0] + 0.2
-                words.append({"w": c["text"].strip(), "start_ms": round((off + ts[0]) * 1000),
-                              "end_ms": round((off + end) * 1000), "seg": ci})
+                words.append(
+                    {
+                        "w": c["text"].strip(),
+                        "start_ms": round((off + ts[0]) * 1000),
+                        "end_ms": round((off + end) * 1000),
+                        "seg": ci,
+                    }
+                )
             raw.extend(dict(w) for w in words)
             if p.get("align", True) and lang in ALIGN_MODELS and words:
                 aligned_n += align_chunk(chunk, words, off, dev)
@@ -169,7 +187,11 @@ def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     return {
         "words": {"lang": lang, "model": model_id, "aligned": aligned_n > 0, "words": words_all},
         "raw_words": {"lang": lang, "model": model_id, "aligned": False, "words": raw},
-        "vad": v, "timing": timing, "device": dev, "batch_size": bs, "aligned_words": aligned_n,
+        "vad": v,
+        "timing": timing,
+        "device": dev,
+        "batch_size": bs,
+        "aligned_words": aligned_n,
         "chunks": [[round(cuts[i] / SR, 3), round(cuts[i + 1] / SR, 3)] for i in range(len(cuts) - 1)],
     }
 
@@ -184,10 +206,17 @@ def transcribe_many(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
         t0 = time.perf_counter()
         r = transcribe({**p, "audio": f}, require_rocm)
         wall = time.perf_counter() - t0
-        out.append({"file": f, "text": " ".join(w["w"] for w in r["raw_words"]["words"]),
-                    "raw_words": r["raw_words"]["words"], "words": r["words"]["words"],
-                    "aligned_words": r["aligned_words"], "wall_s": round(wall, 4),
-                    "audio_s": round(len(audio) / SR, 3)})
+        out.append(
+            {
+                "file": f,
+                "text": " ".join(w["w"] for w in r["raw_words"]["words"]),
+                "raw_words": r["raw_words"]["words"],
+                "words": r["words"]["words"],
+                "aligned_words": r["aligned_words"],
+                "wall_s": round(wall, 4),
+                "audio_s": round(len(audio) / SR, 3),
+            }
+        )
         event("progress", done=k + 1, total=len(p["files"]))
     return {"items": out, "model": p.get("model"), "device": device(require_rocm)}
 

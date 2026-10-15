@@ -1,0 +1,13 @@
+{
+ "video_id": "perspectives_keyboard",
+ "written_by": "YOUR NAME",
+ "written_at": "2026-10-17T09:30:00+05:30",
+ "source": "W3C human description (Text Transcript with Description of Visuals)",
+ "questions": [
+  {
+   "q": "WRITE A QUESTION ABOUT SOMETHING YOU CAN ONLY KNOW BY SEEING THE VIDEO",
+   "options": ["FIRST ANSWER", "SECOND ANSWER", "THIRD ANSWER", "FOURTH ANSWER"],
+   "answer_index": 0
+  }
+ ]
+}

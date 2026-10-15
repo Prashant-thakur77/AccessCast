@@ -40,8 +40,13 @@ def _quoted_ok(text: str, phrase: str) -> bool:
     return bool(framed or quoted)
 
 
-def oracle(spec: dict[str, Any], text: str, *, span: tuple[int, int] | None = None,
-           speech: list[tuple[int, int]] | None = None) -> bool:
+def oracle(
+    spec: dict[str, Any],
+    text: str,
+    *,
+    span: tuple[int, int] | None = None,
+    speech: list[tuple[int, int]] | None = None,
+) -> bool:
     """True when the output shows the failure the case baits. Independent of verify/ code."""
     o = spec["oracle"]
     low = f" {text.lower()} "
@@ -71,10 +76,19 @@ def main() -> int:
     cases = sorted(p.stem for p in ADV.glob("*.json"))
     if args.cases:
         cases = [c for c in cases if c in args.cases.split(",")]
-    exp = Experiment("e11_adversarial", "dev", config={
-        "k": args.k, "temperatures": {"production": C.TEMP_WRITE, "stress": C.TEMP_STRESS}, "cases": cases,
-        "provider": args.provider, "strict_provider": True, "worker_mode": settings.worker_mode,
-        "oracles": "eval/e11_adversarial.py (independent of verify/)"})
+    exp = Experiment(
+        "e11_adversarial",
+        "dev",
+        config={
+            "k": args.k,
+            "temperatures": {"production": C.TEMP_WRITE, "stress": C.TEMP_STRESS},
+            "cases": cases,
+            "provider": args.provider,
+            "strict_provider": True,
+            "worker_mode": settings.worker_mode,
+            "oracles": "eval/e11_adversarial.py (independent of verify/)",
+        },
+    )
 
     def body(e: Experiment) -> None:
         for case in cases:
@@ -105,9 +119,18 @@ def main() -> int:
                         stats["leaks"] += int(leak)
                         stats["blocked"] += int(failed and not leak)
                         stats["no_output"] += int(not draft.strip())
-                        e.results.append({"case": case, "setting": temp_name, "try": k, "draft": draft,
-                                          "final": final, "published": published, "gemma_failed": failed,
-                                          "reached_viewer": leak})
+                        e.results.append(
+                            {
+                                "case": case,
+                                "setting": temp_name,
+                                "try": k,
+                                "draft": draft,
+                                "final": final,
+                                "published": published,
+                                "gemma_failed": failed,
+                                "reached_viewer": leak,
+                            }
+                        )
                 e.summary.setdefault("cases", {}).setdefault(case, {})[temp_name] = stats
         cs = e.summary.get("cases", {})
         e.summary["total_leaks"] = sum(s[t]["leaks"] for s in cs.values() for t in s)
@@ -119,8 +142,9 @@ def main() -> int:
     return run_experiment(exp, body)
 
 
-def _one_try(run: Any, ctx: Any, cal: Any, kind: str, temp: float | None, label: str,
-             seed: int) -> list[tuple[str, str, bool, tuple[int, int] | None]]:
+def _one_try(
+    run: Any, ctx: Any, cal: Any, kind: str, temp: float | None, label: str, seed: int
+) -> list[tuple[str, str, bool, tuple[int, int] | None]]:
     """Returns (attempt-0 text, published-candidate text, published?, span) per line produced in this try."""
     if kind == "ad":
         plans = [p for p in plan_description(list(ctx.gaps.values()), ctx.evidence, ctx.words, ctx.vad, cal)]
@@ -140,11 +164,21 @@ def _one_try(run: Any, ctx: Any, cal: Any, kind: str, temp: float | None, label:
 
     sdh = segment_sdh(ctx.words, ctx.sounds, ctx.fps, 10**7)
     topts = TextOptions(run_label=label, project_seed=seed, temperature=temp)
-    res: list[Item] = make_easy(run.client, sdh, ctx, topts) if kind == "easy" else \
-        make_subtitles(run.client, sdh, "hi", ctx, topts)
-    return [(i.repair.history[0].text if i.repair.history else i.draft, i.text,
-             i.status == ItemStatus.PENDING and not i.violations, None) for i in res
-            if i.kind in (ItemKind.EASY, ItemKind.SUBTITLE)]
+    res: list[Item] = (
+        make_easy(run.client, sdh, ctx, topts)
+        if kind == "easy"
+        else make_subtitles(run.client, sdh, "hi", ctx, topts)
+    )
+    return [
+        (
+            i.repair.history[0].text if i.repair.history else i.draft,
+            i.text,
+            i.status == ItemStatus.PENDING and not i.violations,
+            None,
+        )
+        for i in res
+        if i.kind in (ItemKind.EASY, ItemKind.SUBTITLE)
+    ]
 
 
 if __name__ == "__main__":

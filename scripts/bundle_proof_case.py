@@ -28,7 +28,14 @@ ev = [read_json(f) for f in sorted((proj / "evidence").glob("*/evidence.json"))]
 meta = json.loads((REPO_ROOT / "data" / "adversarial" / f"{case}.json").read_text())
 cal = load_calibration(VOICES["en"])
 meta = {k: meta[k] for k in ("baits", "oracle", "rules")} | {
-    "calibration": {"voice": cal.voice, "wps_voice": cal.wps_voice, "intercept_s": cal.intercept_s, "measured": cal.measured},
-    "proof_temperature": "stress" if "--stress" in sys.argv else "production", "source_sha256": info["sha256"]}
+    "calibration": {
+        "voice": cal.voice,
+        "wps_voice": cal.wps_voice,
+        "intercept_s": cal.intercept_s,
+        "measured": cal.measured,
+    },
+    "proof_temperature": "stress" if "--stress" in sys.argv else "production",
+    "source_sha256": info["sha256"],
+}
 (out / "case.json").write_text(json.dumps(meta, indent=1))
 print(f"bundled {case} → {out}")
