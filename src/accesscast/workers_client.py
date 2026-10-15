@@ -41,8 +41,9 @@ def run_worker(
     *,
     require_rocm: bool = False,
     timeout_s: float = 3600,
+    python: Path | None = None,
 ) -> dict[str, Any]:
-    py = worker_python()
+    py = python or worker_python()
     if not py.exists():
         raise MissingDependencyError(f"worker environment missing ({py}); run `make setup`")
     script = WORKERS_DIR / f"{role}_worker.py"

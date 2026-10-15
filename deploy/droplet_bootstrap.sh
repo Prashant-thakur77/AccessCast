@@ -37,6 +37,11 @@ echo "== project env + worker env (ROCm torch)"
 uv sync --all-extras
 ( cd workers && uv venv -q --python 3.12 && uv pip install -q --index-url https://download.pytorch.org/whl/rocm6.4 torch torchaudio \
   && uv pip install -q transformers kokoro "misaki[en]" silero-vad soundfile numpy jiwer )
+echo "== chatterbox env (own torch pin; ROCm build of the same version)"
+( cd workers/chatterbox && uv venv -q --python 3.11 && uv pip install -q chatterbox-tts soundfile numpy "setuptools<81" \
+  && uv pip install -q --reinstall --index-url https://download.pytorch.org/whl/rocm6.2.4 torch==2.6.0 torchaudio==2.6.0 \
+  && .venv/bin/python -c "from chatterbox.mtl_tts import ChatterboxMultilingualTTS as M; M.from_pretrained(device='cuda')" ) \
+  || echo "WARNING: chatterbox env failed; hi/it voices stay on Kokoro (logged in docs/incidents.md)"
 echo "== prefetch weights"
 docker run --rm -v "$HOME/.cache/huggingface:/root/.cache/huggingface" -e HF_TOKEN --entrypoint huggingface-cli "$IMAGE" \
   download google/gemma-4-31B-it google/gemma-4-E4B-it >/dev/null || \

@@ -1,0 +1,10 @@
+[project]
+name = "accesscast-worker-chatterbox"
+version = "0.1.0"
+description = "Separate env for Chatterbox Multilingual TTS (MIT), which pins its own torch."
+requires-python = ">=3.11,<3.12"
+license = { text = "MIT" }
+dependencies = ["chatterbox-tts", "soundfile", "numpy", "setuptools<81"]  # resemble-perth (watermark) imports pkg_resources
+
+[tool.uv]
+package = false

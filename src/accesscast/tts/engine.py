@@ -22,7 +22,18 @@ from accesscast.verify import nlp
 from accesscast.workers_client import run_worker, workers_available
 from accesscast.write.plan_ad import Calibration
 
-ENGINE_REV = "kokoro-82m@v1.0+seeded"  # seed per line (E9); bumps the TTS cache key
+ENGINE_REV = "kokoro-82m@v1.0+seeded"
+CHATTERBOX_REV = "chatterbox-multilingual@v3+seeded"
+CHATTERBOX_PY = REPO_ROOT / "workers" / "chatterbox" / ".venv" / "bin" / "python"
+
+
+def engine_for(lang: str) -> str:
+    """kokoro (default) or chatterbox for hi/it, chosen by ACCESSCAST_TTS_ENGINE_HI_IT after the voice check."""
+    import os
+
+    if lang in ("hi", "it") and os.environ.get("ACCESSCAST_TTS_ENGINE_HI_IT", "kokoro") == "chatterbox":
+        return "chatterbox"
+    return "kokoro"  # seed per line (E9); bumps the TTS cache key
 VOICES = {"en": "af_heart", "hi": "hf_alpha", "it": "if_sara"}  # Kokoro voice ids (Katha's map, MIT)
 VOICEOVER_VOICES = {"hi": "hm_omega", "it": "im_nicola"}  # distinct from the description voice
 CAL_DIR = REPO_ROOT / "src" / "accesscast" / "tts" / "calibration"
@@ -38,10 +49,9 @@ def load_calibration(voice: str, speed: float = 1.0) -> Calibration:
     return Calibration(voice=voice, wps_voice=2.6, intercept_s=0.0, measured=False)
 
 
-def tts_key(text: str, voice: str, speed: float) -> str:
-    return sha256_text(
-        canonical_json({"text": text, "voice": voice, "speed": round(speed, 3), "engine": ENGINE_REV})
-    )
+def tts_key(text: str, voice: str, speed: float, engine: str = "kokoro") -> str:
+    rev = CHATTERBOX_REV if engine == "chatterbox" else ENGINE_REV
+    return sha256_text(canonical_json({"text": text, "voice": voice, "speed": round(speed, 3), "engine": rev}))
 
 
 def _placeholder(path: Path, words: int, wps: float) -> int:
@@ -68,9 +78,11 @@ def synthesize(
     keyed: dict[str, tuple[str, str, Path]] = {}
     for it in items:
         voice = voice_for.get(it.lang)
+        if voice is not None and engine_for(it.lang) == "chatterbox":
+            voice = "chatterbox-default"  # Chatterbox uses its built-in reference voice, not a Kokoro voice id
         if voice is None:
             raise ValueError(f"no TTS voice for language {it.lang!r} (no fallback to English)")
-        key = tts_key(it.text, voice, speed)
+        key = tts_key(it.text, voice, speed, engine_for(it.lang))
         out = tts_dir / f"{key}.wav"
         keyed[it.id] = (key, voice, out)
         if not out.exists():
@@ -82,12 +94,22 @@ def synthesize(
                     "voice": voice,
                     "speed": speed,
                     "out": str(out),
+                    "engine": engine_for(it.lang),
                 }
             )
     engine = "kokoro-82m"
     if todo:
         if workers_available():
-            run_worker("tts", "synth", {"lines": todo}, tts_dir / "req", events, require_rocm=require_rocm)
+            kok = [t for t in todo if t.get("engine") == "kokoro"]
+            cbx = [t for t in todo if t.get("engine") == "chatterbox"]
+            if kok:
+                run_worker("tts", "synth", {"lines": kok}, tts_dir / "req", events, require_rocm=require_rocm)
+            if cbx:
+                res = run_worker("chatterbox", "synth", {"lines": cbx}, tts_dir / "req", events,
+                                 require_rocm=require_rocm, python=CHATTERBOX_PY)
+                for r in res["items"]:
+                    if r.get("eos_forced"):
+                        Path(str(r["path"]) + ".eos_forced").write_text("chatterbox forced end of sentence\n")
         else:
             engine = "placeholder"
             for t in todo:
@@ -100,7 +122,9 @@ def synthesize(
         key, voice, out = keyed[it.id]
         info = sf.info(str(out))
         is_ph = Path(str(out) + ".placeholder").exists()
-        flags = [*it.flags, "placeholder_tts"] if is_ph and "placeholder_tts" not in it.flags else it.flags
+        flags = [*it.flags, "placeholder_tts"] if is_ph and "placeholder_tts" not in it.flags else list(it.flags)
+        if Path(str(out) + ".eos_forced").exists() and "tts_eos_forced" not in flags:
+            flags.append("tts_eos_forced")  # may be cut short: shown to the reviewer
         result.append(
             it.model_copy(
                 update={
@@ -109,7 +133,7 @@ def synthesize(
                         speed=speed,
                         sha256=key,
                         duration_ms=round(info.duration * 1000),
-                        engine="placeholder" if is_ph else engine,
+                        engine="placeholder" if is_ph else ("chatterbox-multilingual" if engine_for(it.lang) == "chatterbox" else engine),
                     ),
                     "flags": flags,
                 }
