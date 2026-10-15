@@ -30,6 +30,13 @@ def _pipe(lang: str, dev: str) -> Any:
 
 
 def _synth_one(pipe: Any, text: str, voice: str, speed: float) -> np.ndarray:
+    # Kokoro's vocoder draws random noise; seed from the line itself so the same text, voice and speed always
+    # give the same clip (E9 found 1780 vs 1789 ms for one line across fresh processes before this).
+    import hashlib
+
+    import torch
+
+    torch.manual_seed(int(hashlib.sha256(f"{voice}:{speed}:{text}".encode()).hexdigest()[:8], 16))
     chunks = [r.audio.numpy() for r in pipe(text, voice=voice, speed=speed) if r.audio is not None]
     if not chunks:
         raise RuntimeError("TTS produced no audio")

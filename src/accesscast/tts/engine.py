@@ -22,7 +22,7 @@ from accesscast.verify import nlp
 from accesscast.workers_client import run_worker, workers_available
 from accesscast.write.plan_ad import Calibration
 
-ENGINE_REV = "kokoro-82m@v1.0"
+ENGINE_REV = "kokoro-82m@v1.0+seeded"  # seed per line (E9); bumps the TTS cache key
 VOICES = {"en": "af_heart", "hi": "hf_alpha", "it": "if_sara"}  # Kokoro voice ids (Katha's map, MIT)
 VOICEOVER_VOICES = {"hi": "hm_omega", "it": "im_nicola"}  # distinct from the description voice
 CAL_DIR = REPO_ROOT / "src" / "accesscast" / "tts" / "calibration"

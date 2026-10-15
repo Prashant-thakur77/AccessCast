@@ -119,8 +119,8 @@ def mix_standard(
     peak = float(np.max(np.abs(mixed))) if mixed.size else 0.0
     if peak > 0.99:
         mixed *= 0.99 / peak
-    sf.write(str(out_mix), mixed, SR, subtype="FLOAT")
-    sf.write(str(out_stem), stem, SR, subtype="FLOAT")
+    sf.write(str(out_mix), mixed, SR, subtype="PCM_24")
+    sf.write(str(out_stem), stem, SR, subtype="PCM_24")
     return {"clips": len(clips), "duck_spans": len(spans)}
 
 
@@ -174,6 +174,6 @@ def mix_extended(
     peak = float(np.max(np.abs(mixed))) if mixed.size else 0.0
     if peak > 0.99:
         mixed *= 0.99 / peak
-    sf.write(str(out_mix), mixed, SR, subtype="FLOAT")
-    sf.write(str(out_stem), stem, SR, subtype="FLOAT")
+    sf.write(str(out_mix), mixed, SR, subtype="PCM_24")
+    sf.write(str(out_stem), stem, SR, subtype="PCM_24")
     return rows
