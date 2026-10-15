@@ -11,7 +11,7 @@ from accesscast import confidence
 from accesscast import constants as C
 from accesscast.errors import LlmOutputError, ModelEndpointError
 from accesscast.llm.client import LlmClient, LlmRequest, LlmResponse
-from accesscast.repair.loop import feedback_violations, run_repair_loop
+from accesscast.repair.loop import NON_REPAIRABLE, feedback_violations, run_repair_loop
 from accesscast.schemas import (
     FindingModel,
     Item,
@@ -91,6 +91,11 @@ def write_drafts(
 ) -> dict[str, tuple[str, list[str], ModelRef | None, str | None]]:
     """Returns item_id → (draft, fact_ids, model, error). Batches of up to 8 gaps per request."""
     out: dict[str, tuple[str, list[str], ModelRef | None, str | None]] = {}
+
+    for p in plans:  # no facts (evidence failed): a person writes this line; Gemma is not asked
+        if not p.facts:
+            out[p.item_id] = ("", [], None, "evidence_failed: a person writes this line")
+    plans = [p for p in plans if p.facts]
     batches = [list(plans[i : i + C.AD_BATCH_GAPS]) for i in range(0, len(plans), C.AD_BATCH_GAPS)]
 
     def one(batch: list[PlannedLine]) -> None:
@@ -203,6 +208,9 @@ def verify_and_repair(
                 raise LlmOutputError("repair returned no text")
             return new.strip(), [str(f) for f in resp.obj.get("fact_ids") or []]
 
+        if any(f.startswith("generation_error:evidence_failed") for f in item.flags):
+            return item.model_copy(update={"status": ItemStatus.NEEDS_REVISION, "confidence": 0.0,
+                                           "repair": RepairInfo(attempts=0, stop_reason=NON_REPAIRABLE)})
         if not opts.checks:  # E1 arm A: attempt 0 accepted as written
             res = verify(item.draft, item.fact_ids)
             return item.model_copy(
