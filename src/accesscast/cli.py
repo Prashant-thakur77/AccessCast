@@ -214,6 +214,26 @@ def demo_fixture(serve: bool = True, port: int = 8080) -> None:
         serve_dir(out, port)
 
 
+@app.command("scratch-copy")
+def scratch_copy(project: ProjectOpt, suffix: str = "scratch") -> None:
+    """E12 manual mode: copy a project with an EMPTY description lane (lines are written by hand in the review app)."""
+    import shutil
+
+    from accesscast.project import Project, write_jsonl
+    from accesscast.review.store import ReviewStore
+
+    s = load_settings()
+    src = Project.open(s.projects_dir, project).root
+    dst_name = f"{project[:6]}{suffix[:6]:x<6}"  # 12 alphanumeric characters, like every project id
+    dst = s.projects_dir / dst_name
+    if dst.exists():
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst, ignore=shutil.ignore_patterns("render", "review"))
+    write_jsonl(dst / "items" / "ad.en.jsonl", [])
+    ReviewStore(dst).init_from_items()
+    typer.echo(dst_name)
+
+
 def main() -> None:
     try:
         app()
