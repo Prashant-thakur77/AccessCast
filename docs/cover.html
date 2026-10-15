@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>AccessCast cover</title><style>
+*{box-sizing:border-box}body{margin:0;width:1920px;height:1080px;background:#0f1b33;color:#f4f6fb;font-family:"DejaVu Sans",sans-serif;
+display:grid;grid-template-columns:minmax(0,1fr) 800px minmax(0,1fr);grid-template-rows:200px 560px 1fr;}
+h1{grid-column:1/4;margin:0;align-self:end;justify-self:center;font-size:96px;letter-spacing:-1px}
+.frame{grid-column:2;grid-row:2;align-self:center;justify-self:center;position:relative}
+.frame img{width:780px;border-radius:18px;border:6px solid #ffc857;display:block}
+.col{grid-row:2;display:flex;flex-direction:column;justify-content:center;gap:48px;padding:0 28px;min-width:0}
+.left{grid-column:1;align-items:flex-end}.right{grid-column:3;align-items:flex-start}
+.chip{display:flex;align-items:center;gap:18px;background:#18294d;border:3px solid #4a6aa8;border-radius:60px;padding:12px 24px;font-size:29px;font-weight:bold;white-space:nowrap}
+.chip svg{width:46px;height:46px;flex:none}
+.tag{grid-column:1/4;grid-row:3;text-align:center;align-self:center}
+.tag p{margin:8px;font-size:58px;font-weight:bold}.tag .small{font-size:36px;font-weight:normal;color:#ffc857}
+</style></head><body>
+<h1>AccessCast</h1>
+<div class="col left">
+ <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#ffc857" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21"/></svg>I can't see the screen</div>
+ <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#ffc857" stroke-width="2"><path d="M6 9a6 6 0 1 1 12 0c0 4-4 5-4 9a3 3 0 0 1-6 0"/><line x1="3" y1="3" x2="21" y2="21"/></svg>I can't hear</div>
+ <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#ffc857" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h7"/></svg>Simpler words, please</div>
+</div>
+<div class="frame"><img src="cover-frame.jpg" alt="A person in a blue cardigan at a laptop showing Ctrl + C"></div>
+<div class="col right">
+ <div class="chip" lang="hi"><svg viewBox="0 0 24 24" fill="none" stroke="#ffc857" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>हिन्दी</div>
+ <div class="chip" lang="it"><svg viewBox="0 0 24 24" fill="none" stroke="#ffc857" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Italiano</div>
+</div>
+<div class="tag"><p>One video. Five ways to watch.</p><p class="small">Gemma 4 on AMD Instinct MI300X</p></div>
+</body></html>

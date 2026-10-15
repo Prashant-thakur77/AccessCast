@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>AccessCast deck</title>
+<style>
+:root{--bg:#0f1b33;--fg:#f4f6fb;--muted:#c9d3ea;--accent:#ffc857;--card:#18294d}
+*{box-sizing:border-box}body{margin:0;background:#000;font-family:"DejaVu Sans",system-ui,sans-serif}
+section{width:1600px;height:900px;background:var(--bg);color:var(--fg);padding:80px 100px;display:flex;flex-direction:column;
+  gap:22px;page-break-after:always;break-after:page;position:relative;overflow:hidden}
+h1,h2{font-size:58px;line-height:1.1;margin:0 0 10px}h1{font-size:96px}
+.sub{font-size:40px;color:var(--accent);margin:0}
+p,li{font-size:31px;line-height:1.35;margin:0}ul,ol{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:14px}
+table{border-collapse:collapse;font-size:28px;width:100%}th,td{border-bottom:2px solid #33476f;padding:12px 16px;text-align:left}
+th{color:var(--accent)}code{font-size:.9em;background:var(--card);padding:2px 8px;border-radius:6px}
+.pending{color:#ff9b9b;font-style:italic}
+footer{position:absolute;bottom:34px;left:100px;right:100px;display:flex;justify-content:space-between;font-size:20px;color:var(--muted)}
+@page{size:1600px 900px;margin:0}</style></head><body><main><section aria-label="Slide 1"><h2>AccessCast</h2>
+<p class="sub">One video. Five ways to watch.</p>
+<p><span class="pending">[pending: e1.headline]</span></p>
+<p>Gemma 4 on AMD Instinct MI300X · AMD Developer Hackathon ACT III · Create a New Kind of Experience</p>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>1 / 12</span></footer></section>
+<section aria-label="Slide 2"><h2>Most video says nothing to people who can't see it</h2>
+<ul><li><span class="pending">[pending: cited.gbd.blind]</span> people are blind and <span class="pending">[pending: cited.gbd.mod_severe]</span> have moderate to severe vision loss.</li><li><span class="pending">[pending: cited.who.hearing]</span> people need rehabilitation for disabling hearing loss.</li><li><span class="pending">[pending: cited.oecd.literacy]</span> of adults read at or below the lowest literacy level.</li><li>The largest free archive of described video holds about <span class="pending">[pending: cited.market.youdescribe_hours]</span> hours. YouTube received <span class="pending">[pending: cited.market.youtube_uploads]</span> hours a minute.</li></ul>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>2 / 12</span></footer></section>
+<section aria-label="Slide 3"><h2>The law already asks for it</h2>
+<table><thead><tr><th scope="col">Where</th><th scope="col">Rule</th><th scope="col">When</th></tr></thead><tbody><tr><td>EU</td><td>European Accessibility Act</td><td><span class="pending">[pending: cited.law.eaa_date]</span></td></tr><tr><td>Italy</td><td>D.Lgs. 82/2022, fines <span class="pending">[pending: cited.law.italy_fines]</span></td><td>in force</td></tr><tr><td>India</td><td>MIB accessibility guidelines for OTT</td><td><span class="pending">[pending: cited.law.india_mib]</span></td></tr><tr><td>US</td><td>ADA Title II web rule (WCAG 2.1 AA)</td><td><span class="pending">[pending: cited.law.ada_title2]</span></td></tr></tbody></table>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>3 / 12</span></footer></section>
+<section aria-label="Slide 4"><h2>One video, five experiences</h2>
+<p>"I can't see the screen" · "I can't hear" · "Simpler words, please" · "हिन्दी" · "Italiano"</p>
+<p>All five are built from one analysis, so they never disagree. Profiles combine.</p>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>4 / 12</span></footer></section>
+<section aria-label="Slide 5"><h2>How it works</h2>
+<ol><li>Listen: Whisper words, forced alignment, Gemma 4 E4B cross-checks the transcript and labels sounds.</li><li>Look: Gemma 4 31B lists what is visible, at temperature 0.</li><li>Plan: code finds the pauses and gives each line a word budget.</li><li>Write: Gemma writes only from the visible facts.</li><li>Check: code checks every line. Gemma repairs. A person approves.</li><li>Render: one MP4 per audience, loudness and timing checked.</li></ol>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>5 / 12</span></footer></section>
+<section aria-label="Slide 6"><h2>The model proposes, code decides</h2>
+<ul><li>Rules tied to the real audio timeline: the line must fit the pause, measured in milliseconds.</li><li>Names, claims, sounds, restated dialogue and injected instructions are blocked in code.</li><li>Confidence is computed from measurements, never asked of the model.</li><li>The server refuses to render while any line waits for a person.</li></ul>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>6 / 12</span></footer></section>
+<section aria-label="Slide 7"><h2>Result: lines that fit the pauses</h2>
+<p><span class="pending">[pending: e01.table]</span></p>
+<p>Test set: 10 W3C videos never used for tuning. Measured by a script that imports none of our checks.</p>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>7 / 12</span></footer></section>
+<section aria-label="Slide 8"><h2>More results</h2>
+<p><span class="pending">[pending: results.more]</span></p>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>8 / 12</span></footer></section>
+<section aria-label="Slide 9"><h2>On one AMD MI300X</h2>
+<p><span class="pending">[pending: amd.slide]</span></p>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>9 / 12</span></footer></section>
+<section aria-label="Slide 10"><h2>It holds up</h2>
+<p><span class="pending">[pending: reliability.slide]</span></p>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>10 / 12</span></footer></section>
+<section aria-label="Slide 11"><h2>Who pays, and what it costs</h2>
+<p><span class="pending">[pending: business.slide]</span></p>
+<p>Our cost is GPU time plus a person's review time. List prices are labelled as list prices.</p>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>11 / 12</span></footer></section>
+<section aria-label="Slide 12"><h2>What didn't work, and what's next</h2>
+<p><span class="pending">[pending: negative.slide]</span></p>
+<p>Prior work: AudioSight, ViddyScribe, AutoAD-Zero. Code: github.com/Prashant-thakur77/AccessCast · Live: accesscast.vercel.app</p>
+  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>12 / 12</span></footer></section></main></body></html>
