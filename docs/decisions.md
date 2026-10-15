@@ -102,3 +102,33 @@ The team supplied `github.com/Prashant-thakur77/AccessCast` (public, empty). All
 
 ## D-005 Local machine has no AMD GPU (16 Oct 2026)
 The development laptop has an NVIDIA RTX 3050 (6 GB). It is never used for any published number. CPU and fake mode are used for development and CI. All GPU numbers come from the MI300X droplet.
+
+## D-006 W3C test videos fetched from YouTube with yt-dlp (16 Oct 2026)
+W3C's perspective-video pages embed the videos from YouTube (`yt-id`, `yt-id-ad` in the page source) and offer no direct MP4 (HEAD requests to `media.w3.org/wai/perspective-videos/<name>.mp4` returned 404). `eval/datasets/fetch_w3c_wai.py` fetches whole videos with yt-dlp into git-ignored `data/w3c/` for private evaluation only, plus W3C's four tracks per video from `w3c/wai-website` at a pinned commit. Nothing W3C-derived is committed, published or excerpted. `export-site` refuses any project whose source hash is in the W3C manifest.
+
+## D-007 Placeholders pass `claims-check`, fail `submission-check` (16 Oct 2026)
+M1 requires `make claims-check` to pass on an empty registry, while README/JUDGES carry `<pending: id>` placeholders by design. So `claims-check` fails on wrong values, stale hashes and unregistered numbers, and only counts placeholders. `submission-check` runs it with `strict_placeholders=True`, where any placeholder fails.
+
+## D-008 Ducking envelope computed in numpy (16 Oct 2026)
+PLAN §9 S14 asks for a deterministic gain envelope via ffmpeg `volume` with an expression. We compute the same envelope (9 dB dip, 300 ms linear ramps, minimum over overlapping clips) in numpy at 48 kHz and mix there. The goal (a fixed, level-independent dip at known times) is unchanged. It avoids very long ffmpeg expressions for videos with many lines, and it is unit-testable. Loudness is still two-pass ffmpeg `loudnorm` with `I` set explicitly.
+
+## D-009 Whisper word probabilities not extracted (16 Oct 2026)
+The transformers ASR pipeline's word timestamps do not include per-word probabilities. Rather than run a second decoding pass, `prob` is recorded as 1.0, and ASR uncertainty in confidence comes from the independent Gemma E4B cross-check (S2b, ×0.8 on disagreement). Confidence weights are still set on the dev set only.
+
+## D-010 Minimum useful budget of 3 words (16 Oct 2026)
+On the fixture, a 1.48 s opening pause got a 2-word budget, and "repair" produced the useless "White text". A pause too short for 3 words is no longer used for standard description, and its important facts become extended-description candidates. `AD_MIN_USEFUL_WORDS = 3` in `constants.py` (dev-tuned).
+
+## D-011 Extended-description insertion point (16 Oct 2026)
+PLAN §9 S6 says "at the next end of a speech segment". On the fixture, that put the opening title's description 4 s after the title, outside AD005's window. Insertions now go at the speech boundary nearest the event (start of video, start or end of a speech segment, never inside a word) within the AD005 window. They fall back to the next boundary, where AD005 sends them to a person.
+
+## D-012 Voice-over and subtitle slots may use following silence (16 Oct 2026)
+Hindi voice-over is often longer than the English speech. A voice-over slot runs from the speech start to the next speech minus 200 ms, at most 1.5 s past the original speech end (`VO_TAIL_MS`, `VO_GAP_BEFORE_NEXT_MS`). Subtitles extend into following silence before CC001 judges speed, as SDH already does (PLAN §9 S10). VO001's 1.15× tempo cap is unchanged.
+
+## D-013 AD006 compares a sibling only within its own slot (16 Oct 2026)
+During parallel verification, a sibling line's length was estimated from its unrepaired draft, which made a valid line fail AD006 three times. AD001 already keeps every standard line inside its own pause, so a sibling's span is capped at its slot end when checking for overlap.
+
+## D-014 Development set (16 Oct 2026)
+Six NASA Goddard explainers (eclipse ×2, comet, exoplanets, a Worldview screen tutorial with on-screen text, a climate-scientist interview), three Prelinger public-domain films (TV commercials, operator dialling, pedestrian safety), the Sintel trailer and a Big Buck Bunny excerpt. Long clips are trimmed to their first 180 s (120 s for BBB) to save GPU time; dev clips may be cut. The 20 s synthetic fixture and the synthetic adversarial clips (D-003) are also dev data.
+
+## D-015 Scene length clamp splits evenly (16 Oct 2026)
+PLAN §9 S1 says scenes longer than 45 s split "at the largest visual change". The first implementation splits them evenly into ≤ 45 s parts. Revisit if dev clips show splits landing mid-action.
