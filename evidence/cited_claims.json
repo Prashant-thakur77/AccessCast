@@ -1,0 +1,783 @@
+{
+ "schema": "accesscast/cited-claims-draft/v1",
+ "accessed": "2026-10-16",
+ "verified": [
+  {
+   "claim_id": "cited.who.vision_2_2bn",
+   "text": "Worldwide, at least 2.2 billion people have a near or distance vision impairment (WHO).",
+   "value": 2200000000,
+   "unit": "people",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment",
+   "accessed": "2026-10-16",
+   "quote": "Globally, at least 2.2 billion people have a near or distance vision impairment.",
+   "display": [
+    "2.2 billion"
+   ],
+   "note": "WHO fact sheet dated 10 February 2026."
+  },
+  {
+   "claim_id": "cited.gbd.blind_2020",
+   "text": "In 2020, an estimated 43.3 million people were blind (GBD 2019, Lancet Global Health 2021).",
+   "value": 43300000,
+   "unit": "people",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://doi.org/10.1016/S2214-109X(20)30425-3",
+   "accessed": "2026-10-16",
+   "quote": "In 2020, an estimated 43·3 million (95% UI 37·6-48·4) people were blind",
+   "display": [
+    "43.3 million"
+   ],
+   "note": "Bourne et al., 'Trends in prevalence of blindness and distance and near vision impairment over 30 years', Lancet Glob Health 2021;9:e130-43. Abstract text read via Europe PMC (PMC7820390). PLAN said 43.9 million; the paper says 43.3 million."
+  },
+  {
+   "claim_id": "cited.gbd.mod_severe_vi_2020",
+   "text": "In 2020, an estimated 295 million people had moderate or severe vision impairment (GBD 2019, Lancet Global Health 2021).",
+   "value": 295000000,
+   "unit": "people",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://doi.org/10.1016/S2214-109X(20)30425-3",
+   "accessed": "2026-10-16",
+   "quote": "We estimated 295 million (267-325) people to have moderate and severe vision impairment",
+   "display": [
+    "295 million"
+   ],
+   "note": "Same paper as cited.gbd.blind_2020; abstract read via Europe PMC (PMC7820390)."
+  },
+  {
+   "claim_id": "cited.who.hearing_430m",
+   "text": "430 million people need rehabilitation for disabling hearing loss (WHO).",
+   "value": 430000000,
+   "unit": "people",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss",
+   "accessed": "2026-10-16",
+   "quote": "Over 5% of the world’s population – or 430 million people – require rehabilitation to address their disabling hearing loss (including 34 million children).",
+   "display": [
+    "430 million"
+   ],
+   "note": "WHO fact sheet dated 3 March 2026."
+  },
+  {
+   "claim_id": "cited.oecd.piaac_lit_level1_oecd_avg",
+   "text": "On average across OECD countries, 26% of adults scored at or below Level 1 in literacy (OECD Survey of Adult Skills 2023).",
+   "value": 26,
+   "unit": "percent",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.cso.ie/en/releasesandpublications/ep/p-piaac/programmefortheinternationalassessmentofadultcompetenciespiaac2023/internationalcomparison",
+   "accessed": "2026-10-16",
+   "quote": "Large portions of the adult population scored at Level 1 and below on the proficiency scales: 26% in literacy, 25% in numeracy, and 29% in adaptive problem solving, on average across OECD countries.",
+   "display": [
+    "26%"
+   ],
+   "note": "Published by Ireland's Central Statistics Office (CSO) from the OECD PIAAC 2023 data. The OECD's own Italy country note returned HTTP 403 to automated fetches."
+  },
+  {
+   "claim_id": "cited.oecd.piaac_lit_level1_italy",
+   "text": "In Italy, 35% of adults scored at or below Level 1 in literacy (OECD Survey of Adult Skills 2023).",
+   "value": 35,
+   "unit": "percent",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.cso.ie/en/releasesandpublications/ep/p-piaac/programmefortheinternationalassessmentofadultcompetenciespiaac2023/internationalcomparison",
+   "accessed": "2026-10-16",
+   "quote": "Table 3.4 Literacy proficiency levels of adults 1 by country, 2023 Literacy proficiency levels by percentage including S.E. 2 Level 1 and below […] Italy 35 1.3",
+   "display": [
+    "35%"
+   ],
+   "note": "Value is the first column ('Level 1 and below', %) of Table 3.4; S.E. 1.3. The […] marks omitted table columns and rows. Same table: OECD average 26 (S.E. 0.2)."
+  },
+  {
+   "claim_id": "cited.price.3play_refine_std",
+   "text": "3Play Media lists 'Refine' (AI description plus a human spot check, English only) at $4.25 per minute for standard description (list price).",
+   "value": 4.25,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "Package Description Turnaround Eng (Std) Eng (Ext) […] Refine Launch + human spot check 2 biz days $4.25 $5.25",
+   "display": [
+    "$4.25"
+   ],
+   "note": "From the 'New Service Level' tier table on the price list; the page also says 'Launch and Refine packages are English only.'"
+  },
+  {
+   "claim_id": "cited.price.3play_refine_ext",
+   "text": "3Play Media lists 'Refine' at $5.25 per minute for extended description (list price).",
+   "value": 5.25,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "Package Description Turnaround Eng (Std) Eng (Ext) […] Refine Launch + human spot check 2 biz days $4.25 $5.25",
+   "display": [
+    "$5.25"
+   ]
+  },
+  {
+   "claim_id": "cited.price.3play_launch",
+   "text": "3Play Media lists 'Launch' (AI script, AI voice, English only) at $1.25 per minute (list price).",
+   "value": 1.25,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "Launch AI scripted AD, AI voice — English only Immediate $1.25 $1.25",
+   "display": [
+    "$1.25"
+   ],
+   "note": "Same price for standard and extended."
+  },
+  {
+   "claim_id": "cited.price.3play_studio_std",
+   "text": "3Play Media lists 'Studio' (studio mix, optional voice actors) at $18 per minute standard (list price).",
+   "value": 18.0,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "Studio Studio quality mix + optional voice actors 6 biz days $18.00 $25.00",
+   "display": [
+    "$18"
+   ]
+  },
+  {
+   "claim_id": "cited.price.3play_studio_ext",
+   "text": "3Play Media lists 'Studio' at $25 per minute extended (list price).",
+   "value": 25.0,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "Studio Studio quality mix + optional voice actors 6 biz days $18.00 $25.00",
+   "display": [
+    "$25"
+   ]
+  },
+  {
+   "claim_id": "cited.price.3play_voice_artist_std",
+   "text": "3Play Media's per-minute price list shows English voice-artist description at $18 per minute standard (list price).",
+   "value": 18.0,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "English Voice Artist Audio Description (Standard) $18.00 English Voice Artist Audio Description (Extended) $35.00",
+   "display": [
+    "$18"
+   ],
+   "note": "This table is still on the live price list next to the newer tiers; PLAN calls it 'legacy', the page does not."
+  },
+  {
+   "claim_id": "cited.price.3play_voice_artist_ext",
+   "text": "3Play Media's price list shows English voice-artist extended description at $35 per minute (list price).",
+   "value": 35.0,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "English Voice Artist Audio Description (Standard) $18.00 English Voice Artist Audio Description (Extended) $35.00",
+   "display": [
+    "$35"
+   ]
+  },
+  {
+   "claim_id": "cited.price.3play_synth_std",
+   "text": "3Play Media's price list shows English synthesized-speech description at $9 per minute standard (list price).",
+   "value": 9.0,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "English Synthesized Speech Audio Description (Standard) $9.00 English Synthesized Speech Audio Description (Extended) $14.00",
+   "display": [
+    "$9"
+   ]
+  },
+  {
+   "claim_id": "cited.price.3play_synth_ext",
+   "text": "3Play Media's price list shows English synthesized-speech extended description at $14 per minute (list price).",
+   "value": 14.0,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/Pricing-List/",
+   "accessed": "2026-10-16",
+   "quote": "English Synthesized Speech Audio Description (Standard) $9.00 English Synthesized Speech Audio Description (Extended) $14.00",
+   "display": [
+    "$14"
+   ]
+  },
+  {
+   "claim_id": "cited.price.3play_industry_range_low",
+   "text": "3Play Media says audio description prices range from $15 to $75 per minute.",
+   "value": 15.0,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/blog/how-much-does-audio-description-cost/",
+   "accessed": "2026-10-16",
+   "quote": "With prices significantly higher than the cost of closed captioning – ranging from $15 to $75 per minute – many don’t have the budget to regularly implement audio description on video content.",
+   "display": [
+    "$15"
+   ]
+  },
+  {
+   "claim_id": "cited.price.3play_industry_range_high",
+   "text": "3Play Media says audio description prices range from $15 to $75 per minute.",
+   "value": 75.0,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/blog/how-much-does-audio-description-cost/",
+   "accessed": "2026-10-16",
+   "quote": "With prices significantly higher than the cost of closed captioning – ranging from $15 to $75 per minute – many don’t have the budget to regularly implement audio description on video content.",
+   "display": [
+    "$75"
+   ]
+  },
+  {
+   "claim_id": "cited.price.umich_machine_std",
+   "text": "The University of Michigan pays $0.90 per minute for machine-generated standard audio description in English.",
+   "value": 0.9,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://teamdynamix.umich.edu/TDClient/30/Portal/KB/ArticleDet?ID=13962",
+   "accessed": "2026-10-16",
+   "quote": "Machine -generated Standard Audio Description (English) English English 12 hours / $0.9 min",
+   "display": [
+    "$0.90"
+   ],
+   "note": "Page writes '$0.9'."
+  },
+  {
+   "claim_id": "cited.price.umich_machine_ext",
+   "text": "The University of Michigan pays $1.40 per minute for machine-generated extended audio description in English.",
+   "value": 1.4,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://teamdynamix.umich.edu/TDClient/30/Portal/KB/ArticleDet?ID=13962",
+   "accessed": "2026-10-16",
+   "quote": "Machine-generated Extended Audio Description (English) English English 12 hours / $1.40 min",
+   "display": [
+    "$1.40"
+   ]
+  },
+  {
+   "claim_id": "cited.price.umich_human_low",
+   "text": "At the University of Michigan, human professional description costs from $6.65 per minute (standard, 5-day turnaround).",
+   "value": 6.65,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://teamdynamix.umich.edu/TDClient/30/Portal/KB/ArticleDet?ID=13962",
+   "accessed": "2026-10-16",
+   "quote": "Human Professional Standard Audio Description (English) English English 5 days / $6.65 min",
+   "display": [
+    "$6.65"
+   ]
+  },
+  {
+   "claim_id": "cited.price.umich_human_high",
+   "text": "At the University of Michigan, human professional description costs up to $14.70 per minute (extended, 24-hour turnaround).",
+   "value": 14.7,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://teamdynamix.umich.edu/TDClient/30/Portal/KB/ArticleDet?ID=13962",
+   "accessed": "2026-10-16",
+   "quote": "Human Professional Extended Audio Description (English) English English 5 days / $10.78 min 48 hours / $12.74 min 24 hours / $14.70 min",
+   "display": [
+    "$14.70"
+   ],
+   "note": "The $6.65-14.70 range spans standard 5-day to extended 24-hour rush; extended at the normal 5-day turnaround is $10.78."
+  },
+  {
+   "claim_id": "cited.price.accedo_starter_monthly",
+   "text": "Accedo's Starter plan costs $29 per month with 120 minutes included and $0.30 per extra minute.",
+   "value": 29.0,
+   "unit": "usd_per_month",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://ad.compose.accedo.tv/",
+   "accessed": "2026-10-16",
+   "quote": "Starter $29 /mo For individuals getting started. 120 minutes included $0.30/min overage",
+   "display": [
+    "$29"
+   ]
+  },
+  {
+   "claim_id": "cited.price.accedo_starter_minutes",
+   "text": "Accedo's $29 Starter plan includes 120 minutes per month.",
+   "value": 120,
+   "unit": "minutes_per_month",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://ad.compose.accedo.tv/",
+   "accessed": "2026-10-16",
+   "quote": "Starter $29 /mo For individuals getting started. 120 minutes included $0.30/min overage",
+   "display": [
+    "120 minutes"
+   ]
+  },
+  {
+   "claim_id": "cited.price.accedo_starter_overage",
+   "text": "Accedo's Starter plan charges $0.30 per minute over the included 120.",
+   "value": 0.3,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://ad.compose.accedo.tv/",
+   "accessed": "2026-10-16",
+   "quote": "Starter $29 /mo For individuals getting started. 120 minutes included $0.30/min overage",
+   "display": [
+    "$0.30"
+   ]
+  },
+  {
+   "claim_id": "cited.price.accedo_pro_overage",
+   "text": "Accedo's Pro plan ($99 per month, 500 minutes) charges $0.25 per extra minute.",
+   "value": 0.25,
+   "unit": "usd_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://ad.compose.accedo.tv/",
+   "accessed": "2026-10-16",
+   "quote": "Pro $99 /mo For studios and content creators. 500 minutes included $0.25/min overage",
+   "display": [
+    "$0.25"
+   ],
+   "note": "PLAN's '$0.25-0.30' mixes two plans: $0.30 on the $29 Starter plan, $0.25 on the $99 Pro plan."
+  },
+  {
+   "claim_id": "cited.law.eaa_apply_date",
+   "text": "EU member states apply the European Accessibility Act from 28 June 2025.",
+   "value": "2025-06-28",
+   "unit": "date",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj",
+   "accessed": "2026-10-16",
+   "quote": "2. They shall apply those measures from 28 June 2025.",
+   "display": [
+    "28 June 2025"
+   ],
+   "note": "Directive (EU) 2019/882, Article 31(2). EUR-Lex and legislation.gov.uk blocked automated fetches (HTTP 202 challenge); text read from the EUR-Lex mirror https://lawplayer.com/eu/act/32019L0882. Re-check on EUR-Lex in a browser before submitting."
+  },
+  {
+   "claim_id": "cited.law.eaa_av_access_services",
+   "text": "Under the European Accessibility Act, services giving access to audiovisual media must transmit access services such as SDH subtitles, audio description, spoken subtitles and sign language fully, in sync, and under the user's control.",
+   "value": null,
+   "unit": "text",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj",
+   "accessed": "2026-10-16",
+   "quote": "(b) Services providing access to audiovisual media services: (i) providing electronic programme guides (EPGs) which are perceivable, operable, understandable and robust and provide information about the availability of accessibility; (ii) ensuring that the accessibility components (access services) of the audiovisual media services such as subtitles for the deaf and hard of hearing, audio description, spoken subtitles and sign language interpretation are fully transmitted with adequate quality for accurate display, and synchronised with sound and video, while allowing for user control of their display and use.",
+   "display": [],
+   "note": "Annex I, Section IV(b). EUR-Lex and legislation.gov.uk blocked automated fetches (HTTP 202 challenge); text read from the EUR-Lex mirror https://lawplayer.com/eu/act/32019L0882. Re-check on EUR-Lex in a browser before submitting."
+  },
+  {
+   "claim_id": "cited.law.italy_dlgs82_fine_min",
+   "text": "Italy's EAA law (D.Lgs. 82/2022, Art. 24) sets administrative fines from €5,000 to €40,000.",
+   "value": 5000,
+   "unit": "eur",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2022-05-27;82~art24",
+   "accessed": "2026-10-16",
+   "quote": "è punito con la sanzione amministrativa pecuniaria da 5.000 euro a 40.000 euro",
+   "display": [
+    "€5,000"
+   ],
+   "note": "Art. 24 'Sanzioni', para. 1 (official Normattiva text). Applies to economic operators breaching Arts. 3, 6(1-8), 8(1-7), 9(1-4), 10 and 12(1-4). Secondary confirmation: Portolano Cavallo newsletter."
+  },
+  {
+   "claim_id": "cited.law.italy_dlgs82_fine_max",
+   "text": "Italy's EAA law (D.Lgs. 82/2022, Art. 24) sets administrative fines up to €40,000.",
+   "value": 40000,
+   "unit": "eur",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2022-05-27;82~art24",
+   "accessed": "2026-10-16",
+   "quote": "è punito con la sanzione amministrativa pecuniaria da 5.000 euro a 40.000 euro",
+   "display": [
+    "€40,000"
+   ]
+  },
+  {
+   "claim_id": "cited.law.india_mib_ott_date",
+   "text": "India's Ministry of Information and Broadcasting issued accessibility guidelines for OTT platforms on 6 February 2026.",
+   "value": "2026-02-06",
+   "unit": "date",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.mib.gov.in/sites/default/files/2026-02/finalized-accessibility-guidelines-for-ott-platforms_0.pdf",
+   "accessed": "2026-10-16",
+   "quote": "Dated: 6th February, 2026",
+   "display": [
+    "6 February 2026"
+   ],
+   "note": "Title: 'Guidelines for Accessibility of Content on platforms of Publishers of Online Curated Content (OTT Platforms) for Persons with Hearing and Visual Impairment'. Covers OTT publishers only, not broadcasting."
+  },
+  {
+   "claim_id": "cited.law.india_mib_ott_36_months",
+   "text": "After 36 months, Indian OTT platforms must give all newly published content at least one feature for deaf and hard-of-hearing viewers (captions or Indian Sign Language) and one for blind and low-vision viewers (audio description).",
+   "value": 36,
+   "unit": "months",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.mib.gov.in/sites/default/files/2026-02/finalized-accessibility-guidelines-for-ott-platforms_0.pdf",
+   "accessed": "2026-10-16",
+   "quote": "4.1 Publishers of online curated content shall, in a phased manner upon expiry of thirty-six months of the date of publication of these Guidelines: i. ensure that all newly published content carries at least one accessibility feature each for hearing-impaired and visually-impaired viewers, namely Closed/Open Captioning/ Indian Sign Language (CC/OC/ISL) and Audio Descriptors (AD);",
+   "display": [
+    "36 months"
+   ],
+   "note": "PDF text wraps as 'thirty-/six' across a line break. Para 5.1: first Accessibility Conformance Report also due after 36 months, then quarterly. Para 3.1 uses 'shall strive' for audio description. 'About February 2029' is derived (6 Feb 2026 + 36 months), not stated."
+  },
+  {
+   "claim_id": "cited.law.ada_title2_large_date",
+   "text": "US state and local governments serving 50,000 people or more must meet the ADA Title II web rule by 26 April 2027.",
+   "value": "2027-04-26",
+   "unit": "date",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
+   "accessed": "2026-10-16",
+   "quote": "The compliance date for State and local government entities with a total population of 50,000 or more is extended from April 24, 2026, to April 26, 2027.",
+   "display": [
+    "26 April 2027"
+   ],
+   "note": "Interim final rule, published and effective 20 April 2026, with a request for comments. No later Federal Register action on this rule found as of 16 Oct 2026 (API search)."
+  },
+  {
+   "claim_id": "cited.law.ada_title2_small_date",
+   "text": "Smaller US public entities (under 50,000 people) and special district governments must comply by 26 April 2028.",
+   "value": "2028-04-26",
+   "unit": "date",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
+   "accessed": "2026-10-16",
+   "quote": "The compliance date for public entities with a total population of less than 50,000, or any special district government, is extended from April 26, 2027, to April 26, 2028.",
+   "display": [
+    "26 April 2028"
+   ]
+  },
+  {
+   "claim_id": "cited.market.maa_20_hours",
+   "text": "Media Access Australia found it takes about 20 hours to script and voice description for a one-hour TV programme.",
+   "value": 20,
+   "unit": "hours",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.infrastructure.gov.au/sites/default/files/appendix-8-media-access-australia-background-paper.docx",
+   "accessed": "2026-10-16",
+   "quote": "In MAA’s experience, it takes about the same amount of time – 20 hours – to script and voice a one-hour TV program as it does to caption it, and we have confirmed this with a UK AD supplier.",
+   "display": [
+    "20 hours"
+   ],
+   "note": "Media Access Australia, 'Audio Description Background Paper', September 2010. The live URL timed out; read from the Wayback Machine copy of 16 May 2025 (web.archive.org/web/20250516151549/...)."
+  },
+  {
+   "claim_id": "cited.market.youdescribe_hours",
+   "text": "The YouDescribe dataset (YuWA) holds about 310 hours of described video across 5,500+ videos.",
+   "value": 310,
+   "unit": "hours",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.ski.org/wp-content/uploads/2025/01/you_described_we_archived_-_preprint.pdf",
+   "accessed": "2026-10-16",
+   "quote": "YuWA has 5,500+ videos with a total duration of about 310 hours and an average video duration of about 5.5 minutes.",
+   "display": [
+    "310 hours"
+   ],
+   "note": "Paper: 'You Described, We Archived: A Rich Audio Description Dataset' (J. on Technology and Persons with Disabilities, 2023), data 2013-2022. The paper does not call it 'the largest free archive'; don't say that without another source."
+  },
+  {
+   "claim_id": "cited.market.youdescribe_videos",
+   "text": "The YouDescribe dataset (YuWA) covers 5,500+ described videos.",
+   "value": 5500,
+   "unit": "videos",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.ski.org/wp-content/uploads/2025/01/you_described_we_archived_-_preprint.pdf",
+   "accessed": "2026-10-16",
+   "quote": "YuWA has 5,500+ videos with a total duration of about 310 hours and an average video duration of about 5.5 minutes.",
+   "display": [
+    "5,500+"
+   ]
+  },
+  {
+   "claim_id": "cited.market.youtube_500h_per_min",
+   "text": "In 2019, YouTube said more than 500 hours of video were uploaded every minute.",
+   "value": 500,
+   "unit": "hours_per_minute",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.tubefilter.com/2019/05/07/number-hours-video-uploaded-to-youtube-per-minute/",
+   "accessed": "2026-10-16",
+   "quote": "The platform’s users upload more than 500 hours of fresh video per minute, YouTube revealed at recent press events.",
+   "display": [
+    "500 hours"
+   ],
+   "note": "Secondary source (Tubefilter, 7 May 2019) reporting YouTube's statement; YouTube's own press page (blog.youtube/press) no longer shows the figure."
+  },
+  {
+   "claim_id": "cited.market.acb_tts_cost_saving",
+   "text": "The American Council of the Blind's proposed 2025 TTS guidance says synthetic-voice description should never be used purely to save money, must be reviewed by people (including blind and low-vision professionals), and audiences should be told when TTS is used.",
+   "value": null,
+   "unit": "text",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.acb.org/node/9066",
+   "accessed": "2026-10-16",
+   "quote": "TTS should only be used when human-voiced narration is not feasible due to logistical or production constraints, and never purely as a cost-saving measure.",
+   "display": [],
+   "note": "Page title: 'Proposed ACB AD Guidelines and Best Practices for the Use of Text-to-Speech (TTS) in Audio Description June 2025'. Same page: 'All TTS-generated AD must be reviewed by human experts, including blind and low-vision professionals.' and 'Clearly notify audiences of TTS use.'"
+  },
+  {
+   "claim_id": "cited.market.ofcom_80pct_caption_users",
+   "text": "About 80% of people who use captions are not deaf or hard of hearing (Ofcom, as quoted by 3Play Media).",
+   "value": 80,
+   "unit": "percent",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.3playmedia.com/accessibility-online-video-stats/",
+   "accessed": "2026-10-16",
+   "quote": "80% of people who use captions aren’t Deaf or hard of hearing.",
+   "display": [
+    "80%"
+   ],
+   "note": "Secondary: 3Play attributes it to Ofcom (linked as 'Ofcom'). The original Ofcom report was not checked; always say 'Ofcom, via 3Play'."
+  },
+  {
+   "claim_id": "cited.amd.mi300x_192gb_hbm3",
+   "text": "Each AMD Instinct MI300X has 192 GB of HBM3 memory.",
+   "value": 192,
+   "unit": "GB",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+   "accessed": "2026-10-16",
+   "quote": "Dedicated Memory Size 192 GB Dedicated Memory Type HBM3",
+   "display": [
+    "192 GB"
+   ],
+   "note": "The AMD Developer Cloud page also lists the 1x configuration as 'GPU Memory: 192GB' (https://www.amd.com/en/developer/resources/cloud-access/amd-developer-cloud.html)."
+  },
+  {
+   "claim_id": "cited.amd.devcloud_mi300x_hourly",
+   "text": "DigitalOcean's AMD Developer Cloud pricing page lists one MI300X at $2.59 per hour.",
+   "value": 2.59,
+   "unit": "usd_per_hour",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://docs.digitalocean.com/products/amd/details/pricing/",
+   "accessed": "2026-10-16",
+   "quote": "AMD GPU Price AMD MI300X $2.59 per hour AMD MI300X (8x) $20.72 per hour",
+   "display": [
+    "$2.59"
+   ],
+   "note": "PLAN and .env say $1.99/hour; the live page says $2.59 (page header still reads 'Last verified 3 Jun 2025'). Check the droplet's actual billed rate before using either in cost numbers."
+  },
+  {
+   "claim_id": "cited.event.track_name",
+   "text": "We entered the 'Create a New Kind of Experience' track (run by partner Vibe Generation).",
+   "value": null,
+   "unit": "text",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii",
+   "accessed": "2026-10-16",
+   "quote": "Track 4 by partner: Vibe Generation Create a New Kind of Experience Build a media, marketing, or entertainment experience that was not practical before generative AI.",
+   "display": []
+  },
+  {
+   "claim_id": "cited.event.amd_prize_total",
+   "text": "AMD offers $5,000 in prizes.",
+   "value": 5000,
+   "unit": "usd",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii",
+   "accessed": "2026-10-16",
+   "quote": "AMD Prizes $5,000 in prizes from AMD $5,000",
+   "display": [
+    "$5,000"
+   ],
+   "note": "Split between tracks not stated on the page."
+  },
+  {
+   "claim_id": "cited.event.google_prize_total",
+   "text": "Google offers $5,000 in prizes for projects that use Gemma running on AMD Developer Cloud and ROCm.",
+   "value": 5000,
+   "unit": "usd",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii",
+   "accessed": "2026-10-16",
+   "quote": "Google Prizes $5,000 in prizes from Google $5,000",
+   "display": [
+    "$5,000"
+   ],
+   "note": "Eligibility text on the same page: 'You can now build with Gemma, Google DeepMind’s family of open models, running on AMD GPUs in the cloud using AMD Developer Cloud and ROCm. Use Gemma in your project for a chance to win the Google prize.' Cash vs credits not stated."
+  },
+  {
+   "claim_id": "cited.event.total_pool",
+   "text": "The event's total prize pool is $17,000+.",
+   "value": 17000,
+   "unit": "usd",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii",
+   "accessed": "2026-10-16",
+   "quote": "Total prize pool: $17,000+",
+   "display": [
+    "$17,000+"
+   ]
+  },
+  {
+   "claim_id": "cited.event.end_datetime",
+   "text": "The event ends 18 October 2026 at 10:00 UTC (15:30 IST).",
+   "value": "2026-10-18T10:00:00Z",
+   "unit": "datetime",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii",
+   "accessed": "2026-10-16",
+   "quote": "\"endDate\":\"2026-10-18T10:00:00.000Z\"",
+   "display": [
+    "18 Oct 2026, 15:30 IST"
+   ],
+   "note": "From the page's schema.org Event data, not a sentence labelled 'submission deadline'. 15:30 IST is a conversion (UTC+5:30)."
+  },
+  {
+   "claim_id": "cited.event.submission_fields_partial",
+   "text": "The event asks for a cover image, a demo video and a pitch presentation, plus project title, descriptions, challenge, technology tags and a working prototype.",
+   "value": null,
+   "unit": "text",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii",
+   "accessed": "2026-10-16",
+   "quote": "What to Submit 📋 Project Project title Short and long descriptions Selected challenge Technology tags Working prototype 📸 Presentation Cover image Demo video Pitch presentation",
+   "display": [],
+   "note": "GitHub repo, demo platform and app URL were not in the page's static HTML; see unverified."
+  },
+  {
+   "claim_id": "cited.event.stacking_rule",
+   "text": "One project can win the main challenge prize, one partner prize, or both partner prizes.",
+   "value": null,
+   "unit": "text",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii",
+   "accessed": "2026-10-16",
+   "quote": "A single project may qualify for the main challenge prize, one partner prize, or both partner prizes.",
+   "display": []
+  },
+  {
+   "claim_id": "cited.event.mit_compliant",
+   "text": "Submissions must be original and MIT-compliant.",
+   "value": null,
+   "unit": "text",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii",
+   "accessed": "2026-10-16",
+   "quote": "Submissions must be original and MIT-compliant.",
+   "display": []
+  }
+ ],
+ "unverified": [
+  {
+   "fact": "GBD 2019: 43.9 million blind in 2020",
+   "what_we_found": "The Lancet Global Health paper (Bourne et al. 2021, e130-43) says 43.3 million (95% UI 37.6-48.4). Registered 43.3 million instead. 43.9 million was not found in any source checked.",
+   "urls_checked": [
+    "https://doi.org/10.1016/S2214-109X(20)30425-3",
+    "https://www.ebi.ac.uk/europepmc/webservices/rest/search (PMC7820390)",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7820391/ (blocked by reCAPTCHA)"
+   ]
+  },
+  {
+   "fact": "AMD Developer Cloud MI300X at $1.99 per hour",
+   "what_we_found": "DigitalOcean's AMD Developer Cloud pricing page now lists $2.59/hour (1x) and $20.72/hour (8x). $1.99 appears only in older third-party write-ups (Phoronix, getdeploying, lablab article). AMD's own cloud page gives no price, only the $100 credit offer. Registered $2.59; confirm the droplet's billed rate in the DigitalOcean console and update GPU_HOURLY_COST_USD.",
+   "urls_checked": [
+    "https://docs.digitalocean.com/products/amd/details/pricing/",
+    "https://www.amd.com/en/developer/resources/cloud-access/amd-developer-cloud.html",
+    "https://phoronix.com/review/amd-developer-cloud"
+   ]
+  },
+  {
+   "fact": "ACT III required fields: public GitHub repo, demo platform, app URL",
+   "what_we_found": "The page's 'What to Submit' list shows project title, short and long descriptions, selected challenge, technology tags, working prototype, cover image, demo video, pitch presentation. GitHub repo, demo platform and app URL are not in the static HTML (they may be on the submission form). Confirm on the form.",
+   "urls_checked": [
+    "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii"
+   ]
+  },
+  {
+   "fact": "ACT III page header shows 20:30 IST deadline",
+   "what_we_found": "Static HTML has endDate 2026-10-18T10:00:00Z (15:30 IST) plus other timestamps 2026-10-12T15:00Z, 2026-10-12T17:00Z, 2026-10-17T17:00Z with no labels. No 20:30 IST time found. Keep planning against 15:30 IST.",
+   "urls_checked": [
+    "https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii"
+   ]
+  },
+  {
+   "fact": "Ofcom primary source for '80% of caption users are not deaf or hard of hearing'",
+   "what_we_found": "Only 3Play's restatement found (registered as 'Ofcom, via 3Play'). 3Play's older blog URL now redirects to a generic page. The original Ofcom report was not located.",
+   "urls_checked": [
+    "https://www.3playmedia.com/accessibility-online-video-stats/",
+    "https://www.3playmedia.com/blog/3-reasons-captions-increase-youtube-views/",
+    "https://www.3playmedia.com/who-uses-closed-captions-not-just-the-deaf-or-hard-of-hearing/"
+   ]
+  },
+  {
+   "fact": "YouTube 500 hours per minute from a YouTube-owned page",
+   "what_we_found": "YouTube's press page (blog.youtube/press) no longer shows the figure. Registered from Tubefilter (7 May 2019), which reports YouTube's press-event statement; flagged as secondary.",
+   "urls_checked": [
+    "https://blog.youtube/press/",
+    "https://www.tubefilter.com/2019/05/07/number-hours-video-uploaded-to-youtube-per-minute/"
+   ]
+  },
+  {
+   "fact": "YouDescribe is 'the largest free archive of described video'",
+   "what_we_found": "The YuWA paper gives 5,500+ videos and about 310 hours but does not say 'largest'. Hours and videos registered; the word 'largest' is not supported.",
+   "urls_checked": [
+    "https://www.ski.org/wp-content/uploads/2025/01/you_described_we_archived_-_preprint.pdf",
+    "https://www.ski.org/?p=5616"
+   ]
+  },
+  {
+   "fact": "India MIB guideline title 'Guidelines for Accessibility Standards in the Broadcasting/OTT sector'",
+   "what_we_found": "The PDF's title is 'Guidelines for Accessibility of Content on platforms of Publishers of Online Curated Content (OTT Platforms) for Persons with Hearing and Visual Impairment', dated 6 February 2026. It covers OTT publishers only. Facts registered under the correct title.",
+   "urls_checked": [
+    "https://www.mib.gov.in/sites/default/files/2026-02/finalized-accessibility-guidelines-for-ott-platforms_0.pdf"
+   ]
+  },
+  {
+   "fact": "OECD PIAAC 2023 Italy figure from the OECD's own country note",
+   "what_we_found": "The OECD country note returned HTTP 403. Registered from Ireland's CSO publication of the same OECD data (Table 3.4: Italy 35, OECD average 26).",
+   "urls_checked": [
+    "https://www.oecd.org/en/publications/survey-of-adults-skills-2023-country-notes_ab4f6b8c-en/italy_b03d6066-en.html",
+    "https://www.cso.ie/en/releasesandpublications/ep/p-piaac/programmefortheinternationalassessmentofadultcompetenciespiaac2023/internationalcomparison"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,119 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e16_ui_a11y",
+ "split": "none",
+ "passed": true,
+ "git_commit": "98b9daa3d41822a7e3e7648eecfb7d2c98cafeca",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-15T21:45:30.773Z",
+ "finished_at": "2026-10-15T21:46:12.533Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "site": "projects/_fixture_site",
+  "tools": "Playwright + @axe-core/playwright (chromium)"
+ },
+ "checks": {
+  "player_suite": true,
+  "review_suite": true
+ },
+ "results": [
+  {
+   "suite": "player",
+   "ok": true,
+   "tests": [
+    {
+     "title": "proof page never fakes a run",
+     "status": "passed"
+    },
+    {
+     "title": "disclosure banner is always visible for drafts",
+     "status": "passed"
+    },
+    {
+     "title": "no horizontal scroll at 360 px",
+     "status": "passed"
+    },
+    {
+     "title": "keyboard only: pick profiles, open the drawer, jump to a line",
+     "status": "passed"
+    },
+    {
+     "title": "player: picker and drawer open",
+     "status": "passed"
+    },
+    {
+     "title": "five ways",
+     "status": "passed"
+    },
+    {
+     "title": "proof",
+     "status": "passed"
+    },
+    {
+     "title": "player: picker and drawer open",
+     "status": "passed"
+    },
+    {
+     "title": "five ways",
+     "status": "passed"
+    },
+    {
+     "title": "proof",
+     "status": "passed"
+    }
+   ],
+   "passed": 10,
+   "total": 10
+  },
+  {
+   "suite": "review",
+   "ok": true,
+   "tests": [
+    {
+     "title": "axe-core (light): picker, a selected line and the key help dialog have 0 violations",
+     "status": "passed"
+    },
+    {
+     "title": "axe-core (dark): picker, a selected line and the key help dialog have 0 violations",
+     "status": "passed"
+    },
+    {
+     "title": "360 px wide: panels stack and nothing scrolls sideways",
+     "status": "passed"
+    },
+    {
+     "title": "a save that conflicts with another change shows 'Changed elsewhere; reloaded.'",
+     "status": "passed"
+    },
+    {
+     "title": "keyboard only: review a whole project, then mark review complete",
+     "status": "passed"
+    }
+   ],
+   "passed": 5,
+   "total": 5
+  }
+ ],
+ "summary": {
+  "player": {
+   "passed": 10,
+   "total": 10
+  },
+  "review": {
+   "passed": 5,
+   "total": 5
+  },
+  "screen_reader_test_by_person": null
+ },
+ "error": null
+}

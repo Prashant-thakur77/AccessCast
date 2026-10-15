@@ -138,3 +138,6 @@ Without the droplet, real-mode runs (not fake mode) use Ollama 0.33.2 serving `g
 
 ## D-017 W3C DAPT export is best effort (16 Oct 2026)
 `render` writes W3C DAPT TTML scripts (`asRecorded` description, `originalTranscript`, `translatedTranscript`) into `render/dapt/`. DAPT is a Candidate Recommendation Draft; we validate well-formedness only and say so. It is a P2 extra for broadcasters, not a claim of conformance.
+
+## D-018 Outside facts verified; two corrections (16 Oct 2026)
+A fact check of every outside number (`evidence/cited_claims.json`, 49 verified with word-for-word quotes, 9 unverified and therefore not used) corrected the plan in two places. GBD 2019 / Lancet Global Health gives 43.3 million blind people, not 43.9 million; PLAN.md is fixed. DigitalOcean's AMD Developer Cloud page now lists the MI300X at $2.59 per hour, not $1.99, so `GPU_HOURLY_COST_USD` defaults to 2.59 (cited) and will be set to the rate actually billed when the droplet is created; every cost number names the rate it used. Facts read only from a secondary source or mirror (3Play's restatement of Ofcom's 80% figure, Tubefilter for YouTube uploads, a EUR-Lex mirror for the EAA wording, Ireland's CSO page for the OECD data) carry a `note` and must say so where used.
