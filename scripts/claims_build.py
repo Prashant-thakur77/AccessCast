@@ -108,7 +108,7 @@ def fill(claims: dict[str, Any]) -> int:
             continue
         text = p.read_text(encoding="utf-8")
 
-        def sub(m: re.Match[str]) -> str:
+        def sub(m: re.Match[str], rel: str = rel) -> str:
             nonlocal n
             c = claims.get(m.group(1))
             if c and c.get("display"):
