@@ -14,3 +14,13 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 - **Symptom:** two fresh-process runs on the fixture produced identical words, gaps, evidence and description text, but different `ad.en.jsonl` and different description stems. One line's clip was 1780 ms in one run and 1789 ms in the other.
 - **Root cause:** (1) Kokoro's vocoder draws random noise at inference, so the same text and voice gave slightly different audio in a new process. (2) libsndfile adds a PEAK chunk with a timestamp to float WAV files, so even all-silent stems hashed differently.
 - **Fix:** the TTS worker seeds torch from SHA-256(voice, speed, text) before each line (the TTS cache key revision was bumped so old clips are not reused), and mixes and stems are written as 24-bit PCM. Lesson: measure determinism instead of assuming it, and hash content, not containers.
+
+## 2026-10-16 — workers could not find their request files (first real-mode run)
+- **Symptom:** the ASR worker exited with `FileNotFoundError` for `projects/_local_real/.../asr.transcribe.<id>.request.json`, although the core had just written it.
+- **Root cause:** `ACCESSCAST_PROJECTS_DIR` was given as a relative path. The core wrote files relative to the repo root, and workers run with `cwd=workers/`, so the same relative path pointed somewhere else.
+- **Fix:** the projects dir and every worker work dir are resolved to absolute paths before use. Fake mode never exercised this path; the first real-mode run did.
+
+## 2026-10-16 — Gemma used frame times as frame numbers (local integration run)
+- **Symptom:** in the evidence step, Gemma 4 E4B (local, integration test only) returned `"frames": [16000]` (the frame's time in ms) instead of the frame's position `0`.
+- **Root cause:** the prompt gave `frame_times_ms` and asked for "frame numbers", which reads both ways.
+- **Fix:** evidence prompt v2 says frames are image positions (0, 1, 2, …), never times. The code check (`frame index out of range` → re-ask once, then `evidence_failed`) already caught it, so nothing wrong could pass; the prompt fix avoids the wasted second call.
