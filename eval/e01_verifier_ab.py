@@ -105,9 +105,10 @@ def main() -> int:
     ap.add_argument("--videos", default="")
     ap.add_argument("--seeds", type=int, default=3)
     ap.add_argument("--provider", default="local")
+    ap.add_argument("--experiment-name", default="e01_verifier_ab", help="E3 reuses E1 with another model")
     args = ap.parse_args()
     settings = load_settings()
-    exp = Experiment("e01_verifier_ab", args.split, config={
+    exp = Experiment(args.experiment_name, args.split, config={"model": settings.local_model,
         "arms": {"A": "Gemma 4, same plan, no checks", "B": "+ checks, failures go to a person",
                  "C": "+ Gemma repair (≤3)"}, "seeds": args.seeds, "provider": args.provider,
         "strict_provider": True, "worker_mode": settings.worker_mode, "overlap_tolerance_ms": M.TOL_MS,

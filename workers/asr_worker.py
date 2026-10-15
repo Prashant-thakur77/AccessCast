@@ -174,5 +174,23 @@ def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     }
 
 
+def transcribe_many(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
+    """E15: one model load, many files. Returns per file: text, raw and aligned words, wall time, audio seconds."""
+    import time
+
+    out = []
+    for k, f in enumerate(p["files"]):
+        audio = load_audio(f)
+        t0 = time.perf_counter()
+        r = transcribe({**p, "audio": f}, require_rocm)
+        wall = time.perf_counter() - t0
+        out.append({"file": f, "text": " ".join(w["w"] for w in r["raw_words"]["words"]),
+                    "raw_words": r["raw_words"]["words"], "words": r["words"]["words"],
+                    "aligned_words": r["aligned_words"], "wall_s": round(wall, 4),
+                    "audio_s": round(len(audio) / SR, 3)})
+        event("progress", done=k + 1, total=len(p["files"]))
+    return {"items": out, "model": p.get("model"), "device": device(require_rocm)}
+
+
 if __name__ == "__main__":
-    raise SystemExit(main({"transcribe": transcribe, "vad": vad}))
+    raise SystemExit(main({"transcribe": transcribe, "transcribe_many": transcribe_many, "vad": vad}))
