@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import time
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 URLS = ["https://accesscast.vercel.app/", "https://accesscast.vercel.app/data/catalog.json"]
@@ -24,7 +24,7 @@ def probe(url: str) -> dict[str, object]:
 
 def main() -> None:
     doc = json.loads(OUT.read_text()) if OUT.exists() else {"schema": "accesscast/uptime/v1", "samples": []}
-    doc["samples"].append({"ts": datetime.now(timezone.utc).isoformat(timespec="seconds"), "checks": [probe(u) for u in URLS]})
+    doc["samples"].append({"ts": datetime.now(UTC).isoformat(timespec="seconds"), "checks": [probe(u) for u in URLS]})
     doc["samples"] = doc["samples"][-2000:]
     ok = sum(all(c["status"] == 200 for c in s["checks"]) for s in doc["samples"])
     doc["summary"] = {"samples": len(doc["samples"]), "all_ok": ok, "first": doc["samples"][0]["ts"],
