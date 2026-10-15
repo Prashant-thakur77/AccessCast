@@ -43,12 +43,28 @@ def main(n: int = 100) -> int:
                 if sr != 16000:
                     raise SystemExit(f"unexpected sample rate {sr}")
                 sf.write(wav, np.asarray(arr), 16000, subtype="PCM_16")
-            rows.append({"lang": lang, "file": f"data/fleurs/{lang}/{wav.name}", "sha256": sha256_file(wav),
-                         "transcription": row.get("transcription") or row.get("raw_transcription"),
-                         "raw_transcription": row.get("raw_transcription")})
-    MANIFEST.write_text(json.dumps({"dataset": "google/fleurs test (CC-BY-4.0), first N per language",
-                                    "fetched_at": now_iso(), "n_per_lang": n, "files": rows}, ensure_ascii=False,
-                                   indent=1) + "\n")
+            rows.append(
+                {
+                    "lang": lang,
+                    "file": f"data/fleurs/{lang}/{wav.name}",
+                    "sha256": sha256_file(wav),
+                    "transcription": row.get("transcription") or row.get("raw_transcription"),
+                    "raw_transcription": row.get("raw_transcription"),
+                }
+            )
+    MANIFEST.write_text(
+        json.dumps(
+            {
+                "dataset": "google/fleurs test (CC-BY-4.0), first N per language",
+                "fetched_at": now_iso(),
+                "n_per_lang": n,
+                "files": rows,
+            },
+            ensure_ascii=False,
+            indent=1,
+        )
+        + "\n"
+    )
     print(f"{len(rows)} utterances → {MANIFEST}")
     return 0
 

@@ -15,10 +15,23 @@ dependencies = [
   "silero-vad>=5.1",
   "jiwer>=3.0",
   "pip",
+  # metrics for E4–E7 (licences in MODEL_LICENSES.md / THIRD_PARTY_NOTICES.md)
+  "unbabel-comet>=2.2.7",       # Apache-2.0
+  "bert-score>=0.3.13",         # MIT
+  "sentence-transformers>=5.0", # Apache-2.0
+  "sacrebleu>=2.4",             # Apache-2.0
+  "sentencepiece>=0.2",         # Apache-2.0 (Opus-MT tokenizer)
+  "sacremoses>=0.1",            # MIT (Opus-MT, IndicTransToolkit)
+  "IndicTransToolkit>=1.1.1",   # MIT (IndicTrans2 pre/post-processing)
+  "setuptools<81",              # torchmetrics 0.10 (pinned by unbabel-comet) imports pkg_resources
 ]
 
 [tool.uv]
 package = false
+# unbabel-comet 2.2.7 pins transformers<5, numpy<2 and huggingface-hub<1. Keep the versions the ASR/TTS workers
+# already use instead of downgrading them; metrics_worker.py patches COMET's one transformers-5 incompatibility
+# (checked: identical COMET and BERTScore values to 6 decimals against transformers 4.57.6 on a probe set).
+override-dependencies = ["transformers>=5.5", "numpy>=2.0", "huggingface-hub>=1.0"]
 
 [[tool.uv.index]]
 name = "pytorch-cpu"

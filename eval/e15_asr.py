@@ -64,9 +64,17 @@ def main() -> int:
     args = ap.parse_args()
     settings = load_settings()
     man = json.loads((REPO_ROOT / "eval" / "datasets" / "manifests" / "fleurs.json").read_text())
-    exp = Experiment("e15_asr", "dev", config={"models": args.models, "n_per_lang": args.n, "gemma": not args.no_gemma,
-                                               "boundary_truth": "synthesizer word boundaries (synthetic clips; D-003)",
-                                               "wer_normalisation": "lower-case, punctuation stripped"})
+    exp = Experiment(
+        "e15_asr",
+        "dev",
+        config={
+            "models": args.models,
+            "n_per_lang": args.n,
+            "gemma": not args.no_gemma,
+            "boundary_truth": "synthesizer word boundaries (synthetic clips; D-003)",
+            "wer_normalisation": "lower-case, punctuation stripped",
+        },
+    )
 
     def body(e: Experiment) -> None:
         work = REPO_ROOT / "projects" / "_e15"
@@ -74,31 +82,57 @@ def main() -> int:
         for model in args.models.split(","):
             for lang in ("en", "hi", "it"):
                 rows = [r for r in man["files"] if r["lang"] == lang][: args.n]
-                res = run_worker("asr", "transcribe_many", {"files": [str(REPO_ROOT / r["file"]) for r in rows],
-                                                            "model": model, "lang": lang, "align": False},
-                                 work, None, require_rocm=not args.no_rocm, timeout_s=14400)
+                res = run_worker(
+                    "asr",
+                    "transcribe_many",
+                    {
+                        "files": [str(REPO_ROOT / r["file"]) for r in rows],
+                        "model": model,
+                        "lang": lang,
+                        "align": False,
+                    },
+                    work,
+                    None,
+                    require_rocm=not args.no_rocm,
+                    timeout_s=14400,
+                )
                 refs = [norm(r["transcription"]) for r in rows]
                 hyps = [norm(x["text"]) for x in res["items"]]
                 wall = sum(x["wall_s"] for x in res["items"])
                 audio = sum(x["audio_s"] for x in res["items"])
-                acc.setdefault(model, {})[lang] = {"n": len(rows), "wer": round(jiwer.wer(refs, hyps), 4),
-                                                   "cer": round(jiwer.cer(refs, hyps), 4),
-                                                   "rtf": round(wall / audio, 4) if audio else None,
-                                                   "timestamps": True}
+                acc.setdefault(model, {})[lang] = {
+                    "n": len(rows),
+                    "wer": round(jiwer.wer(refs, hyps), 4),
+                    "cer": round(jiwer.cer(refs, hyps), 4),
+                    "rtf": round(wall / audio, 4) if audio else None,
+                    "timestamps": True,
+                }
         if not args.no_gemma:
             client = LlmClient(settings, provider="local_audio", strict_provider=True)
             for lang in ("en", "hi", "it"):
                 rows = [r for r in man["files"] if r["lang"] == lang][: args.n]
                 refs, hyps, wall = [], [], 0.0
                 for r in rows:
-                    resp = client.call(LlmRequest("asr_crosscheck", {"language": LANG_NAMES[lang]}, seed=0,
-                                                  audio=REPO_ROOT / r["file"], label=f"e15:{lang}"), provider="local_audio")
+                    resp = client.call(
+                        LlmRequest(
+                            "asr_crosscheck",
+                            {"language": LANG_NAMES[lang]},
+                            seed=0,
+                            audio=REPO_ROOT / r["file"],
+                            label=f"e15:{lang}",
+                        ),
+                        provider="local_audio",
+                    )
                     refs.append(norm(r["transcription"]))
                     hyps.append(norm(str(resp.obj.get("text", ""))))
                     wall += resp.latency_s
                 acc.setdefault("google/gemma-4-E4B-it", {})[lang] = {
-                    "n": len(rows), "wer": round(jiwer.wer(refs, hyps), 4), "cer": round(jiwer.cer(refs, hyps), 4),
-                    "latency_s_total": round(wall, 2), "timestamps": False}
+                    "n": len(rows),
+                    "wer": round(jiwer.wer(refs, hyps), 4),
+                    "cer": round(jiwer.cer(refs, hyps), 4),
+                    "latency_s_total": round(wall, 2),
+                    "timestamps": False,
+                }
         e.summary["accuracy"] = acc
         # Part 2: boundary error on synthetic clips with known word boundaries
         clips: list[tuple[Path, list[dict[str, Any]]]] = []
@@ -118,18 +152,47 @@ def main() -> int:
             for mp4, _ in clips:
                 wav = work / f"{mp4.stem}.16k.wav"
                 work.mkdir(parents=True, exist_ok=True)
-                subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(mp4), "-ac", "1", "-ar", "16000", str(wav)],
-                               check=True)
+                subprocess.run(
+                    [
+                        "ffmpeg",
+                        "-loglevel",
+                        "error",
+                        "-y",
+                        "-i",
+                        str(mp4),
+                        "-ac",
+                        "1",
+                        "-ar",
+                        "16000",
+                        str(wav),
+                    ],
+                    check=True,
+                )
                 files.append(str(wav))
-            res = run_worker("asr", "transcribe_many", {"files": files, "model": model, "lang": "en", "align": True},
-                             work, None, require_rocm=not args.no_rocm, timeout_s=7200)
+            res = run_worker(
+                "asr",
+                "transcribe_many",
+                {"files": files, "model": model, "lang": "en", "align": True},
+                work,
+                None,
+                require_rocm=not args.no_rocm,
+                timeout_s=7200,
+            )
             for (_mp4, truth), item in zip(clips, res["items"], strict=True):
                 raw_e += boundary_errors(truth, item["raw_words"])
                 al_e += boundary_errors(truth, item["words"])
-            bound[model] = {"raw": {"n": len(raw_e), "median_ms": statistics.median(raw_e) if raw_e else None,
-                                    "p95_ms": p95(raw_e)},
-                            "aligned": {"n": len(al_e), "median_ms": statistics.median(al_e) if al_e else None,
-                                        "p95_ms": p95(al_e)}}
+            bound[model] = {
+                "raw": {
+                    "n": len(raw_e),
+                    "median_ms": statistics.median(raw_e) if raw_e else None,
+                    "p95_ms": p95(raw_e),
+                },
+                "aligned": {
+                    "n": len(al_e),
+                    "median_ms": statistics.median(al_e) if al_e else None,
+                    "p95_ms": p95(al_e),
+                },
+            }
         e.summary["boundary_error"] = bound
         # decision (dev only): lowest English WER among Whisper models; aligner on if it lowers p95 error
         whisper = {m: v for m, v in acc.items() if "whisper" in m}
@@ -138,8 +201,11 @@ def main() -> int:
             b = bound[chosen]
             align_on = (b["aligned"]["p95_ms"] or 1e9) < (b["raw"]["p95_ms"] or 1e9)
             p = b["aligned" if align_on else "raw"]["p95_ms"]
-            e.summary["decision"] = {"asr_model": chosen, "aligner": align_on,
-                                     "guard_ms": int(math.ceil((p or 120) / 10.0) * 10)}
+            e.summary["decision"] = {
+                "asr_model": chosen,
+                "aligner": align_on,
+                "guard_ms": int(math.ceil((p or 120) / 10.0) * 10),
+            }
         e.checks["decision_made"] = chosen is not None
 
     return run_experiment(exp, body)

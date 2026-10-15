@@ -14,7 +14,10 @@ from accesscast.events import now_iso
 
 def main() -> int:
     if git("status", "--porcelain"):
-        print("refusing to freeze: commit your changes first (the freeze must point at a commit)", file=sys.stderr)
+        print(
+            "refusing to freeze: commit your changes first (the freeze must point at a commit)",
+            file=sys.stderr,
+        )
         return 2
     tags = [t for t in git("tag", "--list", "test-freeze-*").split() if t]
     n = max((int(t.rsplit("-", 1)[1]) for t in tags), default=0) + 1
@@ -22,8 +25,11 @@ def main() -> int:
     doc = {"tag": tag, "commit": git("rev-parse", "HEAD"), "frozen_at": now_iso(), "files": frozen_hashes()}
     FREEZE.write_text(json.dumps(doc, indent=1) + "\n")
     subprocess.run(["git", "add", str(FREEZE.relative_to(REPO_ROOT))], cwd=REPO_ROOT, check=True)
-    subprocess.run(["git", "commit", "-qm", f"Freeze prompts, constants, lexicons and confidence: {tag}"], cwd=REPO_ROOT,
-                   check=True)
+    subprocess.run(
+        ["git", "commit", "-qm", f"Freeze prompts, constants, lexicons and confidence: {tag}"],
+        cwd=REPO_ROOT,
+        check=True,
+    )
     subprocess.run(["git", "tag", tag], cwd=REPO_ROOT, check=True)
     print(f"{tag}: {len(doc['files'])} files frozen")
     return 0

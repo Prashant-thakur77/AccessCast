@@ -42,22 +42,37 @@ def nft(*args: str, stdin: str | None = None) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--clip", default="nasa_GSFC_20170614_Eclipse_m12534_Plane")
-    ap.add_argument("--no-host-layer", action="store_true", help="only for local testing; E10 requires both layers")
+    ap.add_argument(
+        "--no-host-layer", action="store_true", help="only for local testing; E10 requires both layers"
+    )
     ap.add_argument("--no-rocm", action="store_true", help="only for local testing")
     args = ap.parse_args()
     clip = REPO_ROOT / "data" / "dev" / f"{args.clip}.mp4"
-    exp = Experiment("e10_offline", "dev", config={"clip": args.clip, "python_layer": True,
-                                                   "host_layer": not args.no_host_layer, "env": OFFLINE_ENV,
-                                                   "excluded_by_rule": "established SSH replies (tcp sport 22)"})
+    exp = Experiment(
+        "e10_offline",
+        "dev",
+        config={
+            "clip": args.clip,
+            "python_layer": True,
+            "host_layer": not args.no_host_layer,
+            "env": OFFLINE_ENV,
+            "excluded_by_rule": "established SSH replies (tcp sport 22)",
+        },
+    )
 
     def body(e: Experiment) -> None:
         log = REPO_ROOT / "projects" / "_e10" / "guard.jsonl"
         shutil.rmtree(log.parent, ignore_errors=True)
         log.parent.mkdir(parents=True)
-        env = {**OFFLINE_ENV, "ACCESSCAST_OFFLINE": "1", "ACCESSCAST_GUARD_LOG": str(log),
-               "ACCESSCAST_SRC": str(REPO_ROOT / "src"),
-               "PYTHONPATH": os.pathsep.join([str(REPO_ROOT / "src" / "accesscast" / "guard" / "site"),
-                                              os.environ.get("PYTHONPATH", "")])}
+        env = {
+            **OFFLINE_ENV,
+            "ACCESSCAST_OFFLINE": "1",
+            "ACCESSCAST_GUARD_LOG": str(log),
+            "ACCESSCAST_SRC": str(REPO_ROOT / "src"),
+            "PYTHONPATH": os.pathsep.join(
+                [str(REPO_ROOT / "src" / "accesscast" / "guard" / "site"), os.environ.get("PYTHONPATH", "")]
+            ),
+        }
         if not args.no_host_layer:
             subprocess.run(["nft", "delete", "table", "inet", "ac_offline"], capture_output=True)
             nft("-f", "-", stdin=NFT)
@@ -83,8 +98,17 @@ def main() -> int:
         e.checks["python_layer_zero"] = len(blocked) == 0
         e.checks["host_layer_zero"] = host == 0
         # Prove the hook is live in workers: a worker-side lookup must be blocked and logged by the guard.
-        probe = subprocess.run(["python3", "-s", "-c", "import socket\ntry:\n socket.getaddrinfo('example.com',80)\nexcept Exception: pass"],
-                               env={**os.environ, **env}, capture_output=True, text=True)
+        probe = subprocess.run(
+            [
+                "python3",
+                "-s",
+                "-c",
+                "import socket\ntry:\n socket.getaddrinfo('example.com',80)\nexcept Exception: pass",
+            ],
+            env={**os.environ, **env},
+            capture_output=True,
+            text=True,
+        )
         logged = len(log.read_text().splitlines()) if log.exists() else 0
         e.summary["guard_self_test_blocked"] = logged - len(blocked)
         e.checks["guard_self_test"] = logged - len(blocked) >= 1

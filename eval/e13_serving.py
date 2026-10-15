@@ -77,15 +77,25 @@ def fire(base: str, model: str, bodies: list[dict[str, Any]], conc: int) -> dict
     m1 = scrape(base)
     gen = m1.get("vllm:generation_tokens_total", 0) - m0.get("vllm:generation_tokens_total", 0)
     prompt = m1.get("vllm:prompt_tokens_total", 0) - m0.get("vllm:prompt_tokens_total", 0)
-    hits = m1.get("vllm:prefix_cache_hits_total", m1.get("vllm:gpu_prefix_cache_hits_total", 0)) - \
-        m0.get("vllm:prefix_cache_hits_total", m0.get("vllm:gpu_prefix_cache_hits_total", 0))
-    queries = m1.get("vllm:prefix_cache_queries_total", m1.get("vllm:gpu_prefix_cache_queries_total", 0)) - \
-        m0.get("vllm:prefix_cache_queries_total", m0.get("vllm:gpu_prefix_cache_queries_total", 0))
+    hits = m1.get("vllm:prefix_cache_hits_total", m1.get("vllm:gpu_prefix_cache_hits_total", 0)) - m0.get(
+        "vllm:prefix_cache_hits_total", m0.get("vllm:gpu_prefix_cache_hits_total", 0)
+    )
+    queries = m1.get(
+        "vllm:prefix_cache_queries_total", m1.get("vllm:gpu_prefix_cache_queries_total", 0)
+    ) - m0.get("vllm:prefix_cache_queries_total", m0.get("vllm:gpu_prefix_cache_queries_total", 0))
     kv = max(m1.get("vllm:kv_cache_usage_perc", 0), m1.get("vllm:gpu_cache_usage_perc", 0))
-    return {"requests": len(bodies), "ok": ok, "wall_s": round(wall, 3), "p50_s": pct(lat, 0.5),
-            "p95_s": pct(lat, 0.95), "gen_tokens": gen, "prompt_tokens": prompt,
-            "tokens_per_s": round(gen / wall, 2) if wall else None,
-            "prefix_hit_rate": round(hits / queries, 4) if queries else None, "kv_cache_usage_end": kv}
+    return {
+        "requests": len(bodies),
+        "ok": ok,
+        "wall_s": round(wall, 3),
+        "p50_s": pct(lat, 0.5),
+        "p95_s": pct(lat, 0.95),
+        "gen_tokens": gen,
+        "prompt_tokens": prompt,
+        "tokens_per_s": round(gen / wall, 2) if wall else None,
+        "prefix_hit_rate": round(hits / queries, 4) if queries else None,
+        "kv_cache_usage_end": kv,
+    }
 
 
 def main() -> int:
@@ -103,11 +113,22 @@ def main() -> int:
             bodies += [json.loads(x) for x in f.read_text().splitlines() if x.strip()]
     if args.subset != "all":
         bodies = bodies[0 if args.subset == "even" else 1 :: 2]
-    exp = Experiment(f"e13_serving_{args.label}", "dev", config={
-        "label": args.label, "levels": args.levels, "repeats": args.repeats, "subset": args.subset,
-        "requests_per_pass": len(bodies), "endpoint": s.local_base_url, "model": s.local_model,
-        "gpu_hourly_cost_usd": s.gpu_hourly_cost_usd, "strict_provider": True,
-        "method": "first pass discarded as warm-up; median of repeats with min/max"})
+    exp = Experiment(
+        f"e13_serving_{args.label}",
+        "dev",
+        config={
+            "label": args.label,
+            "levels": args.levels,
+            "repeats": args.repeats,
+            "subset": args.subset,
+            "requests_per_pass": len(bodies),
+            "endpoint": s.local_base_url,
+            "model": s.local_model,
+            "gpu_hourly_cost_usd": s.gpu_hourly_cost_usd,
+            "strict_provider": True,
+            "method": "first pass discarded as warm-up; median of repeats with min/max",
+        },
+    )
 
     def body(e: Experiment) -> None:
         served = httpx.get(f"{s.local_base_url}/models", timeout=10).json()["data"][0]["id"]
@@ -119,18 +140,31 @@ def main() -> int:
             reps = [fire(s.local_base_url, s.local_model, bodies, conc) for _ in range(args.repeats)]
             for k, r in enumerate(reps):
                 e.results.append({"concurrency": conc, "repeat": k, **r})
-            med = {key: statistics.median([r[key] for r in reps if r[key] is not None])
-                   for key in ("wall_s", "p50_s", "p95_s", "tokens_per_s") if any(r[key] is not None for r in reps)}
+            med = {
+                key: statistics.median([r[key] for r in reps if r[key] is not None])
+                for key in ("wall_s", "p50_s", "p95_s", "tokens_per_s")
+                if any(r[key] is not None for r in reps)
+            }
             rng = {key: [min(r[key] for r in reps), max(r[key] for r in reps)] for key in med}
             lines = len(bodies)
             usd = med["wall_s"] / 3600 * s.gpu_hourly_cost_usd
-            rows.append({"concurrency": conc, "median": med, "min_max": rng,
-                         "success_rate": sum(r["ok"] for r in reps) / sum(r["requests"] for r in reps),
-                         "usd_per_1000_lines": round(usd / lines * 1000, 4) if lines else None})
+            rows.append(
+                {
+                    "concurrency": conc,
+                    "median": med,
+                    "min_max": rng,
+                    "success_rate": sum(r["ok"] for r in reps) / sum(r["requests"] for r in reps),
+                    "usd_per_1000_lines": round(usd / lines * 1000, 4) if lines else None,
+                }
+            )
         e.summary["levels"] = rows
         best = max(rows, key=lambda r: r["median"].get("tokens_per_s") or 0)
-        e.summary["best"] = {"concurrency": best["concurrency"], "tokens_per_s": best["median"].get("tokens_per_s"),
-                             "p95_s": best["median"].get("p95_s"), "usd_per_1000_lines": best["usd_per_1000_lines"]}
+        e.summary["best"] = {
+            "concurrency": best["concurrency"],
+            "tokens_per_s": best["median"].get("tokens_per_s"),
+            "p95_s": best["median"].get("p95_s"),
+            "usd_per_1000_lines": best["usd_per_1000_lines"],
+        }
         e.checks["all_levels_succeeded"] = all(r["success_rate"] == 1.0 for r in rows)
         e.checks["requests_available"] = len(bodies) > 0
 

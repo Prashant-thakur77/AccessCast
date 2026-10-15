@@ -23,7 +23,9 @@ from eval.jobs import run_concurrent
 
 def vram_used_mb() -> float | None:
     try:
-        p = subprocess.run(["amd-smi", "metric", "--mem-usage", "--json"], capture_output=True, text=True, timeout=15)
+        p = subprocess.run(
+            ["amd-smi", "metric", "--mem-usage", "--json"], capture_output=True, text=True, timeout=15
+        )
         data = json.loads(p.stdout)
         gpus = data if isinstance(data, list) else data.get("gpu_data", [data])
         total = 0.0
@@ -43,9 +45,17 @@ def main() -> int:
     args = ap.parse_args()
     man = json.loads((REPO_ROOT / "eval" / "datasets" / "manifests" / "dev_clips.json").read_text())
     videos = [REPO_ROOT / c["file"] for c in man["clips"] if "sha256" in c]
-    exp = Experiment("e08_soak", "dev", config={"hours": args.hours, "concurrency": args.concurrency,
-                                                "videos": [v.name for v in videos], "vram_poll_s": 10,
-                                                "telemetry_note": "MI300X VF: util/power/temp read zero; VRAM only"})
+    exp = Experiment(
+        "e08_soak",
+        "dev",
+        config={
+            "hours": args.hours,
+            "concurrency": args.concurrency,
+            "videos": [v.name for v in videos],
+            "vram_poll_s": 10,
+            "telemetry_note": "MI300X VF: util/power/temp read zero; VRAM only",
+        },
+    )
 
     def body(e: Experiment) -> None:
         samples: list[tuple[float, float]] = []
@@ -65,24 +75,40 @@ def main() -> int:
         k = 0
         try:
             while time.time() - t_start < args.hours * 3600:
-                for r in run_concurrent(videos[k:] + videos[:k], REPO_ROOT / "projects" / "_e08" / f"batch{k}",
-                                        args.concurrency):
+                for r in run_concurrent(
+                    videos[k:] + videos[:k], REPO_ROOT / "projects" / "_e08" / f"batch{k}", args.concurrency
+                ):
                     jobs.append(r)
-                    e.results.append({"t_s": round(time.time() - t_start, 1), "video": r.video, "ok": r.ok,
-                                      "wall_s": round(r.wall_s, 2), "error": r.error})
+                    e.results.append(
+                        {
+                            "t_s": round(time.time() - t_start, 1),
+                            "video": r.video,
+                            "ok": r.ok,
+                            "wall_s": round(r.wall_s, 2),
+                            "error": r.error,
+                        }
+                    )
                 k = (k + 1) % max(1, len(videos))
         finally:
             stop.set()
             th.join(timeout=15)
         e.summary["vram_samples"] = samples
         walls = [j.wall_s for j in jobs if j.ok]
-        e.summary["jobs"] = {"total": len(jobs), "ok": sum(j.ok for j in jobs), "failed": sum(not j.ok for j in jobs),
-                             "wall_p50_s": statistics.median(walls) if walls else None,
-                             "wall_p95_s": sorted(walls)[int(0.95 * (len(walls) - 1))] if walls else None}
+        e.summary["jobs"] = {
+            "total": len(jobs),
+            "ok": sum(j.ok for j in jobs),
+            "failed": sum(not j.ok for j in jobs),
+            "wall_p50_s": statistics.median(walls) if walls else None,
+            "wall_p95_s": sorted(walls)[int(0.95 * (len(walls) - 1))] if walls else None,
+        }
         e.summary["hours_run"] = round((time.time() - t_start) / 3600, 3)
         first = [v for t, v in samples if t <= 3600]
         last = [v for t, v in samples if t >= samples[-1][0] - 3600] if samples else []
-        growth = (statistics.median(last) - statistics.median(first)) / statistics.median(first) if first and last else None
+        growth = (
+            (statistics.median(last) - statistics.median(first)) / statistics.median(first)
+            if first and last
+            else None
+        )
         e.summary["vram_growth_fraction"] = growth
         e.summary["finished_at"] = now_iso()
         e.checks["no_failed_jobs"] = e.summary["jobs"]["failed"] == 0

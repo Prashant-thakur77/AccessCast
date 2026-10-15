@@ -25,8 +25,12 @@ from accesscast.project import atomic_write_text, sha256_file
 EVIDENCE = REPO_ROOT / "evidence"
 FREEZE = EVIDENCE / "test_freeze.json"
 TEST_RUNS = EVIDENCE / "test_runs.jsonl"
-FROZEN_GLOBS = ("src/accesscast/llm/prompts/*.md", "src/accesscast/constants.py",
-                "src/accesscast/confidence.py", "src/accesscast/verify/lexicons/*.py")
+FROZEN_GLOBS = (
+    "src/accesscast/llm/prompts/*.md",
+    "src/accesscast/constants.py",
+    "src/accesscast/confidence.py",
+    "src/accesscast/verify/lexicons/*.py",
+)
 
 
 def git(*args: str) -> str:
@@ -45,19 +49,29 @@ def frozen_hashes() -> dict[str, str]:
 def check_freeze() -> dict[str, Any]:
     """Test-set runs only after `make freeze-prompts`, and only while the frozen files are unchanged."""
     if not FREEZE.exists():
-        raise SystemExit("refusing a test-set run: no evidence/test_freeze.json (run `make freeze-prompts` first)")
+        raise SystemExit(
+            "refusing a test-set run: no evidence/test_freeze.json (run `make freeze-prompts` first)"
+        )
     frozen = json.loads(FREEZE.read_text())
     now = frozen_hashes()
     changed = sorted(k for k in set(now) | set(frozen["files"]) if now.get(k) != frozen["files"].get(k))
     if changed:
-        raise SystemExit(f"refusing a test-set run: frozen files changed since {frozen['tag']}: {changed[:5]}")
+        raise SystemExit(
+            f"refusing a test-set run: frozen files changed since {frozen['tag']}: {changed[:5]}"
+        )
     return frozen
 
 
 def environment() -> dict[str, Any]:
-    env: dict[str, Any] = {"python": platform.python_version(), "host": platform.node(), "platform": platform.platform()}
+    env: dict[str, Any] = {
+        "python": platform.python_version(),
+        "host": platform.node(),
+        "platform": platform.platform(),
+    }
     try:
-        p = subprocess.run(["amd-smi", "static", "--asic", "--json"], capture_output=True, text=True, timeout=20, check=False)
+        p = subprocess.run(
+            ["amd-smi", "static", "--asic", "--json"], capture_output=True, text=True, timeout=20, check=False
+        )
         if p.returncode == 0:
             env["amd_smi_static"] = json.loads(p.stdout)
             env["gpu"] = "AMD Instinct MI300X" if "MI300X" in p.stdout else "AMD GPU"
@@ -65,8 +79,11 @@ def environment() -> dict[str, Any]:
         env["gpu"] = None
     lock = REPO_ROOT / "deploy" / "versions.lock"
     if lock.exists():
-        env["versions_lock"] = dict(line.split("=", 1) for line in lock.read_text().splitlines()
-                                    if "=" in line and not line.startswith("#"))
+        env["versions_lock"] = dict(
+            line.split("=", 1)
+            for line in lock.read_text().splitlines()
+            if "=" in line and not line.startswith("#")
+        )
     return env
 
 
@@ -94,18 +111,39 @@ class Experiment:
     def write(self, error: str | None = None) -> bool:
         passed = bool(self.checks) and all(self.checks.values()) and error is None
         doc = {
-            "schema": "accesscast/evidence/v1", "experiment": self.experiment, "split": self.split,
-            "passed": passed, "git_commit": git("rev-parse", "HEAD"), "git_dirty": bool(git("status", "--porcelain")),
-            "freeze_tag": self.freeze_tag, "started_at": self.started_at, "finished_at": now_iso(),
-            "environment": environment(), "config": self.config, "checks": self.checks,
-            "results": self.results, "summary": self.summary, "error": error,
+            "schema": "accesscast/evidence/v1",
+            "experiment": self.experiment,
+            "split": self.split,
+            "passed": passed,
+            "git_commit": git("rev-parse", "HEAD"),
+            "git_dirty": bool(git("status", "--porcelain")),
+            "freeze_tag": self.freeze_tag,
+            "started_at": self.started_at,
+            "finished_at": now_iso(),
+            "environment": environment(),
+            "config": self.config,
+            "checks": self.checks,
+            "results": self.results,
+            "summary": self.summary,
+            "error": error,
         }
         self.path().parent.mkdir(parents=True, exist_ok=True)
         atomic_write_text(self.path(), json.dumps(doc, indent=1, ensure_ascii=False, default=str) + "\n")
         if self.split == "test" and "_smoke" not in str(self.path()):
             with TEST_RUNS.open("a", encoding="utf-8") as fh:
-                fh.write(json.dumps({"ts": now_iso(), "experiment": self.experiment, "freeze_tag": self.freeze_tag,
-                                     "git_commit": doc["git_commit"], "passed": passed}) + "\n")
+                fh.write(
+                    json.dumps(
+                        {
+                            "ts": now_iso(),
+                            "experiment": self.experiment,
+                            "freeze_tag": self.freeze_tag,
+                            "git_commit": doc["git_commit"],
+                            "passed": passed,
+                            "videos": self.config.get("videos_run"),
+                        }
+                    )
+                    + "\n"
+                )
         return passed
 
 
