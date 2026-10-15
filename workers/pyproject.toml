@@ -5,6 +5,7 @@ description = "GPU/CPU workers for AccessCast (the only code that imports torch)
 requires-python = ">=3.12,<3.13"
 license = { text = "MIT" }
 dependencies = [
+  "en-core-web-sm",  # misaki (Kokoro G2P) loads it; pinned so it is never downloaded mid-run (offline E10)
   "numpy>=1.26",
   "soundfile>=0.12",
   "torch>=2.4",
@@ -39,5 +40,6 @@ url = "https://download.pytorch.org/whl/cpu"
 explicit = true
 
 [tool.uv.sources]
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }
 torch = { index = "pytorch-cpu" }
 torchaudio = { index = "pytorch-cpu" }
