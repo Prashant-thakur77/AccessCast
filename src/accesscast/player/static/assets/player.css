@@ -48,7 +48,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-size: 1rem;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 a { color: var(--accent); text-underline-offset: 2px; }
 a:hover { text-decoration-thickness: 2px; }
@@ -121,7 +121,7 @@ button {
   min-height: 44px;
 }
 button:hover:not(:disabled) { background: var(--surface-2); }
-button:disabled { cursor: not-allowed; opacity: 1; color: var(--muted); border-style: dashed; }
+button:disabled, button.primary:disabled { cursor: not-allowed; opacity: 1; background: var(--surface); color: var(--muted); border: 2px dashed var(--border); font-weight: 400; }
 button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600; }
 button.primary:hover:not(:disabled) { background: var(--accent); filter: brightness(1.1); }
 select { background: var(--bg); border: 2px solid var(--border); border-radius: 8px; padding: 6px 10px; min-height: 44px; max-width: 100%; }
@@ -217,7 +217,11 @@ video.bg-solid::cue { background: #000000; }
 .line h3 { margin-top: 0; }
 .line dl { display: grid; grid-template-columns: minmax(110px, max-content) 1fr; gap: 4px 12px; margin: 8px 0; }
 .line dt { font-weight: 600; }
-.line dd { margin: 0; white-space: pre-line; }
+.line dd { margin: 0; white-space: pre-line; min-width: 0; }
+@media (max-width: 600px) {
+  .line dl { grid-template-columns: 1fr; }
+  .line dd { margin-bottom: 6px; }
+}
 .frames { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
 .frames img { width: 160px; max-width: 45%; height: auto; border-radius: 6px; border: 1px solid var(--border); }
 .timeline svg { width: 100%; max-width: 520px; height: auto; display: block; }

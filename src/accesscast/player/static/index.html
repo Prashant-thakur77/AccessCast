@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AccessCast player</title>
+<meta name="description" content="One video, made for different viewers: audio description, captions, easy-read captions, Hindi and Italian.">
+<link rel="stylesheet" href="assets/player.css">
+</head>
+<body>
+<a class="skip-link" href="#player">Skip to the video</a>
+<header class="site">
+  <div class="wrap">
+    <h1>AccessCast</h1>
+    <nav aria-label="Pages">
+      <ul>
+        <li><a href="index.html" aria-current="page">Player</a></li>
+        <li><a href="five-ways.html">Same 20 seconds, five ways</a></li>
+        <li><a href="proof.html">Proof</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div id="judge-banner" class="banner banner-judge" hidden>
+    <p><strong>Judges, start here.</strong> See the same clip made five ways on
+      <a href="five-ways.html">Same 20 seconds, five ways</a>. See our checks run against a hard case on the
+      <a href="proof.html">Proof page</a>. Below, open any line to see what the models decided.</p>
+  </div>
+  <div id="load-error" class="error" role="alert" hidden></div>
+
+  <section aria-labelledby="picker-h">
+    <h2 id="picker-h">Who's watching?</h2>
+    <p class="muted">Pick one or more. We remember your choice on this device.</p>
+    <div class="picker-grid">
+      <div class="profile">
+        <button type="button" class="toggle" id="t-blind" data-profile="blind" aria-pressed="false" aria-describedby="n-blind">I can't see the screen</button>
+        <p class="note" id="n-blind"></p>
+        <div class="sub" id="sub-blind" hidden>
+          <fieldset>
+            <legend>Description</legend>
+            <label class="choice"><input type="radio" name="blindmode" value="standard" checked> Standard</label>
+            <label class="choice"><input type="radio" name="blindmode" value="extended" id="r-extended"> Extended</label>
+          </fieldset>
+          <p class="note">Extended stops the video when a pause is too short to describe something important.</p>
+          <p class="note" id="n-extended"></p>
+        </div>
+      </div>
+      <div class="profile">
+        <button type="button" class="toggle" id="t-deaf" data-profile="deaf" aria-pressed="false" aria-describedby="n-deaf">I can't hear</button>
+        <p class="note" id="n-deaf"></p>
+      </div>
+      <div class="profile">
+        <button type="button" class="toggle" id="t-easy" data-profile="easy" aria-pressed="false" aria-describedby="n-easy">Simpler words, please</button>
+        <p class="note" id="n-easy"></p>
+        <div class="sub" id="sub-easy" hidden>
+          <label class="choice"><input type="checkbox" id="c-hold" checked> Give me time to read</label>
+          <p class="note" id="hold-rate"></p>
+        </div>
+      </div>
+      <div class="profile">
+        <button type="button" class="toggle" id="t-hi" data-profile="hi" lang="hi" aria-pressed="false" aria-describedby="n-hi">हिन्दी</button>
+        <p class="note" id="n-hi"></p>
+      </div>
+      <div class="profile">
+        <button type="button" class="toggle" id="t-it" data-profile="it" lang="it" aria-pressed="false" aria-describedby="n-it">Italiano</button>
+        <p class="note" id="n-it"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="player" class="player-box" aria-labelledby="video-h" tabindex="-1">
+    <h2 id="video-h">Video</h2>
+    <div id="project-pick" hidden>
+      <label for="project-select">Choose a video</label>
+      <select id="project-select"></select>
+    </div>
+    <div id="disclosure" class="disclosure"></div>
+    <div class="video-frame">
+      <video id="video" controls preload="metadata" playsinline></video>
+    </div>
+    <p id="status" class="now" role="status" aria-live="polite"></p>
+    <p id="version-note" class="note-line"></p>
+    <div id="hold" class="hold" hidden>
+      <p id="hold-msg">Paused so you can read.</p>
+      <button type="button" id="b-continue" class="primary">Continue</button>
+    </div>
+    <div id="desc-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+    <details class="box" id="caption-settings">
+      <summary>Caption and description settings</summary>
+      <div class="settings-row">
+        <fieldset>
+          <legend>Caption size</legend>
+          <label class="choice"><input type="radio" name="capsize" value="s"> Small</label>
+          <label class="choice"><input type="radio" name="capsize" value="m" checked> Medium</label>
+          <label class="choice"><input type="radio" name="capsize" value="l"> Large</label>
+          <label class="choice"><input type="radio" name="capsize" value="xl"> Extra large</label>
+        </fieldset>
+        <fieldset>
+          <legend>Caption background</legend>
+          <label class="choice"><input type="radio" name="capbg" value="none"> None</label>
+          <label class="choice"><input type="radio" name="capbg" value="semi" checked> See-through</label>
+          <label class="choice"><input type="radio" name="capbg" value="solid"> Solid</label>
+        </fieldset>
+        <fieldset>
+          <legend>Caption position</legend>
+          <label class="choice"><input type="radio" name="cappos" value="bottom" checked> Bottom</label>
+          <label class="choice"><input type="radio" name="cappos" value="top"> Top</label>
+        </fieldset>
+        <fieldset>
+          <legend>Show or hide</legend>
+          <label class="choice"><input type="checkbox" id="c-captions" checked> Show captions</label>
+          <label class="choice"><input type="checkbox" id="c-desctext"> Show description text</label>
+        </fieldset>
+      </div>
+    </details>
+    <div id="desc-visible" class="desc-text" hidden></div>
+  </section>
+
+  <section class="drawer" aria-labelledby="drawer-h">
+    <h2 id="drawer-h"><button type="button" class="drawer-toggle" id="drawer-toggle" aria-expanded="false" aria-controls="drawer-body">What the models decided</button></h2>
+    <div id="drawer-body" hidden>
+      <p>Every line in this version: the frames it came from, the pause it had to fit, Gemma's first draft, what our checks caught, and the final text.</p>
+      <p><a id="report-link" href="#">Full audit report (JSON)</a></p>
+      <fieldset>
+        <legend>Show</legend>
+        <div class="filters">
+          <label class="choice"><input type="radio" name="filter" value="all" checked> All</label>
+          <label class="choice"><input type="radio" name="filter" value="first"> Gemma got it right first time</label>
+          <label class="choice"><input type="radio" name="filter" value="caught"> Code caught</label>
+          <label class="choice"><input type="radio" name="filter" value="person"> A person changed it</label>
+        </div>
+      </fieldset>
+      <p id="drawer-count" aria-live="polite"></p>
+      <ol id="lines" class="lines"></ol>
+    </div>
+  </section>
+</main>
+
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+<script src="assets/common.js"></script>
+<script src="assets/player.js"></script>
+</body>
+</html>

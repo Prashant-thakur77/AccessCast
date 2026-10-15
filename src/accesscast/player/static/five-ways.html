@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Same clip, five ways</title>
+<meta name="description" content="The same short clip played once for each audience: description, captions, easy-read, Hindi and Italian.">
+<link rel="stylesheet" href="assets/player.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to the main content</a>
+<header class="site">
+  <div class="wrap">
+    <p><strong>AccessCast</strong></p>
+    <nav aria-label="Pages">
+      <ul>
+        <li><a href="index.html">Player</a></li>
+        <li><a href="five-ways.html" aria-current="page">Same 20 seconds, five ways</a></li>
+        <li><a href="proof.html">Proof</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <h1>Same 20 seconds, five ways</h1>
+  <p>One clip, played once for each kind of viewer, one after another.</p>
+  <p id="segment" class="muted"></p>
+  <div id="load-error" class="error" role="alert" hidden></div>
+  <div id="disclosure" class="disclosure"></div>
+
+  <div class="controls">
+    <button type="button" id="b-start" class="primary">Start</button>
+    <button type="button" id="b-skip" disabled>Skip to the next one</button>
+    <button type="button" id="b-stop" disabled>Stop</button>
+  </div>
+  <p class="muted">Keyboard: Tab to a button, then press Enter or Space. Escape also stops.</p>
+
+  <p id="who" class="who" aria-live="polite"></p>
+  <p id="who-local" class="muted"></p>
+
+  <div class="video-frame">
+    <video id="video" playsinline preload="metadata" aria-label="Clip for the current viewer"></video>
+  </div>
+  <p id="status" class="now" role="status" aria-live="polite"></p>
+
+  <h2 id="steps-h">The five versions</h2>
+  <ol id="steps" class="steps" aria-labelledby="steps-h"></ol>
+</main>
+
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+<script src="assets/common.js"></script>
+<script src="assets/five-ways.js"></script>
+</body>
+</html>

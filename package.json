@@ -1,0 +1,13 @@
+{
+  "name": "accesscast-player-e2e",
+  "private": true,
+  "description": "End-to-end and accessibility tests for the AccessCast player site",
+  "license": "MIT",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.49.1"
+  }
+}
