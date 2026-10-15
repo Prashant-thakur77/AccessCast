@@ -801,6 +801,90 @@
    "note": "WHO fact sheet dated 10 February 2026.",
    "evidence": [],
    "public_files": []
+  },
+  {
+   "claim_id": "e16.player_passed",
+   "text": "player accessibility tests passed (Playwright + axe-core)",
+   "value": 10,
+   "unit": "tests",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e16_ui_a11y.json",
+     "sha256": "3d7564687e0bca5ce3cdbee7e083e5dd723fdbae8b749dddef9e42407f3acf53",
+     "pointer": "/summary/player/passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "10"
+   ]
+  },
+  {
+   "claim_id": "e16.player_total",
+   "text": "player accessibility tests run",
+   "value": 10,
+   "unit": "tests",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e16_ui_a11y.json",
+     "sha256": "3d7564687e0bca5ce3cdbee7e083e5dd723fdbae8b749dddef9e42407f3acf53",
+     "pointer": "/summary/player/total"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "10"
+   ]
+  },
+  {
+   "claim_id": "e16.review_passed",
+   "text": "review-app accessibility tests passed (Playwright + axe-core)",
+   "value": 5,
+   "unit": "tests",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e16_ui_a11y.json",
+     "sha256": "3d7564687e0bca5ce3cdbee7e083e5dd723fdbae8b749dddef9e42407f3acf53",
+     "pointer": "/summary/review/passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "5"
+   ]
+  },
+  {
+   "claim_id": "e16.review_total",
+   "text": "review-app accessibility tests run",
+   "value": 5,
+   "unit": "tests",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e16_ui_a11y.json",
+     "sha256": "3d7564687e0bca5ce3cdbee7e083e5dd723fdbae8b749dddef9e42407f3acf53",
+     "pointer": "/summary/review/total"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "5"
+   ]
   }
  ]
 }
