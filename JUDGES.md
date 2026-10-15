@@ -1,0 +1,62 @@
+# AccessCast Judge Guide
+
+The shortest route through the submission.
+
+## Three-Minute Review
+1. Watch the demo video: <pending: video.url>
+2. Open the live player: <pending: site.url>. Pick "I can't see the screen", then "Italiano".
+3. Open `/proof.html` and press "Run the attack". Watch Gemma's line get blocked.
+4. Open the three key evidence files: [`evidence/e01_verifier_ab.json`](evidence/), [`evidence/e13_serving.json`](evidence/), [`evidence/e14_cost.json`](evidence/).
+5. Optional, no GPU: `make demo-fixture`, then open http://127.0.0.1:8080/?audience=judge
+
+## What To Inspect
+- The "What the models decided" drawer on any video: the frames Gemma saw, the pause each line had to fit, Gemma's first draft, the checks that failed, each repair, and who approved it.
+- A refused render next to a published one (`evidence/gallery/`).
+- The review app, keyboard only (`make review`).
+- [`evidence/public-claims.json`](evidence/public-claims.json) and `make claims-check`.
+
+## Track Brief Map
+| The brief asks | What we did | Fastest proof |
+|---|---|---|
+| The experience changes for at least two audiences | Five audience profiles in one player, switchable live on the same video | Player picker; `five-ways.html` |
+| Explain what was created and what the models decided | Per-line decisions in a drawer and in `decisions.json` | Drawer; `reports/decisions.json` |
+| Show how quality and consistency were controlled | Checks in code, Gemma repair, a person approves, render refused while anything waits | [`docs/rules.md`](docs/rules.md); gallery |
+| Cost per experience | `cost.json` per video from measured GPU time | <pending: e14.summary> |
+| Who pays and why | Laws with deadlines, list prices next to our measured cost | README "Who pays" |
+
+## Rubric Map
+These labels do not pre-award points; judges keep full scoring authority.
+
+| Criterion | What we did | Fastest proof |
+|---|---|---|
+| Application of Technology | Gemma 4 sees, listens, writes, translates and repairs; served with vLLM on ROCm on one MI300X | <pending: amd.section> |
+| Presentation | Plain-words demo video; live player that never sleeps | <pending: video.url> |
+| Business Value | Named buyers and legal deadlines; GPU cost plus measured review time | README "Who pays" |
+| Originality | Checks tied to the real audio timeline; five versions from one analysis; extended description only when needed | `docs/rules.md` |
+
+## Model Selection
+<pending: e03.table> — a deployment decision, not a universal model ranking.
+
+## Current Results
+<pending: results.tables> — generated from `evidence/public-claims.json`.
+
+## AMD Boundary
+- **On the MI300X (AMD Developer Cloud):** Gemma 4 31B and Gemma 4 E4B served by vLLM on ROCm; Whisper, Kokoro and the metric models in worker processes.
+- **On AMD Token Factory:** the always-on endpoint for the live attack page, and a non-Gemma judge for two evaluations.
+- **Never leaves the machine:** the video, the review state and every intermediate file.
+
+## Reproduce
+```bash
+make setup
+make demo-fixture                 # no GPU
+# on a fresh MI300X "vLLM Quick Start" droplet:
+bash deploy/droplet_bootstrap.sh  # images, Gemma servers, worker env, model weights
+make doctor
+make run VIDEO=path/to/video.mp4
+make review                       # approve lines (keyboard)
+make render PROJECT=<sha12>
+make submission-check
+```
+
+## Honest Scope
+See [README.md#honest-scope](README.md#honest-scope).

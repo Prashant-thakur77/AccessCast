@@ -1,0 +1,12 @@
+{
+  "voice": "af_heart",
+  "lang": "en",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": -0.4321,
+  "s_per_word": 0.3109,
+  "wps_voice": 3.2165,
+  "resid_p95_s": 0.4682,
+  "device": "cpu",
+  "wall_s": 59.45
+}
