@@ -4,6 +4,7 @@ code checks the list. Failures re-ask once, then the scene is `evidence_failed` 
 
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import subprocess
@@ -57,7 +58,8 @@ def frame_times(scene: Scene, gaps: Sequence[Gap], video: Path | None) -> list[i
             t = min(b - 1, g.start_ms + 100)
             if all(abs(t - x) >= 250 for x in times):
                 times.append(t)
-    return sorted(times)[:16]
+    # 16 = vLLM --limit-mm-per-prompt; smaller local servers can set ACCESSCAST_MAX_IMAGES (integration runs only)
+    return sorted(times)[: int(os.environ.get("ACCESSCAST_MAX_IMAGES", "16"))]
 
 
 def _tiny(video: Path, t_ms: int) -> np.ndarray:

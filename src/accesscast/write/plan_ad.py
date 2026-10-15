@@ -122,6 +122,16 @@ def plan_description(
                 on_screen_text=[t.text for t in ev0.on_screen_text],
             )
         )
+    # Pauses in scenes whose evidence failed go to a person (PLAN §9 S5): a line with no facts, never sent to Gemma.
+    failed = {sid for sid, ev in evidence.items() if ev.status != "ok"}
+    for gi, g in enumerate(gaps):
+        if g.scene_id in failed and not any(p.gap is g for p in plans):
+            wm = words_budget(g.end_ms - g.start_ms, cal, rate)
+            if wm >= C.AD_MIN_USEFUL_WORDS:
+                plans.append(PlannedLine(
+                    item_id="", gap=g, scene_id=g.scene_id or "", anchor_ms=g.start_ms, slot_start_ms=g.start_ms,
+                    slot_end_ms=g.end_ms, budget=Budget(words_max=wm, seconds_max=round(g.len_ms / 1000, 2),
+                                                        wps_voice=cal.wps_voice), facts=[], gap_index=gi))
     # Important facts that found no gap → extended-description candidates, inserted at the speech
     # boundary (start of video, start or end of a speech segment, never inside a word) nearest the event.
     bounds = sorted(
