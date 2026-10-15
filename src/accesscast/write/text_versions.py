@@ -121,7 +121,7 @@ def make_easy(client: LlmClient, sdh: Sequence[Item], ctx: VerifyContext, opts: 
             ):
                 it = it.model_copy(update={"needs_pause": True})
 
-            def revise(k: int, t: str, v: list[Finding], it: Item = it) -> tuple[str, list[str]]:
+            def revise(k: int, t: str, v: list[Finding], it: Item = it, words_max: int = words_max) -> tuple[str, list[str]]:
                 s = derive_seed(opts.project_seed, f"{it.id}:{opts.run_label}:repair:{k}")
                 r = client.call(
                     LlmRequest(
@@ -343,7 +343,6 @@ def make_voiceover(
     except (LlmOutputError, ModelEndpointError):
         got = {}
     out = []
-    lctx = VerifyContext(**{**ctx.__dict__, "lang": lang, "wps_voice": wps})
     for gi, (g, seg) in enumerate(zip(groups, segs, strict=True)):
         nxt = groups[gi + 1][0].slot.start_ms if gi + 1 < len(groups) else g[-1].slot.end_ms + C.VO_TAIL_MS
         end = max(g[-1].slot.end_ms, min(nxt - C.VO_GAP_BEFORE_NEXT_MS, g[-1].slot.end_ms + C.VO_TAIL_MS))

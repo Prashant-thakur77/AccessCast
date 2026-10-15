@@ -159,7 +159,7 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
             write_jsonl(rdir / f"source_to_output.{v}.jsonl", rows)
         else:
             M.mix_standard(master, [*vo_clips, *ad_clips], mixed, stem, tmp)
-        loud = M.loudnorm_2pass(mixed, normed, target_lufs)
+        M.loudnorm_2pass(mixed, normed, target_lufs)
         if rows is not None:
             render_extended(video, normed, rows, out, watermark=watermark)
             for name in spec["tracks"]:  # remap tracks onto the extended timeline
