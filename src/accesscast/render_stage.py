@@ -177,6 +177,11 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
         lf, measured = R.rn003_loudness(out, target_lufs)
         findings += lf
         findings += R.rn005_av_sync(out)
+        if rows is None and ad_clips:  # RN004: measured dip of the original under description (warning)
+            dur = {i.id: i.tts.duration_ms for i in std_ad if i.tts}
+            ad_spans = [(c.start_ms, c.start_ms + dur.get(c.item_id, 0)) for c in ad_clips]
+            findings += R.rn004_duck_depth(master, stem.with_suffix(".bed.wav"), ad_spans)
+        stem.with_suffix(".bed.wav").unlink(missing_ok=True)
         for name in spec["tracks"]:
             findings += R.rn006_vtt_valid(tdir / (f"{name}.{v}.vtt" if rows is not None else f"{name}.vtt"))
         findings += R.rn007_human_reviewed(res.human_reviewed, public)
