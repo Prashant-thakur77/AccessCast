@@ -65,6 +65,7 @@ def strip_non_prose(text: str) -> str:
     text = re.sub(r"https?://\S+", " ", text)
     text = _PENDING.sub(" ", text)
     text = re.sub(r"\b[A-Za-z]+[-_.]?\d[\w.\-]*\b", " ", text)  # ids and names: e01, AD001, gemma-4-31B, v1, MI300X
+    text = re.sub(r"\b\d{1,2}:\d{2}(?:[–-]\d{1,2}:\d{2})?\b", " ", text)  # clock times in scripts: 0:12–0:30
     text = re.sub(r"§\s?\d[\d.]*", " ", text)
     text = re.sub(r"\b\d+(?:\.\d+)?B\b", " ", text)  # model sizes in names: 31B, 82M handled above
     text = re.sub(r"\b\d{1,2}\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s\d{4}\b", " ", text)  # dates

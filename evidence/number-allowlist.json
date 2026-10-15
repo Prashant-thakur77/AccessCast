@@ -84,6 +84,22 @@
   {
    "value": 2008,
    "reason": "year in Blender Foundation's required Big Buck Bunny credit line"
+  },
+  {
+   "value": 1920,
+   "reason": "recording resolution 1920×1080"
+  },
+  {
+   "value": 1080,
+   "reason": "recording resolution 1920×1080"
+  },
+  {
+   "value": 30,
+   "reason": "30 fps recording / caption frame rate setting"
+  },
+  {
+   "value": -16,
+   "reason": "web loudness target −16 LUFS (constants.py LUFS_WEB)"
   }
  ]
 }
