@@ -30,6 +30,7 @@ class TextOptions:
     run_label: str = "run0"
     project_seed: int = C.PROJECT_SEED_DEFAULT
     repair: bool = True
+    temperature: float | None = None  # E11 stress setting; None = the prompt's own temperature
 
 
 def _apply_loop(
@@ -90,6 +91,7 @@ def make_easy(client: LlmClient, sdh: Sequence[Item], ctx: VerifyContext, opts: 
                     "easy",
                     {"lang": "en", "seconds": round(span_s, 2), "words_max": words_max, "cues": cues},
                     seed=seed,
+                    temperature=opts.temperature,
                     label=f"easy:{gi}",
                 )
             )
@@ -205,6 +207,7 @@ def translate_batch(
                     prompt_id,
                     {"target_lang": lang, "segments": batch},
                     seed=seed,
+                    temperature=opts.temperature,
                     label=f"{prompt_id}:{lang}:{batch[0]['id']}",
                 )
             )

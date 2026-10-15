@@ -139,7 +139,7 @@ def _one_try(run: Any, ctx: Any, cal: Any, kind: str, temp: float | None, label:
     from accesscast.captions.segment import segment_sdh
 
     sdh = segment_sdh(ctx.words, ctx.sounds, ctx.fps, 10**7)
-    topts = TextOptions(run_label=label, project_seed=seed)
+    topts = TextOptions(run_label=label, project_seed=seed, temperature=temp)
     res: list[Item] = make_easy(run.client, sdh, ctx, topts) if kind == "easy" else \
         make_subtitles(run.client, sdh, "hi", ctx, topts)
     return [(i.repair.history[0].text if i.repair.history else i.draft, i.text,
