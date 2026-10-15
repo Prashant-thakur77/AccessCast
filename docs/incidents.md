@@ -24,3 +24,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 - **Symptom:** in the evidence step, Gemma 4 E4B (local, integration test only) returned `"frames": [16000]` (the frame's time in ms) instead of the frame's position `0`.
 - **Root cause:** the prompt gave `frame_times_ms` and asked for "frame numbers", which reads both ways.
 - **Fix:** evidence prompt v2 says frames are image positions (0, 1, 2, …), never times. The code check (`frame index out of range` → re-ask once, then `evidence_failed`) already caught it, so nothing wrong could pass; the prompt fix avoids the wasted second call.
+
+## 2026-10-16 — the ASR model setting never reached the worker
+- **Symptom:** a 14-second clip took minutes in the ASR stage and the worker used about 5 GB of RAM, although `whisper-base` had been selected.
+- **Root cause:** the request payload had no `model` key (an earlier edit did not apply after the formatter reflowed the code), so the worker used its own default, Whisper large-v3.
+- **Fix:** the pipeline passes `run.asr_model` explicitly. Lesson for every experiment: record the model a worker actually loaded, not the one we asked for. E15 and E2 read the model id back from the worker response.
