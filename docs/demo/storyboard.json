@@ -1,0 +1,12 @@
+{
+ "_note": "Numbers only as {claim:<id>} from evidence/public-claims.json. Scenes marked TODO are filled after the experiments run.",
+ "scenes": [
+  {"kind": "card", "lines": ["{claim:cited.gbd.blind_2020} people are blind."], "narration": "{claim:cited.gbd.blind_2020} people are blind. For many of them, most videos say nothing about what is on screen."},
+  {"kind": "card", "lines": ["AccessCast", "One video. Five ways to watch."], "narration": "This is AccessCast. One video, made into a version for each viewer."},
+  {"kind": "recording", "recording": "five_ways.webm", "start": 1, "min_seconds": 30, "narration": "If you can't see the screen, the description fits in the pauses. If there's no room, the video waits. If you can't hear, the captions show who speaks and what sounds. Simpler words, at your pace. And Hindi and Italian, with their own voice."},
+  {"kind": "recording", "recording": "decisions_drawer.webm", "start": 1, "narration": "Gemma writes. Code checks every line. Gemma fixes what fails. A person approves what the public hears."},
+  {"kind": "recording", "recording": "proof.webm", "start": 1, "narration": "TODO: written from E11's measured numbers only."},
+  {"kind": "card", "lines": ["Gemma 4 on AMD Instinct MI300X"], "narration": "All of this runs on one AMD Instinct MI300X."},
+  {"kind": "card", "lines": ["github.com/Prashant-thakur77/AccessCast", "accesscast.vercel.app"], "narration": "Everything, including what didn't work, is in the repo."}
+ ]
+}
