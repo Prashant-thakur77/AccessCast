@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from pathlib import Path
 
 from accesscast.config import load_settings
 from accesscast.project import read_json
@@ -35,7 +36,7 @@ def main() -> int:
     ap.add_argument("--sessions", required=True)
     args = ap.parse_args()
     s = load_settings()
-    sessions = json.loads(open(args.sessions).read())
+    sessions = json.loads(Path(args.sessions).read_text())
     exp = Experiment("e12_person_time", "dev", config={"design": "crossed (2 people × 2 minutes × 2 conditions)",
                                                       "sessions": sessions, "timer": "active, idle > 60 s excluded"})
 
