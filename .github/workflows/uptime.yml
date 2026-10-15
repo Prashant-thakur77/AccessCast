@@ -1,0 +1,20 @@
+name: uptime
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: uptime
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/uptime_probe.py
+      - run: |
+          git config user.name "accesscast-uptime"
+          git config user.email "uptime@users.noreply.github.com"
+          git add evidence/uptime.json
+          git commit -m "uptime sample" || exit 0
+          git pull --rebase -q && git push -q
