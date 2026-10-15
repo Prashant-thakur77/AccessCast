@@ -1,0 +1,106 @@
+{
+ "dataset": "AccessCast development set (tuning allowed)",
+ "fetched_at": "2026-10-15T21:04:59.652Z",
+ "clips": [
+  {
+   "clip": "nasa_GSFC_20170614_Eclipse_m12534_Plane",
+   "url": "https://images-assets.nasa.gov/video/GSFC_20170614_Eclipse_m12534_Plane/GSFC_20170614_Eclipse_m12534_Plane~medium.mp4",
+   "trimmed_to_s": 180,
+   "source": "NASA",
+   "licence": "NASA media usage guidelines (generally not copyrighted in the US)",
+   "credit": "Courtesy NASA",
+   "file": "data/dev/nasa_GSFC_20170614_Eclipse_m12534_Plane.mp4",
+   "sha256": "8af59806d6b6050045c9a8ff6188342b384167d89ed3b08d88087f9b675dddf9"
+  },
+  {
+   "clip": "nasa_GSFC_20140408_LRO_m11514_Eclipse",
+   "url": "https://images-assets.nasa.gov/video/GSFC_20140408_LRO_m11514_Eclipse/GSFC_20140408_LRO_m11514_Eclipse~medium.mp4",
+   "trimmed_to_s": 180,
+   "source": "NASA",
+   "licence": "NASA media usage guidelines (generally not copyrighted in the US)",
+   "credit": "Courtesy NASA",
+   "file": "data/dev/nasa_GSFC_20140408_LRO_m11514_Eclipse.mp4",
+   "sha256": "27be5cf4c7bcea3fb8b6cd1c46ec54a9d047969bb9145236338a6d2983a9d16a"
+  },
+  {
+   "clip": "nasa_GSFC_20131121_ISON_m11384_Comet",
+   "url": "https://images-assets.nasa.gov/video/GSFC_20131121_ISON_m11384_Comet/GSFC_20131121_ISON_m11384_Comet~medium.mp4",
+   "trimmed_to_s": 180,
+   "source": "NASA",
+   "licence": "NASA media usage guidelines (generally not copyrighted in the US)",
+   "credit": "Courtesy NASA",
+   "file": "data/dev/nasa_GSFC_20131121_ISON_m11384_Comet.mp4",
+   "sha256": "00906924c2d20cdadac915ef93c511719eacda3acedbeaf7ee2d39fb75b287b8"
+  },
+  {
+   "clip": "nasa_GSFC_20171115_m12776_LifeInTheUniverse",
+   "url": "https://images-assets.nasa.gov/video/GSFC_20171115_m12776_LifeInTheUniverse/GSFC_20171115_m12776_LifeInTheUniverse~medium.mp4",
+   "trimmed_to_s": 180,
+   "source": "NASA",
+   "licence": "NASA media usage guidelines (generally not copyrighted in the US)",
+   "credit": "Courtesy NASA",
+   "file": "data/dev/nasa_GSFC_20171115_m12776_LifeInTheUniverse.mp4",
+   "sha256": "dac08bcd9d7a0309a86535cffe306b98385b13c99c0ca9520057968efba106c5"
+  },
+  {
+   "clip": "nasa_GSFC_20180417_Worldview_m12928_Tutorial",
+   "url": "https://images-assets.nasa.gov/video/GSFC_20180417_Worldview_m12928_Tutorial/GSFC_20180417_Worldview_m12928_Tutorial~medium.mp4",
+   "trimmed_to_s": 180,
+   "source": "NASA",
+   "licence": "NASA media usage guidelines (generally not copyrighted in the US)",
+   "credit": "Courtesy NASA",
+   "file": "data/dev/nasa_GSFC_20180417_Worldview_m12928_Tutorial.mp4",
+   "sha256": "2c543175e85f06fbc8bda14d397ffe14c5aff791ef08237c26c9495fd3d5a3ed"
+  },
+  {
+   "clip": "nasa_GSFC_20130918_AACS_m11356_Food",
+   "url": "https://images-assets.nasa.gov/video/GSFC_20130918_AACS_m11356_Food/GSFC_20130918_AACS_m11356_Food~medium.mp4",
+   "trimmed_to_s": 180,
+   "source": "NASA",
+   "licence": "NASA media usage guidelines (generally not copyrighted in the US)",
+   "credit": "Courtesy NASA",
+   "file": "data/dev/nasa_GSFC_20130918_AACS_m11356_Food.mp4",
+   "sha256": "beecab6041ea28348e99ecc165a5d5def3073201da2923dd6f4c7429ad67564c"
+  },
+  {
+   "clip": "prelinger_Televisi1970",
+   "url": "https://archive.org/download/Televisi1970/Televisi1970_512kb.mp4",
+   "trimmed_to_s": 180,
+   "source": "Prelinger Archives",
+   "licence": "Public domain",
+   "credit": "Prelinger Archives, archive.org",
+   "file": "data/dev/prelinger_Televisi1970.mp4",
+   "sha256": "03984b500021e25f090f08aef0bd75476aec713ffca28250b90d11c88b5f006c"
+  },
+  {
+   "clip": "prelinger_Operator1949_2",
+   "url": "https://archive.org/download/Operator1949_2/Operator1949_2_512kb.mp4",
+   "trimmed_to_s": 180,
+   "source": "Prelinger Archives",
+   "licence": "Public domain",
+   "credit": "Prelinger Archives, archive.org",
+   "file": "data/dev/prelinger_Operator1949_2.mp4",
+   "sha256": "c8e6779b79c66666f88efc534c1df0c111f314e30f496bb563be82b345994812"
+  },
+  {
+   "clip": "prelinger_WhenYouA1948",
+   "url": "https://archive.org/download/WhenYouA1948/WhenYouA1948_512kb.mp4",
+   "trimmed_to_s": 180,
+   "source": "Prelinger Archives",
+   "licence": "Public domain",
+   "credit": "Prelinger Archives, archive.org",
+   "file": "data/dev/prelinger_WhenYouA1948.mp4",
+   "sha256": "ce6924032c7e900024eb84c54305722b10b3723c0a87b0938c86ee48e863e660"
+  },
+  {
+   "clip": "blender_sintel_trailer",
+   "url": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "clip": "blender_bbb_excerpt",
+   "url": "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4",
+   "error": "HTTP Error 403: Forbidden"
+  }
+ ]
+}

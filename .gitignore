@@ -42,3 +42,5 @@ test-results/
 .cache/
 logs/
 !src/**/logs/
+evidence/_smoke/
+eval/labels/*_key.json

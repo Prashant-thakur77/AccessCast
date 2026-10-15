@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import json
+import os
 import platform
 import subprocess
 import sys
@@ -85,6 +86,9 @@ class Experiment:
             self.freeze_tag = check_freeze()["tag"]
 
     def path(self) -> Path:
+        # Fake-mode (canned) runs never land in evidence/: they go to the git-ignored evidence/_smoke/.
+        if os.environ.get("ACCESSCAST_WORKER_MODE", "real") == "fake":
+            return EVIDENCE / "_smoke" / f"{self.experiment}.json"
         return EVIDENCE / f"{self.experiment}.json"
 
     def write(self, error: str | None = None) -> bool:
@@ -96,9 +100,9 @@ class Experiment:
             "environment": environment(), "config": self.config, "checks": self.checks,
             "results": self.results, "summary": self.summary, "error": error,
         }
-        EVIDENCE.mkdir(exist_ok=True)
+        self.path().parent.mkdir(parents=True, exist_ok=True)
         atomic_write_text(self.path(), json.dumps(doc, indent=1, ensure_ascii=False, default=str) + "\n")
-        if self.split == "test":
+        if self.split == "test" and "_smoke" not in str(self.path()):
             with TEST_RUNS.open("a", encoding="utf-8") as fh:
                 fh.write(json.dumps({"ts": now_iso(), "experiment": self.experiment, "freeze_tag": self.freeze_tag,
                                      "git_commit": doc["git_commit"], "passed": passed}) + "\n")
