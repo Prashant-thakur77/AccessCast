@@ -123,6 +123,10 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
         write_vtt(p, its, end_of=_clip_end if name.startswith("desc") else None, header_note=note)
         track_files[name] = p
 
+    from accesscast.captions.dapt import export_all
+
+    export_all(proj.p("render", "dapt"), track_items["desc.en"], track_items["sdh.en"],
+               {"hi": track_items["subs.hi"], "it": track_items["subs.it"]}, end_of_ad=_clip_end)
     master = proj.p("media", "master48k.wav")
     video = proj.p("media", "source.mp4")
     words = verify_context(proj).words
