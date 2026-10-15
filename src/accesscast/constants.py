@@ -43,8 +43,20 @@ SOUND_WINDOW_MAX_S = 5.0  # PLAN §9 S3
 SOUND_MIN_REGION_S = 1.0  # PLAN §9 S3
 SOUND_RMS_SILENCE = 0.01  # GemmaClip's silence gate idea (re-implemented), PLAN §9 S3
 SOUND_VOCAB: tuple[str, ...] = (
-    "music", "music_with_lyrics", "applause", "laughter", "door", "knock", "phone",
-    "footsteps", "typing", "engine", "alarm", "crowd", "silence", "other",
+    "music",
+    "music_with_lyrics",
+    "applause",
+    "laughter",
+    "door",
+    "knock",
+    "phone",
+    "footsteps",
+    "typing",
+    "engine",
+    "alarm",
+    "crowd",
+    "silence",
+    "other",
 )  # PLAN §9 S3 closed vocabulary
 
 # ---------------------------------------------------------------- evidence (S5)
@@ -52,7 +64,11 @@ EVIDENCE_ANCHORS: tuple[float, ...] = (0.05, 0.35, 0.65, 0.95)  # GemmaClip fram
 EVIDENCE_HIGH_CHANGE_FRAMES = 2  # PLAN §9 S5
 EVIDENCE_FRAME_PX = 512  # PLAN §9 S5
 VISION_SOFT_TOKENS = 140  # PLAN §9 S5 (E2 V3 compares 280 vs 140)
-NAME_SOURCES_ALLOWED: tuple[str, ...] = ("direct_address", "self_introduction", "on_screen_text")  # PLAN §9 S5
+NAME_SOURCES_ALLOWED: tuple[str, ...] = (
+    "direct_address",
+    "self_introduction",
+    "on_screen_text",
+)  # PLAN §9 S5
 
 
 def max_facts(scene_seconds: float) -> int:

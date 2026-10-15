@@ -16,7 +16,18 @@ from accesscast.events import EventLog
 
 M = TypeVar("M", bound=BaseModel)
 
-SUBDIRS = ("media", "analysis", "evidence", "items", "review", "tts", "render", "render/tracks", "reports", "logs")
+SUBDIRS = (
+    "media",
+    "analysis",
+    "evidence",
+    "items",
+    "review",
+    "tts",
+    "render",
+    "render/tracks",
+    "reports",
+    "logs",
+)
 
 
 def sha256_file(path: Path, chunk: int = 1 << 20) -> str:
@@ -69,7 +80,7 @@ def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def read_model(path: Path, model: type[M]) -> M:
+def read_model[M: BaseModel](path: Path, model: type[M]) -> M:
     return model.model_validate(read_json(path))
 
 

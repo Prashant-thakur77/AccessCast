@@ -48,7 +48,7 @@ def parse_worker_line(line: str) -> dict[str, Any] | None:
     if not line.startswith(EVENT_PREFIX):
         return None
     try:
-        obj = json.loads(line[len(EVENT_PREFIX):].strip())
+        obj = json.loads(line[len(EVENT_PREFIX) :].strip())
     except json.JSONDecodeError:
         return None
     return obj if isinstance(obj, dict) else None
