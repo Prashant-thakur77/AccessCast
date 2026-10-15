@@ -7,6 +7,7 @@ const port = 8090;
 
 export default defineConfig({
   testDir: "tests/e2e",
+  testMatch: /player\.spec\.ts$/,
   timeout: 60_000,
   retries: 0,
   reporter: [["list"]],

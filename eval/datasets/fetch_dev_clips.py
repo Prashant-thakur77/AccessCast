@@ -29,7 +29,7 @@ CLIPS = [  # (clip id, url, max seconds or None, source, licence, credit)
        "Public domain", "Prelinger Archives, archive.org") for i in ("Televisi1970", "Operator1949_2", "WhenYouA1948")],
     ("blender_sintel_trailer", "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4", None, "Blender",
      "CC BY 3.0", "© copyright Blender Foundation | www.sintel.org"),
-    ("blender_bbb_excerpt", "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4", 120,
+    ("blender_bbb_excerpt", "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4.zip", 120,
      "Blender", "CC BY 3.0", "(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org"),
 ]
 
@@ -42,7 +42,16 @@ def main() -> int:
         if not dst.exists():
             raw = OUT / f"{cid}.download.mp4"
             try:
-                urllib.request.urlretrieve(url, raw)
+                req = urllib.request.Request(url, headers={"User-Agent": "AccessCast-dataset-fetch/0.1 (+github.com/Prashant-thakur77/AccessCast)"})
+                with urllib.request.urlopen(req, timeout=300) as r, raw.open("wb") as fh:
+                    fh.write(r.read())
+                if url.endswith(".zip"):
+                    import zipfile
+
+                    with zipfile.ZipFile(raw) as z:
+                        name = next(n for n in z.namelist() if n.lower().endswith((".mp4", ".m4v", ".mov")))
+                        data = z.read(name)
+                    raw.write_bytes(data)
             except Exception as e:  # keep going; the manifest records what failed
                 print(f"{cid}: download failed ({e})", file=sys.stderr)
                 rows.append({"clip": cid, "url": url, "error": str(e)[:200]})

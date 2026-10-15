@@ -1,6 +1,6 @@
 {
  "dataset": "AccessCast development set (tuning allowed)",
- "fetched_at": "2026-10-15T21:04:59.652Z",
+ "fetched_at": "2026-10-15T21:11:30.455Z",
  "clips": [
   {
    "clip": "nasa_GSFC_20170614_Eclipse_m12534_Plane",
@@ -95,12 +95,22 @@
   {
    "clip": "blender_sintel_trailer",
    "url": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
-   "error": "HTTP Error 403: Forbidden"
+   "trimmed_to_s": null,
+   "source": "Blender",
+   "licence": "CC BY 3.0",
+   "credit": "\u00a9 copyright Blender Foundation | www.sintel.org",
+   "file": "data/dev/blender_sintel_trailer.mp4",
+   "sha256": "cbf141ec3213409d4d1f280b530c138c851d8164bb69e2466e7ea7d5565b8ec4"
   },
   {
    "clip": "blender_bbb_excerpt",
-   "url": "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4",
-   "error": "HTTP Error 403: Forbidden"
+   "url": "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4.zip",
+   "trimmed_to_s": 120,
+   "source": "Blender",
+   "licence": "CC BY 3.0",
+   "credit": "(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org",
+   "file": "data/dev/blender_bbb_excerpt.mp4",
+   "sha256": "b3eff299b8f0c5f469246a0370f60cbc6f5d6c8a5158e9e4329e8c7152883fa1"
   }
  ]
 }

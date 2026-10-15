@@ -54,6 +54,11 @@ class ManualBody(BaseModel):
     text: str
 
 
+def _measured(it: Item, text: str) -> int | None:
+    """Use the measured clip duration only when it was synthesised from exactly this text."""
+    return it.tts.duration_ms if it.tts is not None and text == it.text else None
+
+
 def _reviewer(request: Request) -> str:
     return request.headers.get("x-reviewer", os.environ.get("ACCESSCAST_REVIEWER", "reviewer-1"))[:40]
 
@@ -94,7 +99,9 @@ def create_app(settings: Settings) -> FastAPI:
                  ItemKind.SDH: SDH_RULES, ItemKind.EASY: EASY_RULES, ItemKind.SUBTITLE: SUBTITLE_RULES,
                  ItemKind.VOICEOVER: VOICEOVER_RULES}[it.kind]
         res = run_rules(cand, ctx, rules)
-        words = len(text.split())
+        from accesscast.verify import nlp
+
+        words = nlp.word_count(text)
         dur = measured_ms if measured_ms is not None else rules_ad.estimated_duration_ms(cand, ctx)
         avail = it.slot.end_ms - it.anchor_ms
         return {"ok": res.ok, "violations": [f.to_model().model_dump() for f in res.violations],
@@ -157,14 +164,19 @@ def create_app(settings: Settings) -> FastAPI:
             raise HTTPException(404, "no such item")
         it = merged[item_id]
         changes = {k: v for k, v in body.model_dump().items() if k != "expected_revision" and v is not None}
+        current = int(store.state()["items"].get(item_id, {}).get("revision", 0))
+        if current != body.expected_revision:
+            return JSONResponse({"error": "conflict", "detail": "Changed elsewhere; reloaded.",
+                                 "current_revision": current}, status_code=409)
         if changes.get("status") == "approved":
             text = changes.get("final", it.text)
-            check = verify_text(p, it, text, measured_ms=it.tts.duration_ms if it.tts and text == it.text else None)
+            check = verify_text(p, it, text, measured_ms=_measured(it, text))
             if not check["ok"] and not (changes.get("override_reason") or "").strip():
                 return JSONResponse({"error": "has_errors", "detail": "This line still fails checks. Fix it, or "
                                      "tick override and write a reason.", "check": check}, status_code=422)
         try:
-            cur = store.patch(item_id, body.expected_revision, changes, who=_reviewer(request))
+            cur = store.patch(item_id, body.expected_revision, changes, who=_reviewer(request),
+                              reason=changes.get("override_reason") or "")
         except RevisionConflict as e:
             return JSONResponse({"error": "conflict", "detail": "Changed elsewhere; reloaded.",
                                  "current_revision": e.current}, status_code=409)
@@ -179,7 +191,8 @@ def create_app(settings: Settings) -> FastAPI:
         merged = ReviewStore(p.root).merged()
         if item_id not in merged:
             raise HTTPException(404, "no such item")
-        return verify_text(p, merged[item_id], body.text)
+        it = merged[item_id]
+        return verify_text(p, it, body.text, measured_ms=_measured(it, body.text))
 
     @app.post("/api/projects/{pid}/items/{item_id}/hear")
     def hear(pid: str, item_id: str, body: TextBody) -> dict[str, Any]:

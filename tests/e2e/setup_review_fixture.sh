@@ -13,8 +13,10 @@ if [[ ! -d "$src" ]]; then
   exit 3
 fi
 
-dest="$(mktemp -d "${TMPDIR:-/tmp}/accesscast-review-e2e.XXXXXX")"
-trap 'rm -rf "$dest"' EXIT
+# One fixed folder per port, wiped at each start (Playwright may SIGKILL us, so no exit trap is relied on).
+dest="${TMPDIR:-/tmp}/accesscast-review-e2e-$port"
+rm -rf "$dest"
+mkdir -p "$dest"
 if [[ -f "$src/project.json" ]]; then
   cp -r "$src" "$dest/$(basename "$src")"
 else
@@ -29,5 +31,4 @@ cd "$(dirname "$0")/../.."
 unset VIRTUAL_ENV
 export ACCESSCAST_WORKER_MODE=fake
 export ACCESSCAST_PROJECTS_DIR="$dest"
-# Not exec: the EXIT trap removes the copy when the server stops.
-uv run accesscast review --host 127.0.0.1 --port "$port"
+exec uv run accesscast review --host 127.0.0.1 --port "$port"

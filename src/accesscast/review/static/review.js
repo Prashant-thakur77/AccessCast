@@ -368,6 +368,8 @@
     try { el.video.currentTime = it.anchor_ms / 1000; } catch (e) { /* metadata not ready */ }
     S.lastSummary = "";
     renderList();
+    const btn = el["item-list"].querySelector(`button[data-id="${CSS.escape(id)}"]`);
+    if (btn) btn.scrollIntoView({ block: "nearest" });
     renderDetail(true);
     renderFrames();
     renderTimelineSelection();
@@ -387,12 +389,12 @@
     if (!it) return;
     el.detail.dataset.id = it.id;
     el.detail.dataset.status = it.status;
-    el["item-head"].replaceChildren(
+    el["item-head"].replaceChildren(...[
       h("span", null, `${it.id} · ${kindText(it)} · ${fmtTime(it.anchor_ms)} to ${fmtTime(itemEnd(it))} · `),
       h("span", { class: `chip ${it.status}`, text: STATUS_LABEL[it.status] || it.status }),
       it.source === "manual" ? h("span", { class: "tag", text: "manual" }) : null,
       it.extended ? h("span", { class: "muted" }, " The video pauses for this line.") : null,
-    );
+    ].filter(Boolean));
     if (it.source_text) {
       el["source-wrap"].hidden = false;
       el["source-text"].textContent = it.source_text;
@@ -451,11 +453,11 @@
       return;
     }
     const terms = Object.entries(it.confidence_terms || {});
-    el.confidence.replaceChildren(
+    el.confidence.replaceChildren(...[
       h("p", { text: `${it.confidence.toFixed(2)} out of 1. Computed in code from measured signals, never asked of the model.` }),
       terms.length ? h("dl", { class: "terms" }, ...terms.map(([k, v]) => [
         h("dt", { text: TERM_LABEL[k] || k }), h("dd", { text: Number(v).toFixed(2) })])) : null,
-    );
+    ].filter(Boolean));
   }
   function renderRepairs(it) {
     const hist = (it.repair && it.repair.history) || [];
@@ -972,9 +974,6 @@
   el["btn-context"].addEventListener("click", () => playInContext());
   el["btn-hear"].addEventListener("click", () => hearIt());
   el["btn-lowest"].addEventListener("click", () => jumpLowest());
-  el.override.addEventListener("change", () => {
-    if (el.override.checked && !el["override-reason"].value.trim()) el["override-reason"].focus();
-  });
   function editText() {
     if (!current()) { announce("Choose a line first."); return; }
     el.final.focus();
