@@ -17,6 +17,7 @@ from typing import Any
 
 import numpy as np
 import soundfile as sf
+
 from common import device, event, main, stage_timer
 
 SR = 16_000

@@ -6,9 +6,10 @@ import json
 import subprocess
 import sys
 
+from eval.common import FREEZE, frozen_hashes, git
+
 from accesscast.config import REPO_ROOT
 from accesscast.events import now_iso
-from eval.common import FREEZE, frozen_hashes, git
 
 
 def main() -> int:
