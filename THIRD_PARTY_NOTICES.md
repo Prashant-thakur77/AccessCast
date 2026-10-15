@@ -4,9 +4,24 @@ AccessCast is MIT-licensed. Code reused from other projects keeps its original l
 
 ## Code reused (with licence)
 
-| File in AccessCast | Source | Licence | Copyright |
-|---|---|---|---|
-| _(filled as each file is added)_ | | | |
+| File in AccessCast | Source | Licence | Copyright | What we took |
+|---|---|---|---|---|
+| `src/accesscast/media/timeline.py` | AudioSight `src/audiosight/timeline.py` (commit 5c708f6) | Apache-2.0 | 2026 AudioSight contributors | copied with header; sample rate changed to 48 kHz; `remap_ms` added |
+| `src/accesscast/analysis/scenes.py` | AudioSight `src/audiosight/clustering.py` | Apache-2.0 | 2026 AudioSight contributors | similarity formula and decision thresholds, rewritten with PIL/numpy |
+| `src/accesscast/seeds.py` | Rivet `rivet/pipeline/seeds.py` | MIT | (c) 2026 Enoch Idowu | `derive_seed` |
+| `src/accesscast/guard/network.py` | Rivet `rivet/telemetry/network_guard.py` | MIT | (c) 2026 Enoch Idowu | idea, rewritten and extended (getaddrinfo, connect_ex, sendto) |
+| `scripts/submission_check.py` | Rivet `cli/submission_command.py` | MIT | (c) 2026 Enoch Idowu | structure of the checks |
+| `src/accesscast/repair/loop.py` | ProteinLoop `sim/proteinloop_sim/gemma_repair.py` | MIT | (c) 2026 Anibal Perez | loop shape and stop reasons |
+| `deploy/serve_gemma.sh` | ProteinLoop `scripts/amd_notebook_setup_vllm.sh` | MIT | (c) 2026 Anibal Perez | health-loop shape |
+| `src/accesscast/review/store.py` | PolicyCut `policycut/api/events.py`, `policycut/core/storage.py` | MIT | (c) 2026 PolicyCut Team | store contract, rewritten (single lock, no swallowed history errors) |
+| `workers/common.py` (`stage_timer`) | PolicyCut `policycut/core/device.py` `stage_metrics` | MIT | (c) 2026 PolicyCut Team | synchronized GPU timing shape |
+| `src/accesscast/write/text_versions.py` (`translate_batch`) | video-voice-translator `src/text_translator.py` | MIT | (c) 2025 Video Voice Translator Contributors | alignment-safe batch translation, rewritten with English prompts and fail-closed behaviour |
+| `workers/tts_worker.py` (voice map) | Katha `katha/config.py` | MIT | (c) 2026 N DIVIJ | Kokoro language codes and hi/it voice ids |
+| `src/accesscast/confidence.py` (`reject_model_confidence`) | ageBand `src/contracts/validators.py` | Apache-2.0 | ageBand authors | pattern only, our own code and formula |
+| `eval/e13_serving.py` | ageBand `scripts/benchmark_roster.py` | Apache-2.0 | ageBand authors | `/metrics` delta method, rewritten (full request sets, warm-up, repeats) |
+
+### AudioSight NOTICE
+AudioSight ships no NOTICE file. Its licence appendix reads "Copyright 2026 AudioSight contributors", which is kept in the header of each file above that contains its code.
 
 ### Apache-2.0 NOTICE content carried from upstream
 - SignalForge — NOTICE: "Copyright 2026 Rafael Bernucci" (carried if any SignalForge code is reused)
