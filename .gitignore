@@ -1,0 +1,44 @@
+# secrets
+.env
+.env.*
+!.env.example
+# reference repos (read-only, cloned locally)
+refs/
+# per-video working folders and media we may not redistribute
+projects/
+data/
+*.mp4
+*.mkv
+*.mov
+*.webm
+*.wav
+*.flac
+*.mp3
+*.m4a
+!tests/fixtures/**/*.mp4
+!tests/fixtures/**/*.wav
+!site/media/**
+# python
+__pycache__/
+*.pyc
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+# node
+node_modules/
+playwright-report/
+test-results/
+# editors
+.vscode/
+.idea/
+.DS_Store
+# local caches
+.cache/
+logs/
+!src/**/logs/
