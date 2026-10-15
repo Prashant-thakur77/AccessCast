@@ -1,0 +1,12 @@
+{
+  "voice": "hf_alpha",
+  "lang": "hi",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": 0.0706,
+  "s_per_word": 0.3546,
+  "wps_voice": 2.8198,
+  "resid_p95_s": 0.3284,
+  "device": "cpu",
+  "wall_s": 75.41
+}

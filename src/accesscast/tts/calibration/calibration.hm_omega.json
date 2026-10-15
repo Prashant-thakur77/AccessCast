@@ -1,0 +1,12 @@
+{
+  "voice": "hm_omega",
+  "lang": "hi",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": -0.1256,
+  "s_per_word": 0.3793,
+  "wps_voice": 2.6363,
+  "resid_p95_s": 0.3649,
+  "device": "cpu",
+  "wall_s": 75.84
+}

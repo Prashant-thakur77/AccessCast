@@ -1,0 +1,12 @@
+{
+  "voice": "if_sara",
+  "lang": "it",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": -0.0683,
+  "s_per_word": 0.3152,
+  "wps_voice": 3.1731,
+  "resid_p95_s": 0.5281,
+  "device": "cpu",
+  "wall_s": 62.61
+}

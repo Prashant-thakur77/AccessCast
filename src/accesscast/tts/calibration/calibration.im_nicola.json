@@ -1,0 +1,12 @@
+{
+  "voice": "im_nicola",
+  "lang": "it",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": -0.023,
+  "s_per_word": 0.3579,
+  "wps_voice": 2.7942,
+  "resid_p95_s": 0.6654,
+  "device": "cpu",
+  "wall_s": 81.17
+}
