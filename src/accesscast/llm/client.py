@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 import random
 import threading
 import time
@@ -225,6 +226,11 @@ class LlmClient:
         }
         if req.seed is not None:
             body["seed"] = req.seed
+        rec = os.environ.get("ACCESSCAST_RECORD_REPLAY")
+        if rec and not req.images and req.audio is None:  # E13 replay set: text-only requests, never image bytes
+            Path(rec).mkdir(parents=True, exist_ok=True)
+            with self._log_lock, (Path(rec) / f"{prompt.id}.jsonl").open("a", encoding="utf-8") as fh:
+                fh.write(json.dumps({k: v for k, v in body.items() if k != "model"}, ensure_ascii=False) + "\n")
         if prov != "tokenfactory":  # Token Factory silently drops chat_template_kwargs (SayAgain's finding)
             body["chat_template_kwargs"] = {"enable_thinking": False}
         last: Exception | None = None
