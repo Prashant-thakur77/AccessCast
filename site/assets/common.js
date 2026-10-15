@@ -107,6 +107,9 @@
     if (idx.synthetic_test_data) {
       container.appendChild(el("p", { class: "fixture", text: "Demo fixture: canned model outputs, not real model results." }));
     }
+    if ((idx.tts_engines || []).indexOf("chatterbox-multilingual") !== -1) {
+      container.appendChild(el("p", { text: "Some voices carry an inaudible watermark added by the speech engine (Chatterbox)." }));
+    }
   }
 
   function renderFooter(container) {
