@@ -48,6 +48,10 @@ def main() -> int:
             "clips": args.clips,
             "fresh_process_per_run": True,
             "separate_project_dirs": True,
+            "provider": os.environ.get("ACCESSCAST_PROVIDER", "local"),
+            "llm_cache": "off",
+            "sound_model": os.environ.get("ACCESSCAST_SOUND_MODEL", "gemma"),
+            "audio_model": os.environ.get("ACCESSCAST_AUDIO_MODEL", "gemma-4-e4b"),
         },
     )
 
