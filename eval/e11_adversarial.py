@@ -16,11 +16,15 @@ import argparse
 import json
 import os
 import re
+import subprocess
+import time
 from typing import Any
 
 from accesscast import constants as C
 from accesscast.config import REPO_ROOT, load_settings
+from accesscast.events import now_iso
 from accesscast.pipeline import ANALYSIS, open_run, stage_evidence, stage_ingest, verify_context
+from accesscast.project import read_jsonl
 from accesscast.schemas import Item, ItemKind, ItemStatus
 from accesscast.tts.engine import VOICES, load_calibration
 from accesscast.write.plan_ad import plan_description
@@ -103,8 +107,9 @@ def main() -> int:
             if not proj.p("analysis", "gaps.json").exists():
                 for _n, fn in ANALYSIS:
                     fn(base)
-            if not any(proj.p("evidence").glob("*/evidence.json")):
-                stage_evidence(base)
+            ev_files = list(proj.p("evidence").glob("*/evidence.json"))
+            if not ev_files or any('"evidence_failed"' in f.read_text() for f in ev_files):
+                stage_evidence(base)  # again after a provider outage
             ctx = verify_context(proj, "en")
             speech_truth = [(w["start_ms"], w["end_ms"]) for w in spec.get("synth_words", [])]
             cal = load_calibration(VOICES["en"])
@@ -114,9 +119,19 @@ def main() -> int:
                 stats = {"tries": 0, "gemma_failed": 0, "blocked": 0, "leaks": 0, "no_output": 0}
                 for k in range(args.k):
                     label = f"e11:{case}:{temp_name}:{k}"
-                    run = open_run(settings, proj, provider=args.provider, strict=True, run_label=label)
-                    spans_final.clear()
-                    rows = _one_try(run, ctx, cal, kind, temp, label, settings.project_seed)
+                    for _attempt in range(6):  # a try hit by a provider outage is redone, never scored
+                        run = open_run(settings, proj, provider=args.provider, strict=True, run_label=label)
+                        spans_final.clear()
+                        t0 = now_iso()
+                        rows = _one_try(run, ctx, cal, kind, temp, label, settings.project_seed)
+                        if not _endpoint_errors(proj, t0):
+                            break
+                        e.summary["tries_redone_after_outage"] = (
+                            e.summary.get("tries_redone_after_outage", 0) + 1
+                        )
+                        _wait_for_provider(args.provider)
+                    else:
+                        raise RuntimeError(f"{label}: provider kept failing; not scoring this try")
                     for k_row, (draft, final, published, span) in enumerate(rows):
                         failed = oracle(spec, draft, span=span, speech=speech_truth)
                         final_span = spans_final.get(
@@ -149,6 +164,20 @@ def main() -> int:
         e.checks["ran_all_cases"] = len(cs) == len(cases)
 
     return run_experiment(exp, body)
+
+
+def _endpoint_errors(proj: Any, since: str) -> int:
+    log = proj.p("logs", "llm_calls.jsonl")
+    return sum(1 for r in read_jsonl(log) if r.get("ts", "") >= since and r.get("status") == "endpoint_error")
+
+
+def _wait_for_provider(provider: str) -> None:
+    if provider == "tokenfactory":
+        subprocess.run(
+            ["bash", str(REPO_ROOT / "scripts" / "tf_wait.sh"), "720"], check=True, stdout=subprocess.DEVNULL
+        )
+    else:
+        time.sleep(120)
 
 
 def _one_try(
