@@ -51,8 +51,8 @@ Gemma 4 31B ran on AMD Token Factory, AMD's hosted endpoint. These numbers are m
 
 | What we measured | Value | Evidence |
 |---|---|---|
-| Generated tokens per second seen by our client, best concurrency | <pending: e13.best_tokens_per_s> | `e13_serving_tokenfactory.json` |
-| p95 latency of a description request at that concurrency | <pending: e13.best_p95_s> | `e13_serving_tokenfactory.json` |
+| Generated tokens per second seen by our client, best concurrency | 17 | `e13_serving_tokenfactory.json` |
+| p95 latency of a description request at that concurrency | 13.9 s | `e13_serving_tokenfactory.json` |
 | Gemma tokens per finished minute of video, all five versions | <pending: e14.tokens_per_minute> | `e14_cost.json` |
 
 We could not create an MI300X droplet: AMD Developer Cloud asks for a payment card, and we did not have one it accepts. So this page has no GPU memory, users-per-GPU or GPU-dollar numbers. The scripts to measure them on a droplet are in `deploy/` and `eval/`, unchanged.
@@ -88,7 +88,7 @@ Nothing reaches a viewer until a person approves it. Confidence for each line is
 | Whisper, the wav2vec2 aligner, Silero VAD, the Kokoro voices, the metric models | Our own workstation, not AMD hardware. The device is written in every worker response and evidence file |
 | Gemma 4 E4B (listening: transcript cross-check, sound labels) | Not run. Token Factory does not offer it, and we had no droplet to serve it |
 
-Token Factory had outages during our runs (it answered "no available workers" for minutes at a time). The pipeline fails closed: a scene whose evidence call fails goes to a person, and a re-run asks again only for the calls that failed. Requests that failed during the speed test are counted in its evidence file: <pending: e13.failed_sentence>
+Token Factory had outages during our runs (it answered "no available workers" for minutes at a time). The pipeline fails closed: a scene whose evidence call fails goes to a person, and a re-run asks again only for the calls that failed. Requests that failed during the speed test are counted in its evidence file: 15 of 120 requests failed (client-side, dev requests replayed).
 
 ## Who pays
 
