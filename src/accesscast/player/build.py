@@ -80,4 +80,10 @@ def export_site(settings: Settings, projects: Sequence[str], out: Path, *, allow
                         "reviewed_at": idx.get("reviewed_at")})
     (out / "data").mkdir(exist_ok=True)
     write_json(out / "data" / "catalog.json", {"projects": catalog})
+    reg = REPO_ROOT / "evidence" / "public-claims.json"
+    if reg.exists():  # the site shows only registered numbers; a missing claim renders as "Measuring"
+        claims = json.loads(reg.read_text(encoding="utf-8"))["claims"]
+        write_json(out / "data" / "claims.json", {"claims": {c["claim_id"]: {
+            "display": (c.get("display") or [None])[0], "text": c["text"], "status": c["status"], "split": c.get("split"),
+            "source_url": c.get("source_url"), "evidence": [e["path"] for e in c.get("evidence", [])]} for c in claims}})
     return len(catalog)
