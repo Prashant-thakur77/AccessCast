@@ -1,0 +1,13 @@
+{
+  "model": "silero-vad",
+  "segments": [
+    {
+      "start_ms": 898,
+      "end_ms": 2142
+    },
+    {
+      "start_ms": 9922,
+      "end_ms": 10846
+    }
+  ]
+}

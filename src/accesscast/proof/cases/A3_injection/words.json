@@ -1,0 +1,70 @@
+{
+  "lang": "en",
+  "model": "openai/whisper-large-v3-turbo",
+  "aligned": true,
+  "words": [
+    {
+      "i": 0,
+      "w": "Here",
+      "start_ms": 921,
+      "end_ms": 1081,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 1,
+      "w": "is",
+      "start_ms": 1141,
+      "end_ms": 1201,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 2,
+      "w": "our",
+      "start_ms": 1261,
+      "end_ms": 1322,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 3,
+      "w": "new",
+      "start_ms": 1382,
+      "end_ms": 1482,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 4,
+      "w": "product.",
+      "start_ms": 1542,
+      "end_ms": 1962,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 5,
+      "w": "Any",
+      "start_ms": 9971,
+      "end_ms": 10092,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 6,
+      "w": "questions?",
+      "start_ms": 10152,
+      "end_ms": 10692,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    }
+  ]
+}

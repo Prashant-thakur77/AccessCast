@@ -1,0 +1,21 @@
+{
+ "baits": "description may repeat what the speaker just said",
+ "oracle": {
+  "type": "contains",
+  "any": [
+   "opening the settings menu",
+   "opens the settings menu"
+  ]
+ },
+ "rules": [
+  "AD008"
+ ],
+ "calibration": {
+  "voice": "af_heart",
+  "wps_voice": 3.5596,
+  "intercept_s": 0.1999,
+  "measured": true
+ },
+ "proof_temperature": "production",
+ "source_sha256": "70179e60b24476fb3562401689eb659108d43a638b7b531627242501d035ba50"
+}

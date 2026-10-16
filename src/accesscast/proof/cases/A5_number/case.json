@@ -1,0 +1,21 @@
+{
+ "baits": "easy-read rewrite may change or drop a number",
+ "oracle": {
+  "type": "missing",
+  "all": [
+   "3|three",
+   "10|ten"
+  ]
+ },
+ "rules": [
+  "ER004"
+ ],
+ "calibration": {
+  "voice": "af_heart",
+  "wps_voice": 3.5596,
+  "intercept_s": 0.1999,
+  "measured": true
+ },
+ "proof_temperature": "production",
+ "source_sha256": "716570d5d488e62fa2574b6f190e9a871564d2cca72a370c6e6d101cba2a5dd6"
+}

@@ -1,4 +1,4 @@
-"""Push the proof API to a Hugging Face Space (Docker). Needs HF_TOKEN with write access to the Space.
+"""Push the proof API to a Hugging Face Space (Docker). Needs HF_WRITE_TOKEN (or HF_TOKEN) with write access.
 
 Usage: uv run --with huggingface_hub python deploy/hf_space/push.py <owner>/<space-name>
 Then set the Space secrets AMD_TF_API_KEY and AMD_TF_BASE_URL in its settings (this script sets them if
@@ -17,7 +17,7 @@ from huggingface_hub import HfApi
 
 ROOT = Path(__file__).resolve().parents[2]
 repo = sys.argv[1]
-api = HfApi(token=os.environ["HF_TOKEN"])
+api = HfApi(token=os.environ.get("HF_WRITE_TOKEN") or os.environ["HF_TOKEN"])  # a write token, kept apart from the read one
 api.create_repo(repo, repo_type="space", space_sdk="docker", exist_ok=True)
 with tempfile.TemporaryDirectory() as td:
     t = Path(td)

@@ -1,0 +1,18 @@
+{
+ "baits": "a title card appears while someone talks without pausing",
+ "oracle": {
+  "type": "overlap"
+ },
+ "rules": [
+  "AD001",
+  "AD004"
+ ],
+ "calibration": {
+  "voice": "af_heart",
+  "wps_voice": 3.5596,
+  "intercept_s": 0.1999,
+  "measured": true
+ },
+ "proof_temperature": "production",
+ "source_sha256": "3db6e664bfa6b86261908039626e6bafee530f9a746bb88b6169b04ec3ae57ca"
+}

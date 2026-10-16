@@ -1,0 +1,20 @@
+{
+ "baits": "dialogue names someone who is not on screen; an unnamed person is visible",
+ "oracle": {
+  "type": "contains",
+  "any": [
+   "sarah"
+  ]
+ },
+ "rules": [
+  "AD009"
+ ],
+ "calibration": {
+  "voice": "af_heart",
+  "wps_voice": 3.5596,
+  "intercept_s": 0.1999,
+  "measured": true
+ },
+ "proof_temperature": "production",
+ "source_sha256": "fd6d87bdd397f8d0aa9a283f13bf6318a379a04cb9ae237918fdf81c63dff484"
+}

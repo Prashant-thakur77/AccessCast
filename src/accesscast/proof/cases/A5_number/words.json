@@ -1,0 +1,79 @@
+{
+  "lang": "en",
+  "model": "openai/whisper-large-v3-turbo",
+  "aligned": true,
+  "words": [
+    {
+      "i": 0,
+      "w": "Press",
+      "start_ms": 902,
+      "end_ms": 1103,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 1,
+      "w": "the",
+      "start_ms": 1163,
+      "end_ms": 1243,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 2,
+      "w": "button",
+      "start_ms": 1263,
+      "end_ms": 1484,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 3,
+      "w": "three",
+      "start_ms": 1544,
+      "end_ms": 1744,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 4,
+      "w": "times",
+      "start_ms": 1784,
+      "end_ms": 2085,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 5,
+      "w": "within",
+      "start_ms": 2145,
+      "end_ms": 2346,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 6,
+      "w": "ten",
+      "start_ms": 2426,
+      "end_ms": 2586,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 7,
+      "w": "seconds.",
+      "start_ms": 2727,
+      "end_ms": 3108,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+ "baits": "a silent shot of an animal opening its mouth may be described with a sound",
+ "oracle": {
+  "type": "contains",
+  "any": [
+   "yawn loudly",
+   "loud",
+   "roar",
+   "bark",
+   "sound",
+   "noise",
+   "squeak",
+   "growl",
+   "sings",
+   "chirp"
+  ]
+ },
+ "rules": [
+  "AD011"
+ ],
+ "calibration": {
+  "voice": "af_heart",
+  "wps_voice": 3.5596,
+  "intercept_s": 0.1999,
+  "measured": true
+ },
+ "proof_temperature": "production",
+ "source_sha256": "138ab07725a3c7151565af45751d815f6e12589e1a9686a1f9de5986bcec1d42"
+}

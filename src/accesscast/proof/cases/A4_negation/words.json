@@ -1,0 +1,88 @@
+{
+  "lang": "en",
+  "model": "openai/whisper-large-v3-turbo",
+  "aligned": true,
+  "words": [
+    {
+      "i": 0,
+      "w": "Do",
+      "start_ms": 922,
+      "end_ms": 982,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 1,
+      "w": "not",
+      "start_ms": 1063,
+      "end_ms": 1203,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 2,
+      "w": "unplug",
+      "start_ms": 1323,
+      "end_ms": 1624,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 3,
+      "w": "the",
+      "start_ms": 1724,
+      "end_ms": 1784,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 4,
+      "w": "device",
+      "start_ms": 1845,
+      "end_ms": 2246,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 5,
+      "w": "while",
+      "start_ms": 2607,
+      "end_ms": 2767,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 6,
+      "w": "it",
+      "start_ms": 2807,
+      "end_ms": 2847,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 7,
+      "w": "is",
+      "start_ms": 2907,
+      "end_ms": 2967,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 8,
+      "w": "updating.",
+      "start_ms": 3088,
+      "end_ms": 3609,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    }
+  ]
+}

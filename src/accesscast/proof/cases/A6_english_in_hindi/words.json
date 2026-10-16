@@ -1,0 +1,97 @@
+{
+  "lang": "en",
+  "model": "openai/whisper-large-v3-turbo",
+  "aligned": true,
+  "words": [
+    {
+      "i": 0,
+      "w": "Open",
+      "start_ms": 982,
+      "end_ms": 1143,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 1,
+      "w": "the",
+      "start_ms": 1223,
+      "end_ms": 1283,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 2,
+      "w": "browser",
+      "start_ms": 1323,
+      "end_ms": 1704,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 3,
+      "w": "settings,",
+      "start_ms": 1784,
+      "end_ms": 2165,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 4,
+      "w": "then",
+      "start_ms": 2566,
+      "end_ms": 2667,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 5,
+      "w": "clear",
+      "start_ms": 2787,
+      "end_ms": 2988,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 6,
+      "w": "the",
+      "start_ms": 3068,
+      "end_ms": 3148,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 7,
+      "w": "cache",
+      "start_ms": 3208,
+      "end_ms": 3529,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 8,
+      "w": "and",
+      "start_ms": 3569,
+      "end_ms": 3649,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 9,
+      "w": "cookies.",
+      "start_ms": 3729,
+      "end_ms": 4130,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    }
+  ]
+}

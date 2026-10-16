@@ -1,0 +1,52 @@
+{
+  "lang": "en",
+  "model": "openai/whisper-large-v3-turbo",
+  "aligned": true,
+  "words": [
+    {
+      "i": 0,
+      "w": "I'm",
+      "start_ms": 941,
+      "end_ms": 1061,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 1,
+      "w": "opening",
+      "start_ms": 1221,
+      "end_ms": 1501,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 2,
+      "w": "the",
+      "start_ms": 1581,
+      "end_ms": 1641,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 3,
+      "w": "settings",
+      "start_ms": 1722,
+      "end_ms": 2062,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 4,
+      "w": "menu.",
+      "start_ms": 2122,
+      "end_ms": 2422,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    }
+  ]
+}
