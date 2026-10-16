@@ -34,7 +34,9 @@ def load_audio(path: str) -> np.ndarray:
     return a
 
 
-def cut_points(audio: np.ndarray, chunk_s: float = 30.0, search_s: float = 2.0) -> list[int]:
+def cut_points(audio: np.ndarray, chunk_s: float = 28.0, search_s: float = 2.0) -> list[int]:
+    """Cut near the quietest frame around every chunk_s; chunk_s + search_s stays within Whisper's 30 s window
+    (a longer chunk switches transformers to long-form decoding, which ran a 6 GB GPU out of memory)."""
     n = len(audio)
     frame = int(0.02 * SR)
     cuts = [0]
@@ -111,10 +113,12 @@ def align_chunk(audio: np.ndarray, words: list[dict[str, Any]], offset_s: float,
     if not keep:
         return 0
     transcript = "|".join(t for _, t in keep)
-    targets = torch.tensor([[idx[c] for c in transcript]], dtype=torch.int32, device=dev)
+    # The CTC path search runs on the CPU: torchaudio 2.11's CUDA kernel fails under torch 2.14 (stream pool API),
+    # and on a 30 s chunk the CPU search takes milliseconds. The acoustic model still runs on `dev`.
+    targets = torch.tensor([[idx[c] for c in transcript]], dtype=torch.int32)
     with torch.inference_mode():
         emission, _ = model(torch.from_numpy(audio).unsqueeze(0).to(dev))
-        emission = torch.log_softmax(emission, dim=-1)
+        emission = torch.log_softmax(emission.float(), dim=-1).cpu()
     if emission.shape[1] < targets.shape[1]:
         return 0
     aligned, scores = F.forced_align(emission, targets, blank=0)
