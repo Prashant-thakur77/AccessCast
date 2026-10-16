@@ -103,6 +103,7 @@
       var p = a.play();
       if (p && p.catch) p.catch(function () { L.playing = false; syncUI(); say($("l-status"), "The browser blocked the sound. Press Play to try again."); });
     };
+    hookAnalyser(mode, a);
     if (a.readyState >= 1) go(); else a.addEventListener("loadedmetadata", go, { once: true });
     L.playing = true;
     startLoop();
@@ -147,7 +148,43 @@
       : "Finished. Press Play to hear it again, or switch back to the original sound.");
   }
 
+  /* ---------- the listener reacts to what is playing ---------- */
+  var M = window.ACMascot, LM = document.getElementById("listen-mascot");
+  var audioCtx = null, analysers = {}, lvl = 0, buf = null;
+  /* Loudness for the sound waves: an AnalyserNode on the audio element. If the browser will not give one,
+   * the waves keep their timed pulse instead. */
+  function hookAnalyser(mode, a) {
+    if (analysers[mode] === false || analysers[mode]) return;
+    try {
+      var AC2 = window.AudioContext || window.webkitAudioContext;
+      if (!AC2) { analysers[mode] = false; return; }
+      audioCtx = audioCtx || new AC2();
+      if (audioCtx.state === "suspended" && audioCtx.resume) audioCtx.resume();
+      var src = audioCtx.createMediaElementSource(a);
+      var an = audioCtx.createAnalyser();
+      an.fftSize = 512;
+      src.connect(an);
+      an.connect(audioCtx.destination);
+      analysers[mode] = an;
+    } catch (e) { analysers[mode] = false; }
+  }
+  function readLevel() {
+    var an = analysers[L.mode];
+    if (!an) return 0;
+    if (!buf || buf.length !== an.fftSize) buf = new Uint8Array(an.fftSize);
+    an.getByteTimeDomainData(buf);
+    var sum = 0;
+    for (var i = 0; i < buf.length; i++) { var v = (buf[i] - 128) / 128; sum += v * v; }
+    return Math.min(1, Math.sqrt(sum / buf.length) * 4);
+  }
+  function syncMascot() {
+    if (!M || !LM) return;
+    M.set(LM, { eyes: L.mode === "desc" ? "closed" : "open", waves: !L.playing ? "idle" : L.mode === "desc" ? "glow" : "dim" });
+    if (!L.playing) M.level(LM, 0);
+  }
+
   function syncUI() {
+    syncMascot();
     $("l-orig").setAttribute("aria-pressed", L.mode === "orig" ? "true" : "false");
     $("l-desc").setAttribute("aria-pressed", L.mode === "desc" ? "true" : "false");
     $("l-desc-lane").classList.toggle("is-off", L.mode !== "desc");
@@ -165,6 +202,7 @@
     var a = L.audio[L.mode];
     if (!a) return;
     paint(a.currentTime * 1000);
+    if (M && LM && L.playing) { lvl = lvl * 0.7 + readLevel() * 0.3; M.level(LM, lvl); }
     if (L.playing) startLoop();
   }
 
@@ -392,7 +430,32 @@
     }).catch(function () { renderClaims({}); });
   }
 
+  /* =================== Who's watching: the listener acts out each audience =================== */
+  function initWhoMascot() {
+    var WM = document.getElementById("who-mascot");
+    if (!M || !WM) return;
+    var STATES = {
+      blind: { eyes: "closed", phones: "on", bubble: null },
+      deaf: { eyes: "open", phones: "faded", bubble: { kind: "caption" } },
+      easy: { eyes: "open", phones: "on", bubble: { text: "Hi!" } },
+      hi: { eyes: "open", phones: "on", bubble: { text: "नमस्ते", lang: "hi" } },
+      it: { eyes: "open", phones: "on", bubble: { text: "Ciao", lang: "it" } }
+    };
+    var rest = { eyes: "open", phones: "on", bubble: null, waves: "idle" };
+    document.querySelectorAll("a.aud").forEach(function (a) {
+      var m = /audience=(\w+)/.exec(a.getAttribute("href") || "");
+      var st = m && STATES[m[1]];
+      if (!st) return;
+      var on = function () { M.set(WM, st); }, off = function () { M.set(WM, rest); };
+      a.addEventListener("mouseenter", on);
+      a.addEventListener("focus", on);
+      a.addEventListener("mouseleave", function () { if (document.activeElement !== a) off(); });
+      a.addEventListener("blur", off);
+    });
+  }
+
   AC.renderFooter($("footer"));
+  initWhoMascot();
   initListen();
   initOrbit();
   initRules();

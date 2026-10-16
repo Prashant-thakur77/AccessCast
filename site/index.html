@@ -45,24 +45,34 @@
         <span class="hl"><span style="--i:1">Five ways</span></span>
         <span class="hl"><span style="--i:2">to watch.</span><span class="sound-dot" aria-hidden="true"></span></span>
       </h1>
-      <p class="lede" data-reveal style="--i:3">Gemma 4 writes it. Code checks every line. A person approves what the public hears.</p>
-      <div class="cta-row" data-reveal style="--i:4">
-        <a class="pill big" href="watch.html">Watch it <span class="dot" aria-hidden="true"></span></a>
-        <a class="pill big ghost" href="#listen">Close your eyes <svg class="arrow down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="hero-stage">
+      <div class="hero-side hero-left" data-reveal style="--i:3">
+        <p class="lede">Gemma 4 writes it. Code checks every line. A person approves what the public hears.</p>
+      </div>
+      <div class="hero-figure">
+        <div class="hero-backdrop" aria-hidden="true" data-speed="0.06"></div>
+        <div class="mascot" data-mascot="hero" aria-hidden="true"></div>
+        <a class="spin-disc hero-disc" href="#how">
+          <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <circle class="disc-fill" cx="100" cy="100" r="100"/>
+            <g class="spin">
+              <path id="hero-ring" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" fill="none"/>
+              <text class="ring-text"><textPath href="#hero-ring" textLength="474" lengthAdjust="spacing">Gemma 4 on AMD Instinct MI300X • Gemma 4 on AMD Instinct MI300X • </textPath></text>
+            </g>
+            <circle class="disc-dot" cx="100" cy="100" r="30"/>
+            <path class="disc-arrow" d="M100 86v26M89 102l11 11 11-11"/>
+          </svg>
+          <span class="visually-hidden">How it works: Gemma 4 on AMD Instinct MI300X</span>
+        </a>
+      </div>
+      <div class="hero-side hero-right" data-reveal style="--i:4">
+        <div class="cta-row">
+          <a class="pill big" href="watch.html">Watch it <span class="dot" aria-hidden="true"></span></a>
+          <a class="pill big ghost" href="#listen">Close your eyes <svg class="arrow down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
       </div>
     </div>
-    <a class="spin-disc hero-disc" href="#how">
-      <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
-        <circle class="disc-fill" cx="100" cy="100" r="100"/>
-        <g class="spin">
-          <path id="hero-ring" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" fill="none"/>
-          <text class="ring-text"><textPath href="#hero-ring" textLength="474" lengthAdjust="spacing">Gemma 4 on AMD Instinct MI300X • Gemma 4 on AMD Instinct MI300X • </textPath></text>
-        </g>
-        <circle class="disc-dot" cx="100" cy="100" r="30"/>
-        <path class="disc-arrow" d="M100 86v26M89 102l11 11 11-11"/>
-      </svg>
-      <span class="visually-hidden">How it works: Gemma 4 on AMD Instinct MI300X</span>
-    </a>
   </section>
 
   <!-- 2. Close your eyes -->
@@ -80,6 +90,7 @@
           </div>
         </div>
         <div class="play">
+          <div class="mascot" data-mascot="listen" id="listen-mascot" aria-hidden="true"></div>
           <button type="button" class="play-disc" id="l-play" disabled>
             <svg class="pd-ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle class="track" cx="50" cy="50" r="48"/><circle class="prog" id="l-ring" cx="50" cy="50" r="48" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg>
             <span class="pd-inner">
@@ -128,6 +139,7 @@
     </div>
     <div class="section">
       <div class="wrap center section-head">
+        <div class="who-mini" data-reveal><div class="mascot" data-mascot="mini" id="who-mascot" aria-hidden="true"></div></div>
         <h2 id="who-h" class="display l" data-reveal>Who's watching?</h2>
         <p class="lede" data-reveal style="--i:1">Pick who it's for. The player opens in that version, and you can mix them.</p>
       </div>
@@ -334,6 +346,7 @@
 <footer class="site" data-section-world="paper"><div class="wrap" id="footer"></div></footer>
 <script src="assets/common.js"></script>
 <script src="assets/motion.js"></script>
+<script src="assets/mascot.js"></script>
 <script src="assets/home.js"></script>
 </body>
 </html>
