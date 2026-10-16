@@ -283,3 +283,7 @@ GPU_HOURLY_COST_USD = 2.59  # AMD Developer Cloud MI300X on-demand price, cited.
 
 # ---------------------------------------------------------------- languages
 LANGS: tuple[str, ...] = ("en", "hi", "it")
+
+# ---------------------------------------------------------------- Studio (local upload, review app)
+STUDIO_MAX_BYTES = 500_000_000  # local tool; the limit keeps one upload from filling the disk
+STUDIO_MAX_SECONDS = 600  # 10 minutes: one job at a time on a shared endpoint

@@ -12,6 +12,7 @@ Endpoints (PLAN §12.4):
   POST   /api/projects/{id}/review/complete       gate check for all versions
   POST   /api/projects/{id}/render                server-side gate; 409 while anything is pending
   GET    /media/{id}/...                          project media (source video, evidence frames, tts clips)
+  POST   /api/studio/jobs, GET /api/studio/jobs/current   AccessCast Studio (review/studio.py)
 """
 
 from __future__ import annotations
@@ -349,6 +350,10 @@ def create_app(settings: Settings) -> FastAPI:
         if not f.is_file():
             raise HTTPException(404, "not found")
         return FileResponse(f)
+
+    from accesscast.review.studio import add_studio
+
+    add_studio(app, settings, os.environ.get("ACCESSCAST_PROVIDER", "tokenfactory"))
 
     if STATIC.exists():
         app.mount("/app", StaticFiles(directory=STATIC, html=True), name="app")

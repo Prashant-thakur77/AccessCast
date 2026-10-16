@@ -160,3 +160,24 @@ test("keyboard only: review a whole project, then mark review complete", async (
   expect(after.filter((i) => i.status === "rejected").length).toBe(rejected);
   expect(after.filter((i) => i.reviewer === "e2e-keyboard").length).toBe(approved + rejected);
 });
+
+test("studio: axe clean, keyboard-only upload, every stage listed, review link opens the project", async ({ page }) => {
+  await page.goto("/app/studio.html");
+  expect(await axeViolations(page)).toEqual([]);
+  await page.locator("#file").setInputFiles("tests/fixtures/fixture20/source.mp4");
+  await tabTo(page, page.locator("#go"));
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#status")).toContainText("Started", { timeout: 30_000 });
+  await expect(page.locator("#stages li")).toHaveCount(19);
+  await expect(page.locator("#status")).toContainText("Finished", { timeout: 300_000 });
+  await expect(page.locator("#stages li[data-state='failed']")).toHaveCount(0);
+  await expect(page.locator("#fake-banner")).toBeVisible(); // the fixture server runs in fake mode: said on screen
+  await expect(page.locator("#gemma")).toContainText("nothing here came from a model");
+  await expect(page.locator("#lines tbody tr").first()).toBeVisible();
+  expect(await axeViolations(page)).toEqual([]);
+  const href = await page.locator("#review-link").getAttribute("href");
+  expect(href).toMatch(/index\.html\?p=[0-9a-f]{12}$/);
+  await page.locator("#review-link").focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#workspace")).toBeVisible();
+});
