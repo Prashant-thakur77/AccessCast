@@ -1,0 +1,116 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e15_asr",
+ "split": "dev",
+ "passed": true,
+ "git_commit": "2e023140ebd1c34c073e0104ec803c9a8d6e843a",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-16T20:13:29.598Z",
+ "finished_at": "2026-10-16T20:39:09.490Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "gpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "models": "openai/whisper-large-v3,openai/whisper-large-v3-turbo",
+  "n_per_lang": 100,
+  "gemma": false,
+  "boundary_truth": "synthesizer word boundaries (synthetic clips; D-003)",
+  "wer_normalisation": "lower-case, punctuation stripped"
+ },
+ "checks": {
+  "decision_made": true
+ },
+ "results": [],
+ "summary": {
+  "accuracy": {
+   "openai/whisper-large-v3": {
+    "en": {
+     "n": 100,
+     "wer": 0.0435,
+     "cer": 0.0211,
+     "rtf": 0.1873,
+     "timestamps": true,
+     "rtf_without_word_timestamps": true
+    },
+    "hi": {
+     "n": 100,
+     "wer": 0.2887,
+     "cer": 0.0938,
+     "rtf": 0.6073,
+     "timestamps": true,
+     "rtf_without_word_timestamps": true
+    },
+    "it": {
+     "n": 100,
+     "wer": 0.0289,
+     "cer": 0.0112,
+     "rtf": 0.1911,
+     "timestamps": true,
+     "rtf_without_word_timestamps": true
+    }
+   },
+   "openai/whisper-large-v3-turbo": {
+    "en": {
+     "n": 100,
+     "wer": 0.0445,
+     "cer": 0.0215,
+     "rtf": 0.0563,
+     "timestamps": true,
+     "rtf_without_word_timestamps": true
+    },
+    "hi": {
+     "n": 100,
+     "wer": 0.3235,
+     "cer": 0.1109,
+     "rtf": 0.1234,
+     "timestamps": true,
+     "rtf_without_word_timestamps": true
+    },
+    "it": {
+     "n": 100,
+     "wer": 0.0297,
+     "cer": 0.0094,
+     "rtf": 0.0465,
+     "timestamps": true,
+     "rtf_without_word_timestamps": true
+    }
+   }
+  },
+  "boundary_error": {
+   "openai/whisper-large-v3": {
+    "not_measured": "word timestamps do not fit this computer's memory (OutOfMemoryError)"
+   },
+   "openai/whisper-large-v3-turbo": {
+    "device": "cuda",
+    "raw": {
+     "n": 224,
+     "median_ms": 32.0,
+     "p95_ms": 480.0
+    },
+    "aligned": {
+     "n": 224,
+     "median_ms": 54.0,
+     "p95_ms": 339.0
+    }
+   }
+  },
+  "not_candidates": {
+   "openai/whisper-large-v3": "word timestamps do not fit this computer's memory (OutOfMemoryError)"
+  },
+  "decision": {
+   "asr_model": "openai/whisper-large-v3-turbo",
+   "aligner": true,
+   "guard_ms": 340
+  }
+ },
+ "error": null
+}
