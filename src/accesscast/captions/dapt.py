@@ -29,17 +29,38 @@ def _clock(ms: int) -> str:
     return f"{max(0, ms) / 1000:.3f}s"
 
 
-def build_dapt(items: Sequence[Item], *, script_type: str, represents: str, lang: str,
-               end_of: Callable[[Item], int] | None = None) -> str:
-    tt = ET.Element(f"{{{TT}}}tt", {
-        f"{{{XML}}}lang": lang, f"{{{TTP}}}contentProfiles": PROFILE, f"{{{DAPTM}}}scriptType": script_type,
-        f"{{{DAPTM}}}scriptRepresents": represents, f"{{{TTP}}}timeBase": "media"})
+def build_dapt(
+    items: Sequence[Item],
+    *,
+    script_type: str,
+    represents: str,
+    lang: str,
+    end_of: Callable[[Item], int] | None = None,
+) -> str:
+    tt = ET.Element(
+        f"{{{TT}}}tt",
+        {
+            f"{{{XML}}}lang": lang,
+            f"{{{TTP}}}contentProfiles": PROFILE,
+            f"{{{DAPTM}}}scriptType": script_type,
+            f"{{{DAPTM}}}scriptRepresents": represents,
+            f"{{{TTP}}}timeBase": "media",
+        },
+    )
     body = ET.SubElement(tt, f"{{{TT}}}body")
     for k, it in enumerate(sorted(items, key=lambda i: i.anchor_ms)):
         begin = it.anchor_ms
         end = end_of(it) if end_of else it.slot.end_ms
-        div = ET.SubElement(body, f"{{{TT}}}div", {f"{{{XML}}}id": f"e{k + 1}", "begin": _clock(begin),
-                                                   "end": _clock(max(end, begin + 1)), f"{{{DAPTM}}}represents": represents})
+        div = ET.SubElement(
+            body,
+            f"{{{TT}}}div",
+            {
+                f"{{{XML}}}id": f"e{k + 1}",
+                "begin": _clock(begin),
+                "end": _clock(max(end, begin + 1)),
+                f"{{{DAPTM}}}represents": represents,
+            },
+        )
         p = ET.SubElement(div, f"{{{TT}}}p", {f"{{{XML}}}lang": it.lang})
         p.text = it.text.replace("\n", " ")
         if it.tts is not None and script_type == "asRecorded":
@@ -47,24 +68,42 @@ def build_dapt(items: Sequence[Item], *, script_type: str, represents: str, lang
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(tt, encoding="unicode")
 
 
-def export_all(out_dir: Path, ad_en: Sequence[Item], sdh: Sequence[Item], subs: dict[str, Sequence[Item]],
-               end_of_ad: Callable[[Item], int] | None = None) -> list[Path]:
+def export_all(
+    out_dir: Path,
+    ad_en: Sequence[Item],
+    sdh: Sequence[Item],
+    subs: dict[str, Sequence[Item]],
+    end_of_ad: Callable[[Item], int] | None = None,
+) -> list[Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     files = []
     if ad_en:
         f = out_dir / "description.en.asRecorded.ttml"
-        atomic_write_text(f, build_dapt(ad_en, script_type="asRecorded", represents="visual.nonText", lang="en",
-                                        end_of=end_of_ad))
+        atomic_write_text(
+            f,
+            build_dapt(
+                ad_en, script_type="asRecorded", represents="visual.nonText", lang="en", end_of=end_of_ad
+            ),
+        )
         files.append(f)
     if sdh:
         f = out_dir / "transcript.en.originalTranscript.ttml"
-        atomic_write_text(f, build_dapt([i for i in sdh if "sound_tag" not in i.flags], script_type="originalTranscript",
-                                        represents="audio.dialogue", lang="en"))
+        atomic_write_text(
+            f,
+            build_dapt(
+                [i for i in sdh if "sound_tag" not in i.flags],
+                script_type="originalTranscript",
+                represents="audio.dialogue",
+                lang="en",
+            ),
+        )
         files.append(f)
     for lang, items in subs.items():
         if items:
             f = out_dir / f"transcript.{lang}.translatedTranscript.ttml"
-            atomic_write_text(f, build_dapt(items, script_type="translatedTranscript", represents="audio.dialogue",
-                                            lang=lang))
+            atomic_write_text(
+                f,
+                build_dapt(items, script_type="translatedTranscript", represents="audio.dialogue", lang=lang),
+            )
             files.append(f)
     return files

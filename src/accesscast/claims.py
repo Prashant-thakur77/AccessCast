@@ -64,11 +64,15 @@ def strip_non_prose(text: str) -> str:
     text = re.sub(r"\]\([^)]*\)", "]", text)  # markdown link targets
     text = re.sub(r"https?://\S+", " ", text)
     text = _PENDING.sub(" ", text)
-    text = re.sub(r"\b[A-Za-z]+[-_.]?\d[\w.\-]*\b", " ", text)  # ids and names: e01, AD001, gemma-4-31B, v1, MI300X
+    text = re.sub(
+        r"\b[A-Za-z]+[-_.]?\d[\w.\-]*\b", " ", text
+    )  # ids and names: e01, AD001, gemma-4-31B, v1, MI300X
     text = re.sub(r"\b\d{1,2}:\d{2}(?:[–-]\d{1,2}:\d{2})?\b", " ", text)  # clock times in scripts: 0:12–0:30
     text = re.sub(r"§\s?\d[\d.]*", " ", text)
     text = re.sub(r"\b\d+(?:\.\d+)?B\b", " ", text)  # model sizes in names: 31B, 82M handled above
-    text = re.sub(r"\b\d{1,2}\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s\d{4}\b", " ", text)  # dates
+    text = re.sub(
+        r"\b\d{1,2}\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s\d{4}\b", " ", text
+    )  # dates
     return text
 
 
@@ -111,7 +115,9 @@ def check(root: Path, *, strict_placeholders: bool = False) -> CheckResult:
                     res.fail(f"{c.claim_id}: {ev.path} missing")
                     continue
                 if sha256_file(p) != ev.sha256:
-                    res.fail(f"{c.claim_id}: {ev.path} changed since the claim was registered (sha256 mismatch)")
+                    res.fail(
+                        f"{c.claim_id}: {ev.path} changed since the claim was registered (sha256 mismatch)"
+                    )
                     continue
                 try:
                     val = resolve_pointer(json.loads(p.read_text(encoding="utf-8")), ev.pointer)
@@ -136,11 +142,14 @@ def check(root: Path, *, strict_placeholders: bool = False) -> CheckResult:
         text = p.read_text(encoding="utf-8")
         for m in _PENDING.finditer(text):
             res.pending.append(f"{rel}: {m.group(1)}")
-            if m.group(1) not in ids and not m.group(1).startswith(("site.", "video.", "deck.", "results.", "amd.",
-                                                                     "negative.")):
+            if m.group(1) not in ids and not m.group(1).startswith(
+                ("site.", "video.", "deck.", "results.", "amd.", "negative.")
+            ):
                 res.messages.append(f"note {rel}: placeholder {m.group(1)} has no claim yet")
         prose = strip_non_prose(text)
-        bad = sorted({m.group(0).strip() for m in _NUM.finditer(prose) if _norm_num(m.group(0)) not in allowed})
+        bad = sorted(
+            {m.group(0).strip() for m in _NUM.finditer(prose) if _norm_num(m.group(0)) not in allowed}
+        )
         if bad:
             res.fail(f"{rel}: unregistered numbers {bad[:12]}")
         else:

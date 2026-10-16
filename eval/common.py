@@ -60,11 +60,18 @@ def check_freeze() -> dict[str, Any]:
             f"refusing a test-set run: frozen files changed since {frozen['tag']}: {changed[:5]}"
         )
     # All pipeline code, not only prompts: any change under src/ since the freeze commit (committed or not) refuses.
-    diff = subprocess.run(["git", "diff", "--name-only", frozen["commit"], "--", "src/"], cwd=REPO_ROOT,
-                          capture_output=True, text=True, check=False)
+    diff = subprocess.run(
+        ["git", "diff", "--name-only", frozen["commit"], "--", "src/"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
     if diff.returncode != 0 or diff.stdout.strip():
-        raise SystemExit(f"refusing a test-set run: src/ changed since {frozen['tag']}: "
-                         f"{diff.stdout.split()[:5] or diff.stderr.strip()[:200]}")
+        raise SystemExit(
+            f"refusing a test-set run: src/ changed since {frozen['tag']}: "
+            f"{diff.stdout.split()[:5] or diff.stderr.strip()[:200]}"
+        )
     return frozen
 
 
@@ -83,6 +90,20 @@ def environment() -> dict[str, Any]:
             env["gpu"] = "AMD Instinct MI300X" if "MI300X" in p.stdout else "AMD GPU"
     except (FileNotFoundError, subprocess.TimeoutExpired, json.JSONDecodeError):
         env["gpu"] = None
+    # Whatever ran the non-Gemma workers is recorded as found (D-021: no droplet; workers ran on our workstation).
+    env["worker_device"] = os.environ.get("ACCESSCAST_WORKER_DEVICE", "cpu")
+    try:
+        p = subprocess.run(
+            ["nvidia-smi", "--query-gpu=name", "--format=csv,noheader"],
+            capture_output=True,
+            text=True,
+            timeout=20,
+            check=False,
+        )
+        if p.returncode == 0 and p.stdout.strip():
+            env["workstation_gpu"] = p.stdout.strip()
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        pass
     lock = REPO_ROOT / "deploy" / "versions.lock"
     if lock.exists():
         env["versions_lock"] = dict(

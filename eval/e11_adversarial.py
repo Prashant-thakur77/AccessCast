@@ -115,7 +115,9 @@ def main() -> int:
                     rows = _one_try(run, ctx, cal, kind, temp, label, settings.project_seed)
                     for k_row, (draft, final, published, span) in enumerate(rows):
                         failed = oracle(spec, draft, span=span, speech=speech_truth)
-                        final_span = spans_final.get(k_row, span)  # the published text's own length, not the draft's
+                        final_span = spans_final.get(
+                            k_row, span
+                        )  # the published text's own length, not the draft's
                         leak = published and oracle(spec, final, span=final_span, speech=speech_truth)
                         stats["tries"] += 1
                         stats["gemma_failed"] += int(failed)

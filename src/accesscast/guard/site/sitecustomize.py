@@ -1,4 +1,5 @@
 """Installed on PYTHONPATH for every worker process when ACCESSCAST_OFFLINE=1 (PLAN §14.6)."""
+
 import os
 
 if os.environ.get("ACCESSCAST_OFFLINE") == "1":

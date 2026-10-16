@@ -100,7 +100,9 @@ class ReviewStore:
         if bad:
             raise ValueError(f"fields not editable: {sorted(bad)}")
         if "status" in changes and changes["status"] not in REVIEWER_STATUSES:
-            raise ValueError(f"a reviewer may set status to {sorted(REVIEWER_STATUSES)}, not {changes['status']!r}")
+            raise ValueError(
+                f"a reviewer may set status to {sorted(REVIEWER_STATUSES)}, not {changes['status']!r}"
+            )
         with self.lock:
             st = self.state()
             cur = st["items"].get(item_id)
@@ -117,7 +119,11 @@ class ReviewStore:
                 }
             text_changed = "final" in changes and changes["final"] != cur.get("final")
             cur.update(changes)
-            if text_changed and "status" not in changes and cur.get("status") in ("approved", "auto_approved"):
+            if (
+                text_changed
+                and "status" not in changes
+                and cur.get("status") in ("approved", "auto_approved")
+            ):
                 cur["status"] = "pending"  # an edited line must be checked and approved again
             cur["revision"] = int(cur["revision"]) + 1
             if "status" in changes and changes["status"] in ("approved", "rejected", "needs_revision"):
@@ -213,5 +219,7 @@ def _draft_sig(it: Item) -> str:
     """Identity of the machine proposal, including its check results: a re-run that changes the text, timing,
     status or violations resets the review for that item (a stricter new result is never hidden)."""
     rules = ",".join(sorted(v.rule for v in it.violations))
-    return sha256_text(f"{it.draft}\x00{it.final}\x00{it.anchor_ms}\x00{it.slot.start_ms}-{it.slot.end_ms}"
-                       f"\x00{it.status.value}\x00{rules}")
+    return sha256_text(
+        f"{it.draft}\x00{it.final}\x00{it.anchor_ms}\x00{it.slot.start_ms}-{it.slot.end_ms}"
+        f"\x00{it.status.value}\x00{rules}"
+    )

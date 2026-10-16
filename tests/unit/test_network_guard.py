@@ -4,7 +4,7 @@ import sys
 
 
 def test_guard_blocks_dns_connect_udp_and_allows_loopback():
-    code = r'''
+    code = r"""
 import socket, json
 from accesscast.guard import network as g
 g.install()
@@ -24,7 +24,7 @@ srv = socket.socket(); srv.bind(("127.0.0.1", 0)); srv.listen(1)
 c = socket.socket(); c.connect(("127.0.0.1", srv.getsockname()[1])); out["loopback"] = "ok"
 out["count"] = len(g.BLOCKED)
 print(json.dumps(out))
-'''
+"""
     p = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, check=True)
     import json
 

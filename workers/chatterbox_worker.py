@@ -47,7 +47,12 @@ def synth(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
         for i, line in enumerate(p["lines"]):
             if line["lang"] not in LANGS:
                 raise ValueError(f"unsupported TTS language {line['lang']!r} (no fallback)")
-            seed = int(hashlib.sha256(f"{line['voice']}:{line.get('speed', 1.0)}:{line['text']}".encode()).hexdigest()[:8], 16)
+            seed = int(
+                hashlib.sha256(
+                    f"{line['voice']}:{line.get('speed', 1.0)}:{line['text']}".encode()
+                ).hexdigest()[:8],
+                16,
+            )
             torch.manual_seed(seed)
             catcher.hit = False
             wav = _model.generate(line["text"], language_id=line["lang"])
@@ -58,11 +63,24 @@ def synth(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
                 fh.write(buf.getvalue())
             dur = len(audio) / _model.sr
             t_audio += dur
-            out.append({"id": line["id"], "duration_ms": round(dur * 1000), "path": line["out"], "eos_forced": catcher.hit})
+            out.append(
+                {
+                    "id": line["id"],
+                    "duration_ms": round(dur * 1000),
+                    "path": line["out"],
+                    "eos_forced": catcher.hit,
+                }
+            )
             event("progress", done=i + 1, total=len(p["lines"]))
     wall = timings["tts"]["wall_s"]
-    return {"items": out, "engine": "chatterbox-multilingual", "device": dev, "timing": timings,
-            "rtf": round(wall / t_audio, 4) if t_audio else None, "watermark": "perth (imperceptible)"}
+    return {
+        "items": out,
+        "engine": "chatterbox-multilingual",
+        "device": dev,
+        "timing": timings,
+        "rtf": round(wall / t_audio, 4) if t_audio else None,
+        "watermark": "perth (imperceptible)",
+    }
 
 
 if __name__ == "__main__":

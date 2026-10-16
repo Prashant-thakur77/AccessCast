@@ -17,8 +17,13 @@ from typing import Any
 _LOCK = threading.Lock()
 BLOCKED: list[dict[str, str]] = []
 _INSTALLED = False
-OFFLINE_ENV = {"HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1", "HF_DATASETS_OFFLINE": "1",
-               "VLLM_NO_USAGE_STATS": "1", "DO_NOT_TRACK": "1"}
+OFFLINE_ENV = {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "HF_DATASETS_OFFLINE": "1",
+    "VLLM_NO_USAGE_STATS": "1",
+    "DO_NOT_TRACK": "1",
+}
 
 
 def _is_loopback(host: Any) -> bool:

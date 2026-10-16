@@ -40,6 +40,14 @@ def device(require_rocm: bool) -> str:
         return "cuda"
     if require_rocm:
         raise RuntimeError("require_rocm: no ROCm (HIP) GPU visible to torch; refusing CPU fallback")
+    # Off the droplet a local GPU is used only when asked for, and the device is recorded in every response.
+    want = os.environ.get("ACCESSCAST_WORKER_DEVICE", "cpu")
+    if want == "gpu":
+        if not torch.cuda.is_available():
+            raise RuntimeError("ACCESSCAST_WORKER_DEVICE=gpu but torch sees no GPU; refusing CPU fallback")
+        return "cuda"
+    if want != "cpu":
+        raise RuntimeError(f"ACCESSCAST_WORKER_DEVICE must be cpu or gpu, not {want!r}")
     return "cpu"
 
 

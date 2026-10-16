@@ -37,3 +37,14 @@ def test_unknown_sound_window_is_treated_as_speech():
     unknown = [SoundEvent(start_ms=1000, end_ms=6000, label="unknown")]
     g = build_gaps([], [], unknown, SCENES, 7000, guard_ms=100, min_gap_ms=1200)
     assert all(not (x.start_ms < 6000 and x.end_ms > 1000) for x in g.gaps)
+
+
+def test_words_outside_vad_are_dropped_as_hallucination():
+    from accesscast.analysis.gaps import gate_words_by_vad
+
+    words = make_words([("Thank", 500, 5100), ("hello", 8000, 8400), ("there", 8500, 8900)])
+    vad = [VadSegment(start_ms=7900, end_ms=9000)]
+    kept, dropped = gate_words_by_vad(words, vad, pad_ms=400)
+    assert [w.w for w in kept] == ["hello", "there"] and [w.i for w in kept] == [0, 1]
+    assert [w.w for w in dropped] == ["Thank"]
+    assert gate_words_by_vad(words, [], pad_ms=400)[0] == []  # no speech heard at all: nothing kept

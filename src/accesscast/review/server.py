@@ -93,23 +93,38 @@ def create_app(settings: Settings) -> FastAPI:
         ctx.is_reviewer_edit = True
         ctx.tts_duration_ms = measured_ms
         store = ReviewStore(p.root)
-        ctx.other_items = [o for o in store.merged().values() if o.kind == it.kind and o.lang == it.lang and not o.extended]
+        ctx.other_items = [
+            o for o in store.merged().values() if o.kind == it.kind and o.lang == it.lang and not o.extended
+        ]
         cand = it.model_copy(update={"final": text, "tts": None if measured_ms is None else it.tts})
-        rules = {ItemKind.AD: ad_rules(it.extended), ItemKind.AD_TRANSLATION: ad_rules(it.extended),
-                 ItemKind.SDH: SDH_RULES, ItemKind.EASY: EASY_RULES, ItemKind.SUBTITLE: SUBTITLE_RULES,
-                 ItemKind.VOICEOVER: VOICEOVER_RULES}[it.kind]
+        rules = {
+            ItemKind.AD: ad_rules(it.extended),
+            ItemKind.AD_TRANSLATION: ad_rules(it.extended),
+            ItemKind.SDH: SDH_RULES,
+            ItemKind.EASY: EASY_RULES,
+            ItemKind.SUBTITLE: SUBTITLE_RULES,
+            ItemKind.VOICEOVER: VOICEOVER_RULES,
+        }[it.kind]
         res = run_rules(cand, ctx, rules)
         from accesscast.verify import nlp
 
         words = nlp.word_count(text)
         dur = measured_ms if measured_ms is not None else rules_ad.estimated_duration_ms(cand, ctx)
         avail = it.slot.end_ms - it.anchor_ms
-        return {"ok": res.ok, "violations": [f.to_model().model_dump() for f in res.violations],
-                "warnings": [f.to_model().model_dump() for f in res.warnings],
-                "meter": {"words": words, "words_max": it.budget.words_max if it.budget else None,
-                          "seconds": round(dur / 1000, 2),
-                          "seconds_max": round(max(0, avail - 300) / 1000, 2) if it.kind == ItemKind.AD and not it.extended else None,
-                          "measured": measured_ms is not None}}
+        return {
+            "ok": res.ok,
+            "violations": [f.to_model().model_dump() for f in res.violations],
+            "warnings": [f.to_model().model_dump() for f in res.warnings],
+            "meter": {
+                "words": words,
+                "words_max": it.budget.words_max if it.budget else None,
+                "seconds": round(dur / 1000, 2),
+                "seconds_max": round(max(0, avail - 300) / 1000, 2)
+                if it.kind == ItemKind.AD and not it.extended
+                else None,
+                "measured": measured_ms is not None,
+            },
+        }
 
     @app.get("/")
     def root() -> RedirectResponse:
@@ -124,8 +139,16 @@ def create_app(settings: Settings) -> FastAPI:
                     info = read_json(d / "project.json")
                     st = ReviewStore(d).state()["items"]
                     pending = sum(1 for v in st.values() if v.get("status") in ("pending", "needs_revision"))
-                    out.append({"id": d.name, "title": info["source_name"], "duration_ms": info["duration_ms"],
-                                "pending": pending, "items": len(st), "fake": info.get("worker_mode") == "fake"})
+                    out.append(
+                        {
+                            "id": d.name,
+                            "title": info["source_name"],
+                            "duration_ms": info["duration_ms"],
+                            "pending": pending,
+                            "items": len(st),
+                            "fake": info.get("worker_mode") == "fake",
+                        }
+                    )
         return out
 
     @app.get("/api/projects/{pid}/items")
@@ -134,24 +157,36 @@ def create_app(settings: Settings) -> FastAPI:
         store = ReviewStore(p.root)
         st = store.state()
         merged = sorted(store.merged().values(), key=lambda i: (i.anchor_ms, i.id))
-        return {"items": [item_json(i, st["items"]) for i in merged], "exports_stale": st.get("exports_stale", True),
-                "state_sha256": store.state_sha256()}
+        return {
+            "items": [item_json(i, st["items"]) for i in merged],
+            "exports_stale": st.get("exports_stale", True),
+            "state_sha256": store.state_sha256(),
+        }
 
     @app.get("/api/projects/{pid}/analysis")
     def analysis(pid: str) -> dict[str, Any]:
         p = proj(pid)
         info = read_json(p.p("project.json"))
-        out: dict[str, Any] = {"duration_ms": info["duration_ms"], "fps": info["fps"], "title": info["source_name"],
-                               "fake": info.get("worker_mode") == "fake"}
+        out: dict[str, Any] = {
+            "duration_ms": info["duration_ms"],
+            "fps": info["fps"],
+            "title": info["source_name"],
+            "fake": info.get("worker_mode") == "fake",
+        }
         for name in ("words", "gaps", "scenes"):
             f = p.p("analysis", f"{name}.json")
             out[name] = read_json(f) if f.exists() else None
         evidence = {}
         for f in sorted(p.p("evidence").glob("*/evidence.json")):
             ev = read_json(f)
-            evidence[ev["scene_id"]] = {"frames": ev["frames"], "frame_ms": ev["frame_ms"],
-                                        "facts": ev["visible_facts"], "on_screen_text": ev["on_screen_text"],
-                                        "characters": ev["characters"], "status": ev["status"]}
+            evidence[ev["scene_id"]] = {
+                "frames": ev["frames"],
+                "frame_ms": ev["frame_ms"],
+                "facts": ev["visible_facts"],
+                "on_screen_text": ev["on_screen_text"],
+                "characters": ev["characters"],
+                "status": ev["status"],
+            }
         out["evidence"] = evidence
         return out
 
@@ -166,24 +201,51 @@ def create_app(settings: Settings) -> FastAPI:
         changes = {k: v for k, v in body.model_dump().items() if k != "expected_revision" and v is not None}
         current = int(store.state()["items"].get(item_id, {}).get("revision", 0))
         if current != body.expected_revision:
-            return JSONResponse({"error": "conflict", "detail": "Changed elsewhere; reloaded.",
-                                 "current_revision": current}, status_code=409)
+            return JSONResponse(
+                {"error": "conflict", "detail": "Changed elsewhere; reloaded.", "current_revision": current},
+                status_code=409,
+            )
         if changes.get("status") == "approved":
             text = changes.get("final", it.text)
             check = verify_text(p, it, text, measured_ms=_measured(it, text))
             if not check["ok"] and not (changes.get("override_reason") or "").strip():
-                return JSONResponse({"error": "has_errors", "detail": "This line still fails checks. Fix it, or "
-                                     "tick override and write a reason.", "check": check}, status_code=422)
+                return JSONResponse(
+                    {
+                        "error": "has_errors",
+                        "detail": "This line still fails checks. Fix it, or "
+                        "tick override and write a reason.",
+                        "check": check,
+                    },
+                    status_code=422,
+                )
         try:
-            cur = store.patch(item_id, body.expected_revision, changes, who=_reviewer(request),
-                              reason=changes.get("override_reason") or "")
+            cur = store.patch(
+                item_id,
+                body.expected_revision,
+                changes,
+                who=_reviewer(request),
+                reason=changes.get("override_reason") or "",
+            )
         except RevisionConflict as e:
-            return JSONResponse({"error": "conflict", "detail": "Changed elsewhere; reloaded.",
-                                 "current_revision": e.current}, status_code=409)
+            return JSONResponse(
+                {
+                    "error": "conflict",
+                    "detail": "Changed elsewhere; reloaded.",
+                    "current_revision": e.current,
+                },
+                status_code=409,
+            )
         except (ValueError, KeyError) as e:
             raise HTTPException(400, str(e)) from e
-        return JSONResponse({"item_id": item_id, "revision": cur["revision"], "status": cur["status"],
-                             "final": cur.get("final"), "state_sha256": store.state_sha256()})
+        return JSONResponse(
+            {
+                "item_id": item_id,
+                "revision": cur["revision"],
+                "status": cur["status"],
+                "final": cur.get("final"),
+                "state_sha256": store.state_sha256(),
+            }
+        )
 
     @app.post("/api/projects/{pid}/items/{item_id}/verify")
     def reverify(pid: str, item_id: str, body: TextBody) -> dict[str, Any]:
@@ -207,9 +269,12 @@ def create_app(settings: Settings) -> FastAPI:
         voiced = synthesize([it], p.p("tts"), p.events, voice_for=voices)[0]
         assert voiced.tts is not None
         check = verify_text(p, it, body.text, measured_ms=voiced.tts.duration_ms)
-        return {"audio": f"/media/{pid}/tts/{voiced.tts.sha256}.wav", "duration_ms": voiced.tts.duration_ms,
-                "start_ms": it.anchor_ms + (150 if it.kind in (ItemKind.AD, ItemKind.AD_TRANSLATION) else 0),
-                "check": check}
+        return {
+            "audio": f"/media/{pid}/tts/{voiced.tts.sha256}.wav",
+            "duration_ms": voiced.tts.duration_ms,
+            "start_ms": it.anchor_ms + (150 if it.kind in (ItemKind.AD, ItemKind.AD_TRANSLATION) else 0),
+            "check": check,
+        }
 
     @app.post("/api/projects/{pid}/items")
     def manual(pid: str, body: ManualBody, request: Request) -> dict[str, Any]:
@@ -217,10 +282,20 @@ def create_app(settings: Settings) -> FastAPI:
         store = ReviewStore(p.root)
         n = sum(1 for i in store.merged().values() if i.source == "manual") + 1
         kind = ItemKind(body.kind)
-        it = Item(id=f"{kind.value}.{body.lang}.m{n:03d}", kind=kind, lang=body.lang, audiences=["blind"],
-                  anchor_ms=body.anchor_ms, slot=Slot(start_ms=body.anchor_ms, end_ms=body.end_ms),
-                  budget=Budget(words_max=40, seconds_max=(body.end_ms - body.anchor_ms) / 1000, wps_voice=2.6)
-                  if kind == ItemKind.AD else None, draft=body.text, source="manual", status=ItemStatus.PENDING)
+        it = Item(
+            id=f"{kind.value}.{body.lang}.m{n:03d}",
+            kind=kind,
+            lang=body.lang,
+            audiences=["blind"],
+            anchor_ms=body.anchor_ms,
+            slot=Slot(start_ms=body.anchor_ms, end_ms=body.end_ms),
+            budget=Budget(words_max=40, seconds_max=(body.end_ms - body.anchor_ms) / 1000, wps_voice=2.6)
+            if kind == ItemKind.AD
+            else None,
+            draft=body.text,
+            source="manual",
+            status=ItemStatus.PENDING,
+        )
         store.add_manual(it, _reviewer(request))
         return {"item_id": it.id}
 
@@ -231,10 +306,18 @@ def create_app(settings: Settings) -> FastAPI:
 
         p = proj(pid)
         store = ReviewStore(p.root)
-        res = gate.evaluate(store.merged(), [v for v in AUDIENCE_VERSIONS if not v.startswith("blind.h")
-                                             and not v.startswith("blind.i")], store.state_sha256())
+        res = gate.evaluate(
+            store.merged(),
+            [v for v in AUDIENCE_VERSIONS if not v.startswith("blind.h") and not v.startswith("blind.i")],
+            store.state_sha256(),
+        )
         gate.write_validation(p.root, res)
-        body = {"ok": res.ok, "blocking": res.blocking, "human_reviewed": res.human_reviewed, "counts": res.counts}
+        body = {
+            "ok": res.ok,
+            "blocking": res.blocking,
+            "human_reviewed": res.human_reviewed,
+            "counts": res.counts,
+        }
         return JSONResponse(body, status_code=200 if res.ok else 409)
 
     @app.post("/api/projects/{pid}/render")
@@ -249,8 +332,12 @@ def create_app(settings: Settings) -> FastAPI:
             package(run)
         except PermissionError as e:
             return JSONResponse({"error": "refused", "detail": str(e)}, status_code=409)
-        return JSONResponse({"ok": all(v["ok"] for v in summary["versions"].values()),
-                             "versions": {k: v["ok"] for k, v in summary["versions"].items()}})
+        return JSONResponse(
+            {
+                "ok": all(v["ok"] for v in summary["versions"].values()),
+                "versions": {k: v["ok"] for k, v in summary["versions"].items()},
+            }
+        )
 
     @app.get("/media/{pid}/{path:path}")
     def media(pid: str, path: str) -> FileResponse:

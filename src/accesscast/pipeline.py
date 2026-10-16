@@ -196,7 +196,12 @@ def stage_shots(run: Run) -> None:
         if run.canned_dir is not None and (run.canned_dir / "shots.json").exists():
             shots = Shots.model_validate(read_json(run.canned_dir / "shots.json"))
         elif run.settings.worker_mode == "fake":
-            shots = Shots.model_validate({"detector": "fake-single", "shots": [{"shot_id": "SH001", "start_ms": 0, "end_ms": info.duration_ms}]})
+            shots = Shots.model_validate(
+                {
+                    "detector": "fake-single",
+                    "shots": [{"shot_id": "SH001", "start_ms": 0, "end_ms": info.duration_ms}],
+                }
+            )
         else:
             shots = _detect_shots(proj.p("media", "proxy480.mp4"), info.duration_ms)
         write_json(proj.p("analysis", "shots.json"), shots)
@@ -259,6 +264,7 @@ def _words(proj: Project) -> Words:
 
 
 def stage_asr(run: Run) -> None:
+    from accesscast.analysis.gaps import gate_words_by_vad
     from accesscast.workers_client import run_worker
 
     proj = run.project
@@ -273,16 +279,26 @@ def stage_asr(run: Run) -> None:
             res = run_worker(
                 "asr",
                 "transcribe",
-                {"audio": str(proj.p("media", "asr16k.wav")), "lang": "en", "align": True, "model": run.asr_model},
+                {
+                    "audio": str(proj.p("media", "asr16k.wav")),
+                    "lang": "en",
+                    "align": True,
+                    "model": run.asr_model,
+                },
                 proj.p("logs", "worker"),
                 proj.events,
                 require_rocm=run.require_rocm,
             )
             words = Words.model_validate(res["words"])
             vad = Vad.model_validate(res["vad"])
+            kept, dropped = gate_words_by_vad(words.words, vad.segments, C.ASR_VAD_GATE_PAD_MS)
+            words = words.model_copy(update={"words": kept})
             write_json(proj.p("analysis", "words_raw.json"), Words.model_validate(res["raw_words"]))
-            write_json(proj.p("analysis", "asr_meta.json"), {k: res[k] for k in ("timing", "device", "batch_size",
-                                                                                 "aligned_words", "chunks")})
+            meta = {k: res[k] for k in ("timing", "device", "batch_size", "aligned_words", "chunks")}
+            meta["dropped_outside_vad"] = [w.model_dump() for w in dropped]
+            write_json(proj.p("analysis", "asr_meta.json"), meta)
+            if dropped:
+                proj.events.emit("asr", "words_dropped_outside_vad", n=len(dropped))
         write_json(proj.p("analysis", "words.json"), words)
         write_json(proj.p("analysis", "vad.json"), vad)
 
@@ -299,9 +315,14 @@ def stage_asr_crosscheck(run: Run) -> None:
     if NO_AUDIO_MODEL():  # explicit dev-only mode (no E4B available): recorded, never silent
         with run.stage("asr_crosscheck"):
             proj.events.emit("asr_crosscheck", "skipped", reason="ACCESSCAST_AUDIO_MODEL=none (dev only)")
-            write_json(proj.p("analysis", "asr_crosscheck.json"),
-                       AsrCrosscheck(model="none: not run (ACCESSCAST_AUDIO_MODEL=none, dev only)",
-                                     threshold=C.ASR_CROSSCHECK_WER, chunks=[]))
+            write_json(
+                proj.p("analysis", "asr_crosscheck.json"),
+                AsrCrosscheck(
+                    model="none: not run (ACCESSCAST_AUDIO_MODEL=none, dev only)",
+                    threshold=C.ASR_CROSSCHECK_WER,
+                    chunks=[],
+                ),
+            )
         return
     with run.stage("asr_crosscheck"):
         chunks: list[AsrChunkCheck] = []
@@ -416,7 +437,9 @@ def stage_sounds(run: Run) -> None:
                         str(clip),
                     ]
                 )
-                if NO_AUDIO_MODEL():  # dev-only: loud non-speech windows are "other", recorded as energy-gate only
+                if (
+                    NO_AUDIO_MODEL()
+                ):  # dev-only: loud non-speech windows are "other", recorded as energy-gate only
                     events.append(SoundEvent(start_ms=s, end_ms=e, label="other", source="energy_gate"))
                     continue
                 try:
@@ -426,7 +449,9 @@ def stage_sounds(run: Run) -> None:
                     )
                     labels = [str(x) for x in r.obj.get("labels") or []]
                 except Exception as ex:
-                    labels = ["unknown"]  # fail closed: an unlabelled window is treated like speech (no description)
+                    labels = [
+                        "unknown"
+                    ]  # fail closed: an unlabelled window is treated like speech (no description)
                     rejected.append(f"error@{s}: {type(ex).__name__}")
                 ok = [x for x in labels if x in C.SOUND_VOCAB]
                 rejected += [x for x in labels if x not in C.SOUND_VOCAB and x != "unknown"]
@@ -440,8 +465,11 @@ def stage_sounds(run: Run) -> None:
                 merged.append(ev)
         write_json(
             proj.p("analysis", "sounds.json"),
-            Sounds(model="none: energy gate only (dev)" if NO_AUDIO_MODEL() else "google/gemma-4-E4B-it",
-                   events=merged, rejected_labels=rejected),
+            Sounds(
+                model="none: energy gate only (dev)" if NO_AUDIO_MODEL() else "google/gemma-4-E4B-it",
+                events=merged,
+                rejected_labels=rejected,
+            ),
         )
 
 

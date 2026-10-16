@@ -61,5 +61,7 @@ class RangeHandler(http.server.SimpleHTTPRequestHandler):
 
 def serve(directory: Path, port: int, host: str = "127.0.0.1") -> None:
     socketserver.ThreadingTCPServer.allow_reuse_address = True
-    with socketserver.ThreadingTCPServer((host, port), partial(RangeHandler, directory=str(directory))) as httpd:
+    with socketserver.ThreadingTCPServer(
+        (host, port), partial(RangeHandler, directory=str(directory))
+    ) as httpd:
         httpd.serve_forever()
