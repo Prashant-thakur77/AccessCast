@@ -32,16 +32,18 @@ Fake mode uses canned model outputs and says so on screen. It shows the pipeline
 
 ## Results
 
-### Headline: description lines that fit the pauses (E1)
-Test set: 10 W3C videos never used for tuning, 3 seeds, measured by a script that imports none of our checks against W3C's human caption timings.
+### Description in the pauses (E1): a negative result
+Test set: 10 W3C videos never used for tuning, 3 seeds, Gemma 4 31B on AMD Token Factory. The fit is measured by a script that imports none of our checks.
 
-| Arm | What changes | Lines that fit | Lines published | Sent to a person |
-|---|---|---|---|---|
-| A | Gemma 4, same plan, no checks | 0 of 6 | 6 | none |
-| B | + checks | 0 of 6 | 0 | 6 |
-| C | + Gemma repair | 0 of 6 | 6 | 0 |
+These videos leave almost no room for description between the words: 6 pauses long enough for a line, 10.5 seconds in 9.3 minutes of video, and 5 of the 10 videos have none at all. So the planner placed only 6 standard lines over the 3 seeds; everything else became extended description, where the video holds a frame while the line plays.
 
-95% interval for the gain from A to C, as a share of planned lines (bootstrap over videos): 0% to 0%. Coverage of W3C's human description positions (one of our lines within 3 seconds): A 4%, C 4%. Evidence: [`evidence/e01_verifier_ab.json`](evidence/e01_verifier_ab.json).
+| Arm | What changes | Lines that fit (W3C caption timings) | Lines that fit (energy speech detector) | Lines published | Sent to a person |
+|---|---|---|---|---|---|
+| A | Gemma 4, same plan, no checks | 0 of 6 | 6 | 6 | none |
+| B | + checks | 0 of 6 | — | 0 | 6 |
+| C | + Gemma repair | 0 of 6 | 6 | 6 | 0 |
+
+Every first draft failed at least one of our checks (arm B sent all of them to a person), and Gemma's repair made every one publishable (arm C). But the two independent speech references disagree on these lines, and with so few lines arms A and C come out the same. As pre-registered (`eval/PREREGISTRATION.md`, rule 4), E1 is reported here as a result that did not work, and the headline moves to the next measured experiment. Evidence: [`evidence/e01_verifier_ab.json`](evidence/e01_verifier_ab.json), [`evidence/e01_test_gap_census.json`](evidence/e01_test_gap_census.json).
 
 ### Other results
 <!-- results.more:start -->

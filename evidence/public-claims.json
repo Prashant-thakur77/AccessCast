@@ -822,6 +822,90 @@
    ]
   },
   {
+   "claim_id": "e1.census_minutes",
+   "text": "minutes of test video",
+   "value": 9.3,
+   "unit": "min",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e01_test_gap_census.json",
+     "sha256": "9c6e701c422cb578bf1e4e9cdf05469b94294c1d164c298c7dfe338078481458",
+     "pointer": "/summary/video_minutes"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "9.3"
+   ]
+  },
+  {
+   "claim_id": "e1.census_no_pause",
+   "text": "test videos with no pause long enough for description",
+   "value": 5,
+   "unit": "videos",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e01_test_gap_census.json",
+     "sha256": "9c6e701c422cb578bf1e4e9cdf05469b94294c1d164c298c7dfe338078481458",
+     "pointer": "/summary/videos_with_no_pause"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "5"
+   ]
+  },
+  {
+   "claim_id": "e1.census_pause_seconds",
+   "text": "seconds of pause in the 10 test videos",
+   "value": 10.5,
+   "unit": "s",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e01_test_gap_census.json",
+     "sha256": "9c6e701c422cb578bf1e4e9cdf05469b94294c1d164c298c7dfe338078481458",
+     "pointer": "/summary/pause_seconds"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "10.5"
+   ]
+  },
+  {
+   "claim_id": "e1.census_pauses",
+   "text": "pauses long enough for description in the 10 test videos",
+   "value": 6,
+   "unit": "pauses",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e01_test_gap_census.json",
+     "sha256": "9c6e701c422cb578bf1e4e9cdf05469b94294c1d164c298c7dfe338078481458",
+     "pointer": "/summary/pauses"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "6"
+   ]
+  },
+  {
    "claim_id": "e1.ci_hi",
    "text": "upper end of the 95% interval for (C−A)/L",
    "value": 0.0,
@@ -911,7 +995,9 @@
      "pointer": "/summary/pooled/A/lines_fit"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -930,7 +1016,9 @@
      "pointer": "/summary/pooled/B/lines_fit"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -949,9 +1037,53 @@
      "pointer": "/summary/pooled/C/lines_fit"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
+   ]
+  },
+  {
+   "claim_id": "e1.fit_energy_a",
+   "text": "lines that fit by an energy speech detector, arm A",
+   "value": 6,
+   "unit": "lines",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e01_verifier_ab.json",
+     "sha256": "71d5821c6bd8dfc3faffc377a83105475805e4583bb8be0ca552a1b6ada55cbb",
+     "pointer": "/summary/pooled/A/lines_fit_energy"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "6"
+   ]
+  },
+  {
+   "claim_id": "e1.fit_energy_c",
+   "text": "lines that fit by an energy speech detector, arm C",
+   "value": 6,
+   "unit": "lines",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e01_verifier_ab.json",
+     "sha256": "71d5821c6bd8dfc3faffc377a83105475805e4583bb8be0ca552a1b6ada55cbb",
+     "pointer": "/summary/pooled/C/lines_fit_energy"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "6"
    ]
   },
   {
@@ -968,7 +1100,9 @@
      "pointer": "/summary/pooled/A/lines_planned"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -987,7 +1121,9 @@
      "pointer": "/summary/pooled/A/lines_published"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1006,7 +1142,9 @@
      "pointer": "/summary/pooled/B/lines_published"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -1025,7 +1163,9 @@
      "pointer": "/summary/pooled/C/lines_published"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1044,7 +1184,9 @@
      "pointer": "/summary/pooled/B/sent_to_person"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1063,7 +1205,9 @@
      "pointer": "/summary/pooled/C/sent_to_person"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
