@@ -6,11 +6,11 @@
   var video = $("video");
 
   var STEPS = [
-    { key: "blind.en", who: "For someone who can't see the screen", role: null },
-    { key: "deaf.en", who: "For someone who can't hear", role: "sdh" },
-    { key: "easy.en", who: "For someone who wants simpler words", role: "easy" },
-    { key: "hi", who: "For someone who speaks Hindi", local: "हिन्दी बोलने वालों के लिए", lang: "hi", role: "subs" },
-    { key: "it", who: "For someone who speaks Italian", local: "Per chi parla italiano", lang: "it", role: "subs" }
+    { key: "blind.en", who: "For someone who can't see the screen", role: null, world: "blind" },
+    { key: "deaf.en", who: "For someone who can't hear", role: "sdh", world: "deaf" },
+    { key: "easy.en", who: "For someone who wants simpler words", role: "easy", world: "easy" },
+    { key: "hi", who: "For someone who speaks Hindi", local: "हिन्दी बोलने वालों के लिए", lang: "hi", role: "subs", world: "hi" },
+    { key: "it", who: "For someone who speaks Italian", local: "Per chi parla italiano", lang: "it", role: "subs", world: "it" }
   ];
   var DEFAULT_SEGMENT_MS = 20000; /* PLAN §13.4: a 20-second segment; index.json "segment_ms" overrides it. */
 
@@ -66,6 +66,7 @@
     var show = st.role ? AC.findTrack(v, st.role) : null;
     Object.keys(tracks).forEach(function (n) { tracks[n].track.mode = show && n === show.name ? "showing" : "hidden"; });
     $("who").textContent = st.who;
+    document.body.setAttribute("data-world", st.world);
     var loc = $("who-local");
     loc.textContent = st.local || "";
     if (st.lang) loc.setAttribute("lang", st.lang); else loc.removeAttribute("lang");
@@ -86,6 +87,7 @@
     setButtons();
     renderSteps();
     $("who").textContent = done ? "That was all five." : "Stopped.";
+    document.body.setAttribute("data-world", "paper");
     $("who-local").textContent = "";
     $("b-start").focus();
   }

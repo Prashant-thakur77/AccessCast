@@ -3,40 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Same clip, five ways</title>
+<script>document.documentElement.classList.add("js");</script>
+<title>Five ways: the same clip for each viewer</title>
 <meta name="description" content="The same short clip played once for each audience: description, captions, easy-read, Hindi and Italian.">
-<link rel="stylesheet" href="assets/player.css">
+<link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body data-world="paper">
 <a class="skip-link" href="#main">Skip to the main content</a>
-<header class="site">
-  <div class="wrap">
-    <p><strong>AccessCast</strong></p>
-    <nav aria-label="Pages">
-      <ul>
-        <li><a href="index.html">Player</a></li>
-        <li><a href="five-ways.html" aria-current="page">Same 20 seconds, five ways</a></li>
-        <li><a href="proof.html">Proof</a></li>
-      </ul>
-    </nav>
-  </div>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="15"/><circle cx="21" cy="11" r="5"/></svg>AccessCast</a>
+  <nav aria-label="Pages">
+    <ul>
+      <li><a href="watch.html">Watch</a></li>
+      <li><a href="five-ways.html" aria-current="page">Five ways</a></li>
+      <li><a href="proof.html">Proof</a></li>
+    </ul>
+  </nav>
 </header>
 
 <main id="main" class="wrap">
-  <h1>Same 20 seconds, five ways</h1>
-  <p>One clip, played once for each kind of viewer, one after another.</p>
-  <p id="segment" class="muted"></p>
-  <div id="load-error" class="error" role="alert" hidden></div>
-  <div id="disclosure" class="disclosure"></div>
-
-  <div class="controls">
-    <button type="button" id="b-start" class="primary">Start</button>
-    <button type="button" id="b-skip" disabled>Skip to the next one</button>
-    <button type="button" id="b-stop" disabled>Stop</button>
+  <div class="page-head">
+    <p class="micro">One clip · five viewers</p>
+    <h1 class="display l">Same clip. Five ways.</h1>
+    <p class="lede">One clip, played once for each kind of viewer, one after another. The page changes colour for each one.</p>
+    <p id="segment" class="muted"></p>
+    <div id="load-error" class="error" role="alert" hidden></div>
+    <div id="disclosure" class="disclosure"></div>
+    <div class="controls">
+      <button type="button" id="b-start" class="pill big">Start <span class="dot" aria-hidden="true"></span></button>
+      <button type="button" id="b-skip" class="pill big ghost" disabled>Skip to the next one</button>
+      <button type="button" id="b-stop" class="pill big ghost" disabled>Stop</button>
+    </div>
+    <p class="muted">Keyboard: Tab to a button, then press Enter or Space. Escape also stops.</p>
   </div>
-  <p class="muted">Keyboard: Tab to a button, then press Enter or Space. Escape also stops.</p>
 
-  <p id="who" class="who" aria-live="polite"></p>
+  <p id="who" class="who-big" aria-live="polite"></p>
   <p id="who-local" class="muted"></p>
 
   <div class="video-frame">
@@ -44,12 +47,15 @@
   </div>
   <p id="status" class="now" role="status" aria-live="polite"></p>
 
-  <h2 id="steps-h">The five versions</h2>
-  <ol id="steps" class="steps" aria-labelledby="steps-h"></ol>
+  <section class="proof-sec" aria-labelledby="steps-h">
+    <h2 id="steps-h" class="display m">The five versions</h2>
+    <ol id="steps" class="steps" aria-labelledby="steps-h"></ol>
+  </section>
 </main>
 
 <footer class="site"><div class="wrap" id="footer"></div></footer>
 <script src="assets/common.js"></script>
+<script src="assets/motion.js"></script>
 <script src="assets/five-ways.js"></script>
 </body>
 </html>

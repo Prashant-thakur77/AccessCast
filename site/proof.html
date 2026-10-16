@@ -3,45 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AccessCast proof</title>
+<script>document.documentElement.classList.add("js");</script>
+<title>Proof: code checks every line</title>
 <meta name="description" content="Watch our checks block bad lines from Gemma before a viewer hears them.">
-<link rel="stylesheet" href="assets/player.css">
+<link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body data-world="blind">
 <a class="skip-link" href="#main">Skip to the main content</a>
-<header class="site">
-  <div class="wrap">
-    <p><strong>AccessCast</strong></p>
-    <nav aria-label="Pages">
-      <ul>
-        <li><a href="index.html">Player</a></li>
-        <li><a href="five-ways.html">Same 20 seconds, five ways</a></li>
-        <li><a href="proof.html" aria-current="page">Proof</a></li>
-      </ul>
-    </nav>
-  </div>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="15"/><circle cx="21" cy="11" r="5"/></svg>AccessCast</a>
+  <nav aria-label="Pages">
+    <ul>
+      <li><a href="watch.html">Watch</a></li>
+      <li><a href="five-ways.html">Five ways</a></li>
+      <li><a href="proof.html" aria-current="page">Proof</a></li>
+    </ul>
+  </nav>
 </header>
 
 <main id="main" class="wrap">
-  <h1>Proof: code checks every line</h1>
-  <p>We give Gemma a hard case on purpose. We ask it several times, with a fresh seed each time. Our checks look at every answer. This page shows what Gemma wrote each time, which check blocked it, and whether it reached a viewer.</p>
+  <div class="page-head">
+    <p class="micro">We attack our own model</p>
+    <h1 class="display l">Proof: code checks every line.</h1>
+    <p class="lede">We give Gemma a hard case on purpose. We ask it several times, with a fresh seed each time. Our checks look at every answer. This page shows what Gemma wrote each time, which check blocked it, and whether it reached a viewer.</p>
+  </div>
 
-  <section aria-labelledby="live-h">
-    <h2 id="live-h">Run it live</h2>
+  <section class="proof-sec" aria-labelledby="live-h">
+    <h2 id="live-h" class="display m">Run it live</h2>
     <p id="live-state"></p>
-    <button type="button" id="b-attack" class="primary" disabled>Run the attack</button>
+    <button type="button" id="b-attack" class="pill big" disabled>Run the attack <span class="dot" aria-hidden="true"></span></button>
     <p id="status" class="now" role="status" aria-live="polite"></p>
     <div id="live-result"></div>
   </section>
 
-  <section aria-labelledby="last-h">
-    <h2 id="last-h">Last recorded run</h2>
+  <section class="proof-sec" aria-labelledby="last-h">
+    <h2 id="last-h" class="display m">Last recorded run</h2>
     <div id="last-run"><p>Loading…</p></div>
   </section>
 </main>
 
 <footer class="site"><div class="wrap" id="footer"></div></footer>
 <script src="assets/common.js"></script>
+<script src="assets/motion.js"></script>
 <script src="assets/proof.js"></script>
 </body>
 </html>
