@@ -2,19 +2,18 @@
  "schema": "accesscast/evidence/v1",
  "experiment": "e16_ui_a11y",
  "split": "none",
- "passed": true,
- "git_commit": "aa6bc55cb80bafc54cab77381fedb4bb6146c5f1",
+ "passed": false,
+ "git_commit": "f6eca3c43e070e250dc24f1d7afb2f179e35fc9f",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-16T17:06:19.996Z",
- "finished_at": "2026-10-16T17:08:03.461Z",
+ "started_at": "2026-10-16T17:28:28.791Z",
+ "finished_at": "2026-10-16T17:30:22.567Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
   "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
   "gpu": null,
   "worker_device": "cpu",
-  "workstation_gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
   "versions_lock": {
    "image": "vllm/vllm-openai-rocm:gemma4",
    "digest": "<pending: recorded on first droplet run>"
@@ -25,13 +24,13 @@
   "tools": "Playwright + @axe-core/playwright (chromium)"
  },
  "checks": {
-  "player_suite": true,
+  "player_suite": false,
   "review_suite": true
  },
  "results": [
   {
    "suite": "player",
-   "ok": true,
+   "ok": false,
    "tests": [
     {
      "title": "proof page never fakes a run",
@@ -83,7 +82,7 @@
     },
     {
      "title": "landing: the listener mascot is decorative and reacts to the description toggle",
-     "status": "passed"
+     "status": "failed"
     },
     {
      "title": "player: picker and drawer open",
@@ -126,7 +125,7 @@
      "status": "passed"
     }
    ],
-   "passed": 23,
+   "passed": 22,
    "total": 23
   },
   {
@@ -160,7 +159,7 @@
  ],
  "summary": {
   "player": {
-   "passed": 23,
+   "passed": 22,
    "total": 23
   },
   "review": {

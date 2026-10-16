@@ -36,7 +36,7 @@ def load_audio(path: str) -> np.ndarray:
 
 def cut_points(audio: np.ndarray, chunk_s: float = 28.0, search_s: float = 2.0) -> list[int]:
     """Cut near the quietest frame around every chunk_s; chunk_s + search_s stays within Whisper's 30 s window
-    (a longer chunk switches transformers to long-form decoding, which ran a 6 GB GPU out of memory)."""
+    (a longer chunk switches transformers to long-form decoding, which ran out of accelerator memory)."""
     n = len(audio)
     frame = int(0.02 * SR)
     cuts = [0]
@@ -77,7 +77,7 @@ def _whisper(model_id: str, dev: str) -> Any:
 
         for k in [
             k for k in _cache if k.startswith("whisper:")
-        ]:  # one Whisper resident at a time (small GPUs)
+        ]:  # one Whisper resident at a time (limited accelerator memory)
             del _cache[k]
         if dev == "cuda":
             torch.cuda.empty_cache()
@@ -147,7 +147,7 @@ def align_chunk(audio: np.ndarray, words: list[dict[str, Any]], offset_s: float,
 
 
 def _dev(p: dict[str, Any], require_rocm: bool) -> str:
-    """The request may ask for the CPU explicitly (E15 part 2 on a small GPU); never with --require-rocm."""
+    """The request may ask for the CPU explicitly (E15 part 2 with limited accelerator memory); never with --require-rocm."""
     if p.get("device") == "cpu":
         if require_rocm:
             raise RuntimeError("device=cpu requested together with require_rocm")
@@ -156,7 +156,7 @@ def _dev(p: dict[str, Any], require_rocm: bool) -> str:
 
 
 def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
-    """On a small workstation GPU (never with --require-rocm), a CUDA out-of-memory redoes the whole file on the
+    """With limited accelerator memory (never with --require-rocm), a CUDA out-of-memory redoes the whole file on the
     CPU, and the response says so in `device` ("cuda, then cpu after out of memory"); never silent."""
     import torch
 
@@ -243,7 +243,7 @@ def transcribe_many(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
         audio = load_audio(f)
         t0 = time.perf_counter()
         if not p.get("word_timestamps", True):
-            # Accuracy only (E15 part 1): text without word times, so large models fit a small GPU
+            # Accuracy only (E15 part 1): text without word times, so large models fit limited memory
             # (word timestamps keep every cross-attention map in memory).
             asr = _whisper(p["model"], _dev(p, require_rocm))
             text = asr(

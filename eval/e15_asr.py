@@ -180,7 +180,7 @@ def main() -> int:
             except OutOfMemoryError:
                 if not args.no_rocm:
                     raise
-                # Word timestamps of a large model do not fit a small workstation GPU: same request on the CPU,
+                # Word timestamps of a large model do not fit limited accelerator memory: same request on the CPU,
                 # recorded per model below (never silent).
                 res = run_worker(
                     "asr",
