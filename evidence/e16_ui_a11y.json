@@ -3,16 +3,18 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "fd4d42fed55eeb6108e776d5e934fd759611d3f4",
- "git_dirty": false,
+ "git_commit": "aa6bc55cb80bafc54cab77381fedb4bb6146c5f1",
+ "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-16T06:50:18.332Z",
- "finished_at": "2026-10-16T06:51:58.996Z",
+ "started_at": "2026-10-16T17:06:19.996Z",
+ "finished_at": "2026-10-16T17:08:03.461Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
   "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
   "gpu": null,
+  "worker_device": "cpu",
+  "workstation_gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
   "versions_lock": {
    "image": "vllm/vllm-openai-rocm:gemma4",
    "digest": "<pending: recorded on first droplet run>"
