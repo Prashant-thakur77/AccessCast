@@ -14,7 +14,16 @@ from accesscast.verify.base import Finding, fmt_s
 
 
 def rn001_duration(out: Path, expected_ms: int) -> list[Finding]:
+    """Container AND each stream: the container reports the longer stream, so a short video under full-length
+    audio passed when only the container was checked (E9, docs/incidents.md 2026-10-17)."""
+    from accesscast.media.ffmpeg import ffprobe_json
+
     got = probe(out).duration_ms
+    for st in ffprobe_json(out).get("streams", []):
+        if st.get("codec_type") in ("video", "audio") and st.get("duration"):
+            ms = round(float(st["duration"]) * 1000)
+            if abs(ms - expected_ms) > abs(got - expected_ms):
+                got = ms  # judge by the stream furthest from the expected length
     if abs(got - expected_ms) > C.RENDER_DURATION_TOL_MS + 40:  # +1 AAC frame of container slack
         return [
             Finding(
