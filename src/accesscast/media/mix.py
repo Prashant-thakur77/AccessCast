@@ -9,6 +9,7 @@ The description stem is written separately so E1 can measure overlap from the re
 from __future__ import annotations
 
 import json
+import math
 import re
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -139,10 +140,14 @@ def mix_extended(
     out_mix: Path,
     out_stem: Path,
     tmp_dir: Path,
+    fps: float | None = None,
 ) -> list[dict[str, object]]:
     """Expanded timeline: the source pauses (silence) at each insertion point while the clip plays.
 
-    Returns the source_to_output rows (AudioSight timeline format). Standard clips are remapped.
+    Returns the source_to_output rows (AudioSight timeline format). Standard clips are remapped. With `fps`, every
+    cut point and every hold is snapped to the source's frame grid (cut to the nearest frame, hold rounded up to
+    whole frames), because the video can only cut and hold whole frames: off-grid times let the picture drift from
+    the description audio by up to a frame per hold (E9: 120 ms on one dev clip, refused by RN001).
     """
     tmp_dir.mkdir(parents=True, exist_ok=True)
     orig, _ = sf.read(str(master), dtype="float32", always_2d=True)
@@ -150,10 +155,16 @@ def mix_extended(
         orig = np.repeat(orig, 2, axis=1)
     pre, post = ms_to_samples(C.EXT_PAD_MS), ms_to_samples(C.EXT_PAD_MS)
     loaded = {c.item_id: load_48k(c.wav, tmp_dir) for c in [*insertions, *standard]}
-    ins = [
-        Insertion(c.item_id, min(len(orig), ms_to_samples(c.start_ms)), len(loaded[c.item_id]), pre, post)
-        for c in insertions
-    ]
+    ins = []
+    for c in insertions:
+        at, speech = min(len(orig), ms_to_samples(c.start_ms)), len(loaded[c.item_id])
+        tail = post
+        if fps:
+            frame = SR / fps
+            at = min(len(orig), round(round(at / frame) * frame))
+            total = pre + speech + post
+            tail = post + math.ceil(math.ceil(total / frame) * frame) - total
+        ins.append(Insertion(c.item_id, at, speech, pre, tail))
     rows = build_timeline(len(orig), ins)
     total = int(rows[-1]["output_end_sample"]) if rows else len(orig)
     out = np.zeros((total, 2), dtype=np.float32)

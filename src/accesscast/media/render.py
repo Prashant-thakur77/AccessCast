@@ -41,41 +41,45 @@ def mux_standard(video: Path, audio: Path, out: Path, *, watermark: bool) -> Non
 
 
 def render_extended(
-    video: Path, audio: Path, rows: Sequence[dict[str, Any]], out: Path, *, watermark: bool
+    video: Path, audio: Path, rows: Sequence[dict[str, Any]], out: Path, *, watermark: bool, fps: float = 30.0
 ) -> None:
-    """Per source segment: trim + setpts; per insertion: tpad clone of the last frame of the previous segment.
-
-    Insertions are attached to the end of the preceding source segment (or a 1-frame head if at t=0).
-    """
+    """Per source segment: trim by frame number + setpts; per insertion: hold the last frame (tpad clone) for a whole
+    number of frames. A hold at t=0 clones the first frame at the start of the first segment. Cuts and holds are
+    counted in frames so the picture stays on the audio timeline (E9 found 3 frames of drift with time-based trims
+    and a 0.04 s head clip; docs/incidents.md 2026-10-17)."""
     parts: list[str] = []
     labels: list[str] = []
     k = 0
     i = 0
     rows = list(rows)
+    lead = 0  # frames to hold before the first source segment (insertions at t=0)
+
+    def frames(ms: float) -> int:
+        return round(ms * fps / 1000)
+
     while i < len(rows):
         r = rows[i]
         if r["type"] == "source":
-            a, b = r["source_start_ms"] / 1000, r["source_end_ms"] / 1000
-            pad_ms = 0
+            a, b = frames(r["source_start_ms"]), frames(r["source_end_ms"])
+            pad = 0
             j = i + 1
             while j < len(rows) and rows[j]["type"] == "insertion":
-                pad_ms += rows[j]["output_end_ms"] - rows[j]["output_start_ms"]
+                pad += frames(rows[j]["output_end_ms"] - rows[j]["output_start_ms"])
                 j += 1
-            chain = f"[0:v]trim=start={a:.3f}:end={b:.3f},setpts=PTS-STARTPTS"
-            if pad_ms:
-                chain += f",tpad=stop_mode=clone:stop_duration={pad_ms / 1000:.3f}"
+            chain = f"[0:v]trim=start_frame={a}:end_frame={b},setpts=PTS-STARTPTS"
+            # one tpad with both options: a second tpad in the same chain drops its padding (ffmpeg 8, tested)
+            opts = ([f"start_mode=clone:start={lead}"] if lead else []) + (
+                [f"stop_mode=clone:stop={pad}"] if pad else []
+            )
+            if opts:
+                chain += ",tpad=" + ":".join(opts)
+            lead = 0
             parts.append(f"{chain}[v{k}]")
             labels.append(f"[v{k}]")
             k += 1
             i = j
-        else:  # insertion at t=0: freeze the first frame
-            pad_ms = r["output_end_ms"] - r["output_start_ms"]
-            parts.append(
-                f"[0:v]trim=start=0:end=0.04,setpts=PTS-STARTPTS,tpad=stop_mode=clone:"
-                f"stop_duration={pad_ms / 1000:.3f}[v{k}]"
-            )
-            labels.append(f"[v{k}]")
-            k += 1
+        else:  # insertion before any source: held at the start of the first segment
+            lead += frames(r["output_end_ms"] - r["output_start_ms"])
             i += 1
     concat = f"{''.join(labels)}concat=n={len(labels)}:v=1:a=0[vc]"
     tail = f";[vc]{_wm_filter()}[vout]" if watermark else ";[vc]null[vout]"

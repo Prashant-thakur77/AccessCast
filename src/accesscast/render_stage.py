@@ -232,7 +232,7 @@ def render_all(
         rendered_ids = [c.item_id for c in [*vo_clips, *ad_clips, *ext_clips]]
         approved_ids = [i.id for i in [*vo, *std_ad, *ext_ad]]
         if ext_clips:
-            rows = M.mix_extended(master, ext_clips, [*vo_clips, *ad_clips], mixed, stem, tmp)
+            rows = M.mix_extended(master, ext_clips, [*vo_clips, *ad_clips], mixed, stem, tmp, fps=info.fps)
             expected_ms = int(str(rows[-1]["output_end_ms"]))
             write_jsonl(rdir / f"source_to_output.{v}.jsonl", rows)
         else:
@@ -241,7 +241,7 @@ def render_all(
             )
         M.loudnorm_2pass(mixed, normed, target_lufs)
         if rows is not None:
-            render_extended(video, normed, rows, out, watermark=watermark)
+            render_extended(video, normed, rows, out, watermark=watermark, fps=info.fps)
             for name in spec["tracks"]:  # remap tracks onto the extended timeline
                 src_items = track_items[name]
                 write_vtt(
