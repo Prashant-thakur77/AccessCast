@@ -156,6 +156,24 @@ def _dev(p: dict[str, Any], require_rocm: bool) -> str:
 
 
 def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
+    """On a small workstation GPU (never with --require-rocm), a CUDA out-of-memory redoes the whole file on the
+    CPU, and the response says so in `device` ("cuda, then cpu after out of memory"); never silent."""
+    import torch
+
+    try:
+        return _transcribe(p, require_rocm)
+    except torch.OutOfMemoryError:
+        if require_rocm or _dev(p, require_rocm) != "cuda":
+            raise
+        _cache.clear()
+        torch.cuda.empty_cache()
+        out = _transcribe({**p, "device": "cpu"}, require_rocm)
+        out["device"] = "cuda, then cpu after out of memory"
+        event("progress", note="GPU out of memory; file redone on the CPU")
+        return out
+
+
+def _transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     dev = _dev(p, require_rocm)
     lang = p.get("lang", "en")
     model_id = p["model"]  # required: no silent default model (CLAUDE.md rule 6)
