@@ -133,7 +133,7 @@
     ]));
     var note = el("p", { text: "Description voices are synthetic speech." });
     container.appendChild(el("div", { class: "foot-note" }, [
-      el("p", { text: "Gemma 4 on AMD Instinct MI300X. Made for AMD Developer Hackathon ACT III." }),
+      el("p", { text: "Gemma 4 on AMD Token Factory. Made for AMD Developer Hackathon ACT III." }),
       note
     ]));
     fetchOptionalJSON("data/catalog.json").then(function (cat) {

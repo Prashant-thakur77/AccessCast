@@ -312,10 +312,10 @@ class LlmClient:
     def _backoff(attempt: int, retry_after: str | None) -> None:
         if attempt > C.LLM_MAX_RETRIES:
             return
-        delay = min(60.0, 2.0**attempt) + random.uniform(0, 0.5)
+        delay = min(C.LLM_BACKOFF_MAX_S, 2.0**attempt) + random.uniform(0, 0.5)
         if retry_after:
             try:
-                delay = min(60.0, float(retry_after))
+                delay = min(C.LLM_BACKOFF_MAX_S, float(retry_after))
             except ValueError:
                 pass
         time.sleep(delay)

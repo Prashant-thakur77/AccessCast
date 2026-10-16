@@ -4,7 +4,7 @@
 
 # AccessCast: one video, five ways to watch
 
-Most online video has no audio description, and most of it has captions only in one language, if any. AccessCast takes one video and makes a version for each viewer. Gemma 4, served on an AMD Instinct MI300X, does the seeing, listening, writing and translating. Code checks every line Gemma writes against the real audio timeline. Gemma repairs what fails. A person approves what the public hears.
+Most online video has no audio description, and most of it has captions only in one language, if any. AccessCast takes one video and makes a version for each viewer. Gemma 4 31B, served by AMD Token Factory, does the seeing, writing, translating and repairing. Code checks every line Gemma writes against the real audio timeline. Gemma repairs what fails. A person approves what the public hears.
 
 > Built for AMD Developer Hackathon ACT III, track "Create a New Kind of Experience". Every number on this page comes from a file in [`evidence/`](evidence/) through [`evidence/public-claims.json`](evidence/public-claims.json); `make claims-check` fails if any number here is not registered. Places marked `<pending: …>` are waiting for an experiment to run.
 
@@ -47,14 +47,15 @@ Test set: 10 W3C videos never used for tuning, 3 seeds, measured by a script tha
 <pending: results.more>
 
 ### On AMD
+Gemma 4 31B ran on AMD Token Factory, AMD's hosted endpoint. These numbers are measured from our side of the connection (client-side), so they include the network and Token Factory's own queue.
+
 | What we measured | Value | Evidence |
 |---|---|---|
-| Generated tokens per second, one MI300X, best concurrency | <pending: e13.best_tokens_per_s> | `e13_serving_prefix_on.json` |
-| p95 latency of a description request at that concurrency | <pending: e13.best_p95_s> | `e13_serving_prefix_on.json` |
-| GPU cost per 1,000 description lines | <pending: e13.usd_per_1000_lines> | `e13_serving_prefix_on.json` |
-| Simultaneous video jobs per MI300X at ≤ 1× real time | <pending: e14.users_per_gpu> | `e14_cost.json` |
-| GPU cost per finished minute, all five versions | <pending: e14.bundle_usd_per_minute> | `e14_cost.json` |
-| Memory needed with every model loaded at once | <pending: mem.total_needed_gib> GiB | `memory.json` |
+| Generated tokens per second seen by our client, best concurrency | <pending: e13.best_tokens_per_s> | `e13_serving_tokenfactory.json` |
+| p95 latency of a description request at that concurrency | <pending: e13.best_p95_s> | `e13_serving_tokenfactory.json` |
+| Gemma tokens per finished minute of video, all five versions | <pending: e14.tokens_per_minute> | `e14_cost.json` |
+
+We could not create an MI300X droplet: AMD Developer Cloud asks for a payment card, and we did not have one it accepts. So this page has no GPU memory, users-per-GPU or GPU-dollar numbers. The scripts to measure them on a droplet are in `deploy/` and `eval/`, unchanged.
 
 Each table names its data split. "Test set" means the 10 W3C WAI "Web Accessibility Perspectives" videos, which were never used for tuning: the ASR model, prompts, thresholds and every other setting were chosen on our dev set, and prompts were frozen at a git tag before the first test run ([`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md)). Gemma may have seen these public videos in pretraining, so we say "never used for tuning", not "never seen".
 
@@ -68,8 +69,8 @@ Nothing reaches a viewer until a person approves it. Confidence for each line is
 
 | Check | Result | Evidence |
 |---|---|---|
-| Soak test | <pending: e08.hours> hours, <pending: e08.failed_jobs> failed jobs | `e08_soak.json` |
-| Offline run on the droplet | <pending: e10.python_blocked> network attempts in Python, <pending: e10.host_packets> outbound packets on the host | `e10_offline.json` |
+| Soak test | Not run: it measures our own GPU server, and we had no droplet | — |
+| Offline run | Not run: Gemma ran on a hosted endpoint, so a run cannot be offline | — |
 | Same input, same output | <pending: e09.summary> | `e09_determinism.json` |
 | Live attacks on Gemma (8 cases, 20 tries each at the production temperature and 20 at a stress temperature) | outputs that reached the viewer: <pending: e11.total_leaks> | `e11_adversarial.json` |
 
@@ -109,6 +110,7 @@ Our cost is GPU time plus a person's review time, both measured: <pending: busin
 | Hindi and Italian | Back-translation shown to reviewers | Not a full professional language QA; native-speaker spot checks are <pending: native.checks> |
 | "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
 | Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |
+| Where it ran | Gemma 4 31B on AMD Token Factory | Whisper, the aligner, the voices and the metric models ran on our own workstation, not on AMD hardware; each evidence file records the device. Gemma 4 E4B (listening) is not on Token Factory, so the transcript cross-check and sound labels did not run |
 | Scope | Pre-recorded video | No sign language, no live streams, no lip-sync dubbing |
 
 ## Prior work and how we differ
@@ -125,7 +127,7 @@ Dated entries with symptom, root cause and fix are in [`docs/incidents.md`](docs
 
 ```bash
 make setup && make check            # tests, lint, types
-bash deploy/droplet_bootstrap.sh    # on a fresh MI300X "vLLM Quick Start" droplet: images, Gemma, workers, weights
+bash deploy/droplet_bootstrap.sh    # only if you have a droplet: a fresh MI300X "vLLM Quick Start" droplet: images, Gemma, workers, weights
 make doctor                         # writes evidence/doctor.json
 make run VIDEO=path/to/video.mp4    # all stages into projects/<sha12>/
 make review                         # approve lines, keyboard first

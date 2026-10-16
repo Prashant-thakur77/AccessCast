@@ -171,6 +171,9 @@ These come from the Winning Numbers Playbook. Every one is a hard requirement. `
 | 10 | Demo awake during judging; pitch clear to non-technical judges | Static player site on a host that does not sleep; uptime check; a plain-words script read aloud by someone outside the team before recording | `evidence/uptime.json`, `docs/demo-script.md` |
 
 
+
+> **Amendment D-021 (16 Oct 2026, `docs/decisions.md`).** No MI300X droplet could be created (AMD Developer Cloud needs a payment card the team does not have). Gemma 4 31B runs on **AMD Token Factory**; the non-Gemma models run on our own workstation, and every evidence file records the device. Must-have 6 becomes: Token Factory client-side tokens/s and p95 latency (E13, labelled "client-side, Token Factory"), Gemma tokens per finished minute (E14), and no MI300X memory or users-per-GPU numbers. Must-have 8 becomes: E9 determinism on Token Factory; E8 soak and E10 offline are marked "not run: no droplet". The droplet scripts stay, unchanged, for anyone who has one.
+
 ---
 
 ## 6. Architecture
@@ -687,6 +690,8 @@ Memory figures marked *computed* are parameters × 2 bytes (BF16), not measureme
 | Independent judge / question answerer (E6, E7) | A non-Gemma model on Token Factory (e.g. Qwen3.8-27B if listed) | per provider | Token Factory | — | So Gemma never grades Gemma |
 
 ### 14.2 Serving Gemma 4 on the MI300X
+> **D-021:** not done in this submission (no droplet). Kept as the reproduction path; Gemma 4 31B was served by AMD Token Factory instead.
+
 **Droplet:** AMD Developer Cloud, MI300X ×1 ($1.99/hour; 192 GB HBM3, 20 vCPU, 240 GB RAM), "vLLM Quick Start" image, SSH-key access. Payment method required; **a powered-off droplet still bills**: snapshot, then destroy.
 
 **Images to try, in this order** (record which one worked in `docs/decisions.md`; pin by digest in `deploy/versions.lock`):

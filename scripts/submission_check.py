@@ -14,14 +14,17 @@ from accesscast.claims import check as claims_check
 from accesscast.config import REPO_ROOT
 from accesscast.project import sha256_file
 
-MUST_HAVE_EVIDENCE = {  # PLAN §5 → evidence files (two-digit eNN_)
+MUST_HAVE_EVIDENCE = {  # PLAN §5 → evidence files (two-digit eNN_), as amended by D-021 (no droplet)
     1: ["e01_verifier_ab.json"],
-    2: ["e02_ladder_V0.json", "e03_model_size_*.json"],
+    2: [
+        "e04_translation.json",
+        "e07_similarity.json",
+    ],  # E2 ladder and E3 need our own server: not run (D-021)
     3: ["test_freeze.json", "test_runs.jsonl"],
     4: ["public-claims.json"],
-    6: ["e13_serving_*.json", "e14_cost.json", "doctor.json"],
+    6: ["e13_serving_tokenfactory.json", "e14_cost.json", "tokenfactory_models.json"],
     7: ["e11_adversarial.json"],
-    8: ["e08_soak.json", "e09_determinism.json", "e10_offline.json"],
+    8: ["e09_determinism.json"],  # E8 soak and E10 offline need our own server: "not run" in README (D-021)
     10: ["uptime.json"],
 }
 SECRET_RES = [

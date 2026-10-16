@@ -24,6 +24,7 @@ from typing import Any
 import jiwer
 
 from accesscast.config import REPO_ROOT, load_settings
+from accesscast.errors import OutOfMemoryError
 from accesscast.llm.client import LlmClient, LlmRequest
 from accesscast.workers_client import run_worker
 from eval.common import Experiment, run_experiment
@@ -90,6 +91,7 @@ def main() -> int:
                         "model": model,
                         "lang": lang,
                         "align": False,
+                        "word_timestamps": False,  # WER needs text only; word timing is part 2
                     },
                     work,
                     None,
@@ -106,6 +108,7 @@ def main() -> int:
                     "cer": round(jiwer.cer(refs, hyps), 4),
                     "rtf": round(wall / audio, 4) if audio else None,
                     "timestamps": True,
+                    "rtf_without_word_timestamps": True,
                 }
         if not args.no_gemma:
             client = LlmClient(settings, provider="local_audio", strict_provider=True)
@@ -169,19 +172,30 @@ def main() -> int:
                     check=True,
                 )
                 files.append(str(wav))
-            res = run_worker(
-                "asr",
-                "transcribe_many",
-                {"files": files, "model": model, "lang": "en", "align": True},
-                work,
-                None,
-                require_rocm=not args.no_rocm,
-                timeout_s=7200,
-            )
+            req = {"files": files, "model": model, "lang": "en", "align": True}
+            try:
+                res = run_worker(
+                    "asr", "transcribe_many", req, work, None, require_rocm=not args.no_rocm, timeout_s=7200
+                )
+            except OutOfMemoryError:
+                if not args.no_rocm:
+                    raise
+                # Word timestamps of a large model do not fit a small workstation GPU: same request on the CPU,
+                # recorded per model below (never silent).
+                res = run_worker(
+                    "asr",
+                    "transcribe_many",
+                    {**req, "device": "cpu"},
+                    work,
+                    None,
+                    require_rocm=False,
+                    timeout_s=14400,
+                )
             for (_mp4, truth), item in zip(clips, res["items"], strict=True):
                 raw_e += boundary_errors(truth, item["raw_words"])
                 al_e += boundary_errors(truth, item["words"])
             bound[model] = {
+                "device": res.get("device"),
                 "raw": {
                     "n": len(raw_e),
                     "median_ms": statistics.median(raw_e) if raw_e else None,

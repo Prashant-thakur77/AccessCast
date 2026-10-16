@@ -10,7 +10,7 @@ Most online video has no audio description, and many viewers can't use it as it 
 
 AccessCast takes one video and makes a version for each of them. Blind and low-vision viewers hear description placed in the pauses between dialogue, and when the pauses are too short the video holds a still frame while the description plays. Deaf viewers get captions with speakers and sounds. Viewers who need simpler words get easy-read captions and a mode that waits for them to finish reading. Hindi and Italian speakers get subtitles, a voice-over and their own description. All five are made from one analysis of the video, so they never disagree.
 
-Gemma 4 does the model work on an AMD Instinct MI300X: Gemma 4 31B looks at the frames and writes, translates and repairs; Gemma 4 E4B listens to check the transcript and label sounds. Code checks every line against the real audio timeline, a word budget, and rules against invented names, unsupported claims, sounds and instructions hidden in on-screen text. Lines that fail go back to Gemma with the failed checks. A person approves every description line, and the server refuses to render while any line is waiting.
+Gemma 4 31B, served by AMD Token Factory, looks at the frames and writes, translates and repairs. Code checks every line against the real audio timeline, a word budget, and rules against invented names, unsupported claims, sounds and instructions hidden in on-screen text. Lines that fail go back to Gemma with the failed checks. A person approves every description line, and the server refuses to render while any line is waiting.
 
 <pending: lablab.results>
 
@@ -24,6 +24,6 @@ Live demo: https://accesscast.vercel.app/?audience=judge · Code: https://github
 
 **Track:** Create a New Kind of Experience
 
-**Technologies:** AMD ROCm, AMD Developer Cloud, AMD Instinct MI300X, Gemma, vLLM, Hugging Face. (Do not select Evolus.)
+**Technologies:** AMD Token Factory, Gemma, Hugging Face. Tick AMD Developer Cloud only if the organisers confirm Token Factory counts as part of it. (Do not select Evolus. Do not tick MI300X, ROCm or vLLM: we did not run them ourselves.)
 
 **Cover image:** `docs/cover.png` (1920×1080). **Slide deck:** `docs/deck/deck.pdf`. **Demo platform:** Web. **App URL:** https://accesscast.vercel.app
