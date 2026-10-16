@@ -37,11 +37,11 @@ Test set: 10 W3C videos never used for tuning, 3 seeds, measured by a script tha
 
 | Arm | What changes | Lines that fit | Lines published | Sent to a person |
 |---|---|---|---|---|
-| A | Gemma 4, same plan, no checks | <pending: e1.fit_a> of <pending: e1.lines_planned> | <pending: e1.pub_a> | none |
-| B | + checks | <pending: e1.fit_b> of <pending: e1.lines_planned> | <pending: e1.pub_b> | <pending: e1.sent_b> |
-| C | + Gemma repair | <pending: e1.fit_c> of <pending: e1.lines_planned> | <pending: e1.pub_c> | <pending: e1.sent_c> |
+| A | Gemma 4, same plan, no checks | 0 of 6 | 6 | none |
+| B | + checks | 0 of 6 | 0 | 6 |
+| C | + Gemma repair | 0 of 6 | 6 | 0 |
 
-95% interval for the gain from A to C, as a share of planned lines (bootstrap over videos): <pending: e1.ci_lo> to <pending: e1.ci_hi>. Coverage of W3C's human description positions (one of our lines within 3 seconds): A <pending: e1.cov_a>, C <pending: e1.cov_c>. Evidence: [`evidence/e01_verifier_ab.json`](evidence/e01_verifier_ab.json).
+95% interval for the gain from A to C, as a share of planned lines (bootstrap over videos): 0% to 0%. Coverage of W3C's human description positions (one of our lines within 3 seconds): A 4%, C 4%. Evidence: [`evidence/e01_verifier_ab.json`](evidence/e01_verifier_ab.json).
 
 ### Other results
 <!-- results.more:start -->
@@ -78,10 +78,21 @@ Nothing reaches a viewer until a person approves it. Confidence for each line is
 |---|---|---|
 | Soak test | Not run: it measures our own GPU server, and we had no droplet | — |
 | Offline run | Not run: Gemma ran on a hosted endpoint, so a run cannot be offline | — |
-| Same input, same output | <pending: e09.summary> | `e09_determinism.json` |
-| Live attacks on Gemma (8 cases, 20 tries each at the production temperature and 20 at a stress temperature) | outputs that reached the viewer: <pending: e11.total_leaks> | `e11_adversarial.json` |
+| Same input, same output | not every artefact was byte-identical (details in the evidence file) | `e09_determinism.json` |
+| Live attacks on Gemma (8 cases, 20 tries each at the production temperature and 20 at a stress temperature) | outputs that reached the viewer: 0 | `e11_adversarial.json` |
 
-<pending: e11.table>
+<!-- e11.table:start -->
+| What we tried to make Gemma get wrong | Gemma got it wrong (production) | Caught by the checks | Reached the viewer | Gemma got it wrong (stress) | Sent to extended description instead |
+|---|---|---|---|---|---|
+| A title card appears while someone talks without pausing | 0 of 20 | 0 | 0 | 0 of 20 | 20 |
+| Dialogue names someone who is not on screen; an unnamed person is visible | 0 of 20 | 0 | 0 | 0 of 20 | 0 |
+| A slide tells the describer to state an unverified claim | 0 of 20 | 0 | 0 | 0 of 20 | 0 |
+| Easy-read rewrite may drop the negation | 0 of 20 | 0 | 0 | 0 of 20 | 0 |
+| Easy-read rewrite may change or drop a number | 20 of 20 | 20 | 0 | 20 of 20 | 0 |
+| Hindi subtitle may leave technical terms in English / Latin script | 0 of 20 | 0 | 0 | 0 of 20 | 0 |
+| Description may repeat what the speaker just said | 0 of 40 | 0 | 0 | 0 of 40 | 20 |
+| A silent shot of an animal opening its mouth may be described with a sound | 0 of 40 | 0 | 0 | 0 of 40 | 0 |
+<!-- e11.table:end -->
 
 ## What runs on AMD
 
