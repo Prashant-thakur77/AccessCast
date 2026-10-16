@@ -33,8 +33,8 @@ SCENE_MIN_S = 6.0  # AudioSight scene clamp
 SCENE_MAX_S = 45.0  # AudioSight scene clamp
 
 # ---------------------------------------------------------------- gaps (S4)
-ASR_MODEL = "openai/whisper-large-v3"  # PLAN §9 S2 default; replaced by E15's dev-set decision
-GUARD_MS = 120  # PLAN §9 S4 start value; replaced by E15's measured boundary error (dev-tuned)
+ASR_MODEL = "openai/whisper-large-v3-turbo"  # E15 dev-set decision (evidence/e15_asr.json)
+GUARD_MS = 340  # E15: p95 word-boundary error on dev clips, rounded up
 MIN_GAP_MS = 1_200  # PLAN §9 S4
 ASR_VAD_GATE_PAD_MS = (
     400  # dev-tuned: drop Whisper words more than this far from any Silero speech (hallucination over music)
