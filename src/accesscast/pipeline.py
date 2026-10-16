@@ -73,7 +73,7 @@ class Run:
     run_label: str = "run0"
     canned_dir: Path | None = None
     require_rocm: bool = False
-    asr_model: str = field(default_factory=lambda: os.environ.get("ACCESSCAST_ASR_MODEL", "openai/whisper-large-v3"))
+    asr_model: str = field(default_factory=lambda: os.environ.get("ACCESSCAST_ASR_MODEL", C.ASR_MODEL))
     # E15 decides large-v3 vs large-v3-turbo on the dev set; the override exists for CPU integration runs
     timings: dict[str, float] = field(default_factory=dict)
 

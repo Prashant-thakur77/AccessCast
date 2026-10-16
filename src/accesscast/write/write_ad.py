@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+import os
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 from accesscast import confidence
@@ -50,7 +51,7 @@ class WriteOptions:
     checks: bool = True  # E1 arm A: False
     repair: bool = True  # E1 arm B: False
     temperature: float | None = None  # E11 stress setting
-    concurrency: int = 16
+    concurrency: int = field(default_factory=lambda: int(os.environ.get("ACCESSCAST_CONCURRENCY", "16")))  # E2 V0 = 1
 
 
 def _model_ref(resp: LlmResponse, seed: int | None) -> ModelRef:
