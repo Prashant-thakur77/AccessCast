@@ -56,7 +56,7 @@ Gemma 4 31B ran on AMD Token Factory, AMD's hosted endpoint. These numbers are m
 |---|---|---|
 | Generated tokens per second seen by our client, best concurrency | 17 | `e13_serving_tokenfactory.json` |
 | p95 latency of a description request at that concurrency | 13.9 s | `e13_serving_tokenfactory.json` |
-| Gemma tokens per finished minute of video, all five versions | <pending: e14.tokens_per_minute> | `e14_cost.json` |
+| Gemma tokens per finished minute of video, all five versions | 41,818 | `e14_cost.json` |
 
 We could not create an MI300X droplet: AMD Developer Cloud asks for a payment card, and we did not have one it accepts. So this page has no GPU memory, users-per-GPU or GPU-dollar numbers. The scripts to measure them on a droplet are in `deploy/` and `eval/`, unchanged.
 

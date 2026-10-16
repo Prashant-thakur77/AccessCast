@@ -879,6 +879,29 @@
    ]
   },
   {
+   "claim_id": "e14.tokens_per_minute",
+   "text": "Gemma tokens per finished minute of video, all five versions (dev set)",
+   "value": 41818,
+   "unit": "tokens",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e14_cost.json",
+     "sha256": "2f78e82ec7f03a31331e966cade89f44721a5ee40bf34ef6562b1fec274ca099",
+     "pointer": "/summary/tokens_per_finished_minute"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "JUDGES.md",
+    "docs/demo-script.md"
+   ],
+   "display": [
+    "41,818"
+   ]
+  },
+  {
    "claim_id": "e15.boundary_aligned_median",
    "text": "median word-boundary error after forced alignment (synthetic dev clips)",
    "value": 54.0,

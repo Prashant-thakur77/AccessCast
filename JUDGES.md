@@ -21,7 +21,7 @@ The shortest route through the submission.
 | The experience changes for at least two audiences | Five audience profiles in one player, switchable live on the same video | Player picker; `five-ways.html` |
 | Explain what was created and what the models decided | Per-line decisions in a drawer and in `decisions.json` | Drawer; `reports/decisions.json` |
 | Show how quality and consistency were controlled | Checks in code, Gemma repair, a person approves, render refused while anything waits | [`docs/rules.md`](docs/rules.md); gallery |
-| Cost per experience | Gemma tokens per finished minute of video, from real call logs (no GPU dollars: D-021) | <pending: e14.tokens_per_minute> tokens |
+| Cost per experience | Gemma tokens per finished minute of video, from real call logs (no GPU dollars: D-021) | 41,818 tokens |
 | Who pays and why | Laws with deadlines, list prices next to our measured cost | README "Who pays" |
 
 ## Rubric Map

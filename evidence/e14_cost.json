@@ -1,0 +1,210 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e14_cost",
+ "split": "dev",
+ "passed": true,
+ "git_commit": "fdb371156c86783d21dc88e0ee08630bf37b5e7f",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-16T21:13:36.396Z",
+ "finished_at": "2026-10-16T21:13:36.416Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "mode": "tokens (D-021: no droplet, Gemma 4 31B on AMD Token Factory)",
+  "projects_dir": "projects/_dev",
+  "counted": "answered calls of each video's last complete run (cache replays included: that run needed them; failed calls excluded)",
+  "finished_if_done": [
+   "voiceover_it",
+   "subtitles_it",
+   "captions_easy",
+   "tts"
+  ]
+ },
+ "checks": {
+  "some_finished_videos": true,
+  "one_provider": true,
+  "one_served_model": true
+ },
+ "results": [
+  {
+   "video": "nasa_GSFC_20131121_ISON_m11384_Comet.mp4",
+   "counted": true,
+   "minutes": 2.039,
+   "calls": 110,
+   "tokens_in": 67056,
+   "tokens_out": 8954
+  },
+  {
+   "video": "prelinger_Televisi1970.mp4",
+   "counted": false,
+   "reason": "last run not finished"
+  },
+  {
+   "video": "A4_negation.mp4",
+   "counted": true,
+   "minutes": 0.133,
+   "calls": 10,
+   "tokens_in": 5393,
+   "tokens_out": 515
+  },
+  {
+   "video": "A8_sound_from_picture.mp4",
+   "counted": true,
+   "minutes": 0.133,
+   "calls": 3,
+   "tokens_in": 4937,
+   "tokens_out": 755
+  },
+  {
+   "video": "nasa_GSFC_20140408_LRO_m11514_Eclipse.mp4",
+   "counted": true,
+   "minutes": 3.0,
+   "calls": 189,
+   "tokens_in": 104127,
+   "tokens_out": 18478
+  },
+  {
+   "video": "nasa_GSFC_20180417_Worldview_m12928_Tutorial.mp4",
+   "counted": true,
+   "minutes": 2.393,
+   "calls": 175,
+   "tokens_in": 185454,
+   "tokens_out": 19187
+  },
+  {
+   "video": "A1_no_pause.mp4",
+   "counted": true,
+   "minutes": 0.233,
+   "calls": 7,
+   "tokens_in": 5006,
+   "tokens_out": 622
+  },
+  {
+   "video": "A7_restated.mp4",
+   "counted": true,
+   "minutes": 0.2,
+   "calls": 10,
+   "tokens_in": 5728,
+   "tokens_out": 844
+  },
+  {
+   "video": "A5_number.mp4",
+   "counted": false,
+   "reason": "last run not finished"
+  },
+  {
+   "video": "A3_injection.mp4",
+   "counted": true,
+   "minutes": 0.233,
+   "calls": 8,
+   "tokens_in": 5304,
+   "tokens_out": 643
+  },
+  {
+   "video": "nasa_GSFC_20170614_Eclipse_m12534_Plane.mp4",
+   "counted": true,
+   "minutes": 0.79,
+   "calls": 15,
+   "tokens_in": 23347,
+   "tokens_out": 2702
+  },
+  {
+   "video": "A6_english_in_hindi.mp4",
+   "counted": true,
+   "minutes": 0.15,
+   "calls": 8,
+   "tokens_in": 4678,
+   "tokens_out": 476
+  },
+  {
+   "video": "blender_bbb_excerpt.mp4",
+   "counted": true,
+   "minutes": 2.0,
+   "calls": 33,
+   "tokens_in": 49275,
+   "tokens_out": 4198
+  },
+  {
+   "video": "nasa_GSFC_20130918_AACS_m11356_Food.mp4",
+   "counted": true,
+   "minutes": 1.9,
+   "calls": 44,
+   "tokens_in": 46204,
+   "tokens_out": 7620
+  },
+  {
+   "video": "prelinger_Operator1949_2.mp4",
+   "counted": true,
+   "minutes": 3.0,
+   "calls": 92,
+   "tokens_in": 85364,
+   "tokens_out": 11187
+  },
+  {
+   "video": "blender_sintel_trailer.mp4",
+   "counted": true,
+   "minutes": 0.87,
+   "calls": 27,
+   "tokens_in": 33315,
+   "tokens_out": 4062
+  },
+  {
+   "video": "prelinger_WhenYouA1948.mp4",
+   "counted": true,
+   "minutes": 3.0,
+   "calls": 105,
+   "tokens_in": 123475,
+   "tokens_out": 14332
+  },
+  {
+   "video": "nasa_GSFC_20171115_m12776_LifeInTheUniverse.mp4",
+   "counted": false,
+   "reason": "last run not finished"
+  },
+  {
+   "video": "A2_name_bait.mp4",
+   "counted": true,
+   "minutes": 0.233,
+   "calls": 8,
+   "tokens_in": 5517,
+   "tokens_out": 534
+  }
+ ],
+ "summary": {
+  "videos_counted": 16,
+  "videos_total": 19,
+  "video_minutes": 20.31,
+  "tokens_in": 754180,
+  "tokens_out": 95109,
+  "tokens_per_finished_minute": 41818,
+  "tokens_per_finished_minute_by_version": {
+   "description_en": 4716,
+   "easy_read": 4371,
+   "shared": 26072,
+   "subtitles_hi_it": 5247,
+   "voiceover_hi_it": 1411
+  },
+  "providers": [
+   "tokenfactory"
+  ],
+  "served_model_ids": [
+   "self-dploy/Gemma-4-31B-IT"
+  ],
+  "tokenfactory_points_per_finished_minute": 0.00162752,
+  "tokenfactory_price_per_token": {
+   "prompt": 3.5e-08,
+   "completion": 7e-08
+  }
+ },
+ "error": null
+}
