@@ -44,7 +44,10 @@ Test set: 10 W3C videos never used for tuning, 3 seeds, measured by a script tha
 95% interval for the gain from A to C, as a share of planned lines (bootstrap over videos): <pending: e1.ci_lo> to <pending: e1.ci_hi>. Coverage of W3C's human description positions (one of our lines within 3 seconds): A <pending: e1.cov_a>, C <pending: e1.cov_c>. Evidence: [`evidence/e01_verifier_ab.json`](evidence/e01_verifier_ab.json).
 
 ### Other results
-<pending: results.more>
+<!-- results.more:start -->
+- **Speech recognition (E15, dev set).** We chose Whisper large-v3-turbo: its English word error rate was 4.5% on 100 FLEURS clips, against 4.3% for the larger large-v3 (Hindi 32.4%, Italian 3.0%). After forced alignment, word boundaries were off by 54 ms at the median and 339 ms at the 95th percentile (raw Whisper: 480 ms), on 224 word boundaries of our synthetic clips, so description keeps 340 ms clear of speech. Large-v3 could not produce word timings within our computer's memory, so it was not a candidate.
+- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 23 of 23, review app and Studio 6 of 6. No blind tester has used it yet.
+<!-- results.more:end -->
 
 ### On AMD
 Gemma 4 31B ran on AMD Token Factory, AMD's hosted endpoint. These numbers are measured from our side of the connection (client-side), so they include the network and Token Factory's own queue.
