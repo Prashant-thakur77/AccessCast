@@ -11,5 +11,6 @@ echo "== final dev pass $(date -u +%FT%TZ)"
 ACCESSCAST_ASR_MODEL="$(uv run python -c 'from accesscast import constants as C; print(C.ASR_MODEL)')" \
 ACCESSCAST_PROJECTS_DIR=projects/_dev bash scripts/capped.sh bash scripts/dev_local.sh data/adversarial/*.mp4 \
   data/dev/nasa_GSFC_20170614_Eclipse_m12534_Plane.mp4 data/dev/blender_sintel_trailer.mp4 \
-  data/dev/nasa_GSFC_20130918_AACS_m11356_Food.mp4 data/dev/prelinger_Operator1949_2.mp4
+  data/dev/nasa_GSFC_20130918_AACS_m11356_Food.mp4 data/dev/prelinger_Operator1949_2.mp4 \
+  data/dev/nasa_GSFC_20171115_m12776_LifeInTheUniverse.mp4
 echo "== done $(date -u +%FT%TZ)"
