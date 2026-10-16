@@ -68,7 +68,7 @@ quality)
   # each experiment stands alone: one failing (e.g. FLORES+ not accessible) never stops the others
   $UV python -m eval.e04_translation --provider tokenfactory --allow-cpu || echo "E4 failed (evidence written)"
   $UV python -m eval.e05_easyread --split test --provider tokenfactory --allow-cpu || echo "E5 failed (evidence written)"
-  $UV python -m eval.e07_similarity --split test --provider tokenfactory --allow-cpu || echo "E7 failed (evidence written)"
+  $UV python -m eval.e07_similarity --provider tokenfactory --allow-cpu || echo "E7 failed (evidence written)"
   ls eval/questions/perspectives_*.json >/dev/null 2>&1 && $UV python -m eval.e06_questions --provider tokenfactory \
     || echo "E6 skipped: no question files yet"
   commit "E4, E5, E7 (and E6 if questions exist), Token Factory"
