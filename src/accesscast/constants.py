@@ -167,6 +167,7 @@ def max_facts(scene_seconds: float) -> int:
 # ---------------------------------------------------------------- planning and writing (S6, S7)
 AD_EVENT_BEFORE_MS = 2_000  # W3C WAI "at or just before the visual"; PLAN §9 S6
 AD_EVENT_AFTER_MS = 1_000  # PLAN §9 S6
+AD_BUDGET_MARGIN_S = 0.23  # dev-tuned: 75th percentile of (voiced − predicted) seconds on 183 dev lines; ~3 in 4 fit first time
 AD_LINE_HORIZON_MS = (
     4_000  # dev-tuned: in a long pause, the most important event starting within the next 4 s goes first
 )

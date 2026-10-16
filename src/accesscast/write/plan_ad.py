@@ -34,8 +34,12 @@ class PlannedLine:
 
 
 def words_budget(available_ms: int, cal: Calibration, rate: float = 1.0) -> int:
-    """words_max = clamp(floor((available_s − intercept) × wps) − 1, 2, 40) (PLAN §9 S7)."""
-    avail_s = (available_ms - C.AD_PAD_BEFORE_MS - C.AD_PAD_AFTER_MS) / 1000 - cal.intercept_s
+    """words_max = clamp(floor((available_s − intercept − margin) × wps) − 1, 2, 40) (PLAN §9 S7; margin dev-tuned)."""
+    avail_s = (
+        (available_ms - C.AD_PAD_BEFORE_MS - C.AD_PAD_AFTER_MS) / 1000
+        - cal.intercept_s
+        - C.AD_BUDGET_MARGIN_S
+    )
     n = math.floor(avail_s * cal.wps_voice * rate) - 1
     return max(C.AD_WORDS_MIN, min(C.AD_WORDS_MAX, C.AD_MAX_WORDS_PER_LINE, n))
 
@@ -105,7 +109,11 @@ def plan_description(
             slot_end = min([g.end_ms, *later])
             usable = (
                 math.floor(
-                    ((slot_end - anchor - C.AD_PAD_BEFORE_MS - C.AD_PAD_AFTER_MS) / 1000 - cal.intercept_s)
+                    (
+                        (slot_end - anchor - C.AD_PAD_BEFORE_MS - C.AD_PAD_AFTER_MS) / 1000
+                        - cal.intercept_s
+                        - C.AD_BUDGET_MARGIN_S
+                    )
                     * cal.wps_voice
                     * rate
                 )

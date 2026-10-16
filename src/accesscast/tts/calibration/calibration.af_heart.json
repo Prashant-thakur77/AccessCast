@@ -1,12 +1,13 @@
 {
-  "voice": "af_heart",
-  "lang": "en",
-  "speed": 1.0,
-  "n": 60,
-  "intercept_s": -0.4321,
-  "s_per_word": 0.3109,
-  "wps_voice": 3.2165,
-  "resid_p95_s": 0.4682,
-  "device": "cpu",
-  "wall_s": 59.45
+ "voice": "af_heart",
+ "lang": "en",
+ "speed": 1.0,
+ "n": 183,
+ "videos": 16,
+ "intercept_s": 0.1999,
+ "s_per_word": 0.2809,
+ "wps_voice": 3.5596,
+ "resid_p50_s": -0.1083,
+ "resid_p95_s": 1.1552,
+ "source": "dev description lines in projects/_dev (scripts/calibrate_from_dev.py)"
 }
