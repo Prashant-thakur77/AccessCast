@@ -461,7 +461,7 @@ def cc009_number_or_name_changed(item: Item, ctx: VerifyContext) -> list[Finding
             )
         ]
     if ctx.lang == "it":
-        lost = [n for n in nlp.proper_nouns(src, "en") if n.lower() not in item.text.lower()]
+        lost = [n for n in nlp.kept_names(src) if n.lower() not in item.text.lower()]
         if lost:
             return [
                 Finding(
