@@ -181,3 +181,26 @@ test("studio: axe clean, keyboard-only upload, every stage listed, review link o
   await page.keyboard.press("Enter");
   await expect(page.locator("#workspace")).toBeVisible();
 });
+
+test("add a line by keyboard: dialog is labelled, axe clean, the line lands and waits for review", async ({ page, request }) => {
+  const pid = await projectId(request);
+  await openProject(page, pid);
+  const before = ((await (await request.get(`/api/projects/${pid}/items`)).json()).items as { id: string }[]).length;
+  await page.locator("#item-list").focus();
+  await page.keyboard.press("i");
+  const dlg = page.locator("#add");
+  await expect(dlg).toBeVisible();
+  await expect(page.locator("#add-text")).toBeFocused();
+  expect(await axeViolations(page)).toEqual([]);
+  await page.keyboard.type("A woman opens a laptop on a desk.");
+  await tabTo(page, page.locator("#add-save"));
+  await page.keyboard.press("Enter");
+  await expect(dlg).toBeHidden();
+  await expect(page.locator("#status")).toContainText("Line added");
+  const items = (await (await request.get(`/api/projects/${pid}/items`)).json()).items as {
+    id: string; status: string; source: string; text: string;
+  }[];
+  expect(items.length).toBe(before + 1);
+  const mine = items.find((i) => i.source === "manual" && i.text === "A woman opens a laptop on a desk.");
+  expect(mine && mine.status).toBe("pending");
+});
