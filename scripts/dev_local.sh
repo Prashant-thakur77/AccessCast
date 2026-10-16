@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 set -a; [ -f .env ] && source .env; set +a
-export ACCESSCAST_AUDIO_MODEL=none
+export ACCESSCAST_AUDIO_MODEL=none ACCESSCAST_SOUND_MODEL=ast  # D-021, D-022
 export ACCESSCAST_ASR_MODEL="${ACCESSCAST_ASR_MODEL:-openai/whisper-large-v3-turbo}"
 export ACCESSCAST_PROJECTS_DIR="${ACCESSCAST_PROJECTS_DIR:-projects/_dev}"
 if [ -x workers/.venv-gpu/bin/python ]; then
