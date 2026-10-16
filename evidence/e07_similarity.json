@@ -1,0 +1,1716 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e07_similarity",
+ "split": "test",
+ "passed": false,
+ "git_commit": "e0cb413db86d5eb973cd8b5513a5a9cf97d0d271",
+ "git_dirty": true,
+ "freeze_tag": "test-freeze-3",
+ "started_at": "2026-10-16T23:53:22.799Z",
+ "finished_at": "2026-10-16T23:57:09.364Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "gpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "question": "How close is our description to W3C's human description?",
+  "one_change": "description method",
+  "systems": {
+   "accesscast": "E1 arm C, seed 0 (checks + Gemma repair, no human review)",
+   "gemma_alone": "E1 arm A, seed 0 (same plan, no checks)",
+   "naive": "Gemma describes the middle frame of each pause (naive_caption; no evidence/plan/checks)"
+  },
+  "reference": "W3C human description track (<id>_desc.en.vtt)",
+  "window_ms": 3000,
+  "pairing": "human cue ↔ our lines starting within ±3 s; unpaired cues are not similarity-scored",
+  "cider": "CIDEr-D, own implementation, simple tokenizer; not comparable with published CIDEr",
+  "bertscore": "microsoft/deberta-xlarge-mnli F1, not rescaled",
+  "judge_model_requested": "Qwen3.8-27B",
+  "judge_provider": "tokenfactory",
+  "provider": "tokenfactory",
+  "strict_provider": true,
+  "worker_mode": "real",
+  "metrics_stand_in": false,
+  "dry_run": false
+ },
+ "checks": {
+  "every_paired_cue_judged": false,
+  "strict_provider": true
+ },
+ "results": [
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": true,
+   "bertscore_f1": 0.735537588596344,
+   "cider_d": 0.2476528816143419,
+   "judge_score": 2,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": true,
+   "bertscore_f1": 0.6093950271606445,
+   "cider_d": 0.0,
+   "judge_score": null,
+   "judge_error": "LlmOutputError: empty model output"
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "accesscast",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": true,
+   "bertscore_f1": 0.768277108669281,
+   "cider_d": 0.2868964346076636,
+   "judge_score": 2,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": true,
+   "bertscore_f1": 0.6116348505020142,
+   "cider_d": 0.0,
+   "judge_score": null,
+   "judge_error": "LlmOutputError: empty model output"
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "gemma_alone",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 1,
+   "paired": true,
+   "bertscore_f1": 0.6867773532867432,
+   "cider_d": 0.27748183752198075,
+   "judge_score": 3,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 2,
+   "paired": true,
+   "bertscore_f1": 0.5125564336776733,
+   "cider_d": 0.0,
+   "judge_score": null,
+   "judge_error": "LlmOutputError: empty model output"
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 6,
+   "paired": true,
+   "bertscore_f1": 0.5171492099761963,
+   "cider_d": 0.43507306983201427,
+   "judge_score": null,
+   "judge_error": "LlmOutputError: empty model output"
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 7,
+   "paired": true,
+   "bertscore_f1": 0.5329310894012451,
+   "cider_d": 0.0,
+   "judge_score": 2,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_captions",
+   "system": "naive",
+   "human_index": 8,
+   "paired": true,
+   "bertscore_f1": 0.4460639953613281,
+   "cider_d": 0.0,
+   "judge_score": 1,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "accesscast",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "gemma_alone",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_contrast",
+   "system": "naive",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "naive",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "naive",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_controls",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "accesscast",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "accesscast",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "gemma_alone",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "gemma_alone",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "naive",
+   "human_index": 0,
+   "paired": true,
+   "bertscore_f1": 0.6680165529251099,
+   "cider_d": 0.0,
+   "judge_score": 3,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "naive",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "naive",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "naive",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_customizable",
+   "system": "naive",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "accesscast",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "gemma_alone",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "naive",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "naive",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_keyboard",
+   "system": "naive",
+   "human_index": 6,
+   "paired": true,
+   "bertscore_f1": 0.4804795980453491,
+   "cider_d": 0.0,
+   "judge_score": 1,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "accesscast",
+   "human_index": 10,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "gemma_alone",
+   "human_index": 10,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_layout",
+   "system": "naive",
+   "human_index": 10,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "accesscast",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "gemma_alone",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 1,
+   "paired": true,
+   "bertscore_f1": 0.3422645032405853,
+   "cider_d": 0.0,
+   "judge_score": 1,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_notifications",
+   "system": "naive",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": true,
+   "bertscore_f1": 0.709572970867157,
+   "cider_d": 0.1286221231105789,
+   "judge_score": 2,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "accesscast",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": true,
+   "bertscore_f1": 0.7977683544158936,
+   "cider_d": 0.4699225444146396,
+   "judge_score": 2,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "gemma_alone",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 4,
+   "paired": true,
+   "bertscore_f1": 0.7221627831459045,
+   "cider_d": 0.12836134918148256,
+   "judge_score": 2,
+   "judge_error": null
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 8,
+   "paired": false
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "system": "naive",
+   "human_index": 9,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "accesscast",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "accesscast",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "accesscast",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "accesscast",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "gemma_alone",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "gemma_alone",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "gemma_alone",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "gemma_alone",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "naive",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "naive",
+   "human_index": 4,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "naive",
+   "human_index": 5,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "naive",
+   "human_index": 6,
+   "paired": false
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "system": "naive",
+   "human_index": 7,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "accesscast",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "accesscast",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "accesscast",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "accesscast",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "gemma_alone",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "gemma_alone",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "gemma_alone",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "gemma_alone",
+   "human_index": 3,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "naive",
+   "human_index": 0,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "naive",
+   "human_index": 1,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "naive",
+   "human_index": 2,
+   "paired": false
+  },
+  {
+   "video": "perspectives_understandable",
+   "system": "naive",
+   "human_index": 3,
+   "paired": false
+  }
+ ],
+ "summary": {
+  "timing_agreement": {
+   "accesscast": {
+    "k": 3,
+    "n": 82
+   },
+   "gemma_alone": {
+    "k": 3,
+    "n": 82
+   },
+   "naive": {
+    "k": 9,
+    "n": 82
+   }
+  },
+  "lines": {
+   "accesscast": 2,
+   "gemma_alone": 2,
+   "naive": 6
+  },
+  "systems": {
+   "accesscast": {
+    "human_cues_paired": {
+     "k": 3,
+     "n": 82
+    },
+    "bertscore_f1": {
+     "n": 3,
+     "mean": 0.6848351955413818,
+     "median": 0.709572970867157,
+     "min": 0.6093950271606445,
+     "max": 0.735537588596344
+    },
+    "cider_d": {
+     "n": 3,
+     "mean": 0.1254250015749736,
+     "median": 0.1286221231105789,
+     "min": 0.0,
+     "max": 0.2476528816143419
+    },
+    "judge_1_to_5": {
+     "n": 2,
+     "mean": 2.0,
+     "median": 2.0,
+     "min": 2.0,
+     "max": 2.0
+    },
+    "judge_errors": 1
+   },
+   "gemma_alone": {
+    "human_cues_paired": {
+     "k": 3,
+     "n": 82
+    },
+    "bertscore_f1": {
+     "n": 3,
+     "mean": 0.7258934378623962,
+     "median": 0.768277108669281,
+     "min": 0.6116348505020142,
+     "max": 0.7977683544158936
+    },
+    "cider_d": {
+     "n": 3,
+     "mean": 0.2522729930074344,
+     "median": 0.2868964346076636,
+     "min": 0.0,
+     "max": 0.4699225444146396
+    },
+    "judge_1_to_5": {
+     "n": 2,
+     "mean": 2.0,
+     "median": 2.0,
+     "min": 2.0,
+     "max": 2.0
+    },
+    "judge_errors": 1
+   },
+   "naive": {
+    "human_cues_paired": {
+     "k": 9,
+     "n": 82
+    },
+    "bertscore_f1": {
+     "n": 9,
+     "mean": 0.5453779465622373,
+     "median": 0.5171492099761963,
+     "min": 0.3422645032405853,
+     "max": 0.7221627831459045
+    },
+    "cider_d": {
+     "n": 9,
+     "mean": 0.09343513961505306,
+     "median": 0.0,
+     "min": 0.0,
+     "max": 0.43507306983201427
+    },
+    "judge_1_to_5": {
+     "n": 7,
+     "mean": 1.8571428571428572,
+     "median": 2.0,
+     "min": 1.0,
+     "max": 3.0
+    },
+    "judge_errors": 2
+   }
+  },
+  "naive_failed_calls": 0,
+  "outputs": {
+   "file": "data/eval_outputs/e07_similarity/pairs_test.jsonl",
+   "sha256": "e4b1eb58796aec374f707f41b8395a6e89768da0298b18ba882fc765d22255c1",
+   "rows": 246,
+   "committed": false
+  },
+  "judge_served_model_id": "self-dploy/Qwen3.8-27B",
+  "metric_models": {
+   "bertscore:en": {
+    "model": "microsoft/deberta-xlarge-mnli",
+    "hash": "microsoft/deberta-xlarge-mnli_L40_no-idf_version=0.3.12(hug_trans=5.20.0)",
+    "device": "cuda",
+    "versions": {
+     "bert-score": "0.3.13",
+     "transformers": "5.20.0",
+     "torch": "2.14.1+cu126"
+    },
+    "metric": "BERTScore"
+   }
+  },
+  "note": "Similarity to one human describer's track, on paired cues only; timing agreement shows how many human cues were paired. CIDEr-D here is our own implementation.",
+  "naive_served_model_id": "self-dploy/Gemma-4-31B-IT"
+ },
+ "error": null
+}
