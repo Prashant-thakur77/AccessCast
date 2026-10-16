@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "949eea4624b839346bd8b2eee250af7debbc1827",
+ "git_commit": "fd4d42fed55eeb6108e776d5e934fd759611d3f4",
  "git_dirty": false,
  "freeze_tag": null,
- "started_at": "2026-10-16T05:51:27.563Z",
- "finished_at": "2026-10-16T05:52:58.242Z",
+ "started_at": "2026-10-16T06:50:18.332Z",
+ "finished_at": "2026-10-16T06:51:58.996Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -80,6 +80,10 @@
      "status": "passed"
     },
     {
+     "title": "landing: the listener mascot is decorative and reacts to the description toggle",
+     "status": "passed"
+    },
+    {
      "title": "player: picker and drawer open",
      "status": "passed"
     },
@@ -120,8 +124,8 @@
      "status": "passed"
     }
    ],
-   "passed": 22,
-   "total": 22
+   "passed": 23,
+   "total": 23
   },
   {
    "suite": "review",
@@ -154,8 +158,8 @@
  ],
  "summary": {
   "player": {
-   "passed": 22,
-   "total": 22
+   "passed": 23,
+   "total": 23
   },
   "review": {
    "passed": 5,
