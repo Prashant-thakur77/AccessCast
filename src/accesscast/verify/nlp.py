@@ -415,7 +415,33 @@ def content_nouns(text: str, lang: str) -> list[str]:
     return [_simple_lemma(t) for t in tokens(text) if t.lower() not in sw and len(t) > 2]
 
 
-_COMMON_CAPS_EN = frozenset({"I", "On", "A", "An", "The", "Screen", "Sign", "Text", "Title", "Slide"})
+_COMMON_CAPS_EN = frozenset(
+    {
+        "I",
+        "On",
+        "A",
+        "An",
+        "The",
+        "Screen",
+        "Sign",
+        "Text",
+        "Title",
+        "Slide",
+        # celestial bodies are written capitalised but are not people's names (dev: AD009 and
+        # CC009 flagged "Moon", "Earth"; docs/incidents.md 2026-10-16)
+        "Sun",
+        "Moon",
+        "Earth",
+        "Mercury",
+        "Venus",
+        "Mars",
+        "Jupiter",
+        "Saturn",
+        "Uranus",
+        "Neptune",
+        "Pluto",
+    }
+)
 
 
 def _name_token(t: str) -> str:
@@ -463,16 +489,80 @@ def finite_past_verbs(text: str) -> list[str]:
     ]
 
 
+_SCALES: dict[str, dict[str, int]] = {
+    "en": {"hundred": 100, "thousand": 1_000, "million": 1_000_000, "billion": 1_000_000_000},
+    "it": {
+        "cento": 100,
+        "mille": 1_000,
+        "mila": 1_000,
+        "milione": 1_000_000,
+        "milioni": 1_000_000,
+        "miliardo": 1_000_000_000,
+        "miliardi": 1_000_000_000,
+    },
+    "hi": {"सौ": 100, "हज़ार": 1_000, "हजार": 1_000, "लाख": 100_000, "करोड़": 10_000_000, "करोड": 10_000_000},
+}
+_NUM_TOKEN_RE = re.compile(r"\d+(?:[.,]\d{3})+(?:[.,]\d+)?|\d+(?:[.,]\d+)?|[^\s\d.,;:!?\"'()\[\]]+")
+
+
+def _num_value(tok: str) -> float:
+    """'34,000' / '34.000' → 34000; '2.5' / '2,5' → 2.5 (a separator before exactly 3 digits is thousands)."""
+    if re.fullmatch(r"\d+(?:[.,]\d{3})+", tok):
+        return float(re.sub(r"[.,]", "", tok))
+    return float(tok.replace(",", "."))
+
+
 def numbers(text: str, lang: str) -> list[str]:
-    """Multiset of numbers as normalised strings (digits and number words)."""
+    """Multiset of numbers as normalised values: digits, number words, and scale words (thousand, million, mille,
+    milioni, हज़ार, लाख, करोड़) applied to the number before them, so "a million" and "10 लाख" are both 1000000.
+    The value 1 is never compared: "one" is also the article in Italian (un, una) and Hindi (एक), and a
+    translation may write "one" as "1" (dev false positives, docs/incidents.md 2026-10-16)."""
     check_lang(lang)
     t = normalise(text).translate(_DEVANAGARI_DIGITS)
-    out = [n.replace(",", ".") for n in _NUM_RE.findall(t)]
+    t = re.sub(r"(\d)\s+([.,]\d{3})\b", r"\1\2", t)  # ASR writes "34 ,000"
     words = NUMBER_WORDS.get(lang, {})
-    for tok in lower_tokens(t):
-        if tok in words:
-            out.append(str(words[tok]))
-    return sorted(out)
+    scales = _SCALES.get(lang, {})
+    vals: list[float] = []
+    prev_was_number = False
+    for tok in _NUM_TOKEN_RE.findall(t):
+        low = tok.lower()
+        if tok[0].isdigit():
+            vals.append(_num_value(tok))
+            prev_was_number = True
+        elif low in scales:
+            if prev_was_number and vals:
+                vals[-1] *= scales[low]
+            else:
+                vals.append(float(scales[low]))  # "a million", "हज़ारों" style without a count
+            prev_was_number = True
+        elif low in words:
+            vals.append(float(words[low]))
+            prev_was_number = True
+        else:
+            prev_was_number = False
+    return sorted(f"{v:g}" if v != int(v) else str(int(v)) for v in vals if v != 1)
+
+
+def kept_names(text: str) -> list[str]:
+    """English names a translation must keep word for word: people and organisations (spaCy PERSON, ORG). Places,
+    months and the Moon are translated (Luna, giugno), so they are not required."""
+    from wordfreq import zipf_frequency
+
+    doc = _doc_en(normalise(text))
+    out: list[str] = []
+    for ent in doc.ents:
+        if ent.label_ not in ("PERSON", "ORG"):
+            continue
+        parts = [_name_token(p) for p in ent.text.split()]
+        parts = [
+            p for p in parts if p and p[:1].isupper() and p not in _COMMON_CAPS_EN
+        ]  # not "the" in an ORG
+        # a lone capitalised common word opening a sentence is an imperative, not a name ("Cook the outer layer")
+        opens = ent.start == 0 or doc[ent.start - 1].text in (".", "!", "?", ":", '"', "'")
+        if len(parts) == 1 and opens and zipf_frequency(parts[0].lower(), "en") >= 4.0:
+            continue
+        out += [p for p in parts if p not in out]
+    return out
 
 
 def negation_count(text: str, lang: str) -> int:

@@ -29,3 +29,29 @@ def test_cc009_number_or_name_changed_fails(ctx):
     ctx.lang = "it"
     found = cc009_number_or_name_changed(_item(draft="Premi il tasto alcune volte."), ctx)
     assert found and found[0].rule == "CC009"
+
+
+def test_cc009_article_one_and_translated_places_are_not_flagged(ctx):
+    # dev false positives: "a comet" → "una cometa"; Moon/Earth/June are translated, not names to keep
+    ctx.lang = "it"
+    for src, tr in [
+        ("Today, we're going to cook a comet.", "Oggi cucineremo una cometa."),
+        (
+            "It's when the Earth, the Moon, and the Sun are in precise alignment.",
+            "È quando Terra, Luna e Sole sono allineati.",
+        ),
+        ("It has been orbiting the moon since June 2009.", "Orbita intorno alla Luna da giugno 2009."),
+    ]:
+        assert cc009_number_or_name_changed(_item(draft=tr, source_text=src), ctx) == [], src
+
+
+def test_cc009_a_person_or_organisation_name_must_stay(ctx):
+    ctx.lang = "it"
+    found = cc009_number_or_name_changed(
+        _item(
+            draft="È un veicolo spaziale che orbita intorno alla Luna.",
+            source_text="It's a NASA spacecraft that's been orbiting the Moon.",
+        ),
+        ctx,
+    )
+    assert found and "NASA" in found[0].observed
