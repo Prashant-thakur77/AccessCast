@@ -59,6 +59,10 @@ We could not create an MI300X droplet: AMD Developer Cloud asks for a payment ca
 
 Each table names its data split. "Test set" means the 10 W3C WAI "Web Accessibility Perspectives" videos, which were never used for tuning: the ASR model, prompts, thresholds and every other setting were chosen on our dev set, and prompts were frozen at a git tag before the first test run ([`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md)). Gemma may have seen these public videos in pretraining, so we say "never used for tuning", not "never seen".
 
+## AccessCast Studio
+
+`make review` also serves the Studio at http://127.0.0.1:8081/app/studio.html. Choose a video and every step runs in front of you, in plain words: listening for words, finding pauses, Gemma looking at each scene, Gemma writing, code checking every line and Gemma repairing what fails, then captions, easy-read, Hindi and Italian. It ends with a table of the lines made per version and a link to review them. Nothing is published from the Studio; every line still goes through the review gate. It works with the keyboard alone and announces each finished step to screen readers.
+
 ## How quality is controlled
 
 Gemma proposes and code decides. Gemma first lists what is visible in a scene (temperature 0), then writes description only from that list. Code then checks every line: [`docs/rules.md`](docs/rules.md) lists each rule with its source and what it measures. For example, AD001 measures the spoken line against the pause it has to fit and reports both numbers, AD009 blocks a name nobody said or showed, and AD018 blocks a line that obeys instructions written on a slide. A line that fails goes back to Gemma with the failed checks, up to three times. A line that still fails goes to a person; it is never published by default.
@@ -136,7 +140,7 @@ make setup && make check            # tests, lint, types
 bash deploy/droplet_bootstrap.sh    # only if you have a droplet: a fresh MI300X "vLLM Quick Start" droplet: images, Gemma, workers, weights
 make doctor                         # writes evidence/doctor.json
 make run VIDEO=path/to/video.mp4    # all stages into projects/<sha12>/
-make review                         # approve lines, keyboard first
+make review                         # approve lines, keyboard first; Studio (add a video, watch each step) at /app/studio.html
 make render PROJECT=<sha12>         # refuses while anything is pending
 make e01 … make e16                 # each experiment writes evidence/eNN_*.json, even when it fails
 make submission-check

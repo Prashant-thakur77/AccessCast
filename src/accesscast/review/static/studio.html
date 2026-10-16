@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>AccessCast Studio</title>
+<link rel="stylesheet" href="review.css">
+<link rel="stylesheet" href="studio.css">
+<script src="studio.js" defer></script>
+</head>
+<body>
+<header>
+<div class="top">
+  <div class="top-title">
+    <h1>AccessCast Studio</h1>
+    <p class="muted">Drop in a video. Watch every step run. Then review the lines before anything is published.</p>
+  </div>
+  <nav aria-label="Studio links" class="top-controls">
+    <a href="index.html">Review lines</a>
+  </nav>
+</div>
+<p id="fake-banner" class="banner" hidden>Fake mode: canned model outputs. Nothing here came from a live model.</p>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+</header>
+
+<main id="main" class="studio">
+  <section aria-labelledby="up-h" class="studio-card">
+    <h2 id="up-h">1. Choose a video</h2>
+    <form id="up-form">
+      <div class="field">
+        <label for="file">Video file (up to 10 minutes)</label>
+        <input id="file" name="file" type="file" accept="video/*" aria-describedby="file-help" required>
+        <p id="file-help" class="muted">It stays on this computer. Gemma 4 31B on AMD Token Factory sees still frames and text only, never the file.</p>
+      </div>
+      <button type="submit" id="go">Make the five versions</button>
+    </form>
+  </section>
+
+  <section aria-labelledby="run-h" class="studio-card" id="run" hidden>
+    <h2 id="run-h">2. Watch it work</h2>
+    <p id="run-summary" class="muted"></p>
+    <ol id="stages" class="stages"></ol>
+    <p id="gemma" class="muted"></p>
+  </section>
+
+  <section aria-labelledby="done-h" class="studio-card" id="done" hidden>
+    <h2 id="done-h">3. Review before anything is published</h2>
+    <table id="lines" class="lines">
+      <caption>Lines made, by version</caption>
+      <thead><tr><th scope="col">Version</th><th scope="col">Lines</th><th scope="col">Repaired by Gemma</th><th scope="col">Waiting for a person</th><th scope="col">Passed every check</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p><a id="review-link" class="button-link" href="index.html">Review these lines</a></p>
+    <pre id="log" class="log" hidden></pre>
+  </section>
+</main>
+</body>
+</html>
