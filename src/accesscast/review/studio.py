@@ -32,6 +32,7 @@ from accesscast.project import read_jsonl
 STAGE_WORDS: tuple[tuple[str, str], ...] = (
     ("ingest", "Reading the video"),
     ("asr", "Listening for every word and when it is said"),
+    ("speakers", "Telling the voices apart"),
     ("shots", "Finding the cuts"),
     ("scenes", "Grouping shots into scenes"),
     ("asr_crosscheck", "Second listen to check the transcript"),

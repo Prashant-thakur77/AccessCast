@@ -886,8 +886,62 @@ def stage_review_init(run: Run) -> dict[str, int]:
 
 
 StageFn = Callable[[Run], Any]
+
+
+def stage_speakers(run: Run) -> None:
+    """S2c: anonymous speaker labels (S1, S2, …) on words, for speaker-change marks in captions. Diarization is
+    pyannote community-1 in its own worker env; if it is unavailable the stage says "not run" and why, and
+    captions carry no speaker marks (never guessed)."""
+    from accesscast.analysis.speakers import assign_speakers
+    from accesscast.workers_client import WORKERS_DIR, run_worker
+
+    proj = run.project
+    py = WORKERS_DIR / "diarize" / ".venv" / "bin" / "python"
+    with run.stage("speakers"):
+        if (
+            run.settings.worker_mode == "fake"
+            or os.environ.get("ACCESSCAST_DIARIZE", "1") == "0"
+            or not py.exists()
+        ):
+            why = (
+                "fake mode"
+                if run.settings.worker_mode == "fake"
+                else "ACCESSCAST_DIARIZE=0"
+                if os.environ.get("ACCESSCAST_DIARIZE", "1") == "0"
+                else "diarization env missing (workers/diarize)"
+            )
+            proj.events.emit("speakers", "skipped", reason=why)
+            write_json(proj.p("analysis", "speakers.json"), {"model": f"not run: {why}", "turns": []})
+            return
+        try:
+            res = run_worker(
+                "diarize",
+                "diarize",
+                {"audio": str(proj.p("media", "asr16k.wav"))},
+                proj.p("logs", "worker"),
+                proj.events,
+                require_rocm=run.require_rocm,
+                python=py,
+            )
+        except Exception as e:  # recorded, never silent: captions then carry no speaker marks
+            why = f"{type(e).__name__}: {str(e)[:200]}"
+            proj.events.emit("speakers", "skipped", reason=why)
+            write_json(proj.p("analysis", "speakers.json"), {"model": f"not run: {why}", "turns": []})
+            return
+        words = _words(proj)
+        write_json(
+            proj.p("analysis", "words.json"),
+            words.model_copy(update={"words": assign_speakers(words.words, res["turns"])}),
+        )
+        write_json(
+            proj.p("analysis", "speakers.json"),
+            {"model": res["model"], "speakers": res["speakers"], "turns": res["turns"]},
+        )
+
+
 ANALYSIS: tuple[tuple[str, StageFn], ...] = (
     ("asr", stage_asr),
+    ("speakers", stage_speakers),
     ("shots", stage_shots),
     ("asr_crosscheck", stage_asr_crosscheck),
     ("sounds", stage_sounds),

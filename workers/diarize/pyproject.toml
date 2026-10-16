@@ -1,0 +1,25 @@
+[project]
+name = "accesscast-diarize"
+version = "0.1.0"
+description = "Speaker diarization worker env (pyannote.audio, MIT; model pyannote/speaker-diarization-community-1, CC-BY-4.0)."
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = [
+  "pyannote.audio>=4.0",
+  "torch>=2.4",
+  "torchaudio>=2.4",
+  "soundfile>=0.12",
+  "numpy>=1.26",
+]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }

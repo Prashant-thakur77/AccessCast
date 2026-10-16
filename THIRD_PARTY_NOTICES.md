@@ -44,4 +44,4 @@ AudioSight ships no NOTICE file. Its licence appendix reads "Copyright 2026 Audi
 | Alignment-safe batch translation | video-voice-translator (https://github.com/icuic/video-voice-translator) | MIT |
 
 ## Python dependencies
-Installed from PyPI under their own licences (see `uv.lock`). Notable: spaCy and `en_core_web_sm` (MIT), pydantic (MIT), FastAPI (MIT), httpx (BSD-3-Clause), jiwer (Apache-2.0), wordfreq (Apache-2.0 code; data CC BY-SA 4.0), textstat (MIT), webvtt-py (MIT), PySceneDetect (BSD-3-Clause), soundfile (BSD-3-Clause).
+Installed from PyPI under their own licences (see `uv.lock`). Notable: spaCy and `en_core_web_sm` (MIT), pydantic (MIT), FastAPI (MIT), httpx (BSD-3-Clause), jiwer (Apache-2.0), wordfreq (Apache-2.0 code; data CC BY-SA 4.0), textstat (MIT), webvtt-py (MIT), PySceneDetect (BSD-3-Clause), soundfile (BSD-3-Clause), pyannote.audio (MIT, diarization worker env `workers/diarize`).
