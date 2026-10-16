@@ -12,6 +12,9 @@ from collections.abc import Callable
 from contextlib import contextmanager
 from typing import Any
 
+# Small GPUs: fewer out-of-memory failures from fragmentation (set before torch is imported anywhere).
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+
 REQ = "accesscast/worker-request/v1"
 RESP = "accesscast/worker-response/v1"
 EXIT_OOM = 6
