@@ -31,3 +31,9 @@ def test_under_label_from_sounds():
     music = [SoundEvent(start_ms=0, end_ms=5000, label="music")]
     g = build_gaps([], [], music, SCENES, 5000, guard_ms=100, min_gap_ms=1200)
     assert g.gaps[0].under == "music_no_lyrics"
+
+
+def test_unknown_sound_window_is_treated_as_speech():
+    unknown = [SoundEvent(start_ms=1000, end_ms=6000, label="unknown")]
+    g = build_gaps([], [], unknown, SCENES, 7000, guard_ms=100, min_gap_ms=1200)
+    assert all(not (x.start_ms < 6000 and x.end_ms > 1000) for x in g.gaps)

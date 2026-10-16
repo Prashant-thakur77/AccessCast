@@ -80,7 +80,7 @@ def segment_sdh(
         )
     # Non-speech sound tags as their own cues.
     for e in sounds:
-        if e.label in ("silence", "other", "music_with_lyrics"):
+        if e.label in ("silence", "other", "music_with_lyrics", "unknown"):
             continue
         overlaps = any(min(e.end_ms, i.slot.end_ms) - max(e.start_ms, i.slot.start_ms) > 0 for i in items)
         if overlaps:

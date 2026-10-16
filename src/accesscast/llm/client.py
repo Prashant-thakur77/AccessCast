@@ -254,9 +254,13 @@ class LlmClient:
             except (KeyError, IndexError, TypeError) as e:
                 raise LlmOutputError(f"malformed response envelope: {e}") from e
             usage = data.get("usage") or {}
+            served = str(data.get("model", ""))
+            if self.strict and served.split("/")[-1].lower() != model.split("/")[-1].lower():
+                # --strict-provider: never accept an answer from a different model than the one requested
+                raise ModelEndpointError(f"{prov} answered with model {served!r}, expected {model!r} (strict)")
             return (
                 text,
-                str(data.get("model", model)),
+                served or model,
                 int(usage.get("prompt_tokens", 0)),
                 int(usage.get("completion_tokens", 0)),
                 attempt,

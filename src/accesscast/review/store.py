@@ -14,10 +14,13 @@ from typing import Any
 
 from accesscast.events import now_iso
 from accesscast.project import atomic_write_text, read_jsonl, sha256_file, sha256_text, write_jsonl
-from accesscast.schemas import Item, ItemStatus
+from accesscast.schemas import Item
 
 ITEM_FILES = ("ad.en", "ad.hi", "ad.it", "sdh.en", "easy.en", "subs.hi", "subs.it", "vo.hi", "vo.it")
 _locks: dict[str, threading.Lock] = {}
+
+
+REVIEWER_STATUSES = frozenset({"approved", "rejected", "needs_revision", "pending"})  # never auto_approved
 
 
 class RevisionConflict(Exception):
@@ -96,8 +99,8 @@ class ReviewStore:
         bad = set(changes) - allowed
         if bad:
             raise ValueError(f"fields not editable: {sorted(bad)}")
-        if "status" in changes:
-            ItemStatus(changes["status"])  # validates
+        if "status" in changes and changes["status"] not in REVIEWER_STATUSES:
+            raise ValueError(f"a reviewer may set status to {sorted(REVIEWER_STATUSES)}, not {changes['status']!r}")
         with self.lock:
             st = self.state()
             cur = st["items"].get(item_id)
@@ -112,7 +115,10 @@ class ReviewStore:
                     "review_seconds": float(cur.get("review_seconds") or 0)
                     + float(changes["review_seconds"]),
                 }
+            text_changed = "final" in changes and changes["final"] != cur.get("final")
             cur.update(changes)
+            if text_changed and "status" not in changes and cur.get("status") in ("approved", "auto_approved"):
+                cur["status"] = "pending"  # an edited line must be checked and approved again
             cur["revision"] = int(cur["revision"]) + 1
             if "status" in changes and changes["status"] in ("approved", "rejected", "needs_revision"):
                 cur["reviewer"] = who
@@ -204,5 +210,8 @@ class ReviewStore:
 
 
 def _draft_sig(it: Item) -> str:
-    """Identity of the machine proposal; a re-run that changes it resets the review for that item."""
-    return sha256_text(f"{it.draft}\x00{it.final}\x00{it.anchor_ms}\x00{it.slot.start_ms}-{it.slot.end_ms}")
+    """Identity of the machine proposal, including its check results: a re-run that changes the text, timing,
+    status or violations resets the review for that item (a stricter new result is never hidden)."""
+    rules = ",".join(sorted(v.rule for v in it.violations))
+    return sha256_text(f"{it.draft}\x00{it.final}\x00{it.anchor_ms}\x00{it.slot.start_ms}-{it.slot.end_ms}"
+                       f"\x00{it.status.value}\x00{rules}")

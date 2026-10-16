@@ -24,6 +24,8 @@ from accesscast.verify.base import Finding, Rule, VerificationResult, VerifyCont
 from accesscast.verify.rules_ad import AD_RULES
 from accesscast.verify.rules_text import EASY_RULES, SUBTITLE_RULES
 
+BATCH = 12  # segments or lines per request for voice-over and description translation (output-length safety)
+
 
 @dataclass
 class TextOptions:
@@ -329,22 +331,17 @@ def make_voiceover(
                 "words_max": max(2, int(secs * wps * C.VO_TEMPO_MAX) - 1),
             }
         )
-    try:
-        resp = client.call(
-            LlmRequest(
-                "voiceover",
-                {"target_lang": lang, "segments": segs},
-                seed=derive_seed(opts.project_seed, f"vo:{lang}:{opts.run_label}"),
-                label=f"voiceover:{lang}",
-            )
-        )
-        got = {
-            str(x.get("id")): str(x.get("text", ""))
-            for x in resp.obj.get("items") or []
-            if isinstance(x, dict)
-        }
-    except (LlmOutputError, ModelEndpointError):
-        got = {}
+    got: dict[str, str] = {}
+    for b in range(0, len(segs), BATCH):  # batched: one request per 12 segments, so long videos fit the output
+        chunk = segs[b : b + BATCH]
+        try:
+            resp = client.call(LlmRequest("voiceover", {"target_lang": lang, "segments": chunk},
+                                          seed=derive_seed(opts.project_seed, f"vo:{lang}:{b}:{opts.run_label}"),
+                                          label=f"voiceover:{lang}:{b}"))
+            got.update({str(x.get("id")): str(x.get("text", "")) for x in resp.obj.get("items") or []
+                        if isinstance(x, dict)})
+        except (LlmOutputError, ModelEndpointError):
+            continue  # missing ids become `misaligned` lines (GEN001 / CC007): never silently English
     out = []
     for gi, (g, seg) in enumerate(zip(groups, segs, strict=True)):
         nxt = groups[gi + 1][0].slot.start_ms if gi + 1 < len(groups) else g[-1].slot.end_ms + C.VO_TAIL_MS
@@ -416,20 +413,16 @@ def make_ad_translations(
         }
         for i in approved_ad
     ]
-    try:
-        resp = client.call(
-            LlmRequest(
-                "ad_translate",
-                {"target_lang": lang, "lines": lines},
-                seed=derive_seed(opts.project_seed, f"adtr:{lang}:{opts.run_label}"),
-                label=f"ad_translate:{lang}",
-            )
-        )
-        got: dict[str, dict[str, Any]] = {
-            str(x.get("id")): x for x in resp.obj.get("items") or [] if isinstance(x, dict)
-        }
-    except (LlmOutputError, ModelEndpointError):
-        got = {}
+    got: dict[str, dict[str, Any]] = {}
+    for b in range(0, len(lines), BATCH):
+        chunk = lines[b : b + BATCH]
+        try:
+            resp = client.call(LlmRequest("ad_translate", {"target_lang": lang, "lines": chunk},
+                                          seed=derive_seed(opts.project_seed, f"adtr:{lang}:{b}:{opts.run_label}"),
+                                          label=f"ad_translate:{lang}:{b}"))
+            got.update({str(x.get("id")): x for x in resp.obj.get("items") or [] if isinstance(x, dict)})
+        except (LlmOutputError, ModelEndpointError):
+            continue
     out = []
     lctx = VerifyContext(
         **{

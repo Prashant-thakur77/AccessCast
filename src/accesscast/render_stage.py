@@ -64,6 +64,43 @@ def _remapper(rows: list[dict[str, Any]]) -> Callable[[int], int]:
     return lambda ms: remap_ms(rows, ms)
 
 
+def _revoice(run: Run, items: dict[str, Item]) -> tuple[dict[str, Item], dict[str, list[Finding]]]:
+    """Re-synthesise any publishable voiced line whose clip no longer matches its text (a reviewer edited it),
+    then re-check its timing on the newly MEASURED duration. Failures are render errors (never silent)."""
+    from accesscast.tts.engine import VOICEOVER_VOICES, synthesize
+    from accesscast.verify import rules_ad
+    from accesscast.verify.base import run_rules
+    from accesscast.verify.rules_text import vo001_slot_overflow
+
+    voiced_kinds = (ItemKind.AD, ItemKind.AD_TRANSLATION, ItemKind.VOICEOVER)
+    todo = [i for i in items.values() if i.kind in voiced_kinds and i.status in PUBLISHABLE and i.text.strip()]
+    if not todo:
+        return items, {}
+    out = dict(items)
+    for kind in voiced_kinds:
+        group = [i for i in todo if i.kind == kind]
+        if not group:
+            continue
+        voices = VOICEOVER_VOICES if kind == ItemKind.VOICEOVER else None
+        for v in synthesize(group, run.project.p("tts"), run.project.events, voice_for=voices,
+                            require_rocm=run.require_rocm):
+            out[v.id] = v
+    failures: dict[str, list[Finding]] = {}
+    for it in todo:
+        new = out[it.id]
+        if it.tts is not None and new.tts is not None and it.tts.sha256 == new.tts.sha256:
+            continue  # unchanged clip: already checked on its measured duration
+        ctx = verify_context(run.project, new.lang)
+        ctx.tts_duration_ms = new.tts.duration_ms if new.tts else None
+        ctx.other_items = [o for o in out.values() if o.kind == new.kind and o.lang == new.lang and not o.extended]
+        rules = (vo001_slot_overflow,) if new.kind == ItemKind.VOICEOVER else () if new.extended else (
+            rules_ad.ad001_gap_overflow, rules_ad.ad004_overlaps_speech, rules_ad.ad006_non_monotonic)
+        res = run_rules(new, ctx, rules)
+        if not res.ok:
+            failures[new.id] = res.violations
+    return out, failures
+
+
 def run_gate(run: Run, versions: Sequence[str]) -> gate.GateResult:
     store = ReviewStore(run.project.root)
     res = gate.evaluate(store.merged(), versions, store.state_sha256())
@@ -80,6 +117,7 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
     info = run.info
     store = ReviewStore(proj.root)
     items = store.merged()
+    items, edit_failures = _revoice(run, items)
     wanted = list(versions or AUDIENCE_VERSIONS)
     # Only render versions whose items exist (hi/it description needs approved English lines first).
     present = {f"{i.kind.value}.{i.lang}" for i in items.values()}
@@ -162,7 +200,7 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
             expected_ms = int(str(rows[-1]["output_end_ms"]))
             write_jsonl(rdir / f"source_to_output.{v}.jsonl", rows)
         else:
-            M.mix_standard(master, [*vo_clips, *ad_clips], mixed, stem, tmp)
+            M.mix_standard(master, [*vo_clips, *ad_clips], mixed, stem, tmp, stem_ids={c.item_id for c in ad_clips})
         M.loudnorm_2pass(mixed, normed, target_lufs)
         if rows is not None:
             render_extended(video, normed, rows, out, watermark=watermark)
@@ -187,6 +225,8 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
         findings += R.rn007_human_reviewed(res.human_reviewed, public)
         if ad_clips and rows is None:
             findings += R.rn008_no_overlap(stem, speech)
+        for iid in approved_ids:  # a line edited after approval that no longer fits refuses this version
+            findings += edit_failures.get(iid, [])
         errors = [f for f in findings if f.severity == "error"]
         if errors:
             out.rename(rdir / f"{v}.REFUSED.mp4")  # never left where the player would pick it up

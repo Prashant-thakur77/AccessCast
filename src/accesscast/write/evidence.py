@@ -236,6 +236,9 @@ def gather_evidence(
         except (LlmOutputError, ModelEndpointError) as e:
             last_err = str(e)
             continue
+        except Exception as e:  # malformed shape (e.g. facts as strings): re-ask once, then evidence_failed
+            last_err = f"malformed evidence: {type(e).__name__}: {str(e)[:120]}"
+            continue
         if errors:
             last_err = "; ".join(errors)
             payload = {**payload, "_previous_problems": errors}

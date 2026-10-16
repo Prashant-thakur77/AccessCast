@@ -39,3 +39,19 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 - **Symptom:** building the landing page's rule demo, AD009 (invented name) fired on "We see the screen showing Ctrl + C." with `name '+'`, and on a line ending "press Ctrl and C." with `name 'C.'`.
 - **Root cause:** spaCy tags some symbols and letter-plus-period tokens as proper nouns, and `proper_nouns` compared them without stripping punctuation, so they never matched the allowed on-screen text ("Ctrl + C").
 - **Fix:** name tokens are stripped of surrounding punctuation and must contain a letter; regression tests added. Lesson: a check that blocks good lines costs coverage and reviewer time, so false positives are bugs too.
+
+## 2026-10-16 — independent code review before GPU time: 12 issues fixed
+- **Symptom:** a reviewer agent read the real-mode paths (never exercised by fake mode) and demonstrated 12 problems.
+- **Root causes and fixes (each with a test):**
+  1. An approved line could be edited without re-checking, and the render then played the old audio. Editing now resets a line to pending, and render re-voices any line whose clip no longer matches its text, then re-checks its timing on the measured duration.
+  2. A client could set `auto_approved` through the API. Reviewers can now only set approved, rejected, needs_revision or pending.
+  3. `blind.hi` and `blind.it` could never render, because the voice-over went into the description stem and RN008 counted it as description over speech. The stem now holds description clips only.
+  4. Re-running a stage could leave an old approval on a line that had since failed. The review signature now includes status and violations.
+  5. The gate passed a version with no items. Empty versions now block (`no_items:<version>`).
+  6. Empty easy-read or voice-over text passed every check. New rule GEN001 blocks empty text, failed generations and misaligned translations for every text kind.
+  7. A failed sound-label call became "other" and opened a describable pause. Failed windows are now "unknown" and treated like speech.
+  8. A malformed evidence reply crashed the run. It is now re-asked once, then the scene goes to a person.
+  9. `--strict-provider` was never enforced. The client now refuses an answer from any model other than the one requested, and E1 records the served model ids.
+  10. The freeze guard covered only prompts, constants and lexicons. Any change under `src/` since the freeze commit now blocks a test-set run.
+  11. Voice-over and description translation sent the whole video in one request. They are now batched in 12s.
+  12. E11 measured a repaired line's overlap using the draft's length. Each text now has its own span.
