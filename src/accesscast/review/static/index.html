@@ -28,6 +28,7 @@
     </div>
     <button type="button" id="btn-complete" disabled>Mark review complete</button>
     <button type="button" id="btn-render" disabled>Render</button>
+    <button type="button" id="btn-add" aria-haspopup="dialog" disabled>Add a description line (i)</button>
     <button type="button" id="btn-help" aria-haspopup="dialog">Keys (?)</button>
     <a href="studio.html">Studio: add a video</a>
   </div>
@@ -141,6 +142,28 @@
   </div>
 </main>
 
+<dialog id="add" aria-labelledby="add-h" aria-describedby="add-help">
+  <h2 id="add-h">Add a description line</h2>
+  <p id="add-help">Your line is spoken from the start time. It waits for review like any other line; approve it when you are happy with it.</p>
+  <form id="add-form">
+    <div class="field">
+      <label for="add-start">Start, in seconds</label>
+      <input id="add-start" type="number" min="0" step="0.1" required>
+    </div>
+    <div class="field">
+      <label for="add-end">End of the pause, in seconds</label>
+      <input id="add-end" type="number" min="0" step="0.1" required>
+    </div>
+    <div class="field">
+      <label for="add-text">What a blind viewer needs to hear</label>
+      <textarea id="add-text" rows="3" required maxlength="400"></textarea>
+    </div>
+    <p id="add-error" class="error" role="alert" hidden></p>
+    <button type="submit" id="add-save">Add the line</button>
+    <button type="button" id="add-cancel">Cancel</button>
+  </form>
+</dialog>
+
 <dialog id="help" aria-labelledby="help-h">
   <h2 id="help-h">Keys</h2>
   <p>Keys work anywhere except while you type in a text field. Press Esc in a text field to go back to the list of lines. Use Enter to press a button.</p>
@@ -158,6 +181,7 @@
       <tr><th scope="row"><kbd>p</kbd></th><td>Play the line in context, 2 seconds either side</td></tr>
       <tr><th scope="row"><kbd>h</kbd></th><td>Hear it: make the voice for the current text and play it with 2 seconds of the video before and after</td></tr>
       <tr><th scope="row"><kbd>l</kbd></th><td>Jump to the waiting line with the lowest confidence</td></tr>
+      <tr><th scope="row"><kbd>i</kbd></th><td>Add a description line of your own, starting where the video is now</td></tr>
       <tr><th scope="row"><kbd>?</kbd></th><td>Open this list</td></tr>
       <tr><th scope="row"><kbd>Esc</kbd></th><td>Close this list, or leave a text field</td></tr>
     </tbody>

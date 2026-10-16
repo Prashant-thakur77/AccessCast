@@ -69,6 +69,7 @@
     "source-text", "draft", "final", "meter", "meter-fill", "override-wrap", "override", "override-reason",
     "btn-approve", "btn-reject", "btn-revise", "btn-edit", "btn-context", "btn-hear", "findings", "bt-wrap",
     "back-translation", "facts", "confidence", "repairs", "clip", "items-panel",
+    "btn-add", "add", "add-form", "add-start", "add-end", "add-text", "add-error", "add-cancel",
   ].forEach((id) => { el[id] = $(id); });
 
   const S = {
@@ -218,6 +219,7 @@
     el.picker.hidden = true;
     el["btn-complete"].disabled = false;
     el["btn-render"].disabled = false;
+    el["btn-add"].disabled = false;
     const title = (S.info && S.info.title) || S.analysis.title || pid;
     el["project-title"].textContent = `Project ${pid}: ${title}, ${fmtSec(S.analysis.duration_ms / 1000)} long`;
     document.title = `Review ${title} – AccessCast`;
@@ -981,6 +983,45 @@
     el.final.setSelectionRange(n, n);
   }
 
+  // Add a line (E12 "from scratch", and any reviewer): native modal <dialog>, starts at the playhead.
+  let addReturn = null;
+  function openAdd() {
+    if (!S.pid || el.add.open) return;
+    addReturn = document.activeElement;
+    const t = Math.max(0, el.video.currentTime || 0);
+    el["add-start"].value = t.toFixed(1);
+    el["add-end"].value = (t + 3).toFixed(1);
+    el["add-text"].value = "";
+    el["add-error"].hidden = true;
+    el.video.pause();
+    el.add.showModal();
+    el["add-text"].focus();
+  }
+  function closeAdd() { if (el.add.open) el.add.close(); }
+  el["btn-add"].addEventListener("click", openAdd);
+  el["add-cancel"].addEventListener("click", closeAdd);
+  el.add.addEventListener("close", () => {
+    if (addReturn && document.contains(addReturn)) addReturn.focus();
+    addReturn = null;
+  });
+  el["add-form"].addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const a = Math.round(Number(el["add-start"].value) * 1000);
+    const b = Math.round(Number(el["add-end"].value) * 1000);
+    const text = el["add-text"].value.trim();
+    const fail = (msg) => { el["add-error"].textContent = msg; el["add-error"].hidden = false; };
+    if (!text) { fail("Write the line first."); el["add-text"].focus(); return; }
+    if (!(b > a)) { fail("The end must be after the start."); el["add-end"].focus(); return; }
+    const r = await api("POST", `/api/projects/${encodeURIComponent(S.pid)}/items`,
+      { kind: "ad", lang: "en", anchor_ms: a, end_ms: b, text });
+    if (!r.ok) { fail(`Not added: ${detailOf(r)}`); return; }
+    addReturn = null;
+    closeAdd();
+    await reloadItems();
+    if (S.byId.has(r.data.item_id)) selectItem(r.data.item_id);
+    announce(`Line added at ${fmtTime(a)}. It is waiting for review.`);
+  });
+
   // Help dialog: native modal <dialog>; focus goes to Close, Esc closes, focus returns.
   let helpReturn = null;
   function openHelp() {
@@ -1006,7 +1047,7 @@
   }
   document.addEventListener("keydown", (e) => {
     if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return;
-    if (el.help.open) return; // the dialog handles Esc itself
+    if (el.help.open || el.add.open) return; // the dialog handles Esc itself
     const t = e.target;
     if (isTextField(t)) {
       if (e.key === "Escape") { e.preventDefault(); focusList(); }
@@ -1030,6 +1071,7 @@
       case "h": e.preventDefault(); hearIt(); break;
       case "l": e.preventDefault(); jumpLowest(); break;
       case "?": e.preventDefault(); openHelp(); break;
+      case "i": e.preventDefault(); openAdd(); break;
       default: break;
     }
   });
