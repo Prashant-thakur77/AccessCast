@@ -32,7 +32,29 @@ Fake mode uses canned model outputs and says so on screen. It shows the pipeline
 
 ## Results
 
-<pending: results.tables>
+### Headline: description lines that fit the pauses (E1)
+Test set: 10 W3C videos never used for tuning, 3 seeds, measured by a script that imports none of our checks against W3C's human caption timings.
+
+| Arm | What changes | Lines that fit | Lines published | Sent to a person |
+|---|---|---|---|---|
+| A | Gemma 4, same plan, no checks | <pending: e1.fit_a> of <pending: e1.lines_planned> | <pending: e1.pub_a> | none |
+| B | + checks | <pending: e1.fit_b> of <pending: e1.lines_planned> | <pending: e1.pub_b> | <pending: e1.sent_b> |
+| C | + Gemma repair | <pending: e1.fit_c> of <pending: e1.lines_planned> | <pending: e1.pub_c> | <pending: e1.sent_c> |
+
+95% interval for the gain from A to C, as a share of planned lines (bootstrap over videos): <pending: e1.ci_lo> to <pending: e1.ci_hi>. Coverage of W3C's human description positions (one of our lines within 3 seconds): A <pending: e1.cov_a>, C <pending: e1.cov_c>. Evidence: [`evidence/e01_verifier_ab.json`](evidence/e01_verifier_ab.json).
+
+### Other results
+<pending: results.more>
+
+### On AMD
+| What we measured | Value | Evidence |
+|---|---|---|
+| Generated tokens per second, one MI300X, best concurrency | <pending: e13.best_tokens_per_s> | `e13_serving_prefix_on.json` |
+| p95 latency of a description request at that concurrency | <pending: e13.best_p95_s> | `e13_serving_prefix_on.json` |
+| GPU cost per 1,000 description lines | <pending: e13.usd_per_1000_lines> | `e13_serving_prefix_on.json` |
+| Simultaneous video jobs per MI300X at ≤ 1× real time | <pending: e14.users_per_gpu> | `e14_cost.json` |
+| GPU cost per finished minute, all five versions | <pending: e14.bundle_usd_per_minute> | `e14_cost.json` |
+| Memory needed with every model loaded at once | <pending: mem.total_needed_gib> GiB | `memory.json` |
 
 Each table names its data split. "Test set" means the 10 W3C WAI "Web Accessibility Perspectives" videos, which were never used for tuning: the ASR model, prompts, thresholds and every other setting were chosen on our dev set, and prompts were frozen at a git tag before the first test run ([`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md)). Gemma may have seen these public videos in pretraining, so we say "never used for tuning", not "never seen".
 
@@ -44,7 +66,14 @@ Nothing reaches a viewer until a person approves it. Confidence for each line is
 
 ## Reliability and the live attack
 
-<pending: reliability.section>
+| Check | Result | Evidence |
+|---|---|---|
+| Soak test | <pending: e08.hours> hours, <pending: e08.failed_jobs> failed jobs | `e08_soak.json` |
+| Offline run on the droplet | <pending: e10.python_blocked> network attempts in Python, <pending: e10.host_packets> outbound packets on the host | `e10_offline.json` |
+| Same input, same output | <pending: e09.summary> | `e09_determinism.json` |
+| Live attacks on Gemma (8 cases, 20 tries each at the production temperature and 20 at a stress temperature) | outputs that reached the viewer: <pending: e11.total_leaks> | `e11_adversarial.json` |
+
+<pending: e11.table>
 
 ## What runs on AMD
 

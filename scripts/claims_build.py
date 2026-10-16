@@ -176,6 +176,14 @@ SPECS: list[Spec] = [
         "outbound packets counted on the host during the offline run",
         "packets",
     ),
+    Spec("e1.pub_a", "e01_verifier_ab.json", "/summary/pooled/A/lines_published", "lines published, arm A", "lines", split="test"),
+    Spec("e1.pub_b", "e01_verifier_ab.json", "/summary/pooled/B/lines_published", "lines published, arm B", "lines", split="test"),
+    Spec("e1.pub_c", "e01_verifier_ab.json", "/summary/pooled/C/lines_published", "lines published, arm C", "lines", split="test"),
+    Spec("e1.sent_b", "e01_verifier_ab.json", "/summary/pooled/B/sent_to_person", "lines sent to a person in arm B", "lines", split="test"),
+    Spec("e1.cov_a", "e01_verifier_ab.json", "/summary/coverage_share/A", "share of human description positions covered, arm A", fmt=pct, split="test"),
+    Spec("e1.cov_c", "e01_verifier_ab.json", "/summary/coverage_share/C", "share of human description positions covered, arm C", fmt=pct, split="test"),
+    Spec("mem.total_needed_gib", "memory.json", "/summary/total_needed_gib", "GPU memory needed with every model loaded", "GiB", fmt=lambda x: f"{float(x):.0f}", split="none"),
+    Spec("e09.summary", "e09_determinism.json", "/summary/all_artefacts_identical", "whether every artefact was byte-identical across runs", fmt=lambda x: "every artefact byte-identical across 5 fresh runs" if x else "not every artefact was byte-identical (details in the evidence file)"),
     Spec("e16.player_passed", "e16_ui_a11y.json", "/summary/player/passed", "player accessibility tests passed (Playwright + axe-core)", "tests", split="none"),
     Spec("e16.player_total", "e16_ui_a11y.json", "/summary/player/total", "player accessibility tests run", "tests", split="none"),
     Spec("e16.review_passed", "e16_ui_a11y.json", "/summary/review/passed", "review-app accessibility tests passed (Playwright + axe-core)", "tests", split="none"),
@@ -190,11 +198,40 @@ SPECS: list[Spec] = [
 ]
 
 
+def e11_specs() -> list[Spec]:
+    f = EV / "e11_adversarial.json"
+    if not f.exists():
+        return []
+    out = []
+    for case, st in json.loads(f.read_text())["summary"].get("cases", {}).items():
+        for setting in st:
+            for key in ("tries", "gemma_failed", "blocked", "leaks"):
+                out.append(Spec(f"e11.{case}.{setting}.{key}", "e11_adversarial.json", f"/summary/cases/{case}/{setting}/{key}",
+                                f"E11 {case} ({setting}): {key}", "tries"))
+    return out
+
+
+def e11_table() -> str | None:
+    f = EV / "e11_adversarial.json"
+    if not f.exists():
+        return None
+    cases = json.loads(f.read_text())["summary"].get("cases", {})
+    lines = ["| Case | Gemma failed (production) | Blocked | Reached the viewer | Gemma failed (stress) |", "|---|---|---|---|---|"]
+    for c in cases:
+        lines.append(f"| {c} | <pending: e11.{c}.production.gemma_failed> of <pending: e11.{c}.production.tries> | "
+                     f"<pending: e11.{c}.production.blocked> | <pending: e11.{c}.production.leaks> | "
+                     f"<pending: e11.{c}.stress.gemma_failed> of <pending: e11.{c}.stress.tries> |")
+    return "\n".join(lines)
+
+
+SECTIONS: dict[str, Callable[[], str | None]] = {"e11.table": e11_table}
+
+
 def register() -> dict[str, Any]:
     reg_p = EV / "public-claims.json"
     reg = json.loads(reg_p.read_text())
     by_id = {c["claim_id"]: c for c in reg["claims"]}
-    for s in SPECS:
+    for s in [*SPECS, *e11_specs()]:
         f = EV / s.path
         if not f.exists():
             continue
@@ -232,6 +269,10 @@ def fill(claims: dict[str, Any]) -> int:
         if not p.exists():
             continue
         text = p.read_text(encoding="utf-8")
+        for sec, gen in SECTIONS.items():  # expand generated sections first; their cells are claim placeholders
+            block = gen() if f"<pending: {sec}>" in text else None
+            if block:
+                text = text.replace(f"<pending: {sec}>", block)
 
         def sub(m: re.Match[str], rel: str = rel) -> str:
             nonlocal n
