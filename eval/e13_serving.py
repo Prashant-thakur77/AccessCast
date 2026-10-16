@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import statistics
 import time
@@ -99,6 +100,9 @@ def fire(base: str, model: str, bodies: list[dict[str, Any]], conc: int) -> dict
 
 
 def main() -> int:
+    os.environ.pop(
+        "ACCESSCAST_LLM_CACHE", None
+    )  # this experiment measures repeated live calls: never a cache
     ap = argparse.ArgumentParser()
     ap.add_argument("--replay", default="logs/replay")
     ap.add_argument("--label", required=True)

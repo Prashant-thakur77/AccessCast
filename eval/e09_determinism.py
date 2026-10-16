@@ -8,6 +8,7 @@ Usage: python -m eval.e09_determinism [--runs 5] [--clips nasa_GSFC_...,fixture2
 from __future__ import annotations
 
 import argparse
+import os
 import shutil
 from pathlib import Path
 
@@ -28,6 +29,9 @@ def clip_path(cid: str) -> Path:
 
 
 def main() -> int:
+    os.environ.pop(
+        "ACCESSCAST_LLM_CACHE", None
+    )  # this experiment measures repeated live calls: never a cache
     ap = argparse.ArgumentParser()
     ap.add_argument("--runs", type=int, default=5)
     ap.add_argument(

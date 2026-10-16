@@ -183,7 +183,7 @@ REVIEW_CONTEXT_S = 2.0  # "Play in context (±2 s)"
 
 # ---------------------------------------------------------------- LLM client (PLAN §14.3)
 LLM_TIMEOUT_S = 180.0
-LLM_MAX_RETRIES = 3
+LLM_MAX_RETRIES = 6  # Token Factory returned 503 "no available workers" for minutes at a time (16 Oct)
 LLM_RETRY_STATUS: tuple[int, ...] = (429, 500, 502, 503, 504)
 LLM_LOG_TRUNCATE = 300  # GemmaClip's diagnostics rule idea: truncate text in logs
 GPU_HOURLY_COST_USD = 2.59  # AMD Developer Cloud MI300X on-demand price, cited.amd.devcloud_mi300x_hourly (16 Oct 2026); replaced by the billed rate
