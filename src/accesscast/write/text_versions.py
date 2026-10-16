@@ -86,9 +86,14 @@ def make_easy(client: LlmClient, sdh: Sequence[Item], ctx: VerifyContext, opts: 
         span_s = (group[-1].slot.end_ms - group[0].slot.start_ms) / 1000
         words_max = max(3, int(span_s * C.EASY_WPM_MAX / 60))
         # each cue gets its own limit: one limit for the group let Gemma pack words into some cues (ER001 on dev)
-        cues = [{"id": c.id, "text": c.text.replace("\n", " ").lstrip("- "),
-                 "words_max": max(2, int((c.slot.end_ms - c.slot.start_ms) / 1000 * C.EASY_WPM_MAX / 60))}
-                for c in group]
+        cues = [
+            {
+                "id": c.id,
+                "text": c.text.replace("\n", " ").lstrip("- "),
+                "words_max": max(2, int((c.slot.end_ms - c.slot.start_ms) / 1000 * C.EASY_WPM_MAX / 60)),
+            }
+            for c in group
+        ]
         seed = derive_seed(opts.project_seed, f"easy:{gi}:{opts.run_label}")
         try:
             resp = client.call(

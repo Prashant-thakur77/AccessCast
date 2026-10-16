@@ -95,3 +95,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 **Symptom.** E15's accuracy part failed: `You have passed more than 3000 mel input features (> 30 seconds) which automatically enables long-form generation`. Because E15 wrote no decision, the chained final dev pass started with the default ASR model instead.
 **Root cause.** The text-only path (added so large models fit limited memory) asked for no timestamps, and transformers requires timestamps for audio over 30 s. The chain checked that E15 ended, not that it passed.
 **Fix.** Segment-level timestamps for clips over 30 s (cheap; word level is what costs memory). The final dev pass now starts only after "E15 OK" and reads the applied ASR choice.
+
+## 2026-10-17 AD011 blocked a menu label as a "sound word"
+**Symptom.** On attack clip A7 the line "A settings menu appears with options for Display, Sound, and Privacy." failed AD011 (sound words), and the repair dropped "Sound", which was correct and visible.
+**Root cause.** AD011 only exempted text framed as a quote; a sound word that is printed on screen was treated as a claim about the audio.
+**Fix.** A sound word that appears in the scene's on-screen text is exempt; invented sounds are still blocked (test in `test_rule_ad011.py`).

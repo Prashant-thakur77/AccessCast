@@ -331,6 +331,11 @@ def ad011_sound(item: Item, ctx: VerifyContext) -> list[Finding]:
     if _quote_framed(_text(item), ctx.lang) and ":" in low:
         low = low.split(":", 1)[0]
     hits = [w for w in L.SOUND_WORDS[ctx.lang] if _has_phrase(low, w)]
+    # A sound word printed on screen in this scene ("Display, Sound, Privacy" in a menu) is visible text, not a
+    # claim about the audio (dev false positive on A7, docs/incidents.md 2026-10-17).
+    ev = _evidence(item, ctx)
+    shown = " ".join(t.text for t in ev.on_screen_text).lower() if ev is not None else ""
+    hits = [w for w in hits if not _has_phrase(shown, w)]
     if hits:
         return [
             Finding(
