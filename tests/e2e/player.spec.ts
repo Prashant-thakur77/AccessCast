@@ -255,3 +255,28 @@ test("watch: ? opens the shortcut list, Escape closes it and returns focus", asy
   await page.keyboard.press("2");
   await expect(page.locator("#t-deaf")).toHaveAttribute("aria-pressed", "true");
 });
+
+test("landing: the listener mascot is decorative and reacts to the description toggle", async ({ page }) => {
+  await page.goto("/index.html");
+  const mascots = page.locator("[data-mascot]");
+  await expect(mascots).toHaveCount(3);
+  for (const m of await mascots.all()) {
+    await expect(m).toHaveAttribute("aria-hidden", "true");
+    await expect(m.locator("svg")).toHaveAttribute("aria-hidden", "true");
+  }
+  const lm = page.locator("#listen-mascot");
+  await expect(lm).toHaveAttribute("data-eyes", "open");
+  const desc = page.locator("#l-desc");
+  await expect(desc).toBeEnabled();
+  await desc.click();
+  await expect(lm).toHaveAttribute("data-eyes", "closed");
+  await page.locator("#l-orig").click();
+  await expect(lm).toHaveAttribute("data-eyes", "open");
+  // hover states on the audience discs drive the small listener
+  const wm = page.locator("#who-mascot");
+  await page.getByRole("link", { name: "I can't see the screen" }).focus();
+  await expect(wm).toHaveAttribute("data-eyes", "closed");
+  await page.getByRole("link", { name: "I can't hear" }).focus();
+  await expect(wm).toHaveAttribute("data-bubble", "caption");
+  await expect(wm).toHaveAttribute("data-phones", "faded");
+});
