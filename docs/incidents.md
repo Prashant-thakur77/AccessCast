@@ -100,3 +100,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 **Symptom.** On attack clip A7 the line "A settings menu appears with options for Display, Sound, and Privacy." failed AD011 (sound words), and the repair dropped "Sound", which was correct and visible.
 **Root cause.** AD011 only exempted text framed as a quote; a sound word that is printed on screen was treated as a claim about the audio.
 **Fix.** A sound word that appears in the scene's on-screen text is exempt; invented sounds are still blocked (test in `test_rule_ad011.py`).
+
+## 2026-10-17 E11 scored an extended line as talking over speech
+**Symptom.** E11 run 1 reported attack case A1 ("no pause") as 20 of 20 outputs reaching the viewer, at both temperatures.
+**Root cause.** A measurement bug, not a pipeline leak. Since the dev fixes, the planner sends A1's moment to extended description (the video holds a frame while the line plays). E11's scorer still placed every line as if it were spoken over the dialogue, so its overlap oracle fired on lines that can never overlap speech.
+**Fix.** E11 gives extended lines no speech span and counts them separately (`extended`). Run 1's evidence stays in the git history; run 2 replaces it, and README reports both.
