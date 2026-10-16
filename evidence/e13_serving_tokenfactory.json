@@ -1,0 +1,168 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e13_serving_tokenfactory",
+ "split": "dev",
+ "passed": true,
+ "git_commit": "9df9d344d5e9910d1fea3a75a8c82e80db7e7b2b",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-16T19:07:05.030Z",
+ "finished_at": "2026-10-16T19:14:15.168Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "gpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "provider": "tokenfactory",
+  "model": "Gemma-4-31B-IT",
+  "measured": "client-side (network and provider queue included)",
+  "levels": [
+   1,
+   4
+  ],
+  "repeats": 3,
+  "per_level": 20,
+  "rpm_limit": 20,
+  "max_concurrency": 8,
+  "replay_requests": 1050,
+  "strict_provider": true
+ },
+ "checks": {
+  "measured": true,
+  "strict_provider": true
+ },
+ "results": [
+  {
+   "concurrency": 1,
+   "repeats": [
+    {
+     "requests": 20,
+     "ok": 20,
+     "errors": {},
+     "wall_s": 58.23,
+     "p50_s": 1.794,
+     "p95_s": 9.42,
+     "gen_tokens": 1019,
+     "tokens_per_s": 17.5,
+     "served": [
+      "self-dploy/Gemma-4-31B-IT"
+     ]
+    },
+    {
+     "requests": 20,
+     "ok": 15,
+     "errors": {
+      "429": 5
+     },
+     "wall_s": 87.193,
+     "p50_s": 2.029,
+     "p95_s": 15.885,
+     "gen_tokens": 1268,
+     "tokens_per_s": 14.54,
+     "served": [
+      "self-dploy/Gemma-4-31B-IT"
+     ]
+    },
+    {
+     "requests": 20,
+     "ok": 19,
+     "errors": {
+      "429": 1
+     },
+     "wall_s": 66.777,
+     "p50_s": 1.84,
+     "p95_s": 31.14,
+     "gen_tokens": 1037,
+     "tokens_per_s": 15.53,
+     "served": [
+      "self-dploy/Gemma-4-31B-IT"
+     ]
+    }
+   ],
+   "tokens_per_s": 15.53,
+   "p95_s": 15.885,
+   "p50_s": 1.84,
+   "tokens_per_s_min": 14.54,
+   "tokens_per_s_max": 17.5,
+   "requests": 60,
+   "ok": 54
+  },
+  {
+   "concurrency": 4,
+   "repeats": [
+    {
+     "requests": 20,
+     "ok": 13,
+     "errors": {
+      "429": 7
+     },
+     "wall_s": 58.967,
+     "p50_s": 4.704,
+     "p95_s": 14.439,
+     "gen_tokens": 833,
+     "tokens_per_s": 14.13,
+     "served": [
+      "self-dploy/Gemma-4-31B-IT"
+     ]
+    },
+    {
+     "requests": 20,
+     "ok": 18,
+     "errors": {
+      "429": 2
+     },
+     "wall_s": 64.859,
+     "p50_s": 3.77,
+     "p95_s": 13.859,
+     "gen_tokens": 1397,
+     "tokens_per_s": 21.54,
+     "served": [
+      "self-dploy/Gemma-4-31B-IT"
+     ]
+    },
+    {
+     "requests": 20,
+     "ok": 20,
+     "errors": {},
+     "wall_s": 61.604,
+     "p50_s": 2.01,
+     "p95_s": 11.13,
+     "gen_tokens": 1065,
+     "tokens_per_s": 17.29,
+     "served": [
+      "self-dploy/Gemma-4-31B-IT"
+     ]
+    }
+   ],
+   "tokens_per_s": 17.29,
+   "p95_s": 13.859,
+   "p50_s": 3.77,
+   "tokens_per_s_min": 14.13,
+   "tokens_per_s_max": 21.54,
+   "requests": 60,
+   "ok": 51
+  }
+ ],
+ "summary": {
+  "best": {
+   "concurrency": 4,
+   "tokens_per_s": 17.29,
+   "p95_s": 13.859,
+   "p50_s": 3.77
+  },
+  "requests": 120,
+  "ok": 105,
+  "failed": 15,
+  "served_model_ids": [
+   "self-dploy/Gemma-4-31B-IT"
+  ]
+ },
+ "error": null
+}

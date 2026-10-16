@@ -803,6 +803,90 @@
    "public_files": []
   },
   {
+   "claim_id": "e13.best_p95_s",
+   "text": "client-side p95 latency of a Gemma request on AMD Token Factory at that concurrency",
+   "value": 13.859,
+   "unit": "s",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e13_serving_tokenfactory.json",
+     "sha256": "ac5b89b55b9ecca1903b919ca2d0373dfd2dc45611f37f3cb1db80ca2eb58ac1",
+     "pointer": "/summary/best/p95_s"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "13.9 s"
+   ]
+  },
+  {
+   "claim_id": "e13.best_tokens_per_s",
+   "text": "generated tokens per second seen by our client, Gemma 4 31B on AMD Token Factory, best concurrency",
+   "value": 17.29,
+   "unit": "tokens/s",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e13_serving_tokenfactory.json",
+     "sha256": "ac5b89b55b9ecca1903b919ca2d0373dfd2dc45611f37f3cb1db80ca2eb58ac1",
+     "pointer": "/summary/best/tokens_per_s"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "17"
+   ]
+  },
+  {
+   "claim_id": "e13.failed",
+   "text": "Gemma requests to AMD Token Factory that failed during the speed test",
+   "value": 15,
+   "unit": "requests",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e13_serving_tokenfactory.json",
+     "sha256": "ac5b89b55b9ecca1903b919ca2d0373dfd2dc45611f37f3cb1db80ca2eb58ac1",
+     "pointer": "/summary/failed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "15"
+   ]
+  },
+  {
+   "claim_id": "e13.requests",
+   "text": "Gemma requests sent to AMD Token Factory during the speed test",
+   "value": 120,
+   "unit": "requests",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e13_serving_tokenfactory.json",
+     "sha256": "ac5b89b55b9ecca1903b919ca2d0373dfd2dc45611f37f3cb1db80ca2eb58ac1",
+     "pointer": "/summary/requests"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "120"
+   ]
+  },
+  {
    "claim_id": "e16.player_passed",
    "text": "player accessibility tests passed (Playwright + axe-core)",
    "value": 23,
@@ -816,9 +900,7 @@
      "pointer": "/summary/player/passed"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "23"
    ]
@@ -837,9 +919,7 @@
      "pointer": "/summary/player/total"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "23"
    ]
@@ -858,9 +938,7 @@
      "pointer": "/summary/review/passed"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -879,9 +957,7 @@
      "pointer": "/summary/review/total"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
