@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "98b9daa3d41822a7e3e7648eecfb7d2c98cafeca",
- "git_dirty": true,
+ "git_commit": "949eea4624b839346bd8b2eee250af7debbc1827",
+ "git_dirty": false,
  "freeze_tag": null,
- "started_at": "2026-10-15T21:45:30.773Z",
- "finished_at": "2026-10-15T21:46:12.533Z",
+ "started_at": "2026-10-16T05:51:27.563Z",
+ "finished_at": "2026-10-16T05:52:58.242Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -48,6 +48,38 @@
      "status": "passed"
     },
     {
+     "title": "old player links redirect to watch.html",
+     "status": "passed"
+    },
+    {
+     "title": "landing: listening toggle works with the keyboard and announces it",
+     "status": "passed"
+    },
+    {
+     "title": "landing: audience discs open the player for that viewer",
+     "status": "passed"
+    },
+    {
+     "title": "landing: rule demo shows real findings and announces the choice",
+     "status": "passed"
+    },
+    {
+     "title": "landing: results show only registered numbers, else Measuring",
+     "status": "passed"
+    },
+    {
+     "title": "landing: the moving text can be paused",
+     "status": "passed"
+    },
+    {
+     "title": "watch: share this view copies a link and says so",
+     "status": "passed"
+    },
+    {
+     "title": "watch: ? opens the shortcut list, Escape closes it and returns focus",
+     "status": "passed"
+    },
+    {
      "title": "player: picker and drawer open",
      "status": "passed"
     },
@@ -60,6 +92,14 @@
      "status": "passed"
     },
     {
+     "title": "landing: every section, in its own colour world",
+     "status": "passed"
+    },
+    {
+     "title": "watch: each audience colour world",
+     "status": "passed"
+    },
+    {
      "title": "player: picker and drawer open",
      "status": "passed"
     },
@@ -69,11 +109,19 @@
     },
     {
      "title": "proof",
+     "status": "passed"
+    },
+    {
+     "title": "landing: every section, in its own colour world",
+     "status": "passed"
+    },
+    {
+     "title": "watch: each audience colour world",
      "status": "passed"
     }
    ],
-   "passed": 10,
-   "total": 10
+   "passed": 22,
+   "total": 22
   },
   {
    "suite": "review",
@@ -106,8 +154,8 @@
  ],
  "summary": {
   "player": {
-   "passed": 10,
-   "total": 10
+   "passed": 22,
+   "total": 22
   },
   "review": {
    "passed": 5,
