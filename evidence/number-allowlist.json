@@ -108,6 +108,14 @@
   {
    "value": 2.2,
    "reason": "WCAG version number (WCAG 2.2)"
+  },
+  {
+   "value": 1000,
+   "reason": "unit in 'GPU cost per 1,000 description lines' (PLAN §5 must-have #6)"
+  },
+  {
+   "value": 95,
+   "reason": "confidence level of the pre-registered bootstrap interval ('95% interval')"
   }
  ]
 }
