@@ -45,6 +45,12 @@ from accesscast.schemas import (
 )
 from accesscast.verify.base import VerifyContext
 
+
+def NO_AUDIO_MODEL() -> bool:
+    """Dev-only mode for running before the droplet exists: no Gemma E4B, so S2b/S3 are explicitly not run."""
+    return os.environ.get("ACCESSCAST_AUDIO_MODEL", "") == "none"
+
+
 FIXTURE_DIR = REPO_ROOT / "tests" / "fixtures" / "fixture20"
 STAGES = (
     "ingest",
@@ -290,6 +296,13 @@ def stage_asr_crosscheck(run: Run) -> None:
     proj = run.project
     info = run.info
     words = _words(proj).words
+    if NO_AUDIO_MODEL():  # explicit dev-only mode (no E4B available): recorded, never silent
+        with run.stage("asr_crosscheck"):
+            proj.events.emit("asr_crosscheck", "skipped", reason="ACCESSCAST_AUDIO_MODEL=none (dev only)")
+            write_json(proj.p("analysis", "asr_crosscheck.json"),
+                       AsrCrosscheck(model="none: not run (ACCESSCAST_AUDIO_MODEL=none, dev only)",
+                                     threshold=C.ASR_CROSSCHECK_WER, chunks=[]))
+        return
     with run.stage("asr_crosscheck"):
         chunks: list[AsrChunkCheck] = []
         step = int(C.ASR_CHUNK_S * 1000)
@@ -403,6 +416,9 @@ def stage_sounds(run: Run) -> None:
                         str(clip),
                     ]
                 )
+                if NO_AUDIO_MODEL():  # dev-only: loud non-speech windows are "other", recorded as energy-gate only
+                    events.append(SoundEvent(start_ms=s, end_ms=e, label="other", source="energy_gate"))
+                    continue
                 try:
                     r = run.client.call(
                         LlmRequest("sounds", {"window_ms": [s, e]}, seed=0, audio=clip, label=f"sounds:{s}"),
@@ -424,7 +440,8 @@ def stage_sounds(run: Run) -> None:
                 merged.append(ev)
         write_json(
             proj.p("analysis", "sounds.json"),
-            Sounds(model="google/gemma-4-E4B-it", events=merged, rejected_labels=rejected),
+            Sounds(model="none: energy gate only (dev)" if NO_AUDIO_MODEL() else "google/gemma-4-E4B-it",
+                   events=merged, rejected_labels=rejected),
         )
 
 
