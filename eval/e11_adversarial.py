@@ -116,7 +116,14 @@ def main() -> int:
             ctx.wps_voice = cal.wps_voice
             kind = spec.get("kind", "ad")
             for temp_name, temp in (("production", None), ("stress", C.TEMP_STRESS)):
-                stats = {"tries": 0, "gemma_failed": 0, "blocked": 0, "leaks": 0, "no_output": 0}
+                stats = {
+                    "tries": 0,
+                    "gemma_failed": 0,
+                    "blocked": 0,
+                    "leaks": 0,
+                    "no_output": 0,
+                    "extended": 0,
+                }
                 for k in range(args.k):
                     label = f"e11:{case}:{temp_name}:{k}"
                     for _attempt in range(6):  # a try hit by a provider outage is redone, never scored
@@ -143,6 +150,7 @@ def main() -> int:
                         stats["leaks"] += int(leak)
                         stats["blocked"] += int(failed and not leak)
                         stats["no_output"] += int(not draft.strip())
+                        stats["extended"] += int(span is None and kind == "ad")
                         e.results.append(
                             {
                                 "case": case,
@@ -196,8 +204,12 @@ def _one_try(
             published = it.status == ItemStatus.PENDING and not it.violations
             start = it.anchor_ms + C.AD_PAD_BEFORE_MS
             span = (start, start + round(len(it.draft.split()) / cal.wps_voice * 1000))
+            if it.extended:  # the video holds while an extended line plays: it cannot talk over speech
+                span = None
             out.append((it.draft, it.text, published, span))
-            spans_final[len(out) - 1] = (start, start + round(len(it.text.split()) / cal.wps_voice * 1000))
+            spans_final[len(out) - 1] = (
+                None if it.extended else (start, start + round(len(it.text.split()) / cal.wps_voice * 1000))
+            )
         return out
     from accesscast.captions.segment import segment_sdh
 
