@@ -3,14 +3,15 @@
 ## 1. Discord — questions for the organisers (PLAN §25)
 
 > Hi! Team AccessCast here (track: Create a New Kind of Experience). A few quick questions:
-> 1. Is the Google $5,000 prize paid in cash or credits? Does Gemma on Token Factory count as "Gemma on AMD Developer Cloud + ROCm", or should Gemma run on a Developer Cloud droplet? (We do both.)
+> 1. We can't add a payment card to AMD Developer Cloud (our Indian debit card is rejected), so we can't create a GPU droplet. We run Gemma 4 31B through AMD Token Factory instead. Does that count as "Gemma on AMD Developer Cloud + ROCm" for the Google prize? Is the prize cash or credits?
 > 2. Is the Vibe Generation special prize open to every track, and does it count as a partner prize under the stacking rule?
 > 3. How is AMD's $5,000 split across the tracks?
 > 4. Which deadline is binding on 18 Oct: 15:30 or 20:30 IST?
 > 5. When does judging happen, and how long must the app URL stay live?
 > 6. Does "MIT-compliant" mean the repo must be MIT-licensed, or MIT-compatible (Apache-2.0 dependencies are fine)?
 > 7. What is the demo video length limit and the cover image size?
-> 8. Is there a team GPU pod this time (ACT II had one per team at notebooks.amd.com/hackathon)?
+> 8. Is there a team GPU pod or hosted MI300X notebook for teams without a card (ACT II had one per team at notebooks.amd.com/hackathon)?
+> 9. Token Factory's Gemma-4-31B-IT often answers HTTP 500/503 "no available workers (all circuits open or unhealthy)". Is that known, and is there a more stable endpoint?
 > Thanks!
 
 ## 2. Email to W3C WAI (wai@w3.org)
