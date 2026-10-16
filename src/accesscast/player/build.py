@@ -73,6 +73,14 @@ def export_site(settings: Settings, projects: Sequence[str], out: Path, *, allow
                     shutil.copyfile(src, dst / fr)
         write_json(dst / "index.json", idx)
         write_json(dst / "decisions.json", dec)
+        an: dict[str, Any] = {"duration_ms": idx["duration_ms"]}
+        if (root / "analysis" / "words.json").exists():
+            an["speech"] = [[w["start_ms"], w["end_ms"]] for w in read_json(root / "analysis" / "words.json")["words"]]
+        if (root / "analysis" / "gaps.json").exists():
+            an["gaps"] = [[g["start_ms"], g["end_ms"]] for g in read_json(root / "analysis" / "gaps.json")["gaps"]]
+        if (root / "analysis" / "scenes.json").exists():
+            an["scenes"] = [[c["start_ms"], c["end_ms"]] for c in read_json(root / "analysis" / "scenes.json")["scenes"]]
+        write_json(dst / "analysis.json", an)
         rep = read_json(root / "reports" / "report.json")
         write_json(dst / "report.json", rep)
         catalog.append({"sha12": root.name, "title": idx.get("title"), "duration_ms": idx["duration_ms"],
