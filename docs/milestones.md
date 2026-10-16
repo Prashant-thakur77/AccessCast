@@ -3,11 +3,11 @@
 Status: `[x]` done and verified · `[~]` in progress · `[ ]` not started · `[!]` blocked on a person (see `docs/outreach.md` and the batched request)
 
 ## M0 Accounts and endpoints (P0)
-- [!] MI300X droplet (team creates, or gives an API token)
-- [!] Token Factory key → `GET /models` → `evidence/tokenfactory_models.json`
-- [!] HF token + gated licences
+- [x] ~~MI300X droplet~~ not available (no accepted payment card): D-021, Gemma 4 31B on AMD Token Factory instead
+- [x] Token Factory key → `GET /models` → `evidence/tokenfactory_models.json`
+- [~] HF token in `.env`; gated licences accepted except pyannote community-1 (speaker labels wait for it)
 - [x] `deploy/droplet_bootstrap.sh`, `deploy/serve_gemma.sh`, `make serve-gemma`, health loop (untested until the droplet exists)
-- [ ] 31B answers an image prompt; E4B answers a 10 s audio prompt
+- [x] 31B answers image prompts on Token Factory (every dev run); E4B not available (D-021: sound labels from AST, D-022)
 - [ ] `accesscast doctor --deep` → `evidence/doctor.json`; `deploy/versions.lock` pinned by digest
 
 ## M1 Skeleton (P0)
@@ -21,14 +21,14 @@ Status: `[x]` done and verified · `[~]` in progress · `[ ]` not started · `[!
 
 ## M2 Analysis (P0)
 - [x] Silero VAD licence resolved (MIT)
-- [~] S0 ingest, S1 shots + scene merge, S2 Whisper + forced alignment, S2b E4B cross-check, S3 sounds, S4 gap map (code done; real-model runs need the droplet)
+- [x] S0 ingest, S1 shots + scene merge, S2 Whisper + forced alignment + VAD gate, S2c speaker labels (waiting for the gated model), S3 sounds (AST), S4 gap map: real runs on 20 dev clips; S2b not run (D-021)
 - [x] timeline view (review app lanes: words, gaps, description, captions, voice-over) ; gap-map unit tests
-- [~] E15 harness done and smoke-tested on CPU; FLEURS + synthetic boundary clips fetched; real run needs the GPU
+- [~] E15 runs tonight on dev data (FLEURS + synthetic boundary clips), then its decision is applied
 
 ## M3 First described video (P0) — from here `main` is always submittable
-- [ ] S5 evidence (+ Tesseract), S6 plan, S7 write, S8 verify + repair, S9 TTS (+ calibration), S14 standard mix
+- [x] S5 evidence, S6 plan (several lines per pause, extended holds), S7 write, S8 verify + repair, S9 TTS (calibration refitted on dev, D-024): real Gemma 4 31B runs on 20 dev clips
 - [x] all §10.2 rules with pass/fail tests; `docs/rules.md`
-- [ ] `report.json`; a person listens
+- [!] `report.json` written per run; a person reviews and listens to the two site clips (Plane, Sintel)
 
 ## M4 Review and gate (P0)
 - [x] review app (keyboard, live re-verify, 409, history, timer, ARIA live region)
@@ -54,4 +54,7 @@ Status: `[x]` done and verified · `[~]` in progress · `[ ]` not started · `[!
 - [ ] README, JUDGES.md, deck PDF, demo video, cover, `docs/lablab.md`; `make submission-check` green; consistency pass; uptime check; competition re-check; release tag `act3-submission`
 
 ## M10 Extras (P2)
-- [ ] DAPT export, diarization, "try your own clip", detail levels, YouDescribe second test set, more languages
+- [x] DAPT export (best effort, D-017)
+- [~] diarization: worker and stage done; runs once the gated model is accepted
+- [x] AccessCast Studio (local "try your own clip": upload, every stage live, then review; e2e with axe-core)
+- [ ] detail levels in the player, YouDescribe second test set, more languages
