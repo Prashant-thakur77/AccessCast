@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "7e3946c12e3cffd3a81367d29d95345b62d9b859",
- "git_dirty": true,
+ "git_commit": "a27450f036b479e805b66644a80b26dce0276c82",
+ "git_dirty": false,
  "freeze_tag": null,
- "started_at": "2026-10-16T17:42:14.034Z",
- "finished_at": "2026-10-16T17:44:10.701Z",
+ "started_at": "2026-10-16T17:49:02.286Z",
+ "finished_at": "2026-10-16T17:51:07.342Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -151,10 +151,14 @@
     {
      "title": "keyboard only: review a whole project, then mark review complete",
      "status": "passed"
+    },
+    {
+     "title": "studio: axe clean, keyboard-only upload, every stage listed, review link opens the project",
+     "status": "passed"
     }
    ],
-   "passed": 5,
-   "total": 5
+   "passed": 6,
+   "total": 6
   }
  ],
  "summary": {
@@ -163,8 +167,8 @@
    "total": 23
   },
   "review": {
-   "passed": 5,
-   "total": 5
+   "passed": 6,
+   "total": 6
   },
   "screen_reader_test_by_person": null
  },

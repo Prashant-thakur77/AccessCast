@@ -116,7 +116,7 @@ Our cost is GPU time plus a person's review time, both measured: <pending: busin
 |---|---|---|
 | Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
 | Human review | Every description and easy-read line is approved by a person; captions and translations pass automatic checks, and a random sample is checked by people | Our reviewers are not professional describers |
-| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 23 of 23, review app 5 of 5, including axe-core scans) | Not yet tested by a blind reviewer |
+| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 23 of 23, review app 6 of 6, including axe-core scans) | Not yet tested by a blind reviewer |
 | Hindi and Italian | Back-translation shown to reviewers | Not a full professional language QA; native-speaker spot checks are <pending: native.checks> |
 | "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
 | Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |
