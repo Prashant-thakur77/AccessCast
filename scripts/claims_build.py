@@ -326,7 +326,7 @@ def e11_specs() -> list[Spec]:
     out = []
     for case, st in json.loads(f.read_text())["summary"].get("cases", {}).items():
         for setting in st:
-            for key in ("tries", "gemma_failed", "blocked", "leaks"):
+            for key in ("tries", "gemma_failed", "blocked", "leaks", "extended"):
                 out.append(
                     Spec(
                         f"e11.{case}.{setting}.{key}",
@@ -345,14 +345,18 @@ def e11_table() -> str | None:
         return None
     cases = json.loads(f.read_text())["summary"].get("cases", {})
     lines = [
-        "| Case | Gemma failed (production) | Blocked | Reached the viewer | Gemma failed (stress) |",
-        "|---|---|---|---|---|",
+        "| What we tried to make Gemma get wrong | Gemma got it wrong (production) | Caught by the checks | "
+        "Reached the viewer | Gemma got it wrong (stress) | Sent to extended description instead |",
+        "|---|---|---|---|---|---|",
     ]
     for c in cases:
+        spec = REPO_ROOT / "data" / "adversarial" / f"{c}.json"
+        what = json.loads(spec.read_text()).get("baits", c) if spec.exists() else c
         lines.append(
-            f"| {c} | <pending: e11.{c}.production.gemma_failed> of <pending: e11.{c}.production.tries> | "
-            f"<pending: e11.{c}.production.blocked> | <pending: e11.{c}.production.leaks> | "
-            f"<pending: e11.{c}.stress.gemma_failed> of <pending: e11.{c}.stress.tries> |"
+            f"| {what[:1].upper() + what[1:]} | <pending: e11.{c}.production.gemma_failed> of "
+            f"<pending: e11.{c}.production.tries> | <pending: e11.{c}.production.blocked> | "
+            f"<pending: e11.{c}.production.leaks> | <pending: e11.{c}.stress.gemma_failed> of "
+            f"<pending: e11.{c}.stress.tries> | <pending: e11.{c}.production.extended> |"
         )
     return "\n".join(lines)
 
@@ -391,7 +395,10 @@ SECTIONS: dict[str, Callable[[], str | None]] = {
     "e13.failed_sentence": e13_failed_sentence,
     "results.more": results_more,
 }
-REGENERATED = ("results.more",)  # kept between markers and rebuilt every time, as experiments land
+REGENERATED = (
+    "results.more",
+    "e11.table",
+)  # kept between markers and rebuilt every time, as experiments land
 
 
 def register() -> dict[str, Any]:
