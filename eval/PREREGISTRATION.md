@@ -58,3 +58,11 @@ Crossed design on two dev minutes: person 1 reviews minute 1 and writes minute 2
 
 ## Addenda
 _(none yet)_
+
+## Notes added before the first test run (17 Oct 2026)
+No test-set run had happened when these were written; they record how the setup changed since this file was first committed, so nobody has to infer it.
+- **Model endpoint (D-021):** every Gemma call in every test run goes to Gemma 4 31B on AMD Token Factory (`--provider tokenfactory`, strict). No MI300X droplet was available.
+- **No Gemma 4 E4B (D-021, D-022):** the transcript cross-check does not run; sound windows are labelled by AST (a non-Gemma AudioSet classifier) with a fail-closed mapping. This changes the gap map only through sound labels, identically for arms A, B and C.
+- **ASR and guard (E15, D-025, dev only):** Whisper large-v3-turbo with forced alignment, `GUARD_MS` = 340.
+- **Dev-set fixes before the freeze:** VAD gate for words over music, several lines per long pause, voice timing refitted on dev lines with a margin (D-024), caption segmentation, translation-number and sound-word rule precision; each in `docs/incidents.md` with its dev measurement.
+- **Provider outages:** a test run that hit any endpoint error is marked failed and re-run; the re-run replays the answers that succeeded (`logs/llm_cache_test`) and asks again only for the calls that failed. Each run is still logged in `evidence/test_runs.jsonl`.
