@@ -1,0 +1,19 @@
+{
+ "baits": "Hindi subtitle may leave technical terms in English / Latin script",
+ "oracle": {
+  "type": "latin_fraction",
+  "max": 0.5
+ },
+ "rules": [
+  "CC008",
+  "AD016"
+ ],
+ "calibration": {
+  "voice": "af_heart",
+  "wps_voice": 3.5596,
+  "intercept_s": 0.1999,
+  "measured": true
+ },
+ "proof_temperature": "production",
+ "source_sha256": "9a5b22899e0faf63523c4933a8a521d00736905ed057ebe6823d9b3c83a08868"
+}

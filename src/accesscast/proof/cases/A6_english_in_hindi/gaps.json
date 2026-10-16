@@ -1,0 +1,16 @@
+{
+  "guard_ms": 120,
+  "min_gap_ms": 1200,
+  "gaps": [
+    {
+      "gap_id": "G0001",
+      "start_ms": 4470,
+      "end_ms": 9000,
+      "len_ms": 4530,
+      "scene_id": "SC001",
+      "prev_word_i": 9,
+      "next_word_i": null,
+      "under": "silence"
+    }
+  ]
+}

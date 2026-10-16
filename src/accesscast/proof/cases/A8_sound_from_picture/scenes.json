@@ -1,0 +1,24 @@
+{
+  "scenes": [
+    {
+      "scene_id": "SC001",
+      "start_ms": 0,
+      "end_ms": 6100,
+      "shots": [
+        "SH001"
+      ],
+      "boundary_reason": "START",
+      "boundary_similarity": null
+    },
+    {
+      "scene_id": "SC002",
+      "start_ms": 6100,
+      "end_ms": 8000,
+      "shots": [
+        "SH002"
+      ],
+      "boundary_reason": "VISUALLY_DIFFERENT",
+      "boundary_similarity": 0.4389
+    }
+  ]
+}

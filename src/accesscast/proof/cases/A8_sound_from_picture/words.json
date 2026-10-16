@@ -1,0 +1,6 @@
+{
+  "lang": "en",
+  "model": "openai/whisper-large-v3-turbo",
+  "aligned": false,
+  "words": []
+}

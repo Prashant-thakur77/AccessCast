@@ -1,0 +1,97 @@
+{
+  "lang": "en",
+  "model": "openai/whisper-large-v3-turbo",
+  "aligned": true,
+  "words": [
+    {
+      "i": 0,
+      "w": "Sarah",
+      "start_ms": 961,
+      "end_ms": 1261,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 1,
+      "w": "will",
+      "start_ms": 1301,
+      "end_ms": 1462,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 2,
+      "w": "join",
+      "start_ms": 1502,
+      "end_ms": 1702,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 3,
+      "w": "us",
+      "start_ms": 1762,
+      "end_ms": 1842,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 4,
+      "w": "later.",
+      "start_ms": 1962,
+      "end_ms": 2243,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 5,
+      "w": "Let's",
+      "start_ms": 8950,
+      "end_ms": 9170,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 6,
+      "w": "look",
+      "start_ms": 9211,
+      "end_ms": 9351,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 7,
+      "w": "at",
+      "start_ms": 9411,
+      "end_ms": 9451,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 8,
+      "w": "the",
+      "start_ms": 9471,
+      "end_ms": 9551,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 9,
+      "w": "report.",
+      "start_ms": 9591,
+      "end_ms": 10011,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "model": "MIT/ast-finetuned-audioset-10-10-0.4593 (AudioSet classes, not Gemma)",
+  "events": [
+    {
+      "start_ms": 3710,
+      "end_ms": 8000,
+      "label": "silence",
+      "source": "energy_gate"
+    }
+  ],
+  "rejected_labels": []
+}

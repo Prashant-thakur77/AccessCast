@@ -1,0 +1,206 @@
+[
+ {
+  "scene_id": "SC001",
+  "frames": [
+   "f00.jpg",
+   "f01.jpg",
+   "f02.jpg",
+   "f03.jpg",
+   "f04.jpg",
+   "f05.jpg"
+  ],
+  "frame_ms": [
+   600,
+   2500,
+   2778,
+   4200,
+   7800,
+   11400
+  ],
+  "setting": "A digital settings menu on a white background.",
+  "characters": [],
+  "visible_facts": [
+   {
+    "fid": "F000",
+    "frames": [
+     0
+    ],
+    "text": "The screen is a solid light gray color.",
+    "priority": 2,
+    "important": true
+   },
+   {
+    "fid": "F001",
+    "frames": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "text": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+    "priority": 1,
+    "important": true
+   }
+  ],
+  "on_screen_text": [
+   {
+    "text": "Settings",
+    "frame": 1,
+    "kind": "title",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Display",
+    "frame": 1,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Sound",
+    "frame": 1,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Privacy",
+    "frame": 1,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Settings",
+    "frame": 2,
+    "kind": "title",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Display",
+    "frame": 2,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Sound",
+    "frame": 2,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Privacy",
+    "frame": 2,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Settings",
+    "frame": 3,
+    "kind": "title",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Display",
+    "frame": 3,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Sound",
+    "frame": 3,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Privacy",
+    "frame": 3,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Settings",
+    "frame": 4,
+    "kind": "title",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Display",
+    "frame": 4,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Sound",
+    "frame": 4,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Privacy",
+    "frame": 4,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Settings",
+    "frame": 5,
+    "kind": "title",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Display",
+    "frame": 5,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Sound",
+    "frame": 5,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   },
+   {
+    "text": "Privacy",
+    "frame": 5,
+    "kind": "label",
+    "ocr_agrees": false,
+    "source": "model"
+   }
+  ],
+  "inferences": [
+   "The user is interacting with a software interface."
+  ],
+  "uncertainties": [],
+  "warnings": [
+   "OCR not run (tesseract not installed)"
+  ],
+  "status": "ok",
+  "model": {
+   "name": "google/gemma-4-31B-it",
+   "endpoint": "tokenfactory",
+   "temperature": 0.0,
+   "seed": 0,
+   "prompt_id": "evidence@2",
+   "prompt_sha": "7a844d4b5726baccbd874bd68bcb956473319271049b12ae3caa76c1d48a5e0a",
+   "served_model_id": "self-dploy/Gemma-4-31B-IT"
+  }
+ }
+]

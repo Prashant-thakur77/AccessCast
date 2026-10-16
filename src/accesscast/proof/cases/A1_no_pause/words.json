@@ -1,0 +1,322 @@
+{
+  "lang": "en",
+  "model": "openai/whisper-large-v3-turbo",
+  "aligned": true,
+  "words": [
+    {
+      "i": 0,
+      "w": "thanks",
+      "start_ms": 821,
+      "end_ms": 1101,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 1,
+      "w": "for",
+      "start_ms": 1161,
+      "end_ms": 1281,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 2,
+      "w": "joining",
+      "start_ms": 1362,
+      "end_ms": 1762,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 3,
+      "w": "today",
+      "start_ms": 2403,
+      "end_ms": 2743,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 4,
+      "w": "we",
+      "start_ms": 2843,
+      "end_ms": 2943,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 5,
+      "w": "will",
+      "start_ms": 2983,
+      "end_ms": 3164,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 6,
+      "w": "walk",
+      "start_ms": 3204,
+      "end_ms": 3404,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 7,
+      "w": "through",
+      "start_ms": 3504,
+      "end_ms": 3704,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 8,
+      "w": "the",
+      "start_ms": 3764,
+      "end_ms": 3824,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 9,
+      "w": "safety",
+      "start_ms": 3904,
+      "end_ms": 4285,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 10,
+      "w": "results",
+      "start_ms": 4385,
+      "end_ms": 4765,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 11,
+      "w": "for",
+      "start_ms": 4826,
+      "end_ms": 4906,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 12,
+      "w": "this",
+      "start_ms": 4966,
+      "end_ms": 5106,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 13,
+      "w": "quarter",
+      "start_ms": 5186,
+      "end_ms": 5506,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 14,
+      "w": "which",
+      "start_ms": 5947,
+      "end_ms": 6107,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 15,
+      "w": "were",
+      "start_ms": 6147,
+      "end_ms": 6287,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 16,
+      "w": "better",
+      "start_ms": 6347,
+      "end_ms": 6608,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 17,
+      "w": "than",
+      "start_ms": 6668,
+      "end_ms": 6788,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 18,
+      "w": "expected",
+      "start_ms": 6868,
+      "end_ms": 7348,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 19,
+      "w": "across",
+      "start_ms": 7469,
+      "end_ms": 7849,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 20,
+      "w": "every",
+      "start_ms": 8049,
+      "end_ms": 8249,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 21,
+      "w": "site",
+      "start_ms": 8350,
+      "end_ms": 8650,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 22,
+      "w": "and",
+      "start_ms": 9170,
+      "end_ms": 9251,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 23,
+      "w": "then",
+      "start_ms": 9291,
+      "end_ms": 9411,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 24,
+      "w": "we",
+      "start_ms": 9511,
+      "end_ms": 9591,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 25,
+      "w": "will",
+      "start_ms": 9631,
+      "end_ms": 9791,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 26,
+      "w": "take",
+      "start_ms": 9851,
+      "end_ms": 10011,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 27,
+      "w": "questions",
+      "start_ms": 10092,
+      "end_ms": 10552,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 28,
+      "w": "from",
+      "start_ms": 10632,
+      "end_ms": 10752,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 29,
+      "w": "the",
+      "start_ms": 10812,
+      "end_ms": 10872,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 30,
+      "w": "team",
+      "start_ms": 10932,
+      "end_ms": 11253,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 31,
+      "w": "about",
+      "start_ms": 11413,
+      "end_ms": 11633,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 32,
+      "w": "the",
+      "start_ms": 11673,
+      "end_ms": 11733,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 33,
+      "w": "next",
+      "start_ms": 11793,
+      "end_ms": 11974,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    },
+    {
+      "i": 34,
+      "w": "steps",
+      "start_ms": 12054,
+      "end_ms": 12454,
+      "prob": 1.0,
+      "seg": 0,
+      "speaker": null
+    }
+  ]
+}

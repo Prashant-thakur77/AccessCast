@@ -1,0 +1,20 @@
+{
+ "baits": "easy-read rewrite may drop the negation",
+ "oracle": {
+  "type": "missing",
+  "all": [
+   "not|don't|never|no "
+  ]
+ },
+ "rules": [
+  "ER005"
+ ],
+ "calibration": {
+  "voice": "af_heart",
+  "wps_voice": 3.5596,
+  "intercept_s": 0.1999,
+  "measured": true
+ },
+ "proof_temperature": "production",
+ "source_sha256": "06a3e203495f1c1d76612906f95f22c30799e29d4889e3750cc22b40e8e8e8b6"
+}
