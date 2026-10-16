@@ -94,7 +94,8 @@ def extract_frame(video: Path, t_ms: int, out: Path, px: int = C.EVIDENCE_FRAME_
             "-frames:v",
             "1",
             "-vf",
-            f"scale='min({px},iw)':-2",
+            # full range for JPEG: ffmpeg 8's mjpeg refuses limited-range (TV) frames (NASA dev clip, 16 Oct)
+            f"scale='min({px},iw)':-2:out_range=full,format=yuvj420p",
             "-q:v",
             "3",
             str(out),

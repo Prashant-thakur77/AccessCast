@@ -85,3 +85,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 **Symptom.** 59 Hindi and Italian subtitle and voice-over lines on the dev set failed CC009 (36 subtitles, 23 voice-over), each one sent back to Gemma or to a person, and every one we read was a correct translation.
 **Root cause.** (1) "one" counted as the number 1, but it is also the article in Italian and Hindi ("a comet" → "una cometa"), and a translation may write "one" as "1". (2) Scale words were ignored, so "a million" → "10 लाख" (correct) looked like a change. (3) ASR wrote "34 ,000". (4) Every capitalised English word counted as a name to keep, so Moon→Luna, Earth→Terra and June→giugno were "lost names", as was "Cook" opening an imperative sentence.
 **Fix.** Numbers are compared as values with scale words applied (thousand, million, mille, milioni, हज़ार, लाख, करोड़), "34 ,000" is joined, and the value 1 is not compared. Only people and organisations (spaCy PERSON/ORG) must be kept word for word; celestial bodies and a lone common word opening a sentence are not names. Re-checked offline on every dev translation: 59 → 0 flags; mutation check on the same lines: corrupted numbers caught 27 of 27, dropped names 14 of 14. Tests in `test_rule_cc009.py`.
+
+## 2026-10-16 Frame extraction failed on a limited-range video
+**Symptom.** The NASA "Life in the Universe" dev clip failed at evidence: `[mjpeg] Non full-range YUV is non-standard ... Error while opening encoder`.
+**Root cause.** ffmpeg 8's JPEG encoder refuses frames in limited ("TV") colour range; most of our clips happened to be full range.
+**Fix.** Evidence and scene-judge frames are scaled to full range (`out_range=full,format=yuvj420p`) before JPEG encoding. Checked on the failing clip and the fixture.
