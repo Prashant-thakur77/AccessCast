@@ -34,3 +34,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 - **Symptom:** in a local real-mode run, the whole clip got no description lines and nobody was told; the review queue had captions only.
 - **Root cause:** the local server rejected an 8-image evidence request; the evidence step correctly failed closed (`evidence_failed` after two tries), but the planner then skipped that scene's pauses instead of sending them to a person, as PLAN §9 S5 requires.
 - **Fix:** pauses in a scene whose evidence failed become `needs_revision` lines with no facts, marked `evidence_failed`; Gemma is never asked to write them, and the render gate blocks until a person writes or rejects them. Lesson: fail closed means "a person is told", not just "nothing is published".
+
+## 2026-10-16 — "+" and "C." treated as invented names
+- **Symptom:** building the landing page's rule demo, AD009 (invented name) fired on "We see the screen showing Ctrl + C." with `name '+'`, and on a line ending "press Ctrl and C." with `name 'C.'`.
+- **Root cause:** spaCy tags some symbols and letter-plus-period tokens as proper nouns, and `proper_nouns` compared them without stripping punctuation, so they never matched the allowed on-screen text ("Ctrl + C").
+- **Fix:** name tokens are stripped of surrounding punctuation and must contain a letter; regression tests added. Lesson: a check that blocks good lines costs coverage and reviewer time, so false positives are bugs too.

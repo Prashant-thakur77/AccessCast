@@ -418,24 +418,38 @@ def content_nouns(text: str, lang: str) -> list[str]:
 _COMMON_CAPS_EN = frozenset({"I", "On", "A", "An", "The", "Screen", "Sign", "Text", "Title", "Slide"})
 
 
+def _name_token(t: str) -> str:
+    """Strip punctuation around a token; empty if it has no letters (spaCy tags "+" or "C." as PROPN)."""
+    t = re.sub(r"^[^\w\u0900-\u097F]+|[^\w\u0900-\u097F]+$", "", t)
+    return t if any(c.isalpha() for c in t) else ""
+
+
 def proper_nouns(text: str, lang: str) -> list[str]:
-    """Candidate names. en: spaCy PROPN/PERSON; hi/it: capitalised (Latin) tokens not sentence-initial."""
+    """Candidate names. en: spaCy PROPN/PERSON; hi/it: capitalised (Latin) tokens not sentence-initial.
+    Tokens are stripped of surrounding punctuation; tokens with no letters are never names."""
     check_lang(lang)
     out: list[str] = []
+
+    def add(tok: str) -> None:
+        t = _name_token(tok)
+        if t and t not in out and t not in _COMMON_CAPS_EN:
+            out.append(t)
+
     if lang == "en":
         doc = _doc_en(normalise(text))
         for ent in doc.ents:
             if ent.label_ == "PERSON":
-                out.extend(ent.text.split())
+                for part in ent.text.split():
+                    add(part)
         for t in doc:
-            if t.pos_ == "PROPN" and t.text not in _COMMON_CAPS_EN and t.text not in out:
-                out.append(t.text)
+            if t.pos_ == "PROPN":
+                add(t.text)
         return out
     for sent in sentences(text):
         toks = tokens(sent)
         for t in toks[1:]:
-            if t[:1].isupper() and t not in out:
-                out.append(t)
+            if t[:1].isupper():
+                add(t)
     return out
 
 
