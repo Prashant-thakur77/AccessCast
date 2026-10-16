@@ -17,8 +17,31 @@ def test_dialogue_bridge():
 
 
 def test_sdh_cues_respect_layout_and_sync():
-    words = make_words([(w, 100 + i * 300, 350 + i * 300) for i, w in enumerate(
-        ["this", "is", "a", "fairly", "long", "sentence", "that", "should", "be", "split", "into", "readable", "caption", "lines", "for", "viewers."])])
+    words = make_words(
+        [
+            (w, 100 + i * 300, 350 + i * 300)
+            for i, w in enumerate(
+                [
+                    "this",
+                    "is",
+                    "a",
+                    "fairly",
+                    "long",
+                    "sentence",
+                    "that",
+                    "should",
+                    "be",
+                    "split",
+                    "into",
+                    "readable",
+                    "caption",
+                    "lines",
+                    "for",
+                    "viewers.",
+                ]
+            )
+        ]
+    )
     cues = segment_sdh(words, [], 30.0, 10_000)
     for c in cues:
         assert all(len(line) <= 42 for line in c.text.split("\n"))

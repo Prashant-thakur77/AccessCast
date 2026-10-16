@@ -156,7 +156,9 @@ def check_evidence(
         try:
             ost.append(
                 OnScreenText(
-                    text=str(raw_t["text"]), frame=int(raw_t.get("frame", 0)), kind=str(raw_t.get("kind", "other"))
+                    text=str(raw_t["text"]),
+                    frame=int(raw_t.get("frame", 0)),
+                    kind=str(raw_t.get("kind", "other")),
                 )
             )
         except (KeyError, TypeError, ValueError):

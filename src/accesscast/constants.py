@@ -36,6 +36,9 @@ SCENE_MAX_S = 45.0  # AudioSight scene clamp
 ASR_MODEL = "openai/whisper-large-v3"  # PLAN §9 S2 default; replaced by E15's dev-set decision
 GUARD_MS = 120  # PLAN §9 S4 start value; replaced by E15's measured boundary error (dev-tuned)
 MIN_GAP_MS = 1_200  # PLAN §9 S4
+ASR_VAD_GATE_PAD_MS = (
+    400  # dev-tuned: drop Whisper words more than this far from any Silero speech (hallucination over music)
+)
 ASR_CROSSCHECK_WER = 0.15  # PLAN §9 S2b: chunk WER above this marks asr_disagreement (dev-tuned)
 ASR_CHUNK_S = 30.0  # Gemma 4 audio input limit: 30 s per clip (Gemma 4 model card)
 
@@ -80,6 +83,9 @@ def max_facts(scene_seconds: float) -> int:
 # ---------------------------------------------------------------- planning and writing (S6, S7)
 AD_EVENT_BEFORE_MS = 2_000  # W3C WAI "at or just before the visual"; PLAN §9 S6
 AD_EVENT_AFTER_MS = 1_000  # PLAN §9 S6
+AD_EXT_MIN_BREAK_MS = (
+    150  # dev-tuned: shortest pause between two words where extended description may hold the video
+)
 AD_PAD_BEFORE_MS = 150  # AudioSight pads; PLAN §9 S7
 AD_PAD_AFTER_MS = 150  # AudioSight pads; PLAN §9 S7
 AD_WORDS_MIN = 2  # PLAN §9 S7 clamp

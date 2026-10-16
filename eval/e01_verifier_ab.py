@@ -192,7 +192,9 @@ def main() -> int:
                 run = open_run(settings, proj, provider=args.provider, strict=True, run_label=label)
                 opts = WriteOptions(run_label=label, project_seed=settings.project_seed)
                 drafts = write_drafts(run.client, plans, ctx.evidence, ctx, opts)  # shared by all arms
-                served_ids.update(m.served_model_id for _t, _f, m, _err in drafts.values() if m and m.served_model_id)
+                served_ids.update(
+                    m.served_model_id for _t, _f, m, _err in drafts.values() if m and m.served_model_id
+                )
                 arms_items = {
                     "A": verify_and_repair(
                         run.client, plans, drafts, ctx, WriteOptions(**{**opts.__dict__, "checks": False})
@@ -340,7 +342,9 @@ def main() -> int:
                 w.writerow([k, r["video"], r["text"], "", "", ""])
         (lab_dir / f"e01_{args.split}_blind_key.json").write_text(json.dumps(label_rows, indent=0))
         e.checks["evaluated_all_arms"] = all(a in pooled for a in ARMS)
-        e.summary["served_model_ids"] = sorted(served_ids)  # as reported by the server (client enforces a match)
+        e.summary["served_model_ids"] = sorted(
+            served_ids
+        )  # as reported by the server (client enforces a match)
         e.checks["strict_provider"] = len(served_ids) <= 1
         _ = read_jsonl
 

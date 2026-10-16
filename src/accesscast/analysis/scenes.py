@@ -116,7 +116,9 @@ def build_scenes(
                 b = grab_frame(video, min(cur.end_ms - 1, cut + 300))
                 sim = similarity(a, b)
             except MediaError:
-                unreadable = True  # fail closed: keep the cut (a split never mixes two settings in one evidence call)
+                unreadable = (
+                    True  # fail closed: keep the cut (a split never mixes two settings in one evidence call)
+                )
         dec = decide_boundary(sim, dialogue_bridges(words, cut))
         if unreadable:
             dec = BoundaryDecision(False, "FRAME_UNREADABLE_SPLIT", 0.0)

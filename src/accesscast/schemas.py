@@ -324,7 +324,9 @@ class Claim(Strict):
     source_url: str | None = None
     accessed: str | None = None
     quote: str | None = None
-    note: str | None = None  # e.g. "secondary source" or "mirror of EUR-Lex"; shown wherever the claim is used
+    note: str | None = (
+        None  # e.g. "secondary source" or "mirror of EUR-Lex"; shown wherever the claim is used
+    )
     public_files: list[str] = Field(default_factory=list)
     display: list[str] = Field(default_factory=list)  # exact strings that may appear in public files
 

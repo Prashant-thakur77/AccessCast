@@ -128,10 +128,21 @@ def plan_description(
         if g.scene_id in failed and not any(p.gap is g for p in plans):
             wm = words_budget(g.end_ms - g.start_ms, cal, rate)
             if wm >= C.AD_MIN_USEFUL_WORDS:
-                plans.append(PlannedLine(
-                    item_id="", gap=g, scene_id=g.scene_id or "", anchor_ms=g.start_ms, slot_start_ms=g.start_ms,
-                    slot_end_ms=g.end_ms, budget=Budget(words_max=wm, seconds_max=round(g.len_ms / 1000, 2),
-                                                        wps_voice=cal.wps_voice), facts=[], gap_index=gi))
+                plans.append(
+                    PlannedLine(
+                        item_id="",
+                        gap=g,
+                        scene_id=g.scene_id or "",
+                        anchor_ms=g.start_ms,
+                        slot_start_ms=g.start_ms,
+                        slot_end_ms=g.end_ms,
+                        budget=Budget(
+                            words_max=wm, seconds_max=round(g.len_ms / 1000, 2), wps_voice=cal.wps_voice
+                        ),
+                        facts=[],
+                        gap_index=gi,
+                    )
+                )
     # Important facts that found no gap → extended-description candidates, inserted at the speech
     # boundary (start of video, start or end of a speech segment, never inside a word) nearest the event.
     bounds = sorted(
@@ -143,8 +154,17 @@ def plan_description(
         lo, hi = _event_window(f, ev)
         event_start = lo + C.AD_EVENT_BEFORE_MS
         ok = [b for b in bounds if lo <= b <= hi and not any(w.start_ms < b < w.end_ms for w in words)]
+        # No segment boundary near the event: use a breath between two words inside the event window
+        # (the video holds there, so nothing is talked over) instead of a boundary seconds later (AD005).
+        brk = [
+            a.end_ms
+            for a, b in zip(words, words[1:], strict=False)
+            if b.start_ms - a.end_ms >= C.AD_EXT_MIN_BREAK_MS and lo <= a.end_ms <= hi
+        ]
         if ok:
             at = min(ok, key=lambda b: (abs(b - event_start), b))
+        elif brk:
+            at = min(brk, key=lambda b: (abs(b - event_start), b))
         else:
             after = [b for b in bounds if b >= lo]
             at = after[0] if after else lo  # AD005 will send it to a person

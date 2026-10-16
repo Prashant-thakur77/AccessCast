@@ -24,13 +24,29 @@ def merge_spans(spans: Sequence[tuple[int, int]]) -> list[tuple[int, int]]:
     return out
 
 
+def gate_words_by_vad(
+    words: Sequence[Word], vad: Sequence[VadSegment], pad_ms: int
+) -> tuple[list[Word], list[Word]]:
+    """Drop ASR words that overlap no VAD speech segment (padded by pad_ms): Whisper writes text over music
+    ("Thank you. Transcription by ESO.") where Silero hears no speech. Returns (kept, dropped)."""
+    kept: list[Word] = []
+    dropped: list[Word] = []
+    for w in words:
+        hit = any(w.start_ms < s.end_ms + pad_ms and w.end_ms > s.start_ms - pad_ms for s in vad)
+        (kept if hit else dropped).append(w)
+    return [w.model_copy(update={"i": k}) for k, w in enumerate(kept)], dropped
+
+
 def speech_spans(
     words: Sequence[Word], vad: Sequence[VadSegment], sounds: Sequence[SoundEvent], guard_ms: int
 ) -> list[tuple[int, int]]:
     spans = [(w.start_ms - guard_ms, w.end_ms + guard_ms) for w in words]
     spans += [(s.start_ms - guard_ms, s.end_ms + guard_ms) for s in vad]
-    spans += [(e.start_ms - guard_ms, e.end_ms + guard_ms) for e in sounds
-              if e.label in ("music_with_lyrics", "unknown")]  # lyrics are dialogue; unknown fails closed
+    spans += [
+        (e.start_ms - guard_ms, e.end_ms + guard_ms)
+        for e in sounds
+        if e.label in ("music_with_lyrics", "unknown")
+    ]  # lyrics are dialogue; unknown fails closed
     return merge_spans(spans)
 
 

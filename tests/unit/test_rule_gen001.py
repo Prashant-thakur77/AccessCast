@@ -4,8 +4,15 @@ from tests.unit.conftest import make_item
 
 
 def _vo(text: str, **kw):
-    return make_item(text, kind=ItemKind.VOICEOVER, lang="it", budget=None, anchor_ms=0,
-                     slot=Slot(start_ms=0, end_ms=3000), **kw)
+    return make_item(
+        text,
+        kind=ItemKind.VOICEOVER,
+        lang="it",
+        budget=None,
+        anchor_ms=0,
+        slot=Slot(start_ms=0, end_ms=3000),
+        **kw,
+    )
 
 
 def test_gen001_passes(ctx):

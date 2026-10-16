@@ -27,13 +27,18 @@ def parse_log(p: Path) -> dict[str, float | None]:
     w = re.findall(r"Model loading took ([\d.]+) GiB", text)
     kv = re.findall(r"Available KV cache memory: ([\d.]+) GiB", text)
     conc = re.findall(r"Maximum concurrency for (\d+) tokens per request: ([\d.]+)x", text)
-    return {"weights_gib": float(w[-1]) if w else None, "kv_allocated_gib": float(kv[-1]) if kv else None,
-            "max_concurrency_at_tokens": float(conc[-1][1]) if conc else None}
+    return {
+        "weights_gib": float(w[-1]) if w else None,
+        "kv_allocated_gib": float(kv[-1]) if kv else None,
+        "max_concurrency_at_tokens": float(conc[-1][1]) if conc else None,
+    }
 
 
 def amd_smi_vram() -> dict[str, float | None]:
     try:
-        out = subprocess.run(["amd-smi", "metric", "--mem-usage", "--json"], capture_output=True, text=True, timeout=20).stdout
+        out = subprocess.run(
+            ["amd-smi", "metric", "--mem-usage", "--json"], capture_output=True, text=True, timeout=20
+        ).stdout
         data = json.loads(out)
         g = (data if isinstance(data, list) else data.get("gpu_data", [data]))[0]
         mu = g.get("mem_usage", g)
@@ -48,9 +53,19 @@ def amd_smi_vram() -> dict[str, float | None]:
 
 
 def main() -> int:
-    exp = Experiment("memory", "none", config={"sources": ["logs/vllm/g4-31b.log", "logs/vllm/g4-e4b.log",
-                                                         "evidence/e13_serving_prefix_on.json", "projects/*/analysis/asr_meta.json",
-                                                         "amd-smi"]})
+    exp = Experiment(
+        "memory",
+        "none",
+        config={
+            "sources": [
+                "logs/vllm/g4-31b.log",
+                "logs/vllm/g4-e4b.log",
+                "evidence/e13_serving_prefix_on.json",
+                "projects/*/analysis/asr_meta.json",
+                "amd-smi",
+            ]
+        },
+    )
 
     def body(e: Experiment) -> None:
         rows = {}
@@ -62,7 +77,9 @@ def main() -> int:
             res = json.loads(e13.read_text())["results"]
             kv_peak = max((r.get("kv_cache_usage_end") or 0) for r in res) if res else None
         if rows["gemma-4-31b"]["kv_allocated_gib"] is not None and kv_peak is not None:
-            rows["gemma-4-31b"]["kv_used_gib_at_e13_peak"] = round(rows["gemma-4-31b"]["kv_allocated_gib"] * kv_peak, 2)
+            rows["gemma-4-31b"]["kv_used_gib_at_e13_peak"] = round(
+                rows["gemma-4-31b"]["kv_allocated_gib"] * kv_peak, 2
+            )
         workers: dict[str, float] = {}
         for meta in sorted(REPO_ROOT.glob("projects/*/analysis/asr_meta.json")):
             for st, t in json.loads(meta.read_text()).get("timing", {}).items():
@@ -74,13 +91,24 @@ def main() -> int:
                 for st, t in (r.get("timing") or {}).items() if isinstance(r, dict) else []:
                     if isinstance(t, dict) and t.get("peak_vram_mb"):
                         workers[f"{role}:{st}"] = float(t["peak_vram_mb"])
-        needed = sum(v for r in rows.values() for k, v in r.items()
-                     if k in ("weights_gib", "kv_used_gib_at_e13_peak") and v) + sum(workers.values()) / 1024
-        e.results = [{"component": k, **v} for k, v in rows.items()] + [{"component": k, "peak_gib": round(v / 1024, 3)}
-                                                                        for k, v in workers.items()]
-        e.summary = {"total_needed_gib": round(needed, 2), "amd_smi": amd_smi_vram(),
-                     "over_80gb": needed > 80 * 0.931,  # 80 GB = 74.5 GiB
-                     "framing": "by memory accounting" if needed > 74.5 else "fits with room on one MI300X"}
+        needed = (
+            sum(
+                v
+                for r in rows.values()
+                for k, v in r.items()
+                if k in ("weights_gib", "kv_used_gib_at_e13_peak") and v
+            )
+            + sum(workers.values()) / 1024
+        )
+        e.results = [{"component": k, **v} for k, v in rows.items()] + [
+            {"component": k, "peak_gib": round(v / 1024, 3)} for k, v in workers.items()
+        ]
+        e.summary = {
+            "total_needed_gib": round(needed, 2),
+            "amd_smi": amd_smi_vram(),
+            "over_80gb": needed > 80 * 0.931,  # 80 GB = 74.5 GiB
+            "framing": "by memory accounting" if needed > 74.5 else "fits with room on one MI300X",
+        }
         e.checks["weights_found"] = all(r["weights_gib"] for r in rows.values())
 
     return run_experiment(exp, body)

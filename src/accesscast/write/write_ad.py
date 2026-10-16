@@ -51,7 +51,9 @@ class WriteOptions:
     checks: bool = True  # E1 arm A: False
     repair: bool = True  # E1 arm B: False
     temperature: float | None = None  # E11 stress setting
-    concurrency: int = field(default_factory=lambda: int(os.environ.get("ACCESSCAST_CONCURRENCY", "16")))  # E2 V0 = 1
+    concurrency: int = field(
+        default_factory=lambda: int(os.environ.get("ACCESSCAST_CONCURRENCY", "16"))
+    )  # E2 V0 = 1
 
 
 def _model_ref(resp: LlmResponse, seed: int | None) -> ModelRef:
@@ -210,8 +212,13 @@ def verify_and_repair(
             return new.strip(), [str(f) for f in resp.obj.get("fact_ids") or []]
 
         if any(f.startswith("generation_error:evidence_failed") for f in item.flags):
-            return item.model_copy(update={"status": ItemStatus.NEEDS_REVISION, "confidence": 0.0,
-                                           "repair": RepairInfo(attempts=0, stop_reason=NON_REPAIRABLE)})
+            return item.model_copy(
+                update={
+                    "status": ItemStatus.NEEDS_REVISION,
+                    "confidence": 0.0,
+                    "repair": RepairInfo(attempts=0, stop_reason=NON_REPAIRABLE),
+                }
+            )
         if not opts.checks:  # E1 arm A: attempt 0 accepted as written
             res = verify(item.draft, item.fact_ids)
             return item.model_copy(

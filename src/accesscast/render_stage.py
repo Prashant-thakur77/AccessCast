@@ -41,7 +41,11 @@ TRACK_LABELS = {
 
 AUDIENCE_VERSIONS: dict[str, dict[str, Any]] = {
     "blind.en": {"label": "I can't see the screen", "tracks": ["desc.en", "sdh.en"]},
-    "blind_ext.en": {"label": "I can't see the screen (extended)", "tracks": ["desc.en", "sdh.en"], "extended": True},
+    "blind_ext.en": {
+        "label": "I can't see the screen (extended)",
+        "tracks": ["desc.en", "sdh.en"],
+        "extended": True,
+    },
     "deaf.en": {"label": "I can't hear", "tracks": ["sdh.en"]},
     "easy.en": {"label": "Simpler words, please", "tracks": ["easy.en"]},
     "hi": {"label": "हिन्दी", "tracks": ["subs.hi"]},
@@ -73,7 +77,9 @@ def _revoice(run: Run, items: dict[str, Item]) -> tuple[dict[str, Item], dict[st
     from accesscast.verify.rules_text import vo001_slot_overflow
 
     voiced_kinds = (ItemKind.AD, ItemKind.AD_TRANSLATION, ItemKind.VOICEOVER)
-    todo = [i for i in items.values() if i.kind in voiced_kinds and i.status in PUBLISHABLE and i.text.strip()]
+    todo = [
+        i for i in items.values() if i.kind in voiced_kinds and i.status in PUBLISHABLE and i.text.strip()
+    ]
     if not todo:
         return items, {}
     out = dict(items)
@@ -82,8 +88,9 @@ def _revoice(run: Run, items: dict[str, Item]) -> tuple[dict[str, Item], dict[st
         if not group:
             continue
         voices = VOICEOVER_VOICES if kind == ItemKind.VOICEOVER else None
-        for v in synthesize(group, run.project.p("tts"), run.project.events, voice_for=voices,
-                            require_rocm=run.require_rocm):
+        for v in synthesize(
+            group, run.project.p("tts"), run.project.events, voice_for=voices, require_rocm=run.require_rocm
+        ):
             out[v.id] = v
     failures: dict[str, list[Finding]] = {}
     for it in todo:
@@ -92,9 +99,16 @@ def _revoice(run: Run, items: dict[str, Item]) -> tuple[dict[str, Item], dict[st
             continue  # unchanged clip: already checked on its measured duration
         ctx = verify_context(run.project, new.lang)
         ctx.tts_duration_ms = new.tts.duration_ms if new.tts else None
-        ctx.other_items = [o for o in out.values() if o.kind == new.kind and o.lang == new.lang and not o.extended]
-        rules = (vo001_slot_overflow,) if new.kind == ItemKind.VOICEOVER else () if new.extended else (
-            rules_ad.ad001_gap_overflow, rules_ad.ad004_overlaps_speech, rules_ad.ad006_non_monotonic)
+        ctx.other_items = [
+            o for o in out.values() if o.kind == new.kind and o.lang == new.lang and not o.extended
+        ]
+        rules = (
+            (vo001_slot_overflow,)
+            if new.kind == ItemKind.VOICEOVER
+            else ()
+            if new.extended
+            else (rules_ad.ad001_gap_overflow, rules_ad.ad004_overlaps_speech, rules_ad.ad006_non_monotonic)
+        )
         res = run_rules(new, ctx, rules)
         if not res.ok:
             failures[new.id] = res.violations
@@ -105,12 +119,15 @@ def run_gate(run: Run, versions: Sequence[str]) -> gate.GateResult:
     store = ReviewStore(run.project.root)
     res = gate.evaluate(store.merged(), versions, store.state_sha256())
     gate.write_validation(run.project.root, res)
-    run.project.events.emit("gate", "done", ok=res.ok, blocking=len(res.blocking), human_reviewed=res.human_reviewed)
+    run.project.events.emit(
+        "gate", "done", ok=res.ok, blocking=len(res.blocking), human_reviewed=res.human_reviewed
+    )
     return res
 
 
-def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None = None,
-               target_lufs: float = C.LUFS_WEB) -> dict[str, Any]:
+def render_all(
+    run: Run, *, mode: str = "draft", versions: Sequence[str] | None = None, target_lufs: float = C.LUFS_WEB
+) -> dict[str, Any]:
     if mode not in ("draft", "public"):
         raise ValueError("mode must be draft or public")
     proj = run.project
@@ -129,7 +146,9 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
     if public:
         gate.check_fresh(proj.root, store)  # raises PermissionError on refusal
         if not res.human_reviewed:
-            raise PermissionError("public render needs every description and easy-read line approved by a person")
+            raise PermissionError(
+                "public render needs every description and easy-read line approved by a person"
+            )
     items, edit_failures = _revoice(run, items)  # only after the gate passes: a refusal returns at once
     watermark = not (public and res.human_reviewed)
     rdir = proj.p("render")
@@ -144,14 +163,20 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
             out = [i for i in out if i.extended == extended]
         return sorted(out, key=lambda i: i.anchor_ms)
 
-    note = "UNREVIEWED DRAFT: machine-made, not yet approved by a person." if watermark else \
-        "Reviewed by a person. Description voiced by synthetic speech."
+    note = (
+        "UNREVIEWED DRAFT: machine-made, not yet approved by a person."
+        if watermark
+        else "Reviewed by a person. Description voiced by synthetic speech."
+    )
     # ---------------------------------------------------------------- tracks (source timeline)
     track_files: dict[str, Path] = {}
     track_items: dict[str, list[Item]] = {
-        "sdh.en": sel(ItemKind.SDH, "en"), "easy.en": sel(ItemKind.EASY, "en"),
-        "subs.hi": sel(ItemKind.SUBTITLE, "hi"), "subs.it": sel(ItemKind.SUBTITLE, "it"),
-        "desc.en": sel(ItemKind.AD, "en"), "desc.hi": sel(ItemKind.AD_TRANSLATION, "hi"),
+        "sdh.en": sel(ItemKind.SDH, "en"),
+        "easy.en": sel(ItemKind.EASY, "en"),
+        "subs.hi": sel(ItemKind.SUBTITLE, "hi"),
+        "subs.it": sel(ItemKind.SUBTITLE, "it"),
+        "desc.en": sel(ItemKind.AD, "en"),
+        "desc.hi": sel(ItemKind.AD_TRANSLATION, "hi"),
         "desc.it": sel(ItemKind.AD_TRANSLATION, "it"),
     }
     for name, its in track_items.items():
@@ -163,8 +188,13 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
 
     from accesscast.captions.dapt import export_all
 
-    export_all(proj.p("render", "dapt"), track_items["desc.en"], track_items["sdh.en"],
-               {"hi": track_items["subs.hi"], "it": track_items["subs.it"]}, end_of_ad=_clip_end)
+    export_all(
+        proj.p("render", "dapt"),
+        track_items["desc.en"],
+        track_items["sdh.en"],
+        {"hi": track_items["subs.hi"], "it": track_items["subs.it"]},
+        end_of_ad=_clip_end,
+    )
     master = proj.p("media", "master48k.wav")
     video = proj.p("media", "source.mp4")
     words = verify_context(proj).words
@@ -190,8 +220,14 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
             ad = sel(ItemKind.AD_TRANSLATION, lang)
         std_ad = [i for i in ad if not i.extended]
         ext_ad = [i for i in ad if i.extended] if spec.get("extended") else []
-        vo_clips = [M.Clip(i.id, proj.p("tts", f"{i.tts.sha256}.wav"), i.anchor_ms, C.VO_DIP_DB) for i in vo if i.tts]
-        ad_clips = [M.Clip(i.id, proj.p("tts", f"{i.tts.sha256}.wav"), i.anchor_ms + C.AD_PAD_BEFORE_MS) for i in std_ad if i.tts]
+        vo_clips = [
+            M.Clip(i.id, proj.p("tts", f"{i.tts.sha256}.wav"), i.anchor_ms, C.VO_DIP_DB) for i in vo if i.tts
+        ]
+        ad_clips = [
+            M.Clip(i.id, proj.p("tts", f"{i.tts.sha256}.wav"), i.anchor_ms + C.AD_PAD_BEFORE_MS)
+            for i in std_ad
+            if i.tts
+        ]
         ext_clips = [M.Clip(i.id, proj.p("tts", f"{i.tts.sha256}.wav"), i.anchor_ms) for i in ext_ad if i.tts]
         rendered_ids = [c.item_id for c in [*vo_clips, *ad_clips, *ext_clips]]
         approved_ids = [i.id for i in [*vo, *std_ad, *ext_ad]]
@@ -200,14 +236,21 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
             expected_ms = int(str(rows[-1]["output_end_ms"]))
             write_jsonl(rdir / f"source_to_output.{v}.jsonl", rows)
         else:
-            M.mix_standard(master, [*vo_clips, *ad_clips], mixed, stem, tmp, stem_ids={c.item_id for c in ad_clips})
+            M.mix_standard(
+                master, [*vo_clips, *ad_clips], mixed, stem, tmp, stem_ids={c.item_id for c in ad_clips}
+            )
         M.loudnorm_2pass(mixed, normed, target_lufs)
         if rows is not None:
             render_extended(video, normed, rows, out, watermark=watermark)
             for name in spec["tracks"]:  # remap tracks onto the extended timeline
                 src_items = track_items[name]
-                write_vtt(tdir / f"{name}.{v}.vtt", src_items, remap=_remapper(rows),
-                          end_of=_clip_end if name.startswith("desc") else None, header_note=note)
+                write_vtt(
+                    tdir / f"{name}.{v}.vtt",
+                    src_items,
+                    remap=_remapper(rows),
+                    end_of=_clip_end if name.startswith("desc") else None,
+                    header_note=note,
+                )
         else:
             mux_standard(video, normed, out, watermark=watermark)
         findings += R.rn001_duration(out, expected_ms)
@@ -231,19 +274,39 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
         if errors:
             out.rename(rdir / f"{v}.REFUSED.mp4")  # never left where the player would pick it up
         results[v] = {
-            "ok": not errors, "file": f"render/{v}.mp4" if not errors else None,
+            "ok": not errors,
+            "file": f"render/{v}.mp4" if not errors else None,
             "sha256": sha256_file(rdir / f"{v}.mp4") if not errors else None,
-            "duration_ms": expected_ms, "extended": rows is not None,
-            "checks": [{"rule": f.rule, "severity": f.severity, "observed": f.observed, "threshold": f.threshold,
-                        "passed": False} for f in findings],
-            "loudness": {"integrated_lufs": measured.integrated_lufs, "true_peak_dbtp": measured.true_peak_dbtp,
-                         "target_lufs": target_lufs},
-            "items": rendered_ids, "tracks": spec["tracks"],
+            "duration_ms": expected_ms,
+            "extended": rows is not None,
+            "checks": [
+                {
+                    "rule": f.rule,
+                    "severity": f.severity,
+                    "observed": f.observed,
+                    "threshold": f.threshold,
+                    "passed": False,
+                }
+                for f in findings
+            ],
+            "loudness": {
+                "integrated_lufs": measured.integrated_lufs,
+                "true_peak_dbtp": measured.true_peak_dbtp,
+                "target_lufs": target_lufs,
+            },
+            "items": rendered_ids,
+            "tracks": spec["tracks"],
         }
         run.project.events.emit("render", "version", version=v, ok=not errors, findings=len(findings))
     shutil.rmtree(tmp, ignore_errors=True)
-    summary = {"mode": mode, "watermark": watermark, "human_reviewed": res.human_reviewed and public,
-               "review_state_sha256": res.state_sha256, "versions": results, "rendered_at": now_iso()}
+    summary = {
+        "mode": mode,
+        "watermark": watermark,
+        "human_reviewed": res.human_reviewed and public,
+        "review_state_sha256": res.state_sha256,
+        "versions": results,
+        "rendered_at": now_iso(),
+    }
     write_json(proj.p("reports", "render.json"), summary)
     if not all(r["ok"] for r in results.values()):
         failed = [k for k, r in results.items() if not r["ok"]]

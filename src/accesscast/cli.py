@@ -12,9 +12,13 @@ import typer
 from accesscast.config import REPO_ROOT, load_settings
 from accesscast.errors import AccessCastError, ExitCode
 
-app = typer.Typer(add_completion=False, no_args_is_help=True, help="AccessCast: one video, five ways to watch.")
+app = typer.Typer(
+    add_completion=False, no_args_is_help=True, help="AccessCast: one video, five ways to watch."
+)
 
-ProjectOpt = Annotated[str, typer.Option("--project", "-p", help="project id (first 12 hex of the source SHA-256)")]
+ProjectOpt = Annotated[
+    str, typer.Option("--project", "-p", help="project id (first 12 hex of the source SHA-256)")
+]
 ProviderOpt = Annotated[str, typer.Option(help="local | tokenfactory")]
 
 
@@ -45,7 +49,9 @@ def run(
     from accesscast.pipeline import run_all
 
     try:
-        r = run_all(load_settings(), video, provider=provider, strict=strict_provider, require_rocm=require_rocm)
+        r = run_all(
+            load_settings(), video, provider=provider, strict=strict_provider, require_rocm=require_rocm
+        )
     except (AccessCastError, PermissionError) as e:
         _fail(e)
     typer.echo(r.project.sha12)
@@ -63,10 +69,20 @@ def stage(
     captions | voiceover | ad_translate | review_init."""
     from accesscast import pipeline as P
 
-    fns: dict[str, Any] = {"shots": P.stage_shots, "asr": P.stage_asr, "asr_crosscheck": P.stage_asr_crosscheck,
-           "sounds": P.stage_sounds, "gaps": P.stage_gaps, "evidence": P.stage_evidence,
-           "describe": P.stage_describe, "tts": P.stage_tts, "captions": P.stage_captions,
-           "voiceover": P.stage_voiceover, "ad_translate": P.stage_ad_translate, "review_init": P.stage_review_init}
+    fns: dict[str, Any] = {
+        "shots": P.stage_shots,
+        "asr": P.stage_asr,
+        "asr_crosscheck": P.stage_asr_crosscheck,
+        "sounds": P.stage_sounds,
+        "gaps": P.stage_gaps,
+        "evidence": P.stage_evidence,
+        "describe": P.stage_describe,
+        "tts": P.stage_tts,
+        "captions": P.stage_captions,
+        "voiceover": P.stage_voiceover,
+        "ad_translate": P.stage_ad_translate,
+        "review_init": P.stage_review_init,
+    }
     if name not in fns:
         typer.echo(f"unknown stage {name}; choose from {', '.join(fns)}", err=True)
         raise typer.Exit(int(ExitCode.USAGE))
@@ -81,11 +97,21 @@ def gate(project: ProjectOpt, versions: str = "") -> None:
     """S13: refuse while anything in the requested versions is pending or needs revision."""
     from accesscast.render_stage import AUDIENCE_VERSIONS, run_gate
 
-    vs = [v for v in versions.split(",") if v] or [v for v in AUDIENCE_VERSIONS if not v.startswith("blind.h")
-                                                   and not v.startswith("blind.i")]
+    vs = [v for v in versions.split(",") if v] or [
+        v for v in AUDIENCE_VERSIONS if not v.startswith("blind.h") and not v.startswith("blind.i")
+    ]
     res = run_gate(_run(project), vs)
-    typer.echo(json.dumps({"ok": res.ok, "blocking": res.blocking, "human_reviewed": res.human_reviewed,
-                           "counts": res.counts}, indent=1))
+    typer.echo(
+        json.dumps(
+            {
+                "ok": res.ok,
+                "blocking": res.blocking,
+                "human_reviewed": res.human_reviewed,
+                "counts": res.counts,
+            },
+            indent=1,
+        )
+    )
     if not res.ok:
         raise typer.Exit(int(ExitCode.VALIDATION_FAILED))
 
@@ -127,8 +153,11 @@ def review(port: int = 8081, host: str = "127.0.0.1") -> None:
 
 
 @app.command("export-site")
-def export_site(projects: str = "", allow_drafts: Annotated[bool, typer.Option("--allow-drafts")] = False,
-                out: Path = REPO_ROOT / "site") -> None:
+def export_site(
+    projects: str = "",
+    allow_drafts: Annotated[bool, typer.Option("--allow-drafts")] = False,
+    out: Path = REPO_ROOT / "site",
+) -> None:
     """Copy reviewed projects into site/ (refuses drafts unless --allow-drafts, which watermarks them)."""
     from accesscast.player.build import export_site as do_export
 
@@ -145,8 +174,13 @@ def doctor(deep: bool = False, as_json: Annotated[bool, typer.Option("--json")] 
     from accesscast.doctor import run_doctor
 
     report = run_doctor(load_settings(), deep=deep)
-    typer.echo(json.dumps(report, indent=1) if as_json else "\n".join(
-        f"{'ok  ' if c['ok'] else 'FAIL'} {c['name']}: {c['detail']}" for c in report["checks"]))
+    typer.echo(
+        json.dumps(report, indent=1)
+        if as_json
+        else "\n".join(
+            f"{'ok  ' if c['ok'] else 'FAIL'} {c['name']}: {c['detail']}" for c in report["checks"]
+        )
+    )
     if not report["ok"]:
         raise typer.Exit(int(ExitCode.MISSING_DEPENDENCY))
 
@@ -176,8 +210,10 @@ def claims_check() -> None:
 
 
 @app.command("calibrate-tts")
-def calibrate_tts(voices: str = "af_heart:en,hf_alpha:hi,if_sara:it,hm_omega:hi,im_nicola:it",
-                  require_rocm: Annotated[bool, typer.Option("--require-rocm")] = False) -> None:
+def calibrate_tts(
+    voices: str = "af_heart:en,hf_alpha:hi,if_sara:it,hm_omega:hi,im_nicola:it",
+    require_rocm: Annotated[bool, typer.Option("--require-rocm")] = False,
+) -> None:
     """Measure each voice's words-per-second (60 fixed sentences per language) → tts/calibration/*.json."""
     from accesscast.tts.calibrate import calibrate
 

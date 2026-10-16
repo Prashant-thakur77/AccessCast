@@ -34,6 +34,8 @@ def engine_for(lang: str) -> str:
     if lang in ("hi", "it") and os.environ.get("ACCESSCAST_TTS_ENGINE_HI_IT", "kokoro") == "chatterbox":
         return "chatterbox"
     return "kokoro"  # seed per line (E9); bumps the TTS cache key
+
+
 VOICES = {"en": "af_heart", "hi": "hf_alpha", "it": "if_sara"}  # Kokoro voice ids (Katha's map, MIT)
 VOICEOVER_VOICES = {"hi": "hm_omega", "it": "im_nicola"}  # distinct from the description voice
 CAL_DIR = REPO_ROOT / "src" / "accesscast" / "tts" / "calibration"
@@ -51,7 +53,9 @@ def load_calibration(voice: str, speed: float = 1.0) -> Calibration:
 
 def tts_key(text: str, voice: str, speed: float, engine: str = "kokoro") -> str:
     rev = CHATTERBOX_REV if engine == "chatterbox" else ENGINE_REV
-    return sha256_text(canonical_json({"text": text, "voice": voice, "speed": round(speed, 3), "engine": rev}))
+    return sha256_text(
+        canonical_json({"text": text, "voice": voice, "speed": round(speed, 3), "engine": rev})
+    )
 
 
 def _placeholder(path: Path, words: int, wps: float) -> int:
@@ -79,7 +83,9 @@ def synthesize(
     for it in items:
         voice = voice_for.get(it.lang)
         if voice is not None and engine_for(it.lang) == "chatterbox":
-            voice = "chatterbox-default"  # Chatterbox uses its built-in reference voice, not a Kokoro voice id
+            voice = (
+                "chatterbox-default"  # Chatterbox uses its built-in reference voice, not a Kokoro voice id
+            )
         if voice is None:
             raise ValueError(f"no TTS voice for language {it.lang!r} (no fallback to English)")
         key = tts_key(it.text, voice, speed, engine_for(it.lang))
@@ -105,8 +111,15 @@ def synthesize(
             if kok:
                 run_worker("tts", "synth", {"lines": kok}, tts_dir / "req", events, require_rocm=require_rocm)
             if cbx:
-                res = run_worker("chatterbox", "synth", {"lines": cbx}, tts_dir / "req", events,
-                                 require_rocm=require_rocm, python=CHATTERBOX_PY)
+                res = run_worker(
+                    "chatterbox",
+                    "synth",
+                    {"lines": cbx},
+                    tts_dir / "req",
+                    events,
+                    require_rocm=require_rocm,
+                    python=CHATTERBOX_PY,
+                )
                 for r in res["items"]:
                     if r.get("eos_forced"):
                         Path(str(r["path"]) + ".eos_forced").write_text("chatterbox forced end of sentence\n")
@@ -114,7 +127,9 @@ def synthesize(
             engine = "placeholder"
             for t in todo:
                 _placeholder(
-                    Path(str(t["out"])), nlp.word_count(str(t["text"])), load_calibration(str(t["voice"])).wps_voice
+                    Path(str(t["out"])),
+                    nlp.word_count(str(t["text"])),
+                    load_calibration(str(t["voice"])).wps_voice,
                 )
                 Path(str(t["out"]) + ".placeholder").write_text("placeholder tone; no TTS worker installed\n")
     result = []
@@ -122,7 +137,9 @@ def synthesize(
         key, voice, out = keyed[it.id]
         info = sf.info(str(out))
         is_ph = Path(str(out) + ".placeholder").exists()
-        flags = [*it.flags, "placeholder_tts"] if is_ph and "placeholder_tts" not in it.flags else list(it.flags)
+        flags = (
+            [*it.flags, "placeholder_tts"] if is_ph and "placeholder_tts" not in it.flags else list(it.flags)
+        )
         if Path(str(out) + ".eos_forced").exists() and "tts_eos_forced" not in flags:
             flags.append("tts_eos_forced")  # may be cut short: shown to the reviewer
         result.append(
@@ -133,7 +150,9 @@ def synthesize(
                         speed=speed,
                         sha256=key,
                         duration_ms=round(info.duration * 1000),
-                        engine="placeholder" if is_ph else ("chatterbox-multilingual" if engine_for(it.lang) == "chatterbox" else engine),
+                        engine="placeholder"
+                        if is_ph
+                        else ("chatterbox-multilingual" if engine_for(it.lang) == "chatterbox" else engine),
                     ),
                     "flags": flags,
                 }

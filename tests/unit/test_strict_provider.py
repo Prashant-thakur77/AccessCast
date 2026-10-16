@@ -11,8 +11,14 @@ def _client(model_reply: str, strict: bool) -> LlmClient:
     c = LlmClient(s, provider="local", strict_provider=strict)
 
     def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json={"model": model_reply, "choices": [{"message": {"content": '{"text": "ok"}'}}],
-                                         "usage": {"prompt_tokens": 1, "completion_tokens": 1}})
+        return httpx.Response(
+            200,
+            json={
+                "model": model_reply,
+                "choices": [{"message": {"content": '{"text": "ok"}'}}],
+                "usage": {"prompt_tokens": 1, "completion_tokens": 1},
+            },
+        )
 
     c._http = httpx.Client(transport=httpx.MockTransport(handler))
     return c

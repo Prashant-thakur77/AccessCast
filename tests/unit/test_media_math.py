@@ -23,8 +23,10 @@ def test_overlapping_dips_take_the_deeper_one():
 
 def test_extended_timeline_maps_monotonically_and_adds_insertions():
     src = ms_to_samples(20_000)
-    ins = [Insertion("a", ms_to_samples(5000), ms_to_samples(2000), ms_to_samples(150), ms_to_samples(150)),
-           Insertion("b", ms_to_samples(12000), ms_to_samples(1000), ms_to_samples(150), ms_to_samples(150))]
+    ins = [
+        Insertion("a", ms_to_samples(5000), ms_to_samples(2000), ms_to_samples(150), ms_to_samples(150)),
+        Insertion("b", ms_to_samples(12000), ms_to_samples(1000), ms_to_samples(150), ms_to_samples(150)),
+    ]
     rows = build_timeline(src, ins)
     assert rows[-1]["output_end_ms"] == 20_000 + 2300 + 1300
     times = [remap_ms(rows, t) for t in range(0, 20_001, 500)]

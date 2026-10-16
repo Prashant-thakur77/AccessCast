@@ -47,7 +47,9 @@ def tts(text: str, path: Path) -> float:
 
 
 def esc(t: str) -> str:
-    return t.replace("\\", "\\\\").replace(":", "\\:").replace("'", "’").replace(",", "\\,").replace("%", "\\%")
+    return (
+        t.replace("\\", "\\\\").replace(":", "\\:").replace("'", "’").replace(",", "\\,").replace("%", "\\%")
+    )
 
 
 def main() -> int:
@@ -63,8 +65,10 @@ def main() -> int:
         mp4 = OUT / f"s{k:02d}.mp4"
         if sc["kind"] == "card":
             lines = [esc(fill(x, reg)) for x in sc["lines"]]
-            draws = [f"drawtext=fontfile={FONT_B}:text='{t}':x=(w-text_w)/2:y={360 + 110 * i}:fontsize={sc.get('size', 64)}:fontcolor=white"
-                     for i, t in enumerate(lines)]
+            draws = [
+                f"drawtext=fontfile={FONT_B}:text='{t}':x=(w-text_w)/2:y={360 + 110 * i}:fontsize={sc.get('size', 64)}:fontcolor=white"
+                for i, t in enumerate(lines)
+            ]
             vin = ["-f", "lavfi", "-i", f"color=c=0x0f1b33:s=1920x1080:r=30:d={dur:.2f}"]
             vf = ",".join(draws) or "null"
         else:
@@ -81,22 +85,87 @@ def main() -> int:
                 tf = OUT / f"cap{k:02d}_{i:02d}_{j}.txt"
                 tf.write_text(line, encoding="utf-8")
                 y = f"h-{230 - 64 * j if len(lines) == 2 else 170}"
-                caps.append(f"drawtext=fontfile={FONT}:textfile='{tf}':x=(w-text_w)/2:y={y}:fontsize=46:fontcolor=white:"
-                            f"box=1:boxcolor=black@0.75:boxborderw=12:enable='between(t,{a:.2f},{b:.2f})'")
+                caps.append(
+                    f"drawtext=fontfile={FONT}:textfile='{tf}':x=(w-text_w)/2:y={y}:fontsize=46:fontcolor=white:"
+                    f"box=1:boxcolor=black@0.75:boxborderw=12:enable='between(t,{a:.2f},{b:.2f})'"
+                )
         vf = ",".join([vf, *caps]) if caps else vf
         ain = ["-i", str(wav)] if narr else ["-f", "lavfi", "-i", f"anullsrc=r=48000:cl=stereo:d={dur:.2f}"]
-        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", *vin, *ain, "-map", "0:v:0", "-map", "1:a:0", "-vf", vf,
-                        "-t", f"{dur:.2f}", "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac",
-                        "-ar", "48000", "-ac", "2", str(mp4)], check=True)
+        subprocess.run(
+            [
+                "ffmpeg",
+                "-loglevel",
+                "error",
+                "-y",
+                *vin,
+                *ain,
+                "-map",
+                "0:v:0",
+                "-map",
+                "1:a:0",
+                "-vf",
+                vf,
+                "-t",
+                f"{dur:.2f}",
+                "-c:v",
+                "libx264",
+                "-crf",
+                "20",
+                "-pix_fmt",
+                "yuv420p",
+                "-c:a",
+                "aac",
+                "-ar",
+                "48000",
+                "-ac",
+                "2",
+                str(mp4),
+            ],
+            check=True,
+        )
         parts.append(mp4)
     lst = OUT / "parts.txt"
     lst.write_text("".join(f"file '{p}'\n" for p in parts))
     raw = OUT / "demo_raw.mp4"
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy",
-                    str(raw)], check=True)
+    subprocess.run(
+        [
+            "ffmpeg",
+            "-loglevel",
+            "error",
+            "-y",
+            "-f",
+            "concat",
+            "-safe",
+            "0",
+            "-i",
+            str(lst),
+            "-c",
+            "copy",
+            str(raw),
+        ],
+        check=True,
+    )
     final = OUT / "accesscast_demo.mp4"
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(raw), "-c:v", "copy", "-af",
-                    "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "160k", str(final)], check=True)
+    subprocess.run(
+        [
+            "ffmpeg",
+            "-loglevel",
+            "error",
+            "-y",
+            "-i",
+            str(raw),
+            "-c:v",
+            "copy",
+            "-af",
+            "loudnorm=I=-16:TP=-1.5:LRA=11",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "160k",
+            str(final),
+        ],
+        check=True,
+    )
     print(f"demo → {final}")
     return 0
 

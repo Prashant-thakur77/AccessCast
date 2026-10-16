@@ -38,8 +38,11 @@ def export_site(settings: Settings, projects: Sequence[str], out: Path, *, allow
             dst = out / f.relative_to(STATIC)
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(f, dst)
-    roots = [settings.projects_dir / p for p in projects] if projects else sorted(
-        d for d in settings.projects_dir.iterdir() if (d / "reports" / "index.json").exists())
+    roots = (
+        [settings.projects_dir / p for p in projects]
+        if projects
+        else sorted(d for d in settings.projects_dir.iterdir() if (d / "reports" / "index.json").exists())
+    )
     banned = w3c_hashes()
     catalog: list[dict[str, Any]] = []
     for root in roots:
@@ -61,7 +64,11 @@ def export_site(settings: Settings, projects: Sequence[str], out: Path, *, allow
             for t in v["tracks"]:
                 shutil.copyfile(root / t["file"], dst / t["file"])
             if v.get("source_to_output"):
-                rows = [json.loads(x) for x in (root / v["source_to_output"]).read_text().splitlines() if x.strip()]
+                rows = [
+                    json.loads(x)
+                    for x in (root / v["source_to_output"]).read_text().splitlines()
+                    if x.strip()
+                ]
                 write_json(dst / (v["source_to_output"].replace(".jsonl", ".json")), rows)
                 v["source_to_output"] = v["source_to_output"].replace(".jsonl", ".json")
         dec = read_json(root / "reports" / "decisions.json")
@@ -75,23 +82,49 @@ def export_site(settings: Settings, projects: Sequence[str], out: Path, *, allow
         write_json(dst / "decisions.json", dec)
         an: dict[str, Any] = {"duration_ms": idx["duration_ms"]}
         if (root / "analysis" / "words.json").exists():
-            an["speech"] = [[w["start_ms"], w["end_ms"]] for w in read_json(root / "analysis" / "words.json")["words"]]
+            an["speech"] = [
+                [w["start_ms"], w["end_ms"]] for w in read_json(root / "analysis" / "words.json")["words"]
+            ]
         if (root / "analysis" / "gaps.json").exists():
-            an["gaps"] = [[g["start_ms"], g["end_ms"]] for g in read_json(root / "analysis" / "gaps.json")["gaps"]]
+            an["gaps"] = [
+                [g["start_ms"], g["end_ms"]] for g in read_json(root / "analysis" / "gaps.json")["gaps"]
+            ]
         if (root / "analysis" / "scenes.json").exists():
-            an["scenes"] = [[c["start_ms"], c["end_ms"]] for c in read_json(root / "analysis" / "scenes.json")["scenes"]]
+            an["scenes"] = [
+                [c["start_ms"], c["end_ms"]] for c in read_json(root / "analysis" / "scenes.json")["scenes"]
+            ]
         write_json(dst / "analysis.json", an)
         rep = read_json(root / "reports" / "report.json")
         write_json(dst / "report.json", rep)
-        catalog.append({"sha12": root.name, "title": idx.get("title"), "duration_ms": idx["duration_ms"],
-                        "human_reviewed": idx.get("human_reviewed"), "synthetic_test_data": idx.get("synthetic_test_data"),
-                        "reviewed_at": idx.get("reviewed_at")})
+        catalog.append(
+            {
+                "sha12": root.name,
+                "title": idx.get("title"),
+                "duration_ms": idx["duration_ms"],
+                "human_reviewed": idx.get("human_reviewed"),
+                "synthetic_test_data": idx.get("synthetic_test_data"),
+                "reviewed_at": idx.get("reviewed_at"),
+            }
+        )
     (out / "data").mkdir(exist_ok=True)
     write_json(out / "data" / "catalog.json", {"projects": catalog})
     reg = REPO_ROOT / "evidence" / "public-claims.json"
     if reg.exists():  # the site shows only registered numbers; a missing claim renders as "Measuring"
         claims = json.loads(reg.read_text(encoding="utf-8"))["claims"]
-        write_json(out / "data" / "claims.json", {"claims": {c["claim_id"]: {
-            "display": (c.get("display") or [None])[0], "text": c["text"], "status": c["status"], "split": c.get("split"),
-            "source_url": c.get("source_url"), "evidence": [e["path"] for e in c.get("evidence", [])]} for c in claims}})
+        write_json(
+            out / "data" / "claims.json",
+            {
+                "claims": {
+                    c["claim_id"]: {
+                        "display": (c.get("display") or [None])[0],
+                        "text": c["text"],
+                        "status": c["status"],
+                        "split": c.get("split"),
+                        "source_url": c.get("source_url"),
+                        "evidence": [e["path"] for e in c.get("evidence", [])],
+                    }
+                    for c in claims
+                }
+            },
+        )
     return len(catalog)

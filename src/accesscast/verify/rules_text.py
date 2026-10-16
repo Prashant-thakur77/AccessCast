@@ -26,12 +26,30 @@ def _lines(text: str) -> list[str]:
 def gen001_empty_or_failed(item: Item, ctx: VerifyContext) -> list[Finding]:
     """Fail closed: empty text, a failed generation or a misaligned translation is never publishable."""
     if not item.text.strip():
-        return [Finding("GEN001", "error", "empty text", "a line to show or speak",
-                        "There is no text for this line. A person must write it.", "write", repairable=False)]
+        return [
+            Finding(
+                "GEN001",
+                "error",
+                "empty text",
+                "a line to show or speak",
+                "There is no text for this line. A person must write it.",
+                "write",
+                repairable=False,
+            )
+        ]
     bad = [f for f in item.flags if f.startswith(("generation_error:", "misaligned:"))]
     if bad:
-        return [Finding("GEN001", "error", bad[0][:80], "generated and aligned",
-                        "The model output for this line failed. A person must check it.", "write", repairable=False)]
+        return [
+            Finding(
+                "GEN001",
+                "error",
+                bad[0][:80],
+                "generated and aligned",
+                "The model output for this line failed. A person must check it.",
+                "write",
+                repairable=False,
+            )
+        ]
     return []
 
 

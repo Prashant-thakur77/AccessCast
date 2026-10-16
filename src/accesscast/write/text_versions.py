@@ -125,7 +125,9 @@ def make_easy(client: LlmClient, sdh: Sequence[Item], ctx: VerifyContext, opts: 
             ):
                 it = it.model_copy(update={"needs_pause": True})
 
-            def revise(k: int, t: str, v: list[Finding], it: Item = it, words_max: int = words_max) -> tuple[str, list[str]]:
+            def revise(
+                k: int, t: str, v: list[Finding], it: Item = it, words_max: int = words_max
+            ) -> tuple[str, list[str]]:
                 s = derive_seed(opts.project_seed, f"{it.id}:{opts.run_label}:repair:{k}")
                 r = client.call(
                     LlmRequest(
@@ -332,14 +334,26 @@ def make_voiceover(
             }
         )
     got: dict[str, str] = {}
-    for b in range(0, len(segs), BATCH):  # batched: one request per 12 segments, so long videos fit the output
+    for b in range(
+        0, len(segs), BATCH
+    ):  # batched: one request per 12 segments, so long videos fit the output
         chunk = segs[b : b + BATCH]
         try:
-            resp = client.call(LlmRequest("voiceover", {"target_lang": lang, "segments": chunk},
-                                          seed=derive_seed(opts.project_seed, f"vo:{lang}:{b}:{opts.run_label}"),
-                                          label=f"voiceover:{lang}:{b}"))
-            got.update({str(x.get("id")): str(x.get("text", "")) for x in resp.obj.get("items") or []
-                        if isinstance(x, dict)})
+            resp = client.call(
+                LlmRequest(
+                    "voiceover",
+                    {"target_lang": lang, "segments": chunk},
+                    seed=derive_seed(opts.project_seed, f"vo:{lang}:{b}:{opts.run_label}"),
+                    label=f"voiceover:{lang}:{b}",
+                )
+            )
+            got.update(
+                {
+                    str(x.get("id")): str(x.get("text", ""))
+                    for x in resp.obj.get("items") or []
+                    if isinstance(x, dict)
+                }
+            )
         except (LlmOutputError, ModelEndpointError):
             continue  # missing ids become `misaligned` lines (GEN001 / CC007): never silently English
     out = []
@@ -417,9 +431,14 @@ def make_ad_translations(
     for b in range(0, len(lines), BATCH):
         chunk = lines[b : b + BATCH]
         try:
-            resp = client.call(LlmRequest("ad_translate", {"target_lang": lang, "lines": chunk},
-                                          seed=derive_seed(opts.project_seed, f"adtr:{lang}:{b}:{opts.run_label}"),
-                                          label=f"ad_translate:{lang}:{b}"))
+            resp = client.call(
+                LlmRequest(
+                    "ad_translate",
+                    {"target_lang": lang, "lines": chunk},
+                    seed=derive_seed(opts.project_seed, f"adtr:{lang}:{b}:{opts.run_label}"),
+                    label=f"ad_translate:{lang}:{b}",
+                )
+            )
             got.update({str(x.get("id")): x for x in resp.obj.get("items") or [] if isinstance(x, dict)})
         except (LlmOutputError, ModelEndpointError):
             continue

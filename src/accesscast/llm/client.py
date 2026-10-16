@@ -227,10 +227,14 @@ class LlmClient:
         if req.seed is not None:
             body["seed"] = req.seed
         rec = os.environ.get("ACCESSCAST_RECORD_REPLAY")
-        if rec and not req.images and req.audio is None:  # E13 replay set: text-only requests, never image bytes
+        if (
+            rec and not req.images and req.audio is None
+        ):  # E13 replay set: text-only requests, never image bytes
             Path(rec).mkdir(parents=True, exist_ok=True)
             with self._log_lock, (Path(rec) / f"{prompt.id}.jsonl").open("a", encoding="utf-8") as fh:
-                fh.write(json.dumps({k: v for k, v in body.items() if k != "model"}, ensure_ascii=False) + "\n")
+                fh.write(
+                    json.dumps({k: v for k, v in body.items() if k != "model"}, ensure_ascii=False) + "\n"
+                )
         if prov != "tokenfactory":  # Token Factory silently drops chat_template_kwargs (SayAgain's finding)
             body["chat_template_kwargs"] = {"enable_thinking": False}
         last: Exception | None = None
@@ -257,7 +261,9 @@ class LlmClient:
             served = str(data.get("model", ""))
             if self.strict and served.split("/")[-1].lower() != model.split("/")[-1].lower():
                 # --strict-provider: never accept an answer from a different model than the one requested
-                raise ModelEndpointError(f"{prov} answered with model {served!r}, expected {model!r} (strict)")
+                raise ModelEndpointError(
+                    f"{prov} answered with model {served!r}, expected {model!r} (strict)"
+                )
             return (
                 text,
                 served or model,

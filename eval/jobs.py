@@ -16,14 +16,15 @@ from accesscast.config import REPO_ROOT
 from accesscast.project import sha256_file
 
 JOB_SCRIPT = r"""
-import json, sys, time
+import json, os, sys, time
 from pathlib import Path
 from accesscast.config import load_settings
 from accesscast.pipeline import run_all
 from accesscast.render_stage import render_all, package
 t0 = time.perf_counter()
 s = load_settings()
-r = run_all(s, Path(sys.argv[1]), strict=True, require_rocm=sys.argv[2] == "1")
+r = run_all(s, Path(sys.argv[1]), provider=os.environ.get("ACCESSCAST_PROVIDER", "local"), strict=True,
+            require_rocm=sys.argv[2] == "1")
 analysis_s = time.perf_counter() - t0
 summary = render_all(r, mode="draft")
 package(r)
