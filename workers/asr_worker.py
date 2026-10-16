@@ -259,5 +259,26 @@ def transcribe_many(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     return {"items": out, "model": p.get("model"), "device": _dev(p, require_rocm)}
 
 
+def sounds(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
+    """AudioSet class scores for each ≤5 s window (AST, BSD-3-Clause); the core maps them to its vocabulary."""
+    dev = _dev(p, require_rocm)
+    key = f"ast:{p['model']}:{dev}"
+    if key not in _cache:
+        from transformers import pipeline
+
+        _cache[key] = pipeline("audio-classification", model=p["model"], device=0 if dev == "cuda" else -1)
+    clf = _cache[key]
+    out = []
+    timing: dict[str, Any] = {}
+    with stage_timer("ast", timing):
+        for k, f in enumerate(p["files"]):
+            res = clf({"raw": load_audio(f), "sampling_rate": SR}, top_k=int(p.get("top_k", 10)))
+            out.append({"file": f, "scores": [[r["label"], round(float(r["score"]), 4)] for r in res]})
+            event("progress", done=k + 1, total=len(p["files"]))
+    return {"items": out, "model": p["model"], "device": dev, "timing": timing}
+
+
 if __name__ == "__main__":
-    raise SystemExit(main({"transcribe": transcribe, "transcribe_many": transcribe_many, "vad": vad}))
+    raise SystemExit(
+        main({"transcribe": transcribe, "transcribe_many": transcribe_many, "vad": vad, "sounds": sounds})
+    )

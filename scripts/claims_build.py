@@ -123,6 +123,20 @@ SPECS: list[Spec] = [
         fmt=lambda x: f"{float(x):,.0f}",
     ),
     Spec(
+        "e13.failed",
+        "e13_serving_tokenfactory.json",
+        "/summary/failed",
+        "Gemma requests to AMD Token Factory that failed during the speed test",
+        "requests",
+    ),
+    Spec(
+        "e13.requests",
+        "e13_serving_tokenfactory.json",
+        "/summary/requests",
+        "Gemma requests sent to AMD Token Factory during the speed test",
+        "requests",
+    ),
+    Spec(
         "e13.best_tokens_per_s",
         "e13_serving_tokenfactory.json",
         "/summary/best/tokens_per_s",
@@ -277,7 +291,16 @@ def e11_table() -> str | None:
     return "\n".join(lines)
 
 
-SECTIONS: dict[str, Callable[[], str | None]] = {"e11.table": e11_table}
+def e13_failed_sentence() -> str | None:
+    if not (EV / "e13_serving_tokenfactory.json").exists():
+        return None
+    return "<pending: e13.failed> of <pending: e13.requests> requests failed (client-side, dev requests replayed)."
+
+
+SECTIONS: dict[str, Callable[[], str | None]] = {
+    "e11.table": e11_table,
+    "e13.failed_sentence": e13_failed_sentence,
+}
 
 
 def register() -> dict[str, Any]:
