@@ -816,9 +816,7 @@
      "pointer": "/summary/best/p95_s"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "13.9 s"
    ]
@@ -837,9 +835,7 @@
      "pointer": "/summary/best/tokens_per_s"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "17"
    ]
@@ -858,9 +854,7 @@
      "pointer": "/summary/failed"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "15"
    ]
@@ -879,11 +873,229 @@
      "pointer": "/summary/requests"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "120"
+   ]
+  },
+  {
+   "claim_id": "e15.boundary_aligned_median",
+   "text": "median word-boundary error after forced alignment (synthetic dev clips)",
+   "value": 54.0,
+   "unit": "ms",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/boundary_error/openai~1whisper-large-v3-turbo/aligned/median_ms"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "54 ms"
+   ]
+  },
+  {
+   "claim_id": "e15.boundary_aligned_p95",
+   "text": "95th-percentile word-boundary error after forced alignment",
+   "value": 339.0,
+   "unit": "ms",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/boundary_error/openai~1whisper-large-v3-turbo/aligned/p95_ms"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "339 ms"
+   ]
+  },
+  {
+   "claim_id": "e15.boundary_n",
+   "text": "word boundaries measured",
+   "value": 224,
+   "unit": "words",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/boundary_error/openai~1whisper-large-v3-turbo/aligned/n"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "224"
+   ]
+  },
+  {
+   "claim_id": "e15.boundary_raw_p95",
+   "text": "95th-percentile word-boundary error of raw Whisper timestamps",
+   "value": 480.0,
+   "unit": "ms",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/boundary_error/openai~1whisper-large-v3-turbo/raw/p95_ms"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "480 ms"
+   ]
+  },
+  {
+   "claim_id": "e15.guard_ms",
+   "text": "guard band around speech, from the measured p95 word-boundary error",
+   "value": 340,
+   "unit": "ms",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/decision/guard_ms"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "340"
+   ]
+  },
+  {
+   "claim_id": "e15.n_per_lang",
+   "text": "FLEURS clips per language",
+   "value": 100,
+   "unit": "clips",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/accuracy/openai~1whisper-large-v3-turbo/en/n"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "100"
+   ]
+  },
+  {
+   "claim_id": "e15.wer_en_large",
+   "text": "English word error rate, Whisper large-v3, FLEURS (dev)",
+   "value": 0.0435,
+   "unit": "",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/accuracy/openai~1whisper-large-v3/en/wer"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "4.3%"
+   ]
+  },
+  {
+   "claim_id": "e15.wer_en_turbo",
+   "text": "English word error rate, Whisper large-v3-turbo, FLEURS (dev)",
+   "value": 0.0445,
+   "unit": "",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/accuracy/openai~1whisper-large-v3-turbo/en/wer"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "4.5%"
+   ]
+  },
+  {
+   "claim_id": "e15.wer_hi_turbo",
+   "text": "Hindi word error rate, Whisper large-v3-turbo, FLEURS (dev)",
+   "value": 0.3235,
+   "unit": "",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/accuracy/openai~1whisper-large-v3-turbo/hi/wer"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "32.4%"
+   ]
+  },
+  {
+   "claim_id": "e15.wer_it_turbo",
+   "text": "Italian word error rate, Whisper large-v3-turbo, FLEURS (dev)",
+   "value": 0.0297,
+   "unit": "",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/accuracy/openai~1whisper-large-v3-turbo/it/wer"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "3.0%"
    ]
   },
   {
@@ -900,7 +1112,10 @@
      "pointer": "/summary/player/passed"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
    "display": [
     "23"
    ]
@@ -919,7 +1134,10 @@
      "pointer": "/summary/player/total"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
    "display": [
     "23"
    ]
@@ -938,7 +1156,10 @@
      "pointer": "/summary/review/passed"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
    "display": [
     "6"
    ]
@@ -957,7 +1178,10 @@
      "pointer": "/summary/review/total"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
    "display": [
     "6"
    ]

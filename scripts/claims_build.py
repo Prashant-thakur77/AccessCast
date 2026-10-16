@@ -244,6 +244,72 @@ SPECS: list[Spec] = [
         split="none",
     ),
     Spec(
+        "e15.wer_en_turbo",
+        "e15_asr.json",
+        "/summary/accuracy/openai~1whisper-large-v3-turbo/en/wer",
+        "English word error rate, Whisper large-v3-turbo, FLEURS (dev)",
+        fmt=lambda x: f"{float(x) * 100:.1f}%",
+    ),
+    Spec(
+        "e15.wer_en_large",
+        "e15_asr.json",
+        "/summary/accuracy/openai~1whisper-large-v3/en/wer",
+        "English word error rate, Whisper large-v3, FLEURS (dev)",
+        fmt=lambda x: f"{float(x) * 100:.1f}%",
+    ),
+    Spec(
+        "e15.wer_hi_turbo",
+        "e15_asr.json",
+        "/summary/accuracy/openai~1whisper-large-v3-turbo/hi/wer",
+        "Hindi word error rate, Whisper large-v3-turbo, FLEURS (dev)",
+        fmt=lambda x: f"{float(x) * 100:.1f}%",
+    ),
+    Spec(
+        "e15.wer_it_turbo",
+        "e15_asr.json",
+        "/summary/accuracy/openai~1whisper-large-v3-turbo/it/wer",
+        "Italian word error rate, Whisper large-v3-turbo, FLEURS (dev)",
+        fmt=lambda x: f"{float(x) * 100:.1f}%",
+    ),
+    Spec(
+        "e15.n_per_lang",
+        "e15_asr.json",
+        "/summary/accuracy/openai~1whisper-large-v3-turbo/en/n",
+        "FLEURS clips per language",
+        "clips",
+    ),
+    Spec(
+        "e15.boundary_aligned_median",
+        "e15_asr.json",
+        "/summary/boundary_error/openai~1whisper-large-v3-turbo/aligned/median_ms",
+        "median word-boundary error after forced alignment (synthetic dev clips)",
+        "ms",
+        fmt=lambda x: f"{float(x):.0f} ms",
+    ),
+    Spec(
+        "e15.boundary_aligned_p95",
+        "e15_asr.json",
+        "/summary/boundary_error/openai~1whisper-large-v3-turbo/aligned/p95_ms",
+        "95th-percentile word-boundary error after forced alignment",
+        "ms",
+        fmt=lambda x: f"{float(x):.0f} ms",
+    ),
+    Spec(
+        "e15.boundary_raw_p95",
+        "e15_asr.json",
+        "/summary/boundary_error/openai~1whisper-large-v3-turbo/raw/p95_ms",
+        "95th-percentile word-boundary error of raw Whisper timestamps",
+        "ms",
+        fmt=lambda x: f"{float(x):.0f} ms",
+    ),
+    Spec(
+        "e15.boundary_n",
+        "e15_asr.json",
+        "/summary/boundary_error/openai~1whisper-large-v3-turbo/aligned/n",
+        "word boundaries measured",
+        "words",
+    ),
+    Spec(
         "e15.guard_ms",
         "e15_asr.json",
         "/summary/decision/guard_ms",
@@ -297,10 +363,35 @@ def e13_failed_sentence() -> str | None:
     return "<pending: e13.failed> of <pending: e13.requests> requests failed (client-side, dev requests replayed)."
 
 
+def results_more() -> str | None:
+    """Plain-words lines for every experiment that has run, regenerated on each build (markers keep the block)."""
+    rows = []
+    if (EV / "e15_asr.json").exists():
+        rows.append(
+            "- **Speech recognition (E15, dev set).** We chose Whisper large-v3-turbo: its English word error rate was "
+            "<pending: e15.wer_en_turbo> on <pending: e15.n_per_lang> FLEURS clips, against <pending: e15.wer_en_large> "
+            "for the larger large-v3 (Hindi <pending: e15.wer_hi_turbo>, Italian <pending: e15.wer_it_turbo>). After "
+            "forced alignment, word boundaries were off by <pending: e15.boundary_aligned_median> at the median and "
+            "<pending: e15.boundary_aligned_p95> at the 95th percentile (raw Whisper: <pending: e15.boundary_raw_p95>), "
+            "on <pending: e15.boundary_n> word boundaries of our synthetic clips, so description keeps "
+            "<pending: e15.guard_ms> ms clear of speech. Large-v3 could not produce word timings within our "
+            "computer's memory, so it was not a candidate."
+        )
+    if (EV / "e16_ui_a11y.json").exists():
+        rows.append(
+            "- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player "
+            "<pending: e16.player_passed> of <pending: e16.player_total>, review app and Studio "
+            "<pending: e16.review_passed> of <pending: e16.review_total>. No blind tester has used it yet."
+        )
+    return "\n".join(rows) if rows else None
+
+
 SECTIONS: dict[str, Callable[[], str | None]] = {
     "e11.table": e11_table,
     "e13.failed_sentence": e13_failed_sentence,
+    "results.more": results_more,
 }
+REGENERATED = ("results.more",)  # kept between markers and rebuilt every time, as experiments land
 
 
 def register() -> dict[str, Any]:
@@ -349,9 +440,17 @@ def fill(claims: dict[str, Any]) -> int:
             sec,
             gen,
         ) in SECTIONS.items():  # expand generated sections first; their cells are claim placeholders
+            start, end = f"<!-- {sec}:start -->", f"<!-- {sec}:end -->"
+            if sec in REGENERATED and start in text and end in text:
+                block = gen()
+                if block:
+                    a, b = text.index(start) + len(start), text.index(end)
+                    text = text[:a] + "\n" + block + "\n" + text[b:]
+                continue
             block = gen() if f"<pending: {sec}>" in text else None
             if block:
-                text = text.replace(f"<pending: {sec}>", block)
+                wrapped = f"{start}\n{block}\n{end}" if sec in REGENERATED else block
+                text = text.replace(f"<pending: {sec}>", wrapped)
 
         def sub(m: re.Match[str], rel: str = rel) -> str:
             nonlocal n
