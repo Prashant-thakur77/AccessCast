@@ -38,6 +38,7 @@ AudioSight ships no NOTICE file. Its licence appendix reads "Copyright 2026 Audi
 | Review UI contract and server-side render gate | PolicyCut (https://github.com/xiaodouzi666/Radeon-hackathon-2026-07/tree/main/policycut) | MIT |
 | JUDGES.md, compliance matrix, claims registry | SignalForge (https://github.com/rvbernucci/signalforge) | Apache-2.0 |
 | Confidence computed in code; serving sweep method | ageBand (https://github.com/asishbose/ageBand) | Apache-2.0 |
+| Site look and feel: condensed display type with tiny captions, colour per section, rotating circle text, discs, orbit layout (patterns only; no code, images, fonts or copy) | dontboardme.com (https://dontboardme.com/), design by thefirstthelast.agency | design inspiration only |
 | Stage timer and benchmark.json | Katha (https://github.com/N-45div/Katha) | MIT |
 | Ablation ladder with failed steps kept; incidents format | StudioMI300 (https://github.com/bladedevoff/studiomi300) | MIT |
 | Alignment-safe batch translation | video-voice-translator (https://github.com/icuic/video-voice-translator) | MIT |
