@@ -84,26 +84,34 @@ def ingest(src: Path, media_dir: Path) -> Probe:
 
 
 def extract_frame(video: Path, t_ms: int, out: Path, px: int = C.EVIDENCE_FRAME_PX) -> Path:
+    """Frame at t_ms; near the end of a stream ffmpeg can decode nothing, so step back up to 1 s (the same rule as
+    scene frames), then fail closed."""
     out.parent.mkdir(parents=True, exist_ok=True)
-    run_ffmpeg(
-        [
-            "-ss",
-            f"{max(0, t_ms) / 1000:.3f}",
-            "-i",
-            str(video),
-            "-frames:v",
-            "1",
-            "-vf",
-            # full range for JPEG: ffmpeg 8's mjpeg refuses limited-range (TV) frames (NASA dev clip, 16 Oct)
-            f"scale='min({px},iw)':-2:out_range=full,format=yuvj420p",
-            "-q:v",
-            "3",
-            str(out),
-        ]
-    )
-    if not out.exists():
-        raise MediaError(f"frame at {t_ms} ms not extracted")
-    return out
+    last = ""
+    for back in (0, 200, 500, 1000):
+        try:
+            run_ffmpeg(
+                [
+                    "-ss",
+                    f"{max(0, t_ms - back) / 1000:.3f}",
+                    "-i",
+                    str(video),
+                    "-frames:v",
+                    "1",
+                    "-vf",
+                    # full range for JPEG: ffmpeg 8's mjpeg refuses limited-range (TV) frames (NASA dev clip, 16 Oct)
+                    f"scale='min({px},iw)':-2:out_range=full,format=yuvj420p",
+                    "-q:v",
+                    "3",
+                    str(out),
+                ]
+            )
+        except MediaError as e:  # nothing decodable here: step back
+            last = str(e)[:120]
+            continue
+        if out.exists() and out.stat().st_size > 0:
+            return out
+    raise MediaError(f"frame at {t_ms} ms not extracted {last}".strip())
 
 
 def load_mono16k(path: Path) -> tuple[np.ndarray, int]:
