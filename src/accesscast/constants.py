@@ -33,6 +33,7 @@ SCENE_MIN_S = 6.0  # AudioSight scene clamp
 SCENE_MAX_S = 45.0  # AudioSight scene clamp
 
 # ---------------------------------------------------------------- gaps (S4)
+ASR_MODEL = "openai/whisper-large-v3"  # PLAN §9 S2 default; replaced by E15's dev-set decision
 GUARD_MS = 120  # PLAN §9 S4 start value; replaced by E15's measured boundary error (dev-tuned)
 MIN_GAP_MS = 1_200  # PLAN §9 S4
 ASR_CROSSCHECK_WER = 0.15  # PLAN §9 S2b: chunk WER above this marks asr_disagreement (dev-tuned)
