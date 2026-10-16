@@ -80,6 +80,18 @@ if (REVIEW && PROJECT) {
   });
 }
 
+// Studio: a finished job on the review server (start it with `make review`, run one dev clip through the Studio first)
+if (REVIEW) {
+  await segment("studio", async (p) => {
+    await p.goto(`${REVIEW}/app/studio.html`);
+    await pause(p, 3000);
+    await p.mouse.wheel(0, 500);
+    await pause(p, 5000);
+    await p.mouse.wheel(0, 900);
+    await pause(p, 5000);
+  });
+}
+
 await segment("proof", async (p) => {
   await p.goto(`${SITE}/proof.html`);
   await pause(p, 2500);

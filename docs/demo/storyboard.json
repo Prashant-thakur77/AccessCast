@@ -1,12 +1,15 @@
 {
- "_note": "Numbers only as {claim:<id>} from evidence/public-claims.json. Scenes marked TODO are filled after the experiments run.",
+ "_note": "Numbers only as {claim:<id>} from evidence/public-claims.json; make_demo_video.py refuses to render while any is unregistered.",
  "scenes": [
   {"kind": "card", "lines": ["{claim:cited.gbd.blind_2020} people are blind."], "narration": "{claim:cited.gbd.blind_2020} people are blind. For many of them, most videos say nothing about what is on screen."},
   {"kind": "card", "lines": ["AccessCast", "One video. Five ways to watch."], "narration": "This is AccessCast. One video, made into a version for each viewer."},
-  {"kind": "recording", "recording": "five_ways.webm", "start": 1, "min_seconds": 30, "narration": "If you can't see the screen, the description fits in the pauses. If there's no room, the video waits. If you can't hear, the captions show who speaks and what sounds. Simpler words, at your pace. And Hindi and Italian, with their own voice."},
-  {"kind": "recording", "recording": "decisions_drawer.webm", "start": 1, "narration": "Gemma writes. Code checks every line. Gemma fixes what fails. A person approves what the public hears."},
-  {"kind": "recording", "recording": "proof.webm", "start": 1, "narration": "TODO: written from E11's measured numbers only."},
-  {"kind": "card", "lines": ["Gemma 4 on AMD Instinct MI300X"], "narration": "All of this runs on one AMD Instinct MI300X."},
+  {"kind": "recording", "recording": "five_ways.webm", "start": 1, "min_seconds": 30, "narration": "If you can't see the screen, the description fits in the pauses. If there's no room, the video waits. If you can't hear, the captions show what is said and what sounds. Simpler words, at your pace. And Hindi and Italian, with their own voice."},
+  {"kind": "recording", "recording": "studio.webm", "start": 1, "narration": "Drop in a video and watch every step. Whisper finds every word and every pause. Gemma looks at each scene and writes. Code checks every line, and Gemma fixes what fails."},
+  {"kind": "recording", "recording": "decisions_drawer.webm", "start": 1, "narration": "Gemma wrote that a man speaks to the camera. The check stopped it: a blind viewer already hears him speak. Gemma rewrote it: he looks at the camera. And a person approves every line before anyone hears it."},
+  {"kind": "card", "lines": ["Easy-read, 10 test videos", "Gemma alone kept the \"not\": {claim:e5.neg_gemma_k} of {claim:e5.neg_gemma_n}", "AccessCast: {claim:e5.neg_ours_k} of {claim:e5.neg_ours_n}"], "narration": "On ten accessibility videos we never tuned on, Gemma alone sometimes dropped a not, which flips the meaning. What AccessCast published kept every one."},
+  {"kind": "recording", "recording": "proof.webm", "start": 1, "narration": "We asked Gemma to simplify: press the button three times within ten seconds. In {claim:e11.A5_number.production.gemma_failed} of {claim:e11.A5_number.production.tries} tries it dropped the ten seconds. Our number check caught every one, and nothing wrong reached a viewer."},
+  {"kind": "card", "lines": ["Gemma 4 31B on AMD Token Factory", "{claim:e14.tokens_per_minute} Gemma tokens per finished minute"], "narration": "Every Gemma call runs on AMD's Token Factory. One finished minute of video, in all five versions, takes about {claim:e14.tokens_per_minute} Gemma tokens."},
+  {"kind": "card", "lines": ["What didn't work", "Our first test needed pauses.", "These videos barely have any."], "narration": "What didn't work: our first test measured description inside pauses, and our test videos have almost none. It could not show a difference, and we report it anyway."},
   {"kind": "card", "lines": ["github.com/Prashant-thakur77/AccessCast", "accesscast.vercel.app"], "narration": "Everything, including what didn't work, is in the repo."}
  ]
 }
