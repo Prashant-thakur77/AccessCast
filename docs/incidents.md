@@ -55,3 +55,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
   10. The freeze guard covered only prompts, constants and lexicons. Any change under `src/` since the freeze commit now blocks a test-set run.
   11. Voice-over and description translation sent the whole video in one request. They are now batched in 12s.
   12. E11 measured a repaired line's overlap using the draft's length. Each text now has its own span.
+
+## 2026-10-16 — scene merge crashed on the first real dev clip
+- **Symptom:** the first real-mode run (NASA eclipse clip, Gemma 4 31B on Token Factory) died in S1 with `FileNotFoundError` for a temporary frame PNG.
+- **Root cause:** the boundary check grabs a frame just before a shot ends; near the end of the proxy stream ffmpeg decodes no frame and exits 0 without writing the file. Fake mode never grabs frames, so this path had never run.
+- **Fix:** `grab_frame` steps back up to 1 s to find a decodable frame; if none exists, the boundary is kept as a split (`FRAME_UNREADABLE_SPLIT`), which is the safe choice, instead of crashing the run.

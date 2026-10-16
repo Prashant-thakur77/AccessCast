@@ -16,17 +16,23 @@ import numpy as np
 from PIL import Image
 
 from accesscast import constants as C
+from accesscast.errors import MediaError
 from accesscast.media.ffmpeg import run_ffmpeg
 from accesscast.schemas import Scene, Scenes, Shot, Word
 
 
 def grab_frame(video: Path, t_ms: int) -> Image.Image:
-    out = Path(str(video) + f".{t_ms}.tmp.png")
-    run_ffmpeg(["-ss", f"{max(0, t_ms) / 1000:.3f}", "-i", str(video), "-frames:v", "1", str(out)])
-    try:
-        return Image.open(io.BytesIO(out.read_bytes())).convert("RGB")
-    finally:
-        out.unlink(missing_ok=True)
+    """Frame at t_ms; near a stream end ffmpeg can decode nothing, so step back up to 1 s before giving up."""
+    for back in (0, 200, 500, 1000):
+        t = max(0, t_ms - back)
+        out = Path(str(video) + f".{t}.tmp.png")
+        try:
+            run_ffmpeg(["-ss", f"{t / 1000:.3f}", "-i", str(video), "-frames:v", "1", str(out)])
+            if out.exists() and out.stat().st_size > 0:
+                return Image.open(io.BytesIO(out.read_bytes())).convert("RGB")
+        finally:
+            out.unlink(missing_ok=True)
+    raise MediaError(f"no frame decodable near {t_ms} ms in {video.name}")
 
 
 def _crop_top(img: Image.Image) -> Image.Image:
@@ -103,11 +109,17 @@ def build_scenes(
     for prev, cur in zip(shots, shots[1:], strict=False):
         cut = cur.start_ms
         sim = 0.0
+        unreadable = False
         if video is not None:
-            a = grab_frame(video, max(prev.start_ms, cut - 300))
-            b = grab_frame(video, min(cur.end_ms - 1, cut + 300))
-            sim = similarity(a, b)
+            try:
+                a = grab_frame(video, max(prev.start_ms, cut - 300))
+                b = grab_frame(video, min(cur.end_ms - 1, cut + 300))
+                sim = similarity(a, b)
+            except MediaError:
+                unreadable = True  # fail closed: keep the cut (a split never mixes two settings in one evidence call)
         dec = decide_boundary(sim, dialogue_bridges(words, cut))
+        if unreadable:
+            dec = BoundaryDecision(False, "FRAME_UNREADABLE_SPLIT", 0.0)
         merge = dec.merge
         reason = dec.reason
         if merge is None:
