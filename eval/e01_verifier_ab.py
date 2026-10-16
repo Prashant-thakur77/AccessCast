@@ -170,8 +170,9 @@ def main() -> int:
             if not proj.p("analysis", "gaps.json").exists():
                 for _n, fn in ANALYSIS:
                     fn(base)
-            if not any(proj.p("evidence").glob("*/evidence.json")):
-                stage_evidence(base)
+            ev_files = list(proj.p("evidence").glob("*/evidence.json"))
+            if not ev_files or any('"evidence_failed"' in f.read_text() for f in ev_files):
+                stage_evidence(base)  # again after a provider outage: the answer cache replays what succeeded
             ctx = verify_context(proj, "en")
             cal = load_calibration(VOICES["en"])
             ctx.wps_voice = cal.wps_voice
@@ -346,7 +347,21 @@ def main() -> int:
             served_ids
         )  # as reported by the server (client enforces a match)
         e.checks["strict_provider"] = len(served_ids) <= 1
-        _ = read_jsonl
+        # Provider outages are not model failures: a run with any endpoint error is marked failed and re-run (the
+        # answer cache replays every call that succeeded), and the count is published with the result.
+        errs = 0
+        for v in vids:
+            log = (
+                settings.projects_dir / stage_ingest(settings, v["video"]).sha12 / "logs" / "llm_calls.jsonl"
+            )
+            if log.exists():
+                errs += sum(
+                    1
+                    for r in read_jsonl(log)
+                    if r.get("ts", "") >= e.started_at and r.get("status") == "endpoint_error"
+                )
+        e.summary["endpoint_errors"] = errs
+        e.checks["no_endpoint_errors"] = errs == 0
 
     return run_experiment(exp, body)
 
