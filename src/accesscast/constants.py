@@ -268,7 +268,9 @@ REVIEW_CONTEXT_S = 2.0  # "Play in context (±2 s)"
 # ---------------------------------------------------------------- LLM client (PLAN §14.3)
 LLM_TIMEOUT_S = 180.0
 LLM_MAX_RETRIES = 10  # Token Factory returned 503 "no available workers" for minutes at a time (16 Oct)
-LLM_CIRCUIT_OPEN_S = 1_800.0  # after one call fails every retry, the rest of the run fails closed fast for 30 min
+LLM_CIRCUIT_OPEN_S = (
+    1_800.0  # after one call fails every retry, the rest of the run fails closed fast for 30 min
+)
 LLM_BACKOFF_MAX_S = (
     120.0  # with 10 retries a call waits out an outage of about 15 minutes before failing closed
 )
