@@ -73,11 +73,18 @@ def _whisper(model_id: str, dev: str) -> Any:
         import torch
         from transformers import pipeline
 
+        for k in [
+            k for k in _cache if k.startswith("whisper:")
+        ]:  # one Whisper resident at a time (small GPUs)
+            del _cache[k]
+        if dev == "cuda":
+            torch.cuda.empty_cache()
+
         _cache[key] = pipeline(
             "automatic-speech-recognition",
             model=model_id,
             device=0 if dev == "cuda" else -1,
-            torch_dtype=torch.float16 if dev == "cuda" else torch.float32,
+            dtype=torch.float16 if dev == "cuda" else torch.float32,  # transformers 5 ignores torch_dtype
         )
     return _cache[key]
 
@@ -135,8 +142,17 @@ def align_chunk(audio: np.ndarray, words: list[dict[str, Any]], offset_s: float,
     return len(keep)
 
 
+def _dev(p: dict[str, Any], require_rocm: bool) -> str:
+    """The request may ask for the CPU explicitly (E15 part 2 on a small GPU); never with --require-rocm."""
+    if p.get("device") == "cpu":
+        if require_rocm:
+            raise RuntimeError("device=cpu requested together with require_rocm")
+        return "cpu"
+    return device(require_rocm)
+
+
 def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
-    dev = device(require_rocm)
+    dev = _dev(p, require_rocm)
     lang = p.get("lang", "en")
     model_id = p["model"]  # required: no silent default model (CLAUDE.md rule 6)
     bs = int(p.get("batch_size", 1))
@@ -204,6 +220,28 @@ def transcribe_many(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     for k, f in enumerate(p["files"]):
         audio = load_audio(f)
         t0 = time.perf_counter()
+        if not p.get("word_timestamps", True):
+            # Accuracy only (E15 part 1): text without word times, so large models fit a small GPU
+            # (word timestamps keep every cross-attention map in memory).
+            asr = _whisper(p["model"], _dev(p, require_rocm))
+            text = asr(
+                {"raw": audio, "sampling_rate": SR},
+                return_timestamps=False,
+                generate_kwargs={"language": p.get("lang", "en"), "task": "transcribe"},
+            )["text"].strip()
+            out.append(
+                {
+                    "file": f,
+                    "text": text,
+                    "raw_words": [],
+                    "words": [],
+                    "aligned_words": 0,
+                    "wall_s": round(time.perf_counter() - t0, 4),
+                    "audio_s": round(len(audio) / SR, 3),
+                }
+            )
+            event("progress", done=k + 1, total=len(p["files"]))
+            continue
         r = transcribe({**p, "audio": f}, require_rocm)
         wall = time.perf_counter() - t0
         out.append(
@@ -218,7 +256,7 @@ def transcribe_many(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
             }
         )
         event("progress", done=k + 1, total=len(p["files"]))
-    return {"items": out, "model": p.get("model"), "device": device(require_rocm)}
+    return {"items": out, "model": p.get("model"), "device": _dev(p, require_rocm)}
 
 
 if __name__ == "__main__":
