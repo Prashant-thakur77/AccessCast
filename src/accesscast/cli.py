@@ -19,7 +19,7 @@ app = typer.Typer(
 ProjectOpt = Annotated[
     str, typer.Option("--project", "-p", help="project id (first 12 hex of the source SHA-256)")
 ]
-ProviderOpt = Annotated[str, typer.Option(help="local | tokenfactory")]
+ProviderOpt = Annotated[str, typer.Option(help="local | tokenfactory | aistudio (backup, D-023)")]
 
 
 def _fail(e: BaseException) -> None:

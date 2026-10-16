@@ -105,6 +105,7 @@ class LlmClient:
             "local": RateLimiter(64, 0),
             "local_audio": RateLimiter(32, 0),
             "tokenfactory": RateLimiter(settings.tf_max_concurrency, settings.tf_rpm),
+            "aistudio": RateLimiter(4, settings.gai_rpm),
             "fake": RateLimiter(64, 0),
         }
         self._log_lock = threading.Lock()
@@ -120,6 +121,10 @@ class LlmClient:
             if not s.tf_base_url or not s.tf_api_key:
                 raise ModelEndpointError("Token Factory not configured (AMD_TF_BASE_URL / AMD_TF_API_KEY)")
             return s.tf_base_url, "Gemma-4-31B-IT", {"Authorization": f"Bearer {s.tf_api_key}"}
+        if provider == "aistudio":  # backup only, never mixed with another provider inside one experiment
+            if not s.gai_api_key:
+                raise ModelEndpointError("Google AI Studio not configured (GEMINI_API_KEY)")
+            return s.gai_base_url, s.gai_model, {"Authorization": f"Bearer {s.gai_api_key}"}
         raise ModelEndpointError(f"unknown provider {provider!r}")
 
     def list_models(self, provider: str) -> list[str]:
@@ -139,13 +144,19 @@ class LlmClient:
         b64 = base64.b64encode(path.read_bytes()).decode("ascii")
         return {"type": "audio_url", "audio_url": {"url": f"data:audio/wav;base64,{b64}"}}
 
-    def _messages(self, prompt: Prompt, req: LlmRequest) -> list[dict[str, Any]]:
+    def _messages(self, prompt: Prompt, req: LlmRequest, fold_system: bool = False) -> list[dict[str, Any]]:
         user: list[dict[str, Any]] = []
+        if (
+            fold_system
+        ):  # Gemma on Google AI Studio takes no system role: the same text goes first in the user turn
+            user.append({"type": "text", "text": prompt.system})
         for img in req.images:
             user.append(self._image_part(img))
         if req.audio is not None:
             user.append(self._audio_part(req.audio))
         user.append({"type": "text", "text": canonical_json(req.payload)})
+        if fold_system:
+            return [{"role": "user", "content": user}]
         return [{"role": "system", "content": prompt.system}, {"role": "user", "content": user}]
 
     # ------------------------------------------------------------------ call
@@ -221,11 +232,13 @@ class LlmClient:
         base, model, headers = self._endpoint(prov)
         body: dict[str, Any] = {
             "model": model,
-            "messages": self._messages(prompt, req),
+            "messages": self._messages(prompt, req, fold_system=prov == "aistudio"),
             "temperature": temp,
             "max_tokens": prompt.max_tokens,
             "response_format": {"type": "json_object"},
         }
+        if prov == "aistudio":  # no JSON mode for Gemma there: the reply is parsed and checked as always
+            del body["response_format"]
         if req.seed is not None:
             body["seed"] = req.seed
         rec = os.environ.get("ACCESSCAST_RECORD_REPLAY")

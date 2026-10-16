@@ -34,6 +34,10 @@ class Settings:
     tf_api_key: str = field(default="", repr=False)
     tf_max_concurrency: int = 8
     tf_rpm: int = 30
+    gai_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
+    gai_api_key: str = field(default="", repr=False)
+    gai_model: str = "gemma-4-31b-it"
+    gai_rpm: int = 15
     hf_token_set: bool = False
     gpu_hourly_cost_usd: float = GPU_HOURLY_COST_USD
     review_policy: Literal["manual", "prototype-auto"] = "manual"
@@ -49,6 +53,7 @@ class Settings:
             "local_audio_model": self.local_audio_model,
             "tf_base_url": self.tf_base_url or None,
             "tf_api_key": "<set>" if self.tf_api_key else None,
+            "gai_api_key": "<set>" if self.gai_api_key else None,
             "hf_token": "<set>" if self.hf_token_set else None,
             "review_policy": self.review_policy,
             "project_seed": self.project_seed,
@@ -81,6 +86,10 @@ def load_settings(**overrides: object) -> Settings:
         tf_api_key=os.environ.get("AMD_TF_API_KEY", ""),
         tf_max_concurrency=tf_conc,
         tf_rpm=tf_rpm,
+        gai_base_url=os.environ.get("GOOGLE_AI_BASE_URL", Settings.gai_base_url),
+        gai_api_key=os.environ.get("GEMINI_API_KEY", ""),
+        gai_model=os.environ.get("GOOGLE_AI_MODEL", Settings.gai_model),
+        gai_rpm=int(os.environ.get("GOOGLE_AI_RPM", 15)),
         hf_token_set=bool(os.environ.get("HF_TOKEN")),
         gpu_hourly_cost_usd=cost,
         review_policy=policy,  # type: ignore[arg-type]
