@@ -50,10 +50,11 @@ All five are built from one analysis, so they never disagree. Profiles combine.
 
 ---
 <!-- slide: headline -->
-# Result: lines that fit the pauses
-<pending: e01.table>
+# What the checks caught (test set)
+- **Easy-read:** Gemma alone kept every "not / never / no" in 104 of 115 captions. AccessCast published 115 of 115 with every negation kept; 6 went to a person.
+- **Live attack:** Gemma's easy-read dropped "within 10 seconds" in 20 of 20 tries. The number check caught 20. Reached the viewer: 0.
 
-Test set: 10 W3C videos never used for tuning. Measured by a script that imports none of our checks.
+Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 
 ---
 <!-- slide: more-results -->
@@ -67,23 +68,33 @@ Test set: 10 W3C videos never used for tuning. Measured by a script that imports
 ---
 <!-- slide: amd -->
 # Gemma 4 on AMD Token Factory
-<pending: amd.slide>
+- Every Gemma call: **Gemma 4 31B on AMD Token Factory**, strict model check on each answer.
+- Measured from our side: 17 generated tokens/s at the best concurrency, p95 13.9 s; 15 of 120 requests refused by our key's rate limit.
+- Cost basis: 41,818 Gemma tokens per finished minute, all five versions (dev set).
+- Whisper, the voices and the sound classifier run on our own computer. No MI300X numbers: we had no droplet.
 
 ---
 <!-- slide: reliability -->
 # It holds up
-<pending: reliability.slide>
+- Live attacks: 0 outputs reached a viewer, over 8 cases × 40 tries.
+- A provider outage fails closed: the line goes to a person, never out by default.
+- Accessibility tests pass: player 23 of 23, review app and Studio 6 of 6.
 
 ---
 <!-- slide: business -->
 # Who pays, and what it costs
-<pending: business.slide>
-
-Our cost is GPU time plus a person's review time. List prices are labelled as list prices.
+- European Accessibility Act applies from 28 June 2025; Italy's fines €5,000 to €40,000.
+- India's OTT accessibility guidelines: 6 February 2026. US ADA Title II, large public bodies: 26 April 2027.
+- List prices today: $4.25 a minute for AI description with a human spot check (3Play Media); $6.65–$14.70 for human description (University of Michigan).
+- Our cost: 41,818 Gemma tokens per finished minute, plus a person's review time (E12).
 
 ---
 <!-- slide: honest -->
 # What didn't work, and what's next
-<pending: negative.slide>
+- **E1 did not work on our test set:** the W3C videos have 6 usable pauses in 9.3 minutes, so only 6 standard lines were planned and the arms came out equal.
+- Gemma never failed 6 of our 8 attack cases, so those checks were not exercised live.
+- Hindi speech recognition is weak: 32.4% word error rate.
+- Token Factory dropped requests for long stretches; everything fails closed, but it slows the work.
+- Not yet: a blind reviewer, native-speaker checks, MI300X numbers.
 
 Prior work: AudioSight, ViddyScribe, AutoAD-Zero. Code: github.com/Prashant-thakur77/AccessCast · Live: accesscast.vercel.app

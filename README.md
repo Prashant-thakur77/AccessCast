@@ -121,11 +121,17 @@ The law already asks for this. The European Accessibility Act has applied since 
 
 What description costs today (list prices, not our measurements): 3Play Media lists $4.25 a minute for AI description with a human spot check and $18 for a voice artist; the University of Michigan lists $0.90 a minute for machine description and $6.65 to $14.70 for human description. A human describer needs about 20 hours to script and voice a one-hour programme (Media Access Australia).
 
-Our cost is GPU time plus a person's review time, both measured: <pending: business.our_cost>. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, five audiences from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
+Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per finished minute of video for all five versions (dev set), and review time from E12. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, five audiences from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
 
 ## What didn't work
 
-<pending: negative.results>
+- **Description in the pauses (E1)** did not separate Gemma alone from Gemma with checks on the test set, because these videos have almost no pauses (see Results). We report it as pre-registered and did not re-tune.
+- **Gemma never took the bait in 6 of our 8 attack cases** (E11), so for those cases the checks were never exercised live. The one case it failed every time (dropping a number in easy-read) was caught every time.
+- **Hindi speech recognition is weak:** 32.4% word error rate on FLEURS, against 4.5% for English. Hindi subtitles start from the English transcript, so this does not reach them, but Hindi source videos would suffer.
+- **Our first voice timing was wrong.** Lines inside their word budget still overran their pause; we refitted on dev lines and added a margin (D-024).
+- **Extended description drifted from the picture** by up to a few frames until E9 caught it; the render and its length check are fixed (`docs/incidents.md`).
+- **Token Factory was unreliable while we worked:** long stretches of "no available workers", and 15 of 120 requests refused by the rate limit in E13. Everything fails closed, but runs took hours.
+- **Not done:** no MI300X droplet (no accepted payment card), no Gemma 4 E4B, no blind tester yet.
 
 ## Honest scope
 
@@ -134,7 +140,7 @@ Our cost is GPU time plus a person's review time, both measured: <pending: busin
 | Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
 | Human review | Every description and easy-read line is approved by a person; captions and translations pass automatic checks, and a random sample is checked by people | Our reviewers are not professional describers |
 | Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 23 of 23, review app 6 of 6, including axe-core scans) | Not yet tested by a blind reviewer |
-| Hindi and Italian | Back-translation shown to reviewers | Not a full professional language QA; native-speaker spot checks are <pending: native.checks> |
+| Hindi and Italian | Back-translation shown to reviewers | Not a full professional language QA; native-speaker spot checks are not done yet |
 | "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
 | Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |
 | Where it ran | Gemma 4 31B on AMD Token Factory | Whisper, the aligner, the voices and the metric models ran on our own workstation, not on AMD hardware; each evidence file records the device. Gemma 4 E4B (listening) is not on Token Factory, so the transcript cross-check and sound labels did not run |

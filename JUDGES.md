@@ -4,7 +4,7 @@ The shortest route through the submission.
 
 ## Three-Minute Review
 1. Watch the demo video: <pending: video.url>
-2. Open the live player: <pending: site.url>. Pick "I can't see the screen", then "Italiano".
+2. Open the live player: https://accesscast.vercel.app/watch.html. Pick "I can't see the screen", then "Italiano".
 3. Open `/proof.html` and press "Run the attack". Watch Gemma's line get blocked.
 4. Open the three key evidence files: [`evidence/e01_verifier_ab.json`](evidence/), [`evidence/e13_serving.json`](evidence/), [`evidence/e14_cost.json`](evidence/).
 5. Optional, no GPU: `make demo-fixture`, then open http://127.0.0.1:8080/?audience=judge
@@ -38,7 +38,7 @@ These labels do not pre-award points; judges keep full scoring authority.
 Gemma 4 31B does every vision, writing, translation and repair task. The planned comparison with a smaller Gemma 4 plus our checks (E3) needs our own GPU server, so it was not run (`docs/decisions.md` D-021). Sound labels come from a small non-Gemma audio classifier (AST), because Gemma 4 E4B, the Gemma model that listens, is not on Token Factory (D-022).
 
 ## Current Results
-<pending: results.tables> — generated from `evidence/public-claims.json`.
+See README "Results": description in the pauses (E1, a negative result), what the checks caught (E5, E11), and the AMD numbers (E13, E14). Every number there comes from `evidence/public-claims.json`.
 
 ## AMD Boundary
 - **On AMD Token Factory:** Gemma 4 31B for every vision, writing, translation and repair call, the live attack page, and a non-Gemma judge for two evaluations.
