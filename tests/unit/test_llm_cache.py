@@ -42,3 +42,28 @@ def test_cache_replays_only_identical_requests(monkeypatch, tmp_path):
     c.call(LlmRequest("repair_ad", {"x": 1}, seed=2))  # another seed is another request
     c.call(LlmRequest("repair_ad", {"x": 2}, seed=1))
     assert len(calls) == 3
+
+
+def test_circuit_opens_after_a_call_fails_every_retry(monkeypatch):
+    import pytest
+
+    from accesscast import constants as C
+    from accesscast.errors import ModelEndpointError
+
+    monkeypatch.setattr(C, "LLM_MAX_RETRIES", 1)
+    monkeypatch.setattr(LlmClient, "_backoff", staticmethod(lambda attempt, retry_after: None))
+    s = load_settings(worker_mode="real", local_base_url="http://test/v1", local_model="gemma-4-31b")
+    c = LlmClient(s, provider="local", strict_provider=True)
+    calls: list[int] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(1)
+        return httpx.Response(503, json={"error": "no_available_workers"})
+
+    c._http = httpx.Client(transport=httpx.MockTransport(handler))
+    with pytest.raises(ModelEndpointError):
+        c.call(LlmRequest("repair_ad", {"x": 1}))
+    n = len(calls)
+    with pytest.raises(ModelEndpointError, match="marked down"):
+        c.call(LlmRequest("repair_ad", {"x": 2}))
+    assert len(calls) == n  # the second call never reached the endpoint

@@ -12,9 +12,9 @@ if [ -x workers/.venv-gpu/bin/python ]; then
 fi
 export ACCESSCAST_RECORD_REPLAY="$PWD/logs/replay_tf"
 export ACCESSCAST_LLM_CACHE="${ACCESSCAST_LLM_CACHE:-$PWD/logs/llm_cache}"
-# Two passes: Token Factory drops requests for minutes at a time; the second pass replays every answer that
+# Four passes: Token Factory drops requests for minutes at a time; the second pass replays every answer that
 # succeeded (ACCESSCAST_LLM_CACHE) and asks again only for the calls that failed.
-for pass in 1 2; do
+for pass in 1 2 3 4; do
   for v in "$@"; do
     bash scripts/tf_wait.sh 720 >/dev/null || { echo "Token Factory down for 24 h; stopping"; exit 5; }
     echo "== pass $pass: $v"; uv run accesscast run "$v" --provider tokenfactory --strict-provider || echo "FAILED: $v"
