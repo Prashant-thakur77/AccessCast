@@ -89,7 +89,7 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 ## 2026-10-16 Frame extraction failed on a limited-range video
 **Symptom.** The NASA "Life in the Universe" dev clip failed at evidence: `[mjpeg] Non full-range YUV is non-standard ... Error while opening encoder`.
 **Root cause.** ffmpeg 8's JPEG encoder refuses frames in limited ("TV") colour range; most of our clips happened to be full range.
-**Fix.** Evidence and scene-judge frames are scaled to full range (`out_range=full,format=yuvj420p`) before JPEG encoding. Checked on the failing clip and the fixture.
+**Fix.** Evidence and scene-judge frames are scaled to full range (`out_range=full,format=yuvj420p`) before JPEG encoding. Checked on the failing clip and the fixture. On 17 Oct the same clip showed a frame asked for 22 ms before the end of the stream; evidence frames now step back up to 1 s like scene frames, then fail closed.
 
 ## 2026-10-17 E15 stopped on a FLEURS clip longer than 30 s
 **Symptom.** E15's accuracy part failed: `You have passed more than 3000 mel input features (> 30 seconds) which automatically enables long-form generation`. Because E15 wrote no decision, the chained final dev pass started with the default ASR model instead.
