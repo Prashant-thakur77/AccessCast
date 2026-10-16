@@ -168,7 +168,7 @@ test("studio: axe clean, keyboard-only upload, every stage listed, review link o
   await tabTo(page, page.locator("#go"));
   await page.keyboard.press("Enter");
   await expect(page.locator("#status")).toContainText("Started", { timeout: 30_000 });
-  await expect(page.locator("#stages li")).toHaveCount(19);
+  await expect(page.locator("#stages li")).toHaveCount(20);
   await expect(page.locator("#status")).toContainText("Finished", { timeout: 300_000 });
   await expect(page.locator("#stages li[data-state='failed']")).toHaveCount(0);
   await expect(page.locator("#fake-banner")).toBeVisible(); // the fixture server runs in fake mode: said on screen
