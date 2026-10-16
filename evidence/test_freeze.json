@@ -1,7 +1,7 @@
 {
- "tag": "test-freeze-3",
- "commit": "76c4dc66edf0404da2ad06b3ce8f54bf982b0b0e",
- "frozen_at": "2026-10-16T23:02:02.231Z",
+ "tag": "test-freeze-4",
+ "commit": "a6861ded30c42fd846e9c18fcda5bb7bae34032a",
+ "frozen_at": "2026-10-16T23:59:02.537Z",
  "files": {
   "src/accesscast/llm/prompts/ad_translate.md": "9cdf3413cf73e64f506df88ba14ca0ee756b5ee6032f2cd2ed382e5887149ff1",
   "src/accesscast/llm/prompts/asr_crosscheck.md": "51ea8b5fd94b30ff5daa84f6b95a6d2a744a89a1737ebd4e481fe5597ceb8af0",
