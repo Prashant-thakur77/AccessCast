@@ -21,7 +21,7 @@ The shortest route through the submission.
 | The experience changes for at least two audiences | Five audience profiles in one player, switchable live on the same video | Player picker; `five-ways.html` |
 | Explain what was created and what the models decided | Per-line decisions in a drawer and in `decisions.json` | Drawer; `reports/decisions.json` |
 | Show how quality and consistency were controlled | Checks in code, Gemma repair, a person approves, render refused while anything waits | [`docs/rules.md`](docs/rules.md); gallery |
-| Cost per experience | `cost.json` per video from measured GPU time | <pending: e14.summary> |
+| Cost per experience | Gemma tokens per finished minute of video, from real call logs (no GPU dollars: D-021) | <pending: e14.tokens_per_minute> tokens |
 | Who pays and why | Laws with deadlines, list prices next to our measured cost | README "Who pays" |
 
 ## Rubric Map
@@ -35,7 +35,7 @@ These labels do not pre-award points; judges keep full scoring authority.
 | Originality | Checks tied to the real audio timeline; five versions from one analysis; extended description only when needed | `docs/rules.md` |
 
 ## Model Selection
-<pending: e03.table> — a deployment decision, not a universal model ranking.
+Gemma 4 31B does every vision, writing, translation and repair task. The planned comparison with a smaller Gemma 4 plus our checks (E3) needs our own GPU server, so it was not run (`docs/decisions.md` D-021). Sound labels come from a small non-Gemma audio classifier (AST), because Gemma 4 E4B, the Gemma model that listens, is not on Token Factory (D-022).
 
 ## Current Results
 <pending: results.tables> — generated from `evidence/public-claims.json`.
