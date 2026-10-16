@@ -28,6 +28,36 @@ def _wrap(words: list[str]) -> list[str]:
     return best[1] if best else []
 
 
+def _merge_short(cues: list[list[Word]], min_ms: int, max_ms: int, duration_ms: int) -> list[list[Word]]:
+    """A cue that cannot last min_ms even by running into the silence after it joins its neighbour (previous
+    first, then next) when the joined cue fits two lines, lasts at most max_ms and keeps one speaker."""
+    out = [list(c) for c in cues]
+    i = 0
+    while i < len(out):
+        c = out[i]
+        room = (out[i + 1][0].start_ms if i + 1 < len(out) else duration_ms) - c[0].start_ms
+        if room >= min_ms or len(out) == 1:
+            i += 1
+            continue
+        for j in (i - 1, i + 1):
+            if not 0 <= j < len(out):
+                continue
+            a, b = (out[j], c) if j < i else (c, out[j])
+            joined = a + b
+            if (
+                a[-1].speaker == b[0].speaker
+                and joined[-1].end_ms - joined[0].start_ms <= max_ms
+                and _wrap([x.w for x in joined])
+            ):
+                k = min(i, j)
+                out[k : k + 2] = [joined]
+                i = max(k - 1, 0)
+                break
+        else:
+            i += 1
+    return out
+
+
 def segment_sdh(
     words: Sequence[Word], sounds: Sequence[SoundEvent], fps: float, duration_ms: int
 ) -> list[Item]:
@@ -36,7 +66,8 @@ def segment_sdh(
     max_ms = int(C.CUE_MAX_S * 1000)
     for w in sorted(words, key=lambda x: x.start_ms):
         if cur:
-            new_seg = w.seg != cur[-1].seg or w.speaker != cur[-1].speaker
+            # ASR chunk boundaries (w.seg) are artificial: they stranded words like "of" in their own cue
+            new_seg = w.speaker != cur[-1].speaker
             too_long = w.end_ms - cur[0].start_ms > max_ms
             no_fit = not _wrap([x.w for x in cur] + [w.w])
             sentence_end = cur[-1].w.endswith((".", "?", "!")) and len(cur) >= 3
@@ -47,6 +78,7 @@ def segment_sdh(
         cur.append(w)
     if cur:
         cues.append(cur)
+    cues = _merge_short(cues, round(C.CUE_MIN_FRAMES / max(fps, 1.0) * 1000), max_ms, duration_ms)
 
     min_ms = round(C.CUE_MIN_FRAMES / max(fps, 1.0) * 1000)
     items: list[Item] = []
