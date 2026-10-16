@@ -816,9 +816,7 @@
      "pointer": "/summary/player/passed"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "10"
    ]
@@ -837,9 +835,7 @@
      "pointer": "/summary/player/total"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "10"
    ]
@@ -858,9 +854,7 @@
      "pointer": "/summary/review/passed"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "5"
    ]
@@ -879,9 +873,7 @@
      "pointer": "/summary/review/total"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "5"
    ]

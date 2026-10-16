@@ -63,6 +63,7 @@ core)
   $UV python -m eval.e14_cost
   $UV python -m eval.e09_determinism
   sudo -E env PATH="$PATH" $UV python -m eval.e10_offline || true
+  $UV python scripts/memory_table.py
   commit "E11, E13, E14, E9, E10 on MI300X"
   ;;
 ladder)
