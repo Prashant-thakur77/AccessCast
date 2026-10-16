@@ -112,15 +112,37 @@
     }
   }
 
+  /* Shared footer: stacked wordmark, link columns, and a disclosure line read from the catalog. */
   function renderFooter(container) {
     container.textContent = "";
-    container.appendChild(el("ul", null, [
-      el("li", null, [el("a", { href: REPO, text: "Source code on GitHub" })]),
-      el("li", null, [el("a", { href: REPO + "/blob/main/JUDGES.md", text: "Notes for judges (JUDGES.md)" })]),
-      el("li", null, [el("a", { href: REPO + "/blob/main/LICENSE", text: "Licence" })]),
-      el("li", null, [el("a", { href: REPO + "/blob/main/MODEL_LICENSES.md", text: "Model and voice licences" })])
+    var col = function (title, links) {
+      return el("div", { class: "foot-col" }, [
+        el("h2", { text: title }),
+        el("ul", null, links.map(function (l) { return el("li", null, [el("a", { href: l[1], text: l[0] })]); }))
+      ]);
+    };
+    var mark = el("p", { class: "wordmark" }, [
+      el("span", { "aria-hidden": "true" }, [el("span", { text: "Access" }), el("span", null, ["Cast", el("span", { class: "sound-dot" })])]),
+      el("span", { class: "visually-hidden", text: "AccessCast" })
+    ]);
+    container.appendChild(el("div", { class: "foot-grid" }, [
+      mark,
+      col("Pages", [["Home", "index.html"], ["Watch", "watch.html"], ["Five ways", "five-ways.html"], ["Proof", "proof.html"]]),
+      col("Project", [["Source code", REPO], ["Notes for judges", REPO + "/blob/main/JUDGES.md"], ["Licence", REPO + "/blob/main/LICENSE"],
+        ["Models, voices and fonts", REPO + "/blob/main/MODEL_LICENSES.md"]])
     ]));
-    container.appendChild(el("p", { text: "Gemma 4 on AMD Instinct MI300X." }));
+    var note = el("p", { text: "Description voices are synthetic speech." });
+    container.appendChild(el("div", { class: "foot-note" }, [
+      el("p", { text: "Gemma 4 on AMD Instinct MI300X. Made for AMD Developer Hackathon ACT III." }),
+      note
+    ]));
+    fetchOptionalJSON("data/catalog.json").then(function (cat) {
+      var ps = (cat && cat.projects) || [];
+      var bits = ["Description voices are synthetic speech."];
+      if (ps.some(function (p) { return p.synthetic_test_data; })) bits.push("The demo video here is a test fixture with canned model outputs.");
+      if (ps.some(function (p) { return !p.human_reviewed; })) bits.push("Versions no person has approved yet are labelled as drafts.");
+      note.textContent = bits.join(" ");
+    }).catch(function () { /* the line above still stands */ });
   }
 
   function fmtTime(ms, precise) {

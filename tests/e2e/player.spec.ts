@@ -30,7 +30,7 @@ for (const scheme of ["light", "dark"] as const) {
     test.use({ colorScheme: scheme });
 
     test("player: picker and drawer open", async ({ page }) => {
-      await page.goto("/index.html?audience=judge,blind,easy");
+      await page.goto("/watch.html?audience=judge,blind,easy");
       await expect(page.locator("#judge-banner")).toBeVisible();
       await expect(page.locator("#drawer-body")).toBeVisible();
       await expect(page.locator("#lines > li").first()).toBeVisible();
@@ -51,6 +51,32 @@ for (const scheme of ["light", "dark"] as const) {
       await expect(page.locator("#last-run")).not.toContainText("Loading");
       expect(await axeViolations(page)).toEqual([]);
     });
+
+    test("landing: every section, in its own colour world", async ({ page }) => {
+      await page.goto("/index.html");
+      await expect(page.locator("#l-play")).toBeEnabled();
+      await expect(page.locator("#results-rows .big-row")).toHaveCount(5);
+      await expect(page.locator("#ex-result .stamp")).toBeVisible();
+      await page.waitForTimeout(1200);
+      expect(await axeViolations(page)).toEqual([]);
+      for (const [id, world] of [["listen", "blind"], ["who", "paper"], ["how", "easy"], ["rules", "deaf"], ["results", "paper"], ["law", "it"], ["proof-teaser", "blind"]]) {
+        await page.locator(`#${id}`).evaluate((n) => n.scrollIntoView({ block: "start" }));
+        await page.mouse.wheel(0, 200);
+        await expect(page.locator("body")).toHaveAttribute("data-world", world);
+        await page.waitForTimeout(1200);
+        expect(await axeViolations(page), id).toEqual([]);
+      }
+    });
+
+    test("watch: each audience colour world", async ({ page }) => {
+      for (const a of ["blind", "deaf", "easy", "hi", "it"]) {
+        await page.goto(`/watch.html?audience=${a}`);
+        await expect(page.locator("body")).toHaveAttribute("data-world", a);
+        await expect(page.locator(`#t-${a}`)).toHaveAttribute("aria-pressed", "true");
+        await page.waitForTimeout(1000);
+        expect(await axeViolations(page), a).toEqual([]);
+      }
+    });
   });
 }
 
@@ -62,13 +88,13 @@ test("proof page never fakes a run", async ({ page }) => {
 });
 
 test("disclosure banner is always visible for drafts", async ({ page }) => {
-  await page.goto("/index.html");
+  await page.goto("/watch.html");
   await expect(page.locator("#disclosure")).toContainText("UNREVIEWED DRAFT");
 });
 
 test("no horizontal scroll at 360 px", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
-  for (const path of ["/index.html?audience=judge,blind,easy", "/five-ways.html", "/proof.html"]) {
+  for (const path of ["/index.html", "/watch.html?audience=judge,blind,easy", "/five-ways.html", "/proof.html"]) {
     await page.goto(path);
     await page.waitForLoadState("networkidle");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -77,7 +103,7 @@ test("no horizontal scroll at 360 px", async ({ page }) => {
 });
 
 test("keyboard only: pick profiles, open the drawer, jump to a line", async ({ page }) => {
-  await page.goto("/index.html");
+  await page.goto("/watch.html");
   await expect(status(page)).toContainText("Now playing");
   const src0 = await videoSrc(page);
 
@@ -122,4 +148,110 @@ test("keyboard only: pick profiles, open the drawer, jump to a line", async ({ p
   await expect(status(page)).toContainText("Moved to");
   expect(await status(page).textContent()).not.toBe(before);
   await expect(page.locator("#video")).toBeFocused();
+});
+
+test("old player links redirect to watch.html", async ({ page }) => {
+  await page.goto("/index.html?audience=judge,blind");
+  await expect(page).toHaveURL(/\/watch\.html\?audience=judge,blind$/);
+  await expect(page.locator("#judge-banner")).toBeVisible();
+  await expect(page.locator("#t-blind")).toHaveAttribute("aria-pressed", "true");
+});
+
+test("landing: listening toggle works with the keyboard and announces it", async ({ page }) => {
+  await page.goto("/index.html");
+  const desc = page.locator("#l-desc");
+  await expect(desc).toBeEnabled();
+  await expect(page.locator("#l-lanes")).toHaveAttribute("aria-label", /Speech comes in \d+ parts/);
+  await expect(page.locator("#l-disclosure")).toContainText("Demo fixture");
+  await tabTo(page, desc);
+  await page.keyboard.press("Enter");
+  await expect(desc).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#l-orig")).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator("#l-desc-lane")).not.toHaveClass(/is-off/);
+  await expect(page.locator("#l-status")).not.toBeEmpty();
+  const play = page.locator("#l-play");
+  await tabTo(page, play);
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#l-status")).not.toBeEmpty();
+});
+
+test("landing: audience discs open the player for that viewer", async ({ page }) => {
+  await page.goto("/index.html");
+  const disc = page.getByRole("link", { name: "I can't hear" });
+  await expect(disc).toHaveAttribute("href", "watch.html?audience=deaf");
+  await tabTo(page, disc);
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/watch\.html\?audience=deaf$/);
+  await expect(page.locator("#t-deaf")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("body")).toHaveAttribute("data-world", "deaf");
+});
+
+test("landing: rule demo shows real findings and announces the choice", async ({ page }) => {
+  await page.goto("/index.html");
+  const examples = await (await page.request.get("/data/rule_examples.json")).json();
+  const good = page.locator("#ex-0");
+  await tabTo(page, page.locator('input[name="example"]:checked'));
+  await page.keyboard.press("ArrowUp");
+  await expect(good).toBeChecked();
+  await expect(page.locator("#ex-status")).toContainText(`${examples.examples[0].label}: passes every check.`);
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  const ex = examples.examples[2];
+  await expect(page.locator("#ex-result .chips li")).toHaveCount(ex.findings.length);
+  for (const f of ex.findings) await expect(page.locator("#ex-result")).toContainText(f.rule);
+  await expect(page.locator("#ex-status")).toContainText(`blocked by ${ex.findings.length} checks`);
+});
+
+test("landing: results show only registered numbers, else Measuring", async ({ page }) => {
+  await page.goto("/index.html");
+  const claims = (await (await page.request.get("/data/claims.json")).json()).claims;
+  const rows = page.locator("#results-rows .big-row");
+  await expect(rows).toHaveCount(5);
+  const first = rows.first();
+  if (!claims["e1.fit_c"]?.display || !claims["e1.lines_planned"]?.display) await expect(first).toContainText("Measuring");
+  else await expect(first).toContainText(`${claims["e1.fit_c"].display} of ${claims["e1.lines_planned"].display}`);
+  await expect(page.locator("#law-rows .big-row").first()).toContainText(claims["cited.law.eaa_apply_date"].display);
+});
+
+test("landing: the moving text can be paused", async ({ page }) => {
+  await page.goto("/index.html");
+  const b = page.locator("#marquee-toggle");
+  await tabTo(page, b);
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#marquee")).toHaveClass(/paused/);
+  await expect(b).toHaveText("Play moving text");
+});
+
+test("watch: share this view copies a link and says so", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/watch.html?audience=blind,easy");
+  await expect(page.locator("#status")).toContainText("Now playing");
+  await page.locator("#b-share").click();
+  await expect(page.locator("#share-status")).toContainText("Link");
+  await expect(page.locator("#share-status")).toContainText("I can't see the screen, Simpler words, please");
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toMatch(/watch\.html\?audience=blind,easy$/);
+});
+
+test("watch: ? opens the shortcut list, Escape closes it and returns focus", async ({ page }) => {
+  await page.goto("/watch.html");
+  await expect(page.locator("#status")).toContainText("Now playing");
+  await page.locator("body").click({ position: { x: 5, y: 5 } });
+  await page.keyboard.press("Shift+Slash");
+  const dlg = page.locator("#keys-dialog");
+  await expect(dlg).toBeVisible();
+  await expect(page.locator("#b-keys-close")).toBeFocused();
+  expect(await axeViolations(page)).toEqual([]);
+  await page.keyboard.press("Escape");
+  await expect(dlg).toBeHidden();
+  const keysBtn = page.locator("#b-keys");
+  await keysBtn.focus();
+  await page.keyboard.press("Enter");
+  await expect(dlg).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(keysBtn).toBeFocused();
+  // single-key shortcut: 2 picks "I can't hear"
+  await page.locator("body").click({ position: { x: 5, y: 5 } });
+  await page.keyboard.press("2");
+  await expect(page.locator("#t-deaf")).toHaveAttribute("aria-pressed", "true");
 });
