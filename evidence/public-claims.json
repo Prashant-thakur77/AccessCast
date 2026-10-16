@@ -805,39 +805,43 @@
   {
    "claim_id": "e16.player_passed",
    "text": "player accessibility tests passed (Playwright + axe-core)",
-   "value": 10,
+   "value": 22,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "3d7564687e0bca5ce3cdbee7e083e5dd723fdbae8b749dddef9e42407f3acf53",
+     "sha256": "942fdf26958e73b98162500631e3fc337974c5d5598586955e3871a23d619dc7",
      "pointer": "/summary/player/passed"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
-    "10"
+    "22"
    ]
   },
   {
    "claim_id": "e16.player_total",
    "text": "player accessibility tests run",
-   "value": 10,
+   "value": 22,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "3d7564687e0bca5ce3cdbee7e083e5dd723fdbae8b749dddef9e42407f3acf53",
+     "sha256": "942fdf26958e73b98162500631e3fc337974c5d5598586955e3871a23d619dc7",
      "pointer": "/summary/player/total"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
-    "10"
+    "22"
    ]
   },
   {
@@ -850,11 +854,13 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "3d7564687e0bca5ce3cdbee7e083e5dd723fdbae8b749dddef9e42407f3acf53",
+     "sha256": "942fdf26958e73b98162500631e3fc337974c5d5598586955e3871a23d619dc7",
      "pointer": "/summary/review/passed"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "5"
    ]
@@ -869,11 +875,13 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "3d7564687e0bca5ce3cdbee7e083e5dd723fdbae8b749dddef9e42407f3acf53",
+     "sha256": "942fdf26958e73b98162500631e3fc337974c5d5598586955e3871a23d619dc7",
      "pointer": "/summary/review/total"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "5"
    ]
