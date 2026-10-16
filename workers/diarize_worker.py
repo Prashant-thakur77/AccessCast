@@ -22,7 +22,8 @@ def diarize(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     import torch
     from pyannote.audio import Pipeline
 
-    dev = device(require_rocm)
+    # this env is CPU-only by design (workers/diarize/pyproject.toml); the stage is short even on the CPU
+    dev = device(require_rocm) if require_rocm else "cpu"
     if "pipe" not in _pipe:
         token = os.environ.get("HF_TOKEN")
         if not token:
