@@ -41,9 +41,16 @@ def main() -> int:
     a, b = np.linalg.lstsq(np.vstack([x, np.ones_like(x)]).T, y, rcond=None)[0]
     r = y - (a * x + b)
     out = {
-        "voice": args.voice, "lang": "en", "speed": 1.0, "n": len(x), "videos": n_videos,
-        "intercept_s": round(float(b), 4), "s_per_word": round(float(a), 4), "wps_voice": round(1 / float(a), 4),
-        "resid_p50_s": round(float(np.percentile(r, 50)), 4), "resid_p95_s": round(float(np.percentile(r, 95)), 4),
+        "voice": args.voice,
+        "lang": "en",
+        "speed": 1.0,
+        "n": len(x),
+        "videos": n_videos,
+        "intercept_s": round(float(b), 4),
+        "s_per_word": round(float(a), 4),
+        "wps_voice": round(1 / float(a), 4),
+        "resid_p50_s": round(float(np.percentile(r, 50)), 4),
+        "resid_p95_s": round(float(np.percentile(r, 95)), 4),
         "source": f"dev description lines in {args.projects} (scripts/calibrate_from_dev.py)",
     }
     p = CAL_DIR / f"calibration.{args.voice}.json"
