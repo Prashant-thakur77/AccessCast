@@ -3,144 +3,337 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AccessCast player</title>
-<meta name="description" content="One video, made for different viewers: audio description, captions, easy-read captions, Hindi and Italian.">
-<link rel="stylesheet" href="assets/player.css">
+<script>
+  /* Old player links (index.html?audience=… or ?p=…) now live on watch.html. */
+  (function () {
+    var q = new URLSearchParams(window.location.search);
+    if (q.has("audience") || q.has("p")) window.location.replace("watch.html" + window.location.search + window.location.hash);
+    document.documentElement.classList.add("js");
+  })();
+</script>
+<title>AccessCast: one video, five ways to watch</title>
+<meta name="description" content="One video, made for different viewers: audio description, captions, easy-read captions, Hindi and Italian. Gemma 4 writes it, code checks every line, a person approves it.">
+<link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
-<a class="skip-link" href="#player">Skip to the video</a>
-<header class="site">
-  <div class="wrap">
-    <h1>AccessCast</h1>
-    <nav aria-label="Pages">
-      <ul>
-        <li><a href="index.html" aria-current="page">Player</a></li>
-        <li><a href="five-ways.html">Same 20 seconds, five ways</a></li>
-        <li><a href="proof.html">Proof</a></li>
-      </ul>
-    </nav>
-  </div>
+<body data-world="paper" data-scroll-worlds>
+<a class="skip-link" href="#main">Skip to the main content</a>
+<header class="top">
+  <a class="brand" href="index.html" aria-current="page"><svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="15"/><circle cx="21" cy="11" r="5"/></svg>AccessCast</a>
+  <nav aria-label="Pages">
+    <ul>
+      <li><a href="watch.html">Watch</a></li>
+      <li><a href="five-ways.html">Five ways</a></li>
+      <li><a href="proof.html">Proof</a></li>
+    </ul>
+  </nav>
 </header>
 
-<main id="main" class="wrap">
-  <div id="judge-banner" class="banner banner-judge" hidden>
-    <p><strong>Judges, start here.</strong> See the same clip made five ways on
-      <a href="five-ways.html">Same 20 seconds, five ways</a>. See our checks run against a hard case on the
-      <a href="proof.html">Proof page</a>. Below, open any line to see what the models decided.</p>
-  </div>
-  <div id="load-error" class="error" role="alert" hidden></div>
+<main id="main">
+  <!-- 1. Hero -->
+  <section class="hero section" data-section-world="paper" aria-labelledby="hero-h">
+    <div class="bubbles" aria-hidden="true">
+      <span class="bubble b1" data-speed="-0.12"></span>
+      <span class="bubble b2" data-speed="0.1"></span>
+      <span class="bubble b3" data-speed="-0.2"></span>
+    </div>
+    <div class="wrap hero-inner">
+      <p class="micro" data-reveal>Audio description · Captions · Easy read · <span lang="hi">हिन्दी</span> · Italiano</p>
+      <h1 id="hero-h" class="display xl hero-title">
+        <span class="hl"><span style="--i:0">One video.</span></span>
+        <span class="hl"><span style="--i:1">Five ways</span></span>
+        <span class="hl"><span style="--i:2">to watch.</span><span class="sound-dot" aria-hidden="true"></span></span>
+      </h1>
+      <p class="lede" data-reveal style="--i:3">Gemma 4 writes it. Code checks every line. A person approves what the public hears.</p>
+      <div class="cta-row" data-reveal style="--i:4">
+        <a class="pill big" href="watch.html">Watch it <span class="dot" aria-hidden="true"></span></a>
+        <a class="pill big ghost" href="#listen">Close your eyes <svg class="arrow down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+    <a class="spin-disc hero-disc" href="#how">
+      <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+        <circle class="disc-fill" cx="100" cy="100" r="100"/>
+        <g class="spin">
+          <path id="hero-ring" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" fill="none"/>
+          <text class="ring-text"><textPath href="#hero-ring" textLength="474" lengthAdjust="spacing">Gemma 4 on AMD Instinct MI300X • Gemma 4 on AMD Instinct MI300X • </textPath></text>
+        </g>
+        <circle class="disc-dot" cx="100" cy="100" r="30"/>
+        <path class="disc-arrow" d="M100 86v26M89 102l11 11 11-11"/>
+      </svg>
+      <span class="visually-hidden">How it works: Gemma 4 on AMD Instinct MI300X</span>
+    </a>
+  </section>
 
-  <section aria-labelledby="picker-h">
-    <h2 id="picker-h">Who's watching?</h2>
-    <p class="muted">Pick one or more. We remember your choice on this device.</p>
-    <div class="picker-grid">
-      <div class="profile">
-        <button type="button" class="toggle" id="t-blind" data-profile="blind" aria-pressed="false" aria-describedby="n-blind">I can't see the screen</button>
-        <p class="note" id="n-blind"></p>
-        <div class="sub" id="sub-blind" hidden>
-          <fieldset>
-            <legend>Description</legend>
-            <label class="choice"><input type="radio" name="blindmode" value="standard" checked> Standard</label>
-            <label class="choice"><input type="radio" name="blindmode" value="extended" id="r-extended"> Extended</label>
+  <!-- 2. Close your eyes -->
+  <section id="listen" class="section listen" data-section-world="blind" aria-labelledby="listen-h">
+    <div class="wrap center">
+      <p class="micro" data-reveal>Try it with sound on</p>
+      <h2 id="listen-h" class="display l" data-reveal>Close your eyes.</h2>
+      <p class="lede" data-reveal style="--i:1">Listen to the same clip twice. First the original sound. Then the version for someone who can't see the screen: a voice says what is on screen, in the pauses between words.</p>
+
+      <div class="listen-stage" data-reveal style="--i:2">
+        <div class="left">
+          <div class="listen-choice">
+            <button type="button" class="pill ghost" id="l-orig" aria-pressed="true" disabled>Original sound</button>
+            <p class="hint">What a blind viewer hears today.</p>
+          </div>
+        </div>
+        <div class="play">
+          <button type="button" class="play-disc" id="l-play" disabled>
+            <svg class="pd-ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle class="track" cx="50" cy="50" r="48"/><circle class="prog" id="l-ring" cx="50" cy="50" r="48" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg>
+            <span class="pd-inner">
+              <svg class="pd-icon" id="l-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M13 9l18 11-18 11z" fill="currentColor"/></svg>
+              <span id="l-play-label">Play</span>
+            </span>
+          </button>
+        </div>
+        <div class="right">
+          <div class="listen-choice">
+            <button type="button" class="pill ghost" id="l-desc" aria-pressed="false" disabled>With AccessCast description</button>
+            <p class="hint">The same clip, with description in the pauses.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="tl" data-reveal style="--i:3">
+        <div class="tl-lanes" id="l-lanes" role="img" aria-label="Timeline of the clip. Loading.">
+          <div class="tl-lane tl-speech"><span class="tl-name" aria-hidden="true">Speech</span><div class="tl-track" id="l-speech"></div></div>
+          <div class="tl-lane tl-desc is-off" id="l-desc-lane"><span class="tl-name" aria-hidden="true">Description</span><div class="tl-track" id="l-descs"></div></div>
+          <div class="tl-head-wrap" aria-hidden="true"><div class="tl-head" id="l-head"></div></div>
+        </div>
+        <div class="tl-scale" aria-hidden="true"><span id="l-t0"></span><span id="l-t1"></span></div>
+        <figcaption class="tl-legend">
+          <span><span class="sw sw-speech" aria-hidden="true"></span>Someone speaks</span>
+          <span><span class="sw sw-desc" aria-hidden="true"></span>Description plays</span>
+          <span><span class="sw sw-gap" aria-hidden="true"></span>A pause where description fits</span>
+        </figcaption>
+      </figure>
+      <p class="listen-now" id="l-now">Press play, then close your eyes.</p>
+      <p class="listen-status" id="l-status" role="status" aria-live="polite"></p>
+      <div id="l-disclosure" class="disclosure center"></div>
+    </div>
+  </section>
+
+  <!-- 3. Who's watching? -->
+  <section id="who" class="who-sec" data-section-world="paper" aria-labelledby="who-h">
+    <div class="marquee-band">
+      <div class="marquee" id="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>I can't see the screen <span class="star">✺</span></span><span>I can't hear <span class="star">✺</span></span><span>Simpler words, please <span class="star">✺</span></span><span lang="hi">हिन्दी <span class="star">✺</span></span><span>Italiano <span class="star">✺</span></span>
+          <span>I can't see the screen <span class="star">✺</span></span><span>I can't hear <span class="star">✺</span></span><span>Simpler words, please <span class="star">✺</span></span><span lang="hi">हिन्दी <span class="star">✺</span></span><span>Italiano <span class="star">✺</span></span>
+        </div>
+      </div>
+      <button type="button" class="marquee-toggle" id="marquee-toggle">Pause moving text</button>
+    </div>
+    <div class="section">
+      <div class="wrap center section-head">
+        <h2 id="who-h" class="display l" data-reveal>Who's watching?</h2>
+        <p class="lede" data-reveal style="--i:1">Pick who it's for. The player opens in that version, and you can mix them.</p>
+      </div>
+      <ul class="aud-list" data-stagger>
+        <li data-speed="0.05"><div data-reveal>
+          <a class="aud w-blind" href="watch.html?audience=blind" aria-describedby="aud-blind-sub">
+            <svg class="arc" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><path id="arc-blind" d="M 30,120 A 90,90 0 0 1 210,120" fill="none"/><text><textPath href="#arc-blind" startOffset="50%" text-anchor="middle">I can't see the screen</textPath></text></svg>
+            <span class="aud-glyph" aria-hidden="true">AD</span>
+            <span class="visually-hidden">I can't see the screen</span>
+          </a>
+          <p class="aud-sub" id="aud-blind-sub">A voice describes the picture, in the pauses.</p>
+        </div></li>
+        <li data-speed="-0.04"><div data-reveal>
+          <a class="aud w-deaf" href="watch.html?audience=deaf" aria-describedby="aud-deaf-sub">
+            <svg class="arc" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><path id="arc-deaf" d="M 30,120 A 90,90 0 0 1 210,120" fill="none"/><text><textPath href="#arc-deaf" startOffset="50%" text-anchor="middle">I can't hear</textPath></text></svg>
+            <span class="aud-glyph" aria-hidden="true">CC</span>
+            <span class="visually-hidden">I can't hear</span>
+          </a>
+          <p class="aud-sub" id="aud-deaf-sub">Captions with every word and sound labels.</p>
+        </div></li>
+        <li data-speed="0.06"><div data-reveal>
+          <a class="aud w-easy" href="watch.html?audience=easy" aria-describedby="aud-easy-sub">
+            <svg class="arc" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><path id="arc-easy" d="M 30,120 A 90,90 0 0 1 210,120" fill="none"/><text><textPath href="#arc-easy" startOffset="50%" text-anchor="middle">Simpler words, please</textPath></text></svg>
+            <span class="aud-glyph" aria-hidden="true">Aa</span>
+            <span class="visually-hidden">Simpler words, please</span>
+          </a>
+          <p class="aud-sub" id="aud-easy-sub">Easy-read captions, and time to read them.</p>
+        </div></li>
+        <li data-speed="-0.05"><div data-reveal>
+          <a class="aud w-hi" href="watch.html?audience=hi" aria-describedby="aud-hi-sub">
+            <svg class="arc" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><path id="arc-hi" d="M 30,120 A 90,90 0 0 1 210,120" fill="none"/><text lang="hi"><textPath href="#arc-hi" startOffset="50%" text-anchor="middle">हिन्दी</textPath></text></svg>
+            <span class="aud-glyph" aria-hidden="true" lang="hi">हि</span>
+            <span class="visually-hidden" lang="hi">हिन्दी</span>
+          </a>
+          <p class="aud-sub" id="aud-hi-sub">Hindi voice-over and subtitles.</p>
+        </div></li>
+        <li data-speed="0.04"><div data-reveal>
+          <a class="aud w-it" href="watch.html?audience=it" aria-describedby="aud-it-sub">
+            <svg class="arc" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><path id="arc-it" d="M 30,120 A 90,90 0 0 1 210,120" fill="none"/><text lang="it"><textPath href="#arc-it" startOffset="50%" text-anchor="middle">Italiano</textPath></text></svg>
+            <span class="aud-glyph" aria-hidden="true">It</span>
+            <span class="visually-hidden" lang="it">Italiano</span>
+          </a>
+          <p class="aud-sub" id="aud-it-sub">Italian voice-over and subtitles.</p>
+        </div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. How it works? -->
+  <section id="how" class="section how" data-section-world="easy" aria-labelledby="how-h" tabindex="-1">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="micro" data-reveal>Six steps, one video</p>
+        <h2 id="how-h" class="display l" data-reveal>How it works?</h2>
+      </div>
+      <div class="how-grid">
+        <div class="orbit-col" aria-hidden="true">
+          <div class="orbit" id="orbit">
+            <div class="orbit-ring" id="orbit-ring">
+              <div class="orbit-dot on" style="--n:0"><span>1</span></div>
+              <div class="orbit-dot" style="--n:1"><span>2</span></div>
+              <div class="orbit-dot" style="--n:2"><span>3</span></div>
+              <div class="orbit-dot" style="--n:3"><span>4</span></div>
+              <div class="orbit-dot" style="--n:4"><span>5</span></div>
+              <div class="orbit-dot" style="--n:5"><span>6</span></div>
+            </div>
+            <div class="orbit-center" id="orbit-center">
+              <span class="orbit-num" id="orbit-num">01</span>
+              <span class="orbit-name" id="orbit-name">Listen</span>
+              <span class="orbit-who" id="orbit-who">Speech recognition</span>
+            </div>
+          </div>
+        </div>
+        <ol class="steps-list" id="steps-list" aria-label="The six steps">
+          <li class="step is-active" data-who="Speech recognition">
+            <p class="who">Who does it: speech recognition</p>
+            <h3><button type="button" class="step-btn" aria-pressed="true"><span class="n" aria-hidden="true">01</span><span class="name">Listen</span></button></h3>
+            <p>We find every spoken word and the moment it is said. That shows where the pauses are.</p>
+          </li>
+          <li class="step" data-who="Gemma 4">
+            <p class="who">Who does it: Gemma 4</p>
+            <h3><button type="button" class="step-btn" aria-pressed="false"><span class="n" aria-hidden="true">02</span><span class="name">Look</span></button></h3>
+            <p>Gemma looks at frames from each scene and lists only what it can see, including text on screen.</p>
+          </li>
+          <li class="step" data-who="Code">
+            <p class="who">Who does it: code</p>
+            <h3><button type="button" class="step-btn" aria-pressed="false"><span class="n" aria-hidden="true">03</span><span class="name">Plan</span></button></h3>
+            <p>Code picks which pauses get a description and how many words fit. If a pause is too short, the video can stop for a moment.</p>
+          </li>
+          <li class="step" data-who="Gemma 4">
+            <p class="who">Who does it: Gemma 4</p>
+            <h3><button type="button" class="step-btn" aria-pressed="false"><span class="n" aria-hidden="true">04</span><span class="name">Write</span></button></h3>
+            <p>Gemma writes each line to fit its pause. It also writes the easy-read captions and the Hindi and Italian versions.</p>
+          </li>
+          <li class="step" data-who="Code, then Gemma">
+            <p class="who">Who does it: code, then Gemma repairs</p>
+            <h3><button type="button" class="step-btn" aria-pressed="false"><span class="n" aria-hidden="true">05</span><span class="name">Check</span></button></h3>
+            <p>Code checks every line: timing, length, names nobody said, guesses about feelings or jobs. Gemma fixes what fails, and code checks it again.</p>
+          </li>
+          <li class="step" data-who="A person">
+            <p class="who">Who does it: a person</p>
+            <h3><button type="button" class="step-btn" aria-pressed="false"><span class="n" aria-hidden="true">06</span><span class="name">Approve</span></button></h3>
+            <p>A person approves what the public hears. Anything not yet approved is marked as a draft.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Gemma proposes. Code decides. -->
+  <section id="rules" class="section rules" data-section-world="deaf" aria-labelledby="rules-h">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="micro" data-reveal>Try the checks</p>
+        <h2 id="rules-h" class="display l rules-title" data-reveal><span class="line1">Gemma proposes.</span> <span class="line2">Code decides.</span></h2>
+      </div>
+      <div class="rules-grid">
+        <div class="card" data-reveal id="scene-card">
+          <p class="micro">The scene</p>
+          <p>Loading the example…</p>
+        </div>
+        <div data-reveal style="--i:1">
+          <fieldset class="ex-picker" id="ex-picker" hidden>
+            <legend>Pick a line Gemma might write for this pause</legend>
+            <div class="ex-options" id="ex-options"></div>
           </fieldset>
-          <p class="note">Extended stops the video when a pause is too short to describe something important.</p>
-          <p class="note" id="n-extended"></p>
+          <div id="ex-result"></div>
+          <p class="visually-hidden" id="ex-status" role="status" aria-live="polite"></p>
         </div>
       </div>
-      <div class="profile">
-        <button type="button" class="toggle" id="t-deaf" data-profile="deaf" aria-pressed="false" aria-describedby="n-deaf">I can't hear</button>
-        <p class="note" id="n-deaf"></p>
-      </div>
-      <div class="profile">
-        <button type="button" class="toggle" id="t-easy" data-profile="easy" aria-pressed="false" aria-describedby="n-easy">Simpler words, please</button>
-        <p class="note" id="n-easy"></p>
-        <div class="sub" id="sub-easy" hidden>
-          <label class="choice"><input type="checkbox" id="c-hold" checked> Give me time to read</label>
-          <p class="note" id="hold-rate"></p>
-        </div>
-      </div>
-      <div class="profile">
-        <button type="button" class="toggle" id="t-hi" data-profile="hi" lang="hi" aria-pressed="false" aria-describedby="n-hi">हिन्दी</button>
-        <p class="note" id="n-hi"></p>
-      </div>
-      <div class="profile">
-        <button type="button" class="toggle" id="t-it" data-profile="it" lang="it" aria-pressed="false" aria-describedby="n-it">Italiano</button>
-        <p class="note" id="n-it"></p>
-      </div>
+      <p class="note" id="rules-note" data-reveal></p>
     </div>
   </section>
 
-  <section id="player" class="player-box" aria-labelledby="video-h" tabindex="-1">
-    <h2 id="video-h">Video</h2>
-    <div id="project-pick" hidden>
-      <label for="project-select">Choose a video</label>
-      <select id="project-select"></select>
-    </div>
-    <div id="disclosure" class="disclosure"></div>
-    <div class="video-frame">
-      <video id="video" controls preload="metadata" playsinline></video>
-    </div>
-    <p id="status" class="now" role="status" aria-live="polite"></p>
-    <p id="version-note" class="note-line"></p>
-    <div id="hold" class="hold" hidden>
-      <p id="hold-msg">Paused so you can read.</p>
-      <button type="button" id="b-continue" class="primary">Continue</button>
-    </div>
-    <div id="desc-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
-
-    <details class="box" id="caption-settings">
-      <summary>Caption and description settings</summary>
-      <div class="settings-row">
-        <fieldset>
-          <legend>Caption size</legend>
-          <label class="choice"><input type="radio" name="capsize" value="s"> Small</label>
-          <label class="choice"><input type="radio" name="capsize" value="m" checked> Medium</label>
-          <label class="choice"><input type="radio" name="capsize" value="l"> Large</label>
-          <label class="choice"><input type="radio" name="capsize" value="xl"> Extra large</label>
-        </fieldset>
-        <fieldset>
-          <legend>Caption background</legend>
-          <label class="choice"><input type="radio" name="capbg" value="none"> None</label>
-          <label class="choice"><input type="radio" name="capbg" value="semi" checked> See-through</label>
-          <label class="choice"><input type="radio" name="capbg" value="solid"> Solid</label>
-        </fieldset>
-        <fieldset>
-          <legend>Caption position</legend>
-          <label class="choice"><input type="radio" name="cappos" value="bottom" checked> Bottom</label>
-          <label class="choice"><input type="radio" name="cappos" value="top"> Top</label>
-        </fieldset>
-        <fieldset>
-          <legend>Show or hide</legend>
-          <label class="choice"><input type="checkbox" id="c-captions" checked> Show captions</label>
-          <label class="choice"><input type="checkbox" id="c-desctext"> Show description text</label>
-        </fieldset>
+  <!-- 6. Results -->
+  <section id="results" class="section results" data-section-world="paper" aria-labelledby="results-h">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="micro" data-reveal>What we measured</p>
+        <h2 id="results-h" class="display l" data-reveal>Results.</h2>
+        <p class="lede" data-reveal style="--i:1">Every number here is read from a file our scripts wrote. Where an experiment has not run yet, it says so.</p>
       </div>
-    </details>
-    <div id="desc-visible" class="desc-text" hidden></div>
+      <dl class="big-rows" id="results-rows" data-stagger></dl>
+      <p class="note" id="results-note"></p>
+    </div>
   </section>
 
-  <section class="drawer" aria-labelledby="drawer-h">
-    <h2 id="drawer-h"><button type="button" class="drawer-toggle" id="drawer-toggle" aria-expanded="false" aria-controls="drawer-body">What the models decided</button></h2>
-    <div id="drawer-body" hidden>
-      <p>Every line in this version: the frames it came from, the pause it had to fit, Gemma's first draft, what our checks caught, and the final text.</p>
-      <p><a id="report-link" href="#">Full audit report (JSON)</a></p>
-      <fieldset>
-        <legend>Show</legend>
-        <div class="filters">
-          <label class="choice"><input type="radio" name="filter" value="all" checked> All</label>
-          <label class="choice"><input type="radio" name="filter" value="first"> Gemma got it right first time</label>
-          <label class="choice"><input type="radio" name="filter" value="caught"> Code caught</label>
-          <label class="choice"><input type="radio" name="filter" value="person"> A person changed it</label>
-        </div>
-      </fieldset>
-      <p id="drawer-count" aria-live="polite"></p>
-      <ol id="lines" class="lines"></ol>
+  <!-- 7. The law already asks -->
+  <section id="law" class="section law" data-section-world="it" aria-labelledby="law-h">
+    <div class="wrap">
+      <a class="spin-disc law-disc" href="#law-rows">
+        <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+          <circle class="disc-fill" cx="100" cy="100" r="100"/>
+          <g class="spin">
+            <path id="law-ring" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" fill="none"/>
+            <text class="ring-text"><textPath href="#law-ring" textLength="474" lengthAdjust="spacing">Access is the law • Access is the law • Access is the law • </textPath></text>
+          </g>
+          <circle class="disc-dot" cx="100" cy="100" r="22"/>
+        </svg>
+        <span class="visually-hidden">Access is the law: jump to the dates</span>
+      </a>
+      <div class="section-head center">
+        <h2 id="law-h" class="display l" data-reveal>The law already asks.</h2>
+        <p class="lede" data-reveal style="--i:1">Description and captions are no longer extras. These rules say when they must be there.</p>
+      </div>
+      <dl class="big-rows" id="law-rows" data-stagger tabindex="-1"></dl>
+    </div>
+  </section>
+
+  <!-- 8. Proof teaser -->
+  <section id="proof-teaser" class="section teaser" data-section-world="blind" aria-labelledby="teaser-h">
+    <div class="wrap center">
+      <p class="micro" data-reveal>See for yourself</p>
+      <h2 id="teaser-h" class="display l" data-reveal>We attack our own model.</h2>
+      <p class="lede" data-reveal style="--i:1">We give Gemma hard cases on purpose, many times over, and show which check blocked each bad answer before a viewer heard it.</p>
+      <div class="teaser-discs">
+        <a class="spin-disc main" href="proof.html" data-reveal style="--i:2">
+          <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <circle class="disc-fill" cx="100" cy="100" r="100"/>
+            <g class="spin">
+              <path id="proof-ring" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" fill="none"/>
+              <text class="ring-text"><textPath href="#proof-ring" textLength="474" lengthAdjust="spacing">Code checks every line • Code checks every line • </textPath></text>
+            </g>
+            <text class="disc-label" x="100" y="114" font-size="40">Proof</text>
+          </svg>
+          <span class="visually-hidden">Proof: code checks every line</span>
+        </a>
+        <a class="spin-disc alt" href="five-ways.html" data-reveal style="--i:3">
+          <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <circle class="disc-fill" cx="100" cy="100" r="100"/>
+            <g class="spin">
+              <path id="five-ring" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" fill="none"/>
+              <text class="ring-text"><textPath href="#five-ring" textLength="474" lengthAdjust="spacing">Same clip, five ways • Same clip, five ways • </textPath></text>
+            </g>
+            <text class="disc-label" x="100" y="114" font-size="36">Five ways</text>
+          </svg>
+          <span class="visually-hidden">Five ways: the same clip, played for each viewer</span>
+        </a>
+      </div>
     </div>
   </section>
 </main>
 
-<footer class="site"><div class="wrap" id="footer"></div></footer>
+<footer class="site" data-section-world="paper"><div class="wrap" id="footer"></div></footer>
 <script src="assets/common.js"></script>
-<script src="assets/player.js"></script>
+<script src="assets/motion.js"></script>
+<script src="assets/home.js"></script>
 </body>
 </html>

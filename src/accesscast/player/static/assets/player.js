@@ -14,7 +14,7 @@
 
   var state = {
     profiles: [], blindMode: "standard", hold: true, showCaptions: true, descText: false,
-    cap: { size: "m", bg: "semi", pos: "bottom" }, filter: "all"
+    cap: { size: "m", bg: "semi", pos: "bottom" }, filter: "all", keys: true
   };
   var data = { index: null, base: "", project: null, catalog: [], rows: {}, decisions: null, decisionsError: null };
   var current = { key: null, tracks: {}, showName: null, notes: [] };
@@ -30,6 +30,7 @@
     if (typeof p.hold === "boolean") state.hold = p.hold;
     if (typeof p.showCaptions === "boolean") state.showCaptions = p.showCaptions;
     if (typeof p.descText === "boolean") state.descText = p.descText;
+    if (typeof p.keys === "boolean") state.keys = p.keys;
     if (p.cap && typeof p.cap === "object") {
       if (["s", "m", "l", "xl"].indexOf(p.cap.size) >= 0) state.cap.size = p.cap.size;
       if (["none", "semi", "solid"].indexOf(p.cap.bg) >= 0) state.cap.bg = p.cap.bg;
@@ -39,7 +40,7 @@
   function savePrefs() {
     AC.store.set(PREFS_KEY, {
       profiles: state.profiles, blindMode: state.blindMode, hold: state.hold,
-      showCaptions: state.showCaptions, descText: state.descText, cap: state.cap
+      showCaptions: state.showCaptions, descText: state.descText, cap: state.cap, keys: state.keys
     });
   }
   function readAudienceParam() {
@@ -100,8 +101,18 @@
   }
 
   /* ---------- picker UI ---------- */
+  /* The page takes on the colour world of the main audience picked (language first, then description). */
+  function worldFor() {
+    if (has("hi")) return "hi";
+    if (has("it")) return "it";
+    if (has("blind")) return "blind";
+    if (has("easy")) return "easy";
+    if (has("deaf")) return "deaf";
+    return "paper";
+  }
   function syncPickerUI() {
     PROFILES.forEach(function (p) { $("t-" + p).setAttribute("aria-pressed", has(p) ? "true" : "false"); });
+    document.body.setAttribute("data-world", worldFor());
     $("sub-blind").hidden = !has("blind");
     $("sub-easy").hidden = !has("easy");
     document.querySelectorAll('input[name="blindmode"]').forEach(function (r) { r.checked = r.value === state.blindMode; });
@@ -535,7 +546,7 @@
       el("article", { "aria-labelledby": hid }, [
         el("h3", { id: hid, text: (KIND_TEXT[it.kind] || it.kind) + " " + n + " at " + AC.fmtTime(it.anchor_ms) }),
         el("p", { class: "muted", text: "Line id: " + it.id + (it.extended ? ". Extended: the video stops for this line." : "") }),
-        el("button", { type: "button", class: "seek", "data-id": it.id, "aria-describedby": hid, text: seekLabel,
+        el("button", { type: "button", class: "seek btn-plain", "data-id": it.id, "aria-describedby": hid, text: seekLabel,
           onclick: function () { seekTo(it); } }),
         dl
       ])
@@ -627,11 +638,98 @@
     video.addEventListener("error", function () {
       announce("This browser could not play the video file for: " + AC.versionName(current.key, data.index) + ".");
     });
+    $("b-share").addEventListener("click", share);
+    $("b-keys").addEventListener("click", function () { openKeys(this); });
+    $("b-keys-close").addEventListener("click", closeKeys);
+    $("keys-dialog").addEventListener("close", function () {
+      if (keysOpener && document.body.contains(keysOpener) && keysOpener.focus) keysOpener.focus();
+      keysOpener = null;
+    });
+    $("c-keys").addEventListener("change", function () { state.keys = this.checked; savePrefs(); });
+    document.addEventListener("keydown", onKey);
     $("project-select").addEventListener("change", function () {
       var u = new URL(window.location.href);
       u.searchParams.set("p", this.value);
       window.location.href = u.toString();
     });
+  }
+
+  /* ---------- share this view ---------- */
+  function shareUrl() {
+    var u = new URL(window.location.href);
+    u.hash = "";
+    u.search = "";
+    u.pathname = u.pathname.replace(/[^/]*$/, "watch.html");
+    var parts = state.profiles.map(function (p) { return p === "blind" && state.blindMode === "extended" ? "extended" : p; });
+    if (judge) parts.unshift("judge");
+    if (parts.length) u.searchParams.set("audience", parts.join(","));
+    if (data.project && (data.catalog.length > 1 || AC.params().get("p"))) u.searchParams.set("p", data.project.sha12);
+    return u.toString().replace(/%2C/gi, ",");
+  }
+  function share() {
+    var url = shareUrl();
+    var who = state.profiles.map(function (p) { return $("t-" + p).querySelector(".t").textContent; });
+    var what = who.length ? "It opens this page for: " + who.join(", ") + "." : "Nobody is picked, so it opens the picker.";
+    var shown = function (msg) {
+      $("share-url").value = url;
+      $("share-out").hidden = false;
+      say($("share-status"), msg);
+    };
+    var done = function () { $("share-out").hidden = true; say($("share-status"), "Link copied. " + what); };
+    var fail = function () { shown("Could not copy by itself. The link is in the box below; select it and copy. " + what); $("share-url").select(); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fail);
+    else fail();
+  }
+  function say(node, msg) {
+    node.textContent = "";
+    window.setTimeout(function () { node.textContent = msg; }, 30);
+  }
+
+  /* ---------- keyboard shortcuts (WCAG 2.1.4: they can be turned off) ---------- */
+  var keysOpener = null;
+  function openKeys(opener) {
+    var d = $("keys-dialog");
+    if (d.open) return;
+    keysOpener = opener || document.activeElement;
+    $("c-keys").checked = state.keys;
+    if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open", "");
+    $("b-keys-close").focus();
+  }
+  function closeKeys() {
+    var d = $("keys-dialog");
+    if (typeof d.close === "function") d.close(); else d.removeAttribute("open");
+  }
+  function typing(t) {
+    if (!t || !t.tagName) return false;
+    var tag = t.tagName.toLowerCase();
+    if (tag === "textarea" || tag === "select" || t.isContentEditable) return true;
+    if (tag === "input") return ["checkbox", "radio", "button", "submit"].indexOf((t.type || "").toLowerCase()) < 0;
+    return false;
+  }
+  function onKey(e) {
+    if (!state.keys || e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented) return;
+    if ($("keys-dialog").open || typing(e.target)) return;
+    var k = e.key;
+    var t = video.currentTime || 0;
+    if (k === "?") { e.preventDefault(); openKeys(document.activeElement); return; }
+    if (k === "k" || k === "K") {
+      e.preventDefault();
+      if (video.paused) { var p = video.play(); if (p && p.catch) p.catch(function () {}); announce("Playing."); }
+      else { video.pause(); announce("Paused."); }
+    } else if (k === "j" || k === "J") {
+      e.preventDefault(); try { video.currentTime = Math.max(0, t - 5); } catch (x) { /* not seekable */ }
+      announce("Back to " + AC.fmtTime(video.currentTime * 1000) + ".");
+    } else if (k === "l" || k === "L") {
+      e.preventDefault(); try { video.currentTime = Math.min(video.duration || t + 5, t + 5); } catch (x) { /* not seekable */ }
+      announce("Forward to " + AC.fmtTime(video.currentTime * 1000) + ".");
+    } else if (k === "c" || k === "C") {
+      e.preventDefault(); $("c-captions").click(); announce(state.showCaptions ? "Captions on." : "Captions off.");
+    } else if (k === "d" || k === "D") {
+      e.preventDefault(); $("c-desctext").click(); announce(state.descText ? "Description text on." : "Description text off.");
+    } else if (/^[1-5]$/.test(k)) {
+      var b = $("t-" + PROFILES[Number(k) - 1]);
+      if (b && !b.disabled) { e.preventDefault(); b.click(); }
+    }
   }
 
   function showError(msg) {

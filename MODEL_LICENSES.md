@@ -39,7 +39,9 @@ Every item is listed here with its licence and link **before** it is used. No no
 ## Fonts
 | Font | Use | Licence |
 |---|---|---|
-| _(system UI fonts only so far)_ | | |
+| Anton (Vernon Adams), via @fontsource/anton 5.3.0; latin and latin-ext woff2 in `src/accesscast/player/static/assets/fonts/` | Display headings on the site | OFL-1.1 — https://github.com/fontsource/font-files/tree/main/fonts/google/anton (font: https://fonts.google.com/specimen/Anton) |
+| Inter (Rasmus Andersson), variable weight, via @fontsource-variable/inter 5.3.0; latin and latin-ext woff2 | Body text and controls on the site | OFL-1.1 — https://github.com/rsms/inter/blob/master/LICENSE.txt |
+| Noto Sans Devanagari (Google), via @fontsource/noto-sans-devanagari 5.3.0; devanagari subset, weights 400 and 700 | Every `lang="hi"` element on the site | OFL-1.1 — https://github.com/notofonts/devanagari/blob/main/OFL.txt |
 
 ## Evaluation libraries (workers/ environment)
 | Library | Use | Licence | Link |
