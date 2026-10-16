@@ -115,6 +115,70 @@ SPECS: list[Spec] = [
     ),
     # E13 / E14 / E8 / E9 / E10 / E15 / E16
     Spec(
+        "e5.neg_gemma_k",
+        "e05_easyread.json",
+        "/summary/arms/gemma_alone_on_the_same_cues/negations_kept/k",
+        "easy-read cues where Gemma alone kept every negation (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
+        "e5.neg_gemma_n",
+        "e05_easyread.json",
+        "/summary/arms/gemma_alone_on_the_same_cues/negations_kept/n",
+        "easy-read cues compared (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
+        "e5.neg_ours_k",
+        "e05_easyread.json",
+        "/summary/arms/accesscast_published/negations_kept/k",
+        "published AccessCast easy-read cues that kept every negation (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
+        "e5.neg_ours_n",
+        "e05_easyread.json",
+        "/summary/arms/accesscast_published/negations_kept/n",
+        "published AccessCast easy-read cues (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
+        "e5.sent",
+        "e05_easyread.json",
+        "/summary/accesscast_routing/sent_to_person",
+        "easy-read cues sent to a person (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
+        "e5.of",
+        "e05_easyread.json",
+        "/summary/accesscast_routing/of",
+        "easy-read cues in the test videos",
+        "cues",
+        split="test",
+    ),
+    Spec(
+        "e5.wpm_source_k",
+        "e05_easyread.json",
+        "/summary/arms/source/at_or_under_130_wpm/k",
+        "original caption cues at or under 130 words per minute (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
+        "e5.wpm_ours_k",
+        "e05_easyread.json",
+        "/summary/arms/accesscast_published/at_or_under_130_wpm/k",
+        "published easy-read cues at or under 130 words per minute (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
         "e1.census_pauses",
         "e01_test_gap_census.json",
         "/summary/pauses",
@@ -430,6 +494,17 @@ def results_more() -> str | None:
             "on <pending: e15.boundary_n> word boundaries of our synthetic clips, so description keeps "
             "<pending: e15.guard_ms> ms clear of speech. Large-v3 could not produce word timings within our "
             "computer's memory, so it was not a candidate."
+        )
+    if (EV / "e05_easyread.json").exists():
+        rows.append(
+            "- **Easy-read (E5, 10 W3C videos never used for tuning).** Asked to simplify the captions, Gemma alone "
+            'kept every "not", "never" and "no" in <pending: e5.neg_gemma_k> of <pending: e5.neg_gemma_n> '
+            "cues; in the others the sentence lost its negation and so its meaning. The easy-read AccessCast "
+            "published kept them in <pending: e5.neg_ours_k> of <pending: e5.neg_ours_n>, and sent "
+            "<pending: e5.sent> of <pending: e5.of> cues to a person instead. Paced for slow reading (at most 130 "
+            "words a minute): <pending: e5.wpm_ours_k> of <pending: e5.neg_ours_n> published cues, against "
+            "<pending: e5.wpm_source_k> of <pending: e5.of> original captions. These counts use a negation counter "
+            "close to our own check, so a blind rating by people leads this experiment; it is still to come."
         )
     if (EV / "e16_ui_a11y.json").exists():
         rows.append(
