@@ -248,7 +248,8 @@ def transcribe_many(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
             asr = _whisper(p["model"], _dev(p, require_rocm))
             text = asr(
                 {"raw": audio, "sampling_rate": SR},
-                return_timestamps=False,
+                # over 30 s transformers needs timestamps (long-form); segment level is cheap, word level is not
+                return_timestamps=len(audio) > 30 * SR,
                 generate_kwargs={"language": p.get("lang", "en"), "task": "transcribe"},
             )["text"].strip()
             out.append(
