@@ -29,7 +29,7 @@ These labels do not pre-award points; judges keep full scoring authority.
 
 | Criterion | What we did | Fastest proof |
 |---|---|---|
-| Application of Technology | Gemma 4 sees, listens, writes, translates and repairs; served with vLLM on ROCm on one MI300X | <pending: amd.section> |
+| Application of Technology | Gemma 4 31B sees, writes, translates and repairs, served by AMD Token Factory; code checks every line | <pending: amd.section> |
 | Presentation | Plain-words demo video; live player that never sleeps | <pending: video.url> |
 | Business Value | Named buyers and legal deadlines; GPU cost plus measured review time | README "Who pays" |
 | Originality | Checks tied to the real audio timeline; five versions from one analysis; extended description only when needed | `docs/rules.md` |
@@ -41,15 +41,16 @@ These labels do not pre-award points; judges keep full scoring authority.
 <pending: results.tables> — generated from `evidence/public-claims.json`.
 
 ## AMD Boundary
-- **On the MI300X (AMD Developer Cloud):** Gemma 4 31B and Gemma 4 E4B served by vLLM on ROCm; Whisper, Kokoro and the metric models in worker processes.
-- **On AMD Token Factory:** the always-on endpoint for the live attack page, and a non-Gemma judge for two evaluations.
+- **On AMD Token Factory:** Gemma 4 31B for every vision, writing, translation and repair call, the live attack page, and a non-Gemma judge for two evaluations.
+- **Not on AMD:** Whisper, the aligner, the voices and the metric models ran on our own workstation; every evidence file records the device.
+- **Not done:** we had no MI300X droplet (AMD Developer Cloud needs a payment card we did not have), so there are no MI300X serving, memory, soak or offline numbers. The droplet scripts are in `deploy/`.
 - **Never leaves the machine:** the video, the review state and every intermediate file.
 
 ## Reproduce
 ```bash
 make setup
 make demo-fixture                 # no GPU
-# on a fresh MI300X "vLLM Quick Start" droplet:
+# only with an MI300X "vLLM Quick Start" droplet:
 bash deploy/droplet_bootstrap.sh  # images, Gemma servers, worker env, model weights
 make doctor
 make run VIDEO=path/to/video.mp4

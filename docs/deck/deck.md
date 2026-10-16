@@ -3,7 +3,7 @@
 ## One video. Five ways to watch.
 <pending: e1.headline>
 
-Gemma 4 on AMD Instinct MI300X · AMD Developer Hackathon ACT III · Create a New Kind of Experience
+Gemma 4 on AMD Token Factory · AMD Developer Hackathon ACT III · Create a New Kind of Experience
 
 ---
 <!-- slide: problem -->
@@ -62,7 +62,7 @@ Test set: 10 W3C videos never used for tuning. Measured by a script that imports
 
 ---
 <!-- slide: amd -->
-# On one AMD MI300X
+# Gemma 4 on AMD Token Factory
 <pending: amd.slide>
 
 ---

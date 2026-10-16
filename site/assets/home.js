@@ -362,7 +362,7 @@
     { label: "Lines that fit their pause", sub: "Gemma 4 with our checks and Gemma repair.", of: ["e1.fit_c", "e1.lines_planned"] },
     { label: "Gemma 4 alone", sub: "The baseline: the same plan, with no checks and no repair.", of: ["e1.fit_a", "e1.lines_planned"] },
     { label: "Attacks that reached a viewer", sub: "Hard cases we gave Gemma on purpose, asked many times.", one: "e11.total_leaks" },
-    { label: "GPU cost per finished minute", sub: "All five versions on one MI300X. GPU time only; a person's review time comes on top.", one: "e14.bundle_usd_per_minute" },
+    { label: "Gemma tokens per finished minute", sub: "All five versions, Gemma 4 31B on AMD Token Factory. A person's review time comes on top.", one: "e14.tokens_per_minute" },
     { label: "Accessibility tests passed", sub: "Player pages, keyboard and axe-core checks.", of: ["e16.player_passed", "e16.player_total"] }
   ];
   var LAW = [
