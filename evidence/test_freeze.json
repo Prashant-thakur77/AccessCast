@@ -1,0 +1,25 @@
+{
+ "tag": "test-freeze-1",
+ "commit": "f8d1e1d2f5dceecaf3bac6c0df251bcfa115502b",
+ "frozen_at": "2026-10-16T21:12:58.836Z",
+ "files": {
+  "src/accesscast/llm/prompts/ad_translate.md": "9cdf3413cf73e64f506df88ba14ca0ee756b5ee6032f2cd2ed382e5887149ff1",
+  "src/accesscast/llm/prompts/asr_crosscheck.md": "51ea8b5fd94b30ff5daa84f6b95a6d2a744a89a1737ebd4e481fe5597ceb8af0",
+  "src/accesscast/llm/prompts/e06_answer.md": "c6be52b26d54bb48ccd3b63d8ccb7d9c7f3e43c405b8437b6ba42c7d69df38bf",
+  "src/accesscast/llm/prompts/e07_judge.md": "4cc257d3321928d186457b1b55b99c226e1dba7a7aa09e44d8740b8c34ee486d",
+  "src/accesscast/llm/prompts/easy.md": "2312de141b328e7e59b6cbb18cfb7261407b7c2f0d35fc40979456cc304d7f36",
+  "src/accesscast/llm/prompts/evidence.md": "77a816acaf287deed3f089df911224c01e30da73d124693d6482d26c4b261ba9",
+  "src/accesscast/llm/prompts/naive_caption.md": "34a759cf5f554aadc75ef84aae970c398ff2deeaf03e66f8d0282fc7feb39e00",
+  "src/accesscast/llm/prompts/repair_ad.md": "2a8d634895c3cc376025b27f00f40fe43c7da44c0798db05754f6745b4d01364",
+  "src/accesscast/llm/prompts/repair_easy.md": "04de793ac54bcfa264f31d05fc64aaca650d0e71a57e0953376194aa19c6c4b3",
+  "src/accesscast/llm/prompts/repair_subs.md": "416c17c4db2a279ff9a88e93b6ec58405b9e1cd483c81ed9f654e0b22eebef4e",
+  "src/accesscast/llm/prompts/scene_judge.md": "89b70b8264bf95ef745f8d302c8815f09a02902c861a6a8adffa48e55ee17584",
+  "src/accesscast/llm/prompts/sounds.md": "f588c43cdac36e121c8836309567ca4bf22195e2ca87ec6eb0a689baf670fd70",
+  "src/accesscast/llm/prompts/translate_subs.md": "c2b7e8bff788894abc4c7147931944eadb5c33477aa322828deb40623b70a330",
+  "src/accesscast/llm/prompts/voiceover.md": "745380ede724c293cc65e4059da8c3c3da02d8daa1565519aebf6edfc8022bfe",
+  "src/accesscast/llm/prompts/write_ad.md": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+  "src/accesscast/constants.py": "f73bf27bf0fb8549c4f5f0d15d48b21ddf8329ca82be680c24cde720145e29d4",
+  "src/accesscast/confidence.py": "9ce85f7cbf8e22b4603fb7412d3128f8cb7db92cba479ca2a9f3cc410dc58533",
+  "src/accesscast/verify/lexicons/__init__.py": "ca1690ca86ee6cb7d397443be972d6547e6f836275e38e239813db60cc4402fa"
+ }
+}
