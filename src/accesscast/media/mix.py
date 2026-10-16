@@ -74,8 +74,13 @@ def place(stem: np.ndarray, clip: np.ndarray, start_sample: int) -> None:
         stem[a:b] += clip[: b - a]
 
 
-def loudnorm_2pass(src: Path, dst: Path, target_lufs: float) -> dict[str, float]:
-    """Two-pass loudnorm: measure, then apply with measured_* and linear=true (I set explicitly)."""
+def loudnorm_2pass(
+    src: Path, dst: Path, target_lufs: float, pad_to_ms: int | None = None
+) -> dict[str, float]:
+    """Two-pass loudnorm: measure, then apply with measured_* and linear=true (I set explicitly). A final limiter
+    2 dB under the true-peak ceiling absorbs the overshoot that AAC encoding adds (a loud dev trailer reached
+    -0.8 dBTP), and `pad_to_ms` pads with silence to the video's length (some sources carry audio shorter than
+    their video; E9, docs/incidents.md 2026-10-17)."""
     flt = f"loudnorm=I={target_lufs}:TP={C.TRUE_PEAK_MAX - 0.5}:LRA=11"
     err = run_ffmpeg(["-i", str(src), "-af", f"{flt}:print_format=json", "-f", "null", "-"])
     m = re.search(r"\{[^{}]*\"input_i\"[^{}]*\}", err, re.S)
@@ -86,7 +91,11 @@ def loudnorm_2pass(src: Path, dst: Path, target_lufs: float) -> dict[str, float]
         f"{flt}:measured_I={meas['input_i']}:measured_TP={meas['input_tp']}:measured_LRA={meas['input_lra']}"
         f":measured_thresh={meas['input_thresh']}:offset={meas['target_offset']}:linear=true"
     )
-    run_ffmpeg(["-i", str(src), "-af", second, "-ar", str(SR), "-c:a", "pcm_f32le", str(dst)])
+    limit = 10 ** ((C.TRUE_PEAK_MAX - 2.0) / 20)
+    chain = f"{second},alimiter=limit={limit:.4f}:level=disabled:attack=1:release=50"
+    if pad_to_ms:
+        chain += f",apad=whole_dur={pad_to_ms / 1000:.3f}"
+    run_ffmpeg(["-i", str(src), "-af", chain, "-ar", str(SR), "-c:a", "pcm_f32le", str(dst)])
     return {
         k: float(v)
         for k, v in meas.items()

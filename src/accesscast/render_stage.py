@@ -239,7 +239,7 @@ def render_all(
             M.mix_standard(
                 master, [*vo_clips, *ad_clips], mixed, stem, tmp, stem_ids={c.item_id for c in ad_clips}
             )
-        M.loudnorm_2pass(mixed, normed, target_lufs)
+        M.loudnorm_2pass(mixed, normed, target_lufs, pad_to_ms=expected_ms)
         if rows is not None:
             render_extended(video, normed, rows, out, watermark=watermark, fps=info.fps)
             for name in spec["tracks"]:  # remap tracks onto the extended timeline

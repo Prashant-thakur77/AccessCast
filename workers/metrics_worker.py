@@ -42,7 +42,9 @@ def _versions(*pkgs: str) -> dict[str, str | None]:
     out: dict[str, str | None] = {}
     for p in pkgs:
         try:
-            out[p] = version(p)
+            out[p] = version(p).split("+")[
+                0
+            ]  # release number only; a local build suffix is not provenance we need
         except PackageNotFoundError:
             out[p] = None
     return out
