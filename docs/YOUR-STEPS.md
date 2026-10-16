@@ -2,19 +2,37 @@
 
 Everything that doesn't need your accounts or other people is built, tested and pushed. These are the steps only you can do. Do them top to bottom. Each says how long it takes and what it unblocks. The safe deadline is **18 Oct 2026, 15:30 IST**.
 
+## Links you will need
+- Hackathon page: https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii (enrol with "Sign up with AMD")
+- Rules: https://lablab.ai/hackathon-rules · Guidelines: https://lablab.ai/ai-articles/hackathon-guidelines
+- AMD AI Developer Program (gives the $100 credit): https://www.amd.com/en/developer/ai-dev-program.html
+- AMD Developer Cloud (GPU droplets): https://www.amd.com/en/developer/resources/cloud-access/amd-developer-cloud.html
+- AMD Token Factory (API key, no card needed): https://notebooks.amd.com/tokenfactory
+- Hugging Face tokens: https://huggingface.co/settings/tokens
+- lablab Discord: https://discord.gg/lablabai
+- W3C videos (for the E6 questions): https://www.w3.org/WAI/perspective-videos/
+
 ## Step 1. Keys (10 minutes): unblocks everything
 1. In the repo folder, create `.env` from the example: `cp .env.example .env`
 2. Open `.env` and fill in:
    - `HF_TOKEN=` a Hugging Face read token (huggingface.co → Settings → Access Tokens).
    - `AMD_TF_API_KEY=` and `AMD_TF_BASE_URL=` from the AMD Token Factory console (notebooks.amd.com/tokenfactory).
    - `GPU_HOURLY_COST_USD=` the hourly price your droplet is actually billed (DigitalOcean's page listed 2.59 on 16 Oct).
-3. While logged in to Hugging Face, open each page and click "Agree" if asked: `google/gemma-4-31B-it`, `google/gemma-4-E4B-it`, `openlanguagedata/flores_plus`, `ai4bharat/indictrans2-en-indic-1B`, `pyannote/speaker-diarization-community-1`, `ai4bharat/indic-parler-tts`.
+3. While logged in to Hugging Face, open each page and click "Agree" if asked:
+   https://huggingface.co/google/gemma-4-31B-it ·
+   https://huggingface.co/google/gemma-4-E4B-it ·
+   https://huggingface.co/datasets/openlanguagedata/flores_plus ·
+   https://huggingface.co/ai4bharat/indictrans2-en-indic-1B ·
+   https://huggingface.co/pyannote/speaker-diarization-community-1 ·
+   https://huggingface.co/ai4bharat/indic-parler-tts
 4. Never paste keys into chat; the file stays on your machine (it is git-ignored).
 
 ## Step 2. The GPU droplet (15 minutes for you, then I take over)
-1. Go to devcloud.amd.com, add a payment method, and add this SSH key: the contents of `~/.ssh/id_ed25519.pub`.
-2. Create one droplet: **AMD Instinct MI300X × 1**, image **"vLLM Quick Start"**.
-3. Tell me its IP address. (Or, if the console offers an API token, put it in `.env` as `DIGITALOCEAN_ACCESS_TOKEN=` and I will create, snapshot and destroy droplets myself.)
+1. Join the AMD AI Developer Program (link above) so the $100 credit lands on your account. Credits expire about 30 days after they are applied (check under Billing).
+2. Open AMD Developer Cloud (link above), sign in with the same AMD account, open **Billing** and add a card (the "Create GPU Droplet" button stays grey without one; credits are used first).
+3. **GPU Droplets → Create GPU Droplet**: region **ATL1 (Atlanta)**, plan **MI300X × 1**, image **vLLM (Quick Start)** (if it is missing, choose **ROCm Software**), and paste your public key: run `cat ~/.ssh/id_ed25519.pub` and copy the whole line. Write down the hourly price the page shows and put it in `.env` as `GPU_HOURLY_COST_USD` (lablab's tutorial lists 1.99, DigitalOcean's page listed 2.59 on 16 Oct).
+4. **Do not open port 8000 on the droplet's firewall**, even though some tutorials say to. Our Gemma server listens only on 127.0.0.1 and is reached through an SSH tunnel (`make tunnel`).
+5. Wait 2–4 minutes until it shows **Active**, then tell me its IP address. (Or, if the console offers an API token, put it in `.env` as `DIGITALOCEAN_ACCESS_TOKEN=` and I will create, snapshot and destroy droplets myself.)
 4. Copy `.env` to the droplet once I've cloned the repo there: `scp .env root@<ip>:/root/AccessCast/.env`
 
 What I then run on the droplet (my estimate: 10–14 GPU hours in total, within the $100 credit; not measured):
@@ -30,7 +48,7 @@ bash deploy/run_session.sh ladder    # speed ladder on the MI300X
 bash deploy/run_session.sh quality   # translation, easy-read, similarity
 bash deploy/run_session.sh soak      # 4-hour soak while people review
 ```
-A powered-off droplet still bills: when I say GPU work is done, snapshot it if you want, then **destroy** it.
+A powered-off droplet still bills: when I say GPU work is done, snapshot it if you want (GPU Droplets → your droplet → Snapshots), then **Destroy** it from the dashboard.
 
 ## Step 3. E6 questions (1 hour, today, before the test run)
 Someone writes about 5 multiple-choice questions per W3C video from W3C's own "Text Transcript with Description of Visuals", following `eval/questions/README.md`. This must happen before step 2's `e01` phase.
