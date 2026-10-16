@@ -1,9 +1,9 @@
 """E14 without a droplet (D-021): Gemma tokens per finished minute of video, from real runs' call logs.
 
 No GPU dollars: Gemma 4 31B ran on AMD Token Factory, so the cost basis is tokens. Reads `logs/llm_calls.jsonl` of
-every finished project in a projects directory (a project counts only if its render report exists or every
-version stage finished), counts the calls that reached the model and succeeded (cache replays have 0 attempts and
-are skipped, so a second pass after an outage is not counted twice), and divides by the video minutes.
+every project in a projects directory, keeps only the calls of its last complete run (dev videos were run several
+times while tuning), counts the answered ones (an answer replayed from the cache counts: that run needed it), and
+divides by the video minutes.
 Token Factory's published price per token (evidence/tokenfactory_models.json) converts tokens to its own unit,
 "points", which is reported as such and never converted to dollars.
 
@@ -37,12 +37,20 @@ VERSION_OF = {
 FINAL_STAGES = ("voiceover_it", "subtitles_it", "captions_easy", "tts")
 
 
-def finished(root: Path) -> bool:
+def last_run_start(root: Path) -> str | None:
+    """Timestamp at which the last complete pipeline run of this project began (its ingest event), or None if
+    that run did not finish every final stage. Dev videos were run several times while tuning; only the last run
+    counts, so the result is the tokens one finished run needs."""
     ev = root / "logs" / "events.jsonl"
     if not ev.exists():
-        return False
-    done = {json.loads(line)["stage"] for line in ev.read_text().splitlines() if '"done"' in line}
-    return all(s in done for s in FINAL_STAGES)
+        return None
+    events = [json.loads(line) for line in ev.read_text().splitlines() if line.strip()]
+    starts = [e["ts"] for e in events if e.get("stage") == "ingest" and e.get("event") in ("start", "cached")]
+    if not starts:
+        return None
+    t0 = starts[-1]
+    done = {e["stage"] for e in events if e.get("event") == "done" and e["ts"] >= t0}
+    return t0 if all(s in done for s in FINAL_STAGES) else None
 
 
 def tf_price() -> tuple[float, float] | None:
@@ -68,7 +76,7 @@ def main() -> int:
         config={
             "mode": "tokens (D-021: no droplet, Gemma 4 31B on AMD Token Factory)",
             "projects_dir": str(base.relative_to(REPO_ROOT)),
-            "counted": "calls with status ok and attempts > 0 (cache replays and failed calls excluded)",
+            "counted": "answered calls of each video's last complete run (cache replays included: that run needed them; failed calls excluded)",
             "finished_if_done": list(FINAL_STAGES),
         },
     )
@@ -82,13 +90,16 @@ def main() -> int:
         for root in sorted(p for p in base.iterdir() if (p / "project.json").exists()):
             info = json.loads((root / "project.json").read_text())
             calls_f = root / "logs" / "llm_calls.jsonl"
-            if not finished(root) or not calls_f.exists():
-                e.results.append({"video": info["source_name"], "counted": False, "reason": "not finished"})
+            t0 = last_run_start(root)
+            if t0 is None or not calls_f.exists():
+                e.results.append(
+                    {"video": info["source_name"], "counted": False, "reason": "last run not finished"}
+                )
                 continue
             vin = vout = n = 0
             for line in calls_f.read_text().splitlines():
                 c: dict[str, Any] = json.loads(line)
-                if c.get("status") != "ok" or not c.get("attempts"):
+                if c.get("status") != "ok" or c.get("ts", "") < t0:
                     continue
                 n += 1
                 vin += int(c.get("tokens_in") or 0)
