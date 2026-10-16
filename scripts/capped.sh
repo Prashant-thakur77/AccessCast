@@ -4,5 +4,5 @@
 #   bash scripts/capped.sh bash scripts/run_local_session.sh e01
 set -euo pipefail
 CAP="${ACCESSCAST_MEMORY_MAX:-7G}"
-exec systemd-run --user --scope --quiet -p MemoryMax="$CAP" -p MemorySwapMax=1G \
+exec systemd-run --user --scope --quiet -p MemoryMax="$CAP" -p MemorySwapMax=1G -p OOMPolicy=continue \
   bash -c 'echo 1000 > /proc/self/oom_score_adj; exec "$@"' _ "$@"
