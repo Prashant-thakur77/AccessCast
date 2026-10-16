@@ -274,6 +274,7 @@ test("landing: the listener mascot is decorative and reacts to the description t
   await expect(lm).toHaveAttribute("data-eyes", "open");
   // hover states on the audience discs drive the small listener
   const wm = page.locator("#who-mascot");
+  await page.mouse.move(0, 0); // park the pointer: focusing scrolls, and a disc under the pointer would win by hover
   await page.getByRole("link", { name: "I can't see the screen" }).focus();
   await expect(wm).toHaveAttribute("data-eyes", "closed");
   await page.getByRole("link", { name: "I can't hear" }).focus();

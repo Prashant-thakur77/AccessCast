@@ -2,12 +2,12 @@
  "schema": "accesscast/evidence/v1",
  "experiment": "e16_ui_a11y",
  "split": "none",
- "passed": false,
- "git_commit": "f6eca3c43e070e250dc24f1d7afb2f179e35fc9f",
+ "passed": true,
+ "git_commit": "7e3946c12e3cffd3a81367d29d95345b62d9b859",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-16T17:28:28.791Z",
- "finished_at": "2026-10-16T17:30:22.567Z",
+ "started_at": "2026-10-16T17:42:14.034Z",
+ "finished_at": "2026-10-16T17:44:10.701Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -24,13 +24,13 @@
   "tools": "Playwright + @axe-core/playwright (chromium)"
  },
  "checks": {
-  "player_suite": false,
+  "player_suite": true,
   "review_suite": true
  },
  "results": [
   {
    "suite": "player",
-   "ok": false,
+   "ok": true,
    "tests": [
     {
      "title": "proof page never fakes a run",
@@ -82,7 +82,7 @@
     },
     {
      "title": "landing: the listener mascot is decorative and reacts to the description toggle",
-     "status": "failed"
+     "status": "passed"
     },
     {
      "title": "player: picker and drawer open",
@@ -125,7 +125,7 @@
      "status": "passed"
     }
    ],
-   "passed": 22,
+   "passed": 23,
    "total": 23
   },
   {
@@ -159,7 +159,7 @@
  ],
  "summary": {
   "player": {
-   "passed": 22,
+   "passed": 23,
    "total": 23
   },
   "review": {

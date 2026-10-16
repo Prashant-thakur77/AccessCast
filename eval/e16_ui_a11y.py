@@ -10,6 +10,8 @@ import argparse
 import json
 import os
 import subprocess
+import sys
+from pathlib import Path
 
 from accesscast.config import REPO_ROOT
 from eval.common import Experiment, run_experiment
@@ -59,6 +61,14 @@ def main() -> int:
     )
 
     def body(e: Experiment) -> None:
+        if Path(args.site).resolve() == (REPO_ROOT / "projects" / "_fixture_site").resolve():
+            # always test the current pages, never a stale build (own process: it switches to fake mode)
+            subprocess.run(
+                [sys.executable, "-c", "from accesscast.cli import demo_fixture; demo_fixture(serve=False)"],
+                cwd=REPO_ROOT,
+                check=True,
+                capture_output=True,
+            )
         player = run_suite(None, {"ACCESSCAST_SITE_DIR": args.site})
         review = run_suite("playwright.review.config.ts", {"ACCESSCAST_REVIEW_FIXTURE": args.review_fixture})
         e.results = [{"suite": "player", **player}, {"suite": "review", **review}]
