@@ -100,6 +100,7 @@ class LlmClient:
         self.log_path = log_path
         self.fake_handler = fake_handler
         self._http = httpx.Client(timeout=C.LLM_TIMEOUT_S)
+        self._down_until: dict[str, float] = {}
         self._limiters: dict[str, RateLimiter] = {
             "local": RateLimiter(64, 0),
             "local_audio": RateLimiter(32, 0),
@@ -250,6 +251,14 @@ class LlmClient:
                     0,
                 )  # 0 attempts = cache hit
         last: Exception | None = None
+        down = self._down_until.get(prov, 0.0)
+        if (
+            time.monotonic() < down
+        ):  # circuit open: fail closed at once instead of waiting out every retry again
+            raise ModelEndpointError(
+                f"{prov} marked down after a call failed every retry; not asking again until "
+                f"{down - time.monotonic():.0f} s from now"
+            )
         for attempt in range(1, C.LLM_MAX_RETRIES + 2):
             lim.wait_turn()
             try:
@@ -295,6 +304,7 @@ class LlmClient:
                 )
                 tmp.replace(cache)
             return out
+        self._down_until[prov] = time.monotonic() + C.LLM_CIRCUIT_OPEN_S
         raise ModelEndpointError(f"{prov} failed after retries: {last}")
 
     @staticmethod
