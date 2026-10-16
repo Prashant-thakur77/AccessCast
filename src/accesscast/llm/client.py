@@ -8,6 +8,7 @@ strict; never logs keys or image/audio bytes.
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import os
 import random
@@ -237,6 +238,17 @@ class LlmClient:
                 )
         if prov != "tokenfactory":  # Token Factory silently drops chat_template_kwargs (SayAgain's finding)
             body["chat_template_kwargs"] = {"enable_thinking": False}
+        cache = self._cache_path(prov, body)
+        if cache is not None and cache.exists():
+            hit = json.loads(cache.read_text(encoding="utf-8"))
+            if not self.strict or hit["served"].split("/")[-1].lower() == model.split("/")[-1].lower():
+                return (
+                    hit["text"],
+                    hit["served"],
+                    hit["tokens_in"],
+                    hit["tokens_out"],
+                    0,
+                )  # 0 attempts = cache hit
         last: Exception | None = None
         for attempt in range(1, C.LLM_MAX_RETRIES + 2):
             lim.wait_turn()
@@ -264,14 +276,37 @@ class LlmClient:
                 raise ModelEndpointError(
                     f"{prov} answered with model {served!r}, expected {model!r} (strict)"
                 )
-            return (
+            out = (
                 text,
                 served or model,
                 int(usage.get("prompt_tokens", 0)),
                 int(usage.get("completion_tokens", 0)),
                 attempt,
             )
+            if cache is not None:
+                cache.parent.mkdir(parents=True, exist_ok=True)
+                tmp = cache.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
+                tmp.write_text(
+                    json.dumps(
+                        {"text": out[0], "served": out[1], "tokens_in": out[2], "tokens_out": out[3]},
+                        ensure_ascii=False,
+                    ),
+                    encoding="utf-8",
+                )
+                tmp.replace(cache)
+            return out
         raise ModelEndpointError(f"{prov} failed after retries: {last}")
+
+    @staticmethod
+    def _cache_path(prov: str, body: dict[str, Any]) -> Path | None:
+        """Opt-in (ACCESSCAST_LLM_CACHE=<dir>): successful answers keyed by the SHA-256 of the exact request body
+        (model, prompt text, images, temperature, seed, max tokens) and provider, so a re-run after an endpoint
+        outage repeats only the calls that failed. Never set for E9, E11 or E13, which measure repeated calls."""
+        root = os.environ.get("ACCESSCAST_LLM_CACHE")
+        if not root:
+            return None
+        key = hashlib.sha256((prov + "\n" + canonical_json(body)).encode("utf-8")).hexdigest()
+        return Path(root) / key[:2] / f"{key}.json"
 
     @staticmethod
     def _backoff(attempt: int, retry_after: str | None) -> None:

@@ -11,6 +11,11 @@ if [ -x workers/.venv-gpu/bin/python ]; then
   export ACCESSCAST_WORKER_PYTHON="$PWD/workers/.venv-gpu/bin/python" ACCESSCAST_WORKER_DEVICE=gpu
 fi
 export ACCESSCAST_RECORD_REPLAY="$PWD/logs/replay_tf"
-for v in "$@"; do
-  echo "== $v"; uv run accesscast run "$v" --provider tokenfactory --strict-provider || echo "FAILED: $v"
+export ACCESSCAST_LLM_CACHE="${ACCESSCAST_LLM_CACHE:-$PWD/logs/llm_cache}"
+# Two passes: Token Factory drops requests for minutes at a time; the second pass replays every answer that
+# succeeded (ACCESSCAST_LLM_CACHE) and asks again only for the calls that failed.
+for pass in 1 2; do
+  for v in "$@"; do
+    echo "== pass $pass: $v"; uv run accesscast run "$v" --provider tokenfactory --strict-provider || echo "FAILED: $v"
+  done
 done

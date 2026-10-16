@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from typing import Any
 
@@ -68,6 +69,9 @@ def oracle(
 
 
 def main() -> int:
+    os.environ.pop(
+        "ACCESSCAST_LLM_CACHE", None
+    )  # this experiment measures repeated live calls: never a cache
     ap = argparse.ArgumentParser()
     ap.add_argument("--k", type=int, default=20)
     ap.add_argument("--cases", default="")
