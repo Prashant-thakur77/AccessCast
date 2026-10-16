@@ -117,7 +117,6 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
     info = run.info
     store = ReviewStore(proj.root)
     items = store.merged()
-    items, edit_failures = _revoice(run, items)
     wanted = list(versions or AUDIENCE_VERSIONS)
     # Only render versions whose items exist (hi/it description needs approved English lines first).
     present = {f"{i.kind.value}.{i.lang}" for i in items.values()}
@@ -131,6 +130,7 @@ def render_all(run: Run, *, mode: str = "draft", versions: Sequence[str] | None 
         gate.check_fresh(proj.root, store)  # raises PermissionError on refusal
         if not res.human_reviewed:
             raise PermissionError("public render needs every description and easy-read line approved by a person")
+    items, edit_failures = _revoice(run, items)  # only after the gate passes: a refusal returns at once
     watermark = not (public and res.human_reviewed)
     rdir = proj.p("render")
     tdir = proj.p("render", "tracks")
