@@ -812,7 +812,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "f114467a2ea4720c0c4c6d8ade27e6555f96d62f35e33f77ba6932b2aff9252c",
+     "sha256": "cee89f40723349f61658a024852ce5fca1361c8cd4963acc0d8edb620fd1d261",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -833,7 +833,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "f114467a2ea4720c0c4c6d8ade27e6555f96d62f35e33f77ba6932b2aff9252c",
+     "sha256": "cee89f40723349f61658a024852ce5fca1361c8cd4963acc0d8edb620fd1d261",
      "pointer": "/summary/player/total"
     }
    ],
@@ -847,14 +847,14 @@
   {
    "claim_id": "e16.review_passed",
    "text": "review-app accessibility tests passed (Playwright + axe-core)",
-   "value": 5,
+   "value": 6,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "f114467a2ea4720c0c4c6d8ade27e6555f96d62f35e33f77ba6932b2aff9252c",
+     "sha256": "cee89f40723349f61658a024852ce5fca1361c8cd4963acc0d8edb620fd1d261",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -862,20 +862,20 @@
     "README.md"
    ],
    "display": [
-    "5"
+    "6"
    ]
   },
   {
    "claim_id": "e16.review_total",
    "text": "review-app accessibility tests run",
-   "value": 5,
+   "value": 6,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "f114467a2ea4720c0c4c6d8ade27e6555f96d62f35e33f77ba6932b2aff9252c",
+     "sha256": "cee89f40723349f61658a024852ce5fca1361c8cd4963acc0d8edb620fd1d261",
      "pointer": "/summary/review/total"
     }
    ],
@@ -883,7 +883,7 @@
     "README.md"
    ],
    "display": [
-    "5"
+    "6"
    ]
   }
  ]
