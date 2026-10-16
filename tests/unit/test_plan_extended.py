@@ -26,3 +26,25 @@ def test_extended_line_never_splits_a_word_when_no_breath_is_near():
     vad = [VadSegment(start_ms=900, end_ms=29500)]
     plans = plan_description([], _ev(15500), words, vad, CAL)
     assert plans[0].anchor_ms == 29500  # next boundary after the event; AD005 then sends it to a person
+
+
+def test_long_pause_holds_several_lines_in_time_order_with_disjoint_slots():
+    from accesscast.schemas import Gap
+
+    facts = [
+        VisibleFact(
+            fid=f"F00{i}", frames=[i], text=f"Fact number {i} is visible.", priority=4, important=True
+        )
+        for i in range(3)
+    ]
+    ev = {
+        "SC001": SceneEvidence(
+            scene_id="SC001", frames=["a", "b", "c"], frame_ms=[1000, 6000, 11000], visible_facts=facts
+        )
+    }
+    gap = Gap(gap_id="G001", start_ms=0, end_ms=15000, len_ms=15000, scene_id="SC001")
+    plans = plan_description([gap], ev, [], [], CAL)
+    assert [p.extended for p in plans] == [False, False, False]
+    assert [p.anchor_ms for p in plans] == [0, 4000, 9000]
+    for a, b in zip(plans, plans[1:], strict=False):
+        assert a.slot_end_ms <= b.anchor_ms

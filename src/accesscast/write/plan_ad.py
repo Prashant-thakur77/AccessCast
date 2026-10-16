@@ -77,51 +77,69 @@ def plan_description(
         if f.priority <= cutoff
     ]
     for gi, g in enumerate(gaps):
-        eligible: list[tuple[int, VisibleFact, SceneEvidence]] = []
-        for ev, f in all_facts:
-            key = f"{ev.scene_id}:{f.fid}"
-            if key in used:
+        # A long pause holds several lines, in time order, in disjoint slots: each line runs from its anchor to the
+        # next line's anchor (or the pause end). One line per pause pushed the rest of a long musical intro to
+        # extended description seconds later (dev run, docs/incidents.md 2026-10-16).
+        cursor = g.start_ms
+        while True:
+            eligible: list[tuple[int, VisibleFact, SceneEvidence]] = []
+            for ev, f in all_facts:
+                if f"{ev.scene_id}:{f.fid}" in used:
+                    continue
+                lo, hi = _event_window(f, ev)
+                if cursor + C.AD_PAD_BEFORE_MS <= hi and g.end_ms >= lo:
+                    anchor = max(cursor, lo)
+                    if g.end_ms - anchor >= C.MIN_GAP_MS:
+                        eligible.append((anchor, f, ev))
+            if not eligible:
+                break  # "Do not try to fill every pause" (DCMP)
+            first = min(a for a, _, _ in eligible)
+            near = [x for x in eligible if x[0] <= first + C.AD_LINE_HORIZON_MS]
+            near.sort(key=lambda x: (x[1].priority, x[0]))
+            anchor, _, ev0 = near[0]
+            chosen = [f for a, f, ev in eligible if ev.scene_id == ev0.scene_id and abs(a - anchor) <= 500][
+                :3
+            ]
+            anchor = max(a for a, f, _ in eligible if f in chosen)  # never before any grouped fact's window
+            later = [a for a, f, _ in eligible if f not in chosen and a >= anchor + C.MIN_GAP_MS]
+            slot_end = min([g.end_ms, *later])
+            usable = (
+                math.floor(
+                    ((slot_end - anchor - C.AD_PAD_BEFORE_MS - C.AD_PAD_AFTER_MS) / 1000 - cal.intercept_s)
+                    * cal.wps_voice
+                    * rate
+                )
+                - 1
+            )
+            if usable < C.AD_MIN_USEFUL_WORDS:
+                if slot_end >= g.end_ms:
+                    break  # too short to say anything useful; important facts become extended candidates
+                cursor = slot_end
                 continue
-            lo, hi = _event_window(f, ev)
-            if g.start_ms + C.AD_PAD_BEFORE_MS <= hi and g.end_ms >= lo:
-                anchor = max(g.start_ms, lo)
-                if g.end_ms - anchor >= C.MIN_GAP_MS:
-                    eligible.append((anchor, f, ev))
-        if not eligible:
-            continue  # "Do not try to fill every pause" (DCMP)
-        eligible.sort(key=lambda x: (x[1].priority, x[0]))
-        anchor = max(a for a, _, _ in eligible[:1])
-        ev0 = eligible[0][2]
-        chosen = [f for a, f, ev in eligible if ev.scene_id == ev0.scene_id and a <= anchor + 500][:3]
-        wm = words_budget(g.end_ms - anchor, cal, rate)
-        if (
-            math.floor(
-                ((g.end_ms - anchor - C.AD_PAD_BEFORE_MS - C.AD_PAD_AFTER_MS) / 1000 - cal.intercept_s)
-                * cal.wps_voice
-                * rate
+            for f in chosen:
+                used.add(f"{ev0.scene_id}:{f.fid}")
+            wm = words_budget(slot_end - anchor, cal, rate)
+            plans.append(
+                PlannedLine(
+                    item_id="",
+                    gap=g,
+                    scene_id=ev0.scene_id,
+                    anchor_ms=anchor,
+                    slot_start_ms=anchor if anchor > g.start_ms else g.start_ms,
+                    slot_end_ms=slot_end,
+                    budget=Budget(
+                        words_max=wm,
+                        seconds_max=round((slot_end - anchor) / 1000, 2),
+                        wps_voice=cal.wps_voice,
+                    ),
+                    facts=chosen,
+                    gap_index=gi,
+                    on_screen_text=[t.text for t in ev0.on_screen_text],
+                )
             )
-            - 1
-            < C.AD_MIN_USEFUL_WORDS
-        ):
-            continue  # too short to say anything useful; important facts become extended candidates
-        for f in chosen:
-            used.add(f"{ev0.scene_id}:{f.fid}")
-        plans.append(
-            PlannedLine(
-                item_id="",
-                gap=g,
-                scene_id=ev0.scene_id,
-                anchor_ms=anchor,
-                slot_start_ms=g.start_ms,
-                slot_end_ms=g.end_ms,
-                budget=Budget(
-                    words_max=wm, seconds_max=round((g.end_ms - anchor) / 1000, 2), wps_voice=cal.wps_voice
-                ),
-                facts=chosen,
-                gap_index=gi,
-                on_screen_text=[t.text for t in ev0.on_screen_text],
-            )
-        )
+            cursor = slot_end
+            if cursor >= g.end_ms:
+                break
     # Pauses in scenes whose evidence failed go to a person (PLAN §9 S5): a line with no facts, never sent to Gemma.
     failed = {sid for sid, ev in evidence.items() if ev.status != "ok"}
     for gi, g in enumerate(gaps):
@@ -154,6 +172,22 @@ def plan_description(
         lo, hi = _event_window(f, ev)
         event_start = lo + C.AD_EVENT_BEFORE_MS
         ok = [b for b in bounds if lo <= b <= hi and not any(w.start_ms < b < w.end_ms for w in words)]
+        # Inside a pause (no words, VAD speech, lyrics or unknown sound there) the video may hold right at the
+        # event, or where a planned line's slot ends, as long as no planned line is speaking at that moment.
+        slots = [(p.slot_start_ms, p.slot_end_ms) for p in plans if not p.extended]
+        in_pause = [
+            b
+            for b in (
+                event_start,
+                *(a for a, _ in slots),
+                *(e for _, e in slots),
+                *(g.start_ms for g in gaps),
+            )
+            if lo <= b <= hi
+            and any(g.start_ms <= b <= g.end_ms for g in gaps)
+            and not any(a < b < e for a, e in slots)
+        ]
+        ok = sorted(set(ok) | set(in_pause))
         # No segment boundary near the event: use a breath between two words inside the event window
         # (the video holds there, so nothing is talked over) instead of a boundary seconds later (AD005).
         brk = [

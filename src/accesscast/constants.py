@@ -167,6 +167,9 @@ def max_facts(scene_seconds: float) -> int:
 # ---------------------------------------------------------------- planning and writing (S6, S7)
 AD_EVENT_BEFORE_MS = 2_000  # W3C WAI "at or just before the visual"; PLAN §9 S6
 AD_EVENT_AFTER_MS = 1_000  # PLAN §9 S6
+AD_LINE_HORIZON_MS = (
+    4_000  # dev-tuned: in a long pause, the most important event starting within the next 4 s goes first
+)
 AD_EXT_MIN_BREAK_MS = (
     150  # dev-tuned: shortest pause between two words where extended description may hold the video
 )

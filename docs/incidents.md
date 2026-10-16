@@ -70,3 +70,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 **Symptom.** With the dev batch running, E15 on the CPU (Whisper large-v3 in float32, 4.6 GB resident) pushed the 15 GB workstation out of memory; the kernel killed VS Code, not our job.
 **Root cause.** Two heavy jobs at once and no memory limit, so the kernel's out-of-memory killer picked by size among all processes.
 **Fix.** One heavy job at a time (E15 waits until the dev batch is done and then uses the GPU). Long jobs start through `scripts/capped.sh`: a cgroup scope with `MemoryMax` (7 GB by default) and `oom_score_adj=1000`, so if memory runs out it is our job that dies, and a killed worker is a failed stage, never a pass.
+
+## 2026-10-16 Planner put one line per pause, however long
+**Symptom.** On the dev clips "Food" and "Sintel", 13 description lines failed AD005 (too far from what they describe), and most lines became extended description.
+**Root cause.** The planner chose one line per pause. In a 15-second musical opening, every other important moment was pushed to extended description at the next speech boundary, seconds after its event. Extended lines could also only hold at speech-segment boundaries, never inside a pause.
+**Fix.** A long pause now holds several lines in time order with disjoint slots (most important event among those starting in the next 4 s first). Extended lines may hold at the event itself, or at a slot or pause start, when that moment is inside a pause and no line is speaking. Replayed on the saved dev analysis (no new model calls): AD005 cases 13 → 1 (the remaining one is inside a stretch the sound classifier could not rule out as speech, so it goes to a person, as designed). Test: `test_plan_extended.py`.
