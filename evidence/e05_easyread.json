@@ -1,0 +1,1446 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e05_easyread",
+ "split": "test",
+ "passed": true,
+ "git_commit": "fccc2ecdede1e2ef258b69f296a88c0c0cbabe79",
+ "git_dirty": false,
+ "freeze_tag": "test-freeze-3",
+ "started_at": "2026-10-16T23:22:09.097Z",
+ "finished_at": "2026-10-16T23:27:58.882Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "gpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "question": "Are easy-read captions easier to read without changing the meaning?",
+  "one_change": "rewrite method",
+  "arms": {
+   "gemma_alone": "Gemma 4 31B, same easy prompt, no checks (attempt 0 as written)",
+   "accesscast": "same attempt 0 + easy-read checks + up to 3 Gemma repairs; failures go to a person"
+  },
+  "reference": "the unsimplified caption text",
+  "data": "W3C human caption cues (never used for tuning)",
+  "lead_metric": "blind human rating sheet (30 cues, both arms, arm hidden)",
+  "automatic_metrics_note": "secondary; they overlap with our own easy-read rules",
+  "wpm_max": 130,
+  "provider": "tokenfactory",
+  "strict_provider": true,
+  "worker_mode": "real",
+  "metrics_stand_in": false,
+  "dry_run": false,
+  "simpitiki_pairs": null
+ },
+ "checks": {
+  "every_cue_rewritten_or_counted": true,
+  "rating_sheet_written": true,
+  "strict_provider": true
+ },
+ "results": [
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0001",
+   "dur_ms": 2120,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8491042852401733,
+   "bertscore_accesscast": 0.8491042852401733
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0002",
+   "dur_ms": 1799,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8026860952377319,
+   "bertscore_accesscast": 0.8026860952377319
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0003",
+   "dur_ms": 4999,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9083144664764404,
+   "bertscore_accesscast": 0.9083144664764404
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0004",
+   "dur_ms": 1590,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7466843128204346,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0005",
+   "dur_ms": 2380,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6384705305099487,
+   "bertscore_accesscast": 0.6384705305099487
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0006",
+   "dur_ms": 3700,
+   "published": true,
+   "repairs": 3,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7086983919143677,
+   "bertscore_accesscast": 0.7569872140884399
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0007",
+   "dur_ms": 2800,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8435127139091492,
+   "bertscore_accesscast": 0.8435127139091492
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0008",
+   "dur_ms": 4860,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7715785503387451,
+   "bertscore_accesscast": 0.7715785503387451
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0009",
+   "dur_ms": 3830,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.931789219379425,
+   "bertscore_accesscast": 0.931789219379425
+  },
+  {
+   "video": "perspectives_captions",
+   "cue": "easy.en.0010",
+   "dur_ms": 4440,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8778104782104492,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0001",
+   "dur_ms": 2220,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6932224035263062,
+   "bertscore_accesscast": 0.6932224035263062
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0002",
+   "dur_ms": 3159,
+   "published": true,
+   "repairs": 2,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.644295871257782,
+   "bertscore_accesscast": 0.820222795009613
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0003",
+   "dur_ms": 4259,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6886848211288452,
+   "bertscore_accesscast": 0.9028470516204834
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0004",
+   "dur_ms": 5880,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8342059850692749,
+   "bertscore_accesscast": 0.8342059850692749
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0005",
+   "dur_ms": 4960,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8607523441314697,
+   "bertscore_accesscast": 0.8607523441314697
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0006",
+   "dur_ms": 4920,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7922117710113525,
+   "bertscore_accesscast": 0.7922117710113525
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0007",
+   "dur_ms": 3880,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7453932762145996,
+   "bertscore_accesscast": 0.7453932762145996
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0008",
+   "dur_ms": 4060,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8023337721824646,
+   "bertscore_accesscast": 0.8023337721824646
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0009",
+   "dur_ms": 2820,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8393348455429077,
+   "bertscore_accesscast": 0.8393348455429077
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0010",
+   "dur_ms": 3020,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7414668798446655,
+   "bertscore_accesscast": 0.7414668798446655
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0011",
+   "dur_ms": 3240,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8216780424118042,
+   "bertscore_accesscast": 0.8216780424118042
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0012",
+   "dur_ms": 2620,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8470192551612854,
+   "bertscore_accesscast": 0.8470192551612854
+  },
+  {
+   "video": "perspectives_contrast",
+   "cue": "easy.en.0013",
+   "dur_ms": 4520,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8588249683380127,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_controls",
+   "cue": "easy.en.0001",
+   "dur_ms": 3740,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8842079639434814,
+   "bertscore_accesscast": 0.8842079639434814
+  },
+  {
+   "video": "perspectives_controls",
+   "cue": "easy.en.0002",
+   "dur_ms": 4080,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7623283267021179,
+   "bertscore_accesscast": 0.7623283267021179
+  },
+  {
+   "video": "perspectives_controls",
+   "cue": "easy.en.0003",
+   "dur_ms": 5580,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.812666118144989,
+   "bertscore_accesscast": 0.812666118144989
+  },
+  {
+   "video": "perspectives_controls",
+   "cue": "easy.en.0004",
+   "dur_ms": 2620,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8141458034515381,
+   "bertscore_accesscast": 0.8141458034515381
+  },
+  {
+   "video": "perspectives_controls",
+   "cue": "easy.en.0005",
+   "dur_ms": 3460,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7134684324264526,
+   "bertscore_accesscast": 0.7134684324264526
+  },
+  {
+   "video": "perspectives_controls",
+   "cue": "easy.en.0006",
+   "dur_ms": 3760,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7812347412109375,
+   "bertscore_accesscast": 0.9353679418563843
+  },
+  {
+   "video": "perspectives_controls",
+   "cue": "easy.en.0007",
+   "dur_ms": 5140,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9371682405471802,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0001",
+   "dur_ms": 1760,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7127318978309631,
+   "bertscore_accesscast": 0.7127318978309631
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0002",
+   "dur_ms": 2180,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6854650378227234,
+   "bertscore_accesscast": 0.6854650378227234
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0003",
+   "dur_ms": 4220,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7473480701446533,
+   "bertscore_accesscast": 0.7473480701446533
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0004",
+   "dur_ms": 2860,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8629302382469177,
+   "bertscore_accesscast": 0.8629302382469177
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0005",
+   "dur_ms": 5660,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.821567177772522,
+   "bertscore_accesscast": 0.821567177772522
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0006",
+   "dur_ms": 4860,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7904258370399475,
+   "bertscore_accesscast": 0.7904258370399475
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0007",
+   "dur_ms": 4460,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8543251752853394,
+   "bertscore_accesscast": 0.8543251752853394
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0008",
+   "dur_ms": 2540,
+   "published": true,
+   "repairs": 2,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6242964267730713,
+   "bertscore_accesscast": 0.9079167246818542
+  },
+  {
+   "video": "perspectives_customizable",
+   "cue": "easy.en.0009",
+   "dur_ms": 4980,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 1.0000001192092896,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0001",
+   "dur_ms": 2120,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.772820770740509,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0002",
+   "dur_ms": 2960,
+   "published": false,
+   "repairs": 3,
+   "rules_failed": [
+    "ER001",
+    "ER005"
+   ],
+   "bertscore_gemma_alone": 0.7550970315933228,
+   "bertscore_accesscast": 0.7776544690132141
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0003",
+   "dur_ms": 3440,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8754062056541443,
+   "bertscore_accesscast": 0.8754062056541443
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0004",
+   "dur_ms": 3420,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6830365061759949,
+   "bertscore_accesscast": 0.6830365061759949
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0005",
+   "dur_ms": 3180,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.5964706540107727,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0006",
+   "dur_ms": 2220,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.747452974319458,
+   "bertscore_accesscast": 0.747452974319458
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0007",
+   "dur_ms": 1980,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9234868288040161,
+   "bertscore_accesscast": 0.9234868288040161
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0008",
+   "dur_ms": 2000,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8791747093200684,
+   "bertscore_accesscast": 0.8791747093200684
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0009",
+   "dur_ms": 3940,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.886390209197998,
+   "bertscore_accesscast": 0.886390209197998
+  },
+  {
+   "video": "perspectives_keyboard",
+   "cue": "easy.en.0010",
+   "dur_ms": 5740,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7548285722732544,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0001",
+   "dur_ms": 3360,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9246862530708313,
+   "bertscore_accesscast": 0.9246862530708313
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0002",
+   "dur_ms": 2240,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6796573996543884,
+   "bertscore_accesscast": 0.6796573996543884
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0003",
+   "dur_ms": 2380,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8208245038986206,
+   "bertscore_accesscast": 0.8208245038986206
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0004",
+   "dur_ms": 2440,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7238621115684509,
+   "bertscore_accesscast": 0.7238621115684509
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0005",
+   "dur_ms": 6120,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7481172680854797,
+   "bertscore_accesscast": 0.7481172680854797
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0006",
+   "dur_ms": 5160,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8536379933357239,
+   "bertscore_accesscast": 0.8536379933357239
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0007",
+   "dur_ms": 4040,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8271747827529907,
+   "bertscore_accesscast": 0.8271747827529907
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0008",
+   "dur_ms": 3460,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9244242310523987,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0009",
+   "dur_ms": 4020,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6968740224838257,
+   "bertscore_accesscast": 0.6968740224838257
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0010",
+   "dur_ms": 3320,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7624198198318481,
+   "bertscore_accesscast": 0.7624198198318481
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0011",
+   "dur_ms": 6340,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8424438834190369,
+   "bertscore_accesscast": 0.8424438834190369
+  },
+  {
+   "video": "perspectives_layout",
+   "cue": "easy.en.0012",
+   "dur_ms": 6340,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7548285722732544,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0001",
+   "dur_ms": 3380,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.825314998626709,
+   "bertscore_accesscast": 0.825314998626709
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0002",
+   "dur_ms": 3400,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7734197378158569,
+   "bertscore_accesscast": 0.7734197378158569
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0003",
+   "dur_ms": 3120,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6064742803573608,
+   "bertscore_accesscast": 0.6064742803573608
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0004",
+   "dur_ms": 3640,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8128423094749451,
+   "bertscore_accesscast": 0.8128423094749451
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0005",
+   "dur_ms": 2040,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8501499891281128,
+   "bertscore_accesscast": 0.8501499891281128
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0006",
+   "dur_ms": 2520,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7215468287467957,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0007",
+   "dur_ms": 3320,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8555699586868286,
+   "bertscore_accesscast": 0.8555699586868286
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0008",
+   "dur_ms": 4920,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8214820623397827,
+   "bertscore_accesscast": 0.8214820623397827
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0009",
+   "dur_ms": 3940,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8799874782562256,
+   "bertscore_accesscast": 0.8799874782562256
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0010",
+   "dur_ms": 3480,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8318256139755249,
+   "bertscore_accesscast": 0.8318256139755249
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0011",
+   "dur_ms": 4580,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7421035170555115,
+   "bertscore_accesscast": 0.7421035170555115
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0012",
+   "dur_ms": 2400,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7121854424476624,
+   "bertscore_accesscast": 0.7121854424476624
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0013",
+   "dur_ms": 3240,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8798001408576965,
+   "bertscore_accesscast": 0.8798001408576965
+  },
+  {
+   "video": "perspectives_notifications",
+   "cue": "easy.en.0014",
+   "dur_ms": 5800,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7801907658576965,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0001",
+   "dur_ms": 4940,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8288239240646362,
+   "bertscore_accesscast": 0.8288239240646362
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0002",
+   "dur_ms": 3420,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8935583829879761,
+   "bertscore_accesscast": 0.8935583829879761
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0003",
+   "dur_ms": 3860,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7681465744972229,
+   "bertscore_accesscast": 0.7681465744972229
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0004",
+   "dur_ms": 1620,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7548169493675232,
+   "bertscore_accesscast": 0.7548169493675232
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0005",
+   "dur_ms": 1980,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9031747579574585,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0006",
+   "dur_ms": 1180,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7036250233650208,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0007",
+   "dur_ms": 3960,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 1.0,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0008",
+   "dur_ms": 2920,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7894397377967834,
+   "bertscore_accesscast": 0.7894397377967834
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0009",
+   "dur_ms": 2980,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8031198978424072,
+   "bertscore_accesscast": 0.8031198978424072
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0010",
+   "dur_ms": 2200,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6852108836174011,
+   "bertscore_accesscast": 0.6852108836174011
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0011",
+   "dur_ms": 1420,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9999999403953552,
+   "bertscore_accesscast": 0.9999999403953552
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0012",
+   "dur_ms": 3720,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7715204358100891,
+   "bertscore_accesscast": 0.7715204358100891
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0013",
+   "dur_ms": 3020,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 1.0,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0014",
+   "dur_ms": 2759,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7586314678192139,
+   "bertscore_accesscast": 0.7586314678192139
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0015",
+   "dur_ms": 2819,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8183513879776001,
+   "bertscore_accesscast": 0.8183513879776001
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0016",
+   "dur_ms": 980,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9999999403953552,
+   "bertscore_accesscast": 0.9999999403953552
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0017",
+   "dur_ms": 2480,
+   "published": false,
+   "repairs": 0,
+   "rules_failed": [
+    "GEN001"
+   ]
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0018",
+   "dur_ms": 3160,
+   "published": false,
+   "repairs": 0,
+   "rules_failed": [
+    "ER006",
+    "GEN001"
+   ]
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0019",
+   "dur_ms": 2600,
+   "published": false,
+   "repairs": 0,
+   "rules_failed": [
+    "GEN001"
+   ]
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0020",
+   "dur_ms": 1980,
+   "published": false,
+   "repairs": 0,
+   "rules_failed": [
+    "GEN001"
+   ]
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0021",
+   "dur_ms": 1120,
+   "published": false,
+   "repairs": 0,
+   "rules_failed": [
+    "ER006",
+    "GEN001"
+   ]
+  },
+  {
+   "video": "perspectives_speech-recognition",
+   "cue": "easy.en.0022",
+   "dur_ms": 2940,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6772757172584534,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0001",
+   "dur_ms": 3140,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.887991189956665,
+   "bertscore_accesscast": 0.887991189956665
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0002",
+   "dur_ms": 3880,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7687146663665771,
+   "bertscore_accesscast": 0.7687146663665771
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0003",
+   "dur_ms": 5100,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8108084201812744,
+   "bertscore_accesscast": 0.8108084201812744
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0004",
+   "dur_ms": 3580,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.859399139881134,
+   "bertscore_accesscast": 0.859399139881134
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0005",
+   "dur_ms": 3820,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.786653459072113,
+   "bertscore_accesscast": 0.8818321824073792
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0006",
+   "dur_ms": 3680,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7298609614372253,
+   "bertscore_accesscast": 0.7298609614372253
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0007",
+   "dur_ms": 1600,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9120330214500427,
+   "bertscore_accesscast": 0.9120330214500427
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0008",
+   "dur_ms": 3020,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8240575194358826,
+   "bertscore_accesscast": 0.8240575194358826
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0009",
+   "dur_ms": 6060,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8623237013816833,
+   "bertscore_accesscast": 0.8623237013816833
+  },
+  {
+   "video": "perspectives_text-to-speech",
+   "cue": "easy.en.0010",
+   "dur_ms": 5040,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.9371682405471802,
+   "bertscore_accesscast": 1.0000001192092896
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0001",
+   "dur_ms": 1700,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6164416670799255,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0002",
+   "dur_ms": 2280,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6920217871665955,
+   "bertscore_accesscast": 0.6920217871665955
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0003",
+   "dur_ms": 3560,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.5833722352981567,
+   "bertscore_accesscast": 0.5833722352981567
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0004",
+   "dur_ms": 1520,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.571577250957489,
+   "bertscore_accesscast": 0.571577250957489
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0005",
+   "dur_ms": 2500,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6499789953231812,
+   "bertscore_accesscast": 0.6499789953231812
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0006",
+   "dur_ms": 3160,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8062617182731628,
+   "bertscore_accesscast": 0.8062617182731628
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0007",
+   "dur_ms": 2100,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.6660088300704956,
+   "bertscore_accesscast": 1.0
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0008",
+   "dur_ms": 3200,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7142506241798401,
+   "bertscore_accesscast": 0.7142506241798401
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0009",
+   "dur_ms": 3720,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8005772233009338,
+   "bertscore_accesscast": 0.8005772233009338
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0010",
+   "dur_ms": 2440,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.8406448364257812,
+   "bertscore_accesscast": 0.8406448364257812
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0011",
+   "dur_ms": 3620,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7200826406478882,
+   "bertscore_accesscast": 0.7200826406478882
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0012",
+   "dur_ms": 2000,
+   "published": true,
+   "repairs": 0,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.5972886681556702,
+   "bertscore_accesscast": 0.5972886681556702
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0013",
+   "dur_ms": 4980,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7648663520812988,
+   "bertscore_accesscast": 0.937549889087677
+  },
+  {
+   "video": "perspectives_understandable",
+   "cue": "easy.en.0014",
+   "dur_ms": 5640,
+   "published": true,
+   "repairs": 1,
+   "rules_failed": [],
+   "bertscore_gemma_alone": 0.7924674153327942,
+   "bertscore_accesscast": 1.0000001192092896
+  }
+ ],
+ "summary": {
+  "arms": {
+   "source": {
+    "cues": 121,
+    "empty": 0,
+    "at_or_under_130_wpm": {
+     "k": 57,
+     "n": 121
+    },
+    "words_per_sentence": {
+     "n": 121,
+     "mean": 7.446280991735537,
+     "median": 7.0,
+     "min": 1.0,
+     "max": 17.0
+    },
+    "flesch_reading_ease_en": {
+     "n": 121,
+     "mean": 49.04411155446403,
+     "median": 50.470769230769264,
+     "min": -91.29499999999996,
+     "max": 118.17500000000001
+    },
+    "numbers_kept": {
+     "k": 121,
+     "n": 121
+    },
+    "negations_kept": {
+     "k": 121,
+     "n": 121
+    },
+    "bertscore_f1_vs_source": {
+     "n": 0
+    }
+   },
+   "gemma_alone": {
+    "cues": 121,
+    "empty": 5,
+    "at_or_under_130_wpm": {
+     "k": 106,
+     "n": 116
+    },
+    "words_per_sentence": {
+     "n": 116,
+     "mean": 5.543103448275862,
+     "median": 5.0,
+     "min": 1.0,
+     "max": 10.0
+    },
+    "flesch_reading_ease_en": {
+     "n": 116,
+     "mean": 82.82772167487687,
+     "median": 87.94500000000002,
+     "min": -21.809999999999945,
+     "max": 119.19000000000003
+    },
+    "numbers_kept": {
+     "k": 116,
+     "n": 116
+    },
+    "negations_kept": {
+     "k": 104,
+     "n": 116
+    },
+    "bertscore_f1_vs_source": {
+     "n": 116,
+     "mean": 0.7924908353336926,
+     "median": 0.796522319316864,
+     "min": 0.571577250957489,
+     "max": 1.0000001192092896
+    }
+   },
+   "accesscast_published": {
+    "cues": 115,
+    "empty": 0,
+    "at_or_under_130_wpm": {
+     "k": 106,
+     "n": 115
+    },
+    "words_per_sentence": {
+     "n": 115,
+     "mean": 5.834782608695652,
+     "median": 6.0,
+     "min": 1.0,
+     "max": 10.0
+    },
+    "flesch_reading_ease_en": {
+     "n": 115,
+     "mean": 74.06254658385096,
+     "median": 77.90500000000002,
+     "min": -52.039999999999964,
+     "max": 119.19000000000003
+    },
+    "numbers_kept": {
+     "k": 115,
+     "n": 115
+    },
+    "negations_kept": {
+     "k": 115,
+     "n": 115
+    },
+    "bertscore_f1_vs_source": {
+     "n": 115,
+     "mean": 0.8373571706854779,
+     "median": 0.8288239240646362,
+     "min": 0.571577250957489,
+     "max": 1.0000001192092896
+    }
+   },
+   "gemma_alone_on_the_same_cues": {
+    "cues": 115,
+    "empty": 0,
+    "at_or_under_130_wpm": {
+     "k": 105,
+     "n": 115
+    },
+    "words_per_sentence": {
+     "n": 115,
+     "mean": 5.547826086956522,
+     "median": 5.0,
+     "min": 1.0,
+     "max": 10.0
+    },
+    "flesch_reading_ease_en": {
+     "n": 115,
+     "mean": 82.82344099378885,
+     "median": 87.94500000000002,
+     "min": -21.809999999999945,
+     "max": 119.19000000000003
+    },
+    "numbers_kept": {
+     "k": 115,
+     "n": 115
+    },
+    "negations_kept": {
+     "k": 104,
+     "n": 115
+    },
+    "bertscore_f1_vs_source": {
+     "n": 115,
+     "mean": 0.7928159988444784,
+     "median": 0.8005772233009338,
+     "min": 0.571577250957489,
+     "max": 1.0000001192092896
+    }
+   }
+  },
+  "accesscast_routing": {
+   "published": 115,
+   "sent_to_person": 6,
+   "of": 121
+  },
+  "note": "LED BY THE BLIND HUMAN RATING. The automatic numbers are secondary and overlap with our own easy-read rules.",
+  "outputs": {
+   "file": "data/eval_outputs/e05_easyread/easy_test.jsonl",
+   "sha256": "57d099a0cda17869bfe70cfe4b5e024a92197c42bd0f18ca250c34b5e3d5b0eb",
+   "rows": 121,
+   "committed": false
+  },
+  "rating_sheet": {
+   "sheet": "data/labels/e05_test_blind_sheet.csv",
+   "cues": 30,
+   "rows": 60,
+   "key": "data/labels/e05_test_blind_key.json",
+   "key_committed": false,
+   "status": "waiting for a person to rate"
+  },
+  "served_model_id": "self-dploy/Gemma-4-31B-IT",
+  "metric_models": {
+   "bertscore:en": {
+    "model": "microsoft/deberta-xlarge-mnli",
+    "hash": "microsoft/deberta-xlarge-mnli_L40_no-idf_version=0.3.12(hug_trans=5.20.0)",
+    "device": "cuda",
+    "versions": {
+     "bert-score": "0.3.13",
+     "transformers": "5.20.0",
+     "torch": "2.14.1+cu126"
+    },
+    "metric": "BERTScore"
+   }
+  }
+ },
+ "error": null
+}
