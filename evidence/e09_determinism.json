@@ -1,0 +1,109 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e09_determinism",
+ "split": "dev",
+ "passed": false,
+ "git_commit": "d923af93242371761b5160aeb04d54e8cb8a19d2",
+ "git_dirty": false,
+ "freeze_tag": null,
+ "started_at": "2026-10-16T22:33:14.631Z",
+ "finished_at": "2026-10-16T22:57:12.063Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "gpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "runs": 3,
+  "clips": "nasa_GSFC_20170614_Eclipse_m12534_Plane,blender_sintel_trailer",
+  "fresh_process_per_run": true,
+  "separate_project_dirs": true,
+  "provider": "tokenfactory",
+  "llm_cache": "off",
+  "sound_model": "ast",
+  "audio_model": "none"
+ },
+ "checks": {
+  "all_runs_completed": true,
+  "identical": false
+ },
+ "results": [
+  {
+   "clip": "nasa_GSFC_20170614_Eclipse_m12534_Plane",
+   "run": 1,
+   "ok": false,
+   "error": null
+  },
+  {
+   "clip": "nasa_GSFC_20170614_Eclipse_m12534_Plane",
+   "run": 2,
+   "ok": false,
+   "error": null
+  },
+  {
+   "clip": "blender_sintel_trailer",
+   "run": 0,
+   "ok": false,
+   "error": null
+  },
+  {
+   "clip": "blender_sintel_trailer",
+   "run": 1,
+   "ok": false,
+   "error": null
+  },
+  {
+   "clip": "blender_sintel_trailer",
+   "run": 2,
+   "ok": false,
+   "error": null
+  }
+ ],
+ "summary": {
+  "clips": {
+   "nasa_GSFC_20170614_Eclipse_m12534_Plane": {
+    "runs_ok": 1,
+    "identical_to_run1": {
+     "words": "1/1",
+     "gaps": "1/1",
+     "scenes": "1/1",
+     "sounds": "1/1",
+     "ad_drafts": "1/1",
+     "sdh": "1/1",
+     "easy": "1/1",
+     "subs_hi": "1/1",
+     "subs_it": "1/1",
+     "evidence/SC001": "1/1",
+     "evidence/SC002": "1/1",
+     "evidence/SC003": "1/1",
+     "evidence/SC004": "1/1",
+     "evidence/SC005": "1/1",
+     "stem/blind.en.desc_stem.wav": "1/1",
+     "stem/blind_ext.en.desc_stem.wav": "1/1",
+     "stem/deaf.en.desc_stem.wav": "1/1",
+     "stem/easy.en.desc_stem.wav": "1/1",
+     "stem/hi.desc_stem.wav": "1/1",
+     "stem/it.desc_stem.wav": "1/1"
+    },
+    "description_lines": 10,
+    "differing_description_lines_per_run": [],
+    "stem_max_sample_difference_dbfs": {
+     "blind.en.desc_stem.wav": null,
+     "blind_ext.en.desc_stem.wav": null,
+     "deaf.en.desc_stem.wav": null,
+     "easy.en.desc_stem.wav": null,
+     "hi.desc_stem.wav": null,
+     "it.desc_stem.wav": null
+    }
+   }
+  },
+  "all_artefacts_identical": false
+ },
+ "error": null
+}
