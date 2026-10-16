@@ -44,7 +44,9 @@ def diarize(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     for seg, _track, label in ann.itertracks(yield_label=True):
         if label not in names:
             names[label] = f"S{len(names) + 1}"
-        turns.append({"start_ms": round(seg.start * 1000), "end_ms": round(seg.end * 1000), "speaker": names[label]})
+        turns.append(
+            {"start_ms": round(seg.start * 1000), "end_ms": round(seg.end * 1000), "speaker": names[label]}
+        )
     event("progress", turns=len(turns))
     return {"model": MODEL, "turns": turns, "speakers": len(names), "device": dev, "timing": timing}
 
