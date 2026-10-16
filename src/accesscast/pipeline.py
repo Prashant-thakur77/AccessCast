@@ -46,6 +46,14 @@ from accesscast.schemas import (
 from accesscast.verify.base import VerifyContext
 
 
+def SOUND_MODEL() -> str:
+    """ACCESSCAST_SOUND_MODEL=ast: sound labels from AST in a worker instead of Gemma 4 E4B (D-021); recorded."""
+    v = os.environ.get("ACCESSCAST_SOUND_MODEL", "gemma")
+    if v not in ("gemma", "ast"):
+        raise UsageError(f"ACCESSCAST_SOUND_MODEL must be gemma or ast, not {v!r}")
+    return v
+
+
 def NO_AUDIO_MODEL() -> bool:
     """Dev-only mode for running before the droplet exists: no Gemma E4B, so S2b/S3 are explicitly not run."""
     return os.environ.get("ACCESSCAST_AUDIO_MODEL", "") == "none"
@@ -413,6 +421,7 @@ def stage_sounds(run: Run) -> None:
             free.append((cur, info.duration_ms))
         events: list[SoundEvent] = []
         rejected: list[str] = []
+        ast_windows: list[tuple[int, int, Path]] = []
         win = int(C.SOUND_WINDOW_MAX_S * 1000)
         for a, b in free:
             for s in range(a, b, win):
@@ -437,6 +446,9 @@ def stage_sounds(run: Run) -> None:
                         str(clip),
                     ]
                 )
+                if SOUND_MODEL() == "ast":  # labelled together below, in one worker call
+                    ast_windows.append((s, e, clip))
+                    continue
                 if (
                     NO_AUDIO_MODEL()
                 ):  # dev-only: loud non-speech windows are "other", recorded as energy-gate only
@@ -457,6 +469,32 @@ def stage_sounds(run: Run) -> None:
                 rejected += [x for x in labels if x not in C.SOUND_VOCAB and x != "unknown"]
                 label = "unknown" if labels == ["unknown"] else (ok[0] if ok else "other")
                 events.append(SoundEvent(start_ms=s, end_ms=e, label=label, source="model"))
+        if ast_windows:
+            from accesscast.analysis.sound_labels import label_from_audioset
+            from accesscast.workers_client import run_worker
+
+            try:
+                res = run_worker(
+                    "asr",
+                    "sounds",
+                    {
+                        "files": [str(c) for _, _, c in ast_windows],
+                        "model": C.SOUND_AST_MODEL,
+                        "top_k": C.SOUND_AST_TOP_K,
+                    },
+                    proj.p("logs", "worker"),
+                    proj.events,
+                    require_rocm=run.require_rocm,
+                )
+                labels = [
+                    label_from_audioset([(n, float(p)) for n, p in it["scores"]]) for it in res["items"]
+                ]
+            except Exception as ex:  # fail closed: unlabelled windows are treated like speech
+                labels = ["unknown"] * len(ast_windows)
+                rejected.append(f"error: {type(ex).__name__}")
+            for (s, e, _), lab in zip(ast_windows, labels, strict=True):
+                events.append(SoundEvent(start_ms=s, end_ms=e, label=lab, source="model"))
+            events.sort(key=lambda x: x.start_ms)
         merged: list[SoundEvent] = []
         for ev in events:
             if merged and merged[-1].label == ev.label and ev.start_ms - merged[-1].end_ms <= 50:
@@ -466,7 +504,11 @@ def stage_sounds(run: Run) -> None:
         write_json(
             proj.p("analysis", "sounds.json"),
             Sounds(
-                model="none: energy gate only (dev)" if NO_AUDIO_MODEL() else "google/gemma-4-E4B-it",
+                model=f"{C.SOUND_AST_MODEL} (AudioSet classes, not Gemma)"
+                if SOUND_MODEL() == "ast"
+                else "none: energy gate only (dev)"
+                if NO_AUDIO_MODEL()
+                else "google/gemma-4-E4B-it",
                 events=merged,
                 rejected_labels=rejected,
             ),

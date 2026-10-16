@@ -46,6 +46,90 @@ ASR_CHUNK_S = 30.0  # Gemma 4 audio input limit: 30 s per clip (Gemma 4 model ca
 SOUND_WINDOW_MAX_S = 5.0  # PLAN §9 S3
 SOUND_MIN_REGION_S = 1.0  # PLAN §9 S3
 SOUND_RMS_SILENCE = 0.01  # GemmaClip's silence gate idea (re-implemented), PLAN §9 S3
+# Sound labels without Gemma 4 E4B (D-021): MIT/ast-finetuned-audioset-10-10-0.4593 (AST, BSD-3-Clause) on AudioSet
+# classes, mapped to our closed vocabulary. Speech-like classes become "unknown", which the gap map treats as speech.
+SOUND_AST_MODEL = "MIT/ast-finetuned-audioset-10-10-0.4593"
+SOUND_AST_MIN_P = 0.15  # dev-tuned: an AudioSet class counts only at or above this probability
+SOUND_AST_TOP_K = 10
+AUDIOSET_TO_VOCAB: dict[str, str] = {
+    **dict.fromkeys(
+        ("Singing", "Song", "Choir", "Rapping", "Vocal music", "Pop music", "Hip hop music"),
+        "music_with_lyrics",
+    ),
+    **dict.fromkeys(
+        (
+            "Music",
+            "Musical instrument",
+            "Piano",
+            "Guitar",
+            "Orchestra",
+            "Drum",
+            "Electronic music",
+            "Ambient music",
+            "Background music",
+            "Soundtrack music",
+            "Classical music",
+            "Jazz",
+            "Synthesizer",
+            "Violin, fiddle",
+            "Theme music",
+            "Music for children",
+        ),
+        "music",
+    ),
+    **dict.fromkeys(("Applause", "Clapping"), "applause"),
+    **dict.fromkeys(
+        ("Laughter", "Giggle", "Chuckle, chortle", "Belly laugh", "Baby laughter", "Snicker"), "laughter"
+    ),
+    **dict.fromkeys(("Door", "Slam", "Sliding door", "Cupboard open or close"), "door"),
+    **dict.fromkeys(("Knock",), "knock"),
+    **dict.fromkeys(("Telephone", "Telephone bell ringing", "Ringtone", "Telephone dialing, DTMF"), "phone"),
+    **dict.fromkeys(("Walk, footsteps", "Run"), "footsteps"),
+    **dict.fromkeys(("Typing", "Computer keyboard", "Typewriter"), "typing"),
+    **dict.fromkeys(
+        (
+            "Engine",
+            "Vehicle",
+            "Car",
+            "Motor vehicle (road)",
+            "Idling",
+            "Accelerating, revving, vroom",
+            "Aircraft",
+            "Aircraft engine",
+            "Jet engine",
+            "Truck",
+            "Bus",
+            "Train",
+            "Motorcycle",
+        ),
+        "engine",
+    ),
+    **dict.fromkeys(
+        (
+            "Alarm",
+            "Siren",
+            "Smoke detector, smoke alarm",
+            "Fire alarm",
+            "Alarm clock",
+            "Buzzer",
+            "Civil defense siren",
+        ),
+        "alarm",
+    ),
+    **dict.fromkeys(("Crowd", "Chatter", "Hubbub, speech noise, speech babble", "Cheering"), "crowd"),
+    **dict.fromkeys(
+        (
+            "Speech",
+            "Narration, monologue",
+            "Conversation",
+            "Male speech, man speaking",
+            "Female speech, woman speaking",
+            "Child speech, kid speaking",
+            "Whispering",
+        ),
+        "unknown",
+    ),
+}
 SOUND_VOCAB: tuple[str, ...] = (
     "music",
     "music_with_lyrics",
@@ -184,7 +268,9 @@ REVIEW_CONTEXT_S = 2.0  # "Play in context (±2 s)"
 # ---------------------------------------------------------------- LLM client (PLAN §14.3)
 LLM_TIMEOUT_S = 180.0
 LLM_MAX_RETRIES = 10  # Token Factory returned 503 "no available workers" for minutes at a time (16 Oct)
-LLM_BACKOFF_MAX_S = 120.0  # with 10 retries a call waits out an outage of about 15 minutes before failing closed
+LLM_BACKOFF_MAX_S = (
+    120.0  # with 10 retries a call waits out an outage of about 15 minutes before failing closed
+)
 LLM_RETRY_STATUS: tuple[int, ...] = (429, 500, 502, 503, 504)
 LLM_LOG_TRUNCATE = 300  # GemmaClip's diagnostics rule idea: truncate text in logs
 GPU_HOURLY_COST_USD = 2.59  # AMD Developer Cloud MI300X on-demand price, cited.amd.devcloud_mi300x_hourly (16 Oct 2026); replaced by the billed rate

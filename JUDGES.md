@@ -29,7 +29,7 @@ These labels do not pre-award points; judges keep full scoring authority.
 
 | Criterion | What we did | Fastest proof |
 |---|---|---|
-| Application of Technology | Gemma 4 31B sees, writes, translates and repairs, served by AMD Token Factory; code checks every line | <pending: amd.section> |
+| Application of Technology | Gemma 4 31B sees, writes, translates and repairs, served by AMD Token Factory; code checks every line | README "What runs on AMD" |
 | Presentation | Plain-words demo video; live player that never sleeps | <pending: video.url> |
 | Business Value | Named buyers and legal deadlines; GPU cost plus measured review time | README "Who pays" |
 | Originality | Checks tied to the real audio timeline; five versions from one analysis; extended description only when needed | `docs/rules.md` |

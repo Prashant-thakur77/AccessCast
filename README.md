@@ -78,7 +78,13 @@ Nothing reaches a viewer until a person approves it. Confidence for each line is
 
 ## What runs on AMD
 
-<pending: amd.section>
+| Part | Where it ran |
+|---|---|
+| Gemma 4 31B: looking at frames, writing description, captions, easy-read, Hindi and Italian, every repair, scene judgments | AMD Token Factory (`Gemma-4-31B-IT`), every call checked against the model name the server reports (`--strict-provider`) |
+| Whisper, the wav2vec2 aligner, Silero VAD, the Kokoro voices, the metric models | Our own workstation, not AMD hardware. The device is written in every worker response and evidence file |
+| Gemma 4 E4B (listening: transcript cross-check, sound labels) | Not run. Token Factory does not offer it, and we had no droplet to serve it |
+
+Token Factory had outages during our runs (it answered "no available workers" for minutes at a time). The pipeline fails closed: a scene whose evidence call fails goes to a person, and a re-run asks again only for the calls that failed. Requests that failed during the speed test are counted in its evidence file: <pending: e13.failed_sentence>
 
 ## Who pays
 
