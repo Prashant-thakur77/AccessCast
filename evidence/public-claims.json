@@ -805,14 +805,14 @@
   {
    "claim_id": "e16.player_passed",
    "text": "player accessibility tests passed (Playwright + axe-core)",
-   "value": 22,
+   "value": 23,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "942fdf26958e73b98162500631e3fc337974c5d5598586955e3871a23d619dc7",
+     "sha256": "f114467a2ea4720c0c4c6d8ade27e6555f96d62f35e33f77ba6932b2aff9252c",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -820,20 +820,20 @@
     "README.md"
    ],
    "display": [
-    "22"
+    "23"
    ]
   },
   {
    "claim_id": "e16.player_total",
    "text": "player accessibility tests run",
-   "value": 22,
+   "value": 23,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "942fdf26958e73b98162500631e3fc337974c5d5598586955e3871a23d619dc7",
+     "sha256": "f114467a2ea4720c0c4c6d8ade27e6555f96d62f35e33f77ba6932b2aff9252c",
      "pointer": "/summary/player/total"
     }
    ],
@@ -841,7 +841,7 @@
     "README.md"
    ],
    "display": [
-    "22"
+    "23"
    ]
   },
   {
@@ -854,7 +854,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "942fdf26958e73b98162500631e3fc337974c5d5598586955e3871a23d619dc7",
+     "sha256": "f114467a2ea4720c0c4c6d8ade27e6555f96d62f35e33f77ba6932b2aff9252c",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -875,7 +875,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "942fdf26958e73b98162500631e3fc337974c5d5598586955e3871a23d619dc7",
+     "sha256": "f114467a2ea4720c0c4c6d8ade27e6555f96d62f35e33f77ba6932b2aff9252c",
      "pointer": "/summary/review/total"
     }
    ],
