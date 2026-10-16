@@ -1,0 +1,48 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e04_translation",
+ "split": "none",
+ "passed": false,
+ "git_commit": "ab93d1f80f84d71908ec2d79779736be8773a0c1",
+ "git_dirty": false,
+ "freeze_tag": null,
+ "started_at": "2026-10-16T22:05:31.550Z",
+ "finished_at": "2026-10-16T22:05:31.580Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "gpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "question": "Is Gemma 4 31B a good translator for Hindi and Italian?",
+  "one_change": "translator",
+  "systems": {
+   "gemma": "Gemma 4 31B via translate_batch (prompt translate_subs, attempt 0, no repair)",
+   "baseline_hi": "IndicTrans2 en-indic 1B",
+   "baseline_it": "Opus-MT en-it"
+  },
+  "data": "FLORES+ devtest",
+  "limit": null,
+  "chunk": 16,
+  "provider": "tokenfactory",
+  "strict_provider": true,
+  "worker_mode": "real",
+  "metrics_stand_in": false,
+  "n_boot": 1000,
+  "bootstrap": "paired, items resampled with replacement, percentile 95% interval",
+  "comet": "Unbabel/wmt22-comet-da",
+  "chrf": "sacrebleu chrF++ (word order 2)",
+  "missing_segments": "scored as an empty translation",
+  "in_domain": null
+ },
+ "checks": {},
+ "results": [],
+ "summary": {},
+ "error": "FileNotFoundError: no FLORES+ manifest: run `python -m eval.datasets.fetch_flores` first\nTraceback (most recent call last):\n  File \"/home/prashant/projects/AccessCast/eval/common.py\", line 169, in run_experiment\n    body(exp)\n  File \"/home/prashant/projects/AccessCast/eval/e04_translation.py\", line 351, in body\n    flores = load_split(\"devtest\")\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/prashant/projects/AccessCast/eval/datasets/fetch_flores.py\", line 56, in load_split\n    raise FileNotFoundError(\"no FLORES+ manifest: run `python -m eval.datasets.fetch_flores` first\")\nFileNotFoundError: no FLORES+ manifest: run `python -m eval.datasets.fetch_flores` first\n"
+}
