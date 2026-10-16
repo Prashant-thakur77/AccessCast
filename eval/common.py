@@ -90,20 +90,8 @@ def environment() -> dict[str, Any]:
             env["gpu"] = "AMD Instinct MI300X" if "MI300X" in p.stdout else "AMD GPU"
     except (FileNotFoundError, subprocess.TimeoutExpired, json.JSONDecodeError):
         env["gpu"] = None
-    # Whatever ran the non-Gemma workers is recorded as found (D-021: no droplet; workers ran on our workstation).
+    # cpu or gpu for the non-Gemma workers (D-021: no droplet; they ran on our own computer).
     env["worker_device"] = os.environ.get("ACCESSCAST_WORKER_DEVICE", "cpu")
-    try:
-        p = subprocess.run(
-            ["nvidia-smi", "--query-gpu=name", "--format=csv,noheader"],
-            capture_output=True,
-            text=True,
-            timeout=20,
-            check=False,
-        )
-        if p.returncode == 0 and p.stdout.strip():
-            env["workstation_gpu"] = p.stdout.strip()
-    except (FileNotFoundError, subprocess.TimeoutExpired):
-        pass
     lock = REPO_ROOT / "deploy" / "versions.lock"
     if lock.exists():
         env["versions_lock"] = dict(
