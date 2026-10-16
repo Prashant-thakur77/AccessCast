@@ -410,13 +410,12 @@ def stage_sounds(run: Run) -> None:
                     )
                     labels = [str(x) for x in r.obj.get("labels") or []]
                 except Exception as ex:
-                    labels = []
+                    labels = ["unknown"]  # fail closed: an unlabelled window is treated like speech (no description)
                     rejected.append(f"error@{s}: {type(ex).__name__}")
                 ok = [x for x in labels if x in C.SOUND_VOCAB]
-                rejected += [x for x in labels if x not in C.SOUND_VOCAB]
-                events.append(
-                    SoundEvent(start_ms=s, end_ms=e, label=ok[0] if ok else "other", source="model")
-                )
+                rejected += [x for x in labels if x not in C.SOUND_VOCAB and x != "unknown"]
+                label = "unknown" if labels == ["unknown"] else (ok[0] if ok else "other")
+                events.append(SoundEvent(start_ms=s, end_ms=e, label=label, source="model"))
         merged: list[SoundEvent] = []
         for ev in events:
             if merged and merged[-1].label == ev.label and ev.start_ms - merged[-1].end_ms <= 50:

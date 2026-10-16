@@ -59,6 +59,12 @@ def check_freeze() -> dict[str, Any]:
         raise SystemExit(
             f"refusing a test-set run: frozen files changed since {frozen['tag']}: {changed[:5]}"
         )
+    # All pipeline code, not only prompts: any change under src/ since the freeze commit (committed or not) refuses.
+    diff = subprocess.run(["git", "diff", "--name-only", frozen["commit"], "--", "src/"], cwd=REPO_ROOT,
+                          capture_output=True, text=True, check=False)
+    if diff.returncode != 0 or diff.stdout.strip():
+        raise SystemExit(f"refusing a test-set run: src/ changed since {frozen['tag']}: "
+                         f"{diff.stdout.split()[:5] or diff.stderr.strip()[:200]}")
     return frozen
 
 

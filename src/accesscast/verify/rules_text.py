@@ -22,6 +22,19 @@ def _lines(text: str) -> list[str]:
     return text.split("\n")
 
 
+# ---------------------------------------------------------------- all text kinds
+def gen001_empty_or_failed(item: Item, ctx: VerifyContext) -> list[Finding]:
+    """Fail closed: empty text, a failed generation or a misaligned translation is never publishable."""
+    if not item.text.strip():
+        return [Finding("GEN001", "error", "empty text", "a line to show or speak",
+                        "There is no text for this line. A person must write it.", "write", repairable=False)]
+    bad = [f for f in item.flags if f.startswith(("generation_error:", "misaligned:"))]
+    if bad:
+        return [Finding("GEN001", "error", bad[0][:80], "generated and aligned",
+                        "The model output for this line failed. A person must check it.", "write", repairable=False)]
+    return []
+
+
 # ---------------------------------------------------------------- easy-read
 def er001_too_fast(item: Item, ctx: VerifyContext) -> list[Finding]:
     if item.needs_pause:
@@ -524,6 +537,7 @@ def vo004_too_short(item: Item, ctx: VerifyContext) -> list[Finding]:
 
 
 EASY_RULES: tuple[Rule, ...] = (
+    gen001_empty_or_failed,
     er001_too_fast,
     er002_sentence_too_long,
     er003_more_than_one_idea,
@@ -536,6 +550,7 @@ EASY_RULES: tuple[Rule, ...] = (
     er010_layout,
 )
 SDH_RULES: tuple[Rule, ...] = (
+    gen001_empty_or_failed,
     cc001_cps,
     cc002_chars_per_line,
     cc003_lines,
@@ -545,6 +560,7 @@ SDH_RULES: tuple[Rule, ...] = (
     cc010_missing_glyph,
 )
 SUBTITLE_RULES: tuple[Rule, ...] = (
+    gen001_empty_or_failed,
     cc001_cps,
     cc002_chars_per_line,
     cc003_lines,
@@ -555,6 +571,7 @@ SUBTITLE_RULES: tuple[Rule, ...] = (
     cc010_missing_glyph,
 )
 VOICEOVER_RULES: tuple[Rule, ...] = (
+    gen001_empty_or_failed,
     vo001_slot_overflow,
     vo002_untranslated,
     vo003_number_or_name,

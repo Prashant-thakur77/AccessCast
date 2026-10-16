@@ -53,10 +53,14 @@ def evaluate(items: Mapping[str, Item], versions: Iterable[str], state_sha256: s
     if unknown:
         raise ValueError(f"unknown versions {unknown}")
     selected: dict[str, Item] = {}
+    empty: list[str] = []
     for v in vs:
-        for it in items_for(items, v):
+        found = items_for(items, v)
+        if not found:
+            empty.append(f"no_items:{v}")  # a version with nothing in it means a stage failed: fail closed
+        for it in found:
             selected[it.id] = it
-    blocking = sorted(i.id for i in selected.values() if i.status in BLOCKING)
+    blocking = sorted(i.id for i in selected.values() if i.status in BLOCKING) + empty
     # A description or easy-read line counts as reviewed only if a person approved it (never auto).
     auto_on_person_only = sorted(
         i.id for i in selected.values() if i.kind in PERSON_ONLY and i.status == ItemStatus.AUTO_APPROVED

@@ -100,8 +100,12 @@ def mix_standard(
     out_stem: Path,
     tmp_dir: Path,
     extra_spans: Sequence[tuple[int, int, float]] = (),
+    stem_ids: set[str] | None = None,
 ) -> dict[str, object]:
-    """Original dipped under each clip, clips placed at their start; writes the mix and the stem."""
+    """Original dipped under each clip, clips placed at their start; writes the mix and the stem.
+
+    The stem holds only the clips in `stem_ids` (the description lines) when given, so RN008 and E1 measure
+    description, never a dubbed voice-over."""
     tmp_dir.mkdir(parents=True, exist_ok=True)
     orig, sr = sf.read(str(master), dtype="float32", always_2d=True)
     if sr != SR:
@@ -109,13 +113,16 @@ def mix_standard(
     if orig.shape[1] == 1:
         orig = np.repeat(orig, 2, axis=1)
     stem = np.zeros_like(orig)
+    voices = np.zeros_like(orig)
     spans: list[tuple[int, int, float]] = list(extra_spans)
     for c in clips:
         audio = load_48k(c.wav, tmp_dir)
-        place(stem, audio, ms_to_samples(c.start_ms))
+        place(voices, audio, ms_to_samples(c.start_ms))
+        if stem_ids is None or c.item_id in stem_ids:
+            place(stem, audio, ms_to_samples(c.start_ms))
         spans.append((c.start_ms, c.start_ms + round(len(audio) * 1000 / SR), c.duck_db))
     env = gain_envelope(len(orig), spans)
-    mixed = orig * env[:, None] + stem
+    mixed = orig * env[:, None] + voices
     peak = float(np.max(np.abs(mixed))) if mixed.size else 0.0
     if peak > 0.99:
         mixed *= 0.99 / peak

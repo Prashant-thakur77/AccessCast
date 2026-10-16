@@ -49,3 +49,19 @@ def test_auto_approval_never_counts_as_human_for_description(store):
 def test_fields_outside_contract_rejected(store):
     with pytest.raises(ValueError):
         store.patch("ad.en.0001", 0, {"draft": "sneaky"}, who="x")
+
+
+def test_gate_blocks_a_version_with_no_items(store):
+    res = gate.evaluate(store.merged(), ["hi"], store.state_sha256())
+    assert not res.ok and "no_items:hi" in res.blocking
+
+
+def test_reviewer_cannot_set_auto_approved(store):
+    with pytest.raises(ValueError):
+        store.patch("ad.en.0001", 0, {"status": "auto_approved"}, who="x")
+
+
+def test_editing_an_approved_line_resets_it_to_pending(store):
+    store.patch("ad.en.0001", 0, {"status": "approved"}, who="reviewer-1")
+    cur = store.patch("ad.en.0001", 1, {"final": "A new line nobody checked."}, who="reviewer-1")
+    assert cur["status"] == "pending"

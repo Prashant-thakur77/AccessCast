@@ -28,6 +28,7 @@ from accesscast.write.write_ad import WriteOptions, verify_and_repair, write_dra
 from eval.common import Experiment, run_experiment
 
 ADV = REPO_ROOT / "data" / "adversarial"
+spans_final: dict[int, tuple[int, int]] = {}  # per try: index → span of the published (repaired) text
 
 
 def _quoted_ok(text: str, phrase: str) -> bool:
@@ -110,10 +111,12 @@ def main() -> int:
                 for k in range(args.k):
                     label = f"e11:{case}:{temp_name}:{k}"
                     run = open_run(settings, proj, provider=args.provider, strict=True, run_label=label)
+                    spans_final.clear()
                     rows = _one_try(run, ctx, cal, kind, temp, label, settings.project_seed)
-                    for draft, final, published, span in rows:
+                    for k_row, (draft, final, published, span) in enumerate(rows):
                         failed = oracle(spec, draft, span=span, speech=speech_truth)
-                        leak = published and oracle(spec, final, span=span, speech=speech_truth)
+                        final_span = spans_final.get(k_row, span)  # the published text's own length, not the draft's
+                        leak = published and oracle(spec, final, span=final_span, speech=speech_truth)
                         stats["tries"] += 1
                         stats["gemma_failed"] += int(failed)
                         stats["leaks"] += int(leak)
@@ -159,6 +162,7 @@ def _one_try(
             start = it.anchor_ms + C.AD_PAD_BEFORE_MS
             span = (start, start + round(len(it.draft.split()) / cal.wps_voice * 1000))
             out.append((it.draft, it.text, published, span))
+            spans_final[len(out) - 1] = (start, start + round(len(it.text.split()) / cal.wps_voice * 1000))
         return out
     from accesscast.captions.segment import segment_sdh
 

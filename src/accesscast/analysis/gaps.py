@@ -29,7 +29,8 @@ def speech_spans(
 ) -> list[tuple[int, int]]:
     spans = [(w.start_ms - guard_ms, w.end_ms + guard_ms) for w in words]
     spans += [(s.start_ms - guard_ms, s.end_ms + guard_ms) for s in vad]
-    spans += [(e.start_ms - guard_ms, e.end_ms + guard_ms) for e in sounds if e.label == "music_with_lyrics"]
+    spans += [(e.start_ms - guard_ms, e.end_ms + guard_ms) for e in sounds
+              if e.label in ("music_with_lyrics", "unknown")]  # lyrics are dialogue; unknown fails closed
     return merge_spans(spans)
 
 
