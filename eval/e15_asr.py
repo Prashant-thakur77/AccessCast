@@ -24,7 +24,7 @@ from typing import Any
 import jiwer
 
 from accesscast.config import REPO_ROOT, load_settings
-from accesscast.errors import OutOfMemoryError
+from accesscast.errors import OutOfMemoryError, ValidationFailed
 from accesscast.llm.client import LlmClient, LlmRequest
 from accesscast.workers_client import run_worker
 from eval.common import Experiment, run_experiment
@@ -83,21 +83,27 @@ def main() -> int:
         for model in args.models.split(","):
             for lang in ("en", "hi", "it"):
                 rows = [r for r in man["files"] if r["lang"] == lang][: args.n]
-                res = run_worker(
-                    "asr",
-                    "transcribe_many",
-                    {
-                        "files": [str(REPO_ROOT / r["file"]) for r in rows],
-                        "model": model,
-                        "lang": lang,
-                        "align": False,
-                        "word_timestamps": False,  # WER needs text only; word timing is part 2
-                    },
-                    work,
-                    None,
-                    require_rocm=not args.no_rocm,
-                    timeout_s=14400,
-                )
+                saved = work / f"acc_{model.replace('/', '_')}_{lang}_{args.n}.json"
+                if saved.exists():  # a crash later in E15 does not cost the 25 minutes of transcription again
+                    res = json.loads(saved.read_text())
+                else:
+                    res = run_worker(
+                        "asr",
+                        "transcribe_many",
+                        {
+                            "files": [str(REPO_ROOT / r["file"]) for r in rows],
+                            "model": model,
+                            "lang": lang,
+                            "align": False,
+                            "word_timestamps": False,  # WER needs text only; word timing is part 2
+                        },
+                        work,
+                        None,
+                        require_rocm=not args.no_rocm,
+                        timeout_s=14400,
+                    )
+                    work.mkdir(parents=True, exist_ok=True)
+                    saved.write_text(json.dumps(res))
                 refs = [norm(r["transcription"]) for r in rows]
                 hyps = [norm(x["text"]) for x in res["items"]]
                 wall = sum(x["wall_s"] for x in res["items"])
@@ -172,25 +178,20 @@ def main() -> int:
                     check=True,
                 )
                 files.append(str(wav))
-            req = {"files": files, "model": model, "lang": "en", "align": True}
+            req = {"files": files, "model": model, "lang": "en", "align": True, "cpu_redo": False}
             try:
                 res = run_worker(
                     "asr", "transcribe_many", req, work, None, require_rocm=not args.no_rocm, timeout_s=7200
                 )
-            except OutOfMemoryError:
+            except (OutOfMemoryError, ValidationFailed) as ex:
                 if not args.no_rocm:
                     raise
-                # Word timestamps of a large model do not fit limited accelerator memory: same request on the CPU,
-                # recorded per model below (never silent).
-                res = run_worker(
-                    "asr",
-                    "transcribe_many",
-                    {**req, "device": "cpu"},
-                    work,
-                    None,
-                    require_rocm=False,
-                    timeout_s=14400,
-                )
+                # Word timestamps of this model do not fit this computer's memory (accelerator, then a 7 GB RAM
+                # cap on the CPU redo): it cannot be the timing source here, so it is not a candidate. Recorded.
+                bound[model] = {
+                    "not_measured": f"word timestamps do not fit this computer's memory ({type(ex).__name__})"
+                }
+                continue
             for (_mp4, truth), item in zip(clips, res["items"], strict=True):
                 raw_e += boundary_errors(truth, item["raw_words"])
                 al_e += boundary_errors(truth, item["words"])
@@ -209,7 +210,9 @@ def main() -> int:
             }
         e.summary["boundary_error"] = bound
         # decision (dev only): lowest English WER among Whisper models; aligner on if it lowers p95 error
-        whisper = {m: v for m, v in acc.items() if "whisper" in m}
+        # candidates: Whisper models that produced word timings here (the gap map needs them)
+        whisper = {m: v for m, v in acc.items() if "whisper" in m and "raw" in bound.get(m, {})}
+        e.summary["not_candidates"] = {m: b["not_measured"] for m, b in bound.items() if "not_measured" in b}
         chosen = min(whisper, key=lambda m: whisper[m]["en"]["wer"]) if whisper else None
         if chosen:
             b = bound[chosen]

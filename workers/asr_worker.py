@@ -163,7 +163,7 @@ def transcribe(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
     try:
         return _transcribe(p, require_rocm)
     except torch.OutOfMemoryError:
-        if require_rocm or _dev(p, require_rocm) != "cuda":
+        if require_rocm or _dev(p, require_rocm) != "cuda" or p.get("cpu_redo") is False:
             raise
         _cache.clear()
         torch.cuda.empty_cache()
