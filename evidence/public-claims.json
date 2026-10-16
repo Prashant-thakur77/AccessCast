@@ -835,9 +835,7 @@
      "pointer": "/summary/video_minutes"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "9.3"
    ]
@@ -856,9 +854,7 @@
      "pointer": "/summary/videos_with_no_pause"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "5"
    ]
@@ -877,9 +873,7 @@
      "pointer": "/summary/pause_seconds"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "10.5"
    ]
@@ -898,9 +892,7 @@
      "pointer": "/summary/pauses"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -995,9 +987,7 @@
      "pointer": "/summary/pooled/A/lines_fit"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "0"
    ]
@@ -1016,9 +1006,7 @@
      "pointer": "/summary/pooled/B/lines_fit"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "0"
    ]
@@ -1037,9 +1025,7 @@
      "pointer": "/summary/pooled/C/lines_fit"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "0"
    ]
@@ -1058,9 +1044,7 @@
      "pointer": "/summary/pooled/A/lines_fit_energy"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -1079,9 +1063,7 @@
      "pointer": "/summary/pooled/C/lines_fit_energy"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -1100,9 +1082,7 @@
      "pointer": "/summary/pooled/A/lines_planned"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -1121,9 +1101,7 @@
      "pointer": "/summary/pooled/A/lines_published"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -1142,9 +1120,7 @@
      "pointer": "/summary/pooled/B/lines_published"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "0"
    ]
@@ -1163,9 +1139,7 @@
      "pointer": "/summary/pooled/C/lines_published"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -1184,9 +1158,7 @@
      "pointer": "/summary/pooled/B/sent_to_person"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -1205,9 +1177,7 @@
      "pointer": "/summary/pooled/C/sent_to_person"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "0"
    ]
@@ -3264,6 +3234,182 @@
    ],
    "display": [
     "6"
+   ]
+  },
+  {
+   "claim_id": "e5.neg_gemma_k",
+   "text": "easy-read cues where Gemma alone kept every negation (test)",
+   "value": 104,
+   "unit": "cues",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e05_easyread.json",
+     "sha256": "57669eb862b4153a4b45d06c38e745fd93f2787623df78296f9629371bc24cda",
+     "pointer": "/summary/arms/gemma_alone_on_the_same_cues/negations_kept/k"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "104"
+   ]
+  },
+  {
+   "claim_id": "e5.neg_gemma_n",
+   "text": "easy-read cues compared (test)",
+   "value": 115,
+   "unit": "cues",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e05_easyread.json",
+     "sha256": "57669eb862b4153a4b45d06c38e745fd93f2787623df78296f9629371bc24cda",
+     "pointer": "/summary/arms/gemma_alone_on_the_same_cues/negations_kept/n"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "115"
+   ]
+  },
+  {
+   "claim_id": "e5.neg_ours_k",
+   "text": "published AccessCast easy-read cues that kept every negation (test)",
+   "value": 115,
+   "unit": "cues",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e05_easyread.json",
+     "sha256": "57669eb862b4153a4b45d06c38e745fd93f2787623df78296f9629371bc24cda",
+     "pointer": "/summary/arms/accesscast_published/negations_kept/k"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "115"
+   ]
+  },
+  {
+   "claim_id": "e5.neg_ours_n",
+   "text": "published AccessCast easy-read cues (test)",
+   "value": 115,
+   "unit": "cues",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e05_easyread.json",
+     "sha256": "57669eb862b4153a4b45d06c38e745fd93f2787623df78296f9629371bc24cda",
+     "pointer": "/summary/arms/accesscast_published/negations_kept/n"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "115"
+   ]
+  },
+  {
+   "claim_id": "e5.of",
+   "text": "easy-read cues in the test videos",
+   "value": 121,
+   "unit": "cues",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e05_easyread.json",
+     "sha256": "57669eb862b4153a4b45d06c38e745fd93f2787623df78296f9629371bc24cda",
+     "pointer": "/summary/accesscast_routing/of"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "121"
+   ]
+  },
+  {
+   "claim_id": "e5.sent",
+   "text": "easy-read cues sent to a person (test)",
+   "value": 6,
+   "unit": "cues",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e05_easyread.json",
+     "sha256": "57669eb862b4153a4b45d06c38e745fd93f2787623df78296f9629371bc24cda",
+     "pointer": "/summary/accesscast_routing/sent_to_person"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "6"
+   ]
+  },
+  {
+   "claim_id": "e5.wpm_ours_k",
+   "text": "published easy-read cues at or under 130 words per minute (test)",
+   "value": 106,
+   "unit": "cues",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e05_easyread.json",
+     "sha256": "57669eb862b4153a4b45d06c38e745fd93f2787623df78296f9629371bc24cda",
+     "pointer": "/summary/arms/accesscast_published/at_or_under_130_wpm/k"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "106"
+   ]
+  },
+  {
+   "claim_id": "e5.wpm_source_k",
+   "text": "original caption cues at or under 130 words per minute (test)",
+   "value": 57,
+   "unit": "cues",
+   "status": "measured",
+   "split": "test",
+   "evidence": [
+    {
+     "path": "evidence/e05_easyread.json",
+     "sha256": "57669eb862b4153a4b45d06c38e745fd93f2787623df78296f9629371bc24cda",
+     "pointer": "/summary/arms/source/at_or_under_130_wpm/k"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "57"
    ]
   }
  ]
