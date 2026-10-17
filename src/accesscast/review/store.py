@@ -12,11 +12,20 @@ import threading
 from pathlib import Path
 from typing import Any
 
+from accesscast import constants as C
 from accesscast.events import now_iso
 from accesscast.project import atomic_write_text, read_jsonl, sha256_file, sha256_text, write_jsonl
 from accesscast.schemas import Item
 
-ITEM_FILES = ("ad.en", "ad.hi", "ad.it", "sdh.en", "easy.en", "subs.hi", "subs.it", "vo.hi", "vo.it")
+# every item file a stage can write, built from the language lists so a new language is never left out of review
+ITEM_FILES: tuple[str, ...] = (
+    "ad.en",
+    *(f"ad.{lang}" for lang in C.AD_TRANSLATION_LANGS),
+    "sdh.en",
+    "easy.en",
+    *(f"subs.{lang}" for lang in C.TRANSLATION_LANGS),
+    *(f"vo.{lang}" for lang in C.TRANSLATION_LANGS),
+)
 _locks: dict[str, threading.Lock] = {}
 
 

@@ -229,7 +229,7 @@ def render_all(
         proj.p("render", "dapt"),
         track_items["desc.en"],
         track_items["sdh.en"],
-        {"hi": track_items["subs.hi"], "it": track_items["subs.it"]},
+        {lang: track_items[f"subs.{lang}"] for lang in C.TRANSLATION_LANGS},
         end_of_ad=_clip_end,
     )
     master = proj.p("media", "master48k.wav")

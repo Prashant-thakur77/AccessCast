@@ -81,7 +81,7 @@ await segment("home", async (p) => {
   await p.goto(`${SITE}/index.html`);
   await pause(p, 2500);
   p.mark("page");
-  await pause(p, 3500);
+  await pause(p, 7000);  // the hero alone for the whole narration line; the reveal below starts after the scroll
   await p.evaluate(() => window.scrollBy({ top: 650, behavior: "smooth" }));
   await pause(p, 3000);
   p.mark("scrolled");

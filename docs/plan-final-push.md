@@ -46,5 +46,23 @@ Each phase ends with its checks green: `make check`, `make claims-check`, E16, a
 - F3. Video: mention four languages, show a chart scene, keep under ~5:30.
 - F4. GitHub repo description, homepage and topics.
 
+## Phase H — iteration 2 (01:00–06:00 IST, 18 Oct): finish what is measured, then show it
+Status of the phases above: A, B1–B3, C, E1, F1, F2, F4 done; B4/D1 (E4 es/fr/pt) and D2 (E17) run now.
+- H1. E17 on Token Factory (Qwen3.8-27B, MiniCPM-V-4.7-35B-A3B; k = 5 per setting). An empty answer is counted as
+  "no output", never as "took the bait". Claims, chart, README row, Results card, deck "It holds up".
+- H2. E18 per-language check results on both site drafts after the es/fr/pt stages; claims, chart, README row,
+  Results card.
+- H3. E4 es/fr/pt (chunk 12 = the translation batch cap). Direction words ("higher", "lower", "no clearly
+  different") come from each 95% interval in code, never typed. Results card and the video's chart scene follow
+  the result.
+- H4. AMD usage refreshed after H1–H3: Gemma counted apart from E17's models, plus an all-model total.
+- H5. Tests as evidence (`scripts/test_stats.py` → evidence/tests.json: 188 of 188, line coverage), a Results card,
+  a README row; the Results e2e test now fails on any broken chart or any number still "Measuring". Keys 1–8 pick
+  every viewer on the Watch page (tested).
+- H6. Site: export both drafts with every language, deploy, check Try and Results live.
+- H7. Video: es/fr/pt voice clips from the NASA render, home page re-recorded, wording ("every version"), rebuilt;
+  target about 5:00–5:30 with no silence over 1 s and no hard cut.
+- H8. Deck and lablab text refreshed from claims; `make check`, E16, claims-check, submission-check.
+
 ## Phase G — close
 - `make submission-check`, final claims-check, tag `act3-submission`, hand the user the upload checklist.
