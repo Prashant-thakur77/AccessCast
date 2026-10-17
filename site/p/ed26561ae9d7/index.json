@@ -117,5 +117,8 @@
     "easy.en.0002",
     "easy.en.0003",
     "easy.en.0004"
+  ],
+  "tts_engines": [
+    "kokoro-82m"
   ]
 }

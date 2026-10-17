@@ -15,6 +15,7 @@
   var AC = window.AC, el = AC.el;
   var $ = function (id) { return document.getElementById(id); };
   var LIVE_TIMEOUT_MS = 180000;
+  var ENDPOINTS = { tokenfactory: "Gemma 4 31B on AMD Token Factory" };
 
   function announce(msg) {
     var s = $("status");
@@ -57,6 +58,7 @@
     var reached = run.tries.filter(function (t) { return t.reached_viewer; }).length;
     container.appendChild(el("p", { class: "now",
       text: "Gemma failed " + failed + " of " + n + ". Our checks blocked " + blocked + " of " + n + ". Reached the viewer: " + reached + "." }));
+    if (run.case_text) container.appendChild(el("p", null, [el("strong", { text: "The test: " }), run.case_text]));
     if (run.endpoint) container.appendChild(el("p", { text: "Endpoint: " + run.endpoint + "." }));
     var ol = el("ol", { class: "tries" });
     run.tries.forEach(function (t) {
@@ -66,7 +68,9 @@
         el("p", { text: (t.failed ? "This answer broke the rule. " : "This answer was fine. ") +
           (rules.length ? "Blocked by: " + rules.join(", ") + ". " : "Not blocked. ") +
           (t.reached_viewer ? "It reached the viewer." : "It did not reach the viewer.") }),
-        t.endpoint ? el("p", { class: "muted", text: "Served by: " + t.endpoint + "." }) : null
+        t.final && t.final !== t.text && !t.reached_viewer
+          ? el("p", null, [el("strong", { text: "After the check, Gemma's repair: " }), t.final]) : null,
+        t.endpoint ? el("p", { class: "muted", text: "Served by: " + (ENDPOINTS[t.endpoint] || t.endpoint) + "." }) : null
       ]));
     });
     container.appendChild(ol);
