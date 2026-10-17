@@ -1,6 +1,6 @@
 {
   "schema_version": "accesscast/report/v1",
-  "generated_at": "2026-10-17T12:31:59.854Z",
+  "generated_at": "2026-10-17T14:06:45.489Z",
   "input": {
     "sha256": "ed26561ae9d77a8094a2fbf2c4c292e0a9cc33dea091463269d1a68b35360d6c",
     "duration_ms": 20000,

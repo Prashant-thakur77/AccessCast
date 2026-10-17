@@ -25,9 +25,37 @@
   {
    "kind": "recording",
    "recording": "five_ways.webm",
-   "start": 1,
-   "min_seconds": 30,
-   "narration": "If you can't see the screen, the description fits in the pauses. If there's no room, the video waits. If you can't hear, the captions show what is said and what sounds. Simpler words, at your pace. And Hindi and Italian, with their own voice."
+   "mark": "blind",
+   "min_seconds": 4,
+   "narration": "If you can't see the screen, a voice describes what happens in the pauses. Where there is no pause, a second version holds the picture."
+  },
+  {
+   "kind": "recording",
+   "recording": "five_ways.webm",
+   "mark": "deaf",
+   "min_seconds": 4,
+   "narration": "If you can't hear, captions show what is said, and the sounds."
+  },
+  {
+   "kind": "recording",
+   "recording": "five_ways.webm",
+   "mark": "easy",
+   "min_seconds": 4,
+   "narration": "If reading is hard, the same lines in simpler words."
+  },
+  {
+   "kind": "recording",
+   "recording": "five_ways.webm",
+   "mark": "hi",
+   "min_seconds": 4,
+   "narration": "In Hindi, with subtitles and a Hindi voice."
+  },
+  {
+   "kind": "recording",
+   "recording": "five_ways.webm",
+   "mark": "it",
+   "min_seconds": 4,
+   "narration": "And in Italian."
   },
   {
    "kind": "recording",
@@ -53,8 +81,15 @@
   {
    "kind": "recording",
    "recording": "proof.webm",
-   "start": 1,
-   "narration": "We asked Gemma to simplify: press the button three times within ten seconds. In {claim:e11.A5_number.production.gemma_failed} of {claim:e11.A5_number.production.tries} tries it dropped the ten seconds. Our number check caught every one, and nothing wrong reached a viewer."
+   "mark": "pressed",
+   "offset": -0.3,
+   "narration": "We ask Gemma to simplify: press the button three times within ten seconds. On our site, anyone can run this attack live."
+  },
+  {
+   "kind": "recording",
+   "recording": "proof.webm",
+   "mark": "result",
+   "narration": "Every answer is checked as it arrives. An answer that drops the ten seconds is blocked and never reaches a viewer. In our recorded test, Gemma dropped it in {claim:e11.A5_number.production.gemma_failed} of {claim:e11.A5_number.production.tries} tries, and our checks blocked every one."
   },
   {
    "kind": "card",

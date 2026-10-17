@@ -608,6 +608,9 @@ def register() -> dict[str, Any]:
             continue
         if val is None:
             continue
+        # keep the files already recorded as quoting this claim: `--fill` replaces each placeholder with its
+        # value, so after the first fill the placeholder scan alone would forget where the number appears
+        known = list(by_id.get(s.claim_id, {}).get("public_files", []))
         by_id[s.claim_id] = {
             "claim_id": s.claim_id,
             "text": s.text,
@@ -616,13 +619,15 @@ def register() -> dict[str, Any]:
             "status": "measured",
             "split": doc.get("split", s.split),
             "evidence": [{"path": f"evidence/{s.path}", "sha256": sha256_file(f), "pointer": s.pointer}],
-            "public_files": [],
+            "public_files": known,
             "display": [s.fmt(val)],
         }
     cited = EV / "cited_claims.json"
     if cited.exists():
         for c in json.loads(cited.read_text()).get("verified", []):
-            by_id[c["claim_id"]] = {**c, "evidence": [], "public_files": c.get("public_files", [])}
+            known = by_id.get(c["claim_id"], {}).get("public_files", [])
+            files = list(dict.fromkeys([*known, *c.get("public_files", [])]))
+            by_id[c["claim_id"]] = {**c, "evidence": [], "public_files": files}
     reg["claims"] = sorted(by_id.values(), key=lambda c: c["claim_id"])
     reg_p.write_text(json.dumps(reg, indent=1, ensure_ascii=False) + "\n")
     return {c["claim_id"]: c for c in reg["claims"]}
