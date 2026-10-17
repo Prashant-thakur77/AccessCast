@@ -23,6 +23,10 @@ F = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 CLOSED_S = 18.6  # source: up to "...in this image alone." (the first spoken sentences)
 AD_S = 16.0  # extended output: both opening description lines, then the same first sentence
 OPEN_S = 8.5  # extended output: the two held descriptions with the picture
+LANG_CLIP_S = (
+    1.2,
+    6.6,
+)  # the first sentence ("This is Hubble Telescope's famous photograph..."), voiced in hi and it
 
 
 def ff(*args: str) -> None:
@@ -52,6 +56,25 @@ def vtt_cues(p: Path) -> list[tuple[float, float, str]]:
         z = g[4] * 3600 + g[5] * 60 + g[6] + g[7] / 1000
         cues.append((a, z, m.group(9).strip().replace("[UNREVIEWED DRAFT] ", "")))
     return cues
+
+
+def to_ass(cues: list[tuple[float, float, str]], font: str, size: int) -> str:
+    """The subtitle track as ASS on a 1920×1080 canvas: white text on a dark box, bottom centre."""
+
+    def t(x: float) -> str:
+        return f"{int(x // 3600)}:{int(x % 3600 // 60):02d}:{x % 60:05.2f}"
+
+    head = (
+        "[Script Info]\nScriptType: v4.00+\nPlayResX: 1920\nPlayResY: 1080\n\n[V4+ Styles]\n"
+        "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
+        "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, "
+        "MarginR, MarginV, Encoding\n"
+        f"Style: Default,{font},{size},&H00FFFFFF,&H000000FF,&H50000000,&H50000000,0,0,0,0,100,100,0,0,3,14,0,2,80,80,70,1\n\n"
+        "[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
+    )
+    return head + "".join(
+        f"Dialogue: 0,{t(a)},{t(z)},Default,,0,0,0,,{x.replace(chr(10), chr(92) + 'N')}\n" for a, z, x in cues
+    )
 
 
 def main() -> int:
@@ -187,7 +210,50 @@ def main() -> int:
         "2",
         str(OUT / "hook_open.mp4"),
     )
-    for n in ("hook_closed", "hook_ad", "hook_open"):
+    # Hear the translated versions: the first spoken sentence of the Hindi and Italian renders, their own sound, the
+    # real subtitle track burned in (libass, so Devanagari is shaped), and a plain label. Same sentence in both.
+    for lang, label, font, size in (
+        ("hi", "HINDI VERSION: Hindi voice and subtitles", "Noto Serif Devanagari", 58),
+        ("it", "ITALIAN VERSION: Italian voice and subtitles", "DejaVu Sans", 50),
+    ):
+        a0, a1 = LANG_CLIP_S
+        tf = OUT / f"ver_{lang}_label.txt"
+        tf.write_text(label, encoding="utf-8")
+        vtt = proj / "render" / "tracks" / f"subs.{lang}.vtt"
+        ass = OUT / f"ver_{lang}.ass"
+        ass.write_text(to_ass(vtt_cues(vtt), font, size), encoding="utf-8")
+        vf = (  # full size first, then the subtitles at 1920×1080 with complex shaping (Devanagari needs it)
+            "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,"
+            f"ass='{ass}':shaping=complex,setpts=PTS-STARTPTS,"
+            f"drawtext=fontfile={FB}:textfile='{tf}':x=60:y=150:fontsize=40:fontcolor=0x1b1e4b:box=1:boxcolor=0xffd23f:boxborderw=16,fps=30"
+        )
+        ff(
+            "-ss",
+            f"{a0}",
+            "-copyts",
+            "-i",
+            str(proj / "render" / f"{lang}.mp4"),
+            "-t",
+            f"{a1 - a0:.2f}",
+            "-vf",
+            vf,
+            "-af",
+            "asetpts=PTS-STARTPTS,afade=t=in:d=0.2",
+            "-c:v",
+            "libx264",
+            "-crf",
+            "20",
+            "-pix_fmt",
+            "yuv420p",
+            "-c:a",
+            "aac",
+            "-ar",
+            "48000",
+            "-ac",
+            "2",
+            str(OUT / f"ver_{lang}.mp4"),
+        )
+    for n in ("hook_closed", "hook_ad", "hook_open", "ver_hi", "ver_it"):
         print(OUT / f"{n}.mp4")
     return 0
 
