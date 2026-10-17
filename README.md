@@ -16,6 +16,10 @@ With Gemma 4 31B on AMD Token Factory:
 
 - **A dropped "not" flips a sentence.** On 10 W3C accessibility videos never used for tuning, asked to simplify captions, Gemma alone kept every "not", "never" and "no" in 105 of 114 captions. What AccessCast published kept them in 114 of 114; 7 captions went to a person instead.
 - **A dropped time limit.** On our own attack clips (made to test the checks; not the W3C test set), told "press the button 3 times within 10 seconds", Gemma's easy-read rewrite dropped the 10 seconds in 20 of 20 tries. The number check caught every one, and Gemma's repair put it back. Across 8 attack cases, attack outputs that reached a viewer: 0. ([Proof page](https://accesscast.vercel.app/proof.html))
+
+![Bar chart: easy-read captions that kept every negation, Gemma alone against AccessCast as published](docs/charts/e5_negations.png)
+
+![Attack cases: tries, how often Gemma took the bait, and how many answers reached a viewer](docs/charts/e11_attacks.png)
 - **What it costs.** All five versions of one finished minute take about 41,818 Gemma tokens (measured on our dev videos). At a published list price for Gemma 4 31B that is about $0.0053 a minute, or $0.32 per hour of video (an estimate, not a price we paid), plus a person's review time. Today's list price for AI description with a human spot check is $4.25 a minute (3Play Media).
 
 ## What it does
@@ -28,6 +32,8 @@ With Gemma 4 31B on AMD Token Factory:
 | "हिन्दी" | Hindi subtitles, a Hindi voice-over in the same time slots as the original speech, and Hindi description. |
 | "Italiano" | Italian subtitles, an Italian voice-over and Italian description. |
 
+![One real clip, NASA's Life in the Universe: speech, the few pauses, the lines spoken in pauses, and the many lines read while the picture holds](docs/charts/timeline_nasa.png)
+
 All five come from one analysis of the video (shots, scenes, every word with its timing, the pauses between words, sounds, on-screen text and what is visible), so they never disagree with each other. Profiles combine: a blind Hindi speaker gets the Hindi voice-over with Hindi description.
 
 ## AccessCast Studio
@@ -39,6 +45,12 @@ All five come from one analysis of the video (shots, scenes, every word with its
 Gemma 4 31B does four jobs in every run, all on **AMD Token Factory**: it looks at the frames of each scene and lists what is visible, writes the description from that list only, rewrites captions as easy-read and translates them into Hindi and Italian, and repairs any line that fails a check, told exactly which check failed. Every answer is checked against the model name the server reports (`--strict-provider`), and the model never decides timing or whether a line is good enough: code does.
 
 **Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,162 Gemma 4 31B requests for us, 3,002,402 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. The live attack on our site adds more calls, which these logs do not include.
+
+![Gemma 4 31B requests answered by AMD Token Factory, by day, from our own call logs](docs/charts/amd_usage.png)
+
+![Where the Gemma tokens of one finished minute go, by version](docs/charts/e14_tokens.png)
+
+![Latency and tokens per second seen from our side at one and four requests at a time](docs/charts/e13_serving.png)
 
 Gemma 4 31B ran on AMD Token Factory, AMD's hosted endpoint. These numbers are measured from our side of the connection (client-side), so they include the network and Token Factory's own queue.
 
@@ -68,6 +80,8 @@ Token Factory had outages during our runs (it answered "no available workers" fo
 <!-- results.more:start -->
 - **Speech recognition (E15, dev set).** We chose Whisper large-v3-turbo: its English word error rate was 4.5% on 100 FLEURS clips, against 4.3% for the larger large-v3 (Hindi 32.4%, Italian 3.0%). After forced alignment, word boundaries were off by 54 ms at the median and 339 ms at the 95th percentile, on 224 word boundaries of our synthetic clips. Raw Whisper timestamps were closer at the median (32 ms) but worse in the tail (480 ms at the 95th percentile); the guard is set from the tail, so description keeps 340 ms clear of speech. Large-v3 could not produce word timings within our computer's memory, so it was not a candidate.
 - **Translation (E4, FLORES+ devtest, 1012 sentences per language, not our videos).** Two scores: COMET, a model trained to match human quality ratings, and chrF++, which counts character and word overlap with one human translation. Italian: Gemma 4 31B scored higher than Opus-MT, a widely used open English–Italian model, on both: COMET 0.8898 against 0.8522 (difference +0.0376, 95% interval +0.0337 to +0.0417) and chrF++ 55.4 against 54.8 (+0.7, +0.1 to +1.3). Hindi was mixed: Gemma scored higher on COMET (0.8253 against 0.8157, +0.0095, +0.0063 to +0.0131), but IndicTrans2, a model built for Indian languages, scored higher on chrF++ (58.8 against 53.8; Gemma −5.0, −5.7 to −4.3). Gemma returned every sentence (0 missing in Hindi, 0 in Italian).
+
+  ![Gemma minus the baseline for each language and score, with 95% intervals](docs/charts/e4_translation.png)
 - **Easy-read (E5, 10 W3C videos never used for tuning).** Asked to simplify the captions, Gemma alone kept every "not", "never" and "no" in 105 of 114 cues; in the others the sentence lost its negation and so its meaning. The easy-read AccessCast published kept them in 114 of 114, and sent 7 of 121 cues to a person instead. Paced for slow reading (at most 130 words a minute): 106 of 114 published cues, against 57 of 121 original captions. These counts use a negation counter close to our own check, so a blind rating by people leads this experiment; it is still to come.
 - **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 25 of 25, review app and Studio 7 of 7. No blind tester has used it yet.
 <!-- results.more:end -->
