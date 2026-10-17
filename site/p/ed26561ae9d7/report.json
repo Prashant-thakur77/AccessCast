@@ -1,6 +1,6 @@
 {
   "schema_version": "accesscast/report/v1",
-  "generated_at": "2026-10-17T00:56:18.913Z",
+  "generated_at": "2026-10-17T11:56:34.225Z",
   "input": {
     "sha256": "ed26561ae9d77a8094a2fbf2c4c292e0a9cc33dea091463269d1a68b35360d6c",
     "duration_ms": 20000,
@@ -64,31 +64,31 @@
   },
   "stage_metrics": {
     "asr": {
-      "wall_s": 0.09,
+      "wall_s": 0.104,
       "fallbacks": []
     },
     "shots": {
-      "wall_s": 0.032,
+      "wall_s": 0.036,
       "fallbacks": []
     },
     "scenes": {
-      "wall_s": 0.029,
+      "wall_s": 0.033,
       "fallbacks": []
     },
     "asr_crosscheck": {
-      "wall_s": 0.504,
+      "wall_s": 0.551,
       "fallbacks": []
     },
     "sounds": {
-      "wall_s": 0.028,
+      "wall_s": 0.032,
       "fallbacks": []
     },
     "gaps": {
-      "wall_s": 0.027,
+      "wall_s": 0.031,
       "fallbacks": []
     },
     "evidence": {
-      "wall_s": 31.989,
+      "wall_s": 35.201,
       "fallbacks": []
     },
     "plan": {
@@ -96,43 +96,43 @@
       "fallbacks": []
     },
     "write": {
-      "wall_s": 0.016,
+      "wall_s": 0.018,
       "fallbacks": []
     },
     "verify_repair": {
-      "wall_s": 11.635,
+      "wall_s": 12.657,
       "fallbacks": []
     },
     "tts": {
-      "wall_s": 26.881,
+      "wall_s": 26.892,
       "fallbacks": []
     },
     "captions_sdh": {
-      "wall_s": 0.035,
-      "fallbacks": []
-    },
-    "captions_easy": {
-      "wall_s": 6.639,
-      "fallbacks": []
-    },
-    "subtitles_hi": {
       "wall_s": 0.042,
       "fallbacks": []
     },
+    "captions_easy": {
+      "wall_s": 7.244,
+      "fallbacks": []
+    },
+    "subtitles_hi": {
+      "wall_s": 0.049,
+      "fallbacks": []
+    },
     "subtitles_it": {
-      "wall_s": 0.659,
+      "wall_s": 0.719,
       "fallbacks": []
     },
     "voiceover_hi": {
-      "wall_s": 48.214,
+      "wall_s": 48.223,
       "fallbacks": []
     },
     "voiceover_it": {
-      "wall_s": 46.702,
+      "wall_s": 46.708,
       "fallbacks": []
     },
     "speakers": {
-      "wall_s": 0.016,
+      "wall_s": 0.022,
       "fallbacks": []
     }
   },
