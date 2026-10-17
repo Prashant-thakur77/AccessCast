@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "40a5148c7a81fe4cc7dc2bc04275c49efeeb25e3",
+ "git_commit": "afafc161eec5c632e9c7c8d6a8c3a2c2d8ecf4ac",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-17T19:29:13.310Z",
- "finished_at": "2026-10-17T19:31:16.689Z",
+ "started_at": "2026-10-17T19:36:22.127Z",
+ "finished_at": "2026-10-17T19:38:32.462Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -97,6 +97,10 @@
      "status": "passed"
     },
     {
+     "title": "results: every number filled from the registry, charts described",
+     "status": "passed"
+    },
+    {
      "title": "proof",
      "status": "passed"
     },
@@ -121,6 +125,10 @@
      "status": "passed"
     },
     {
+     "title": "results: every number filled from the registry, charts described",
+     "status": "passed"
+    },
+    {
      "title": "proof",
      "status": "passed"
     },
@@ -133,8 +141,8 @@
      "status": "passed"
     }
    ],
-   "passed": 25,
-   "total": 25
+   "passed": 27,
+   "total": 27
   },
   {
    "suite": "review",
@@ -175,8 +183,8 @@
  ],
  "summary": {
   "player": {
-   "passed": 25,
-   "total": 25
+   "passed": 27,
+   "total": 27
   },
   "review": {
    "passed": 7,

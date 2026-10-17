@@ -87,7 +87,7 @@ Token Factory had outages during our runs (it answered "no available workers" fo
 
   ![Gemma minus the baseline for each language and score, with 95% intervals](docs/charts/e4_translation.png)
 - **Easy-read (E5, 10 W3C videos never used for tuning).** Asked to simplify the captions, Gemma alone kept every "not", "never" and "no" in 105 of 114 cues; in the others the sentence lost its negation and so its meaning. The easy-read AccessCast published kept them in 114 of 114, and sent 7 of 121 cues to a person instead. Paced for slow reading (at most 130 words a minute): 106 of 114 published cues, against 57 of 121 original captions. These counts use a negation counter close to our own check, so a blind rating by people leads this experiment; it is still to come.
-- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 25 of 25, review app and Studio 7 of 7. No blind tester has used it yet.
+- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 27 of 27, review app and Studio 7 of 7. No blind tester has used it yet.
 <!-- results.more:end -->
 
 ## Reliability and the live attack
@@ -190,7 +190,7 @@ Every first draft failed at least one of our checks (arm B sent all of them to a
 |---|---|---|
 | Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
 | Human review | Nothing renders while a description or easy-read line waits for a person (the server refuses); captions and translations pass automatic checks | Our reviewers are not professional describers; the timed two-person review study (E12) has not run yet |
-| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 25 of 25, review app and Studio 7 of 7, including axe-core scans) | Not yet tested by a blind reviewer |
+| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 27 of 27, review app and Studio 7 of 7, including axe-core scans) | Not yet tested by a blind reviewer |
 | Hindi, Italian, Spanish, French, Portuguese | Each language's subtitles and voice-over pass the same number, name and language checks; translated description has a back-translation for reviewers (Hindi, Italian) | Not a full professional language QA; native-speaker spot checks are not done yet. Spanish, French and Portuguese were added last |
 | "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
 | Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |

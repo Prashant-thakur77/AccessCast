@@ -907,6 +907,13 @@ pre.raw { white-space: pre-wrap; background: var(--card); padding: 12px; border-
 .try-ok { font-weight: 700; }
 .try-ok::before { content: "✓ "; }
 
+/* ---------- results ---------- */
+.results-list { list-style: none; margin: clamp(28px, 4vw, 56px) 0 0; padding: 0; display: grid; gap: clamp(20px, 3vw, 40px); }
+.result-card { background: var(--card); border-radius: var(--radius); padding: clamp(20px, 3vw, 36px); }
+.result-card h2 { font-size: var(--fs-s); overflow-wrap: anywhere; }
+.result-card .muted, .result-card .how-say { overflow-wrap: anywhere; }
+.result-card img { display: block; width: 100%; height: auto; border-radius: 14px; margin: 14px 0 10px; background: #fff; }
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
