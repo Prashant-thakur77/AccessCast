@@ -110,6 +110,27 @@ What description costs today (list prices, not our measurements): 3Play Media li
 
 Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per finished minute of video for all five versions (dev set), and review time from E12. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, five audiences from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
 
+### How it is sold
+
+- **First customer:** the accessibility office of a US public university. It has a deadline (ADA Title II applies to large public bodies from 26 April 2027), a large archive of lecture and outreach video with no description, and staff who can review lines but not write description from scratch for thousands of hours.
+- **What they buy:** a price per finished minute for all five versions, set below today's list prices for AI description, with the review done by their own staff in our review app; or a yearly licence to run it on their own servers, because the models are open and the video never has to leave the building.
+- **Who comes next:** broadcasters and streaming platforms in the EU, Italy and India, where the law names access services and where Hindi and Italian versions of the same video are worth more than one more English track.
+- **Why the cost works:** the model work is small (about $0.0053 of Gemma per finished minute at a published list price, an estimate). What the customer really pays for is a person's review time, which is why the review app is built for speed: confidence ordering, keyboard-only review, and lines that already passed every check.
+
+### How it differs from tools that already exist
+
+| | AccessCast | [ViddyScribe](https://ocadu.ca/news/new-ai-tool-ocad-u-alum-makes-videos-accessible-people-low-vision) | [YouDescribe](https://www.ski.org/news/youdescribe-launches-two-new-describer-interfaces-for-gaad-2026/) |
+|---|---|---|---|
+| Description placed in natural pauses | yes, checked in code against measured word timings | yes | — |
+| Extended description when there is no room | yes, only where needed | — | — |
+| Easy-read captions and a "give me time to read" mode | yes | — | — |
+| Hindi and Italian voice-over from the same analysis | yes | many languages | — |
+| Code checks meaning (numbers, "not", invented names, instructions on screen) | yes, every line | — | — |
+| A person approves every description line; the server refuses to publish otherwise | yes | — | volunteers review AI drafts |
+| Open models that can run on the customer's own servers | yes (Gemma 4) | — | — |
+
+"—" means we found no public statement either way, not that the feature is absent.
+
 ## What didn't work
 
 - **Description in the pauses (E1)** did not separate Gemma alone from Gemma with checks on the test set, because these videos have almost no pauses (details below). We report it as pre-registered and did not re-tune.

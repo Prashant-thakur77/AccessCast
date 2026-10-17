@@ -208,7 +208,9 @@
    ],
    "note": "Interim final rule, published and effective 20 April 2026, with a request for comments. No later Federal Register action on this rule found as of 16 Oct 2026 (API search).",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.law.ada_title2_small_date",
@@ -869,7 +871,9 @@
      "pointer": "/summary/usd_per_finished_minute_gemma"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "$0.0053"
    ]
