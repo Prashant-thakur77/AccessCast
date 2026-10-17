@@ -10,6 +10,8 @@
  "rules": [
   "ER004"
  ],
+ "kind": "easy",
+ "said": "Press the button 3 times within 10 seconds.",
  "calibration": {
   "voice": "af_heart",
   "wps_voice": 3.5596,

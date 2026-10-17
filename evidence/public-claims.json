@@ -538,9 +538,7 @@
    ],
    "note": "From the 'New Service Level' tier table on the price list; the page also says 'Launch and Refine packages are English only.'",
    "evidence": [],
-   "public_files": [
-    "README.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.price.3play_studio_ext",
@@ -852,9 +850,7 @@
      "pointer": "/summary/usd_per_hour_of_video_gemma"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "$0.32"
    ]
@@ -873,9 +869,7 @@
      "pointer": "/summary/usd_per_finished_minute_gemma"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "$0.0053"
    ]
@@ -3020,9 +3014,7 @@
      "pointer": "/summary/total_leaks"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "0"
    ]
@@ -3117,9 +3109,7 @@
      "pointer": "/summary/tokens_per_finished_minute"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "41,818"
    ]
@@ -3344,7 +3334,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "47e6255683e6aa3332ab8995b17ddfc99e14c8dd82aec45cb443932bd5d0d9ce",
+     "sha256": "25080c8ee1b1801e6b76b20ceb74cda706c6191b92f878a1a4051097c5da0c2f",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3365,7 +3355,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "47e6255683e6aa3332ab8995b17ddfc99e14c8dd82aec45cb443932bd5d0d9ce",
+     "sha256": "25080c8ee1b1801e6b76b20ceb74cda706c6191b92f878a1a4051097c5da0c2f",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3386,7 +3376,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "47e6255683e6aa3332ab8995b17ddfc99e14c8dd82aec45cb443932bd5d0d9ce",
+     "sha256": "25080c8ee1b1801e6b76b20ceb74cda706c6191b92f878a1a4051097c5da0c2f",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3407,7 +3397,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "47e6255683e6aa3332ab8995b17ddfc99e14c8dd82aec45cb443932bd5d0d9ce",
+     "sha256": "25080c8ee1b1801e6b76b20ceb74cda706c6191b92f878a1a4051097c5da0c2f",
      "pointer": "/summary/review/total"
     }
    ],
