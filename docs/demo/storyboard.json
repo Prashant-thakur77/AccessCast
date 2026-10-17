@@ -27,35 +27,40 @@
    "recording": "five_ways.webm",
    "mark": "blind",
    "min_seconds": 4,
-   "narration": "If you can't see the screen, a voice describes what happens in the pauses. Where there is no pause, a second version holds the picture."
+   "narration": "If you can't see the screen, a voice describes what happens in the pauses. Where there is no pause, a second version holds the picture.",
+   "footage": 7.8
   },
   {
    "kind": "recording",
    "recording": "five_ways.webm",
    "mark": "deaf",
    "min_seconds": 4,
-   "narration": "If you can't hear, captions show what is said, and the sounds."
+   "narration": "If you can't hear, captions show what is said, and the sounds.",
+   "footage": 7.0
   },
   {
    "kind": "recording",
    "recording": "five_ways.webm",
    "mark": "easy",
    "min_seconds": 4,
-   "narration": "If reading is hard, the same lines in simpler words."
+   "narration": "If reading is hard, the same lines in simpler words.",
+   "footage": 7.0
   },
   {
    "kind": "recording",
    "recording": "five_ways.webm",
    "mark": "hi",
    "min_seconds": 4,
-   "narration": "In Hindi, with subtitles and a Hindi voice."
+   "narration": "In Hindi, with subtitles and a Hindi voice.",
+   "footage": 7.0
   },
   {
    "kind": "recording",
    "recording": "five_ways.webm",
    "mark": "it",
    "min_seconds": 4,
-   "narration": "And in Italian."
+   "narration": "And in Italian.",
+   "footage": 7.0
   },
   {
    "kind": "recording",
