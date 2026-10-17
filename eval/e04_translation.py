@@ -48,6 +48,9 @@ from eval.common import Experiment, run_experiment
 EVAL_WORK = REPO_ROOT / "projects" / "_eval"  # git-ignored scratch (worker request files, LLM call logs)
 OUTPUTS = REPO_ROOT / "data" / "eval_outputs"  # git-ignored: texts we may not commit (FLORES+, W3C-derived)
 LANG_NAME = {"hi": "Hindi", "it": "Italian"}
+# IndicTrans2's remote model code imports transformers.onnx (removed in transformers 5), so the Hindi baseline runs
+# in its own worker env pinned to transformers 4 (workers/indic/pyproject.toml); same worker file, same protocol.
+INDIC_PYTHON = Path(os.environ.get("ACCESSCAST_INDIC_PYTHON", REPO_ROOT / "workers/indic/.venv/bin/python"))
 BASELINE_NAME = {"hi": "IndicTrans2 en-indic 1B", "it": "Opus-MT en-it"}
 FLORES_LANG = {"hi": "hin_Deva", "it": "ita_Latn"}
 # Dry-run sentences (wiring check only; written for this file, never scored as evidence).
@@ -82,6 +85,9 @@ class Metrics:
             self.workdir,
             require_rocm=self.require_rocm,
             timeout_s=6 * 3600,
+            python=INDIC_PYTHON
+            if action == "translate_baseline" and payload.get("lang") == "hi" and not self.stand_in
+            else None,
         )
         key = f"{action}:{payload['lang']}" if "lang" in payload else action
         self.meta[key] = {

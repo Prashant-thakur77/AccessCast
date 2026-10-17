@@ -1,0 +1,25 @@
+[project]
+name = "accesscast-indic"
+version = "0.1.0"
+description = "E4 Hindi baseline env: IndicTrans2's remote model code needs transformers 4 (it imports transformers.onnx, removed in 5)."
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = [
+  "torch>=2.4",
+  "transformers>=4.44,<4.46",   # Apache-2.0; IndicTrans2 code uses tuple KV caches (Cache objects break it from 4.46+)
+  "IndicTransToolkit>=1.1.1",   # MIT
+  "sentencepiece>=0.2",         # Apache-2.0
+  "sacremoses>=0.1",            # MIT
+  "numpy>=1.26",
+]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
