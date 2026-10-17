@@ -208,11 +208,7 @@
    ],
    "note": "Interim final rule, published and effective 20 April 2026, with a request for comments. No later Federal Register action on this rule found as of 16 Oct 2026 (API search).",
    "evidence": [],
-   "public_files": [
-    "docs/deck/deck.md",
-    "docs/lablab.md",
-    "docs/demo-script.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.law.ada_title2_small_date",
@@ -245,11 +241,7 @@
    ],
    "note": "Directive (EU) 2019/882, Article 31(2). EUR-Lex and legislation.gov.uk blocked automated fetches (HTTP 202 challenge); text read from the EUR-Lex mirror https://lawplayer.com/eu/act/32019L0882. Re-check on EUR-Lex in a browser before submitting.",
    "evidence": [],
-   "public_files": [
-    "docs/deck/deck.md",
-    "docs/lablab.md",
-    "docs/demo-script.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.law.eaa_av_access_services",
@@ -298,11 +290,7 @@
    ],
    "note": "Title: 'Guidelines for Accessibility of Content on platforms of Publishers of Online Curated Content (OTT Platforms) for Persons with Hearing and Visual Impairment'. Covers OTT publishers only, not broadcasting.",
    "evidence": [],
-   "public_files": [
-    "docs/deck/deck.md",
-    "docs/lablab.md",
-    "docs/demo-script.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.law.italy_dlgs82_fine_max",
@@ -318,9 +306,7 @@
     "€40,000"
    ],
    "evidence": [],
-   "public_files": [
-    "docs/deck/deck.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.law.italy_dlgs82_fine_min",
@@ -337,9 +323,7 @@
    ],
    "note": "Art. 24 'Sanzioni', para. 1 (official Normattiva text). Applies to economic operators breaching Arts. 3, 6(1-8), 8(1-7), 9(1-4), 10 and 12(1-4). Secondary confirmation: Portolano Cavallo newsletter.",
    "evidence": [],
-   "public_files": [
-    "docs/deck/deck.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.market.acb_tts_cost_saving",
@@ -554,9 +538,7 @@
    ],
    "note": "From the 'New Service Level' tier table on the price list; the page also says 'Launch and Refine packages are English only.'",
    "evidence": [],
-   "public_files": [
-    "docs/deck/deck.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.price.3play_studio_ext",
@@ -735,9 +717,7 @@
    ],
    "note": "The $6.65-14.70 range spans standard 5-day to extended 24-hour rush; extended at the normal 5-day turnaround is $10.78.",
    "evidence": [],
-   "public_files": [
-    "docs/deck/deck.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.price.umich_human_low",
@@ -753,9 +733,7 @@
     "$6.65"
    ],
    "evidence": [],
-   "public_files": [
-    "docs/deck/deck.md"
-   ]
+   "public_files": []
   },
   {
    "claim_id": "cited.price.umich_machine_ext",
@@ -834,7 +812,7 @@
    "evidence": [
     {
      "path": "evidence/e09_determinism.json",
-     "sha256": "bb79f076be428219cebd13ce26172abced2b3bf85a96f6f6e6d05a2bd0cf0fca",
+     "sha256": "8ca5abb95d2ecb8fe48df8feb2986c2a31c12672cf2791d329cec59208ed6a1f",
      "pointer": "/summary/all_artefacts_identical"
     }
    ],
@@ -857,10 +835,7 @@
      "pointer": "/summary/video_minutes"
     }
    ],
-   "public_files": [
-    "docs/deck/deck.md",
-    "docs/lablab.md"
-   ],
+   "public_files": [],
    "display": [
     "9.3"
    ]
@@ -917,10 +892,7 @@
      "pointer": "/summary/pauses"
     }
    ],
-   "public_files": [
-    "docs/deck/deck.md",
-    "docs/lablab.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -1110,9 +1082,7 @@
      "pointer": "/summary/pooled/A/lines_planned"
     }
    ],
-   "public_files": [
-    "docs/deck/deck.md"
-   ],
+   "public_files": [],
    "display": [
     "6"
    ]
@@ -2043,8 +2013,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "20"
@@ -2086,10 +2055,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md",
-    "docs/demo-script.md"
+    "README.md"
    ],
    "display": [
     "20"
@@ -2110,8 +2076,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "0"
@@ -2132,10 +2097,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md",
-    "docs/demo-script.md"
+    "README.md"
    ],
    "display": [
     "20"
@@ -2866,10 +2828,7 @@
      "pointer": "/summary/total_leaks"
     }
    ],
-   "public_files": [
-    "docs/deck/deck.md",
-    "docs/lablab.md"
-   ],
+   "public_files": [],
    "display": [
     "0"
    ]
@@ -2888,10 +2847,7 @@
      "pointer": "/summary/best/p95_s"
     }
    ],
-   "public_files": [
-    "docs/deck/deck.md",
-    "docs/lablab.md"
-   ],
+   "public_files": [],
    "display": [
     "13.9 s"
    ]
@@ -2910,11 +2866,7 @@
      "pointer": "/summary/best/tokens_per_s"
     }
    ],
-   "public_files": [
-    "docs/deck/deck.md",
-    "docs/lablab.md",
-    "docs/demo-script.md"
-   ],
+   "public_files": [],
    "display": [
     "17"
    ]
@@ -2933,10 +2885,7 @@
      "pointer": "/summary/failed"
     }
    ],
-   "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
-   ],
+   "public_files": [],
    "display": [
     "15"
    ]
@@ -2955,10 +2904,7 @@
      "pointer": "/summary/requests"
     }
    ],
-   "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
-   ],
+   "public_files": [],
    "display": [
     "120"
    ]
@@ -2977,12 +2923,7 @@
      "pointer": "/summary/tokens_per_finished_minute"
     }
    ],
-   "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md",
-    "docs/demo-script.md"
-   ],
+   "public_files": [],
    "display": [
     "41,818"
    ]
@@ -3024,8 +2965,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "339 ms"
@@ -3046,8 +2986,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "224"
@@ -3068,8 +3007,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "480 ms"
@@ -3090,8 +3028,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "340"
@@ -3112,8 +3049,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "100"
@@ -3134,8 +3070,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "4.3%"
@@ -3178,8 +3113,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "32.4%"
@@ -3200,8 +3134,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "3.0%"
@@ -3310,9 +3243,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "104"
@@ -3333,9 +3264,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "115"
@@ -3356,9 +3285,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "115"
@@ -3380,8 +3307,7 @@
    ],
    "public_files": [
     "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "docs/deck/deck.md"
    ],
    "display": [
     "115"
@@ -3424,9 +3350,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "6"
