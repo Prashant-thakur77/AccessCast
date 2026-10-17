@@ -581,8 +581,56 @@ def amd_specs() -> list[Spec]:
     ]
 
 
+def tests_specs() -> list[Spec]:
+    """Unit and golden tests and their line coverage, from one pytest run (scripts/test_stats.py)."""
+    f, n = "tests.json", "none"
+    return [
+        Spec("tests.total", f, "/summary/tests_total", "unit and golden tests", "tests", str, n),
+        Spec("tests.passed", f, "/summary/tests_passed", "unit and golden tests that pass", "tests", str, n),
+        Spec("tests.files", f, "/summary/test_files", "test files", "files", str, n),
+        Spec(
+            "tests.coverage",
+            f,
+            "/summary/line_coverage_pct",
+            "share of src/accesscast lines the tests run",
+            "%",
+            lambda x: f"{float(x):.0f}%",
+            n,
+        ),
+    ]
+
+
+def e18_specs() -> list[Spec]:
+    """E18 (site drafts, dev): per language, translated lines that passed every check, and lines held for a person."""
+    f = "e18_language_checks.json"
+    out: list[Spec] = []
+    for lang, name in (
+        ("hi", "Hindi"),
+        ("it", "Italian"),
+        ("es", "Spanish"),
+        ("fr", "French"),
+        ("pt", "Portuguese"),
+    ):
+        L = f"/summary/by_language/{lang}"
+        out += [
+            Spec(f"e18.{lang}.lines", f, f"{L}/lines", f"{name} subtitle and voice-over lines made", "lines"),
+            Spec(f"e18.{lang}.passed", f, f"{L}/passed", f"{name} lines that passed every check", "lines"),
+            Spec(f"e18.{lang}.held", f, f"{L}/held_for_a_person", f"{name} lines held for a person", "lines"),
+        ]
+    return out
+
+
 def signed(nd: int) -> Callable[[Any], str]:
     return lambda x: f"{float(x):+.{nd}f}".replace("-", "−")
+
+
+E4_LANGS = (
+    ("e04_translation.json", "hi", "Hindi", "IndicTrans2"),
+    ("e04_translation.json", "it", "Italian", "Opus-MT"),
+    ("e04_translation_es_fr_pt.json", "es", "Spanish", "Opus-MT"),
+    ("e04_translation_es_fr_pt.json", "fr", "French", "Opus-MT"),
+    ("e04_translation_es_fr_pt.json", "pt", "Portuguese", "Opus-MT"),
+)
 
 
 def e4_specs() -> list[Spec]:
@@ -598,12 +646,12 @@ def e4_specs() -> list[Spec]:
             split="none",
         )
     ]
-    for lang, name, base in (("hi", "Hindi", "IndicTrans2"), ("it", "Italian", "Opus-MT")):
+    for ef, lang, name, base in E4_LANGS:
         L = f"/summary/languages/{lang}"
         out += [
             Spec(
                 f"e4.{lang}.comet_gemma",
-                "e04_translation.json",
+                ef,
                 f"{L}/comet/gemma",
                 f"{name} COMET, Gemma 4 31B",
                 fmt=lambda x: f"{float(x):.4f}",
@@ -611,7 +659,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.comet_base",
-                "e04_translation.json",
+                ef,
                 f"{L}/comet/baseline_{lang}",
                 f"{name} COMET, {base}",
                 fmt=lambda x: f"{float(x):.4f}",
@@ -619,7 +667,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.comet_diff",
-                "e04_translation.json",
+                ef,
                 f"{L}/comet/gemma_minus_baseline/diff",
                 f"{name} COMET, Gemma minus {base}",
                 fmt=signed(4),
@@ -627,7 +675,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.comet_lo",
-                "e04_translation.json",
+                ef,
                 f"{L}/comet/gemma_minus_baseline/ci95_lo",
                 f"{name} COMET difference, 95% interval low end",
                 fmt=signed(4),
@@ -635,7 +683,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.comet_hi",
-                "e04_translation.json",
+                ef,
                 f"{L}/comet/gemma_minus_baseline/ci95_hi",
                 f"{name} COMET difference, 95% interval high end",
                 fmt=signed(4),
@@ -643,7 +691,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.chrf_gemma",
-                "e04_translation.json",
+                ef,
                 f"{L}/chrf/gemma",
                 f"{name} chrF++, Gemma 4 31B",
                 fmt=lambda x: f"{float(x):.1f}",
@@ -651,7 +699,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.chrf_base",
-                "e04_translation.json",
+                ef,
                 f"{L}/chrf/baseline_{lang}",
                 f"{name} chrF++, {base}",
                 fmt=lambda x: f"{float(x):.1f}",
@@ -659,7 +707,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.chrf_diff",
-                "e04_translation.json",
+                ef,
                 f"{L}/chrf/gemma_minus_baseline/diff",
                 f"{name} chrF++, Gemma minus {base}",
                 fmt=signed(1),
@@ -667,7 +715,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.chrf_lo",
-                "e04_translation.json",
+                ef,
                 f"{L}/chrf/gemma_minus_baseline/ci95_lo",
                 f"{name} chrF++ difference, 95% interval low end",
                 fmt=signed(1),
@@ -675,7 +723,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.chrf_hi",
-                "e04_translation.json",
+                ef,
                 f"{L}/chrf/gemma_minus_baseline/ci95_hi",
                 f"{name} chrF++ difference, 95% interval high end",
                 fmt=signed(1),
@@ -683,7 +731,7 @@ def e4_specs() -> list[Spec]:
             ),
             Spec(
                 f"e4.{lang}.never_aligned",
-                "e04_translation.json",
+                ef,
                 f"{L}/gemma_never_aligned",
                 f"{name} sentences Gemma never returned (scored as empty)",
                 "sentences",
@@ -786,13 +834,99 @@ def results_more() -> str | None:
             "<pending: e5.wpm_source_k> of <pending: e5.of> original captions. These counts use a negation counter "
             "close to our own check, so a blind rating by people leads this experiment; it is still to come."
         )
+    more_e4 = e4_more_languages()
+    if more_e4:
+        rows.append(more_e4)
+    e18 = e18_row()
+    if e18:
+        rows.append(e18)
     if (EV / "e16_ui_a11y.json").exists():
         rows.append(
             "- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player "
             "<pending: e16.player_passed> of <pending: e16.player_total>, review app and Studio "
             "<pending: e16.review_passed> of <pending: e16.review_total>. No blind tester has used it yet."
         )
+    if (EV / "tests.json").exists():
+        rows.append(
+            "- **Tests.** <pending: tests.passed> of <pending: tests.total> unit and golden tests pass, in "
+            "<pending: tests.files> files; they run <pending: tests.coverage> of the lines in `src/accesscast` "
+            "(`scripts/test_stats.py`, evidence/tests.json)."
+        )
     return "\n".join(rows) if rows else None
+
+
+def _verdict(lo: float, hi: float) -> str:
+    """Words for a paired difference (Gemma − baseline) from its 95% interval, never from the point estimate alone."""
+    return "higher" if lo > 0 else "lower" if hi < 0 else "no clearly different"
+
+
+def e4_more_languages() -> str | None:
+    """E4 for Spanish, French and Portuguese: one sentence per language, direction read from the interval."""
+    f = EV / "e04_translation_es_fr_pt.json"
+    if not f.exists() or not json.loads(f.read_text()).get("passed"):
+        return None
+    langs = json.loads(f.read_text())["summary"]["languages"]
+    parts = []
+    for ef, lang, name, _base in E4_LANGS:
+        if ef != f.name or lang not in langs:
+            continue
+        L = langs[lang]
+        words = []
+        for m, label in (("comet", "COMET"), ("chrf", "chrF++")):
+            d = L[m]["gemma_minus_baseline"]
+            v = _verdict(float(d["ci95_lo"]), float(d["ci95_hi"]))
+            words.append(
+                f"{label} {v} (<pending: e4.{lang}.{m}_gemma> against <pending: e4.{lang}.{m}_base>; "
+                f"<pending: e4.{lang}.{m}_diff>, <pending: e4.{lang}.{m}_lo> to <pending: e4.{lang}.{m}_hi>)"
+            )
+        parts.append(f"{name}: {words[0]}, {words[1]}")
+    if not parts:
+        return None
+    return (
+        "- **More languages (E4, same FLORES+ devtest, Gemma 4 31B against Opus-MT).** "
+        + "; ".join(parts)
+        + ". Sentences Gemma never returned: <pending: e4.es.never_aligned> Spanish, "
+        "<pending: e4.fr.never_aligned> French, <pending: e4.pt.never_aligned> Portuguese. Evidence: "
+        "evidence/e04_translation_es_fr_pt.json."
+    )
+
+
+RULE_WORDS = {
+    "CC001": "reading speed",
+    "CC002": "line length",
+    "CC009": "a name or number changed",
+    "VO001": "the voice runs past its slot",
+    "VO003": "a name or number changed",
+}  # plain words for docs/rules.md ids
+
+
+def e18_row() -> str | None:
+    """E18 (dev): per language, lines that passed every check; names the rule that held the most lines."""
+    f = EV / "e18_language_checks.json"
+    if not f.exists():
+        return None
+    by = json.loads(f.read_text())["summary"]["by_language"]
+    names = {"hi": "Hindi", "it": "Italian", "es": "Spanish", "fr": "French", "pt": "Portuguese"}
+    held: dict[str, int] = {}
+    for r in by.values():
+        for rule, n in r["held_by_rule"].items():
+            held[rule] = held.get(rule, 0) + int(n)
+    parts = [f"{names[k]} <pending: e18.{k}.passed> of <pending: e18.{k}.lines>" for k in names if k in by]
+    top = max(held, key=lambda k: held[k]) if held else None
+    tail = (
+        f" The check that held the most lines was {top} ({RULE_WORDS[top]})."
+        if top and top in RULE_WORDS
+        else ""
+    )
+    return (
+        "- **Every language through the same checks (E18, our two site drafts, dev).** Translated subtitle and "
+        "voice-over lines that passed every check on their own: "
+        + ", ".join(parts)
+        + ". The rest went to a person, not to viewers."
+        + tail
+        + " Evidence: evidence/e18_language_checks.json.\n\n  ![Lines per language that passed every check, "
+        "and lines held for a person](docs/charts/e18_languages.png)"
+    )
 
 
 SECTIONS: dict[str, Callable[[], str | None]] = {
@@ -810,7 +944,7 @@ def register() -> dict[str, Any]:
     reg_p = EV / "public-claims.json"
     reg = json.loads(reg_p.read_text())
     by_id = {c["claim_id"]: c for c in reg["claims"]}
-    for s in [*SPECS, *e11_specs(), *e4_specs(), *amd_specs()]:
+    for s in [*SPECS, *e11_specs(), *e4_specs(), *amd_specs(), *tests_specs(), *e18_specs()]:
         f = EV / s.path
         if not f.exists():
             continue

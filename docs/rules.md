@@ -52,7 +52,7 @@ Extended-description lines (inserted while the video holds a frame) skip AD001â€
 
 | Rule | Severity | Check | Source |
 |---|---|---|---|
-| CC001 `CPS` | error for subtitles (repairable); warning for verbatim SDH | > 20 cps (en, it SDH), > 25 (hi SDH), > 17 (it subtitles), > 22 (hi subtitles) | Netflix guides |
+| CC001 `CPS` | error for subtitles (repairable); warning for verbatim SDH | > 20 cps (en, it SDH), > 25 (hi SDH), > 17 (it, es, fr, pt subtitles), > 22 (hi subtitles) | Netflix guides |
 | CC002 `CHARS_PER_LINE` | error | > 42 | Netflix |
 | CC003 `LINES` | error | > 2 | Netflix; DCMP |
 | CC004 `DURATION` | error | < 40 frames or > 6 s | DCMP Captioning Key |
@@ -60,7 +60,7 @@ Extended-description lines (inserted while the video holds a frame) skip AD001â€
 | CC006 `NOT_VERBATIM` | error (automatic cues only) | cue words â‰  aligned words | DCMP |
 | CC007 `SEGMENT_MISALIGNED` | error | translation ids or snippets do not match the batch | video-voice-translator |
 | CC008 `UNTRANSLATED` | error | same as the English, or mostly English/Latin script | QuestBridge's lesson |
-| CC009 `NUMBER_OR_NAME_CHANGED` | error | numbers differ; Italian loses a name | ours |
+| CC009 `NUMBER_OR_NAME_CHANGED` | error | numbers differ; Italian, Spanish, French or Portuguese loses a name | ours |
 | CC010 `MISSING_GLYPH` | error | the caption font cannot draw a character | Rivet A11 |
 | CC011 `CONTRAST` | error (burned-in only) | contrast < 4.5:1 | WCAG 1.4.3 (not used yet: we ship text tracks, not burned-in captions) |
 

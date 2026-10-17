@@ -1,0 +1,51 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "tests",
+ "split": "none",
+ "passed": true,
+ "git_commit": "db8ec35821dbc067e17153038c0d543e4b705786",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-17T19:43:45.488Z",
+ "finished_at": "2026-10-17T19:43:49.740Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "question": "How many unit and golden tests run, and how much of src/accesscast do they execute?",
+  "runner": "pytest -q -p no:cacheprovider --cov=accesscast --cov-branch",
+  "coverage": "coverage.py line + branch, src/accesscast only (workers/ run in their own envs)"
+ },
+ "checks": {
+  "pytest_exit_0": true,
+  "no_failures": true,
+  "coverage_measured": true
+ },
+ "results": [
+  {
+   "pytest_exit": 0,
+   "tail": [
+    "Coverage JSON written to file /tmp/tmpf8dnaqwb/coverage.json"
+   ]
+  }
+ ],
+ "summary": {
+  "tests_total": 188,
+  "tests_passed": 188,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "test_files": 69,
+  "line_coverage_pct": 53.3,
+  "statements": 4524,
+  "statements_covered": 2580
+ },
+ "error": null
+}

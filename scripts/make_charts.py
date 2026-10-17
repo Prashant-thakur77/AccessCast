@@ -117,7 +117,7 @@ def e11_attacks() -> None:
 
 def e4_translation() -> None:
     rows = []
-    for f in ("e04_translation.json", "e04_translation_es_fr.json"):
+    for f in ("e04_translation.json", "e04_translation_es_fr_pt.json"):
         e = ev(f)
         if not e or not e.get("passed"):
             continue
