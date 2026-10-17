@@ -41,6 +41,11 @@ All five are built from one analysis, so they never disagree. Profiles combine.
 6. Render: one MP4 per audience, loudness and timing checked.
 
 ---
+<!-- slide: demo -->
+# See it working
+![AccessCast Studio after a real run: every step done, 29 Gemma calls answered, lines per version waiting for review](docs/media/studio.png) ![The proof page: Gemma dropped the time limit in 20 of 20 tries, our checks blocked all 20, and Gemma's repair put it back](docs/media/proof.png)
+
+---
 <!-- slide: quality -->
 # The model proposes, code decides
 - Rules tied to the real audio timeline: the line must fit the pause, measured in milliseconds.
@@ -86,6 +91,14 @@ Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 - India's OTT accessibility guidelines: 6 February 2026. US ADA Title II, large public bodies: 26 April 2027.
 - List prices today: $4.25 a minute for AI description with a human spot check (3Play Media); $6.65–$14.70 for human description (University of Michigan).
 - Our cost: 41,818 Gemma tokens per finished minute, plus a person's review time (E12).
+
+---
+<!-- slide: sold -->
+# How it is sold
+- **First customer:** a US public university's accessibility office: ADA Title II from 26 April 2027, years of video with no description.
+- **They buy:** all five versions per finished minute, below today's AI-description list prices, reviewed by their own staff in our app; or a yearly licence to run it on their own servers.
+- **Next:** broadcasters and streaming platforms in the EU, Italy and India.
+- **The difference:** five audiences from one analysis, checks that catch meaning changes, and a server that refuses to publish unreviewed lines.
 
 ---
 <!-- slide: honest -->
