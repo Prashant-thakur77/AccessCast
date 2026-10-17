@@ -203,6 +203,7 @@ def build_reports(run: Run) -> dict[str, Any]:
         "sha12": info.sha12,
         "title": meta.get("title") or info.source_name,
         "credit": meta.get("credit"),
+        **({"segment_ms": meta["segment_ms"]} if meta.get("segment_ms") else {}),  # "five ways" excerpt
         "duration_ms": info.duration_ms,
         "human_reviewed": report["review"]["human_reviewed"],
         "synthetic_test_data": report["synthetic_test_data"],
