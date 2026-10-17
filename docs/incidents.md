@@ -115,3 +115,9 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 **Symptom.** E9's re-run refused every standard version of the Sintel dev trailer: RN001 (a stream 0.29 s short) and RN003 (true peak −0.8 dBTP against ≤ −1.0).
 **Root cause.** (1) The source's audio track is 0.26 s shorter than its video; our mix kept that length, and the per-stream RN001 (added the same day) now sees it. (2) Two-pass loudnorm aimed at −1.5 dBTP, but AAC encoding of a loud trailer added intersample overshoot.
 **Fix.** The normalised mix is padded with silence to the video's length, and a final limiter sits 2 dB under the ceiling. Re-render of the same project: all six versions pass, −16.3 to −16.5 LUFS, true peak ≤ −1.7 dBTP, video and audio within 42 ms.
+
+## 2026-10-17 The Hindi baseline for E4 would not load
+**Symptom.** E4 stopped at the Hindi baseline twice. The first time, the model download returned 403. After the account accepted IndicTrans2's terms, the worker failed with `No module named 'transformers.onnx'`. E4 wrote `passed: false` both times.
+**Root cause.** IndicTrans2 ships its own model code (`trust_remote_code`), written for transformers 4. That code imports `transformers.onnx`, which transformers 5 removed. Our workers need transformers ≥ 5.5 for Gemma 4 and Whisper.
+With transformers 4.57 it then loaded but crashed in generation: its code indexes the key/value cache as tuples, and newer 4.x versions pass a cache object.
+**Fix.** The Hindi baseline runs in its own worker environment, `workers/indic` (transformers 4.45, the last line whose cache its code expects; same worker file, same request/response protocol, set up by `make setup`). We did not patch the baseline's code: the model we compare against runs as its authors wrote it. A missing environment still fails closed.
