@@ -2,37 +2,62 @@
   {
     "type": "source",
     "source_start_sample": 0,
-    "source_end_sample": 795600,
+    "source_end_sample": 9600,
     "output_start_sample": 0,
-    "output_end_sample": 795600,
+    "output_end_sample": 9600,
     "source_start_ms": 0,
-    "source_end_ms": 16575,
+    "source_end_ms": 200,
     "output_start_ms": 0,
-    "output_end_ms": 16575
+    "output_end_ms": 200
+  },
+  {
+    "type": "insertion",
+    "narration_id": "ad.en.0001",
+    "source_anchor_sample": 9600,
+    "source_anchor_ms": 200,
+    "output_start_sample": 9600,
+    "output_end_sample": 228800,
+    "output_start_ms": 200,
+    "output_end_ms": 4767,
+    "speech_duration_samples": 204750,
+    "speech_duration_ms": 4266,
+    "padding_duration_samples": 14450,
+    "padding_duration_ms": 301
+  },
+  {
+    "type": "source",
+    "source_start_sample": 9600,
+    "source_end_sample": 795200,
+    "output_start_sample": 228800,
+    "output_end_sample": 1014400,
+    "source_start_ms": 200,
+    "source_end_ms": 16567,
+    "output_start_ms": 4767,
+    "output_end_ms": 21133
   },
   {
     "type": "insertion",
     "narration_id": "ad.en.0004",
-    "source_anchor_sample": 795600,
-    "source_anchor_ms": 16575,
-    "output_start_sample": 795600,
-    "output_end_sample": 968972,
-    "output_start_ms": 16575,
-    "output_end_ms": 20187,
-    "speech_duration_samples": 158972,
+    "source_anchor_sample": 795200,
+    "source_anchor_ms": 16567,
+    "output_start_sample": 1014400,
+    "output_end_sample": 1188800,
+    "output_start_ms": 21133,
+    "output_end_ms": 24767,
+    "speech_duration_samples": 158974,
     "speech_duration_ms": 3312,
-    "padding_duration_samples": 14400,
-    "padding_duration_ms": 300
+    "padding_duration_samples": 15426,
+    "padding_duration_ms": 321
   },
   {
     "type": "source",
-    "source_start_sample": 795600,
+    "source_start_sample": 795200,
     "source_end_sample": 960512,
-    "output_start_sample": 968972,
-    "output_end_sample": 1133884,
-    "source_start_ms": 16575,
+    "output_start_sample": 1188800,
+    "output_end_sample": 1354112,
+    "source_start_ms": 16567,
     "source_end_ms": 20011,
-    "output_start_ms": 20187,
-    "output_end_ms": 23623
+    "output_start_ms": 24767,
+    "output_end_ms": 28211
   }
 ]

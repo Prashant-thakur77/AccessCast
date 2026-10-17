@@ -1,6 +1,6 @@
 {
   "schema_version": "accesscast/decisions/v1",
-  "generated_at": "2026-10-15T21:07:42.344Z",
+  "generated_at": "2026-10-17T00:52:46.698Z",
   "items": [
     {
       "id": "ad.en.0001",
@@ -9,16 +9,16 @@
       "audiences": [
         "blind"
       ],
-      "anchor_ms": 0,
+      "anchor_ms": 210,
       "slot": {
-        "start_ms": 0,
-        "end_ms": 1480
+        "start_ms": 210,
+        "end_ms": 210
       },
-      "extended": false,
+      "extended": true,
       "budget": {
-        "words_max": 4,
-        "seconds_max": 1.48,
-        "wps_voice": 3.2165
+        "words_max": 14,
+        "seconds_max": 4.53,
+        "wps_voice": 3.5596
       },
       "facts": [
         {
@@ -38,66 +38,27 @@
         "evidence/SC001/f01.jpg",
         "evidence/SC001/f02.jpg"
       ],
-      "first_draft": "On screen: Keyboard Shortcuts, Lesson 1.",
-      "final_text": "White text on a",
-      "status": "needs_revision",
-      "rules_fired": [
-        "AD001",
-        "AD004",
-        "AD007"
-      ],
+      "first_draft": "White text on a dark blue background reads Keyboard Shortcuts, Lesson 1.",
+      "final_text": "White text on a dark blue background reads Keyboard Shortcuts, Lesson 1.",
+      "status": "auto_approved",
+      "rules_fired": [],
       "repairs": [
         {
           "attempt": 0,
-          "text": "On screen: Keyboard Shortcuts, Lesson 1.",
-          "rules": [
-            "AD001",
-            "AD004",
-            "AD007"
-          ]
-        },
-        {
-          "attempt": 1,
-          "text": "White text on a",
-          "rules": [
-            "AD001"
-          ]
-        },
-        {
-          "attempt": 2,
-          "text": "White text on a",
-          "rules": [
-            "AD001"
-          ]
-        },
-        {
-          "attempt": 3,
-          "text": "White text on a",
-          "rules": [
-            "AD001"
-          ]
+          "text": "White text on a dark blue background reads Keyboard Shortcuts, Lesson 1.",
+          "rules": []
         }
       ],
-      "stop_reason": "repair_limit_reached",
-      "violations": [
-        {
-          "rule": "AD001",
-          "severity": "error",
-          "observed": "1.54 s (estimated, incl. pads)",
-          "threshold": "≤ 1.48 s",
-          "message": "Spoken line is 0.06 s longer than the pause.",
-          "owner_stage": "write_ad",
-          "repairable": true
-        }
-      ],
+      "stop_reason": "safe_initial_proposal",
+      "violations": [],
       "warnings": [],
-      "confidence": 0.0,
+      "confidence": 1.0,
       "confidence_terms": {
         "grounding": 1.0,
-        "slack": 0.0,
+        "slack": 1.0,
         "asr": 1.0,
         "ocr": 1.0,
-        "repairs": -0.3,
+        "repairs": -0.0,
         "warnings": -0.0
       },
       "reviewer": null,
@@ -110,14 +71,14 @@
         "temperature": 0.3,
         "seed": 299413391,
         "prompt_id": "write_ad@1",
-        "prompt_sha": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+        "prompt_sha": "a6bbf4fd5ad5912d1862b6d45bd24f75b7b0f032f6f09c836b1e07732c718ee8",
         "served_model_id": "fake/canned"
       },
       "tts": {
         "voice": "af_heart",
         "speed": 1.0,
-        "sha256": "909e154f6091406156a935dffc7f01daedaa856ed4b75c893b72f6efc5a5850b",
-        "duration_ms": 954,
+        "sha256": "3a4b1e75226692282e0b01276c4ebc90dbedfe05751b9c5d5232d6de8687ceda",
+        "duration_ms": 4266,
         "engine": "kokoro-82m"
       },
       "source_text": null
@@ -136,28 +97,30 @@
       },
       "extended": false,
       "budget": {
-        "words_max": 10,
+        "words_max": 8,
         "seconds_max": 3.44,
-        "wps_voice": 3.2165
+        "wps_voice": 3.5596
       },
       "facts": [
         {
-          "fid": "F002",
+          "fid": "F003",
           "frames": [
-            0,
-            1
+            1,
+            2,
+            3
           ],
-          "text": "A person with short grey hair and a blue cardigan sits at a desk with a laptop.",
-          "priority": 3,
+          "text": "The laptop screen shows Ctrl + C.",
+          "priority": 1,
           "important": true
         }
       ],
       "frames": [
-        "evidence/SC002/f00.jpg",
-        "evidence/SC002/f01.jpg"
+        "evidence/SC002/f01.jpg",
+        "evidence/SC002/f02.jpg",
+        "evidence/SC002/f03.jpg"
       ],
       "first_draft": "Sarah, a teacher in a blue cardigan, sits at her desk because she wants to show the shortcut Ctrl + C on her laptop screen.",
-      "final_text": "A person in a blue cardigan sits at a laptop.",
+      "final_text": "On screen: Ctrl + C.",
       "status": "auto_approved",
       "rules_fired": [
         "AD001",
@@ -182,17 +145,17 @@
         },
         {
           "attempt": 1,
-          "text": "A person in a blue cardigan sits at a laptop.",
+          "text": "On screen: Ctrl + C.",
           "rules": []
         }
       ],
       "stop_reason": "safe_model_revision",
       "violations": [],
       "warnings": [],
-      "confidence": 0.0,
+      "confidence": 0.9,
       "confidence_terms": {
         "grounding": 1.0,
-        "slack": 0.0433,
+        "slack": 1.0,
         "asr": 1.0,
         "ocr": 1.0,
         "repairs": -0.1,
@@ -208,14 +171,14 @@
         "temperature": 0.3,
         "seed": 299413391,
         "prompt_id": "write_ad@1",
-        "prompt_sha": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+        "prompt_sha": "a6bbf4fd5ad5912d1862b6d45bd24f75b7b0f032f6f09c836b1e07732c718ee8",
         "served_model_id": "fake/canned"
       },
       "tts": {
         "voice": "af_heart",
         "speed": 1.0,
-        "sha256": "b7f0f1e2019d0fa00e8d4b5b50fb647b6ec0aaddb3ea75f7de805c417bf0e319",
-        "duration_ms": 2606,
+        "sha256": "6e0c7cb335481cc5dfbc312c55273c691dd2f3c5bfd84a1a59f89350d6b5b9be",
+        "duration_ms": 1757,
         "engine": "kokoro-82m"
       },
       "source_text": null
@@ -229,14 +192,14 @@
       ],
       "anchor_ms": 10780,
       "slot": {
-        "start_ms": 10570,
+        "start_ms": 10780,
         "end_ms": 13255
       },
       "extended": false,
       "budget": {
-        "words_max": 7,
+        "words_max": 5,
         "seconds_max": 2.48,
-        "wps_voice": 3.2165
+        "wps_voice": 3.5596
       },
       "facts": [
         {
@@ -304,13 +267,13 @@
         "temperature": 0.3,
         "seed": 299413391,
         "prompt_id": "write_ad@1",
-        "prompt_sha": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+        "prompt_sha": "a6bbf4fd5ad5912d1862b6d45bd24f75b7b0f032f6f09c836b1e07732c718ee8",
         "served_model_id": "fake/canned"
       },
       "tts": {
         "voice": "af_heart",
         "speed": 1.0,
-        "sha256": "11431ce71ebb1e6b1c6c8d48727621da08201b0f6581fb36b85a217259ded7a5",
+        "sha256": "2c38f577d45ea8d6bffd682e6e183296551520d4815b6c80ff29c1957e01f046",
         "duration_ms": 1785,
         "engine": "kokoro-82m"
       },
@@ -331,8 +294,8 @@
       "extended": true,
       "budget": {
         "words_max": 14,
-        "seconds_max": 4.95,
-        "wps_voice": 3.2165
+        "seconds_max": 4.53,
+        "wps_voice": 3.5596
       },
       "facts": [
         {
@@ -383,13 +346,13 @@
         "temperature": 0.3,
         "seed": 299413391,
         "prompt_id": "write_ad@1",
-        "prompt_sha": "6e1849b1e36c75b3a3c502587d2d70d77f310ffc9743f9cc0ef0083080ac3de4",
+        "prompt_sha": "a6bbf4fd5ad5912d1862b6d45bd24f75b7b0f032f6f09c836b1e07732c718ee8",
         "served_model_id": "fake/canned"
       },
       "tts": {
         "voice": "af_heart",
         "speed": 1.0,
-        "sha256": "7f47e8b196bf0e0378fc424eb316c89f81d56d6c24e15bf077ab4f1add6ba22b",
+        "sha256": "73bf9420d31f6884367a03dfe796d75e737f075d0418c80a1a6687eab858067b",
         "duration_ms": 3312,
         "engine": "kokoro-82m"
       },
@@ -1099,7 +1062,7 @@
       "tts": {
         "voice": "hm_omega",
         "speed": 1.0,
-        "sha256": "a399cd9c27f412f03127f8d3b6d9746df0124df9becfdee9e24e001c7d42a85e",
+        "sha256": "10009f6cc1ac9cc7e8820fb39071e45731afe54b32c8bf61dfdbdcd878645790",
         "duration_ms": 3479,
         "engine": "kokoro-82m"
       },
@@ -1145,7 +1108,7 @@
       "tts": {
         "voice": "hm_omega",
         "speed": 1.0,
-        "sha256": "663a10806f763a7125bbb11ae72b684d260368b114cbcb4f8c1826aa1c3b5f50",
+        "sha256": "daf3e7876bc25aa8daf79fd122e4ab842117b5625cd1c9a1b8c5091a5fb69fd7",
         "duration_ms": 3260,
         "engine": "kokoro-82m"
       },
@@ -1205,8 +1168,8 @@
       "tts": {
         "voice": "hm_omega",
         "speed": 1.0,
-        "sha256": "c912d1cd011906a7a6f021c3b4327ace1e82438d5f7ea92ad07426a34c17427b",
-        "duration_ms": 3492,
+        "sha256": "0eb26d81276521ea432aacacb62f8d7ac84d55205c3d111cdd39a90069e36cfe",
+        "duration_ms": 3491,
         "engine": "kokoro-82m"
       },
       "source_text": "Then press control and V to paste it."
@@ -1251,7 +1214,7 @@
       "tts": {
         "voice": "hm_omega",
         "speed": 1.0,
-        "sha256": "6b25ddc196fb099780d10e4ff8c9a6f2c5fae79eabafc3745ad42944a41b2421",
+        "sha256": "7c2ac58633cba89645f4e6b250cd5cb7ca4e94df30265a9ad36e3e8d8a262732",
         "duration_ms": 3055,
         "engine": "kokoro-82m"
       },
@@ -1297,8 +1260,8 @@
       "tts": {
         "voice": "im_nicola",
         "speed": 1.0,
-        "sha256": "080c10505dbba3a10d8e227ba6ac1a91ef4b376cde459960753c9612b753ae29",
-        "duration_ms": 2725,
+        "sha256": "030e8801a6d26f1f0079c64e149d0b9441233c793ef8f05db5b1b5df34e38c05",
+        "duration_ms": 2657,
         "engine": "kokoro-82m"
       },
       "source_text": "Welcome. Today I will show you two shortcuts."
@@ -1343,8 +1306,8 @@
       "tts": {
         "voice": "im_nicola",
         "speed": 1.0,
-        "sha256": "49a72e946d5d729de91f5e5d2f8bdbad4ae54497c8a225dec06e2ec69c0f1f3a",
-        "duration_ms": 3250,
+        "sha256": "26df80b7c4b04a9df71cf98cc034930620a2333d56d40fae0cf3828edb3bfaf6",
+        "duration_ms": 3249,
         "engine": "kokoro-82m"
       },
       "source_text": "Press control and C to copy the text."
@@ -1389,8 +1352,8 @@
       "tts": {
         "voice": "im_nicola",
         "speed": 1.0,
-        "sha256": "43090b2e50799fe2184ce06297544084330614b6d317e7b1562c53f273618f92",
-        "duration_ms": 3094,
+        "sha256": "64ee2d4de94cf376444d6c8cc0375701c9a5bdf3895e39df2db82e4a4b076879",
+        "duration_ms": 3095,
         "engine": "kokoro-82m"
       },
       "source_text": "Then press control and V to paste it."
@@ -1435,8 +1398,8 @@
       "tts": {
         "voice": "im_nicola",
         "speed": 1.0,
-        "sha256": "a615f26c8a3b9a8f8f855f39a097d10ac933c649b1419e1c7b3148cc16581986",
-        "duration_ms": 2796,
+        "sha256": "1392662c77311d5f3fb8af931909cceaaa26a457504763e83ea0729d72c8663e",
+        "duration_ms": 2799,
         "engine": "kokoro-82m"
       },
       "source_text": "Do not unplug the laptop while it saves."
