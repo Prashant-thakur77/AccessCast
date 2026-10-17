@@ -125,7 +125,7 @@ class LlmClient:
         if provider == "tokenfactory":
             if not s.tf_base_url or not s.tf_api_key:
                 raise ModelEndpointError("Token Factory not configured (AMD_TF_BASE_URL / AMD_TF_API_KEY)")
-            return s.tf_base_url, "Gemma-4-31B-IT", {"Authorization": f"Bearer {s.tf_api_key}"}
+            return s.tf_base_url, s.tf_model, {"Authorization": f"Bearer {s.tf_api_key}"}
         if provider == "aistudio":  # backup only, never mixed with another provider inside one experiment
             if not s.gai_api_key:
                 raise ModelEndpointError("Google AI Studio not configured (GEMINI_API_KEY)")

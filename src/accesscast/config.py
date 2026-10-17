@@ -32,6 +32,7 @@ class Settings:
     local_audio_model: str = "gemma-4-e4b"
     tf_base_url: str = ""
     tf_api_key: str = field(default="", repr=False)
+    tf_model: str = "Gemma-4-31B-IT"  # AMD_TF_MODEL: another Token Factory model only for E17 (the model ladder)
     tf_max_concurrency: int = 8
     tf_rpm: int = 30
     gai_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
@@ -53,6 +54,7 @@ class Settings:
             "local_audio_model": self.local_audio_model,
             "tf_base_url": self.tf_base_url or None,
             "tf_api_key": "<set>" if self.tf_api_key else None,
+            "tf_model": self.tf_model,
             "gai_api_key": "<set>" if self.gai_api_key else None,
             "hf_token": "<set>" if self.hf_token_set else None,
             "review_policy": self.review_policy,
@@ -84,6 +86,7 @@ def load_settings(**overrides: object) -> Settings:
         local_audio_model=os.environ.get("ACCESSCAST_LOCAL_AUDIO_MODEL", Settings.local_audio_model),
         tf_base_url=os.environ.get("AMD_TF_BASE_URL", ""),
         tf_api_key=os.environ.get("AMD_TF_API_KEY", ""),
+        tf_model=os.environ.get("AMD_TF_MODEL", "Gemma-4-31B-IT"),
         tf_max_concurrency=tf_conc,
         tf_rpm=tf_rpm,
         gai_base_url=os.environ.get("GOOGLE_AI_BASE_URL", Settings.gai_base_url),
