@@ -1,8 +1,8 @@
 # lablab.ai submission text (ready to paste)
 
-**Title:** AccessCast: one video, five ways to watch
+**Title:** AccessCast: one video, made for every viewer
 
-**Short description:** Blind, deaf, slow-reading, Hindi and Italian viewers each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.
+**Short description:** Blind, deaf and slow-reading viewers, and people who speak Hindi, Italian, Spanish, French or Portuguese, each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.
 
 **Long description:**
 

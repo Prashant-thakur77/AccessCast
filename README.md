@@ -1,4 +1,4 @@
-Blind, deaf, slow-reading, Hindi and Italian viewers each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.
+Blind, deaf and slow-reading viewers, and people who speak Hindi, Italian, Spanish, French or Portuguese, each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.
 
 ![The AccessCast player plays the same clip for one viewer after another; the page changes colour for each viewer.](docs/media/five-ways.gif)
 
@@ -6,7 +6,7 @@ Blind, deaf, slow-reading, Hindi and Italian viewers each get their own version 
 
 [![CI](https://github.com/Prashant-thakur77/AccessCast/actions/workflows/ci.yml/badge.svg)](https://github.com/Prashant-thakur77/AccessCast/actions/workflows/ci.yml) [![Live demo](https://img.shields.io/badge/live%20demo-accesscast.vercel.app-E4402A)](https://accesscast.vercel.app/?audience=judge) [![Gemma 4 31B on AMD Token Factory](https://img.shields.io/badge/Gemma%204%2031B-AMD%20Token%20Factory-141B34)](#gemma-4-on-amd) [![Accessible: keyboard and axe-core](https://img.shields.io/badge/our%20own%20UI-keyboard%20%2B%20axe--core-1E7A4C)](#results) [![MIT licence](https://img.shields.io/badge/licence-MIT-blue)](LICENSE)
 
-# AccessCast: one video, five ways to watch
+# AccessCast: one video, made for every viewer
 
 Most online video has no audio description, and most of it has captions only in one language, if any. AccessCast takes one video and makes a version for each viewer. Gemma 4 31B, served by AMD Token Factory, does the seeing, writing, translating and repairing. Code checks every line Gemma writes against the real audio timeline. Gemma repairs what fails. A person approves what the public hears.
 
@@ -22,7 +22,7 @@ With Gemma 4 31B on AMD Token Factory:
 ![Bar chart: easy-read captions that kept every negation, Gemma alone against AccessCast as published](docs/charts/e5_negations.png)
 
 ![Attack cases: tries, how often Gemma took the bait, and how many answers reached a viewer](docs/charts/e11_attacks.png)
-- **What it costs.** All five versions of one finished minute take about 41,818 Gemma tokens (measured on our dev videos). At a published list price for Gemma 4 31B that is about $0.0053 a minute, or $0.32 per hour of video (an estimate, not a price we paid), plus a person's review time. Today's list price for AI description with a human spot check is $4.25 a minute (3Play Media).
+- **What it costs.** The five versions we measured (description, captions, easy-read, Hindi, Italian) of one finished minute take about 41,818 Gemma tokens (measured on our dev videos). At a published list price for Gemma 4 31B that is about $0.0053 a minute, or $0.32 per hour of video (an estimate, not a price we paid), plus a person's review time. Today's list price for AI description with a human spot check is $4.25 a minute (3Play Media).
 
 ## What it does
 
@@ -73,7 +73,7 @@ Each table names its data split. "Test set" means the 10 W3C WAI "Web Accessibil
 
 | Part | Where it ran |
 |---|---|
-| Gemma 4 31B: looking at frames, writing description, captions, easy-read, Hindi and Italian, every repair, scene judgments | AMD Token Factory (`Gemma-4-31B-IT`), every call checked against the model name the server reports (`--strict-provider`) |
+| Gemma 4 31B: looking at frames, writing description, captions, easy-read, Hindi, Italian, Spanish, French and Portuguese, every repair, scene judgments | AMD Token Factory (`Gemma-4-31B-IT`), every call checked against the model name the server reports (`--strict-provider`) |
 | Whisper, the wav2vec2 aligner, Silero VAD, the AST sound classifier, the Kokoro voices, the metric models | Our own workstation, not AMD hardware. The device is written in every worker response and evidence file |
 | Gemma 4 E4B (listening: transcript cross-check, sound labels) | Not run. Token Factory does not offer it, and we had no droplet to serve it. Sound labels come from AST, a small non-Gemma classifier, instead (`docs/decisions.md` D-022) |
 
@@ -92,7 +92,7 @@ Token Factory had outages during our runs (it answered "no available workers" fo
 
 ## Reliability and the live attack
 
-On the live site, anyone can run our attack against Gemma 4 31B on AMD Token Factory, or type their own caption and watch the easy-read, Hindi and Italian versions being made and checked ([proof page](https://accesscast.vercel.app/proof.html)). Nothing typed there is stored.
+On the live site, anyone can run our attack against Gemma 4 31B on AMD Token Factory, or type their own caption and watch the easy-read, Hindi, Italian, Spanish, French and Portuguese versions being made and checked ([proof page](https://accesscast.vercel.app/proof.html)). Nothing typed there is stored.
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -150,7 +150,7 @@ Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per fi
 | Description placed in natural pauses | yes, checked in code against measured word timings | yes | — |
 | Extended description when there is no room | yes, only where needed | — | — |
 | Easy-read captions and a "give me time to read" mode | yes | — | — |
-| Hindi and Italian voice-over from the same analysis | yes | many languages | — |
+| Voice-over in Hindi, Italian, Spanish, French and Portuguese from the same analysis | yes | many languages | — |
 | Code checks meaning (numbers, "not", invented names, instructions on screen) | yes, every line | — | — |
 | A person approves every description line; the server refuses to publish otherwise | yes | — | volunteers review AI drafts |
 | Open models that can run on the customer's own servers | yes (Gemma 4) | — | — |
@@ -191,7 +191,7 @@ Every first draft failed at least one of our checks (arm B sent all of them to a
 | Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
 | Human review | Nothing renders while a description or easy-read line waits for a person (the server refuses); captions and translations pass automatic checks | Our reviewers are not professional describers; the timed two-person review study (E12) has not run yet |
 | Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 25 of 25, review app and Studio 7 of 7, including axe-core scans) | Not yet tested by a blind reviewer |
-| Hindi and Italian | Back-translation shown to reviewers | Not a full professional language QA; native-speaker spot checks are not done yet |
+| Hindi, Italian, Spanish, French, Portuguese | Each language's subtitles and voice-over pass the same number, name and language checks; translated description has a back-translation for reviewers (Hindi, Italian) | Not a full professional language QA; native-speaker spot checks are not done yet. Spanish, French and Portuguese were added last |
 | "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
 | Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |
 | Where it ran | Gemma 4 31B on AMD Token Factory | Whisper, the aligner, the voices and the metric models ran on our own workstation, not on AMD hardware; each evidence file records the device. Gemma 4 E4B (listening) is not on Token Factory, so the transcript cross-check did not run and sound labels come from AST |
