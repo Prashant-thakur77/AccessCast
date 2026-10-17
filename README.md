@@ -1,4 +1,4 @@
-<pending: e1.headline>
+One video, five versions: AccessCast uses Gemma 4 31B on AMD Token Factory to write audio description, captions, easy-read, Hindi and Italian versions, checks every line in code, and a person approves what the public hears.
 
 [Live demo](https://accesscast.vercel.app/?audience=judge) · [3-minute judge guide](JUDGES.md) · Demo video: <pending: video.url> · Deck (PDF): <pending: deck.url>
 
