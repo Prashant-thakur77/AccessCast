@@ -81,7 +81,7 @@ Nothing reaches a viewer until a person approves it. Confidence for each line is
 |---|---|---|
 | Soak test | Not run: it measures our own GPU server, and we had no droplet | — |
 | Offline run | Not run: Gemma ran on a hosted endpoint, so a run cannot be offline | — |
-| Same input, same output | not every artefact was byte-identical (details in the evidence file) | `e09_determinism.json` |
+| Same input, same output (dev) | Our own stages are repeatable: word timings identical in 3/3 runs, and so were the pauses and captions. Gemma on Token Factory is not: its scene evidence (temperature 0) and drafts (temperature 0.3, fixed seed) changed between runs, so 3 of 10 description lines differed on a NASA clip and 16 of 17 on the Sintel trailer. This is why a person reviews the final text, never a re-run. | `e09_determinism.json` |
 | Live attacks on Gemma (8 cases, 20 tries each at the production temperature and 20 at a stress temperature) | outputs that reached the viewer: 0 | `e11_adversarial.json` |
 
 <!-- e11.table:start -->
@@ -131,6 +131,7 @@ Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per fi
 - **Our first voice timing was wrong.** Lines inside their word budget still overran their pause; we refitted on dev lines and added a margin (D-024).
 - **Extended description drifted from the picture** by up to a few frames until E9 caught it; the render and its length check are fixed (`docs/incidents.md`).
 - **Token Factory was unreliable while we worked:** long stretches of "no available workers", and 15 of 120 requests refused by the rate limit in E13. Everything fails closed, but runs took hours.
+- **Gemma on Token Factory does not repeat itself,** even at temperature 0 with a fixed seed (E9): re-running the same clip changed most of its description lines on the Sintel trailer. Determinism would need our own server.
 - **Not done:** no MI300X droplet (no accepted payment card), no Gemma 4 E4B, no blind tester yet.
 
 ## Honest scope
