@@ -76,6 +76,12 @@ section p { margin: 0 0 .25em; }
 .pipe { z-index: 1; }
 
 /* counters */
+.tr-grid { position: absolute; left: 200px; right: 200px; top: 330px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 20px 28px; align-items: center; }
+.tr-h { font: 700 28px/1.2 Inter; color: #CBD0E4; text-align: center; }
+.tr-l { font: 800 46px/1 Inter; color: #fff; }
+.tr-l small { display: block; font: 600 22px/1.3 Inter; color: #CBD0E4; margin-top: 6px; }
+.pill { font: 800 30px/1 Inter; padding: 18px 20px; border-radius: 999px; text-align: center; color: #fff; }
+.pill.g { background: #1E7A4C; } .pill.r { background: var(--red); } .pill.n { background: #5A6178; }
 .counters { position: absolute; left: 140px; right: 140px; top: 250px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
 .ctr { background: rgba(20, 27, 52, .86); border-radius: 30px; padding: 34px 34px 30px; border-top: 10px solid var(--red); }
 .ctr .v { font: 400 112px/1 Anton; color: var(--sun); white-space: nowrap; }
@@ -261,6 +267,31 @@ section p { margin: 0 0 .25em; }
 </section>
 
 <!-- AMD, measured from our own logs -->
+<section data-scene="res_tr" data-dur="10">
+  <div class="box" style="top:110px">
+    <p class="micro anim fade" style="--d:.1s">Translation · FLORES+ devtest · <span data-claim="e4.n"></span> sentences per language</p>
+    <p class="mid anim up" style="--d:.3s">Against specialist translation models</p>
+  </div>
+  <div class="tr-grid">
+    <div></div><div class="tr-h anim fade" style="--d:.6s">COMET: a quality score</div><div class="tr-h anim fade" style="--d:.6s">chrF++: word overlap</div>
+    <div class="tr-l anim up" style="--d:1.0s">Hindi<small>against IndicTrans2</small></div>
+    <div class="pill g anim up" style="--d:1.2s">Gemma higher</div>
+    <div class="pill r anim up" style="--d:1.4s">Specialist higher</div>
+    <div class="tr-l anim up" style="--d:1.7s">Italian<small>against Opus-MT</small></div>
+    <div class="pill g anim up" style="--d:1.9s">Gemma higher</div>
+    <div class="pill g anim up" style="--d:2.1s">Gemma higher</div>
+    <div class="tr-l anim up" style="--d:2.4s">Spanish<small>against Opus-MT</small></div>
+    <div class="pill g anim up" style="--d:2.6s">Gemma higher</div>
+    <div class="pill n anim up" style="--d:2.8s">No clear difference</div>
+    <div class="tr-l anim up" style="--d:3.1s">French<small>against Opus-MT</small></div>
+    <div class="pill g anim up" style="--d:3.3s">Gemma higher</div>
+    <div class="pill r anim up" style="--d:3.5s">Specialist higher</div>
+    <div class="tr-l anim up" style="--d:3.8s">Portuguese<small>against Opus-MT</small></div>
+    <div class="pill g anim up" style="--d:4.0s">Gemma higher</div>
+    <div class="pill r anim up" style="--d:4.2s">Specialist higher</div>
+  </div>
+</section>
+
 <section data-scene="amd" data-dur="10">
   <div class="box" style="top:100px">
     <p class="micro anim fade" style="--d:.1s">Gemma 4 31B on AMD Token Factory · measured from our logs</p>
