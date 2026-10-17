@@ -11,7 +11,7 @@ The shortest route through the submission.
 
 ## What To Inspect
 - The "What the models decided" drawer on any video: the frames Gemma saw, the pause each line had to fit, Gemma's first draft, the checks that failed, each repair, and who approved it.
-- A refused render next to a published one (`evidence/gallery/`).
+- A public render refused because no person has approved the lines yet, next to the labelled draft the same project is allowed (`evidence/gallery/refused_public_render.json`).
 - The review app, keyboard only (`make review`).
 - [`evidence/public-claims.json`](evidence/public-claims.json) and `make claims-check`.
 
@@ -29,7 +29,7 @@ These labels do not pre-award points; judges keep full scoring authority.
 
 | Criterion | What we did | Fastest proof |
 |---|---|---|
-| Application of Technology | Gemma 4 31B sees, writes, translates and repairs, served by AMD Token Factory; code checks every line | README "What runs on AMD" |
+| Application of Technology | Gemma 4 31B sees, writes, translates and repairs, served by AMD Token Factory; code checks every line | README "Gemma 4 on AMD" |
 | Presentation | Plain-words demo video; live player that never sleeps | <pending: video.url> |
 | Business Value | Named buyers and legal deadlines; GPU cost plus measured review time | README "Who pays" |
 | Originality | Checks tied to the real audio timeline; five versions from one analysis; extended description only when needed | `docs/rules.md` |

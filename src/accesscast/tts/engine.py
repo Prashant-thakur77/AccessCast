@@ -36,8 +36,8 @@ def engine_for(lang: str) -> str:
     return "kokoro"  # seed per line (E9); bumps the TTS cache key
 
 
-VOICES = {"en": "af_heart", "hi": "hf_alpha", "it": "if_sara"}  # Kokoro voice ids (Katha's map, MIT)
-VOICEOVER_VOICES = {"hi": "hm_omega", "it": "im_nicola"}  # distinct from the description voice
+VOICES = {"en": "af_heart", "hi": "hf_alpha", "it": "if_sara", "es": "ef_dora", "fr": "ff_siwis"}  # Kokoro voice ids (Katha's map, MIT)
+VOICEOVER_VOICES = {"hi": "hm_omega", "it": "im_nicola", "es": "em_alex", "fr": "ff_siwis"}  # distinct from the description voice where Kokoro has one (French has a single voice)
 CAL_DIR = REPO_ROOT / "src" / "accesscast" / "tts" / "calibration"
 
 

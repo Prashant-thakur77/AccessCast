@@ -211,7 +211,7 @@ def claims_check() -> None:
 
 @app.command("calibrate-tts")
 def calibrate_tts(
-    voices: str = "af_heart:en,hf_alpha:hi,if_sara:it,hm_omega:hi,im_nicola:it",
+    voices: str = "af_heart:en,hf_alpha:hi,if_sara:it,hm_omega:hi,im_nicola:it,em_alex:es,ef_dora:es,ff_siwis:fr",
     require_rocm: Annotated[bool, typer.Option("--require-rocm")] = False,
 ) -> None:
     """Measure each voice's words-per-second (60 fixed sentences per language) → tts/calibration/*.json."""

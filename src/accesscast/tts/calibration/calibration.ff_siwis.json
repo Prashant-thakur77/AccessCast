@@ -1,0 +1,12 @@
+{
+  "voice": "ff_siwis",
+  "lang": "fr",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": -0.1784,
+  "s_per_word": 0.3191,
+  "wps_voice": 3.134,
+  "resid_p95_s": 0.4947,
+  "device": "cuda",
+  "wall_s": 12.34
+}

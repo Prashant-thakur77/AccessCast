@@ -20,6 +20,13 @@ _DEVANAGARI = re.compile(r"[ऀ-ॿ]")
 _LATIN = re.compile(r"[A-Za-zÀ-ÿ]")
 
 STOPWORDS: dict[str, frozenset[str]] = {
+    # Spanish and French: common function words (ours, for the token-based checks on these languages)
+    "es": frozenset(
+        ["el", "la", "los", "las", "un", "una", "unos", "unas", "y", "o", "pero", "que", "de", "del", "a", "al", "en", "con", "por", "para", "es", "son", "está", "están", "fue", "ser", "se", "su", "sus", "lo", "le", "les", "me", "te", "nos", "este", "esta", "estos", "estas", "ese", "esa", "eso", "aquí", "allí", "muy", "más", "como", "cuando"]
+    ),
+    "fr": frozenset(
+        ["le", "la", "les", "un", "une", "des", "et", "ou", "mais", "que", "qui", "de", "du", "au", "aux", "en", "dans", "avec", "par", "pour", "est", "sont", "été", "être", "se", "sa", "son", "ses", "ce", "cet", "cette", "ces", "il", "elle", "ils", "elles", "on", "nous", "vous", "très", "plus", "comme", "quand", "ici", "là"]
+    ),
     "en": frozenset(
         [
             "a",
@@ -258,9 +265,55 @@ NEGATIONS: dict[str, frozenset[str]] = {
     ),
     "hi": frozenset({"नहीं", "मत", "न", "कभी नहीं", "बिना"}),
     "it": frozenset({"non", "mai", "nessuno", "niente", "nulla", "né", "senza", "nemmeno", "neanche"}),
+    "es": frozenset(
+        {"no", "nunca", "jamás", "nadie", "nada", "ni", "sin", "tampoco", "ningún", "ninguna", "ninguno"}
+    ),
+    "fr": frozenset(
+        {"pas", "jamais", "rien", "aucun", "aucune", "sans", "ni", "nulle"}
+    ),  # "ne" pairs with these
 }
 
 NUMBER_WORDS: dict[str, dict[str, int]] = {
+    "es": {
+        "cero": 0,
+        "dos": 2,
+        "tres": 3,
+        "cuatro": 4,
+        "cinco": 5,
+        "seis": 6,
+        "siete": 7,
+        "ocho": 8,
+        "nueve": 9,
+        "diez": 10,
+        "once": 11,
+        "doce": 12,
+        "veinte": 20,
+        "treinta": 30,
+        "cuarenta": 40,
+        "cincuenta": 50,
+        "sesenta": 60,
+        "setenta": 70,
+        "ochenta": 80,
+        "noventa": 90,
+    },
+    "fr": {  # "neuf" (nine / new) is left out: it would read a number into ordinary sentences
+        "zéro": 0,
+        "deux": 2,
+        "trois": 3,
+        "quatre": 4,
+        "cinq": 5,
+        "six": 6,
+        "sept": 7,
+        "huit": 8,
+        "dix": 10,
+        "onze": 11,
+        "douze": 12,
+        "vingt": 20,
+        "trente": 30,
+        "quarante": 40,
+        "cinquante": 50,
+        "soixante": 60,
+    },
     "en": {
         "zero": 0,
         "one": 1,
@@ -490,6 +543,15 @@ def finite_past_verbs(text: str) -> list[str]:
 
 
 _SCALES: dict[str, dict[str, int]] = {
+    "es": {"cien": 100, "mil": 1_000, "millón": 1_000_000, "millones": 1_000_000},
+    "fr": {
+        "cent": 100,
+        "mille": 1_000,
+        "million": 1_000_000,
+        "millions": 1_000_000,
+        "milliard": 1_000_000_000,
+        "milliards": 1_000_000_000,
+    },
     "en": {"hundred": 100, "thousand": 1_000, "million": 1_000_000, "billion": 1_000_000_000},
     "it": {
         "cento": 100,
@@ -520,6 +582,9 @@ def numbers(text: str, lang: str) -> list[str]:
     check_lang(lang)
     t = normalise(text).translate(_DEVANAGARI_DIGITS)
     t = re.sub(r"(\d)\s+([.,]\d{3})\b", r"\1\2", t)  # ASR writes "34 ,000"
+    t = re.sub(
+        r"(?<=\d)[ \u00a0\u202f](?=\d{3}(?!\d))", "", t
+    )  # French writes 10 000 (space as thousands sign)
     words = NUMBER_WORDS.get(lang, {})
     scales = _SCALES.get(lang, {})
     vals: list[float] = []

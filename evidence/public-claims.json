@@ -3378,7 +3378,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "339 ms"
@@ -3406,6 +3407,27 @@
    ]
   },
   {
+   "claim_id": "e15.boundary_raw_median",
+   "text": "median word-boundary error of raw Whisper timestamps",
+   "value": 32.0,
+   "unit": "ms",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e15_asr.json",
+     "sha256": "76be70603783885e7a59423b9cec404e6c05efd0145a86b52c86403d84afc85e",
+     "pointer": "/summary/boundary_error/openai~1whisper-large-v3-turbo/raw/median_ms"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "32 ms"
+   ]
+  },
+  {
    "claim_id": "e15.boundary_raw_p95",
    "text": "95th-percentile word-boundary error of raw Whisper timestamps",
    "value": 480.0,
@@ -3420,7 +3442,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "480 ms"
