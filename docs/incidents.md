@@ -126,3 +126,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** During the E4 attempts, Token Factory failed 2,472 Hindi requests (most failed instantly, while our circuit breaker was open). Our batch translator gives up on a sentence it cannot get and leaves it out, and E4 scores a missing sentence as an empty translation.
 **Root cause.** In the pipeline, leaving a line out is the right fail-closed move: an untranslated line is never shown. In a quality comparison, though, it would count an outage against Gemma.
 **Fix.** E4 now counts this run's endpoint errors and has a check, `no_endpoint_errors`. A run with any endpoint error does not pass and has to be re-run. Successful answers come back from the opt-in answer cache, which the evidence file records. No E4 numbers had been reported before this fix.
+
+## 2026-10-17 The standard description track showed lines nobody hears
+**Symptom.** The text track of the standard "can't see the screen" version on the Sintel draft had four cues inside 1.5 s, each about 0.5 s long and one 0.13 s. Spoken, each of those lines takes 2 to 3 s.
+**Root cause.** These lines need the video to hold, so they are voiced only in the extended version. The standard audio already left them out, but the description track on the source timeline took every line, and each cue was cut short by the next one.
+**Fix.** The source-timeline description tracks (`desc.en`, `desc.hi`, `desc.it`) carry only lines voiced without a pause (`render_stage.timeline_items`, with a unit test). The extended version's track keeps every line, and on drafts it now carries the "UNREVIEWED DRAFT" mark too. The three site drafts were re-rendered, and all 18 versions pass the render checks.
