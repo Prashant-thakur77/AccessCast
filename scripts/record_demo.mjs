@@ -17,7 +17,7 @@ const video = { width: 1920, height: 1080 };
 
 async function segment(name, fn) {
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: size, recordVideo: { dir: out, size: video }, deviceScaleFactor: 1.5 });
+  const ctx = await browser.newContext({ viewport: size, recordVideo: { dir: out, size } });
   const page = await ctx.newPage();
   try {
     await fn(page);

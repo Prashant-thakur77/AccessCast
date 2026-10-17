@@ -45,13 +45,13 @@
     tb.replaceChildren();
     for (const [name, v] of Object.entries(lines)) {
       const waiting = (v.by_status.pending || 0) + (v.by_status.needs_revision || 0);
-      const passed = (v.by_status.auto_approved || 0);
+      const flagged = (v.by_status.needs_revision || 0);
       const tr = document.createElement("tr");
       const th = document.createElement("th");
       th.scope = "row";
       th.textContent = name;
       tr.append(th);
-      for (const val of [v.total, v.repaired, waiting, passed]) {
+      for (const val of [v.total, v.repaired, flagged, waiting]) {
         const td = document.createElement("td");
         td.textContent = String(val);
         tr.append(td);

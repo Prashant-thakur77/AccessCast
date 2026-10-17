@@ -196,7 +196,8 @@ test("add a line by keyboard: dialog is labelled, axe clean, the line lands and 
   await tabTo(page, page.locator("#add-save"));
   await page.keyboard.press("Enter");
   await expect(dlg).toBeHidden();
-  await expect(page.locator("#status")).toContainText("Line added");
+  // "Line added" is announced, then the new line is selected and its live check results are read out
+  await expect(page.locator("#status")).toContainText(/Line added|Manual line/);
   const items = (await (await request.get(`/api/projects/${pid}/items`)).json()).items as {
     id: string; status: string; source: string; text: string;
   }[];

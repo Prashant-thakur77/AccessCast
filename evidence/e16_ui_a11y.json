@@ -2,12 +2,12 @@
  "schema": "accesscast/evidence/v1",
  "experiment": "e16_ui_a11y",
  "split": "none",
- "passed": true,
- "git_commit": "a27450f036b479e805b66644a80b26dce0276c82",
- "git_dirty": false,
+ "passed": false,
+ "git_commit": "a81c6cb35f7fe2533c528ebcd598496b1c452086",
+ "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-16T17:49:02.286Z",
- "finished_at": "2026-10-16T17:51:07.342Z",
+ "started_at": "2026-10-17T00:45:58.547Z",
+ "finished_at": "2026-10-17T00:48:12.086Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -25,7 +25,7 @@
  },
  "checks": {
   "player_suite": true,
-  "review_suite": true
+  "review_suite": false
  },
  "results": [
   {
@@ -130,7 +130,7 @@
   },
   {
    "suite": "review",
-   "ok": true,
+   "ok": false,
    "tests": [
     {
      "title": "axe-core (light): picker, a selected line and the key help dialog have 0 violations",
@@ -150,15 +150,19 @@
     },
     {
      "title": "keyboard only: review a whole project, then mark review complete",
-     "status": "passed"
+     "status": "failed"
     },
     {
      "title": "studio: axe clean, keyboard-only upload, every stage listed, review link opens the project",
-     "status": "passed"
+     "status": "skipped"
+    },
+    {
+     "title": "add a line by keyboard: dialog is labelled, axe clean, the line lands and waits for review",
+     "status": "skipped"
     }
    ],
-   "passed": 6,
-   "total": 6
+   "passed": 4,
+   "total": 7
   }
  ],
  "summary": {
@@ -167,8 +171,8 @@
    "total": 23
   },
   "review": {
-   "passed": 6,
-   "total": 6
+   "passed": 4,
+   "total": 7
   },
   "screen_reader_test_by_person": null
  },
