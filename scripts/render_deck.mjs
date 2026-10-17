@@ -2,7 +2,7 @@
 // docs/cover.html → docs/cover.png. Usage: node scripts/render_deck.mjs
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { chromium } from "@playwright/test";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -22,6 +22,12 @@ function mdToHtml(md) {
     if (/^### /.test(l)) { out.push(`<h3>${inline(l.slice(4))}</h3>`); i++; continue; }
     if (/^## /.test(l)) { out.push(`<p class="sub">${inline(l.slice(3))}</p>`); i++; continue; }
     if (/^# /.test(l)) { out.push(`<h2>${inline(l.slice(2))}</h2>`); i++; continue; }
+    if (/^!\[/.test(l)) {  // one or more images on a line → a row of figures
+      const imgs = [...l.matchAll(/!\[([^\]]*)\]\(([^)]+)\)/g)];
+      out.push(`<div class="figs">${imgs.map((m) => `<img src="${pathToFileURL(resolve(root, m[2])).href}" alt="${m[1].replace(/"/g, "&quot;")}">`).join("")}</div>`);
+      i++;
+      continue;
+    }
     if (/^\|/.test(l)) {
       const rows = [];
       while (i < lines.length && /^\|/.test(lines[i])) { rows.push(lines[i]); i++; }
@@ -57,6 +63,7 @@ p,li{font-size:31px;line-height:1.35;margin:0}ul,ol{margin:0;padding-left:1.2em;
 table{border-collapse:collapse;font-size:28px;width:100%}th,td{border-bottom:2px solid #33476f;padding:12px 16px;text-align:left}
 th{color:var(--accent)}code{font-size:.9em;background:var(--card);padding:2px 8px;border-radius:6px}
 .pending{color:#ff9b9b;font-style:italic}
+.figs{display:flex;gap:28px;align-items:flex-start;flex:1;min-height:0}.figs img{max-width:48%;max-height:560px;object-fit:contain;border-radius:12px;border:2px solid #33476f}
 footer{position:absolute;bottom:34px;left:100px;right:100px;display:flex;justify-content:space-between;font-size:20px;color:var(--muted)}
 @page{size:1600px 900px;margin:0}`;
 

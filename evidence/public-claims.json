@@ -209,7 +209,7 @@
    "note": "Interim final rule, published and effective 20 April 2026, with a request for comments. No later Federal Register action on this rule found as of 16 Oct 2026 (API search).",
    "evidence": [],
    "public_files": [
-    "README.md"
+    "docs/deck/deck.md"
    ]
   },
   {
@@ -871,9 +871,7 @@
      "pointer": "/summary/usd_per_finished_minute_gemma"
     }
    ],
-   "public_files": [
-    "README.md"
-   ],
+   "public_files": [],
    "display": [
     "$0.0053"
    ]
