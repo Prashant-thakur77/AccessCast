@@ -320,10 +320,14 @@ def _indictrans2(
         raise PermissionError(f"{repo} is gated: set HF_TOKEN in .env for an account that accepted its terms")
     tok = AutoTokenizer.from_pretrained(repo, revision=rev, trust_remote_code=True)
     model = AutoModelForSeq2SeqLM.from_pretrained(repo, revision=rev, trust_remote_code=True).to(dev).eval()
+    half = str(dev).startswith("cuda")
+    if half:  # example.py: `if DEVICE == "cuda": model.half()` (fp32 1B + beam 5 does not fit a 6 GB card)
+        model = model.half()
     ip = IndicProcessor(inference=True)
     beams, max_len = int(p.get("num_beams", 5)), int(p.get("max_length", 256))
+    bs = int(p.get("batch_size", 4))  # example.py: BATCH_SIZE = 4
     out: list[str] = []
-    for k, batch in enumerate(_batches(texts, int(p.get("batch_size", 16)))):
+    for k, batch in enumerate(_batches(texts, bs)):
         pre = ip.preprocess_batch(batch, src_lang="eng_Latn", tgt_lang=FLORES_CODE["hi"])
         enc = tok(
             pre, truncation=False, padding="longest", return_tensors="pt", return_attention_mask=True
@@ -345,6 +349,9 @@ def _indictrans2(
     return out, {
         "num_beams": beams,
         "max_length": max_len,
+        "batch_size": bs,
+        "dtype": "float16" if half else "float32",
+        "recipe": "AI4Bharat/IndicTrans2 huggingface_interface/example.py",
         "preprocessing": "IndicTransToolkit.IndicProcessor",
     }
 
