@@ -40,6 +40,9 @@ await segment("five_ways", async (p) => {
   const start = p.getByRole("button", { name: /start|play/i }).first();
   await start.focus();
   await p.keyboard.press("Enter");
+  await pause(p, 600);
+  await p.locator("#video").scrollIntoViewIfNeeded();  // keep the playing clip and its captions in view
+  await p.evaluate(() => window.scrollBy(0, -120));
   await pause(p, 48000);
 });
 
