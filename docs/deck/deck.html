@@ -13,8 +13,8 @@ th{color:var(--accent)}code{font-size:.9em;background:var(--card);padding:2px 8p
 .figs{display:flex;gap:28px;align-items:flex-start;flex:1;min-height:0}.figs img{max-width:48%;max-height:560px;object-fit:contain;border-radius:12px;border:2px solid #33476f}.figs img:only-child{max-width:100%;max-height:520px}
 footer{position:absolute;bottom:34px;left:100px;right:100px;display:flex;justify-content:space-between;font-size:20px;color:var(--muted)}
 @page{size:1600px 900px;margin:0}</style></head><body><main><section aria-label="Slide 1"><h2>AccessCast</h2>
-<p class="sub">One video. Five ways to watch.</p>
-<p>Blind, deaf, slow-reading, Hindi and Italian viewers each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.</p>
+<p class="sub">One video. Made for every viewer.</p>
+<p>Blind, deaf and slow-reading viewers, and people who speak Hindi, Italian, Spanish, French or Portuguese, each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.</p>
 <p>Gemma 4 on AMD Token Factory · AMD Developer Hackathon ACT III · Create a New Kind of Experience</p>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>1 / 14</span></footer></section>
 <section aria-label="Slide 2"><h2>Most video says nothing to people who can't see it</h2>
@@ -23,9 +23,9 @@ footer{position:absolute;bottom:34px;left:100px;right:100px;display:flex;justify
 <section aria-label="Slide 3"><h2>The law already asks for it</h2>
 <table><thead><tr><th scope="col">Where</th><th scope="col">Rule</th><th scope="col">When</th></tr></thead><tbody><tr><td>EU</td><td>European Accessibility Act</td><td>28 June 2025</td></tr><tr><td>Italy</td><td>D.Lgs. 82/2022, fines €5,000 to €40,000</td><td>in force</td></tr><tr><td>India</td><td>MIB accessibility guidelines for OTT</td><td>6 February 2026</td></tr><tr><td>US</td><td>ADA Title II web rule (WCAG 2.1 AA)</td><td>26 April 2027</td></tr></tbody></table>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>3 / 14</span></footer></section>
-<section aria-label="Slide 4"><h2>One video, five experiences</h2>
-<p>"I can't see the screen" · "I can't hear" · "Simpler words, please" · "हिन्दी" · "Italiano"</p>
-<p>All five are built from one analysis, so they never disagree. Profiles combine.</p>
+<section aria-label="Slide 4"><h2>One video, every viewer</h2>
+<p>"I can't see the screen" · "I can't hear" · "Simpler words, please" · "हिन्दी" · "Italiano" · "Español" · "Français" · "Português"</p>
+<p>Every version is built from one analysis, so they never disagree. A viewer can combine them: description in Hindi, say.</p>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>4 / 14</span></footer></section>
 <section aria-label="Slide 5"><h2>How it works</h2>
 <div class="figs"><img src="file:///home/prashant/projects/AccessCast/docs/architecture.png" alt="What runs where: our computer listens; Gemma 4 31B on AMD Token Factory looks, writes, translates and repairs; code plans and checks every line; a person approves; a render gate refuses while any line waits"></div>
@@ -42,7 +42,7 @@ footer{position:absolute;bottom:34px;left:100px;right:100px;display:flex;justify
 <div class="figs"><img src="file:///home/prashant/projects/AccessCast/docs/charts/e5_negations.png" alt="Easy-read captions that kept every negation: Gemma alone against AccessCast as published"><img src="file:///home/prashant/projects/AccessCast/docs/charts/e11_attacks.png" alt="Our attack cases: Gemma took the bait only on the number case, and no answer reached a viewer"></div>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>8 / 14</span></footer></section>
 <section aria-label="Slide 9"><h2>More results</h2>
-<ul><li><strong>Translation (FLORES+, 1012 sentences each):</strong> Gemma beat Opus-MT on Italian on both scores; Hindi is mixed (IndicTrans2 higher on chrF++).</li><li><strong>Accessibility:</strong> player 25 of 25 tests, review app and Studio 7 of 7, axe-core included.</li></ul>
+<ul><li><strong>Translation (FLORES+, 1012 sentences each):</strong> Gemma beat Opus-MT on Italian on both scores; Hindi is mixed (IndicTrans2 higher on chrF++).</li><li><strong>Accessibility:</strong> player 27 of 27 tests, review app and Studio 7 of 7, axe-core included.</li></ul>
 <div class="figs"><img src="file:///home/prashant/projects/AccessCast/docs/charts/e4_translation.png" alt="Translation: Gemma minus the baseline per language and score, with 95% intervals"></div>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>9 / 14</span></footer></section>
 <section aria-label="Slide 10"><h2>Gemma 4 on AMD Token Factory</h2>
@@ -50,13 +50,13 @@ footer{position:absolute;bottom:34px;left:100px;right:100px;display:flex;justify
 <div class="figs"><img src="file:///home/prashant/projects/AccessCast/docs/charts/amd_usage.png" alt="Gemma requests answered by AMD Token Factory, by day"><img src="file:///home/prashant/projects/AccessCast/docs/charts/e14_tokens.png" alt="Gemma tokens of one finished minute, by version"></div>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>10 / 14</span></footer></section>
 <section aria-label="Slide 11"><h2>It holds up</h2>
-<ul><li>Live attacks: 0 outputs reached a viewer: 8 cases, 20 tries each at two temperatures.</li><li>A provider outage fails closed: the line goes to a person, never out by default.</li><li>Same clip, re-run: words, pauses and captions identical; Gemma's drafts changed (16 of 17 lines on one clip), so a person reviews the final text.</li><li>Accessibility tests pass: player 25 of 25, review app and Studio 7 of 7.</li></ul>
+<ul><li>Live attacks: 0 outputs reached a viewer: 8 cases, 20 tries each at two temperatures.</li><li>A provider outage fails closed: the line goes to a person, never out by default.</li><li>Same clip, re-run: words, pauses and captions identical; Gemma's drafts changed (16 of 17 lines on one clip), so a person reviews the final text.</li><li>Accessibility tests pass: player 27 of 27, review app and Studio 7 of 7.</li></ul>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>11 / 14</span></footer></section>
 <section aria-label="Slide 12"><h2>Who pays, and what it costs</h2>
 <ul><li>European Accessibility Act applies from 28 June 2025; Italy's fines €5,000 to €40,000.</li><li>India's OTT accessibility guidelines: 6 February 2026. US ADA Title II, large public bodies: 26 April 2027.</li><li>List prices today: $4.25 a minute for AI description with a human spot check (3Play Media); $6.65–$14.70 for human description (University of Michigan).</li><li>Our cost: 41,818 Gemma tokens per finished minute, plus a person's review time (E12).</li></ul>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>12 / 14</span></footer></section>
 <section aria-label="Slide 13"><h2>How it is sold</h2>
-<ul><li><strong>First customer:</strong> a US public university's accessibility office: ADA Title II from 26 April 2027, years of video with no description.</li><li><strong>They buy:</strong> all five versions per finished minute, below today's AI-description list prices, reviewed by their own staff in our app; or a yearly licence to run it on their own servers.</li><li><strong>Next:</strong> broadcasters and streaming platforms in the EU, Italy and India.</li><li><strong>The difference:</strong> five audiences from one analysis, checks that catch meaning changes, and a server that refuses to publish unreviewed lines.</li></ul>
+<ul><li><strong>First customer:</strong> a US public university's accessibility office: ADA Title II from 26 April 2027, years of video with no description.</li><li><strong>They buy:</strong> every version per finished minute, below today's AI-description list prices, reviewed by their own staff in our app; or a yearly licence to run it on their own servers.</li><li><strong>Next:</strong> broadcasters and streaming platforms in the EU, Italy and India.</li><li><strong>The difference:</strong> every audience and language from one analysis, checks that catch meaning changes, and a server that refuses to publish unreviewed lines.</li></ul>
   <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>13 / 14</span></footer></section>
 <section aria-label="Slide 14"><h2>What didn't work, and what's next</h2>
 <ul><li><strong>E1 did not work on our test set:</strong> the W3C videos have 6 usable pauses in 9.3 minutes, so only 6 standard lines were planned and the arms came out equal.</li><li>Gemma never failed 6 of our 8 attack cases, so those checks were not exercised live.</li><li>Hindi translation: IndicTrans2 beat Gemma on chrF++ (58.8 against 53.8).</li><li>Hindi speech recognition is weak: 32.4% word error rate.</li><li>Token Factory dropped requests for long stretches; everything fails closed, but it slows the work.</li><li>Not yet: a blind reviewer, native-speaker checks, MI300X numbers.</li></ul>
