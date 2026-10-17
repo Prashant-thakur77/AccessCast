@@ -3262,7 +3262,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "cee89f40723349f61658a024852ce5fca1361c8cd4963acc0d8edb620fd1d261",
+     "sha256": "1acc1e599bfeeeae473c6d8d40e70ab3e99f2c627eae92306760072c1ec3ad46",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3283,7 +3283,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "cee89f40723349f61658a024852ce5fca1361c8cd4963acc0d8edb620fd1d261",
+     "sha256": "1acc1e599bfeeeae473c6d8d40e70ab3e99f2c627eae92306760072c1ec3ad46",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3297,14 +3297,14 @@
   {
    "claim_id": "e16.review_passed",
    "text": "review-app accessibility tests passed (Playwright + axe-core)",
-   "value": 6,
+   "value": 4,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "cee89f40723349f61658a024852ce5fca1361c8cd4963acc0d8edb620fd1d261",
+     "sha256": "1acc1e599bfeeeae473c6d8d40e70ab3e99f2c627eae92306760072c1ec3ad46",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3312,20 +3312,20 @@
     "README.md"
    ],
    "display": [
-    "6"
+    "4"
    ]
   },
   {
    "claim_id": "e16.review_total",
    "text": "review-app accessibility tests run",
-   "value": 6,
+   "value": 7,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "cee89f40723349f61658a024852ce5fca1361c8cd4963acc0d8edb620fd1d261",
+     "sha256": "1acc1e599bfeeeae473c6d8d40e70ab3e99f2c627eae92306760072c1ec3ad46",
      "pointer": "/summary/review/total"
     }
    ],
@@ -3333,7 +3333,7 @@
     "README.md"
    ],
    "display": [
-    "6"
+    "7"
    ]
   },
   {
@@ -3351,9 +3351,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "105"
@@ -3374,9 +3372,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "114"
@@ -3397,9 +3393,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "114"
@@ -3420,9 +3414,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "114"
@@ -3443,8 +3435,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "121"
@@ -3465,9 +3456,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md",
-    "docs/lablab.md"
+    "README.md"
    ],
    "display": [
     "7"
@@ -3488,8 +3477,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "106"
@@ -3510,8 +3498,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "57"
