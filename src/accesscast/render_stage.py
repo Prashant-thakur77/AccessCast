@@ -60,6 +60,13 @@ def _clip_end(it: Item) -> int:
     return it.anchor_ms + C.AD_PAD_BEFORE_MS + dur
 
 
+def timeline_items(its: list[Item], *, extended_timeline: bool) -> list[Item]:
+    """Description lines that belong on a timeline. The source timeline (standard versions) carries only lines
+    voiced without a pause; a line that needs the video to hold is heard only in the extended version, so on the
+    source timeline its text cue would flash for a fraction of a second over speech it was never fitted to."""
+    return list(its) if extended_timeline else [i for i in its if not i.extended]
+
+
 def _publishable(it: Item, mode: str) -> bool:
     return it.status in PUBLISHABLE
 
@@ -175,15 +182,22 @@ def render_all(
         "easy.en": sel(ItemKind.EASY, "en"),
         "subs.hi": sel(ItemKind.SUBTITLE, "hi"),
         "subs.it": sel(ItemKind.SUBTITLE, "it"),
-        "desc.en": sel(ItemKind.AD, "en"),
-        "desc.hi": sel(ItemKind.AD_TRANSLATION, "hi"),
-        "desc.it": sel(ItemKind.AD_TRANSLATION, "it"),
+        "desc.en": timeline_items(sel(ItemKind.AD, "en"), extended_timeline=False),
+        "desc.hi": timeline_items(sel(ItemKind.AD_TRANSLATION, "hi"), extended_timeline=False),
+        "desc.it": timeline_items(sel(ItemKind.AD_TRANSLATION, "it"), extended_timeline=False),
     }
+    ext_track_items = {**track_items, "desc.en": sel(ItemKind.AD, "en")}  # the extended timeline: every line
+
+    def marked(name: str, its: list[Item]) -> list[Item]:
+        if watermark and name.startswith("desc") and its:
+            return [its[0].model_copy(update={"final": f"[UNREVIEWED DRAFT] {its[0].text}"}), *its[1:]]
+        return its
+
     for name, its in track_items.items():
         p = tdir / f"{name}.vtt"
-        if watermark and name.startswith("desc") and its:
-            its = [its[0].model_copy(update={"final": f"[UNREVIEWED DRAFT] {its[0].text}"}), *its[1:]]
-        write_vtt(p, its, end_of=_clip_end if name.startswith("desc") else None, header_note=note)
+        write_vtt(
+            p, marked(name, its), end_of=_clip_end if name.startswith("desc") else None, header_note=note
+        )
         track_files[name] = p
 
     from accesscast.captions.dapt import export_all
@@ -243,10 +257,9 @@ def render_all(
         if rows is not None:
             render_extended(video, normed, rows, out, watermark=watermark, fps=info.fps)
             for name in spec["tracks"]:  # remap tracks onto the extended timeline
-                src_items = track_items[name]
                 write_vtt(
                     tdir / f"{name}.{v}.vtt",
-                    src_items,
+                    marked(name, ext_track_items[name]),
                     remap=_remapper(rows),
                     end_of=_clip_end if name.startswith("desc") else None,
                     header_note=note,
