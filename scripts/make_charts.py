@@ -256,6 +256,37 @@ def e17_ladder() -> None:
     )
 
 
+def e18_languages() -> None:
+    e = ev("e18_language_checks.json")
+    if not e:
+        return
+    names = {"hi": "Hindi", "it": "Italian", "es": "Spanish", "fr": "French", "pt": "Portuguese"}
+    rows = [(names.get(k, k), v) for k, v in e["summary"]["by_language"].items() if v["lines"]]
+    fig, ax = plt.subplots(figsize=(10, 0.7 * len(rows) + 1.8))
+    for i, (_name, v) in enumerate(rows):
+        pct = 100 * v["passed"] / v["lines"]
+        ax.barh(i, pct, color=GREEN, height=0.55)
+        top = ", ".join(list(v["held_by_rule"])[:2]) or "none"
+        ax.text(
+            pct + 0.8,
+            i,
+            f"{v['passed']} of {v['lines']} · held for a person {v['held_for_a_person']} (mostly {top})",
+            va="center",
+            fontsize=10,
+        )
+    ax.set_yticks(range(len(rows)), [r[0] for r in rows])
+    ax.invert_yaxis()
+    ax.set_xlim(0, 150)
+    ax.set_xlabel("subtitle and voice-over lines that passed every check (%)")
+    finish(
+        fig,
+        ax,
+        "Every language goes through the same checks",
+        f"Split: {e['split']} ({e['summary']['projects']} site drafts; CC001 = reading speed). Source: evidence/e18_language_checks.json",
+        "e18_languages",
+    )
+
+
 def timeline(sha12: str = "dac08bcd9d7a") -> None:
     base = ROOT / "site" / "p" / sha12
     if not (base / "analysis.json").exists():
