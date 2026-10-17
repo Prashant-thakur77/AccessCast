@@ -125,6 +125,12 @@ class LogTail:
     def served(self) -> list[str]:
         return sorted({str(r.get("served_model_id")) for r in self.records() if r.get("served_model_id")})
 
+    def endpoint_errors(self) -> int:
+        """Calls the endpoint never answered (outage, rate limit). translate_batch drops a segment it cannot get,
+        which is right in the pipeline but would score an outage as a bad translation, so a quality run with any
+        of these does not pass: re-run it (successful answers come back from the opt-in cache)."""
+        return sum(1 for r in self.records() if r.get("status") == "endpoint_error")
+
 
 def gemma_client(settings: Settings, exp_name: str, provider: str) -> tuple[LlmClient, LogTail]:
     log = EVAL_WORK / exp_name / "llm_calls.jsonl"
@@ -436,6 +442,12 @@ def main() -> int:
                     e.experiment,
                 )
         e.summary["served_model_id"] = one_served_model(tail)
+        e.summary["endpoint_errors"] = tail.endpoint_errors()
+        e.summary["cache_hits"] = sum(
+            1 for r in tail.records() if r.get("status") == "ok" and r.get("attempts") == 0
+        )
+        e.config["llm_cache"] = bool(os.environ.get("ACCESSCAST_LLM_CACHE"))
+        e.checks["no_endpoint_errors"] = e.summary["endpoint_errors"] == 0
         e.summary["metric_models"] = metrics.meta
         e.summary["statements"] = statements(e.summary["languages"], dry=args.dry_run)
         e.summary["negative_results"] = [s for s, neg in e.summary["statements"] if neg]

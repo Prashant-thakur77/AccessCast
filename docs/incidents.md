@@ -121,3 +121,8 @@ Dated entries: Symptom / Root cause / Fix. These feed the README's "Bugs that ta
 **Root cause.** IndicTrans2 ships its own model code (`trust_remote_code`), written for transformers 4. That code imports `transformers.onnx`, which transformers 5 removed. Our workers need transformers ≥ 5.5 for Gemma 4 and Whisper.
 With transformers 4.57 it then loaded but crashed in generation: its code indexes the key/value cache as tuples, and newer 4.x versions pass a cache object.
 **Fix.** The Hindi baseline runs in its own worker environment, `workers/indic` (transformers 4.45, the last line whose cache its code expects; same worker file, same request/response protocol, set up by `make setup`). We did not patch the baseline's code: the model we compare against runs as its authors wrote it. A missing environment still fails closed.
+
+## 2026-10-17 E4 could have scored an outage as a bad translation
+**Symptom.** During the E4 attempts, Token Factory failed 2,472 Hindi requests (most failed instantly, while our circuit breaker was open). Our batch translator gives up on a sentence it cannot get and leaves it out, and E4 scores a missing sentence as an empty translation.
+**Root cause.** In the pipeline, leaving a line out is the right fail-closed move: an untranslated line is never shown. In a quality comparison, though, it would count an outage against Gemma.
+**Fix.** E4 now counts this run's endpoint errors and has a check, `no_endpoint_errors`. A run with any endpoint error does not pass and has to be re-run. Successful answers come back from the opt-in answer cache, which the evidence file records. No E4 numbers had been reported before this fix.
