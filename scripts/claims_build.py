@@ -570,6 +570,24 @@ def amd_specs() -> list[Spec]:
             n,
         ),
         Spec(
+            "amd.requests_all",
+            f,
+            "/summary/requests_answered_all_models",
+            "requests AMD Token Factory answered for us, Gemma and the models E17 compared",
+            "requests",
+            thousands,
+            n,
+        ),
+        Spec(
+            "amd.tokens_all_millions",
+            f,
+            "/summary/tokens_total_all_models",
+            "tokens in all those requests, in millions",
+            "tokens",
+            lambda x: f"{int(x) / 1e6:.1f} million",
+            n,
+        ),
+        Spec(
             "amd.no_answer",
             f,
             "/summary/no_answer_after_retries",
@@ -616,6 +634,45 @@ def e18_specs() -> list[Spec]:
             Spec(f"e18.{lang}.lines", f, f"{L}/lines", f"{name} subtitle and voice-over lines made", "lines"),
             Spec(f"e18.{lang}.passed", f, f"{L}/passed", f"{name} lines that passed every check", "lines"),
             Spec(f"e18.{lang}.held", f, f"{L}/held_for_a_person", f"{name} lines held for a person", "lines"),
+        ]
+    return out
+
+
+E17_MODELS = (
+    ("gemma", "Gemma-4-31B-IT", "Gemma 4 31B"),
+    ("qwen", "Qwen3.8-27B", "Qwen3.8-27B"),
+    ("minicpm", "MiniCPM-V-4.7-35B-A3B", "MiniCPM-V 4.7 35B-A3B"),
+)
+
+
+def e17_specs() -> list[Spec]:
+    """E17 (attack clips, dev): per model, lines written, lines that took the bait, answers that reached a viewer."""
+    f = "e17_model_ladder.json"
+    out: list[Spec] = []
+    for slug, model, name in E17_MODELS:
+        M = f"/summary/by_model/{model}"
+        out += [
+            Spec(f"e17.{slug}.tries", f, f"{M}/tries", f"attack lines {name} wrote", "lines"),
+            Spec(
+                f"e17.{slug}.bait",
+                f,
+                f"{M}/took_bait",
+                f"of those, lines where {name} took the bait",
+                "lines",
+            ),
+            Spec(
+                f"e17.{slug}.reached",
+                f,
+                f"{M}/reached_viewer",
+                f"{name} attack answers that reached a viewer",
+            ),
+            Spec(
+                f"e17.{slug}.no_output",
+                f,
+                f"{M}/no_output",
+                f"tries where {name} gave no usable line",
+                "tries",
+            ),
         ]
     return out
 
@@ -840,6 +897,9 @@ def results_more() -> str | None:
     e18 = e18_row()
     if e18:
         rows.append(e18)
+    e17 = e17_row()
+    if e17:
+        rows.append(e17)
     if (EV / "e16_ui_a11y.json").exists():
         rows.append(
             "- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player "
@@ -888,6 +948,31 @@ def e4_more_languages() -> str | None:
         + ". Sentences Gemma never returned: <pending: e4.es.never_aligned> Spanish, "
         "<pending: e4.fr.never_aligned> French, <pending: e4.pt.never_aligned> Portuguese. Evidence: "
         "evidence/e04_translation_es_fr_pt.json."
+    )
+
+
+def e17_row() -> str | None:
+    f = EV / "e17_model_ladder.json"
+    if not f.exists() or not json.loads(f.read_text()).get("checks", {}).get("every_model_ran"):
+        return None
+    parts = [
+        f"{name} took the bait in <pending: e17.{slug}.bait> of <pending: e17.{slug}.tries> lines "
+        f"(no usable line in <pending: e17.{slug}.no_output> tries; reached a viewer: "
+        f"<pending: e17.{slug}.reached>)"
+        for slug, _model, name in E17_MODELS
+    ]
+    return (
+        "- **Other models on AMD Token Factory (E17, our own attack clips, dev).** The same attacks and the same "
+        "checks, with a different model writing: "
+        + "; ".join(parts)
+        + (
+            ". With every model, no attack answer reached a viewer. "
+            if int(json.loads(f.read_text())["summary"]["reached_viewer_total"]) == 0
+            else ". Some attack answers reached a viewer; we list each one in the evidence file. "
+        )
+        + "Gemma ran 20 tries per setting, the others 5. "
+        "Evidence: evidence/e17_model_ladder.json.\n\n  ![Per model: lines that took the bait and answers "
+        "that reached a viewer](docs/charts/e17_ladder.png)"
     )
 
 
@@ -944,7 +1029,7 @@ def register() -> dict[str, Any]:
     reg_p = EV / "public-claims.json"
     reg = json.loads(reg_p.read_text())
     by_id = {c["claim_id"]: c for c in reg["claims"]}
-    for s in [*SPECS, *e11_specs(), *e4_specs(), *amd_specs(), *tests_specs(), *e18_specs()]:
+    for s in [*SPECS, *e11_specs(), *e4_specs(), *amd_specs(), *tests_specs(), *e18_specs(), *e17_specs()]:
         f = EV / s.path
         if not f.exists():
             continue

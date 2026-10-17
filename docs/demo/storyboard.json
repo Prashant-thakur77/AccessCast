@@ -161,7 +161,7 @@
   {
    "kind": "motion",
    "scene": "pipeline",
-   "narration": "How does it work? Whisper listens. Gemma 4 31B, on AMD, looks at the frames and writes. Code checks every line, and Gemma repairs what fails. A person approves. Then all five versions are made."
+   "narration": "How does it work? Whisper listens. Gemma 4 31B, on AMD, looks at the frames and writes. Code checks every line, and Gemma repairs what fails. A person approves. Then every version is made."
   },
   {
    "kind": "recording",
@@ -264,7 +264,7 @@
   {
    "kind": "motion",
    "scene": "amd",
-   "narration": "Every Gemma call runs on AMD's Token Factory. Counted from our own logs: {claim:amd.requests} requests and {claim:amd.tokens_millions} tokens, across {claim:amd.videos} videos. One finished minute, in all five versions, costs about {claim:cost.usd_per_min} of Gemma, at a published list price."
+   "narration": "Every Gemma call runs on AMD's Token Factory. Counted from our own logs: {claim:amd.requests} requests and {claim:amd.tokens_millions} tokens, across {claim:amd.videos} videos. One finished minute, in the five versions we measured, costs about {claim:cost.usd_per_min} of Gemma, at a published list price."
   },
   {
    "kind": "motion",

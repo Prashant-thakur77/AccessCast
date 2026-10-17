@@ -62,7 +62,7 @@ Gemma 4 31B ran on AMD Token Factory, AMD's hosted endpoint. These numbers are m
 |---|---|---|
 | Generated tokens per second seen by our client, best concurrency | 17 | `e13_serving_tokenfactory.json` |
 | p95 latency of a description request at that concurrency | 13.9 s | `e13_serving_tokenfactory.json` |
-| Gemma tokens per finished minute of video, all five versions | 41,818 | `e14_cost.json` |
+| Gemma tokens per finished minute of video, the five versions we measured | 41,818 | `e14_cost.json` |
 | Gemma requests answered by AMD Token Factory, all our work | 3,162 | `amd_usage.json` |
 | Tokens in those requests | 3,002,402 | `amd_usage.json` |
 | Calls Token Factory never answered, after every retry (outages; each one failed closed) | 2,639 | `amd_usage.json` |
@@ -135,12 +135,12 @@ The law already asks for this. The European Accessibility Act has applied since 
 
 What description costs today (list prices, not our measurements): 3Play Media lists $4.25 a minute for AI description with a human spot check and $18 for a voice artist; the University of Michigan lists $0.90 a minute for machine description and $6.65 to $14.70 for human description. A human describer needs about 20 hours to script and voice a one-hour programme (Media Access Australia).
 
-Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per finished minute of video for all five versions (dev set), and review time from E12. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, five audiences from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
+Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per finished minute of video for the five versions we measured (dev set), and review time from E12. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, five audiences from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
 
 ### How it is sold
 
 - **First customer:** the accessibility office of a US public university. It has a deadline (ADA Title II applies to large public bodies from 26 April 2027), a large archive of lecture and outreach video with no description, and staff who can review lines but not write description from scratch for thousands of hours.
-- **What they buy:** a price per finished minute for all five versions, set below today's list prices for AI description, with the review done by their own staff in our review app; or a yearly licence to run it on their own servers, because the models are open and the video never has to leave the building.
+- **What they buy:** a price per finished minute for every version, set below today's list prices for AI description, with the review done by their own staff in our review app; or a yearly licence to run it on their own servers, because the models are open and the video never has to leave the building.
 - **Who comes next:** broadcasters and streaming platforms in the EU, Italy and India, where the law names access services and where Hindi and Italian versions of the same video are worth more than one more English track.
 - **Why the cost works:** the model work is small (about $0.0053 of Gemma per finished minute at a published list price, an estimate). What the customer really pays for is a person's review time, which is why the review app is built for speed: confidence ordering, keyboard-only review, and lines that already passed every check.
 

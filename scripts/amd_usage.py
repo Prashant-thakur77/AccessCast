@@ -1,6 +1,7 @@
 """How much of AccessCast's model work ran on AMD: every Gemma call our code logged (logs/llm_calls.jsonl in each
 project and evaluation), counted once (projects copied for drafts or experiments repeat their logs, so a call is
-identified by time, label, seed and prompt hash).
+identified by time, label, seed and prompt hash). Gemma's numbers count Gemma only; the other Token Factory models
+E17 tried are counted apart (`other_models`), and the all-model totals add both.
 
 Counts only what our logs show: requests Token Factory answered (attempts ≥ 1; a cache hit sent nothing), their
 tokens as the server reported them, the videos and minutes of video those requests worked on, and the calls that
@@ -15,7 +16,7 @@ from __future__ import annotations
 import json
 import re
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,6 +25,10 @@ sys.path.insert(0, str(ROOT))
 from eval.common import Experiment, run_experiment  # noqa: E402
 
 SHA12 = re.compile(r"^[0-9a-f]{12}$")
+
+
+def _is_gemma(served: str) -> bool:
+    return served.split("/")[-1].lower().startswith("gemma")
 
 
 def project_of(log: Path) -> Path | None:
@@ -53,6 +58,7 @@ def main() -> int:
         videos: dict[str, int] = {}
         groups: dict[str, str] = {}
         days: Counter[str] = Counter()
+        other: defaultdict[str, Counter[str]] = defaultdict(Counter)
         for log in sorted((ROOT / "projects").glob("**/llm_calls.jsonl")):
             n_new = 0
             proj = project_of(log)
@@ -69,6 +75,11 @@ def main() -> int:
                 seen.add(key)
                 n_new += 1
                 answered = r.get("status") == "ok" and int(r.get("attempts") or 0) >= 1
+                model = str(r.get("served_model_id"))
+                if answered and not _is_gemma(model):  # E17's model ladder: counted apart, never as Gemma
+                    other[model]["requests"] += 1
+                    other[model]["tokens"] += int(r.get("tokens_in") or 0) + int(r.get("tokens_out") or 0)
+                    continue
                 if answered:
                     status["answered"] += 1
                     tokens["in"] += int(r.get("tokens_in") or 0)
@@ -107,8 +118,11 @@ def main() -> int:
             "answered_but_unusable": sum(v for k, v in status.items() if k.startswith("answered_but_")),
             "cache_hits_no_request": status["cache_hit_no_request"],
             "days": dict(sorted(days.items())),
+            "other_models": {m: dict(c) for m, c in sorted(other.items())},
+            "requests_answered_all_models": status["answered"] + sum(c["requests"] for c in other.values()),
+            "tokens_total_all_models": total + sum(c["tokens"] for c in other.values()),
         }
-        e.checks["one_served_model"] = len(served) == 1
+        e.checks["one_served_gemma_id"] = len(served) == 1
         e.checks["some_requests"] = status["answered"] > 0
 
     return run_experiment(exp, body)

@@ -246,7 +246,7 @@ def e17_ladder() -> None:
     ax.set_yticks(range(len(rows)), [r["model"] for r in rows])
     ax.invert_yaxis()
     ax.set_xlim(0, 160)
-    ax.set_xlabel("tries where the model took the bait (%)")
+    ax.set_xlabel("lines where the model took the bait (%)")
     finish(
         fig,
         ax,

@@ -6,7 +6,7 @@ PROJECT ?=
 VIDEO ?=
 EXP = $(UV) run python -m eval.$(1)
 
-.PHONY: setup check lint typecheck test test-e2e demo-fixture serve-gemma tunnel doctor run review render \
+.PHONY: setup check lint typecheck test test-stats test-e2e demo-fixture serve-gemma tunnel doctor run review render \
         export-site freeze-prompts offline-demo claims-check submission-check schemas fixture calibrate \
         e01 e02 e03 e04 e05 e06 e07 e08 e09 e10 e11 e12 e13 e14 e15 e16
 
