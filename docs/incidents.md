@@ -131,3 +131,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** The text track of the standard "can't see the screen" version on the Sintel draft had four cues inside 1.5 s, each about 0.5 s long and one 0.13 s. Spoken, each of those lines takes 2 to 3 s.
 **Root cause.** These lines need the video to hold, so they are voiced only in the extended version. The standard audio already left them out, but the description track on the source timeline took every line, and each cue was cut short by the next one.
 **Fix.** The source-timeline description tracks (`desc.en`, `desc.hi`, `desc.it`) carry only lines voiced without a pause (`render_stage.timeline_items`, with a unit test). The extended version's track keeps every line, and on drafts it now carries the "UNREVIEWED DRAFT" mark too. The three site drafts were re-rendered, and all 18 versions pass the render checks.
+
+## 2026-10-17 Extended description text appeared at the wrong times
+**Symptom.** In the extended version of a NASA dev clip, the first description line is voiced from 0.1 to 3.1 s, but its text cue ran until 8.2 s. The second line is voiced from 4.2 to 6.4 s, but its cue was pushed to 8.2 to 8.4 s.
+**Root cause.** The extended track mapped each line's start and end from the source timeline. A line voiced while the picture holds has no source time inside its hold, so its end mapped to after every later hold. The overlap guard then pushed the next cue back.
+**Fix.** `write_vtt` takes a `span_of`. For lines voiced in a hold, the extended render passes the exact output window from its timeline rows. Unit tests cover both paths. All site drafts were re-rendered, and the cues now match the holds to the millisecond.
