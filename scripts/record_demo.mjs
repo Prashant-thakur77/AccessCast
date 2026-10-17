@@ -75,6 +75,26 @@ await segment("five_ways", async (p) => {
   }
 });
 
+// How it works: one real clip, step by step (how.html), each step brought to the top and held for its narration.
+const HOW_P = process.env.HOW_PROJECT || "dac08bcd9d7a";
+await segment("how", async (p) => {
+  await p.goto(`${SITE}/how.html?p=${HOW_P}`);
+  await p.waitForFunction(() => document.querySelectorAll("#repairs > li").length > 0, null, { timeout: 30000 });
+  await p.evaluate(() => Promise.all([...document.images].map((i) => (i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r))))));
+  await pause(p, 1500);
+  p.mark("page");
+  await pause(p, 4000);
+  for (const id of ["s-listen", "s-pauses", "s-look", "s-write", "s-check", "s-repair", "s-fit", "s-person", "s-out"]) {
+    await p.evaluate((id) => {
+      const el = document.getElementById(id);
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 12, behavior: "smooth" });
+    }, id);
+    await pause(p, 900);
+    p.mark(id);
+    await pause(p, 9000);
+  }
+});
+
 // Picker: blind standard → extended → Italiano, with the decisions drawer
 await segment("player_picker", async (p) => {
   await p.goto(`${SITE}/?audience=blind${PROJECT ? `&p=${PROJECT}` : ""}`);

@@ -1,26 +1,79 @@
 {
- "_note": "Numbers only as {claim:<id>} from evidence/public-claims.json; make_demo_video.py refuses to render while any is unregistered.",
+ "_note": "Numbers only as {claim:<id>} from evidence/public-claims.json; make_demo_video.py refuses to render while any is unregistered. Motion scenes: docs/demo/motion (render_motion.mjs); opening: make_hook_scenes.py.",
  "scenes": [
   {
-   "kind": "card",
-   "lines": [
-    "{claim:cited.gbd.blind_2020} people are blind."
-   ],
-   "narration": "{claim:cited.gbd.blind_2020} people are blind. For many of them, most videos say nothing about what is on screen."
+   "kind": "motion",
+   "scene": "p_upload",
+   "narration": "Every minute, YouTube receives more than {claim:cited.market.youtube_500h_per_min} of new video.",
+   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
+   "bg_start": 1
+  },
+  {
+   "kind": "motion",
+   "scene": "p_blind",
+   "narration": "{claim:cited.gbd.blind_2020} people are blind. To follow a video, they need to hear what is on screen.",
+   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
+   "bg_start": 8
+  },
+  {
+   "kind": "motion",
+   "scene": "p_deaf",
+   "narration": "{claim:cited.who.hearing_430m} people live with disabling hearing loss. They need captions that also say what sounds.",
+   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
+   "bg_start": 14
+  },
+  {
+   "kind": "motion",
+   "scene": "p_read",
+   "narration": "And {claim:cited.oecd.piaac_lit_level1_oecd_avg} of adults read at the lowest levels. They need simpler words, at a slower pace. Others need the video in their own language.",
+   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
+   "bg_start": 21
+  },
+  {
+   "kind": "motion",
+   "scene": "p_cost",
+   "narration": "Doing this by hand takes about {claim:cited.market.maa_20_hours} of work for one hour of TV, and costs {claim:cited.price.3play_industry_range_low} to {claim:cited.price.3play_industry_range_high} a minute. So most video never gets it.",
+   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
+   "bg_start": 28
   },
   {
    "kind": "recording",
-   "recording": "ab.mp4",
+   "recording": "hook_closed.mp4",
    "keep_audio": true,
-   "seconds": 28
+   "seconds": 18.6
   },
   {
    "kind": "card",
    "lines": [
-    "AccessCast",
-    "One video. Five ways to watch."
+    "\"This is Hubble's famous photograph.\"",
+    "But what does it show?"
    ],
-   "narration": "This is AccessCast. One video, made into a version for each viewer."
+   "narration": "He said: this is Hubble's famous photograph. If you can't see the screen, you never find out what it shows."
+  },
+  {
+   "kind": "recording",
+   "recording": "hook_ad.mp4",
+   "keep_audio": true,
+   "seconds": 16
+  },
+  {
+   "kind": "recording",
+   "recording": "hook_open.mp4",
+   "keep_audio": true,
+   "seconds": 8.5
+  },
+  {
+   "kind": "card",
+   "lines": [
+    "No pause to speak in?",
+    "The picture holds."
+   ],
+   "narration": "There was no pause in his speech, so AccessCast held the picture while the description was read. Every word was written by Gemma, and checked by code."
+  },
+  {
+   "kind": "motion",
+   "scene": "split",
+   "narration": "This is AccessCast. One video, made into five: for people who can't see the screen, people who can't hear, people who want simpler words, and for Hindi and Italian speakers."
   },
   {
    "kind": "recording",
@@ -63,25 +116,77 @@
    "footage": 7.0
   },
   {
+   "kind": "motion",
+   "scene": "pipeline",
+   "narration": "How does it work? Whisper listens. Gemma 4 31B, running on AMD, looks and writes. Code checks every line, and Gemma repairs what fails. A person approves. Then all five versions are made."
+  },
+  {
    "kind": "recording",
-   "recording": "studio.webm",
-   "start": 1,
-   "narration": "Drop in a video and watch every step. Whisper finds every word and every pause. Gemma looks at each scene and writes. Code checks every line, and Gemma fixes what fails."
+   "recording": "how.webm",
+   "mark": "s-listen",
+   "footage": 9.4,
+   "narration": "Here is one real clip, step by step. First, Whisper writes down every word, and a second model pins each word to the moment it is said."
+  },
+  {
+   "kind": "recording",
+   "recording": "how.webm",
+   "mark": "s-pauses",
+   "footage": 9.4,
+   "narration": "Then the code measures the pauses between the words. This clip is mostly talk, so there are only a few."
+  },
+  {
+   "kind": "recording",
+   "recording": "how.webm",
+   "mark": "s-look",
+   "footage": 9.4,
+   "narration": "Gemma 4 31B, on AMD, looks at still frames from each scene, and lists only what it can see."
+  },
+  {
+   "kind": "recording",
+   "recording": "how.webm",
+   "mark": "s-write",
+   "footage": 9.4,
+   "narration": "From that list, and nothing else, Gemma writes one line, inside a word budget. Here it wrote: a man in a NASA polo shirt speaks to the camera."
+  },
+  {
+   "kind": "recording",
+   "recording": "how.webm",
+   "mark": "s-check",
+   "footage": 9.4,
+   "narration": "Code checks the line. This one is stopped: it describes speech, and a blind viewer can already hear him speak. The model never decides whether its own line is good enough."
+  },
+  {
+   "kind": "recording",
+   "recording": "how.webm",
+   "mark": "s-repair",
+   "footage": 9.4,
+   "narration": "The line goes back to Gemma with the exact rule it broke. Gemma rewrites it: he looks at the camera. The code checks again, and it passes."
+  },
+  {
+   "kind": "recording",
+   "recording": "how.webm",
+   "mark": "s-fit",
+   "footage": 9.4,
+   "narration": "A line that fits a pause is spoken in it. Where there is no pause, the extended version holds the picture while the line is read."
+  },
+  {
+   "kind": "recording",
+   "recording": "how.webm",
+   "mark": "s-person",
+   "footage": 9.4,
+   "narration": "Then a person decides. Every description line waits for a reviewer, and nothing is published while a line is waiting."
   },
   {
    "kind": "recording",
    "recording": "decisions_drawer.webm",
    "start": 1,
-   "narration": "Gemma wrote that a man speaks to the camera. The check stopped it: a blind viewer already hears him speak. Gemma rewrote it: he looks at the camera. And a person approves every line before anyone hears it."
+   "narration": "Reviewers use our review app with the keyboard alone. They see the frames Gemma saw, the checks, and every repair, and they approve, edit or reject each line."
   },
   {
-   "kind": "card",
-   "lines": [
-    "Easy-read, 10 test videos",
-    "Gemma alone kept the \"not\": {claim:e5.neg_gemma_k} of {claim:e5.neg_gemma_n}",
-    "AccessCast: {claim:e5.neg_ours_k} of {claim:e5.neg_ours_n}"
-   ],
-   "narration": "On ten accessibility videos we never tuned on, Gemma alone sometimes dropped a not, which flips the meaning. What AccessCast published kept every one."
+   "kind": "recording",
+   "recording": "studio.webm",
+   "start": 1,
+   "narration": "And anyone can drop in their own video, and watch every step run, live."
   },
   {
    "kind": "recording",
@@ -97,22 +202,29 @@
    "narration": "Every answer is checked as it arrives. An answer that drops the ten seconds is blocked and never reaches a viewer. In our recorded test, Gemma dropped it in {claim:e11.A5_number.production.gemma_failed} of {claim:e11.A5_number.production.tries} tries, and our checks blocked every one."
   },
   {
-   "kind": "card",
-   "lines": [
-    "Gemma 4 31B on AMD Token Factory",
-    "{claim:e14.tokens_per_minute} Gemma tokens per finished minute"
-   ],
-   "narration": "Every Gemma call runs on AMD's Token Factory. One finished minute of video, in all five versions, takes about {claim:e14.tokens_per_minute} Gemma tokens."
+   "kind": "motion",
+   "scene": "res_neg",
+   "narration": "On ten W3C accessibility videos we never tuned on, Gemma alone kept every not in {claim:e5.neg_gemma_k} of {claim:e5.neg_gemma_n} easy-read captions. What AccessCast published kept {claim:e5.neg_ours_k} of {claim:e5.neg_ours_n}."
   },
   {
    "kind": "card",
    "lines": [
-    "Who buys it",
-    "Universities, broadcasters, streaming platforms",
-    "Laws with deadlines: EU {claim:cited.law.eaa_apply_date}",
-    "US public universities {claim:cited.law.ada_title2_large_date}"
+    "Translation, {claim:e4.n} test sentences per language",
+    "Italian: Gemma beat Opus-MT on both scores",
+    "Hindi: Gemma won on one score, lost on the other"
    ],
-   "narration": "Who buys it? Universities with an accessibility deadline, and broadcasters and streaming platforms under Europe's accessibility law. They pay per finished minute, and their own staff approve every line, in our review app."
+   "size": 56,
+   "narration": "For translation, Gemma beat a standard Italian model on both of our scores. For Hindi it won on one score and lost on the other, and we report that loss."
+  },
+  {
+   "kind": "motion",
+   "scene": "amd",
+   "narration": "Every Gemma call runs on AMD's Token Factory. Counted from our own logs: {claim:amd.requests} requests and {claim:amd.tokens_millions} tokens, across {claim:amd.videos} videos. One finished minute, in all five versions, takes about {claim:e14.tokens_per_minute} Gemma tokens: about {claim:cost.usd_per_min} at a published list price."
+  },
+  {
+   "kind": "motion",
+   "scene": "laws",
+   "narration": "The law already asks for this: in Europe since {claim:cited.law.eaa_apply_date}, in India since {claim:cited.law.india_mib_ott_date}, and for US public universities from {claim:cited.law.ada_title2_large_date}. They pay per finished minute, and their own staff approve every line."
   },
   {
    "kind": "card",
@@ -124,12 +236,11 @@
    "narration": "What didn't work: our first test measured description inside pauses, and our test videos have almost none. It could not show a difference, and we report it anyway."
   },
   {
-   "kind": "card",
-   "lines": [
-    "github.com/Prashant-thakur77/AccessCast",
-    "accesscast.vercel.app"
-   ],
-   "narration": "Everything, including what didn't work, is in the repo."
+   "kind": "motion",
+   "scene": "close",
+   "narration": "AccessCast. Every viewer, the same video. Everything, including what didn't work, is in the repo.",
+   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
+   "bg_start": 22
   }
  ]
 }

@@ -11,11 +11,13 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/no_answer_after_retries"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "2,639"
    ]
@@ -23,56 +25,69 @@
   {
    "claim_id": "amd.requests",
    "text": "Gemma 4 31B requests answered by AMD Token Factory",
-   "value": 3143,
+   "value": 3162,
    "unit": "requests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/requests_answered"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "docs/demo-script.md",
+    "README.md",
+    "JUDGES.md",
+    "docs/deck/deck.md",
+    "docs/lablab.md"
+   ],
    "display": [
-    "3,143"
+    "3,162"
    ]
   },
   {
    "claim_id": "amd.tokens",
    "text": "tokens in those requests, as the server reported them",
-   "value": 2994418,
+   "value": 3002402,
    "unit": "tokens",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/tokens_total"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md",
+    "JUDGES.md"
+   ],
    "display": [
-    "2,994,418"
+    "3,002,402"
    ]
   },
   {
    "claim_id": "amd.tokens_millions",
    "text": "tokens in those requests, in millions",
-   "value": 2994418,
+   "value": 3002402,
    "unit": "tokens",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/tokens_total"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "docs/demo-script.md",
+    "docs/deck/deck.md",
+    "docs/lablab.md"
+   ],
    "display": [
     "3.0 million"
    ]
@@ -87,11 +102,14 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/video_minutes"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
    "display": [
     "32.8"
    ]
@@ -106,11 +124,17 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/videos"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "docs/demo-script.md",
+    "README.md",
+    "JUDGES.md",
+    "docs/deck/deck.md",
+    "docs/lablab.md"
+   ],
    "display": [
     "28"
    ]
@@ -125,11 +149,13 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/video_groups/attack_clips"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "8"
    ]
@@ -144,11 +170,13 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/video_groups/dev_clips"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "10"
    ]
@@ -163,11 +191,13 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
      "pointer": "/summary/video_groups/w3c_test"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "10"
    ]
@@ -345,7 +375,9 @@
    ],
    "note": "Bourne et al., 'Trends in prevalence of blindness and distance and near vision impairment over 30 years', Lancet Glob Health 2021;9:e130-43. Abstract text read via Europe PMC (PMC7820390). PLAN said 43.9 million; the paper says 43.3 million.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.gbd.mod_severe_vi_2020",
@@ -379,7 +411,9 @@
    ],
    "note": "Interim final rule, published and effective 20 April 2026, with a request for comments. No later Federal Register action on this rule found as of 16 Oct 2026 (API search).",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.law.ada_title2_small_date",
@@ -412,7 +446,9 @@
    ],
    "note": "Directive (EU) 2019/882, Article 31(2). EUR-Lex and legislation.gov.uk blocked automated fetches (HTTP 202 challenge); text read from the EUR-Lex mirror https://lawplayer.com/eu/act/32019L0882. Re-check on EUR-Lex in a browser before submitting.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.law.eaa_av_access_services",
@@ -461,7 +497,9 @@
    ],
    "note": "Title: 'Guidelines for Accessibility of Content on platforms of Publishers of Online Curated Content (OTT Platforms) for Persons with Hearing and Visual Impairment'. Covers OTT publishers only, not broadcasting.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.law.italy_dlgs82_fine_max",
@@ -526,7 +564,9 @@
    ],
    "note": "Media Access Australia, 'Audio Description Background Paper', September 2010. The live URL timed out; read from the Wayback Machine copy of 16 May 2025 (web.archive.org/web/20250516151549/...).",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.market.ofcom_80pct_caption_users",
@@ -593,7 +633,9 @@
    ],
    "note": "Secondary source (Tubefilter, 7 May 2019) reporting YouTube's statement; YouTube's own press page (blog.youtube/press) no longer shows the figure.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.oecd.piaac_lit_level1_italy",
@@ -627,7 +669,9 @@
    ],
    "note": "Published by Ireland's Central Statistics Office (CSO) from the OECD PIAAC 2023 data. The OECD's own Italy country note returned HTTP 403 to automated fetches.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.price.3play_industry_range_high",
@@ -643,7 +687,9 @@
     "$75"
    ],
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.price.3play_industry_range_low",
@@ -659,7 +705,9 @@
     "$15"
    ],
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.price.3play_launch",
@@ -988,7 +1036,9 @@
    ],
    "note": "WHO fact sheet dated 3 March 2026.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "docs/demo-script.md"
+   ]
   },
   {
    "claim_id": "cited.who.vision_2_2bn",
@@ -1041,7 +1091,8 @@
     }
    ],
    "public_files": [
-    "docs/lablab.md"
+    "docs/lablab.md",
+    "docs/demo-script.md"
    ],
    "display": [
     "$0.0053"
@@ -2414,7 +2465,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/demo-script.md"
    ],
    "display": [
     "20"
@@ -2456,7 +2508,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/demo-script.md"
    ],
    "display": [
     "20"
@@ -3282,7 +3335,9 @@
      "pointer": "/summary/tokens_per_finished_minute"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "docs/demo-script.md"
+   ],
    "display": [
     "41,818"
    ]
@@ -4066,7 +4121,8 @@
    "public_files": [
     "README.md",
     "docs/lablab.md",
-    "docs/deck/deck.md"
+    "docs/deck/deck.md",
+    "docs/demo-script.md"
    ],
    "display": [
     "1012"
@@ -4087,7 +4143,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/demo-script.md"
    ],
    "display": [
     "105"
@@ -4108,7 +4165,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/demo-script.md"
    ],
    "display": [
     "114"
@@ -4129,7 +4187,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/demo-script.md"
    ],
    "display": [
     "114"
@@ -4150,7 +4209,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/demo-script.md"
    ],
    "display": [
     "114"

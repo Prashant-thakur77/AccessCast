@@ -109,7 +109,7 @@ def main() -> int:
                     "-i",
                     str(ROOT / sc["bg"]),
                 ]
-                look = sc.get("bg_look", "eq=brightness=-0.32:saturation=0.55,gblur=sigma=5")
+                look = sc.get("bg_look", "eq=brightness=-0.36:saturation=0.6,gblur=sigma=9")
                 bgf = f"[0:v]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30,{look},tpad=stop_mode=clone:stop_duration={dur:.2f}[bg]"
             else:
                 bg = ["-f", "lavfi", "-i", f"color=c=0x0f1b33:s=1920x1080:r=30:d={dur:.2f}"]
@@ -171,7 +171,7 @@ def main() -> int:
                 tf.write_text(line, encoding="utf-8")
                 y = f"h-{230 - 64 * j if len(lines) == 2 else 170}"
                 caps.append(
-                    f"drawtext=fontfile={FONT}:textfile='{tf}':x=(w-text_w)/2:y={y}:fontsize=46:fontcolor=white:"
+                    f"drawtext=fontfile={FONT}:textfile='{tf}':x=(w-text_w)/2:y={y}:fontsize=46:fontcolor=white:expansion=none:"
                     f"box=1:boxcolor=black@0.75:boxborderw=12:enable='between(t,{a:.2f},{b:.2f})'"
                 )
         vf = ",".join([vf, *caps]) if caps else vf
