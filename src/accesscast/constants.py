@@ -227,8 +227,14 @@ CPS_MAX: dict[tuple[str, str], int] = {
     ("hi", "sdh"): 25,  # Netflix Hindi TTSG SDH
     ("it", "subtitle"): 17,  # Netflix Italian TTSG
     ("hi", "subtitle"): 22,  # Netflix Hindi TTSG
-    ("es", "subtitle"): 17,  # Netflix Spanish TTSG (adult programmes)
-    ("fr", "subtitle"): 17,  # Netflix French TTSG (adult programmes)
+    (
+        "es",
+        "subtitle",
+    ): 17,  # Netflix Spanish TTSG, adult: "Up to 17 characters per second" (partnerhelp.netflixstudios.com 217349997)
+    (
+        "fr",
+        "subtitle",
+    ): 17,  # Netflix French (France) TTSG, adult subtitles: 17 cps (partnerhelp.netflixstudios.com 217351577)
     ("en", "subtitle"): 20,  # Netflix English TTSG
 }
 CUE_MIN_FRAMES = 40  # DCMP Captioning Key: at least 40 frames

@@ -95,12 +95,16 @@ def stage(
 @app.command()
 def gate(project: ProjectOpt, versions: str = "") -> None:
     """S13: refuse while anything in the requested versions is pending or needs revision."""
-    from accesscast.render_stage import AUDIENCE_VERSIONS, run_gate
+    from accesscast.render_stage import project_versions, run_gate
+    from accesscast.review.store import ReviewStore
 
+    run = _run(project)
     vs = [v for v in versions.split(",") if v] or [
-        v for v in AUDIENCE_VERSIONS if not v.startswith("blind.h") and not v.startswith("blind.i")
+        v
+        for v in project_versions(ReviewStore(run.project.root).merged())
+        if not v.startswith("blind.h") and not v.startswith("blind.i")
     ]
-    res = run_gate(_run(project), vs)
+    res = run_gate(run, vs)
     typer.echo(
         json.dumps(
             {

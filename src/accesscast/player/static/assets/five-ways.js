@@ -10,7 +10,9 @@
     { key: "deaf.en", who: "For someone who can't hear", role: "sdh", world: "deaf" },
     { key: "easy.en", who: "For someone who wants simpler words", role: "easy", world: "easy" },
     { key: "hi", who: "For someone who speaks Hindi", local: "हिन्दी बोलने वालों के लिए", lang: "hi", role: "subs", world: "hi" },
-    { key: "it", who: "For someone who speaks Italian", local: "Per chi parla italiano", lang: "it", role: "subs", world: "it" }
+    { key: "it", who: "For someone who speaks Italian", local: "Per chi parla italiano", lang: "it", role: "subs", world: "it" },
+    { key: "es", who: "For someone who speaks Spanish", local: "Para quien habla español", lang: "es", role: "subs", world: "es" },
+    { key: "fr", who: "For someone who speaks French", local: "Pour qui parle français", lang: "fr", role: "subs", world: "fr" }
   ];
   var DEFAULT_SEGMENT_MS = 20000; /* PLAN §13.4: a 20-second segment; index.json "segment_ms" overrides it. */
 

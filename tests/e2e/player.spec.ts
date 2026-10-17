@@ -42,7 +42,7 @@ for (const scheme of ["light", "dark"] as const) {
 
     test("five ways", async ({ page }) => {
       await page.goto("/five-ways.html");
-      await expect(page.locator("#steps > li")).toHaveCount(5);
+      await expect(page.locator("#steps > li")).toHaveCount(7);
       expect(await axeViolations(page)).toEqual([]);
     });
 
@@ -217,8 +217,8 @@ test("landing: results show only registered numbers, else Measuring", async ({ p
   const rows = page.locator("#results-rows .big-row");
   await expect(rows).toHaveCount(5);
   const first = rows.first();
-  if (!claims["e1.fit_c"]?.display || !claims["e1.lines_planned"]?.display) await expect(first).toContainText("Measuring");
-  else await expect(first).toContainText(`${claims["e1.fit_c"].display} of ${claims["e1.lines_planned"].display}`);
+  if (!claims["e5.neg_ours_k"]?.display || !claims["e5.neg_ours_n"]?.display) await expect(first).toContainText("Measuring");
+  else await expect(first).toContainText(`${claims["e5.neg_ours_k"].display} of ${claims["e5.neg_ours_n"].display}`);
   await expect(page.locator("#law-rows .big-row").first()).toContainText(claims["cited.law.eaa_apply_date"].display);
 });
 

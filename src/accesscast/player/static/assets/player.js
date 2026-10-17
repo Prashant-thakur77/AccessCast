@@ -3,8 +3,10 @@
   "use strict";
   var AC = window.AC, el = AC.el;
   var PREFS_KEY = "accesscast.player.v1";
-  var PROFILES = ["blind", "deaf", "easy", "hi", "it"];
-  var LANG_NAMES = { hi: "Hindi", it: "Italian" };
+  var LANGS = ["hi", "it", "es", "fr"];  // one language at a time
+  var PROFILES = ["blind", "deaf", "easy"].concat(LANGS);
+  var LANG_NAMES = { hi: "Hindi", it: "Italian", es: "Spanish", fr: "French" };
+  function firstLang() { for (var i = 0; i < LANGS.length; i++) if (has(LANGS[i])) return LANGS[i]; return null; }
   /* Reading speed used for "Give me time to read" (PLAN §13.2). An export may override it with
    * index.json "read_words_per_second"; the value in use is shown to the viewer next to the checkbox. */
   var DEFAULT_READ_WPS = 2.2;
@@ -55,9 +57,12 @@
     });
     if (picked.length) {
       state.profiles = picked.filter(function (x, i) { return picked.indexOf(x) === i; });
-      if (state.profiles.indexOf("hi") >= 0 && state.profiles.indexOf("it") >= 0) {
-        state.profiles = state.profiles.filter(function (x) { return x !== "it"; });
-      }
+      var keep = null;  // one language at a time: the first one named wins
+      state.profiles = state.profiles.filter(function (x) {
+        if (LANGS.indexOf(x) < 0) return true;
+        if (keep) return false;
+        keep = x; return true;
+      });
     }
   }
   function has(p) { return state.profiles.indexOf(p) >= 0; }
@@ -76,9 +81,8 @@
       case "blind": return hasVersion("blind.en") || hasVersion("blind_ext.en") || hasVersion("blind.hi") || hasVersion("blind.it");
       case "deaf": return hasVersion("deaf.en");
       case "easy": return hasVersion("easy.en");
-      case "hi": return hasVersion("hi") || hasVersion("blind.hi");
-      case "it": return hasVersion("it") || hasVersion("blind.it");
     }
+    if (LANGS.indexOf(profile) >= 0) return hasVersion(profile) || hasVersion("blind." + profile);
     return false;
   }
   function renderAvailability() {
@@ -103,8 +107,8 @@
   /* ---------- picker UI ---------- */
   /* The page takes on the colour world of the main audience picked (language first, then description). */
   function worldFor() {
-    if (has("hi")) return "hi";
-    if (has("it")) return "it";
+    var l = firstLang();
+    if (l) return l;
     if (has("blind")) return "blind";
     if (has("easy")) return "easy";
     if (has("deaf")) return "deaf";
@@ -133,7 +137,7 @@
   /* ---------- profile -> version ---------- */
   function computeVersion() {
     var notes = [], key = null, showRole = null;
-    var lang = has("hi") ? "hi" : has("it") ? "it" : null;
+    var lang = firstLang();
     if (lang) {
       var name = LANG_NAMES[lang];
       if (has("blind")) {
@@ -160,12 +164,12 @@
       notes.push("Nobody picked yet. Pick who's watching above.");
     }
     if (!key || !hasVersion(key)) {
-      var order = ["deaf.en", "easy.en", "blind.en", "blind_ext.en", "hi", "it", "blind.hi", "blind.it"];
+      var order = ["deaf.en", "easy.en", "blind.en", "blind_ext.en"].concat(LANGS, ["blind.hi", "blind.it"]);
       var all = order.filter(hasVersion).concat(Object.keys(data.index.versions));
       key = all[0];
       if (key === "deaf.en") showRole = "sdh";
       else if (key === "easy.en") showRole = "easy";
-      else if (key === "hi" || key === "it") showRole = "subs";
+      else if (LANGS.indexOf(key) >= 0) showRole = "subs";
       else showRole = null;
     }
     return { key: key, notes: notes, showRole: showRole };
@@ -383,7 +387,7 @@
     if ((m = /^blind\.(\w+)$/.exec(key))) return pick(["ad_translation"], m[1]);
     if (key === "deaf.en") return pick(["sdh"], "en");
     if (key === "easy.en") return pick(["easy"], "en");
-    if (key === "hi" || key === "it") return pick(["subtitle", "voiceover"], key);
+    if (LANGS.indexOf(key) >= 0) return pick(["subtitle", "voiceover"], key);
     return [];
   }
   function matchesFilter(it) {
@@ -595,8 +599,7 @@
         if (has(p)) state.profiles = state.profiles.filter(function (x) { return x !== p; });
         else {
           state.profiles.push(p);
-          if (p === "hi") state.profiles = state.profiles.filter(function (x) { return x !== "it"; });
-          if (p === "it") state.profiles = state.profiles.filter(function (x) { return x !== "hi"; });
+          if (LANGS.indexOf(p) >= 0) state.profiles = state.profiles.filter(function (x) { return x === p || LANGS.indexOf(x) < 0; });
         }
         savePrefs(); syncPickerUI(); update({ announce: true });
       });

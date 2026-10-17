@@ -79,6 +79,8 @@
     "easy.en": "English, with easy-read captions",
     "hi": "Hindi version",
     "it": "Italian version",
+    "es": "Spanish version",
+    "fr": "French version",
     "blind.hi": "Hindi version, with audio description",
     "blind.it": "Italian version, with audio description"
   };

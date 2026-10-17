@@ -108,6 +108,18 @@ body[data-world="it"], .w-it {
   --soft: rgba(18, 53, 91, .08); --line: rgba(18, 53, 91, .2); --line-strong: #4A6F92;
   --band-bg: #12355B; --band-fg: #BFDDF5;
 }
+body[data-world="es"], .w-es {
+  --bg: #F7C6B5; --fg: #5C1A0B; --muted: #5C1A0B; --accent: #5C1A0B; --accent-text: #5C1A0B;
+  --btn-bg: #5C1A0B; --btn-fg: #FDE9E2; --disc-bg: #5C1A0B; --disc-fg: #F7C6B5; --card: #FBDCD1;
+  --soft: rgba(92, 26, 11, .08); --line: rgba(92, 26, 11, .2); --line-strong: #8F4A3A;
+  --band-bg: #5C1A0B; --band-fg: #F7C6B5;
+}
+body[data-world="fr"], .w-fr {
+  --bg: #D9D2F5; --fg: #2B1B5E; --muted: #2B1B5E; --accent: #2B1B5E; --accent-text: #2B1B5E;
+  --btn-bg: #2B1B5E; --btn-fg: #EEEAFC; --disc-bg: #2B1B5E; --disc-fg: #D9D2F5; --card: #E8E3FA;
+  --soft: rgba(43, 27, 94, .08); --line: rgba(43, 27, 94, .2); --line-strong: #5E4F92;
+  --band-bg: #2B1B5E; --band-fg: #D9D2F5;
+}
 @media (prefers-color-scheme: dark) {
   :root { --danger-bg: #C42B1C; }
   body[data-world="paper"], .w-paper {
@@ -144,6 +156,18 @@ body[data-world="it"], .w-it {
     --btn-bg: #8CC4F0; --btn-fg: #0E2945; --disc-bg: #8CC4F0; --disc-fg: #0E2945; --card: #15365A;
     --soft: rgba(217, 235, 250, .07); --line: rgba(217, 235, 250, .18); --line-strong: #5D86AE;
     --band-bg: #8CC4F0; --band-fg: #0E2945;
+  }
+  body[data-world="es"], .w-es {
+    --bg: #3D140A; --fg: #FBDCD1; --muted: #F2C2B2; --accent: #F59A7C; --accent-text: #F59A7C;
+    --btn-bg: #F59A7C; --btn-fg: #3D140A; --disc-bg: #F59A7C; --disc-fg: #3D140A; --card: #55200F;
+    --soft: rgba(251, 220, 209, .07); --line: rgba(251, 220, 209, .18); --line-strong: #A86A58;
+    --band-bg: #F59A7C; --band-fg: #3D140A;
+  }
+  body[data-world="fr"], .w-fr {
+    --bg: #1E1440; --fg: #E8E3FA; --muted: #CFC6F2; --accent: #B3A4F2; --accent-text: #B3A4F2;
+    --btn-bg: #B3A4F2; --btn-fg: #1E1440; --disc-bg: #B3A4F2; --disc-fg: #1E1440; --card: #2C1F5A;
+    --soft: rgba(232, 227, 250, .07); --line: rgba(232, 227, 250, .18); --line-strong: #7A6CB0;
+    --band-bg: #B3A4F2; --band-fg: #1E1440;
   }
 }
 
