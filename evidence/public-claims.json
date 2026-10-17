@@ -803,6 +803,105 @@
    "public_files": []
   },
   {
+   "claim_id": "e09.plane_diff",
+   "text": "description lines that differed from run 1 in run 2 (NASA dev clip)",
+   "value": 3,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e09_determinism.json",
+     "sha256": "50e982c91f65bcf4e7c2804cc5a81b1a1d04e4022808f3db71377dc118905a3c",
+     "pointer": "/summary/clips/nasa_GSFC_20170614_Eclipse_m12534_Plane/differing_description_lines_per_run/0"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "3"
+   ]
+  },
+  {
+   "claim_id": "e09.plane_lines",
+   "text": "description lines (NASA dev clip)",
+   "value": 10,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e09_determinism.json",
+     "sha256": "50e982c91f65bcf4e7c2804cc5a81b1a1d04e4022808f3db71377dc118905a3c",
+     "pointer": "/summary/clips/nasa_GSFC_20170614_Eclipse_m12534_Plane/description_lines"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "10"
+   ]
+  },
+  {
+   "claim_id": "e09.runs",
+   "text": "fresh runs per clip in E9",
+   "value": 3,
+   "unit": "runs",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e09_determinism.json",
+     "sha256": "50e982c91f65bcf4e7c2804cc5a81b1a1d04e4022808f3db71377dc118905a3c",
+     "pointer": "/config/runs"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "3"
+   ]
+  },
+  {
+   "claim_id": "e09.sintel_diff",
+   "text": "description lines that differed from run 1 in run 2 (Sintel dev clip)",
+   "value": 16,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e09_determinism.json",
+     "sha256": "50e982c91f65bcf4e7c2804cc5a81b1a1d04e4022808f3db71377dc118905a3c",
+     "pointer": "/summary/clips/blender_sintel_trailer/differing_description_lines_per_run/0"
+    }
+   ],
+   "public_files": [
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "16"
+   ]
+  },
+  {
+   "claim_id": "e09.sintel_lines",
+   "text": "description lines (Sintel dev clip)",
+   "value": 17,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e09_determinism.json",
+     "sha256": "50e982c91f65bcf4e7c2804cc5a81b1a1d04e4022808f3db71377dc118905a3c",
+     "pointer": "/summary/clips/blender_sintel_trailer/description_lines"
+    }
+   ],
+   "public_files": [
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "17"
+   ]
+  },
+  {
    "claim_id": "e09.summary",
    "text": "whether every artefact was byte-identical across runs",
    "value": false,
@@ -812,13 +911,32 @@
    "evidence": [
     {
      "path": "evidence/e09_determinism.json",
-     "sha256": "8ca5abb95d2ecb8fe48df8feb2986c2a31c12672cf2791d329cec59208ed6a1f",
+     "sha256": "50e982c91f65bcf4e7c2804cc5a81b1a1d04e4022808f3db71377dc118905a3c",
      "pointer": "/summary/all_artefacts_identical"
     }
    ],
    "public_files": [],
    "display": [
     "not every artefact was byte-identical (details in the evidence file)"
+   ]
+  },
+  {
+   "claim_id": "e09.words_same",
+   "text": "runs whose word timings were byte-identical to run 1 (NASA dev clip)",
+   "value": "3/3",
+   "unit": "",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e09_determinism.json",
+     "sha256": "50e982c91f65bcf4e7c2804cc5a81b1a1d04e4022808f3db71377dc118905a3c",
+     "pointer": "/summary/clips/nasa_GSFC_20170614_Eclipse_m12534_Plane/identical_to_run1/words"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "3/3"
    ]
   },
   {
@@ -2943,8 +3061,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "54 ms"
@@ -3091,8 +3208,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "4.5%"
@@ -3155,8 +3271,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "23"
@@ -3177,8 +3292,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "23"
@@ -3199,8 +3313,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "6"
@@ -3221,8 +3334,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "6"
@@ -3306,8 +3418,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "115"
@@ -3328,8 +3439,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "121"
@@ -3371,8 +3481,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "106"
@@ -3393,8 +3502,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "57"

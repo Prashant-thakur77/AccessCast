@@ -76,6 +76,7 @@ Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 # It holds up
 - Live attacks: 0 outputs reached a viewer: 8 cases, 20 tries each at two temperatures.
 - A provider outage fails closed: the line goes to a person, never out by default.
+- Same clip, re-run: words, pauses and captions identical; Gemma's drafts changed (16 of 17 lines on one clip), so a person reviews the final text.
 - Accessibility tests pass: player 23 of 23, review app and Studio 6 of 6.
 
 ---
