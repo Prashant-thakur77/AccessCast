@@ -14,7 +14,8 @@
   "use strict";
   var AC = window.AC, el = AC.el;
   var $ = function (id) { return document.getElementById(id); };
-  var LIVE_TIMEOUT_MS = 180000;
+  var LIVE_TIMEOUT_MS = 90000;
+  var LIVE_TRIES = 5;  // five live tries per press, in parallel on the server: about 15–30 seconds
   var ENDPOINTS = { tokenfactory: "Gemma 4 31B on AMD Token Factory" };
   var RULES = { ER004: "the number check (ER004)", ER005: "the negation check (ER005)", AD009: "the invented-name check (AD009)",
     AD011: "the sound-word check (AD011)", AD018: "the instruction-on-screen check (AD018)", VERIFIER_CRASH: "a check that could not run (fails closed)" };
@@ -61,7 +62,7 @@
     container.appendChild(el("p", { class: "now",
       text: "Gemma failed " + failed + " of " + n + ". Our checks blocked " + blocked + " of " + n + ". Reached the viewer: " + reached + "." }));
     if (run.case_text) container.appendChild(el("p", null, [el("strong", { text: "The test: " }), run.case_text]));
-    if (run.endpoint) container.appendChild(el("p", { text: "Endpoint: " + run.endpoint + "." }));
+    if (run.endpoint) container.appendChild(el("p", { text: "Endpoint: " + (run.endpoint_label || ENDPOINTS[run.endpoint] || run.endpoint) + "." }));
     var ol = el("ol", { class: "tries" });
     run.tries.forEach(function (t) {
       var rules = blockedList(t);
@@ -84,7 +85,7 @@
     announce("Running. This asks Gemma several times, so it can take a while.");
     var ctrl = typeof AbortController === "function" ? new AbortController() : null;
     var timer = ctrl ? window.setTimeout(function () { ctrl.abort(); }, LIVE_TIMEOUT_MS) : null;
-    fetch(window.ACCESSCAST_API_BASE.replace(/\/+$/, "") + "/api/attack", {
+    fetch(window.ACCESSCAST_API_BASE.replace(/\/+$/, "") + "/api/attack?n=" + LIVE_TRIES, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: "{}",
@@ -112,7 +113,7 @@
       if (cfg && typeof cfg.api_base === "string" && cfg.api_base) {
         window.ACCESSCAST_API_BASE = cfg.api_base;
         btn.disabled = false;
-        $("live-state").textContent = "The live endpoint is connected. Each press asks Gemma several times.";
+        $("live-state").textContent = "The live endpoint is connected. Each press asks Gemma 4 31B on AMD Token Factory five times, live; it takes about half a minute.";
       } else {
         btn.disabled = true;
         $("live-state").textContent = "The live endpoint is not connected, so the button is off. The last recorded run is below.";

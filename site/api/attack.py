@@ -1,0 +1,13 @@
+"""Vercel Python function: the live proof API (POST /api/attack). Code and pruned dependencies are vendored by
+scripts/build_vercel_api.sh; the Token Factory key comes from the project's environment settings."""
+
+import os
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "_vendor"))
+os.environ.setdefault("ACCESSCAST_WORKER_MODE", "real")
+os.environ.setdefault("ACCESSCAST_PROJECTS_DIR", "/tmp/accesscast-projects")
+
+from accesscast.proof.api import create_app  # noqa: E402
+
+app = create_app()

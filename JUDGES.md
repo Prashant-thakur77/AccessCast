@@ -5,7 +5,7 @@ The shortest route through the submission.
 ## Three-Minute Review
 1. Watch the demo video: <pending: video.url>
 2. Open the live player: https://accesscast.vercel.app/watch.html. Pick "I can't see the screen", then "Italiano".
-3. Open [`/proof.html`](https://accesscast.vercel.app/proof.html): it shows a recorded run of 20 live Gemma tries in which Gemma dropped a number every time and our check caught every one. When the live endpoint is connected, "Run the attack" repeats it in front of you (about 20 seconds).
+3. Open [`/proof.html`](https://accesscast.vercel.app/proof.html) and press **Run the attack**. It asks Gemma 4 31B on AMD Token Factory five times, live (about 20 seconds), to simplify "press the button 3 times within 10 seconds", and shows each answer, the check that blocked it, and Gemma's repair. Below it is the recorded E11 run of 20 tries.
 4. Open the three key evidence files: [`evidence/e01_verifier_ab.json`](evidence/), [`evidence/e13_serving_tokenfactory.json`](evidence/e13_serving_tokenfactory.json), [`evidence/e14_cost.json`](evidence/).
 5. Optional, no GPU: `make demo-fixture`, then open http://127.0.0.1:8080/?audience=judge
 
