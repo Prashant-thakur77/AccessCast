@@ -65,7 +65,7 @@ const slides = md.split(/\n---\n/);
 const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>AccessCast deck</title>
 <style>${css}</style></head><body><main>` +
   slides.map((s, k) => `<section aria-label="Slide ${k + 1}">${mdToHtml(s.trim())}
-  <footer><span>AccessCast · Gemma 4 on AMD Instinct MI300X</span><span>${k + 1} / ${slides.length}</span></footer></section>`).join("\n") +
+  <footer><span>AccessCast · Gemma 4 on AMD Token Factory</span><span>${k + 1} / ${slides.length}</span></footer></section>`).join("\n") +
   "</main></body></html>";
 writeFileSync(resolve(root, "docs/deck/deck.html"), html);
 
