@@ -10,4 +10,5 @@ uv run python scripts/build_rule_examples.py >/dev/null
 printf '{"api_base": "https://accesscast.vercel.app"}\n' > site/data/proof_config.json
 [ -d site/api/_vendor ] || bash scripts/build_vercel_api.sh
 rsync -a --delete --exclude "__pycache__" --exclude "player/static" --exclude "review/static" src/accesscast site/api/_vendor/
-(cd site && vercel deploy --prod --yes | tail -1)
+(cd site && vercel deploy --prod --yes 2>&1 | grep -E "Aliased|readyState|Error" )
+uv run python scripts/live_check.py || echo "LIVE CHECK FAILED (evidence/live_check.json)"

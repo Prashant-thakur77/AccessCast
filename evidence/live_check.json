@@ -1,0 +1,159 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "live_check",
+ "split": "none",
+ "passed": true,
+ "git_commit": "7a74e22e808d682687d3ed73256a852ada3bd1cd",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-17T21:43:44.089Z",
+ "finished_at": "2026-10-17T21:44:13.524Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "site": "https://accesscast.vercel.app",
+  "text": "Do not press the red button before 5 pm.",
+  "versions": [
+   "easy",
+   "hi",
+   "it",
+   "es",
+   "fr",
+   "pt"
+  ]
+ },
+ "checks": {
+  "every_page_and_chart": true,
+  "no_check_crashed": true,
+  "every_version_answered": true
+ },
+ "results": [
+  {
+   "get": "index.html",
+   "status": 200
+  },
+  {
+   "get": "watch.html",
+   "status": 200
+  },
+  {
+   "get": "five-ways.html",
+   "status": 200
+  },
+  {
+   "get": "how.html",
+   "status": 200
+  },
+  {
+   "get": "results.html",
+   "status": 200
+  },
+  {
+   "get": "proof.html",
+   "status": 200
+  },
+  {
+   "get": "data/claims.json",
+   "status": 200
+  },
+  {
+   "get": "charts/e5_negations.png",
+   "status": 200
+  },
+  {
+   "get": "charts/e11_attacks.png",
+   "status": 200
+  },
+  {
+   "get": "charts/e4_translation.png",
+   "status": 200
+  },
+  {
+   "get": "charts/e14_tokens.png",
+   "status": 200
+  },
+  {
+   "get": "charts/amd_usage.png",
+   "status": 200
+  },
+  {
+   "get": "charts/e13_serving.png",
+   "status": 200
+  },
+  {
+   "get": "charts/e17_ladder.png",
+   "status": 200
+  },
+  {
+   "get": "charts/e18_languages.png",
+   "status": 200
+  },
+  {
+   "get": "charts/timeline_nasa.png",
+   "status": 200
+  },
+  {
+   "try": "easy",
+   "status": 200,
+   "rules": [],
+   "published": [
+    "Do not press the red button before 5 pm."
+   ]
+  },
+  {
+   "try": "hi",
+   "status": 200,
+   "rules": [],
+   "published": [
+    "शाम 5 बजे से पहले लाल बटन न दबाएं।"
+   ]
+  },
+  {
+   "try": "it",
+   "status": 200,
+   "rules": [],
+   "published": [
+    "Non premere il pulsante\nrosso prima delle 5 pm."
+   ]
+  },
+  {
+   "try": "es",
+   "status": 200,
+   "rules": [],
+   "published": [
+    "No presione el botón\nrojo antes de las 5 pm."
+   ]
+  },
+  {
+   "try": "fr",
+   "status": 200,
+   "rules": [],
+   "published": [
+    "N'appuyez pas sur le\nbouton rouge avant 5 pm."
+   ]
+  },
+  {
+   "try": "pt",
+   "status": 200,
+   "rules": [],
+   "published": [
+    "Não aperte o botão\nvermelho antes das 5 pm."
+   ]
+  }
+ ],
+ "summary": {
+  "missing": [],
+  "crashed": [],
+  "unanswered": []
+ },
+ "error": null
+}

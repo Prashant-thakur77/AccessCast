@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Build the live proof API as a Vercel Python function inside site/ (D-028): the API code plus a pruned copy of its
-# dependencies (spaCy + en_core_web_sm, wordfreq data for en/hi/it only, no tests or caches, stripped binaries) so the
+# dependencies (spaCy + en_core_web_sm, wordfreq data for en/hi/it/es/fr/pt only, no tests or caches, stripped binaries) so the
 # function fits Vercel's 250 MB limit. The Token Factory key lives in Vercel's environment settings, never in files.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -16,7 +16,7 @@ cp -r "$T/venv/lib/python3.12/site-packages/." "$V/"
   rm -rf pip* setuptools* _distutils_hack pygments* uv* _virtualenv*
   find . -name "__pycache__" -type d -prune -exec rm -rf {} +
   find . -path "*/tests" -type d -prune -exec rm -rf {} +
-  ( cd wordfreq/data && ls | grep -v -E "^(large_en|large_it|small_en|small_hi|small_it)\.msgpack\.gz$" | xargs rm -f )
+  ( cd wordfreq/data && ls | grep -v -E "^(large_en|large_it|large_es|large_fr|large_pt|small_en|small_hi|small_it|small_es|small_fr|small_pt)\.msgpack\.gz$" | xargs rm -f )
   find . -name "*.so" -exec strip --strip-unneeded {} + 2>/dev/null || true )
 rsync -a --exclude "__pycache__" --exclude "player/static" --exclude "review/static" src/accesscast "$V/"
 # textstat (ER009) needs NLTK's cmudict; ship it, since the function cannot download at run time
