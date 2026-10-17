@@ -243,18 +243,18 @@ def e17_ladder() -> None:
         ax.text(
             bait + 1,
             i,
-            f"bait {r['took_bait']} of {r['tries']} · no answer {r['no_output']} · reached a viewer {r['reached_viewer']}",
+            f"bait {r['took_bait']} of {r['tries']} · empty first draft {r['no_output']} · reached a viewer {r['reached_viewer']}",
             va="center",
             fontsize=10,
         )
     ax.set_yticks(range(len(rows)), [r["model"] for r in rows])
     ax.invert_yaxis()
-    ax.set_xlim(0, 160)
+    ax.set_xlim(0, 40)
     ax.set_xlabel("lines where the model took the bait (%)")
     finish(
         fig,
         ax,
-        f"Other models on AMD Token Factory, same checks. Reached a viewer: {e['summary']['reached_viewer_total']}",
+        f"Same attacks, other models writing. Reached a viewer: {e['summary']['reached_viewer_total']}",
         f"Split: {e['split']} (our own attack clips). Source: evidence/e17_model_ladder.json",
         "e17_ladder",
     )

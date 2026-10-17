@@ -650,7 +650,7 @@ def e18_specs() -> list[Spec]:
 E17_MODELS = (
     ("gemma", "Gemma-4-31B-IT", "Gemma 4 31B"),
     ("qwen", "Qwen3.8-27B", "Qwen3.8-27B"),
-    ("minicpm", "MiniCPM-V-4.7-35B-A3B", "MiniCPM-V 4.7 35B-A3B"),
+    ("minicpm", "MiniCPM-V-4.7-35B-A3B", "MiniCPM-V-4.7-35B-A3B"),
 )
 
 
@@ -679,8 +679,8 @@ def e17_specs() -> list[Spec]:
                 f"e17.{slug}.no_output",
                 f,
                 f"{M}/no_output",
-                f"tries where {name} gave no usable line",
-                "tries",
+                f"lines where {name}'s first draft was empty",
+                "lines",
             ),
         ]
     return out
@@ -967,13 +967,24 @@ def e4_more_languages() -> str | None:
     )
 
 
+def _e17_caveat(by_model: dict[str, dict[str, int]]) -> str:
+    """Said when the other models seldom took the bait: then the run tested the checks less than Gemma's did."""
+    gemma = by_model.get("Gemma-4-31B-IT", {})
+    others = [v for k, v in by_model.items() if k != "Gemma-4-31B-IT"]
+    g_rate = gemma.get("took_bait", 0) / max(1, gemma.get("tries", 0))
+    o_rate = sum(v.get("took_bait", 0) for v in others) / max(1, sum(v.get("tries", 0) for v in others))
+    if others and o_rate < g_rate / 2:
+        return "The other two models seldom took these baits, so this run tested our checks less than Gemma's did. "
+    return ""
+
+
 def e17_row() -> str | None:
     f = EV / "e17_model_ladder.json"
     if not f.exists() or not json.loads(f.read_text()).get("checks", {}).get("every_model_ran"):
         return None
     parts = [
         f"{name} took the bait in <pending: e17.{slug}.bait> of <pending: e17.{slug}.tries> lines "
-        f"(no usable line in <pending: e17.{slug}.no_output> tries; reached a viewer: "
+        f"(no usable first draft for <pending: e17.{slug}.no_output>; reached a viewer: "
         f"<pending: e17.{slug}.reached>)"
         for slug, _model, name in E17_MODELS
     ]
@@ -986,7 +997,9 @@ def e17_row() -> str | None:
             if int(json.loads(f.read_text())["summary"]["reached_viewer_total"]) == 0
             else ". Some attack answers reached a viewer; we list each one in the evidence file. "
         )
-        + "Gemma ran 20 tries per setting, the others 5. "
+        + _e17_caveat(json.loads(f.read_text())["summary"]["by_model"])
+        + "An empty first draft (an answer that was not valid JSON) goes back for repair like any failed line. "
+        "Gemma ran 20 tries per setting, the others 5. "
         "Evidence: evidence/e17_model_ladder.json.\n\n  ![Per model: lines that took the bait and answers "
         "that reached a viewer](docs/charts/e17_ladder.png)"
     )

@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "afafc161eec5c632e9c7c8d6a8c3a2c2d8ecf4ac",
+ "git_commit": "7108d989fa29662528ebb975d796767466c67bbe",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-17T19:36:22.127Z",
- "finished_at": "2026-10-17T19:38:32.462Z",
+ "started_at": "2026-10-17T21:36:32.249Z",
+ "finished_at": "2026-10-17T21:38:49.108Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -161,6 +161,14 @@
      "status": "passed"
     },
     {
+     "title": "every language has its own filter, and a filter shows only that language's lines",
+     "status": "passed"
+    },
+    {
+     "title": "the list of lines is one Tab stop: arrows move inside it, Tab leaves it",
+     "status": "passed"
+    },
+    {
      "title": "a save that conflicts with another change shows 'Changed elsewhere; reloaded.'",
      "status": "passed"
     },
@@ -177,8 +185,8 @@
      "status": "passed"
     }
    ],
-   "passed": 7,
-   "total": 7
+   "passed": 9,
+   "total": 9
   }
  ],
  "summary": {
@@ -187,8 +195,8 @@
    "total": 27
   },
   "review": {
-   "passed": 7,
-   "total": 7
+   "passed": 9,
+   "total": 9
   },
   "screen_reader_test_by_person": null
  },
