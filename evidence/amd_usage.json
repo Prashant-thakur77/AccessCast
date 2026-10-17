@@ -3,11 +3,11 @@
  "experiment": "amd_usage",
  "split": "none",
  "passed": true,
- "git_commit": "6b5ab6953736edadc427e7da79909931b448c285",
+ "git_commit": "59fa8802ecc25f55e26ad8763f2334046a8bd23e",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-17T15:14:41.688Z",
- "finished_at": "2026-10-17T15:14:41.787Z",
+ "started_at": "2026-10-17T15:39:21.986Z",
+ "finished_at": "2026-10-17T15:39:22.136Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -237,7 +237,7 @@
   },
   {
    "log": "projects/_site/dac08bcd9d7a/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 106
+   "new_tokenfactory_calls": 125
   },
   {
    "log": "projects/_site/ed26561ae9d7/logs/llm_calls.jsonl",
@@ -285,12 +285,12 @@
   }
  ],
  "summary": {
-  "requests_answered": 3143,
-  "tokens_in": 2549365,
-  "tokens_out": 445053,
-  "tokens_total": 2994418,
+  "requests_answered": 3162,
+  "tokens_in": 2555832,
+  "tokens_out": 446570,
+  "tokens_total": 3002402,
   "served_model_ids": {
-   "self-dploy/Gemma-4-31B-IT": 3143
+   "self-dploy/Gemma-4-31B-IT": 3162
   },
   "videos": 28,
   "video_minutes": 32.8,
@@ -304,7 +304,7 @@
   "cache_hits_no_request": 782,
   "days": {
    "2026-10-16": 2600,
-   "2026-10-17": 543
+   "2026-10-17": 562
   }
  },
  "error": null

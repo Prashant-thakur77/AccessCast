@@ -73,6 +73,7 @@ Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 <!-- slide: amd -->
 # Gemma 4 on AMD Token Factory
 - Every Gemma call: **Gemma 4 31B on AMD Token Factory**, strict model check on each answer.
+- From our logs: **3,162 requests** answered, **3.0 million tokens**, 28 videos (32.8 minutes).
 - Measured from our side: 17 generated tokens/s at the best concurrency, p95 13.9 s; 15 of 120 requests refused by our key's rate limit.
 - Cost basis: 41,818 Gemma tokens per finished minute, all five versions (dev set).
 - Whisper, the voices and the sound classifier run on our own computer. No MI300X numbers: we had no droplet.

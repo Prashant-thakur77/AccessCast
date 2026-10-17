@@ -41,7 +41,7 @@ Gemma 4 31B does every vision, writing, translation and repair task. The planned
 See README "Results": description in the pauses (E1, a negative result), what the checks caught (E5, E11), translation against specialist models (E4, including a Hindi loss on one score), and the AMD numbers (E13, E14). Every number there comes from `evidence/public-claims.json`.
 
 ## AMD Boundary
-- **On AMD Token Factory:** Gemma 4 31B for every vision, writing, translation and repair call, the live attack page, and a non-Gemma judge for two evaluations.
+- **On AMD Token Factory:** Gemma 4 31B for every vision, writing, translation and repair call, the live attack page, and a non-Gemma judge for two evaluations. Counted from our logs: 3,162 Gemma requests answered and 3,002,402 tokens, across 28 videos (`evidence/amd_usage.json`).
 - **Not on AMD:** Whisper, the aligner, the voices and the metric models ran on our own workstation; every evidence file records the device.
 - **Not done:** we had no MI300X droplet (AMD Developer Cloud needs a payment card we did not have), so there are no MI300X serving, memory, soak or offline numbers. The droplet scripts are in `deploy/`.
 - **Never leaves the machine:** the video, the review state and every intermediate file.
