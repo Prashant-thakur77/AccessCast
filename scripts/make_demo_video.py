@@ -82,19 +82,18 @@ def esc(t: str) -> str:
     )
 
 
-# A soft generated tone under the narration (A major, slow swells): no dead air between lines. Our own sound, made
-# here with ffmpeg, so there is no music licence to check. Faded out under the scenes that play a video's own sound.
-PAD = "+".join(
-    f"{amp}*sin(2*PI*{hz}*t)*(0.55+0.45*sin(2*PI*{lfo}*t+{ph}))"
-    for amp, hz, lfo, ph in (
-        (0.20, 110.0, 0.06, 0.0),
-        (0.14, 164.81, 0.045, 1.3),
-        (0.10, 220.0, 0.08, 2.1),
-        (0.07, 277.18, 0.05, 0.4),
-        (0.05, 329.63, 0.07, 2.9),
-    )
+# Music (Kevin MacLeod, incompetech.com, CC BY 4.0; credited on the closing screen and in MODEL_LICENSES.md): a
+# quiet piano piece under the problem and the eyes-closed opening, then an uplifting one from "This is AccessCast".
+# Each is levelled to the same loudness, dips under the narration (sidechain), and drops out under the scenes that
+# play a video's own sound.
+MUSIC = (
+    ROOT / "data" / "music" / "Touching_Moments_Four_-_Melody.mp3",
+    ROOT / "data" / "music" / "Inspired.mp3",
 )
-PAD_GAIN = 0.12
+MUSIC_GAIN = (
+    1.6,
+    0.28,
+)  # measured short-term loudness about −28 and −13 LUFS: both brought to about −24 before mixing
 
 
 def xfade_join(
@@ -102,10 +101,13 @@ def xfade_join(
     out: Path,
     extra_fc: list[str] | None = None,
     audio_out: str | None = None,
+    extra_inputs: list[Path] | None = None,
 ) -> float:
     """Crossfade clips in order (picture: xfade, sound: acrossfade, XFADE_S each) into `out`; returns its length."""
     inputs: list[str] = []
     for p, _ in clips:
+        inputs += ["-i", str(p)]
+    for p in extra_inputs or []:  # e.g. the music, after the clips: input index len(clips), len(clips) + 1, …
         inputs += ["-i", str(p)]
     fc = [
         f"[{k}:v]fps=30,settb=AVTB,format=yuv420p[v{k}i];[{k}:a]aformat=sample_rates=48000:channel_layouts=stereo[a{k}i]"
@@ -156,16 +158,16 @@ def xfade_join(
     return length
 
 
-def assemble(parts: list[tuple[Path, float, bool]], raw: Path, batch: int = 6) -> None:
+def assemble(parts: list[tuple[Path, float, bool, bool]], raw: Path, batch: int = 6) -> None:
     """Join the scenes with crossfades and mix the tone underneath. Joined in batches: one graph over every
     scene at once ran out of memory. Batch joins overlap by XFADE_S exactly like scene joins, so times add up."""
     starts, t = [], 0.0
-    for _, d, _ in parts:
+    for _, d, _, _ in parts:
         starts.append(t)
         t += d - XFADE_S
     chunks = []
     for i in range(0, len(parts), batch):
-        group = [(p, d) for p, d, _ in parts[i : i + batch]]
+        group = [(p, d) for p, d, _, _ in parts[i : i + batch]]
         out = OUT / f"chunk{i // batch:02d}.mov"
         chunks.append((out, xfade_join(group, out) if len(group) > 1 else group[0][1]))
         if len(group) == 1:
@@ -185,18 +187,26 @@ def assemble(parts: list[tuple[Path, float, bool]], raw: Path, batch: int = 6) -
                 ],
                 check=True,
             )
-    mutes = [(starts[k], starts[k] + d) for k, (_, d, keep) in enumerate(parts) if keep]
+    mutes = [(starts[k], starts[k] + d) for k, (_, d, keep, _) in enumerate(parts) if keep]
     gain = (
         "*".join(f"(1-clip(min((t-({a:.2f}-0.8))/0.8\\,(({b:.2f}+0.8)-t)/0.8)\\,0\\,1))" for a, b in mutes)
         or "1"
     )
+    switch = next((starts[k] for k, (_, _, _, sw) in enumerate(parts) if sw), t / 2)
+    n = len(chunks)
+    a_end = switch + 2.0
     pad = [
-        f"aevalsrc='{PAD}':s=48000:d={{LENGTH}},aformat=channel_layouts=stereo,lowpass=f=900,"
-        f"aecho=0.8:0.6:180|360:0.25|0.15,afade=t=in:d=2,afade=t=out:st={max(0.0, t - 3):.2f}:d=3,"
-        f"volume='{gain}':eval=frame,volume={PAD_GAIN}[pad]",
-        "{AUDIO}[pad]amix=inputs=2:duration=first:normalize=0[aout]",
+        f"[{n}:a]aformat=sample_rates=48000:channel_layouts=stereo,atrim=0:{a_end:.2f},volume={MUSIC_GAIN[0]},"
+        f"afade=t=in:d=2,afade=t=out:st={a_end - 3:.2f}:d=3[ma]",
+        f"[{n + 1}:a]aformat=sample_rates=48000:channel_layouts=stereo,atrim=0:{t - switch + 1.5:.2f},volume={MUSIC_GAIN[1]},"
+        f"afade=t=in:d=3,afade=t=out:st={max(0.0, t - switch - 3):.2f}:d=4.5,adelay={int((switch - 1.5) * 1000)}:all=1[mb]",
+        f"[ma][mb]amix=inputs=2:duration=longest:normalize=0,apad=whole_dur={{LENGTH}},atrim=0:{{LENGTH}},"
+        f"volume='{gain}':eval=frame[music]",
+        "{AUDIO}asplit=2[narr][key]",
+        "[music][key]sidechaincompress=threshold=0.03:ratio=5:attack=30:release=600:makeup=1[ducked]",
+        "[narr][ducked]amix=inputs=2:duration=first:normalize=0[aout]",
     ]
-    xfade_join(chunks, raw, pad, "[aout]")
+    xfade_join(chunks, raw, pad, "[aout]", list(MUSIC))
 
 
 def main() -> int:
@@ -350,7 +360,7 @@ def main() -> int:
             ],
             check=True,
         )
-        parts.append((mp4, dur, bool(sc.get("keep_audio"))))
+        parts.append((mp4, dur, bool(sc.get("keep_audio")), bool(sc.get("music_switch"))))
     raw = OUT / "demo_raw.mp4"
     assemble(parts, raw)
     final = OUT / "accesscast_demo.mp4"

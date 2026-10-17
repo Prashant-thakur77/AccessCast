@@ -42,8 +42,7 @@ Generated from `docs/demo/storyboard.json` by `scripts/storyboard_to_script.py`;
 | Card: Translation, 1012 test sentences per language / Italian: Gemma beat Opus-MT on both scores / Hindi: Gemma won on one score, lost on the other | For translation, Gemma beat a standard Italian model on both of our scores. For Hindi it won on one score and lost on the other, and we report that loss. |
 | Counters from our own call logs: Gemma requests answered by AMD Token Factory, tokens, videos; tokens and estimated cost per finished minute | Every Gemma call runs on AMD's Token Factory. Counted from our own logs: 3,162 requests and 3.0 million tokens, across 28 videos. One finished minute, in all five versions, costs about $0.0053 of Gemma, at a published list price. |
 | Three law dates: EU, India, US | The law already asks for this: in Europe since 28 June 2025, in India since 6 February 2026, and for US public universities from 26 April 2027. They pay per finished minute, and their own staff approve every line. |
-| Card: What didn't work / Our first test needed pauses. / These videos barely have any. | What didn't work: our first test measured description inside pauses, and our test videos have almost none. It could not show a difference, and we report it anyway. |
-| Closing line over stock footage of a family watching TV, with the links and footage credits | AccessCast. Every viewer, the same video. Everything, including what didn't work, is in our repo. |
+| Closing line over stock footage of a family watching TV, with the links and footage credits | AccessCast. Every viewer, the same video. |
 
 ## How it is made
 - Motion scenes: `docs/demo/motion/index.html`, rendered frame by frame with a transparent background (`scripts/render_motion.mjs`) and composited over real footage.
