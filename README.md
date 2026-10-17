@@ -4,6 +4,8 @@ Blind, deaf, slow-reading, Hindi and Italian viewers each get their own version 
 
 **[▶ Live demo](https://accesscast.vercel.app/?audience=judge)** · Demo video: <pending: video.url> · Deck (PDF): <pending: deck.url> · [3-minute judge guide](JUDGES.md) · [Proof page](https://accesscast.vercel.app/proof.html)
 
+[![CI](https://github.com/Prashant-thakur77/AccessCast/actions/workflows/ci.yml/badge.svg)](https://github.com/Prashant-thakur77/AccessCast/actions/workflows/ci.yml) [![Live demo](https://img.shields.io/badge/live%20demo-accesscast.vercel.app-E4402A)](https://accesscast.vercel.app/?audience=judge) [![Gemma 4 31B on AMD Token Factory](https://img.shields.io/badge/Gemma%204%2031B-AMD%20Token%20Factory-141B34)](#gemma-4-on-amd) [![Accessible: keyboard and axe-core](https://img.shields.io/badge/our%20own%20UI-keyboard%20%2B%20axe--core-1E7A4C)](#results) [![MIT licence](https://img.shields.io/badge/licence-MIT-blue)](LICENSE)
+
 # AccessCast: one video, five ways to watch
 
 Most online video has no audio description, and most of it has captions only in one language, if any. AccessCast takes one video and makes a version for each viewer. Gemma 4 31B, served by AMD Token Factory, does the seeing, writing, translating and repairing. Code checks every line Gemma writes against the real audio timeline. Gemma repairs what fails. A person approves what the public hears.
