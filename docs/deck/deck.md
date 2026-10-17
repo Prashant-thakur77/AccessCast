@@ -29,6 +29,7 @@ Gemma 4 on AMD Token Factory · AMD Developer Hackathon ACT III · Create a New 
 "I can't see the screen" · "I can't hear" · "Simpler words, please" · "हिन्दी" · "Italiano" · "Español" · "Français" · "Português"
 
 Every version is built from one analysis, so they never disagree. A viewer can combine them: description in Hindi, say.
+![The viewer picker on our site: I can't see the screen, I can't hear, simpler words, and five languages](docs/media/picker.png)
 
 ---
 <!-- slide: how -->
@@ -93,7 +94,7 @@ Gemma 4 31B on AMD Token Factory.
 # How it is sold
 - **First customer:** a US public university's accessibility office: ADA Title II from 26 April 2027, years of video with no description.
 - **They buy:** every version per finished minute, below today's AI-description list prices, reviewed by their own staff in our app; or a yearly licence to run it on their own servers.
-- **Next:** broadcasters and streaming platforms in the EU, Italy and India.
+- **Next:** broadcasters and streaming platforms in the EU and India.
 - **The difference:** every audience and language from one analysis, checks that catch meaning changes, and a server that refuses to publish unreviewed lines.
 
 ---
@@ -101,7 +102,7 @@ Gemma 4 31B on AMD Token Factory.
 # What didn't work, and what's next
 - **E1 did not work on our test set:** the W3C videos have 6 usable pauses in 9.3 minutes, so only 6 standard lines were planned and the arms came out equal.
 - Gemma never failed 6 of our 8 attack cases, so those checks were not exercised live.
-- Hindi translation: IndicTrans2 beat Gemma on chrF++ (58.8 against 53.8).
+- Translation, one of two scores: the specialist model beat Gemma on chrF++ for Hindi (58.8 against 53.8), French (68.0 against 64.1) and Portuguese (70.0 against 67.4).
 - Hindi speech recognition is weak: 32.4% word error rate.
 - Token Factory dropped requests for long stretches; everything fails closed, but it slows the work.
 - Not yet: a blind reviewer, native-speaker checks, MI300X numbers.
