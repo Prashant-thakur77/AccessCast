@@ -66,6 +66,7 @@ Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 # More results
 - **Speech recognition (dev):** Whisper large-v3-turbo, 4.5% English word error rate; word timing off by 54 ms (median) after alignment.
 - **Easy-read (test):** published cues paced for slow reading: 106 of 114, against 57 of 121 original captions.
+- **Translation (FLORES+, 1012 sentences each):** Italian: Gemma beat Opus-MT on both scores (COMET 0.8898 against 0.8522). Hindi: Gemma higher on COMET, IndicTrans2 higher on chrF++.
 - **Accessibility:** player 23 of 23 tests, review app and Studio 7 of 7, axe-core included.
 
 ---
@@ -105,6 +106,7 @@ Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 # What didn't work, and what's next
 - **E1 did not work on our test set:** the W3C videos have 6 usable pauses in 9.3 minutes, so only 6 standard lines were planned and the arms came out equal.
 - Gemma never failed 6 of our 8 attack cases, so those checks were not exercised live.
+- Hindi translation: IndicTrans2 beat Gemma on chrF++ (58.8 against 53.8).
 - Hindi speech recognition is weak: 32.4% word error rate.
 - Token Factory dropped requests for long stretches; everything fails closed, but it slows the work.
 - Not yet: a blind reviewer, native-speaker checks, MI300X numbers.
