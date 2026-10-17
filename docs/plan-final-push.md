@@ -67,5 +67,10 @@ Status of the phases above: A, B1–B3, C, E1, F1, F2, F4 done; B4/D1 (E4 es/fr/
 - H9. Review app: the list of lines is one Tab stop with arrow keys, Home and End (it was one Tab stop per line;
   with five languages a keyboard user passed many lines before the header). Tested.
 
+Status at 03:30 IST: H1–H9 done. E17 (0 reached a viewer for every model; the others seldom took the bait),
+E18, E4 es/fr/pt (Gemma higher on COMET in all five languages; chrF++ lower for Hindi, French, Portuguese),
+tests 190/190, E16 27/27 and 9/9, live check 6 of 6 versions, video 5:25 with no silence, deck and site deployed.
+Left for the person: upload the video and deck, send their links and the team names.
+
 ## Phase G — close
 - `make submission-check`, final claims-check, tag `act3-submission`, hand the user the upload checklist.
