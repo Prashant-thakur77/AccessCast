@@ -11,7 +11,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/no_answer_after_retries"
     }
    ],
@@ -32,7 +32,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/not_sent_circuit_open"
     }
    ],
@@ -53,7 +53,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/requests_answered"
     }
    ],
@@ -71,20 +71,22 @@
   {
    "claim_id": "amd.requests_all",
    "text": "requests AMD Token Factory answered for us, Gemma and the models E17 compared",
-   "value": 3787,
+   "value": 3955,
    "unit": "requests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/requests_answered_all_models"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
-    "3,787"
+    "3,955"
    ]
   },
   {
@@ -97,7 +99,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/tokens_total"
     }
    ],
@@ -112,20 +114,22 @@
   {
    "claim_id": "amd.tokens_all_millions",
    "text": "tokens in all those requests, in millions",
-   "value": 3549686,
+   "value": 3660272,
    "unit": "tokens",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/tokens_total_all_models"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
-    "3.5 million"
+    "3.7 million"
    ]
   },
   {
@@ -138,7 +142,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/tokens_total"
     }
    ],
@@ -161,7 +165,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/video_minutes"
     }
    ],
@@ -183,7 +187,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/videos"
     }
    ],
@@ -208,7 +212,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/video_groups/attack_clips"
     }
    ],
@@ -229,7 +233,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/video_groups/dev_clips"
     }
    ],
@@ -250,7 +254,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "93986c2c36f170eed52b7b70413e04c872ecb04eda92d84c24a0b623362da6da",
+     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
      "pointer": "/summary/video_groups/w3c_test"
     }
    ],
@@ -3663,7 +3667,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "d817a8104cb45f7c8bba719a717ffa71c744d74120e9a01ddba42c789278f985",
+     "sha256": "01f9b115bdb8047719b892f550b052bf1c5bf45a0c8732221f7811e1ca49524f",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3685,7 +3689,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "d817a8104cb45f7c8bba719a717ffa71c744d74120e9a01ddba42c789278f985",
+     "sha256": "01f9b115bdb8047719b892f550b052bf1c5bf45a0c8732221f7811e1ca49524f",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3700,14 +3704,14 @@
   {
    "claim_id": "e16.review_passed",
    "text": "review-app accessibility tests passed (Playwright + axe-core)",
-   "value": 7,
+   "value": 9,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "d817a8104cb45f7c8bba719a717ffa71c744d74120e9a01ddba42c789278f985",
+     "sha256": "01f9b115bdb8047719b892f550b052bf1c5bf45a0c8732221f7811e1ca49524f",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3716,20 +3720,20 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "7"
+    "9"
    ]
   },
   {
    "claim_id": "e16.review_total",
    "text": "review-app accessibility tests run",
-   "value": 7,
+   "value": 9,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "d817a8104cb45f7c8bba719a717ffa71c744d74120e9a01ddba42c789278f985",
+     "sha256": "01f9b115bdb8047719b892f550b052bf1c5bf45a0c8732221f7811e1ca49524f",
      "pointer": "/summary/review/total"
     }
    ],
@@ -3738,7 +3742,261 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "7"
+    "9"
+   ]
+  },
+  {
+   "claim_id": "e17.gemma.bait",
+   "text": "of those, lines where Gemma 4 31B took the bait",
+   "value": 40,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/Gemma-4-31B-IT/took_bait"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "40"
+   ]
+  },
+  {
+   "claim_id": "e17.gemma.no_output",
+   "text": "lines where Gemma 4 31B's first draft was empty",
+   "value": 0,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/Gemma-4-31B-IT/no_output"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e17.gemma.reached",
+   "text": "Gemma 4 31B attack answers that reached a viewer",
+   "value": 0,
+   "unit": "",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/Gemma-4-31B-IT/reached_viewer"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e17.gemma.tries",
+   "text": "attack lines Gemma 4 31B wrote",
+   "value": 400,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/Gemma-4-31B-IT/tries"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "400"
+   ]
+  },
+  {
+   "claim_id": "e17.minicpm.bait",
+   "text": "of those, lines where MiniCPM-V-4.7-35B-A3B took the bait",
+   "value": 1,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/MiniCPM-V-4.7-35B-A3B/took_bait"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "1"
+   ]
+  },
+  {
+   "claim_id": "e17.minicpm.no_output",
+   "text": "lines where MiniCPM-V-4.7-35B-A3B's first draft was empty",
+   "value": 0,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/MiniCPM-V-4.7-35B-A3B/no_output"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e17.minicpm.reached",
+   "text": "MiniCPM-V-4.7-35B-A3B attack answers that reached a viewer",
+   "value": 0,
+   "unit": "",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/MiniCPM-V-4.7-35B-A3B/reached_viewer"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e17.minicpm.tries",
+   "text": "attack lines MiniCPM-V-4.7-35B-A3B wrote",
+   "value": 100,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/MiniCPM-V-4.7-35B-A3B/tries"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "100"
+   ]
+  },
+  {
+   "claim_id": "e17.qwen.bait",
+   "text": "of those, lines where Qwen3.8-27B took the bait",
+   "value": 0,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/Qwen3.8-27B/took_bait"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e17.qwen.no_output",
+   "text": "lines where Qwen3.8-27B's first draft was empty",
+   "value": 63,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/Qwen3.8-27B/no_output"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "63"
+   ]
+  },
+  {
+   "claim_id": "e17.qwen.reached",
+   "text": "Qwen3.8-27B attack answers that reached a viewer",
+   "value": 0,
+   "unit": "",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/Qwen3.8-27B/reached_viewer"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/deck/deck.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e17.qwen.tries",
+   "text": "attack lines Qwen3.8-27B wrote",
+   "value": 100,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e17_model_ladder.json",
+     "sha256": "1c13297882e0f441e6f7446d20e92f7c3920e44ce6d48661a613b65af7a8619e",
+     "pointer": "/summary/by_model/Qwen3.8-27B/tries"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "100"
    ]
   },
   {
@@ -5449,7 +5707,7 @@
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "7c264a2d77381d522e4cfe88e3db3f623d6f85dc06844c285e836feeab03bfa9",
+     "sha256": "73921a73822d7a1450aa184e8984eb27921e9f432eeebca9409ec39c88b814d0",
      "pointer": "/summary/line_coverage_pct"
     }
    ],
@@ -5463,14 +5721,14 @@
   {
    "claim_id": "tests.files",
    "text": "test files",
-   "value": 69,
+   "value": 70,
    "unit": "files",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "7c264a2d77381d522e4cfe88e3db3f623d6f85dc06844c285e836feeab03bfa9",
+     "sha256": "73921a73822d7a1450aa184e8984eb27921e9f432eeebca9409ec39c88b814d0",
      "pointer": "/summary/test_files"
     }
    ],
@@ -5478,49 +5736,51 @@
     "README.md"
    ],
    "display": [
-    "69"
+    "70"
    ]
   },
   {
    "claim_id": "tests.passed",
    "text": "unit and golden tests that pass",
-   "value": 188,
+   "value": 190,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "7c264a2d77381d522e4cfe88e3db3f623d6f85dc06844c285e836feeab03bfa9",
+     "sha256": "73921a73822d7a1450aa184e8984eb27921e9f432eeebca9409ec39c88b814d0",
      "pointer": "/summary/tests_passed"
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
-    "188"
+    "190"
    ]
   },
   {
    "claim_id": "tests.total",
    "text": "unit and golden tests",
-   "value": 188,
+   "value": 190,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "7c264a2d77381d522e4cfe88e3db3f623d6f85dc06844c285e836feeab03bfa9",
+     "sha256": "73921a73822d7a1450aa184e8984eb27921e9f432eeebca9409ec39c88b814d0",
      "pointer": "/summary/tests_total"
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
-    "188"
+    "190"
    ]
   }
  ]

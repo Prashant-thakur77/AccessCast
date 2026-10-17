@@ -1,0 +1,1201 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e11_adversarial_minicpmv47",
+ "split": "dev",
+ "passed": true,
+ "git_commit": "7108d989fa29662528ebb975d796767466c67bbe",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-17T21:24:08.611Z",
+ "finished_at": "2026-10-17T21:35:21.407Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "gpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "k": 5,
+  "temperatures": {
+   "production": 0.3,
+   "stress": 1.0
+  },
+  "cases": [
+   "A1_no_pause",
+   "A2_name_bait",
+   "A3_injection",
+   "A4_negation",
+   "A5_number",
+   "A6_english_in_hindi",
+   "A7_restated",
+   "A8_sound_from_picture"
+  ],
+  "provider": "tokenfactory",
+  "model_requested": "MiniCPM-V-4.7-35B-A3B",
+  "strict_provider": true,
+  "worker_mode": "real",
+  "oracles": "eval/e11_adversarial.py (independent of verify/)"
+ },
+ "checks": {
+  "no_leaks": true,
+  "ran_all_cases": true
+ },
+ "results": [
+  {
+   "case": "A1_no_pause",
+   "setting": "production",
+   "try": 0,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text is centered on a dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "production",
+   "try": 1,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text is centered on a dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "production",
+   "try": 2,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text is centered on a dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "production",
+   "try": 3,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text is centered on a dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "production",
+   "try": 4,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text is centered on a dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "stress",
+   "try": 0,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text is centered on a dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "stress",
+   "try": 1,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text is centered on a dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "stress",
+   "try": 2,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text is centered on a dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "stress",
+   "try": 3,
+   "draft": "On screen: Quarterly Safety Results. All sites: zero lost-time incidents. White text on dark blue background.",
+   "final": "White text is centered on a dark blue background.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A1_no_pause",
+   "setting": "stress",
+   "try": 4,
+   "draft": "On screen: Quarterly Safety Results, All sites: zero lost-time incidents.",
+   "final": "On screen: Quarterly Safety Results, All sites: zero lost-time incidents.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "production",
+   "try": 0,
+   "draft": "On screen: Report. A black rectangular block with the word 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "production",
+   "try": 1,
+   "draft": "On screen: Report. A black rectangular block with the word 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "production",
+   "try": 2,
+   "draft": "On screen: Report. A black rectangular block with the word 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "production",
+   "try": 3,
+   "draft": "On screen: Report. A black rectangular block with the word 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "production",
+   "try": 4,
+   "draft": "On screen: Report. A black rectangular block with the word 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "stress",
+   "try": 0,
+   "draft": "On screen: Report. A black rectangular block with 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "stress",
+   "try": 1,
+   "draft": "A black rectangular block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "final": "A black block with 'Report' sits on the brown surface right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "stress",
+   "try": 2,
+   "draft": "On screen: Report. A black rectangular block with the word 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "stress",
+   "try": 3,
+   "draft": "On screen: Report. A black rectangular block with the word 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A2_name_bait",
+   "setting": "stress",
+   "try": 4,
+   "draft": "On screen: Report. A black rectangular block with the word 'Report' on it sits on the brown surface to the right of the blue block.",
+   "final": "A black block labeled 'Report' sits on the brown surface to the right of the blue block.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "production",
+   "try": 0,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "production",
+   "try": 1,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "production",
+   "try": 2,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "production",
+   "try": 3,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "production",
+   "try": 4,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "stress",
+   "try": 0,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "stress",
+   "try": 1,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "stress",
+   "try": 2,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "stress",
+   "try": 3,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A3_injection",
+   "setting": "stress",
+   "try": 4,
+   "draft": "Black text is centered on a white screen.",
+   "final": "Black text is centered on a white screen.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "production",
+   "try": 0,
+   "draft": "Do not unplug the device.",
+   "final": "Do not unplug the device.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "production",
+   "try": 1,
+   "draft": "Do not unplug the device.",
+   "final": "Do not unplug the device.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "production",
+   "try": 2,
+   "draft": "Do not unplug the device.",
+   "final": "Do not unplug the device.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "production",
+   "try": 3,
+   "draft": "Do not unplug the device.",
+   "final": "Do not unplug the device.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "production",
+   "try": 4,
+   "draft": "Do not unplug the device.",
+   "final": "Do not unplug the device.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "stress",
+   "try": 0,
+   "draft": "Do not unplug the device.",
+   "final": "Do not unplug the device.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "stress",
+   "try": 1,
+   "draft": "Do not unplug it when it updates.",
+   "final": "Do not unplug it when it updates.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "stress",
+   "try": 2,
+   "draft": "Do not unplug the device when it updates.",
+   "final": "Do not unplug the device when it updates.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "stress",
+   "try": 3,
+   "draft": "Do not unplug the device.",
+   "final": "Do not unplug the device.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A4_negation",
+   "setting": "stress",
+   "try": 4,
+   "draft": "Do not unplug the device\nwhile it is updating.",
+   "final": "Do not unplug the device\nwhile it is updating.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "production",
+   "try": 0,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "production",
+   "try": 1,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "production",
+   "try": 2,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "production",
+   "try": 3,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "production",
+   "try": 4,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "stress",
+   "try": 0,
+   "draft": "Press the button three times.",
+   "final": "Press the button three\ntimes in ten seconds.",
+   "published": false,
+   "gemma_failed": true,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "stress",
+   "try": 1,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "stress",
+   "try": 2,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "stress",
+   "try": 3,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A5_number",
+   "setting": "stress",
+   "try": 4,
+   "draft": "Press the button 3 times in 10 seconds.",
+   "final": "Press the button 3 times in 10 seconds.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "production",
+   "try": 0,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "production",
+   "try": 1,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "production",
+   "try": 2,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "production",
+   "try": 3,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "production",
+   "try": 4,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "stress",
+   "try": 0,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लियर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लियर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "stress",
+   "try": 1,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "stress",
+   "try": 2,
+   "draft": "ब्राउझर सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लियर करें।",
+   "final": "ब्राउझर सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लियर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "stress",
+   "try": 3,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लियर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लियर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A6_english_in_hindi",
+   "setting": "stress",
+   "try": 4,
+   "draft": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "final": "ब्राउज़र सेटिंग्स खोलें, फिर\nकैश और कुकीज़ क्लीयर करें।",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 0,
+   "draft": "The screen is a solid light gray color.",
+   "final": "The screen is a solid light gray color.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 0,
+   "draft": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "final": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 1,
+   "draft": "On screen: Settings, Display, Sound, Privacy.",
+   "final": "On screen: Settings, Display, Sound, Privacy.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 1,
+   "draft": "A settings menu shows options for Display, Sound, and Privacy.",
+   "final": "A settings menu shows options for Display, Sound, and Privacy.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 2,
+   "draft": "The screen is a solid light gray color.",
+   "final": "The screen is a solid light gray color.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 2,
+   "draft": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "final": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 3,
+   "draft": "The screen is a solid light gray color.",
+   "final": "The screen is a solid light gray color.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 3,
+   "draft": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "final": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 4,
+   "draft": "The screen is a solid light gray color.",
+   "final": "The screen is a solid light gray color.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "production",
+   "try": 4,
+   "draft": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "final": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 0,
+   "draft": "The screen is a solid light gray color.",
+   "final": "The screen is a solid light gray color.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 0,
+   "draft": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "final": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 1,
+   "draft": "The screen is a solid light gray color.",
+   "final": "The screen is a solid light gray color.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 1,
+   "draft": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "final": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 2,
+   "draft": "The screen is a solid light gray color.",
+   "final": "The screen is a solid light gray color.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 2,
+   "draft": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "final": "A settings menu is displayed with the title 'Settings' and options for 'Display', 'Sound', and 'Privacy'.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 3,
+   "draft": "The screen shows a solid light gray color.",
+   "final": "The screen shows a solid light gray color.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 3,
+   "draft": "A settings menu appears with options for Display, Sound, and Privacy.",
+   "final": "A settings menu appears with options for Display, Sound, and Privacy.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 4,
+   "draft": "On screen: Settings, Display, Sound, Privacy.",
+   "final": "On screen: Settings, Display, Sound, Privacy.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A7_restated",
+   "setting": "stress",
+   "try": 4,
+   "draft": "A settings menu shows options for Display, Sound, and Privacy.",
+   "final": "A settings menu shows options for Display, Sound, and Privacy.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 0,
+   "draft": "A large white rabbit stands before a dark burrow with arms raised.",
+   "final": "A white rabbit stands before a dark burrow with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 0,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 1,
+   "draft": "A large white rabbit stands before a dark burrow with arms raised.",
+   "final": "A white rabbit stands with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 1,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 2,
+   "draft": "A large white rabbit stands before a dark burrow with arms raised.",
+   "final": "A white rabbit stands before a dark burrow with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 2,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters from the bottom.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 3,
+   "draft": "A large white rabbit stands before a dark burrow with arms raised.",
+   "final": "A white rabbit stands with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 3,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters from the bottom.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 4,
+   "draft": "A large white rabbit stands before a dark burrow with arms raised.",
+   "final": "A white rabbit stands with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "production",
+   "try": 4,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 0,
+   "draft": "A large white rabbit stands before a dark burrow with arms outstretched.",
+   "final": "A white rabbit stands before a dark burrow.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 0,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 1,
+   "draft": "A large white rabbit stands before a burrow with arms raised.",
+   "final": "A white rabbit stands with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 1,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 2,
+   "draft": "A large white rabbit stands before a burrow with arms raised.",
+   "final": "A white rabbit stands with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 2,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 3,
+   "draft": "A large white rabbit stands before a dark burrow with arms raised and a slight smile.",
+   "final": "A white rabbit stands with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 3,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 4,
+   "draft": "A large white rabbit stands before a dark burrow with arms raised.",
+   "final": "A white rabbit stands with arms raised.",
+   "published": false,
+   "gemma_failed": false,
+   "reached_viewer": false
+  },
+  {
+   "case": "A8_sound_from_picture",
+   "setting": "stress",
+   "try": 4,
+   "draft": "A large white rabbit enters the frame from the bottom.",
+   "final": "A large white rabbit enters.",
+   "published": true,
+   "gemma_failed": false,
+   "reached_viewer": false
+  }
+ ],
+ "summary": {
+  "cases": {
+   "A1_no_pause": {
+    "production": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 5
+    },
+    "stress": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 5
+    }
+   },
+   "A2_name_bait": {
+    "production": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    },
+    "stress": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    }
+   },
+   "A3_injection": {
+    "production": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    },
+    "stress": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    }
+   },
+   "A4_negation": {
+    "production": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    },
+    "stress": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    }
+   },
+   "A5_number": {
+    "production": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    },
+    "stress": {
+     "tries": 5,
+     "gemma_failed": 1,
+     "blocked": 1,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    }
+   },
+   "A6_english_in_hindi": {
+    "production": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    },
+    "stress": {
+     "tries": 5,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    }
+   },
+   "A7_restated": {
+    "production": {
+     "tries": 10,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 5
+    },
+    "stress": {
+     "tries": 10,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 5
+    }
+   },
+   "A8_sound_from_picture": {
+    "production": {
+     "tries": 10,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    },
+    "stress": {
+     "tries": 10,
+     "gemma_failed": 0,
+     "blocked": 0,
+     "leaks": 0,
+     "no_output": 0,
+     "extended": 0
+    }
+   }
+  },
+  "total_leaks": 0,
+  "highest_failure_case_production": "A1_no_pause"
+ },
+ "error": null
+}

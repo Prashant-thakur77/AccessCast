@@ -45,11 +45,23 @@
       <img src="charts/e11_attacks.png" alt="Bar chart of the attack cases: how many tries, how often Gemma took the bait, and how many answers reached a viewer." loading="lazy">
       <p class="muted">Data: our own attack clips (not the test set). Evidence: evidence/e11_adversarial.json. <a href="proof.html">Run it live</a>.</p>
     </li>
+    <li class="result-card" aria-labelledby="r-ladder">
+      <h2 id="r-ladder" class="display m">Other models, same checks</h2>
+      <p class="how-say">We ran the same attacks with other models on AMD Token Factory writing. Lines that took the bait: Gemma 4 31B <b data-claim="e17.gemma.bait"></b> of <b data-claim="e17.gemma.tries"></b>, Qwen3.8-27B <b data-claim="e17.qwen.bait"></b> of <b data-claim="e17.qwen.tries"></b>, MiniCPM-V-4.7 <b data-claim="e17.minicpm.bait"></b> of <b data-claim="e17.minicpm.tries"></b>. Empty first drafts: <b data-claim="e17.gemma.no_output"></b>, <b data-claim="e17.qwen.no_output"></b> and <b data-claim="e17.minicpm.no_output"></b>. Answers that reached a viewer: <b data-claim="e17.gemma.reached"></b>, <b data-claim="e17.qwen.reached"></b> and <b data-claim="e17.minicpm.reached"></b>.</p>
+      <img src="charts/e17_ladder.png" alt="Bar chart per model: share of attack lines where the model took the bait, with counts of lines with no answer and answers that reached a viewer." loading="lazy">
+      <p class="muted">Data: our own attack clips (not the test set). Gemma ran 20 tries per setting, the others 5. A first draft that was not valid JSON counts as empty and goes back for repair. Evidence: evidence/e17_model_ladder.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-langs">
+      <h2 id="r-langs" class="display m">Every language through the same checks</h2>
+      <p class="how-say">Translated subtitle and voice-over lines that passed every check on their own: Hindi <b data-claim="e18.hi.passed"></b> of <b data-claim="e18.hi.lines"></b>, Italian <b data-claim="e18.it.passed"></b> of <b data-claim="e18.it.lines"></b>, Spanish <b data-claim="e18.es.passed"></b> of <b data-claim="e18.es.lines"></b>, French <b data-claim="e18.fr.passed"></b> of <b data-claim="e18.fr.lines"></b>, Portuguese <b data-claim="e18.pt.passed"></b> of <b data-claim="e18.pt.lines"></b>. The rest wait for a person.</p>
+      <img src="charts/e18_languages.png" alt="Stacked bars per language: lines that passed every check and lines held for a person, with the rules that held them." loading="lazy">
+      <p class="muted">Data: our two site drafts (dev), machine drafts not yet reviewed. Evidence: evidence/e18_language_checks.json</p>
+    </li>
     <li class="result-card" aria-labelledby="r-tr">
       <h2 id="r-tr" class="display m">Translation against specialist models</h2>
-      <p class="how-say">Italian: Gemma 4 31B scored higher than Opus-MT on both scores. Hindi: higher on COMET, lower than IndicTrans2 on chrF++, and we report that loss.</p>
+      <p class="how-say">Gemma 4 31B scored higher than the specialist model on COMET in all five languages. On chrF++, which counts word overlap with one human translation, it was higher for Italian, about the same for Spanish, and lower for Hindi, French and Portuguese. We report those losses.</p>
       <img src="charts/e4_translation.png" alt="Chart of Gemma minus the baseline for each language and score, with 95 percent intervals; green where Gemma is better, red where the baseline is better." loading="lazy">
-      <p class="muted">Data: FLORES+ devtest, <span data-claim="e4.n"></span> sentences per language. Evidence: evidence/e04_translation*.json</p>
+      <p class="muted">Data: FLORES+ devtest, <span data-claim="e4.n"></span> sentences per language. Evidence: evidence/e04_translation.json and evidence/e04_translation_es_fr_pt.json</p>
     </li>
     <li class="result-card" aria-labelledby="r-amd">
       <h2 id="r-amd" class="display m">On AMD Token Factory</h2>
@@ -68,6 +80,11 @@
       <p class="how-say"><b data-claim="e13.best_tokens_per_s"></b> generated tokens a second at the best concurrency; requests over our key's rate limit were refused, never answered wrongly.</p>
       <img src="charts/e13_serving.png" alt="Bar chart of median and 95th percentile seconds per request at one and four requests at a time." loading="lazy">
       <p class="muted">Evidence: evidence/e13_serving_tokenfactory.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-tests">
+      <h2 id="r-tests" class="display m">Tests, so it keeps working</h2>
+      <p class="how-say"><b data-claim="tests.passed"></b> of <b data-claim="tests.total"></b> unit and golden tests pass, in <b data-claim="tests.files"></b> files, running <b data-claim="tests.coverage"></b> of our core code. Browser tests with keyboard-only runs and axe-core scans: player <b data-claim="e16.player_passed"></b> of <b data-claim="e16.player_total"></b>, review app and Studio <b data-claim="e16.review_passed"></b> of <b data-claim="e16.review_total"></b>.</p>
+      <p class="muted">Evidence: evidence/tests.json and evidence/e16_ui_a11y.json</p>
     </li>
     <li class="result-card" aria-labelledby="r-tl">
       <h2 id="r-tl" class="display m">One real clip, where the description goes</h2>

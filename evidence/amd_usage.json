@@ -3,11 +3,11 @@
  "experiment": "amd_usage",
  "split": "none",
  "passed": true,
- "git_commit": "00a0e0f3f3575ecca45e0092e36af578326986e0",
+ "git_commit": "7108d989fa29662528ebb975d796767466c67bbe",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-17T20:56:43.264Z",
- "finished_at": "2026-10-17T20:56:43.623Z",
+ "started_at": "2026-10-17T21:35:48.148Z",
+ "finished_at": "2026-10-17T21:35:48.500Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -37,11 +37,11 @@
  "results": [
   {
    "log": "projects/06a3e203495f/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 91
+   "new_tokenfactory_calls": 101
   },
   {
    "log": "projects/138ab07725a3/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 82
+   "new_tokenfactory_calls": 158
   },
   {
    "log": "projects/1d4445a74f9d/logs/llm_calls.jsonl",
@@ -53,15 +53,15 @@
   },
   {
    "log": "projects/3db6e664bfa6/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 116
+   "new_tokenfactory_calls": 135
   },
   {
    "log": "projects/70179e60b244/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 93
+   "new_tokenfactory_calls": 121
   },
   {
    "log": "projects/716570d5d488/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 254
+   "new_tokenfactory_calls": 267
   },
   {
    "log": "projects/81efb91a4b43/logs/llm_calls.jsonl",
@@ -69,7 +69,7 @@
   },
   {
    "log": "projects/861ffe38efa7/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 109
+   "new_tokenfactory_calls": 119
   },
   {
    "log": "projects/8748f4be5399/logs/llm_calls.jsonl",
@@ -77,7 +77,7 @@
   },
   {
    "log": "projects/9a5b22899e0f/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 91
+   "new_tokenfactory_calls": 101
   },
   {
    "log": "projects/_demo_draft/beecab6041ea/logs/llm_calls.jsonl",
@@ -289,7 +289,7 @@
   },
   {
    "log": "projects/fd6d87bdd397/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 95
+   "new_tokenfactory_calls": 115
   }
  ],
  "summary": {
@@ -309,20 +309,24 @@
   },
   "no_answer_after_retries": 20,
   "not_sent_circuit_open": 2619,
-  "answered_but_unusable": 44,
+  "answered_but_unusable": 62,
   "cache_hits_no_request": 818,
   "days": {
    "2026-10-16": 2600,
    "2026-10-17": 1130
   },
   "other_models": {
+   "self-dploy/MiniCPM-V-4.7-35B-A3B": {
+    "requests": 146,
+    "tokens": 79242
+   },
    "self-dploy/Qwen3.8-27B": {
-    "requests": 57,
-    "tokens": 67608
+    "requests": 79,
+    "tokens": 98952
    }
   },
-  "requests_answered_all_models": 3787,
-  "tokens_total_all_models": 3549686
+  "requests_answered_all_models": 3955,
+  "tokens_total_all_models": 3660272
  },
  "error": null
 }

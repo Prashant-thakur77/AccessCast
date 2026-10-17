@@ -48,7 +48,7 @@ All five come from one analysis of the video (shots, scenes, every word with its
 
 Gemma 4 31B does four jobs in every run, all on **AMD Token Factory**: it looks at the frames of each scene and lists what is visible, writes the description from that list only, rewrites captions as easy-read and translates them into Hindi and Italian, and repairs any line that fails a check, told exactly which check failed. Every answer is checked against the model name the server reports (`--strict-provider`), and the model never decides timing or whether a line is good enough: code does.
 
-**Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,730 Gemma 4 31B requests for us, 3,482,078 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. The live attack on our site adds more calls, which these logs do not include.
+**Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,730 Gemma 4 31B requests for us, 3,482,078 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. With the two other Token Factory models we compared in E17, Token Factory answered 3,955 requests for us (3.7 million tokens). The live attack on our site adds more calls, which these logs do not include.
 
 ![Gemma 4 31B requests answered by AMD Token Factory, by day, from our own call logs](docs/charts/amd_usage.png)
 
@@ -92,8 +92,11 @@ Token Factory had outages during our runs (it answered "no available workers" fo
 - **Every language through the same checks (E18, our two site drafts, dev).** Translated subtitle and voice-over lines that passed every check on their own: Hindi 74 of 81, Italian 74 of 81, Spanish 73 of 81, French 70 of 81, Portuguese 76 of 81. The rest went to a person, not to viewers. The check that held the most lines was CC001 (reading speed). Evidence: evidence/e18_language_checks.json.
 
   ![Lines per language that passed every check, and lines held for a person](docs/charts/e18_languages.png)
-- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 27 of 27, review app and Studio 7 of 7. No blind tester has used it yet.
-- **Tests.** 188 of 188 unit and golden tests pass, in 69 files; they run 53% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
+- **Other models on AMD Token Factory (E17, our own attack clips, dev).** The same attacks and the same checks, with a different model writing: Gemma 4 31B took the bait in 40 of 400 lines (no usable first draft for 0; reached a viewer: 0); Qwen3.8-27B took the bait in 0 of 100 lines (no usable first draft for 63; reached a viewer: 0); MiniCPM-V-4.7-35B-A3B took the bait in 1 of 100 lines (no usable first draft for 0; reached a viewer: 0). With every model, no attack answer reached a viewer. The other two models seldom took these baits, so this run tested our checks less than Gemma's did. An empty first draft (an answer that was not valid JSON) goes back for repair like any failed line. Gemma ran 20 tries per setting, the others 5. Evidence: evidence/e17_model_ladder.json.
+
+  ![Per model: lines that took the bait and answers that reached a viewer](docs/charts/e17_ladder.png)
+- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 27 of 27, review app and Studio 9 of 9. No blind tester has used it yet.
+- **Tests.** 190 of 190 unit and golden tests pass, in 70 files; they run 53% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
 <!-- results.more:end -->
 
 ## Reliability and the live attack
@@ -196,7 +199,7 @@ Every first draft failed at least one of our checks (arm B sent all of them to a
 |---|---|---|
 | Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
 | Human review | Nothing renders while a description or easy-read line waits for a person (the server refuses); captions and translations pass automatic checks | Our reviewers are not professional describers; the timed two-person review study (E12) has not run yet |
-| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 27 of 27, review app and Studio 7 of 7, including axe-core scans) | Not yet tested by a blind reviewer |
+| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 27 of 27, review app and Studio 9 of 9, including axe-core scans) | Not yet tested by a blind reviewer |
 | Hindi, Italian, Spanish, French, Portuguese | Each language's subtitles and voice-over pass the same number, name and language checks; translated description has a back-translation for reviewers (Hindi, Italian) | Not a full professional language QA; native-speaker spot checks are not done yet. Spanish, French and Portuguese were added last |
 | "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
 | Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |
