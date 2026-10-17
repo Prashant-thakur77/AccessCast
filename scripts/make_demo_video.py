@@ -91,6 +91,9 @@ def main() -> int:
                 )
         vf = ",".join([vf, *caps]) if caps else vf
         ain = ["-i", str(wav)] if narr else ["-f", "lavfi", "-i", f"anullsrc=r=48000:cl=stereo:d={dur:.2f}"]
+        amap = "1:a:0"
+        if sc.get("keep_audio"):  # the recording's own sound (e.g. the eyes-closed before/after), no narration
+            ain, amap = [], "0:a:0"
         subprocess.run(
             [
                 "ffmpeg",
@@ -102,7 +105,7 @@ def main() -> int:
                 "-map",
                 "0:v:0",
                 "-map",
-                "1:a:0",
+                amap,
                 "-vf",
                 vf,
                 "-t",
