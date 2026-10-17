@@ -68,7 +68,7 @@ Gemma 4 31B on AMD Token Factory.
 <!-- slide: amd -->
 # Gemma 4 on AMD Token Factory
 - Every Gemma call: **Gemma 4 31B on AMD Token Factory**, strict model check on each answer.
-- From our logs: **3,510 requests** answered, **3.2 million tokens**, 28 videos (32.8 minutes).
+- From our logs: **3,730 requests** answered, **3.5 million tokens**, 28 videos (32.8 minutes).
 ![Gemma requests answered by AMD Token Factory, by day](docs/charts/amd_usage.png) ![Gemma tokens of one finished minute, by version](docs/charts/e14_tokens.png)
 
 ---
