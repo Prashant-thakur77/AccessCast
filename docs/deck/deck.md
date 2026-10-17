@@ -51,7 +51,7 @@ All five are built from one analysis, so they never disagree. Profiles combine.
 ---
 <!-- slide: headline -->
 # What the checks caught (test set)
-- **Easy-read:** Gemma alone kept every "not / never / no" in 104 of 115 captions. AccessCast published 115 of 115 with every negation kept; 6 went to a person.
+- **Easy-read:** Gemma alone kept every "not / never / no" in 105 of 114 captions. AccessCast published 114 of 114 with every negation kept; 7 went to a person.
 - **Live attack:** Gemma's easy-read dropped "within 10 seconds" in 20 of 20 tries. The number check caught 20. Reached the viewer: 0.
 
 Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
@@ -60,7 +60,7 @@ Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 <!-- slide: more-results -->
 # More results
 - **Speech recognition (dev):** Whisper large-v3-turbo, 4.5% English word error rate; word timing off by 54 ms (median) after alignment.
-- **Easy-read (test):** published cues paced for slow reading: 106 of 115, against 57 of 121 original captions.
+- **Easy-read (test):** published cues paced for slow reading: 106 of 114, against 57 of 121 original captions.
 - **Accessibility:** player 23 of 23 tests, review app and Studio 6 of 6, axe-core included.
 
 ---
