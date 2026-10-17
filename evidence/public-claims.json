@@ -3411,6 +3411,490 @@
    ]
   },
   {
+   "claim_id": "e4.hi.chrf_base",
+   "text": "Hindi chrF++, IndicTrans2",
+   "value": 58.80566603741543,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/chrf/baseline_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "58.8"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.chrf_diff",
+   "text": "Hindi chrF++, Gemma minus IndicTrans2",
+   "value": -5.020826508379152,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/chrf/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−5.0"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.chrf_gemma",
+   "text": "Hindi chrF++, Gemma 4 31B",
+   "value": 53.784839529036276,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/chrf/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "53.8"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.chrf_hi",
+   "text": "Hindi chrF++ difference, 95% interval high end",
+   "value": -4.29581952178879,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/chrf/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−4.3"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.chrf_lo",
+   "text": "Hindi chrF++ difference, 95% interval low end",
+   "value": -5.700206175087464,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/chrf/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−5.7"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.comet_base",
+   "text": "Hindi COMET, IndicTrans2",
+   "value": 0.815743166850254,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/comet/baseline_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8157"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.comet_diff",
+   "text": "Hindi COMET, Gemma minus IndicTrans2",
+   "value": 0.009544188915034056,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/comet/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0095"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.comet_gemma",
+   "text": "Hindi COMET, Gemma 4 31B",
+   "value": 0.825287355765288,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/comet/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8253"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.comet_hi",
+   "text": "Hindi COMET difference, 95% interval high end",
+   "value": 0.013117195101153003,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/comet/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0131"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.comet_lo",
+   "text": "Hindi COMET difference, 95% interval low end",
+   "value": 0.0062658809206408,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/comet/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0063"
+   ]
+  },
+  {
+   "claim_id": "e4.hi.never_aligned",
+   "text": "Hindi sentences Gemma never returned (scored as empty)",
+   "value": 0,
+   "unit": "sentences",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/gemma_never_aligned"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e4.it.chrf_base",
+   "text": "Italian chrF++, Opus-MT",
+   "value": 54.75609209634301,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/chrf/baseline_it"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "54.8"
+   ]
+  },
+  {
+   "claim_id": "e4.it.chrf_diff",
+   "text": "Italian chrF++, Gemma minus Opus-MT",
+   "value": 0.6693323489418859,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/chrf/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.7"
+   ]
+  },
+  {
+   "claim_id": "e4.it.chrf_gemma",
+   "text": "Italian chrF++, Gemma 4 31B",
+   "value": 55.4254244452849,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/chrf/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "55.4"
+   ]
+  },
+  {
+   "claim_id": "e4.it.chrf_hi",
+   "text": "Italian chrF++ difference, 95% interval high end",
+   "value": 1.3068950672306217,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/chrf/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+1.3"
+   ]
+  },
+  {
+   "claim_id": "e4.it.chrf_lo",
+   "text": "Italian chrF++ difference, 95% interval low end",
+   "value": 0.06042939411107913,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/chrf/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.1"
+   ]
+  },
+  {
+   "claim_id": "e4.it.comet_base",
+   "text": "Italian COMET, Opus-MT",
+   "value": 0.8521596052842177,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/comet/baseline_it"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8522"
+   ]
+  },
+  {
+   "claim_id": "e4.it.comet_diff",
+   "text": "Italian COMET, Gemma minus Opus-MT",
+   "value": 0.037649542535011,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/comet/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0376"
+   ]
+  },
+  {
+   "claim_id": "e4.it.comet_gemma",
+   "text": "Italian COMET, Gemma 4 31B",
+   "value": 0.8898091478192288,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/comet/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8898"
+   ]
+  },
+  {
+   "claim_id": "e4.it.comet_hi",
+   "text": "Italian COMET difference, 95% interval high end",
+   "value": 0.041699537357293336,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/comet/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0417"
+   ]
+  },
+  {
+   "claim_id": "e4.it.comet_lo",
+   "text": "Italian COMET difference, 95% interval low end",
+   "value": 0.033695397435470294,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/comet/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0337"
+   ]
+  },
+  {
+   "claim_id": "e4.it.never_aligned",
+   "text": "Italian sentences Gemma never returned (scored as empty)",
+   "value": 0,
+   "unit": "sentences",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/it/gemma_never_aligned"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e4.n",
+   "text": "FLORES+ devtest sentences per language",
+   "value": 1012,
+   "unit": "sentences",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation.json",
+     "sha256": "aee5daa6631b958d510035262e606d439595ad06e148cb22a75e36eb181c45fb",
+     "pointer": "/summary/languages/hi/n"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "docs/lablab.md"
+   ],
+   "display": [
+    "1012"
+   ]
+  },
+  {
    "claim_id": "e5.neg_gemma_k",
    "text": "easy-read cues where Gemma alone kept every negation (test)",
    "value": 105,

@@ -500,6 +500,118 @@ SPECS: list[Spec] = [
 ]
 
 
+def signed(nd: int) -> Callable[[Any], str]:
+    return lambda x: f"{float(x):+.{nd}f}".replace("-", "−")
+
+
+def e4_specs() -> list[Spec]:
+    """E4 (translation, FLORES+ devtest): per language, COMET and chrF++ for Gemma and the baseline, and the paired
+    bootstrap difference (Gemma − baseline) with its 95% interval."""
+    out = [
+        Spec(
+            "e4.n",
+            "e04_translation.json",
+            "/summary/languages/hi/n",
+            "FLORES+ devtest sentences per language",
+            "sentences",
+            split="none",
+        )
+    ]
+    for lang, name, base in (("hi", "Hindi", "IndicTrans2"), ("it", "Italian", "Opus-MT")):
+        L = f"/summary/languages/{lang}"
+        out += [
+            Spec(
+                f"e4.{lang}.comet_gemma",
+                "e04_translation.json",
+                f"{L}/comet/gemma",
+                f"{name} COMET, Gemma 4 31B",
+                fmt=lambda x: f"{float(x):.4f}",
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.comet_base",
+                "e04_translation.json",
+                f"{L}/comet/baseline_{lang}",
+                f"{name} COMET, {base}",
+                fmt=lambda x: f"{float(x):.4f}",
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.comet_diff",
+                "e04_translation.json",
+                f"{L}/comet/gemma_minus_baseline/diff",
+                f"{name} COMET, Gemma minus {base}",
+                fmt=signed(4),
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.comet_lo",
+                "e04_translation.json",
+                f"{L}/comet/gemma_minus_baseline/ci95_lo",
+                f"{name} COMET difference, 95% interval low end",
+                fmt=signed(4),
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.comet_hi",
+                "e04_translation.json",
+                f"{L}/comet/gemma_minus_baseline/ci95_hi",
+                f"{name} COMET difference, 95% interval high end",
+                fmt=signed(4),
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.chrf_gemma",
+                "e04_translation.json",
+                f"{L}/chrf/gemma",
+                f"{name} chrF++, Gemma 4 31B",
+                fmt=lambda x: f"{float(x):.1f}",
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.chrf_base",
+                "e04_translation.json",
+                f"{L}/chrf/baseline_{lang}",
+                f"{name} chrF++, {base}",
+                fmt=lambda x: f"{float(x):.1f}",
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.chrf_diff",
+                "e04_translation.json",
+                f"{L}/chrf/gemma_minus_baseline/diff",
+                f"{name} chrF++, Gemma minus {base}",
+                fmt=signed(1),
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.chrf_lo",
+                "e04_translation.json",
+                f"{L}/chrf/gemma_minus_baseline/ci95_lo",
+                f"{name} chrF++ difference, 95% interval low end",
+                fmt=signed(1),
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.chrf_hi",
+                "e04_translation.json",
+                f"{L}/chrf/gemma_minus_baseline/ci95_hi",
+                f"{name} chrF++ difference, 95% interval high end",
+                fmt=signed(1),
+                split="none",
+            ),
+            Spec(
+                f"e4.{lang}.never_aligned",
+                "e04_translation.json",
+                f"{L}/gemma_never_aligned",
+                f"{name} sentences Gemma never returned (scored as empty)",
+                "sentences",
+                split="none",
+            ),
+        ]
+    return out
+
+
 def e11_specs() -> list[Spec]:
     f = EV / "e11_adversarial.json"
     if not f.exists():
@@ -562,6 +674,24 @@ def results_more() -> str | None:
             "<pending: e15.guard_ms> ms clear of speech. Large-v3 could not produce word timings within our "
             "computer's memory, so it was not a candidate."
         )
+    e4 = EV / "e04_translation.json"
+    if e4.exists() and json.loads(e4.read_text()).get("passed"):
+        rows.append(
+            "- **Translation (E4, FLORES+ devtest, <pending: e4.n> sentences per language, not our videos).** "
+            "Two scores: COMET, a model trained to match human quality ratings, and chrF++, which counts character "
+            "and word overlap with one human translation. Italian: Gemma 4 31B scored higher than Opus-MT, a "
+            "widely used open English–Italian model, on both: COMET <pending: e4.it.comet_gemma> against "
+            "<pending: e4.it.comet_base> (difference <pending: e4.it.comet_diff>, 95% interval "
+            "<pending: e4.it.comet_lo> to <pending: e4.it.comet_hi>) and chrF++ <pending: e4.it.chrf_gemma> against "
+            "<pending: e4.it.chrf_base> (<pending: e4.it.chrf_diff>, <pending: e4.it.chrf_lo> to "
+            "<pending: e4.it.chrf_hi>). Hindi was mixed: Gemma scored higher on COMET (<pending: e4.hi.comet_gemma> "
+            "against <pending: e4.hi.comet_base>, <pending: e4.hi.comet_diff>, <pending: e4.hi.comet_lo> to "
+            "<pending: e4.hi.comet_hi>), but IndicTrans2, a model built for Indian languages, scored higher on "
+            "chrF++ (<pending: e4.hi.chrf_base> against <pending: e4.hi.chrf_gemma>; Gemma "
+            "<pending: e4.hi.chrf_diff>, <pending: e4.hi.chrf_lo> to <pending: e4.hi.chrf_hi>). Gemma returned "
+            "every sentence (<pending: e4.hi.never_aligned> missing in Hindi, <pending: e4.it.never_aligned> in "
+            "Italian)."
+        )
     if (EV / "e05_easyread.json").exists():
         rows.append(
             "- **Easy-read (E5, 10 W3C videos never used for tuning).** Asked to simplify the captions, Gemma alone "
@@ -597,7 +727,7 @@ def register() -> dict[str, Any]:
     reg_p = EV / "public-claims.json"
     reg = json.loads(reg_p.read_text())
     by_id = {c["claim_id"]: c for c in reg["claims"]}
-    for s in [*SPECS, *e11_specs()]:
+    for s in [*SPECS, *e11_specs(), *e4_specs()]:
         f = EV / s.path
         if not f.exists():
             continue
