@@ -302,12 +302,15 @@
     const active = document.activeElement;
     const focusId = active && el["item-list"].contains(active) ? active.dataset.id : null;
     el["list-summary"].textContent = `Showing ${list.length} of ${S.items.length} lines, sorted by time.`;
+    // one Tab stop for the whole list (the selected line, else the first); arrow keys move inside it
+    const rov = list.some((i) => i.id === S.selectedId) ? S.selectedId : (list[0] && list[0].id);
     el["item-list"].replaceChildren(...list.map((it) => {
       const meta = [fmtTime(it.anchor_ms), kindText(it)];
       if (it.confidence !== null && it.confidence !== undefined) meta.push(`confidence ${it.confidence.toFixed(2)}`);
       return h("li", null, h("button", {
         type: "button", class: `st-${it.status}`, dataset: { id: it.id },
         "aria-current": it.id === S.selectedId ? "true" : null,
+        tabindex: it.id === rov ? "0" : "-1",
         onclick: () => selectItem(it.id),
       },
       h("span", { class: "iid", text: it.id }),
@@ -321,9 +324,23 @@
   function focusItemButton(id) {
     if (!id) return false;
     const b = el["item-list"].querySelector(`button[data-id="${CSS.escape(id)}"]`);
-    if (b) { b.focus(); return true; }
+    if (b) { moveTabStop(b); b.focus(); return true; }
     return false;
   }
+  function moveTabStop(b) {
+    el["item-list"].querySelectorAll("button[data-id]").forEach((x) => { x.tabIndex = x === b ? 0 : -1; });
+  }
+  el["item-list"].addEventListener("keydown", (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const bs = [...el["item-list"].querySelectorAll("button[data-id]")];
+    const i = bs.indexOf(document.activeElement);
+    if (i < 0) return;
+    const j = { ArrowDown: Math.min(bs.length - 1, i + 1), ArrowUp: Math.max(0, i - 1), Home: 0, End: bs.length - 1 }[e.key];
+    if (j === undefined) return;
+    e.preventDefault();
+    moveTabStop(bs[j]);
+    bs[j].focus();
+  });
   function focusList() {
     if (!focusItemButton(S.selectedId)) {
       const first = el["item-list"].querySelector("button");

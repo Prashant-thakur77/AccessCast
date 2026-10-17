@@ -34,9 +34,8 @@ async function axeViolations(page: Page) {
   }));
 }
 
-/** Press Tab until `target` has focus (keyboard only, no clicks). Every line is a Tab stop, so with five languages
- *  Tab passes many lines before it wraps to the header (follow-up H9 in docs/plan-final-push.md: one Tab stop). */
-async function tabTo(page: Page, target: Locator, max = 240) {
+/** Press Tab until `target` has focus (keyboard only, no clicks). */
+async function tabTo(page: Page, target: Locator, max = 80) {
   for (let i = 0; i < max; i++) {
     await page.keyboard.press("Tab");
     if (await target.evaluate((el) => el === document.activeElement)) return;
@@ -92,6 +91,24 @@ test("every language has its own filter, and a filter shows only that language's
     const n = Number(((await b.textContent()) || "").match(/\((\d+)\)/)?.[1] ?? "0");
     await expect(page.locator("#item-list button[data-id]")).toHaveCount(n);
   }
+});
+
+test("the list of lines is one Tab stop: arrows move inside it, Tab leaves it", async ({ page, request }) => {
+  const pid = await projectId(request);
+  await openProject(page, pid);
+  const items = page.locator("#item-list button[data-id]");
+  expect(await items.count()).toBeGreaterThan(2);
+  await expect(page.locator("#item-list button[data-id][tabindex='0']")).toHaveCount(1);
+  await tabTo(page, page.locator("#item-list button[data-id][tabindex='0']"));
+  const first = await page.evaluate(() => (document.activeElement as HTMLElement).dataset.id);
+  await page.keyboard.press("ArrowDown");
+  const second = await page.evaluate(() => (document.activeElement as HTMLElement).dataset.id);
+  expect(second).toBeTruthy();
+  expect(second).not.toBe(first);
+  await page.keyboard.press("End");
+  await expect(items.last()).toBeFocused();
+  await page.keyboard.press("Tab");
+  expect(await page.evaluate(() => !!document.activeElement?.closest("#item-list"))).toBe(false);
 });
 
 test("a save that conflicts with another change shows 'Changed elsewhere; reloaded.'", async ({ page, request }) => {
