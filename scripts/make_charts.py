@@ -44,7 +44,7 @@ def ev(name: str) -> dict[str, Any] | None:
 def finish(fig: Any, ax: Any, title: str, source: str, name: str) -> None:
     ax.set_title(title, loc="left", fontsize=15, fontweight="bold", pad=14)
     fig.text(0.01, 0.01, source, fontsize=9, color="#4A4F63")
-    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    fig.tight_layout(rect=(0, 0.04 + 0.025 * source.count("\n"), 1, 1))
     OUT.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT / f"{name}.png", dpi=150)
     plt.close(fig)
@@ -115,6 +115,9 @@ def e11_attacks() -> None:
     )
 
 
+LANG_NAMES = {"hi": "Hindi", "it": "Italian", "es": "Spanish", "fr": "French", "pt": "Portuguese"}
+
+
 def e4_translation() -> None:
     rows = []
     for f in ("e04_translation.json", "e04_translation_es_fr_pt.json"):
@@ -126,7 +129,7 @@ def e4_translation() -> None:
                 d = r[metric]["gemma_minus_baseline"]
                 rows.append(
                     (
-                        f"{lang} · {metric.upper().replace('CHRF', 'chrF++')}",
+                        f"{LANG_NAMES.get(lang, lang)} · {metric.upper().replace('CHRF', 'chrF++')}",
                         d["diff"] * scale,
                         d["ci95_lo"] * scale,
                         d["ci95_hi"] * scale,
@@ -149,7 +152,8 @@ def e4_translation() -> None:
         fig,
         ax,
         "Translation against specialist models",
-        "Green: Gemma better · red: baseline better · grey: no clear difference. FLORES+ devtest, 1012 sentences each. evidence/"
+        "Green: Gemma better · red: baseline better · grey: no clear difference. FLORES+ devtest, 1012 sentences each.\n"
+        + "Sources: evidence/"
         + ", evidence/".join(sorted({r[5] for r in rows})),
         "e4_translation",
     )

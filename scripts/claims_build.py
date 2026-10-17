@@ -924,9 +924,15 @@ def results_more() -> str | None:
     return "\n".join(rows) if rows else None
 
 
-def _verdict(lo: float, hi: float) -> str:
+def _verdict(lo: float, hi: float, label: str) -> str:
     """Words for a paired difference (Gemma − baseline) from its 95% interval, never from the point estimate alone."""
-    return "higher" if lo > 0 else "lower" if hi < 0 else "no clearly different"
+    return (
+        f"Gemma higher on {label}"
+        if lo > 0
+        else f"Opus-MT higher on {label}"
+        if hi < 0
+        else f"no clear difference on {label}"
+    )
 
 
 def e4_more_languages() -> str | None:
@@ -943,10 +949,11 @@ def e4_more_languages() -> str | None:
         words = []
         for m, label in (("comet", "COMET"), ("chrf", "chrF++")):
             d = L[m]["gemma_minus_baseline"]
-            v = _verdict(float(d["ci95_lo"]), float(d["ci95_hi"]))
+            v = _verdict(float(d["ci95_lo"]), float(d["ci95_hi"]), label)
             words.append(
-                f"{label} {v} (<pending: e4.{lang}.{m}_gemma> against <pending: e4.{lang}.{m}_base>; "
-                f"<pending: e4.{lang}.{m}_diff>, <pending: e4.{lang}.{m}_lo> to <pending: e4.{lang}.{m}_hi>)"
+                f"{v} (Gemma <pending: e4.{lang}.{m}_gemma>, Opus-MT <pending: e4.{lang}.{m}_base>; difference "
+                f"<pending: e4.{lang}.{m}_diff>, 95% interval <pending: e4.{lang}.{m}_lo> to "
+                f"<pending: e4.{lang}.{m}_hi>)"
             )
         parts.append(f"{name}: {words[0]}, {words[1]}")
     if not parts:

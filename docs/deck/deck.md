@@ -60,7 +60,7 @@ Gemma 4 31B on AMD Token Factory.
 ---
 <!-- slide: more-results -->
 # More results
-- **Translation (FLORES+, 1012 sentences each):** Gemma beat Opus-MT on Italian on both scores; Hindi is mixed (IndicTrans2 higher on chrF++).
+- **Translation (FLORES+, 1012 sentences each):** Gemma higher than the specialist model on COMET in all five languages; on chrF++ higher for Italian, no clear difference for Spanish, lower for Hindi, French and Portuguese.
 - **Every language, same checks (2 site drafts):** lines that passed on their own: Hindi 74 of 81, Italian 74 of 81, Spanish 73 of 81, French 70 of 81, Portuguese 76 of 81. The rest wait for a person.
 ![Translation: Gemma minus the baseline per language and score, with 95% intervals](docs/charts/e4_translation.png) ![Lines per language that passed every check](docs/charts/e18_languages.png)
 
