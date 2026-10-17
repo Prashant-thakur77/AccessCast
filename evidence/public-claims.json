@@ -4047,6 +4047,468 @@
    ]
   },
   {
+   "claim_id": "e4.es.chrf_base",
+   "text": "Spanish chrF++, Opus-MT",
+   "value": 52.87292726930992,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/chrf/baseline_es"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "52.9"
+   ]
+  },
+  {
+   "claim_id": "e4.es.chrf_diff",
+   "text": "Spanish chrF++, Gemma minus Opus-MT",
+   "value": 0.12758393578429406,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/chrf/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.1"
+   ]
+  },
+  {
+   "claim_id": "e4.es.chrf_gemma",
+   "text": "Spanish chrF++, Gemma 4 31B",
+   "value": 53.00051120509421,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/chrf/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "53.0"
+   ]
+  },
+  {
+   "claim_id": "e4.es.chrf_hi",
+   "text": "Spanish chrF++ difference, 95% interval high end",
+   "value": 0.5825582393468279,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/chrf/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.6"
+   ]
+  },
+  {
+   "claim_id": "e4.es.chrf_lo",
+   "text": "Spanish chrF++ difference, 95% interval low end",
+   "value": -0.3223806261566752,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/chrf/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−0.3"
+   ]
+  },
+  {
+   "claim_id": "e4.es.comet_base",
+   "text": "Spanish COMET, Opus-MT",
+   "value": 0.8502596611738676,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/comet/baseline_es"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8503"
+   ]
+  },
+  {
+   "claim_id": "e4.es.comet_diff",
+   "text": "Spanish COMET, Gemma minus Opus-MT",
+   "value": 0.01918957388330354,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/comet/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0192"
+   ]
+  },
+  {
+   "claim_id": "e4.es.comet_gemma",
+   "text": "Spanish COMET, Gemma 4 31B",
+   "value": 0.8694492350571712,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/comet/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8694"
+   ]
+  },
+  {
+   "claim_id": "e4.es.comet_hi",
+   "text": "Spanish COMET difference, 95% interval high end",
+   "value": 0.022159875791681848,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/comet/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0222"
+   ]
+  },
+  {
+   "claim_id": "e4.es.comet_lo",
+   "text": "Spanish COMET difference, 95% interval low end",
+   "value": 0.016399959758984242,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/comet/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0164"
+   ]
+  },
+  {
+   "claim_id": "e4.es.never_aligned",
+   "text": "Spanish sentences Gemma never returned (scored as empty)",
+   "value": 0,
+   "unit": "sentences",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/es/gemma_never_aligned"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.chrf_base",
+   "text": "French chrF++, Opus-MT",
+   "value": 67.95000657397746,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/chrf/baseline_fr"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "68.0"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.chrf_diff",
+   "text": "French chrF++, Gemma minus Opus-MT",
+   "value": -3.8199291164819726,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/chrf/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−3.8"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.chrf_gemma",
+   "text": "French chrF++, Gemma 4 31B",
+   "value": 64.13007745749549,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/chrf/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "64.1"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.chrf_hi",
+   "text": "French chrF++ difference, 95% interval high end",
+   "value": -2.998653184033738,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/chrf/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−3.0"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.chrf_lo",
+   "text": "French chrF++ difference, 95% interval low end",
+   "value": -4.665836248406012,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/chrf/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−4.7"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.comet_base",
+   "text": "French COMET, Opus-MT",
+   "value": 0.8616698922022529,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/comet/baseline_fr"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8617"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.comet_diff",
+   "text": "French COMET, Gemma minus Opus-MT",
+   "value": 0.019469986791196076,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/comet/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0195"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.comet_gemma",
+   "text": "French COMET, Gemma 4 31B",
+   "value": 0.881139878993449,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/comet/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8811"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.comet_hi",
+   "text": "French COMET difference, 95% interval high end",
+   "value": 0.023348216303134623,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/comet/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0233"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.comet_lo",
+   "text": "French COMET difference, 95% interval low end",
+   "value": 0.01514913012446622,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/comet/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0151"
+   ]
+  },
+  {
+   "claim_id": "e4.fr.never_aligned",
+   "text": "French sentences Gemma never returned (scored as empty)",
+   "value": 0,
+   "unit": "sentences",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/fr/gemma_never_aligned"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
+   ]
+  },
+  {
    "claim_id": "e4.hi.chrf_base",
    "text": "Hindi chrF++, IndicTrans2",
    "value": 58.80566603741543,
@@ -4534,6 +4996,237 @@
    ],
    "display": [
     "1012"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.chrf_base",
+   "text": "Portuguese chrF++, Opus-MT",
+   "value": 70.02539313796491,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/chrf/baseline_pt"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "70.0"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.chrf_diff",
+   "text": "Portuguese chrF++, Gemma minus Opus-MT",
+   "value": -2.6118946749918166,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/chrf/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−2.6"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.chrf_gemma",
+   "text": "Portuguese chrF++, Gemma 4 31B",
+   "value": 67.4134984629731,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/chrf/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "67.4"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.chrf_hi",
+   "text": "Portuguese chrF++ difference, 95% interval high end",
+   "value": -1.8388282593305962,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/chrf/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−1.8"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.chrf_lo",
+   "text": "Portuguese chrF++ difference, 95% interval low end",
+   "value": -3.2402039239035725,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/chrf/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "−3.2"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.comet_base",
+   "text": "Portuguese COMET, Opus-MT",
+   "value": 0.8912166912447322,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/comet/baseline_pt"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.8912"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.comet_diff",
+   "text": "Portuguese COMET, Gemma minus Opus-MT",
+   "value": 0.010854080672791824,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/comet/gemma_minus_baseline/diff"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0109"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.comet_gemma",
+   "text": "Portuguese COMET, Gemma 4 31B",
+   "value": 0.902070771917524,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/comet/gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0.9021"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.comet_hi",
+   "text": "Portuguese COMET difference, 95% interval high end",
+   "value": 0.0135491286282954,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/comet/gemma_minus_baseline/ci95_hi"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0135"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.comet_lo",
+   "text": "Portuguese COMET difference, 95% interval low end",
+   "value": 0.008523589711297642,
+   "unit": "",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/comet/gemma_minus_baseline/ci95_lo"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "+0.0085"
+   ]
+  },
+  {
+   "claim_id": "e4.pt.never_aligned",
+   "text": "Portuguese sentences Gemma never returned (scored as empty)",
+   "value": 0,
+   "unit": "sentences",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/e04_translation_es_fr_pt.json",
+     "sha256": "9d63465ae92030491b1be3e45e51d2b295cb214d903556d8e68a17902d61fbcc",
+     "pointer": "/summary/languages/pt/gemma_never_aligned"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
    ]
   },
   {

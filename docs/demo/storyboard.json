@@ -259,7 +259,7 @@
   {
    "kind": "image",
    "image": "docs/charts/e4_translation.png",
-   "narration": "For translation, Gemma beat a standard Italian model on both of our scores. For Hindi it won on one score and lost on the other, and we report that loss."
+   "narration": "Against specialist translation models, Gemma won on one of our two scores in all five languages. On the other score it lost for Hindi, French and Portuguese, and we report that."
   },
   {
    "kind": "motion",
