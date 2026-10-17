@@ -56,7 +56,7 @@ await segment("player_picker", async (p) => {
   await pause(p, 6000);
 });
 
-await segment("decisions_drawer", async (p) => {
+await segment("site_drawer", async (p) => {
   await p.goto(`${SITE}/?audience=judge${PROJECT ? `&p=${PROJECT}` : ""}`);
   await pause(p, 2500);
   await p.getByRole("button", { name: /code caught/i }).first().click().catch(() => {});
@@ -100,8 +100,13 @@ await segment("proof", async (p) => {
     await run.click();
     await pause(p, 60000);
   } else {
-    await pause(p, 6000);
+    await pause(p, 2500);
   }
+  // the recorded run: the test, Gemma's answer, the check, and what the repair published
+  await p.locator("#last-h").scrollIntoViewIfNeeded();
+  await pause(p, 9000);
+  await p.mouse.wheel(0, 350);
+  await pause(p, 5000);
 });
 
 console.log(readdirSync(out).filter((f) => f.endsWith(".webm")).join("\n"));
