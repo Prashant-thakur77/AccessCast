@@ -146,3 +146,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** Vercel refused the deploy: "Total bundle size (361.64 MB) exceeds the maximum function size".
 **Root cause.** The live-attack function bundled the whole site directory, including every draft video. A 3-minute draft with six versions added about 150 MB.
 **Fix.** The function config excludes site media (`excludeFiles` in `site/vercel.json`). The function never reads them. The live attack was checked after the deploy and is still connected.
+
+## 2026-10-17 A readability check crashed on the live site
+**Symptom.** The new "Try your own caption" box returned VERIFIER_CRASH for an easy-read line. The finding said `er009_readability: OSError`. The line failed closed and went to a person, so nothing wrong was shown.
+**Root cause.** textstat 0.7.13 looks up NLTK's cmudict and downloads it on first use. On our computer it had quietly downloaded once, so we never noticed, and `make setup` did not fetch it. Vercel's disk is read-only, so the download raised OSError.
+**Fix.** The function bundle ships cmudict (`NLTK_DATA` points at it; `build_vercel_api.sh` fetches it), and `make setup` fetches it ahead of time. The API now returns each finding's observed value, which is how we found this. Live check after the fix: HTTP 200, and the line passed every check.

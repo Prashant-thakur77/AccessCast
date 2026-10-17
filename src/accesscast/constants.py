@@ -288,3 +288,10 @@ LANGS: tuple[str, ...] = ("en", "hi", "it")
 # ---------------------------------------------------------------- Studio (local upload, review app)
 STUDIO_MAX_BYTES = 500_000_000  # local tool; the limit keeps one upload from filling the disk
 STUDIO_MAX_SECONDS = 600  # 10 minutes: one job at a time on a shared endpoint
+# "Try your own caption" on the public proof page (POST /api/try): one sentence, timed as if spoken.
+TRY_MAX_CHARS = (
+    240  # ours: about two caption lines' worth of speech, keeps one try well under the 60 s function limit
+)
+TRY_MAX_WORDS = 45  # ours: same reason
+TRY_MS_PER_WORD = 400  # ours: 150 words a minute, an ordinary speaking pace (the rate used to time the text)
+TRY_PER_HOUR = 30  # ours: per address (three requests per try, one per version: 10 tries), so a few visitors cannot spend the key's daily budget

@@ -815,8 +815,8 @@ pre.raw { white-space: pre-wrap; background: var(--card); padding: 12px; border-
 .tl-speech { position: absolute; top: 10px; bottom: 10px; background: var(--fg); opacity: .78; border-radius: 2px; }
 .tl-gap { position: absolute; top: 0; bottom: 0; background: var(--sun); outline: 2px solid var(--fg); display: grid; place-items: center; }
 .tl-len { font-weight: 800; font-size: .85rem; color: #141B34; }
-.tl-mark { position: absolute; top: 0; bottom: 0; width: 4px; margin-left: -2px; background: var(--signal); }
-.tl-mark-label { position: absolute; top: 2px; left: 8px; white-space: nowrap; font-size: .8rem; font-weight: 800; background: var(--signal); color: #fff; padding: 1px 6px; border-radius: 6px; }
+.tl-mark { position: absolute; top: 0; bottom: 0; width: 4px; margin-left: -2px; background: var(--signal-dark); }
+.tl-mark-label { position: absolute; top: 2px; left: 8px; white-space: nowrap; font-size: .8rem; font-weight: 800; background: var(--signal-dark); color: #fff; padding: 1px 6px; border-radius: 6px; }
 .tl-axis { display: flex; justify-content: space-between; font-size: .85rem; color: var(--muted); margin-top: 4px; }
 .tl-key { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: .9rem; color: var(--muted); margin-top: 6px; }
 .k { display: inline-block; width: 18px; height: 12px; border-radius: 3px; }
@@ -855,6 +855,21 @@ pre.raw { white-space: pre-wrap; background: var(--card); padding: 12px; border-
 .outs { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
 .outs a { display: block; background: var(--soft); border-radius: 14px; padding: 12px 16px; font-weight: 700; }
 @media (max-width: 600px) { .how-frames { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- try your own caption ---------- */
+.try-form { display: grid; gap: 10px; max-width: 760px; margin-top: 18px; }
+.try-form label { font-weight: 800; }
+.try-form textarea { font: inherit; font-size: 1.1rem; padding: 12px 14px; border-radius: 14px; border: 2px solid var(--line-strong); background: var(--card); color: var(--fg); }
+.try-form textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.try-form button { justify-self: start; }
+.try-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
+.try-card { background: var(--card); border-radius: 20px; padding: 16px 20px; }
+.try-card h3 { font-size: 1.3rem; margin: 0 0 8px; }
+.try-cue { border-top: 2px solid var(--line); padding-top: 8px; margin-top: 8px; display: grid; gap: 4px; }
+.try-bad { font-weight: 700; }
+.try-bad::before { content: "✕ "; }
+.try-ok { font-weight: 700; }
+.try-ok::before { content: "✓ "; }
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {

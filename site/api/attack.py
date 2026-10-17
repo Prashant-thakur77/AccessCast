@@ -7,6 +7,8 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "_vendor"))
 os.environ.setdefault("ACCESSCAST_WORKER_MODE", "real")
 os.environ.setdefault("ACCESSCAST_PROJECTS_DIR", "/tmp/accesscast-projects")
+# textstat (readability check ER009) reads NLTK's cmudict; the function cannot download it (read-only disk)
+os.environ.setdefault("NLTK_DATA", os.path.join(os.path.dirname(__file__), "_vendor", "nltk_data"))
 
 from accesscast.proof.api import create_app  # noqa: E402
 

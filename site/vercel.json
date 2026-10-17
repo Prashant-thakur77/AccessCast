@@ -30,7 +30,12 @@
   ],
   "functions": {
     "api/attack.py": {
-      "maxDuration": 60,
+      "maxDuration": 120,
+      "includeFiles": "api/_vendor/**",
+      "excludeFiles": "{p/**,assets/**,data/**,*.html,*.png,*.jpg,*.gif,*.mp4}"
+    },
+    "api/try.py": {
+      "maxDuration": 120,
       "includeFiles": "api/_vendor/**",
       "excludeFiles": "{p/**,assets/**,data/**,*.html,*.png,*.jpg,*.gif,*.mp4}"
     }

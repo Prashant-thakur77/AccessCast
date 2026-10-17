@@ -14,7 +14,7 @@
   "use strict";
   var AC = window.AC, el = AC.el;
   var $ = function (id) { return document.getElementById(id); };
-  var LIVE_TIMEOUT_MS = 90000;
+  var LIVE_TIMEOUT_MS = 130000;  // the function may run up to 120 s (site/vercel.json)
   var LIVE_TRIES = 5;  // five live tries per press, in parallel on the server: about 15–30 seconds
   var ENDPOINTS = { tokenfactory: "Gemma 4 31B on AMD Token Factory" };
   var RULES = { ER004: "the number check (ER004)", ER005: "the negation check (ER005)", AD009: "the invented-name check (AD009)",

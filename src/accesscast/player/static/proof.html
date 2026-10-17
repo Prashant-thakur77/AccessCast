@@ -39,6 +39,19 @@
     <div id="live-result"></div>
   </section>
 
+  <section class="proof-sec" aria-labelledby="try-h">
+    <h2 id="try-h" class="display m">Try your own caption</h2>
+    <p class="lede">Write something a video might say. Gemma 4 31B on AMD Token Factory makes the easy-read, Hindi and Italian captions live, and our checks test every answer. Nothing you write is stored.</p>
+    <form id="try-form" class="try-form">
+      <label for="try-text">Your caption</label>
+      <textarea id="try-text" name="text" rows="3" maxlength="240" aria-describedby="try-help">Do not open the door before 5 pm. Press the green button twice to call for help.</textarea>
+      <p id="try-help" class="muted">3 to 45 words. Try a number, a "not", or a name: those are what the checks guard.</p>
+      <button type="submit" id="b-try" class="pill big" disabled>Make the captions <span class="dot" aria-hidden="true"></span></button>
+    </form>
+    <p id="try-status" class="now" role="status" aria-live="polite"></p>
+    <div id="try-result" class="try-grid"></div>
+  </section>
+
   <section class="proof-sec" aria-labelledby="last-h">
     <h2 id="last-h" class="display m">Last recorded run</h2>
     <div id="last-run"><p>Loading…</p></div>
@@ -49,5 +62,6 @@
 <script src="assets/common.js"></script>
 <script src="assets/motion.js"></script>
 <script src="assets/proof.js"></script>
+<script src="assets/try.js"></script>
 </body>
 </html>
