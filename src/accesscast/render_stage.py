@@ -71,6 +71,10 @@ def _publishable(it: Item, mode: str) -> bool:
     return it.status in PUBLISHABLE
 
 
+def _held_span(held: dict[str, tuple[int, int]]) -> Callable[[Item], tuple[int, int] | None]:
+    return lambda it: held.get(it.id)
+
+
 def _remapper(rows: list[dict[str, Any]]) -> Callable[[int], int]:
     return lambda ms: remap_ms(rows, ms)
 
@@ -256,10 +260,16 @@ def render_all(
         M.loudnorm_2pass(mixed, normed, target_lufs, pad_to_ms=expected_ms)
         if rows is not None:
             render_extended(video, normed, rows, out, watermark=watermark, fps=info.fps)
+            held = {  # lines voiced while the picture holds: their exact window on the output timeline
+                str(r["narration_id"]): (int(r["output_start_ms"]), int(r["output_end_ms"]))
+                for r in rows
+                if r.get("type") == "insertion"
+            }
             for name in spec["tracks"]:  # remap tracks onto the extended timeline
                 write_vtt(
                     tdir / f"{name}.{v}.vtt",
                     marked(name, ext_track_items[name]),
+                    span_of=_held_span(held) if name.startswith("desc") else None,
                     remap=_remapper(rows),
                     end_of=_clip_end if name.startswith("desc") else None,
                     header_note=note,
