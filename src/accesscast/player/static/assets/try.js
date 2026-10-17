@@ -65,7 +65,7 @@
       slots[v.key] = card(v, [el("p", { class: "muted", text: "Asking Gemma…" })]);
       out.appendChild(slots[v.key]);
     });
-    say("Asking Gemma on AMD Token Factory for four languages and easy-read. This can take a minute or two.");
+    say("Asking Gemma on AMD Token Factory for five languages and easy-read. This can take a minute or two.");
     var done = 0, stopped = 0, failed = 0;
     Promise.all(VERSIONS.map(function (v) {
       var ctrl = typeof AbortController === "function" ? new AbortController() : null;

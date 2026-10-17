@@ -226,7 +226,7 @@ def create_app() -> FastAPI:
 
     @app.post("/api/try")
     async def try_text(request: Request, version: str = "easy") -> dict[str, Any]:
-        """A visitor's own caption: Gemma writes easy-read, Hindi and Italian live; our checks run on every answer
+        """A visitor's own caption: Gemma writes easy-read and each language live; our checks run on every answer
         and repairs are asked for as in the pipeline. Shows Gemma's first answer, what blocked it, and what would
         be published. Nothing is stored."""
         if version not in ("easy", *C.TRANSLATION_LANGS):
