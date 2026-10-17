@@ -209,7 +209,8 @@ class LlmClient:
             raise
         except ModelEndpointError as e:
             status = "endpoint_error"
-            error = str(e)[:200]  # why: rate limit, outage or timeout (never a key; messages carry no headers)
+            # why: rate limit, outage or timeout (never a key: these messages carry no headers)
+            error = str(e)[:200]
             raise
         finally:
             self._log(
