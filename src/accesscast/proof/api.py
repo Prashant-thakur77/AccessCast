@@ -1,6 +1,8 @@
 """Proof API for /proof "Run the attack" (PLAN §13.5).
 
-- Accepts only the fixed attack cases bundled in proof/cases/<case>/ (no free-form prompts).
+- /api/attack accepts only the fixed attack cases bundled in proof/cases/<case>/ (no free-form prompts).
+- /api/try takes one short caption from a visitor (length-capped, timed as if spoken) and runs the easy-read and
+  subtitle writers on it, with our checks, exactly as the pipeline does. Separate, smaller rate limit.
 - Runs N tries (default 10) against the live Gemma endpoint — Token Factory first if configured, else the droplet —
   each with a fresh seed; reports per try what Gemma wrote, whether the case's oracle says it failed (the same
   independent oracle E11 uses), which rules blocked it, and whether anything reached the viewer.
@@ -29,7 +31,7 @@ from accesscast.config import load_settings
 from accesscast.events import now_iso
 from accesscast.llm.client import LlmClient
 from accesscast.project import read_json
-from accesscast.schemas import Gaps, ItemStatus, SceneEvidence, Scenes, Sounds, Vad, Words
+from accesscast.schemas import Gaps, ItemStatus, SceneEvidence, Scenes, Sounds, Vad, Word, Words
 from accesscast.verify.base import VerifyContext
 from accesscast.write.plan_ad import Calibration, plan_description
 from accesscast.write.write_ad import WriteOptions, verify_and_repair, write_drafts
@@ -91,6 +93,33 @@ def oracle(meta: dict[str, Any], text: str) -> bool:
     return False  # "overlap" needs timing the proof API does not model: never claim a failure it cannot see
 
 
+def _allow(key: str, per_hour: int) -> None:
+    now = time.time()
+    with _lock:
+        q = _hits[key]
+        while q and now - q[0] > 3600:
+            q.popleft()
+        if len(q) >= per_hour:
+            raise HTTPException(429, "Too many runs from this address. Try again in an hour.")
+        q.append(now)
+
+
+def words_from_text(text: str) -> list[Word]:
+    """A visitor's sentence as timed words, spoken at an ordinary pace (TRY_MS_PER_WORD), with a short pause after
+    each sentence. Rejects empty, over-long or control-character input (fail closed: nothing is sent to Gemma)."""
+    text = " ".join(text.split())
+    if not text or len(text) > C.TRY_MAX_CHARS or any(ord(c) < 32 for c in text):
+        raise HTTPException(422, f"Write one or two sentences, up to {C.TRY_MAX_CHARS} characters.")
+    toks = text.split(" ")
+    if len(toks) < 3 or len(toks) > C.TRY_MAX_WORDS:
+        raise HTTPException(422, f"Write between 3 and {C.TRY_MAX_WORDS} words.")
+    out, t = [], 500
+    for i, w in enumerate(toks):
+        out.append(Word(i=i, w=w, start_ms=t, end_ms=t + C.TRY_MS_PER_WORD - 40))
+        t += C.TRY_MS_PER_WORD + (300 if w.endswith((".", "?", "!")) else 0)
+    return out
+
+
 def create_app() -> FastAPI:
     app = FastAPI(title="AccessCast proof API", docs_url=None, redoc_url=None)
     origins = [
@@ -109,17 +138,7 @@ def create_app() -> FastAPI:
 
     @app.post("/api/attack")
     def attack(request: Request, case: str | None = None, n: int = 10) -> dict[str, Any]:
-        ip = request.headers.get("x-forwarded-for", request.client.host if request.client else "?").split(
-            ","
-        )[0]
-        now = time.time()
-        with _lock:
-            q = _hits[ip]
-            while q and now - q[0] > 3600:
-                q.popleft()
-            if len(q) >= RATE_PER_HOUR:
-                raise HTTPException(429, "Too many runs from this address. Try again in an hour.")
-            q.append(now)
+        _allow(_ip(request), RATE_PER_HOUR)
         n = max(1, min(int(n), 10))
         default_case = os.environ.get("ACCESSCAST_PROOF_CASE") or next(
             iter(sorted(p.name for p in CASES.iterdir())), ""
@@ -205,7 +224,80 @@ def create_app() -> FastAPI:
             },
         }
 
+    @app.post("/api/try")
+    async def try_text(request: Request, version: str = "easy") -> dict[str, Any]:
+        """A visitor's own caption: Gemma writes easy-read, Hindi and Italian live; our checks run on every answer
+        and repairs are asked for as in the pipeline. Shows Gemma's first answer, what blocked it, and what would
+        be published. Nothing is stored."""
+        if version not in ("easy", "hi", "it"):
+            raise HTTPException(404, "version must be easy, hi or it")
+        _allow("try:" + _ip(request), C.TRY_PER_HOUR)
+        try:
+            body = await request.json()
+        except ValueError as e:
+            raise HTTPException(400, 'send JSON: {"text": "..."}') from e
+        words = words_from_text(str((body or {}).get("text", "")))
+        from accesscast.captions.segment import segment_sdh
+        from accesscast.schemas import ItemKind
+        from accesscast.write.text_versions import TextOptions, make_easy, make_subtitles
+
+        settings = load_settings()
+        provider = "tokenfactory" if settings.tf_api_key and settings.tf_base_url else "local"
+        client = LlmClient(settings, provider=provider, strict_provider=True)
+        ctx = VerifyContext(lang="en", words=words)
+        end = words[-1].end_ms + 1500
+        sdh = segment_sdh(words, [], 25.0, end)
+        run_id = secrets.token_hex(4)
+        topts = TextOptions(run_label=f"try:{run_id}", project_seed=settings.project_seed)
+
+        def one(version: str) -> dict[str, Any]:
+            if version == "easy":
+                made = make_easy(client, sdh, ctx, topts)
+                kind = ItemKind.EASY
+            else:
+                made = make_subtitles(client, sdh, version, ctx, topts)
+                kind = ItemKind.SUBTITLE
+            cues = []
+            for item in (i for i in made if i.kind == kind):
+                first = item.repair.history[0] if item.repair.history else None
+                published = item.status == ItemStatus.PENDING and not item.violations
+                cues.append(
+                    {
+                        "gemma_wrote": first.text if first else item.draft,
+                        "blocked_by": first.rules if first and first.rules else [],
+                        "published": item.text if published else None,
+                        "to_person": not published,
+                        "repairs": item.repair.attempts,
+                        "back_translation": item.back_translation,
+                        "findings": [{"rule": f.rule, "observed": f.observed} for f in item.violations][:6],
+                    }
+                )
+            return {"version": version, "cues": cues}
+
+        try:  # one version per request: the page asks for all three at once, so each stays under the time limit
+            result = one(version)
+        except Exception as e:
+            raise HTTPException(
+                503, f"Gemma endpoint not reachable ({type(e).__name__}). Nothing was run."
+            ) from e
+        return {
+            "input": " ".join(w.w for w in words),
+            "captions": [i.text for i in sdh],
+            "endpoint_label": "Gemma 4 31B on AMD Token Factory"
+            if client.provider == "tokenfactory"
+            else client.provider,
+            "recorded_at": now_iso(),
+            "version": result["version"],
+            "cues": result["cues"],
+        }
+
     return app
+
+
+def _ip(request: Request) -> str:
+    return request.headers.get("x-forwarded-for", request.client.host if request.client else "?").split(",")[
+        0
+    ]
 
 
 app = create_app()

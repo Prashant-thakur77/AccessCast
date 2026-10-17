@@ -19,4 +19,6 @@ cp -r "$T/venv/lib/python3.12/site-packages/." "$V/"
   ( cd wordfreq/data && ls | grep -v -E "^(large_en|large_it|small_en|small_hi|small_it)\.msgpack\.gz$" | xargs rm -f )
   find . -name "*.so" -exec strip --strip-unneeded {} + 2>/dev/null || true )
 rsync -a --exclude "__pycache__" --exclude "player/static" --exclude "review/static" src/accesscast "$V/"
+# textstat (ER009) needs NLTK's cmudict; ship it, since the function cannot download at run time
+"$T/venv/bin/python" -c "import nltk; nltk.download('cmudict', download_dir='$V/nltk_data', quiet=True)"  # keeps the unzipped folder: textstat looks it up with nltk.data.find
 du -sh "$V" | cut -f1
