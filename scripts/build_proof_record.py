@@ -36,10 +36,15 @@ def main() -> int:
         }
         for r in rows
     ]
+    spec = json.loads((REPO_ROOT / "data" / "adversarial" / f"{case}.json").read_text())
+    said = " ".join(line[2] for line in spec.get("lines", []))
+    baits = spec["baits"][:1].upper() + spec["baits"][1:]
+    case_text = f'The video says "{said}" {baits}.' if said else f"{baits}."
     out = {
         "recorded_at": ev["finished_at"],
         "evidence_file": "evidence/e11_adversarial.json",
         "case_id": case,
+        "case_text": case_text,
         "endpoint": "Gemma 4 31B on AMD Token Factory",
         "failure_rate_production": round(rate[case], 4),
         "tries": tries,

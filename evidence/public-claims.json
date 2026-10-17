@@ -3262,7 +3262,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "53524e72e9ee10290d038248d0213cd97d14bf032206bdc942a8838cff41d214",
+     "sha256": "47e6255683e6aa3332ab8995b17ddfc99e14c8dd82aec45cb443932bd5d0d9ce",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3283,7 +3283,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "53524e72e9ee10290d038248d0213cd97d14bf032206bdc942a8838cff41d214",
+     "sha256": "47e6255683e6aa3332ab8995b17ddfc99e14c8dd82aec45cb443932bd5d0d9ce",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3304,7 +3304,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "53524e72e9ee10290d038248d0213cd97d14bf032206bdc942a8838cff41d214",
+     "sha256": "47e6255683e6aa3332ab8995b17ddfc99e14c8dd82aec45cb443932bd5d0d9ce",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3325,7 +3325,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "53524e72e9ee10290d038248d0213cd97d14bf032206bdc942a8838cff41d214",
+     "sha256": "47e6255683e6aa3332ab8995b17ddfc99e14c8dd82aec45cb443932bd5d0d9ce",
      "pointer": "/summary/review/total"
     }
    ],
