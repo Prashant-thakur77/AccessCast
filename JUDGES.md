@@ -5,7 +5,7 @@ The shortest route through the submission.
 ## Three-Minute Review
 1. Watch the demo video: <pending: video.url>
 2. Open the live player: https://accesscast.vercel.app/watch.html. Pick "I can't see the screen", then "Italiano".
-3. Open [`/proof.html`](https://accesscast.vercel.app/proof.html) and press **Run the attack**. It asks Gemma 4 31B on AMD Token Factory five times, live (about 20 seconds), to simplify "press the button 3 times within 10 seconds", and shows each answer, the check that blocked it, and Gemma's repair. Below it is the recorded E11 run of 20 tries.
+3. Open [`/proof.html`](https://accesscast.vercel.app/proof.html) and press **Run the attack**. It asks Gemma 4 31B on AMD Token Factory five times, live (usually under a minute), to simplify "press the button 3 times within 10 seconds", and shows each answer, the check that blocked it, and Gemma's repair. Below it is the recorded E11 run of 20 tries.
 4. Open the three key evidence files: [`evidence/e01_verifier_ab.json`](evidence/), [`evidence/e13_serving_tokenfactory.json`](evidence/e13_serving_tokenfactory.json), [`evidence/e14_cost.json`](evidence/).
 5. Optional, no GPU: `make demo-fixture`, then open http://127.0.0.1:8080/?audience=judge
 
@@ -38,7 +38,7 @@ These labels do not pre-award points; judges keep full scoring authority.
 Gemma 4 31B does every vision, writing, translation and repair task. The planned comparison with a smaller Gemma 4 plus our checks (E3) needs our own GPU server, so it was not run (`docs/decisions.md` D-021). Sound labels come from a small non-Gemma audio classifier (AST), because Gemma 4 E4B, the Gemma model that listens, is not on Token Factory (D-022).
 
 ## Current Results
-See README "Results": description in the pauses (E1, a negative result), what the checks caught (E5, E11), and the AMD numbers (E13, E14). Every number there comes from `evidence/public-claims.json`.
+See README "Results": description in the pauses (E1, a negative result), what the checks caught (E5, E11), translation against specialist models (E4, including a Hindi loss on one score), and the AMD numbers (E13, E14). Every number there comes from `evidence/public-claims.json`.
 
 ## AMD Boundary
 - **On AMD Token Factory:** Gemma 4 31B for every vision, writing, translation and repair call, the live attack page, and a non-Gemma judge for two evaluations.
