@@ -227,6 +227,8 @@ CPS_MAX: dict[tuple[str, str], int] = {
     ("hi", "sdh"): 25,  # Netflix Hindi TTSG SDH
     ("it", "subtitle"): 17,  # Netflix Italian TTSG
     ("hi", "subtitle"): 22,  # Netflix Hindi TTSG
+    ("es", "subtitle"): 17,  # Netflix Spanish TTSG (adult programmes)
+    ("fr", "subtitle"): 17,  # Netflix French TTSG (adult programmes)
     ("en", "subtitle"): 20,  # Netflix English TTSG
 }
 CUE_MIN_FRAMES = 40  # DCMP Captioning Key: at least 40 frames
@@ -283,7 +285,9 @@ LLM_LOG_TRUNCATE = 300  # GemmaClip's diagnostics rule idea: truncate text in lo
 GPU_HOURLY_COST_USD = 2.59  # AMD Developer Cloud MI300X on-demand price, cited.amd.devcloud_mi300x_hourly (16 Oct 2026); replaced by the billed rate
 
 # ---------------------------------------------------------------- languages
-LANGS: tuple[str, ...] = ("en", "hi", "it")
+LANGS: tuple[str, ...] = ("en", "hi", "it", "es", "fr")
+TRANSLATION_LANGS: tuple[str, ...] = ("hi", "it", "es", "fr")  # subtitles + voice-over versions
+AD_TRANSLATION_LANGS: tuple[str, ...] = ("hi", "it")  # translated description (blind.hi / blind.it)
 
 # ---------------------------------------------------------------- Studio (local upload, review app)
 STUDIO_MAX_BYTES = 500_000_000  # local tool; the limit keeps one upload from filling the disk

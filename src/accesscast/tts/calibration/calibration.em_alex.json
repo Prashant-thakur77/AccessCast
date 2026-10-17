@@ -1,0 +1,12 @@
+{
+  "voice": "em_alex",
+  "lang": "es",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": 0.0355,
+  "s_per_word": 0.3308,
+  "wps_voice": 3.0227,
+  "resid_p95_s": 0.586,
+  "device": "cuda",
+  "wall_s": 13.62
+}

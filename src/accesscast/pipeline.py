@@ -740,7 +740,7 @@ def stage_captions(run: Run) -> None:
     opts = TextOptions(run_label=run.run_label, project_seed=run.settings.project_seed)
     with run.stage("captions_easy"):
         write_jsonl(proj.p("items", "easy.en.jsonl"), make_easy(run.client, out, ctx, opts))
-    for lang in ("hi", "it"):
+    for lang in C.TRANSLATION_LANGS:
         with run.stage(f"subtitles_{lang}"):
             write_jsonl(
                 proj.p("items", f"subs.{lang}.jsonl"), make_subtitles(run.client, out, lang, ctx, opts)
@@ -759,7 +759,7 @@ def stage_voiceover(run: Run) -> None:
     sdh = [Item.model_validate(r) for r in read_jsonl(proj.p("items", "sdh.en.jsonl"))]
     ctx = verify_context(proj, "en")
     opts = TextOptions(run_label=run.run_label, project_seed=run.settings.project_seed)
-    for lang in ("hi", "it"):
+    for lang in C.TRANSLATION_LANGS:
         with run.stage(f"voiceover_{lang}"):
             cal = load_calibration(VOICEOVER_VOICES[lang])
             lctx = VerifyContext(**{**ctx.__dict__, "lang": lang, "wps_voice": cal.wps_voice})
@@ -833,7 +833,7 @@ def stage_ad_translate(run: Run) -> None:
     approved.sort(key=lambda i: i.anchor_ms)
     ctx = verify_context(proj, "en")
     opts = TextOptions(run_label=run.run_label, project_seed=run.settings.project_seed)
-    for lang in ("hi", "it"):
+    for lang in C.AD_TRANSLATION_LANGS:
         with run.stage(f"ad_translate_{lang}"):
             cal = load_calibration(VOICES[lang])
             tr = make_ad_translations(run.client, approved, lang, cal.wps_voice, ctx, opts)

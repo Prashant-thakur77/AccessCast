@@ -476,6 +476,14 @@ SPECS: list[Spec] = [
         fmt=lambda x: f"{float(x):.0f} ms",
     ),
     Spec(
+        "e15.boundary_raw_median",
+        "e15_asr.json",
+        "/summary/boundary_error/openai~1whisper-large-v3-turbo/raw/median_ms",
+        "median word-boundary error of raw Whisper timestamps",
+        "ms",
+        fmt=lambda x: f"{float(x):.0f} ms",
+    ),
+    Spec(
         "e15.boundary_raw_p95",
         "e15_asr.json",
         "/summary/boundary_error/openai~1whisper-large-v3-turbo/raw/p95_ms",
@@ -742,8 +750,10 @@ def results_more() -> str | None:
             "<pending: e15.wer_en_turbo> on <pending: e15.n_per_lang> FLEURS clips, against <pending: e15.wer_en_large> "
             "for the larger large-v3 (Hindi <pending: e15.wer_hi_turbo>, Italian <pending: e15.wer_it_turbo>). After "
             "forced alignment, word boundaries were off by <pending: e15.boundary_aligned_median> at the median and "
-            "<pending: e15.boundary_aligned_p95> at the 95th percentile (raw Whisper: <pending: e15.boundary_raw_p95>), "
-            "on <pending: e15.boundary_n> word boundaries of our synthetic clips, so description keeps "
+            "<pending: e15.boundary_aligned_p95> at the 95th percentile, on <pending: e15.boundary_n> word boundaries of "
+            "our synthetic clips. Raw Whisper timestamps were closer at the median (<pending: e15.boundary_raw_median>) "
+            "but worse in the tail (<pending: e15.boundary_raw_p95> at the 95th percentile); the guard is set from the "
+            "tail, so description keeps "
             "<pending: e15.guard_ms> ms clear of speech. Large-v3 could not produce word timings within our "
             "computer's memory, so it was not a candidate."
         )

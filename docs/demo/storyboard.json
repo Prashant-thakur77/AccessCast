@@ -270,7 +270,8 @@
    "narration": "AccessCast. Every viewer, the same video.",
    "bg": "data/stock/pexels_5813766.mp4",
    "bg_start": 12,
-   "bg_look": "eq=brightness=-0.05:saturation=0.9"
+   "bg_look": "eq=brightness=-0.05:saturation=0.9",
+   "min_seconds": 8
   }
  ]
 }

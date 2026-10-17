@@ -55,16 +55,16 @@ All five are built from one analysis, so they never disagree. Profiles combine.
 
 ---
 <!-- slide: headline -->
-# What the checks caught (test set)
-- **Easy-read:** Gemma alone kept every "not / never / no" in 105 of 114 captions. AccessCast published 114 of 114 with every negation kept; 7 went to a person.
-- **Live attack:** Gemma's easy-read dropped "within 10 seconds" in 20 of 20 tries. The number check caught 20. Reached the viewer: 0.
+# What the checks caught
+- **Easy-read (10 W3C test videos, never used for tuning):** Gemma alone kept every "not / never / no" in 105 of 114 captions. AccessCast published 114 of 114 with every negation kept; 7 went to a person.
+- **Attack (our own attack clips):** Gemma's easy-read dropped "within 10 seconds" in 20 of 20 tries. The number check caught 20. Reached the viewer: 0.
 
-Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
+Gemma 4 31B on AMD Token Factory.
 
 ---
 <!-- slide: more-results -->
 # More results
-- **Speech recognition (dev):** Whisper large-v3-turbo, 4.5% English word error rate; word timing off by 54 ms (median) after alignment.
+- **Speech recognition (dev):** Whisper large-v3-turbo, 4.5% English word error rate; word timing within 339 ms at the 95th percentile after alignment (raw 480 ms).
 - **Easy-read (test):** published cues paced for slow reading: 106 of 114, against 57 of 121 original captions.
 - **Translation (FLORES+, 1012 sentences each):** Italian: Gemma beat Opus-MT on both scores (COMET 0.8898 against 0.8522). Hindi: Gemma higher on COMET, IndicTrans2 higher on chrF++.
 - **Accessibility:** player 25 of 25 tests, review app and Studio 7 of 7, axe-core included.

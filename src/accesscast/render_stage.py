@@ -34,6 +34,8 @@ TRACK_LABELS = {
     "easy.en": ("subtitles", "en", "English (easy-read)"),
     "subs.hi": ("subtitles", "hi", "हिन्दी"),
     "subs.it": ("subtitles", "it", "Italiano"),
+    "subs.es": ("subtitles", "es", "Español"),
+    "subs.fr": ("subtitles", "fr", "Français"),
     "desc.en": ("descriptions", "en", "Description (English)"),
     "desc.hi": ("descriptions", "hi", "Description (हिन्दी)"),
     "desc.it": ("descriptions", "it", "Description (Italiano)"),
@@ -50,6 +52,8 @@ AUDIENCE_VERSIONS: dict[str, dict[str, Any]] = {
     "easy.en": {"label": "Simpler words, please", "tracks": ["easy.en"]},
     "hi": {"label": "हिन्दी", "tracks": ["subs.hi"]},
     "it": {"label": "Italiano", "tracks": ["subs.it"]},
+    "es": {"label": "Español", "tracks": ["subs.es"]},
+    "fr": {"label": "Français", "tracks": ["subs.fr"]},
     "blind.hi": {"label": "हिन्दी + description", "tracks": ["desc.hi", "subs.hi"]},
     "blind.it": {"label": "Italiano + description", "tracks": ["desc.it", "subs.it"]},
 }
@@ -152,6 +156,8 @@ def render_all(
         wanted = [v for v in wanted if v != "blind.hi"]
     if "ad_translation.it" not in present:
         wanted = [v for v in wanted if v != "blind.it"]
+    # Spanish and French came later: a project made before them has no such items and keeps its earlier versions
+    wanted = [v for v in wanted if v not in ("es", "fr") or f"subtitle.{v}" in present]
     res = run_gate(run, wanted)
     public = mode == "public"
     if public:
@@ -186,6 +192,8 @@ def render_all(
         "easy.en": sel(ItemKind.EASY, "en"),
         "subs.hi": sel(ItemKind.SUBTITLE, "hi"),
         "subs.it": sel(ItemKind.SUBTITLE, "it"),
+        "subs.es": sel(ItemKind.SUBTITLE, "es"),
+        "subs.fr": sel(ItemKind.SUBTITLE, "fr"),
         "desc.en": timeline_items(sel(ItemKind.AD, "en"), extended_timeline=False),
         "desc.hi": timeline_items(sel(ItemKind.AD_TRANSLATION, "hi"), extended_timeline=False),
         "desc.it": timeline_items(sel(ItemKind.AD_TRANSLATION, "it"), extended_timeline=False),
@@ -230,7 +238,7 @@ def render_all(
         expected_ms = info.duration_ms
         rows: list[dict[str, Any]] | None = None
         lang = v.split(".")[-1] if "." in v else v
-        vo: list[Item] = sel(ItemKind.VOICEOVER, lang) if lang in ("hi", "it") else []
+        vo: list[Item] = sel(ItemKind.VOICEOVER, lang) if lang in C.TRANSLATION_LANGS else []
         ad: list[Item] = []
         if v in ("blind.en", "blind_ext.en"):
             ad = sel(ItemKind.AD, "en")

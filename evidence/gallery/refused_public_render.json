@@ -1,0 +1,55 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "gallery/refused_public_render",
+ "split": "none",
+ "passed": true,
+ "git_commit": "ad2fdd610e3929667133957d04574c8e0fdb1cc6",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-17T18:43:22.993Z",
+ "finished_at": "2026-10-17T18:43:23.515Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "project": "dac08bcd9d7a",
+  "projects_dir": "projects/_site"
+ },
+ "checks": {
+  "public_render_refused": true
+ },
+ "results": [
+  {
+   "request": "public render",
+   "command": "accesscast render -p dac08bcd9d7a --mode public",
+   "exit_code": 7,
+   "message": "error: gate refused: 20 item(s) still pending"
+  },
+  {
+   "request": "draft render (labelled UNREVIEWED DRAFT)",
+   "mode": "draft",
+   "versions": [
+    "blind.en",
+    "blind_ext.en",
+    "deaf.en",
+    "easy.en",
+    "hi",
+    "it"
+   ]
+  }
+ ],
+ "summary": {
+  "public_render_refused": true,
+  "refusal_message": "error: gate refused: 20 item(s) still pending",
+  "exit_code": 7
+ },
+ "error": null
+}

@@ -229,8 +229,8 @@ def create_app() -> FastAPI:
         """A visitor's own caption: Gemma writes easy-read, Hindi and Italian live; our checks run on every answer
         and repairs are asked for as in the pipeline. Shows Gemma's first answer, what blocked it, and what would
         be published. Nothing is stored."""
-        if version not in ("easy", "hi", "it"):
-            raise HTTPException(404, "version must be easy, hi or it")
+        if version not in ("easy", *C.TRANSLATION_LANGS):
+            raise HTTPException(404, f"version must be easy or one of {', '.join(C.TRANSLATION_LANGS)}")
         _allow("try:" + _ip(request), C.TRY_PER_HOUR)
         try:
             body = await request.json()
