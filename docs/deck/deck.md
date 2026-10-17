@@ -1,7 +1,7 @@
 <!-- slide: title -->
 # AccessCast
-## One video. Five ways to watch.
-Blind, deaf, slow-reading, Hindi and Italian viewers each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.
+## One video. Made for every viewer.
+Blind, deaf and slow-reading viewers, and people who speak Hindi, Italian, Spanish, French or Portuguese, each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.
 
 Gemma 4 on AMD Token Factory · AMD Developer Hackathon ACT III · Create a New Kind of Experience
 
@@ -25,10 +25,10 @@ Gemma 4 on AMD Token Factory · AMD Developer Hackathon ACT III · Create a New 
 
 ---
 <!-- slide: product -->
-# One video, five experiences
-"I can't see the screen" · "I can't hear" · "Simpler words, please" · "हिन्दी" · "Italiano"
+# One video, every viewer
+"I can't see the screen" · "I can't hear" · "Simpler words, please" · "हिन्दी" · "Italiano" · "Español" · "Français" · "Português"
 
-All five are built from one analysis, so they never disagree. Profiles combine.
+Every version is built from one analysis, so they never disagree. A viewer can combine them: description in Hindi, say.
 
 ---
 <!-- slide: how -->
@@ -91,9 +91,9 @@ Gemma 4 31B on AMD Token Factory.
 <!-- slide: sold -->
 # How it is sold
 - **First customer:** a US public university's accessibility office: ADA Title II from 26 April 2027, years of video with no description.
-- **They buy:** all five versions per finished minute, below today's AI-description list prices, reviewed by their own staff in our app; or a yearly licence to run it on their own servers.
+- **They buy:** every version per finished minute, below today's AI-description list prices, reviewed by their own staff in our app; or a yearly licence to run it on their own servers.
 - **Next:** broadcasters and streaming platforms in the EU, Italy and India.
-- **The difference:** five audiences from one analysis, checks that catch meaning changes, and a server that refuses to publish unreviewed lines.
+- **The difference:** every audience and language from one analysis, checks that catch meaning changes, and a server that refuses to publish unreviewed lines.
 
 ---
 <!-- slide: honest -->

@@ -176,3 +176,13 @@ With E1 negative, E6 invalid and E3 impossible (D-026), and E12 not yet done, RE
 
 ## D-028 The live attack runs as a Vercel function (17 Oct 2026)
 No droplet, and Hugging Face now charges for Docker Spaces, so the proof API runs as a Python function in the same Vercel project as the site (`site/api/attack.py`, built by `scripts/build_vercel_api.sh`). Its dependencies are pruned to fit Vercel's limit (spaCy and its small English model, word-frequency data for English, Hindi and Italian only, no tests, stripped binaries; 160 MB) and were checked to give the same results as the full environment (no check crashes; the number check blocks the same answers). It runs only the fixed easy-read case A5 (the case with the highest measured failure rate in E11), five tries per press, in parallel, against Gemma 4 31B on AMD Token Factory. The key is in Vercel's environment settings only. The oracle is E11's, inlined and tested for parity (`tests/unit/test_proof_oracle.py`). If the endpoint fails, the page says so and shows the recorded run.
+
+## D-029 (18 Oct 2026): Spanish, French and Portuguese (Brazil)
+**Why.** Viewers and buyers: Spanish has the largest non-English share of Netflix viewing (Netflix, H2 2023), Brazil's
+ANCINE rule asks for subtitles and audio description in cinemas, and French is an EU accessibility market. Kokoro has
+voices for all three (Apache-2.0). **What.** Subtitles and voice-over for es, fr and pt, with the same checks (number,
+name, untranslated, reading speed at Netflix's 17 characters per second for each); translated description stays Hindi
+and Italian. **Measurement.** Adding the languages edits the translation prompt's language list, so its hash changes:
+E4's Hindi and Italian results were measured with the earlier text. Spanish, French and Portuguese get their own E4
+run (FLORES+ devtest against Opus-MT); until it runs, no quality number is stated for them.
+

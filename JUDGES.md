@@ -32,7 +32,7 @@ These labels do not pre-award points; judges keep full scoring authority.
 | Application of Technology | Gemma 4 31B sees, writes, translates and repairs, served by AMD Token Factory; code checks every line | README "Gemma 4 on AMD" |
 | Presentation | Plain-words demo video; live player that never sleeps | <pending: video.url> |
 | Business Value | Named buyers and legal deadlines; GPU cost plus measured review time | README "Who pays" |
-| Originality | Checks tied to the real audio timeline; five versions from one analysis; extended description only when needed | `docs/rules.md` |
+| Originality | Checks tied to the real audio timeline; every version from one analysis; extended description only when needed | `docs/rules.md` |
 
 ## Model Selection
 Gemma 4 31B does every vision, writing, translation and repair task. The planned comparison with a smaller Gemma 4 plus our checks (E3) needs our own GPU server, so it was not run (`docs/decisions.md` D-021). Sound labels come from a small non-Gemma audio classifier (AST), because Gemma 4 E4B, the Gemma model that listens, is not on Token Factory (D-022).
