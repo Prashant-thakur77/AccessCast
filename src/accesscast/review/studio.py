@@ -49,10 +49,12 @@ STAGE_WORDS: tuple[tuple[str, str], ...] = (
     ("subtitles_it", "Italian subtitles"),
     ("subtitles_es", "Spanish subtitles"),
     ("subtitles_fr", "French subtitles"),
+    ("subtitles_pt", "Portuguese subtitles"),
     ("voiceover_hi", "Hindi voice-over"),
     ("voiceover_it", "Italian voice-over"),
     ("voiceover_es", "Spanish voice-over"),
     ("voiceover_fr", "French voice-over"),
+    ("voiceover_pt", "Portuguese voice-over"),
     ("review_init", "Lines ready for a person to review"),
 )
 ITEM_FILES = {
@@ -63,6 +65,7 @@ ITEM_FILES = {
     "subs.it": "Italian subtitles",
     "subs.es": "Spanish subtitles",
     "subs.fr": "French subtitles",
+    "subs.pt": "Portuguese subtitles",
 }
 
 

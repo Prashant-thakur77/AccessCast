@@ -460,7 +460,7 @@ def cc009_number_or_name_changed(item: Item, ctx: VerifyContext) -> list[Finding
                 "translate",
             )
         ]
-    if ctx.lang in ("it", "es", "fr"):  # Latin script: names are kept as written
+    if ctx.lang in ("it", "es", "fr", "pt"):  # Latin script: names are kept as written
         lost = [n for n in nlp.kept_names(src) if n.lower() not in item.text.lower()]
         if lost:
             return [

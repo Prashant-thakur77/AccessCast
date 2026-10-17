@@ -47,7 +47,7 @@ from eval.common import Experiment, run_experiment
 
 EVAL_WORK = REPO_ROOT / "projects" / "_eval"  # git-ignored scratch (worker request files, LLM call logs)
 OUTPUTS = REPO_ROOT / "data" / "eval_outputs"  # git-ignored: texts we may not commit (FLORES+, W3C-derived)
-LANG_NAME = {"hi": "Hindi", "it": "Italian", "es": "Spanish", "fr": "French"}
+LANG_NAME = {"hi": "Hindi", "it": "Italian", "es": "Spanish", "fr": "French", "pt": "Portuguese"}
 # IndicTrans2's remote model code imports transformers.onnx (removed in transformers 5), so the Hindi baseline runs
 # in its own worker env pinned to transformers 4 (workers/indic/pyproject.toml); same worker file, same protocol.
 INDIC_PYTHON = Path(os.environ.get("ACCESSCAST_INDIC_PYTHON", REPO_ROOT / "workers/indic/.venv/bin/python"))
@@ -56,8 +56,9 @@ BASELINE_NAME = {
     "it": "Opus-MT en-it",
     "es": "Opus-MT en-es",
     "fr": "Opus-MT en-fr",
+    "pt": "Opus-MT tc-big en-pt",
 }
-FLORES_LANG = {"hi": "hin_Deva", "it": "ita_Latn", "es": "spa_Latn", "fr": "fra_Latn"}
+FLORES_LANG = {"hi": "hin_Deva", "it": "ita_Latn", "es": "spa_Latn", "fr": "fra_Latn", "pt": "por_Latn"}
 # Dry-run sentences (wiring check only; written for this file, never scored as evidence).
 DRY_SENTENCES = [
     "Press the Tab key to move to the next link.",

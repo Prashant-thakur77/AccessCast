@@ -36,8 +36,11 @@ BASELINES = {
     "it": ("Helsinki-NLP/opus-mt-en-it", "be5a254d936f1a8c8da080406ca582a6615e6658"),
     "es": ("Helsinki-NLP/opus-mt-en-es", "5bc4493d463cf000c1f0b50f8d56886a392ed4ab"),
     "fr": ("Helsinki-NLP/opus-mt-en-fr", "dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18"),
+    # CC BY 4.0; a multi-target model: each sentence starts with its target token (see _marian, "prefix")
+    "pt": ("Helsinki-NLP/opus-mt-tc-big-en-pt", "9f2863d807ecf91a374bdbecb8d01e402e90622e"),
 }
-FLORES_CODE = {"hi": "hin_Deva", "it": "ita_Latn", "es": "spa_Latn", "fr": "fra_Latn"}
+FLORES_CODE = {"hi": "hin_Deva", "it": "ita_Latn", "es": "spa_Latn", "fr": "fra_Latn", "pt": "por_Latn"}
+MARIAN_PREFIX = {"pt": ">>por<< "}  # opus-mt-tc-big-en-pt picks its output language from this token
 
 
 def _versions(*pkgs: str) -> dict[str, str | None]:
@@ -370,6 +373,7 @@ def _marian(
     max_new = int(p.get("max_new_tokens", 256))
     out: list[str] = []
     for k, batch in enumerate(_batches(texts, int(p.get("batch_size", 16)))):
+        batch = [str(p.get("prefix", "")) + t for t in batch]
         enc = tok(batch, return_tensors="pt", padding=True, truncation=False).to(dev)
         if enc["input_ids"].shape[1] > tok.model_max_length:
             raise ValueError(
@@ -402,7 +406,7 @@ def translate_baseline(p: dict[str, Any], require_rocm: bool) -> dict[str, Any]:
         if repo.startswith("ai4bharat/indictrans2"):
             out, gen = _indictrans2(texts, repo, rev, dev, p)
         elif repo.startswith("Helsinki-NLP/opus-mt"):
-            out, gen = _marian(texts, repo, rev, dev, p)
+            out, gen = _marian(texts, repo, rev, dev, {**p, "prefix": MARIAN_PREFIX.get(lang, "")})
         else:
             raise ValueError(f"unsupported baseline model {repo!r}")
     if len(out) != len(texts) or any(not t.strip() for t in out):

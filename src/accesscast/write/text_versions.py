@@ -203,7 +203,9 @@ def translate_batch(
     """Return id → translation for every segment that aligned; misaligned ids are absent."""
     done: dict[int, str] = {}
     pending = list(segs)
-    size = len(pending)
+    size = min(
+        len(pending), C.TRANSLATE_BATCH_MAX
+    )  # never one huge request: it can outlast the client timeout
     single_tries = 0
     calls = 0
     while pending and calls < 4 * len(segs) + 10:

@@ -11,7 +11,8 @@
     { key: "hi", title: "हिन्दी", lang: "hi" },
     { key: "it", title: "Italiano", lang: "it" },
     { key: "es", title: "Español", lang: "es" },
-    { key: "fr", title: "Français", lang: "fr" }
+    { key: "fr", title: "Français", lang: "fr" },
+    { key: "pt", title: "Português", lang: "pt" }
   ];
   var RULES = {
     ER001: "too fast to read", ER002: "a sentence is too long", ER004: "a number changed", ER005: "a \"not\" was lost or added",

@@ -80,7 +80,9 @@ def main() -> int:
     ap.add_argument("--k", type=int, default=20)
     ap.add_argument("--cases", default="")
     ap.add_argument("--provider", default="local")
-    ap.add_argument("--tag", default="", help="E17: evidence name suffix for another Token Factory model (AMD_TF_MODEL)")
+    ap.add_argument(
+        "--tag", default="", help="E17: evidence name suffix for another Token Factory model (AMD_TF_MODEL)"
+    )
     args = ap.parse_args()
     settings = load_settings()
     cases = sorted(p.stem for p in ADV.glob("*.json"))

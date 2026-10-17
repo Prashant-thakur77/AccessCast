@@ -27,6 +27,7 @@ VERSION_ITEMS: dict[str, tuple[tuple[ItemKind, str], ...]] = {
     "it": ((ItemKind.SUBTITLE, "it"), (ItemKind.VOICEOVER, "it")),
     "es": ((ItemKind.SUBTITLE, "es"), (ItemKind.VOICEOVER, "es")),
     "fr": ((ItemKind.SUBTITLE, "fr"), (ItemKind.VOICEOVER, "fr")),
+    "pt": ((ItemKind.SUBTITLE, "pt"), (ItemKind.VOICEOVER, "pt")),
     "blind.hi": ((ItemKind.VOICEOVER, "hi"), (ItemKind.AD_TRANSLATION, "hi")),
     "blind.it": ((ItemKind.VOICEOVER, "it"), (ItemKind.AD_TRANSLATION, "it")),
 }

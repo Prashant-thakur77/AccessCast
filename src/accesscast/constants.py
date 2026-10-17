@@ -227,14 +227,11 @@ CPS_MAX: dict[tuple[str, str], int] = {
     ("hi", "sdh"): 25,  # Netflix Hindi TTSG SDH
     ("it", "subtitle"): 17,  # Netflix Italian TTSG
     ("hi", "subtitle"): 22,  # Netflix Hindi TTSG
-    (
-        "es",
-        "subtitle",
-    ): 17,  # Netflix Spanish TTSG, adult: "Up to 17 characters per second" (partnerhelp.netflixstudios.com 217349997)
-    (
-        "fr",
-        "subtitle",
-    ): 17,  # Netflix French (France) TTSG, adult subtitles: 17 cps (partnerhelp.netflixstudios.com 217351577)
+    # Netflix Timed Text Style Guides, adult subtitles (partnerhelp.netflixstudios.com): Spanish 217349997 ("Up to
+    # 17 characters per second"), French (France) 217351577, Portuguese (Brazil) 215600497
+    ("es", "subtitle"): 17,
+    ("fr", "subtitle"): 17,
+    ("pt", "subtitle"): 17,
     ("en", "subtitle"): 20,  # Netflix English TTSG
 }
 CUE_MIN_FRAMES = 40  # DCMP Captioning Key: at least 40 frames
@@ -291,8 +288,12 @@ LLM_LOG_TRUNCATE = 300  # GemmaClip's diagnostics rule idea: truncate text in lo
 GPU_HOURLY_COST_USD = 2.59  # AMD Developer Cloud MI300X on-demand price, cited.amd.devcloud_mi300x_hourly (16 Oct 2026); replaced by the billed rate
 
 # ---------------------------------------------------------------- languages
-LANGS: tuple[str, ...] = ("en", "hi", "it", "es", "fr")
-TRANSLATION_LANGS: tuple[str, ...] = ("hi", "it", "es", "fr")  # subtitles + voice-over versions
+LANGS: tuple[str, ...] = ("en", "hi", "it", "es", "fr", "pt")
+TRANSLATION_LANGS: tuple[str, ...] = ("hi", "it", "es", "fr", "pt")  # subtitles + voice-over versions
+TRANSLATE_BATCH_MAX = (
+    12  # ours: lines per translation request; a whole video in one request ran past the 180 s client
+)
+# timeout on Token Factory (18 Oct) and retried the same oversized request
 AD_TRANSLATION_LANGS: tuple[str, ...] = ("hi", "it")  # translated description (blind.hi / blind.it)
 
 # ---------------------------------------------------------------- Studio (local upload, review app)

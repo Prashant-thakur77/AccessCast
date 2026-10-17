@@ -28,6 +28,7 @@ def _sub(lang: str, draft: str, source: str):
     [
         ("es", "Hay casi 10.000 galaxias.", "Hay casi mil galaxias."),
         ("fr", "Il y a près de 10 000 galaxies.", "Il y a près de mille galaxies."),
+        ("pt", "Há quase 10.000 galáxias.", "Há quase mil galáxias."),
     ],
 )
 def test_numbers_kept_or_caught(ctx, lang, good, bad):
@@ -42,6 +43,7 @@ def test_numbers_kept_or_caught(ctx, lang, good, bad):
     [
         ("es", "La Dra. Maria Lopez explica los resultados.", "La doctora explica los resultados."),
         ("fr", "La Dre Maria Lopez explique les résultats.", "La docteure explique les résultats."),
+        ("pt", "A Dra. Maria Lopez explica os resultados.", "A doutora explica os resultados."),
     ],
 )
 def test_names_kept_or_caught(ctx, lang, good, bad):
@@ -66,9 +68,9 @@ def test_untranslated_caught(ctx, lang, good):
 
 
 def test_every_subtitle_rule_runs_on_the_new_languages(ctx):
-    for lang in ("es", "fr"):
+    for lang in ("es", "fr", "pt"):
         ctx.lang = lang
-        item = _sub(lang, "Hola." if lang == "es" else "Bonjour.", "Hello.")
+        item = _sub(lang, {"es": "Hola.", "fr": "Bonjour.", "pt": "Olá."}[lang], "Hello.")
         for rule in SUBTITLE_RULES:
             rule(item, ctx)  # no KeyError or UnknownLanguageError: every table has the language
 
@@ -78,3 +80,26 @@ def test_new_languages_are_registered():
     for lang in ("es", "fr"):
         assert (lang, "subtitle") in C.CPS_MAX
         assert nlp.negation_count("no nunca" if lang == "es" else "pas jamais", lang) == 2
+
+
+def test_translation_requests_are_capped(monkeypatch):
+    monkeypatch.setenv("ACCESSCAST_WORKER_MODE", "fake")  # canned answers: no model is asked
+    from accesscast.config import load_settings
+    from accesscast.llm.client import LlmClient
+    from accesscast.llm.fake import FakeModel
+    from accesscast.write.text_versions import TextOptions, translate_batch
+
+    sizes = []
+    client = LlmClient(load_settings(), provider="fake", fake_handler=FakeModel(None))
+    real_call = client.call
+
+    def spy(req, **kw):
+        sizes.append(len(req.payload.get("segments", [])))
+        return real_call(req, **kw)
+
+    client.call = spy  # type: ignore[method-assign]
+    segs = [
+        {"id": k, "text": f"Line number {k} of the talk.", "seconds": 3.0, "chars_max": 60} for k in range(40)
+    ]
+    translate_batch(client, segs, "es", TextOptions(run_label="t", project_seed=1))
+    assert sizes and max(sizes) <= C.TRANSLATE_BATCH_MAX

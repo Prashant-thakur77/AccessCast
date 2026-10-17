@@ -32,7 +32,9 @@ class Settings:
     local_audio_model: str = "gemma-4-e4b"
     tf_base_url: str = ""
     tf_api_key: str = field(default="", repr=False)
-    tf_model: str = "Gemma-4-31B-IT"  # AMD_TF_MODEL: another Token Factory model only for E17 (the model ladder)
+    tf_model: str = (
+        "Gemma-4-31B-IT"  # AMD_TF_MODEL: another Token Factory model only for E17 (the model ladder)
+    )
     tf_max_concurrency: int = 8
     tf_rpm: int = 30
     gai_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"

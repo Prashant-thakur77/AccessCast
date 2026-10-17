@@ -42,12 +42,14 @@ VOICES = {
     "it": "if_sara",
     "es": "ef_dora",
     "fr": "ff_siwis",
+    "pt": "pf_dora",
 }  # Kokoro voice ids (Katha's map, MIT)
 VOICEOVER_VOICES = {
     "hi": "hm_omega",
     "it": "im_nicola",
     "es": "em_alex",
     "fr": "ff_siwis",
+    "pt": "pm_alex",
 }  # distinct from the description voice where Kokoro has one (French has a single voice)
 CAL_DIR = REPO_ROOT / "src" / "accesscast" / "tts" / "calibration"
 

@@ -81,6 +81,7 @@
     "it": "Italian version",
     "es": "Spanish version",
     "fr": "French version",
+    "pt": "Portuguese version",
     "blind.hi": "Hindi version, with audio description",
     "blind.it": "Italian version, with audio description"
   };

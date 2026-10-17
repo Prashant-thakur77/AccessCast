@@ -168,7 +168,7 @@ test("studio: axe clean, keyboard-only upload, every stage listed, review link o
   await tabTo(page, page.locator("#go"));
   await page.keyboard.press("Enter");
   await expect(page.locator("#status")).toContainText("Started", { timeout: 30_000 });
-  await expect(page.locator("#stages li")).toHaveCount(24);  // 20 stages + Spanish and French subtitles and voice-over
+  await expect(page.locator("#stages li")).toHaveCount(26);  // 20 stages + Spanish, French and Portuguese subtitles and voice-over
   await expect(page.locator("#status")).toContainText("Finished", { timeout: 300_000 });
   await expect(page.locator("#stages li[data-state='failed']")).toHaveCount(0);
   await expect(page.locator("#fake-banner")).toBeVisible(); // the fixture server runs in fake mode: said on screen

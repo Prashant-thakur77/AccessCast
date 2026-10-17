@@ -3,9 +3,9 @@
   "use strict";
   var AC = window.AC, el = AC.el;
   var PREFS_KEY = "accesscast.player.v1";
-  var LANGS = ["hi", "it", "es", "fr"];  // one language at a time
+  var LANGS = ["hi", "it", "es", "fr", "pt"];  // one language at a time
   var PROFILES = ["blind", "deaf", "easy"].concat(LANGS);
-  var LANG_NAMES = { hi: "Hindi", it: "Italian", es: "Spanish", fr: "French" };
+  var LANG_NAMES = { hi: "Hindi", it: "Italian", es: "Spanish", fr: "French", pt: "Portuguese" };
   function firstLang() { for (var i = 0; i < LANGS.length; i++) if (has(LANGS[i])) return LANGS[i]; return null; }
   /* Reading speed used for "Give me time to read" (PLAN §13.2). An export may override it with
    * index.json "read_words_per_second"; the value in use is shown to the viewer next to the checkbox. */

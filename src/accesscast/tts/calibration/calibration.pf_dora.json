@@ -1,0 +1,12 @@
+{
+  "voice": "pf_dora",
+  "lang": "pt",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": -0.3141,
+  "s_per_word": 0.3589,
+  "wps_voice": 2.786,
+  "resid_p95_s": 0.7977,
+  "device": "cuda",
+  "wall_s": 11.5
+}

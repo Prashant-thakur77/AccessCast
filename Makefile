@@ -15,7 +15,7 @@ setup:  ## uv sync, worker env, pre-fetched TTS/NLP assets, node deps
 	cd workers && $(UV) sync
 	cd workers/indic && $(UV) sync  # E4 Hindi baseline (IndicTrans2 needs transformers 4)
 	$(UV) run python -c "import nltk; nltk.download('cmudict', quiet=True)"  # textstat (ER009) needs it; never fetched mid-run
-	cd workers && $(UV) run python -c "from kokoro import KPipeline; [KPipeline(lang_code=l, repo_id='hexgrad/Kokoro-82M') for l in 'ahief']"
+	cd workers && $(UV) run python -c "from kokoro import KPipeline; [KPipeline(lang_code=l, repo_id='hexgrad/Kokoro-82M') for l in 'ahiefp']"
 	cd workers && $(UV) run python -c "import torchaudio; torchaudio.pipelines.WAV2VEC2_ASR_BASE_960H.get_model(); from silero_vad import load_silero_vad; load_silero_vad()"
 	cd workers && $(UV) run python -c "from transformers import pipeline; [pipeline('automatic-speech-recognition', model=m) for m in ('openai/whisper-large-v3', 'openai/whisper-large-v3-turbo')]"
 	-npm install --no-audit --no-fund

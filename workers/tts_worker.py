@@ -14,7 +14,7 @@ import soundfile as sf
 
 from common import device, event, main, stage_timer
 
-KOKORO_LANG = {"en": "a", "hi": "h", "it": "i", "es": "e", "fr": "f"}
+KOKORO_LANG = {"en": "a", "hi": "h", "it": "i", "es": "e", "fr": "f", "pt": "p"}
 SR = 24_000
 _pipes: dict[str, Any] = {}
 

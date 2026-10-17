@@ -151,3 +151,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** The new "Try your own caption" box returned VERIFIER_CRASH for an easy-read line. The finding said `er009_readability: OSError`. The line failed closed and went to a person, so nothing wrong was shown.
 **Root cause.** textstat 0.7.13 looks up NLTK's cmudict and downloads it on first use. On our computer it had quietly downloaded once, so we never noticed, and `make setup` did not fetch it. Vercel's disk is read-only, so the download raised OSError.
 **Fix.** The function bundle ships cmudict (`NLTK_DATA` points at it; `build_vercel_api.sh` fetches it), and `make setup` fetches it ahead of time. The API now returns each finding's observed value, which is how we found this. Live check after the fix: HTTP 200, and the line passed every check.
+
+## 2026-10-18 A long video's translation timed out and retried forever
+**Symptom.** Adding the new languages to the 3-minute NASA draft stalled for more than 7 minutes on one request: no new Gemma call, one open HTTPS connection to Token Factory.
+**Root cause.** Subtitle translation sent every caption of the video in one request. For a talk-heavy 3-minute clip that is about 40 lines, and at Token Factory's speed that night the answer took longer than the 180-second client timeout. The client retried the same oversized request (up to 10 times). After a call fails every retry, the circuit breaker stops Gemma calls for 30 minutes, so the rest of the run would have failed closed.
+**Fix.** At most 12 lines per translation request (`TRANSLATE_BATCH_MAX`), the same size voice-over already used, with a unit test. The run was stopped and restarted.
