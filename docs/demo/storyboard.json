@@ -248,7 +248,7 @@
    "recording": "try.webm",
    "mark": "result",
    "footage": 14,
-   "narration": "Gemma, on AMD, made the easy-read, Hindi and Italian versions in about half a minute. Our number check stopped one Italian line, where Gemma had turned 5 pm into 17:00, and Gemma's repair passed.",
+   "narration": "In about half a minute, Gemma on AMD made the easy-read, Hindi and Italian versions. Our number check stopped one Italian line that turned 5 pm into 17:00, and the repair passed.",
    "_narration_matches": "the try.webm recorded on 17 Oct 2026 (Italian line stopped by CC009, repaired). Re-check this sentence if try.webm is re-recorded."
   },
   {
@@ -257,14 +257,14 @@
    "narration": "On ten W3C accessibility videos we never tuned on, Gemma alone kept every not in {claim:e5.neg_gemma_k} of {claim:e5.neg_gemma_n} easy-read captions. What AccessCast published kept {claim:e5.neg_ours_k} of {claim:e5.neg_ours_n}."
   },
   {
-   "kind": "image",
-   "image": "docs/charts/e4_translation.png",
+   "kind": "motion",
+   "scene": "res_tr",
    "narration": "Against specialist translation models, Gemma won on one of our two scores in all five languages. On the other score it lost for Hindi, French and Portuguese, and we report that."
   },
   {
    "kind": "motion",
    "scene": "amd",
-   "narration": "Every Gemma call runs on AMD's Token Factory. Counted from our own logs: {claim:amd.requests} requests and {claim:amd.tokens_millions} tokens, across {claim:amd.videos} videos. One finished minute, in the five versions we measured, costs about {claim:cost.usd_per_min} of Gemma, at a published list price."
+   "narration": "Every Gemma call runs on AMD's Token Factory. From our own logs: {claim:amd.requests} requests and {claim:amd.tokens_millions} tokens, across {claim:amd.videos} videos. One finished minute of the five versions we measured costs about {claim:cost.usd_per_min} of Gemma, at list price."
   },
   {
    "kind": "motion",

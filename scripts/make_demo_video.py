@@ -38,7 +38,7 @@ def fill(text: str, reg: dict[str, str]) -> str:
     return re.sub(r"\{claim:([\w.\-]+)\}", lambda m: reg[m.group(1)], text)
 
 
-NARRATION_SPEED = 1.1  # a little brisker than Kokoro's default: the whole video stays near five minutes
+NARRATION_SPEED = 1.13  # a little brisker than Kokoro's default: the whole video stays near five minutes
 LEAD_S, TAIL_S = (
     0.15,
     0.35,
