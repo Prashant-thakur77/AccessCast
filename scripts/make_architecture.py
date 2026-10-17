@@ -170,7 +170,7 @@ def main() -> int:
         out.append(
             f'<line x1="{p1[0]:.0f}" y1="{p1[1]:.0f}" x2="{p2[0]:.0f}" y2="{p2[1]:.0f}" stroke="#141B34" stroke-width="3" marker-end="url(#a)"/>'
         )
-    for bid, x, y, w, h, kind, title, lines in BOXES:
+    for _bid, x, y, w, h, kind, title, lines in BOXES:
         fill, ink = COL[kind]
         out.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="22" fill="{fill}"/>')
         out.append(
