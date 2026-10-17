@@ -37,6 +37,9 @@ def fill(text: str, reg: dict[str, str]) -> str:
     return re.sub(r"\{claim:([\w.\-]+)\}", lambda m: reg[m.group(1)], text)
 
 
+CAPTION_BAND = 240  # px at the bottom of a recording scene for the burned-in narration captions
+
+
 def tts(text: str, path: Path) -> float:
     from kokoro import KPipeline
 
@@ -81,10 +84,16 @@ def main() -> int:
                 if sc["mark"] not in marks:
                     raise SystemExit(f"scene {k}: no mark {sc['mark']!r} in {sc['recording']} (re-record it)")
                 start = marks[sc["mark"]] + float(sc.get("offset", 0))
-            vin = ["-ss", f"{max(0.0, start):.2f}", "-t", f"{dur:.2f}", "-i", str(src)]
-            # if the footage runs out before the narration does, hold its last frame (never cut to black)
+            # "footage": seconds of the recording this scene may use; past that (or past the recording's end) the
+            # last frame is held while the narration finishes, never the next thing the recorder did
+            take = min(dur, float(sc.get("footage", dur)))
+            vin = ["-ss", f"{max(0.0, start):.2f}", "-t", f"{take:.2f}", "-i", str(src)]
+            # the screen sits above a band that holds the narration captions, so they never cover the player's
+            # own captions or the text being shown (keep_audio scenes have no narration and use the full frame)
+            box = "1920:1080" if sc.get("keep_audio") else f"1920:{1080 - CAPTION_BAND}"
+            pad_y = "(oh-ih)/2" if sc.get("keep_audio") else "0"
             vf = (
-                "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,fps=30,"
+                f"scale={box}:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:{pad_y}:color=0x0f1b33,fps=30,"
                 f"tpad=stop_mode=clone:stop_duration={dur:.2f}"
             )
         # burned-in captions of the narration, chunked to ≤ 42 chars × 2 lines across the scene
@@ -163,6 +172,29 @@ def main() -> int:
         check=True,
     )
     final = OUT / "accesscast_demo.mp4"
+    # two-pass loudnorm (one pass is dynamic and lands short of the target), then a limiter under the ceiling
+    meas = subprocess.run(
+        [
+            "ffmpeg",
+            "-hide_banner",
+            "-i",
+            str(raw),
+            "-af",
+            "loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json",
+            "-f",
+            "null",
+            "-",
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stderr
+    m = json.loads(meas[meas.rindex("{") : meas.rindex("}") + 1])
+    norm = (
+        f"loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
+        f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true,"
+        "alimiter=limit=0.79:level=false"  # 0.79 ≈ −2 dBFS: AAC adds intersample overshoot
+    )
     subprocess.run(
         [
             "ffmpeg",
@@ -174,7 +206,9 @@ def main() -> int:
             "-c:v",
             "copy",
             "-af",
-            "loudnorm=I=-16:TP=-1.5:LRA=11",
+            norm,
+            "-ar",
+            "48000",
             "-c:a",
             "aac",
             "-b:a",
