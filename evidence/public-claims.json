@@ -2,6 +2,177 @@
  "schema": "accesscast/public-claims/v1",
  "claims": [
   {
+   "claim_id": "amd.no_answer",
+   "text": "calls Token Factory never answered, after every retry",
+   "value": 2639,
+   "unit": "calls",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/no_answer_after_retries"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "2,639"
+   ]
+  },
+  {
+   "claim_id": "amd.requests",
+   "text": "Gemma 4 31B requests answered by AMD Token Factory",
+   "value": 3143,
+   "unit": "requests",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/requests_answered"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "3,143"
+   ]
+  },
+  {
+   "claim_id": "amd.tokens",
+   "text": "tokens in those requests, as the server reported them",
+   "value": 2994418,
+   "unit": "tokens",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/tokens_total"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "2,994,418"
+   ]
+  },
+  {
+   "claim_id": "amd.tokens_millions",
+   "text": "tokens in those requests, in millions",
+   "value": 2994418,
+   "unit": "tokens",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/tokens_total"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "3.0 million"
+   ]
+  },
+  {
+   "claim_id": "amd.video_minutes",
+   "text": "minutes of video those requests worked on",
+   "value": 32.8,
+   "unit": "minutes",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/video_minutes"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "32.8"
+   ]
+  },
+  {
+   "claim_id": "amd.videos",
+   "text": "videos those requests worked on",
+   "value": 28,
+   "unit": "videos",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/videos"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "28"
+   ]
+  },
+  {
+   "claim_id": "amd.videos_attack",
+   "text": "of which attack clips",
+   "value": 8,
+   "unit": "videos",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/video_groups/attack_clips"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "8"
+   ]
+  },
+  {
+   "claim_id": "amd.videos_dev",
+   "text": "of which dev clips",
+   "value": 10,
+   "unit": "videos",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/video_groups/dev_clips"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "10"
+   ]
+  },
+  {
+   "claim_id": "amd.videos_w3c",
+   "text": "of which W3C test videos",
+   "value": 10,
+   "unit": "videos",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "6a38ba228341d560470cf17e5266d0553a5b35ff0803151afd977087311caaf7",
+     "pointer": "/summary/video_groups/w3c_test"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "10"
+   ]
+  },
+  {
    "claim_id": "cited.amd.devcloud_mi300x_hourly",
    "text": "DigitalOcean's AMD Developer Cloud pricing page lists one MI300X at $2.59 per hour.",
    "value": 2.59,
@@ -3329,43 +3500,45 @@
   {
    "claim_id": "e16.player_passed",
    "text": "player accessibility tests passed (Playwright + axe-core)",
-   "value": 23,
+   "value": 25,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "aaa78ea713c834b993c35839ef2fbe78e9792cfcc2210b8e729ec9d04cec61d3",
+     "sha256": "e929ca7cf7b3b73238588eff1c5c389cfbbe9fda6bd918a69b95ae1eb9ae0098",
      "pointer": "/summary/player/passed"
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
-    "23"
+    "25"
    ]
   },
   {
    "claim_id": "e16.player_total",
    "text": "player accessibility tests run",
-   "value": 23,
+   "value": 25,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "aaa78ea713c834b993c35839ef2fbe78e9792cfcc2210b8e729ec9d04cec61d3",
+     "sha256": "e929ca7cf7b3b73238588eff1c5c389cfbbe9fda6bd918a69b95ae1eb9ae0098",
      "pointer": "/summary/player/total"
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
-    "23"
+    "25"
    ]
   },
   {
@@ -3378,7 +3551,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "aaa78ea713c834b993c35839ef2fbe78e9792cfcc2210b8e729ec9d04cec61d3",
+     "sha256": "e929ca7cf7b3b73238588eff1c5c389cfbbe9fda6bd918a69b95ae1eb9ae0098",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3399,7 +3572,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "aaa78ea713c834b993c35839ef2fbe78e9792cfcc2210b8e729ec9d04cec61d3",
+     "sha256": "e929ca7cf7b3b73238588eff1c5c389cfbbe9fda6bd918a69b95ae1eb9ae0098",
      "pointer": "/summary/review/total"
     }
    ],

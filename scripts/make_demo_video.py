@@ -40,13 +40,29 @@ def fill(text: str, reg: dict[str, str]) -> str:
 CAPTION_BAND = 240  # px at the bottom of a recording scene for the burned-in narration captions
 
 
-def tts(text: str, path: Path) -> float:
+def tts(text: str, path: Path) -> tuple[float, list[tuple[str, float]]]:
+    """Narration audio; returns its length and each spoken segment (text, seconds) for caption timing."""
     from kokoro import KPipeline
 
     pipe = KPipeline(lang_code="a", repo_id="hexgrad/Kokoro-82M")
-    audio = np.concatenate([r.audio.numpy() for r in pipe(text, voice="af_heart", speed=1.0)])
+    parts = [(r.graphemes, r.audio.numpy()) for r in pipe(text, voice="af_heart", speed=1.0)]
+    audio = np.concatenate([a for _, a in parts])
     sf.write(path, audio, 24000)
-    return len(audio) / 24000
+    return len(audio) / 24000, [(g, len(a) / 24000) for g, a in parts]
+
+
+def caption_chunks(segments: list[tuple[str, float]]) -> list[tuple[str, float, float]]:
+    """Captions (≤ 2 lines of 42) timed to the segment that speaks them; a long segment is split by length."""
+    out, t = [], 0.0
+    for text, secs in segments:
+        pieces = textwrap.wrap(text, 84) or [""]
+        total = sum(len(x) for x in pieces) or 1
+        for piece in pieces:
+            d = secs * len(piece) / total
+            if piece:
+                out.append((piece, t, t + d))
+            t += d
+    return out
 
 
 def esc(t: str) -> str:
@@ -63,7 +79,8 @@ def main() -> int:
     for k, sc in enumerate(sb["scenes"]):
         narr = fill(sc.get("narration", ""), reg)
         wav = OUT / f"n{k:02d}.wav"
-        dur = tts(narr, wav) + 0.6 if narr else float(sc.get("seconds", 3))
+        spoken, segments = tts(narr, wav) if narr else (0.0, [])
+        dur = spoken + 0.6 if narr else float(sc.get("seconds", 3))
         dur = max(dur, float(sc.get("min_seconds", 0)))
         mp4 = OUT / f"s{k:02d}.mp4"
         if sc["kind"] == "card":
@@ -74,6 +91,55 @@ def main() -> int:
             ]
             vin = ["-f", "lavfi", "-i", f"color=c=0x0f1b33:s=1920x1080:r=30:d={dur:.2f}"]
             vf = ",".join(draws) or "null"
+        elif sc["kind"] == "motion":
+            # a rendered motion scene (render_motion.mjs, transparent PNGs) over real footage, dimmed, or a plain
+            # background; full frame, with the narration captions on top (motion layouts keep the bottom clear)
+            frames = OUT / "motion" / sc["scene"]
+            if not any(frames.glob("*.png")):
+                raise SystemExit(
+                    f"scene {k}: no frames for motion scene {sc['scene']!r} (run render_motion.mjs)"
+                )
+            comp = OUT / f"m{k:02d}.mp4"
+            if sc.get("bg"):
+                bg = [
+                    "-ss",
+                    f"{float(sc.get('bg_start', 0)):.2f}",
+                    "-t",
+                    f"{dur:.2f}",
+                    "-i",
+                    str(ROOT / sc["bg"]),
+                ]
+                look = sc.get("bg_look", "eq=brightness=-0.32:saturation=0.55,gblur=sigma=5")
+                bgf = f"[0:v]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30,{look},tpad=stop_mode=clone:stop_duration={dur:.2f}[bg]"
+            else:
+                bg = ["-f", "lavfi", "-i", f"color=c=0x0f1b33:s=1920x1080:r=30:d={dur:.2f}"]
+                bgf = "[0:v]null[bg]"
+            subprocess.run(
+                [
+                    "ffmpeg",
+                    "-loglevel",
+                    "error",
+                    "-y",
+                    *bg,
+                    "-framerate",
+                    "30",
+                    "-i",
+                    str(frames / "%05d.png"),
+                    "-filter_complex",
+                    f"{bgf};[1:v]tpad=stop_mode=clone:stop_duration={dur:.2f}[ov];[bg][ov]overlay=0:0,format=yuv420p",
+                    "-t",
+                    f"{dur:.2f}",
+                    "-an",
+                    "-c:v",
+                    "libx264",
+                    "-crf",
+                    "16",
+                    str(comp),
+                ],
+                check=True,
+            )
+            vin = ["-i", str(comp)]
+            vf = "null"
         else:
             src = OUT / sc["recording"]
             start = float(sc.get("start", 0))
@@ -97,10 +163,8 @@ def main() -> int:
                 f"tpad=stop_mode=clone:stop_duration={dur:.2f}"
             )
         # burned-in captions of the narration, chunked to ≤ 42 chars × 2 lines across the scene
-        chunks = textwrap.wrap(narr, 84) if narr else []
         caps = []
-        for i, ch in enumerate(chunks):
-            a, b = dur * i / len(chunks), dur * (i + 1) / len(chunks)
+        for i, (ch, a, b) in enumerate(caption_chunks(segments)):
             lines = textwrap.wrap(ch, 42)[:2]
             for j, line in enumerate(lines):  # one drawtext per line: this ffmpeg draws a newline as a glyph
                 tf = OUT / f"cap{k:02d}_{i:02d}_{j}.txt"

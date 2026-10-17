@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");</script>
+<title>How it works: one clip, step by step</title>
+<meta name="description" content="How AccessCast made the versions of one clip, step by step, shown with the real output of each step.">
+<link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-world="paper">
+<a class="skip-link" href="#main">Skip to the main content</a>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="15"/><circle cx="21" cy="11" r="5"/></svg>AccessCast</a>
+  <nav aria-label="Pages">
+    <ul>
+      <li><a href="watch.html">Watch</a></li>
+      <li><a href="five-ways.html">Five ways</a></li>
+      <li><a href="how.html" aria-current="page">How it works</a></li>
+      <li><a href="proof.html">Proof</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+  <div class="page-head">
+    <p class="micro">How it works · one clip, step by step</p>
+    <h1 class="display l">From one video to five.</h1>
+    <p class="lede">Every step below shows the real output for one clip. Nothing on this page was written by hand.</p>
+    <p id="clip" class="muted"></p>
+    <div id="load-error" class="error" role="alert" hidden></div>
+    <div id="disclosure" class="disclosure"></div>
+  </div>
+
+  <ol class="how" id="how" aria-label="The steps">
+    <li class="how-step" id="s-listen" aria-labelledby="h-listen">
+      <h2 id="h-listen" class="display m"><span class="how-n" aria-hidden="true">1</span>Listen</h2>
+      <p class="how-say">Whisper writes down every word. A second model pins each word to the moment it is said.</p>
+      <div id="tl-listen" class="tl-wrap"></div>
+      <ul id="transcript" class="transcript"></ul>
+    </li>
+
+    <li class="how-step" id="s-pauses" aria-labelledby="h-pauses">
+      <h2 id="h-pauses" class="display m"><span class="how-n" aria-hidden="true">2</span>Find the pauses</h2>
+      <p class="how-say">A description has to fit between the words, so the code measures every pause.</p>
+      <div id="tl-pauses" class="tl-wrap"></div>
+      <p id="pauses-note" class="how-note"></p>
+    </li>
+
+    <li class="how-step" id="s-look" aria-labelledby="h-look">
+      <h2 id="h-look" class="display m"><span class="how-n" aria-hidden="true">3</span>Look</h2>
+      <p class="how-say">Gemma 4 31B, on AMD, looks at still frames from the scene and lists only what it can see. Each fact names its frames.</p>
+      <div id="frames" class="how-frames"></div>
+      <ul id="facts" class="facts"></ul>
+    </li>
+
+    <li class="how-step" id="s-write" aria-labelledby="h-write">
+      <h2 id="h-write" class="display m"><span class="how-n" aria-hidden="true">4</span>Write</h2>
+      <p class="how-say">Gemma writes one line from that list, and nothing else, inside a word budget.</p>
+      <figure class="line-card">
+        <figcaption>Gemma's first draft</figcaption>
+        <blockquote id="draft" class="line-text"></blockquote>
+      </figure>
+      <p id="budget" class="how-note"></p>
+    </li>
+
+    <li class="how-step" id="s-check" aria-labelledby="h-check">
+      <h2 id="h-check" class="display m"><span class="how-n" aria-hidden="true">5</span>Check</h2>
+      <p class="how-say">Code checks the line, rule by rule. The model never decides whether its own line is good enough.</p>
+      <div id="check" class="check-box"></div>
+    </li>
+
+    <li class="how-step" id="s-repair" aria-labelledby="h-repair">
+      <h2 id="h-repair" class="display m"><span class="how-n" aria-hidden="true">6</span>Repair</h2>
+      <p class="how-say">The line goes back to Gemma with the exact rule it broke. Then the code checks the new line again.</p>
+      <ol id="repairs" class="repairs"></ol>
+    </li>
+
+    <li class="how-step" id="s-fit" aria-labelledby="h-fit">
+      <h2 id="h-fit" class="display m"><span class="how-n" aria-hidden="true">7</span>Fit it in</h2>
+      <p class="how-say">A line is spoken in a pause. Where there is no pause, the extended version holds the picture while it is read.</p>
+      <div id="fit" class="fit"></div>
+    </li>
+
+    <li class="how-step" id="s-person" aria-labelledby="h-person">
+      <h2 id="h-person" class="display m"><span class="how-n" aria-hidden="true">8</span>A person decides</h2>
+      <p class="how-say">Every description line waits for a person. They see the frames, the checks and every repair, then approve, edit or reject it. Nothing is published while a line is waiting.</p>
+      <p id="person-note" class="how-note"></p>
+    </li>
+
+    <li class="how-step" id="s-out" aria-labelledby="h-out">
+      <h2 id="h-out" class="display m"><span class="how-n" aria-hidden="true">9</span>Five ways to watch</h2>
+      <p class="how-say">The same analysis makes every version, so they never disagree.</p>
+      <ul id="outs" class="outs"></ul>
+    </li>
+  </ol>
+</main>
+
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+<script src="assets/common.js"></script>
+<script src="assets/motion.js"></script>
+<script src="assets/how.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AccessCast demo motion scenes</title>
+<!-- Motion graphics for the demo video, rendered frame by frame by scripts/render_motion.mjs (transparent
+     background) and composited over real footage by scripts/make_demo_video.py. Every number is a
+     data-claim / data-count attribute filled from evidence/public-claims.json at render time; none is typed here. -->
+<style>
+@font-face { font-family: Anton; src: url("../../../src/accesscast/player/static/assets/fonts/anton-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: Inter; src: url("../../../src/accesscast/player/static/assets/fonts/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; }
+@font-face { font-family: Noto; src: url("../../../src/accesscast/player/static/assets/fonts/noto-sans-devanagari-devanagari-700-normal.woff2") format("woff2"); }
+:root { --sun: #FFD23F; --red: #E4402A; --ink: #141B34; --paper: #F6F1E7; --navy: #1B1E4B; }
+html, body { margin: 0; width: 1920px; height: 1080px; background: transparent; overflow: hidden; font-family: Inter, sans-serif; color: #fff; }
+section { position: absolute; inset: 0; display: none; }
+section.on { display: block; }
+.anim { animation-duration: var(--len, .7s); animation-delay: var(--d, 0s); animation-fill-mode: both; animation-timing-function: cubic-bezier(.2, .8, .2, 1); animation-play-state: paused; }
+@keyframes up { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop { 0% { opacity: 0; transform: scale(.6); } 70% { opacity: 1; transform: scale(1.06); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes out { from { opacity: 1; } to { opacity: 0; } }
+.up { animation-name: up; } .fade { animation-name: fade; } .pop { animation-name: pop; } .grow { animation-name: grow; transform-origin: left center; }
+.micro { font: 800 30px/1 Inter; letter-spacing: .22em; text-transform: uppercase; color: var(--sun); }
+.big { font: 400 150px/0.95 Anton; text-transform: uppercase; letter-spacing: .01em; }
+.mid { font: 700 64px/1.15 Inter; }
+.small { font: 500 40px/1.3 Inter; color: #E6E9F5; }
+.y { color: var(--sun); }
+.box { position: absolute; left: 140px; right: 140px; top: 170px; }
+.src { position: absolute; left: 140px; top: 760px; font: 500 26px/1.3 Inter; color: #C9D3EA; }
+
+/* problem stats */
+.stat .big { font-size: 190px; color: var(--sun); }
+.stat .mid { margin-top: 18px; max-width: 1500px; }
+
+/* 3D split */
+.stage3d { position: absolute; inset: 0; perspective: 1800px; perspective-origin: 50% 40%; }
+.card3d { position: absolute; left: 50%; top: 600px; width: 330px; height: 186px; margin-left: -165px; margin-top: -93px; border-radius: 20px; overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,.55); transform-style: preserve-3d; background: #000 center/cover no-repeat; }
+.card3d .lab { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 14px; font: 800 24px/1.1 Inter; color: var(--ink); }
+.card3d .lab:lang(hi) { font-family: Noto, Inter; }
+@keyframes fan0 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(-700px, 40px, -120px) rotateY(24deg); } }
+@keyframes fan1 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(-350px, 40px, -40px) rotateY(12deg); } }
+@keyframes fan2 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(0, 40px, 40px) rotateY(0); } }
+@keyframes fan3 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(350px, 40px, -40px) rotateY(-12deg); } }
+@keyframes fan4 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(700px, 40px, -120px) rotateY(-24deg); } }
+@keyframes spin { 0% { opacity: 0; transform: translateY(-40px) rotateY(-40deg) rotateX(10deg) scale(1.9); } 30% { opacity: 1; } 100% { opacity: 1; transform: translateY(-40px) rotateY(0) rotateX(0) scale(1.9); } }
+.hero { animation-name: spin, out; animation-duration: 1.6s, .5s; animation-delay: 0s, 1.9s; }
+.labcol { opacity: 0; animation-name: fade; }
+.title3d { position: absolute; top: 60px; left: 0; right: 0; text-align: center; }
+.title3d .big { font-size: 120px; }
+.title3d p { margin: 0; }
+.title3d .mid { margin-top: 14px; }
+section p { margin: 0 0 .25em; }
+
+/* pipeline */
+.pipe { position: absolute; left: 110px; right: 110px; top: 250px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 22px; }
+.node { background: rgba(20, 27, 52, .86); border: 4px solid rgba(255,255,255,.25); border-radius: 26px; padding: 26px 18px; min-height: 260px; text-align: center; }
+.node .n { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px; display: grid; place-items: center; font: 400 38px/1 Anton; background: var(--sun); color: var(--ink); }
+.node .t { font: 800 34px/1.1 Inter; }
+.node .s { font: 500 23px/1.3 Inter; color: #C9D3EA; margin-top: 10px; }
+.node.amd { border-color: var(--red); }
+.node.amd .s b { color: #fff; }
+.node.code { border-color: var(--sun); }
+@keyframes lit { from { border-color: rgba(255,255,255,.25); } to { border-color: var(--sun); background: rgba(27, 30, 75, .95); } }
+.track { position: absolute; left: 170px; right: 170px; top: 372px; height: 10px; border-radius: 5px; background: var(--sun); z-index: 0; }
+.pipe { z-index: 1; }
+
+/* counters */
+.counters { position: absolute; left: 140px; right: 140px; top: 250px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
+.ctr { background: rgba(20, 27, 52, .86); border-radius: 30px; padding: 34px 34px 30px; border-top: 10px solid var(--red); }
+.ctr .v { font: 400 112px/1 Anton; color: var(--sun); white-space: nowrap; }
+.ctr .l { font: 600 30px/1.3 Inter; margin-top: 14px; }
+.note { position: absolute; left: 140px; right: 140px; top: 700px; font: 500 28px/1.35 Inter; color: #C9D3EA; }
+
+/* results */
+.bars { position: absolute; left: 140px; right: 140px; top: 330px; display: grid; gap: 40px; }
+.bar-row .l { font: 700 40px/1.2 Inter; margin-bottom: 14px; }
+.bar { height: 70px; background: rgba(255,255,255,.12); border-radius: 14px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--sun); transform-origin: left center; animation-name: grow; }
+.bar.red i { background: #FF8A73; }
+.bar-row .v { font: 400 64px/1 Anton; margin-top: 10px; }
+
+/* laws */
+.laws { position: absolute; left: 140px; right: 140px; top: 300px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
+.law { background: rgba(20, 27, 52, .86); border-radius: 30px; padding: 34px; }
+.law .w { font: 800 34px/1.2 Inter; color: var(--sun); }
+.law .d { font: 400 76px/1.05 Anton; margin-top: 16px; }
+.law .x { font: 500 28px/1.3 Inter; margin-top: 14px; color: #E6E9F5; }
+
+.close .big { font-size: 170px; text-align: center; }
+.close .mid { text-align: center; }
+.links { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font: 700 40px/1.6 Inter; color: var(--sun); }
+</style>
+</head>
+<body>
+
+<!-- THE PROBLEM, over real footage -->
+<section data-scene="p_upload" data-dur="8">
+  <div class="box">
+    <p class="micro anim fade" style="--d:.2s">The problem</p>
+    <p class="mid anim up" style="--d:.5s">Every minute, YouTube receives</p>
+    <p class="big y anim pop" style="--d:1.1s;--len:.9s">more than <span data-claim="cited.market.youtube_500h_per_min"></span></p>
+    <p class="mid anim up" style="--d:2s">of new video.</p>
+  </div>
+  <p class="src anim fade" style="--d:2.6s">YouTube, 2019, via Tubefilter</p>
+</section>
+
+<section data-scene="p_blind" data-dur="8">
+  <div class="box stat">
+    <p class="big anim pop" style="--d:.3s;--len:.9s"><span data-count-claim="cited.gbd.blind_2020"></span></p>
+    <p class="mid anim up" style="--d:1.1s">people are blind. To follow a video, they need to hear what is on screen.</p>
+  </div>
+  <p class="src anim fade" style="--d:1.8s">GBD 2019 Blindness and Vision Impairment Collaborators, Lancet Global Health 2021</p>
+</section>
+
+<section data-scene="p_deaf" data-dur="8">
+  <div class="box stat">
+    <p class="big anim pop" style="--d:.3s;--len:.9s"><span data-count-claim="cited.who.hearing_430m"></span></p>
+    <p class="mid anim up" style="--d:1.1s">people live with disabling hearing loss. They need captions that also say what sounds.</p>
+  </div>
+  <p class="src anim fade" style="--d:1.8s">World Health Organization</p>
+</section>
+
+<section data-scene="p_read" data-dur="8">
+  <div class="box stat">
+    <p class="big anim pop" style="--d:.3s;--len:.9s"><span data-count-claim="cited.oecd.piaac_lit_level1_oecd_avg"></span></p>
+    <p class="mid anim up" style="--d:1.1s">of adults read at the lowest levels. They need simpler words, at a slower pace.</p>
+  </div>
+  <p class="src anim fade" style="--d:1.8s">OECD Survey of Adult Skills 2023, average across OECD countries</p>
+</section>
+
+<section data-scene="p_cost" data-dur="9">
+  <div class="box">
+    <p class="micro anim fade" style="--d:.2s">Why most video is left out</p>
+    <p class="mid anim up" style="--d:.5s">Describing one hour of TV by hand takes about</p>
+    <p class="big y anim pop" style="--d:1.1s;--len:.9s" data-claim="cited.market.maa_20_hours"></p>
+    <p class="mid anim up" style="--d:2.2s">and costs <span class="y" data-claim="cited.price.3play_industry_range_low"></span> to <span class="y" data-claim="cited.price.3play_industry_range_high"></span> a minute.</p>
+  </div>
+  <p class="src anim fade" style="--d:2.8s">Media Access Australia; 3Play Media (list prices)</p>
+</section>
+
+<!-- THE SOLUTION, in 3D: one video becomes five -->
+<section data-scene="split" data-dur="9">
+  <div class="title3d">
+    <p class="big anim up" style="--d:.2s">AccessCast</p>
+    <p class="mid anim up" style="--d:.6s">One video. Five ways to watch.</p>
+  </div>
+  <div class="stage3d">
+    <div class="card3d anim hero" style="background-image:url(../../../data/demo/motion/still_main.jpg)"></div>
+    <div class="card3d anim" style="animation-name:fan0;--d:1.8s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:2.9s;background:#FFD23F">Can't see the screen</div></div>
+    <div class="card3d anim" style="animation-name:fan1;--d:1.9s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:3.0s;background:#C9EBDC">Can't hear</div></div>
+    <div class="card3d anim" style="animation-name:fan2;--d:2.0s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:3.1s;background:#FFD9C2">Simpler words</div></div>
+    <div class="card3d anim" style="animation-name:fan3;--d:2.1s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="hi" style="--d:3.2s;background:#F9C74F">हिन्दी</div></div>
+    <div class="card3d anim" style="animation-name:fan4;--d:2.2s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="it" style="--d:3.3s;background:#BFDDF5">Italiano</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS, at a glance -->
+<section data-scene="pipeline" data-dur="12">
+  <div class="box" style="top:90px"><p class="micro anim fade" style="--d:.1s">How it works</p></div>
+  <div class="track anim grow" style="--d:.3s;--len:8s;animation-timing-function:linear"></div>
+  <div class="pipe">
+    <div class="node anim up" style="--d:.3s"><div class="n">1</div><div class="t">Listen</div><div class="s">Whisper writes every word and when it is said</div></div>
+    <div class="node amd anim up" style="--d:1.4s"><div class="n">2</div><div class="t">Look</div><div class="s"><b>Gemma 4 31B on AMD</b> lists what it sees</div></div>
+    <div class="node amd anim up" style="--d:2.5s"><div class="n">3</div><div class="t">Write</div><div class="s"><b>Gemma</b> writes from that list only</div></div>
+    <div class="node code anim up" style="--d:3.6s"><div class="n">4</div><div class="t">Check</div><div class="s">Code tests every line. The model never judges itself</div></div>
+    <div class="node amd anim up" style="--d:4.7s"><div class="n">5</div><div class="t">Repair</div><div class="s"><b>Gemma</b> fixes what failed, told why</div></div>
+    <div class="node anim up" style="--d:5.8s"><div class="n">6</div><div class="t">Approve</div><div class="s">A person approves every description line</div></div>
+    <div class="node anim up" style="--d:6.9s"><div class="n">7</div><div class="t">Five versions</div><div class="s">Voiced, captioned, translated, rendered</div></div>
+  </div>
+</section>
+
+<!-- AMD, measured from our own logs -->
+<section data-scene="amd" data-dur="10">
+  <div class="box" style="top:100px">
+    <p class="micro anim fade" style="--d:.1s">Gemma 4 31B on AMD Token Factory · measured from our logs</p>
+  </div>
+  <div class="counters">
+    <div class="ctr anim up" style="--d:.3s"><div class="v" data-count-claim="amd.requests" data-count-from=".5" data-count-len="2.2"></div><div class="l">Gemma requests answered by AMD</div></div>
+    <div class="ctr anim up" style="--d:.6s"><div class="v" data-count-claim="amd.tokens_millions" data-count-from=".8" data-count-len="2.2"></div><div class="l">tokens</div></div>
+    <div class="ctr anim up" style="--d:.9s"><div class="v"><span data-count-claim="amd.videos" data-count-from="1.1" data-count-len="1.8"></span></div><div class="l">videos, <span data-claim="amd.video_minutes"></span> minutes in all</div></div>
+    <div class="ctr anim up" style="--d:2.6s"><div class="v" data-count-claim="e14.tokens_per_minute" data-count-from="2.8" data-count-len="2"></div><div class="l">Gemma tokens per finished minute, all five versions</div></div>
+    <div class="ctr anim up" style="--d:3.0s"><div class="v" data-claim="cost.usd_per_min"></div><div class="l">of Gemma per finished minute (estimate, at a published list price)</div></div>
+    <div class="ctr anim up" style="--d:3.4s"><div class="v" data-count-claim="e13.best_tokens_per_s" data-count-from="3.6" data-count-len="1.6"></div><div class="l">tokens a second seen from our side</div></div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section data-scene="res_neg" data-dur="10">
+  <div class="box" style="top:110px">
+    <p class="micro anim fade" style="--d:.1s">Easy-read · 10 W3C test videos never used for tuning</p>
+    <p class="mid anim up" style="--d:.3s">Captions that kept every "not", "never" and "no"</p>
+  </div>
+  <div class="bars">
+    <div class="bar-row anim up" style="--d:.8s"><div class="l">Gemma alone</div><div class="bar red"><i class="anim" data-bar-k="e5.neg_gemma_k" data-bar-n="e5.neg_gemma_n" style="--d:1.2s;--len:1.4s"></i></div><div class="v"><span data-claim="e5.neg_gemma_k"></span> of <span data-claim="e5.neg_gemma_n"></span></div></div>
+    <div class="bar-row anim up" style="--d:2.4s"><div class="l">AccessCast, as published</div><div class="bar"><i class="anim" data-bar-k="e5.neg_ours_k" data-bar-n="e5.neg_ours_n" style="--d:2.8s;--len:1.4s"></i></div><div class="v y"><span data-claim="e5.neg_ours_k"></span> of <span data-claim="e5.neg_ours_n"></span></div></div>
+  </div>
+</section>
+
+<section data-scene="laws" data-dur="9">
+  <div class="box" style="top:110px">
+    <p class="micro anim fade" style="--d:.1s">Who needs it now</p>
+    <p class="mid anim up" style="--d:.3s">The law already asks for it.</p>
+  </div>
+  <div class="laws">
+    <div class="law anim up" style="--d:.8s"><div class="w">European Union</div><div class="d" data-claim="cited.law.eaa_apply_date"></div><div class="x">European Accessibility Act applies</div></div>
+    <div class="law anim up" style="--d:1.4s"><div class="w">India</div><div class="d" data-claim="cited.law.india_mib_ott_date"></div><div class="x">Accessibility guidelines for streaming platforms</div></div>
+    <div class="law anim up" style="--d:2.0s"><div class="w">United States</div><div class="d" data-claim="cited.law.ada_title2_large_date"></div><div class="x">ADA Title II deadline for large public bodies, including universities</div></div>
+  </div>
+</section>
+
+<section data-scene="close" data-dur="9">
+  <div class="box close" style="top:240px">
+    <p class="big anim pop" style="--d:.3s;--len:1s">Every viewer.</p>
+    <p class="big y anim pop" style="--d:1.2s;--len:1s">The same video.</p>
+  </div>
+  <p class="links anim fade" style="--d:2.4s">accesscast.vercel.app<br>github.com/Prashant-thakur77/AccessCast</p>
+</section>
+
+<script>
+// Frame stepping: the renderer calls __setup(claims, scene) once, then __seek(t) for every frame.
+window.__setup = function (claims, scene) {
+  document.querySelectorAll("section").forEach(function (s) { s.classList.toggle("on", s.dataset.scene === scene); });
+  var sec = document.querySelector('section[data-scene="' + scene + '"]');
+  if (!sec) throw new Error("no scene " + scene);
+  var get = function (id) { var c = claims[id]; if (!c || !c.display || !c.display.length) throw new Error("claim not registered: " + id); return c; };
+  sec.querySelectorAll("[data-claim]").forEach(function (e) { e.textContent = get(e.dataset.claim).display[0]; });
+  sec.querySelectorAll("[data-count-claim]").forEach(function (e) { e.dataset.final = get(e.dataset.countClaim).display[0]; });
+  sec.querySelectorAll("[data-bar-k]").forEach(function (e) {
+    e.style.width = (100 * Number(get(e.dataset.barK).value) / Number(get(e.dataset.barN).value)) + "%";
+  });
+  return Number(sec.dataset.dur);
+};
+// A count-up shows the registered display string at the end; on the way it counts the leading number up
+// with the same format (thousands separators, decimals, suffix), so no other number is ever on screen at rest.
+function countFrame(final, p) {
+  var m = final.match(/^([^0-9]*)([0-9][0-9,]*\.?[0-9]*)(.*)$/);
+  if (!m || p >= 1) return final;
+  var raw = m[2].replace(/,/g, ""), dec = (raw.split(".")[1] || "").length, target = parseFloat(raw);
+  var v = target * (1 - Math.pow(1 - p, 3));
+  var s = v.toFixed(dec);
+  if (m[2].indexOf(",") >= 0) { var parts = s.split("."); parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ","); s = parts.join("."); }
+  return m[1] + s + m[3];
+}
+window.__seek = function (t) {
+  document.getAnimations().forEach(function (a) { a.pause(); a.currentTime = t * 1000; });
+  document.querySelectorAll("section.on [data-count-claim]").forEach(function (e) {
+    var from = Number(e.dataset.countFrom || 0.4), len = Number(e.dataset.countLen || 1.6);
+    e.textContent = countFrame(e.dataset.final, Math.max(0, Math.min(1, (t - from) / len)));
+  });
+};
+</script>
+</body>
+</html>

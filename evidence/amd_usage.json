@@ -1,0 +1,311 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "amd_usage",
+ "split": "none",
+ "passed": true,
+ "git_commit": "6b5ab6953736edadc427e7da79909931b448c285",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-17T15:14:41.688Z",
+ "finished_at": "2026-10-17T15:14:41.787Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "question": "How much of the model work ran on AMD Token Factory?",
+  "source": "projects/**/llm_calls.jsonl (git-ignored logs; each file's call count is in results)",
+  "dedupe_key": [
+   "ts",
+   "label",
+   "seed",
+   "prompt_sha"
+  ],
+  "excludes": "the public site's live attack (logged server-side, not here); fake-mode calls"
+ },
+ "checks": {
+  "one_served_model": true,
+  "some_requests": true
+ },
+ "results": [
+  {
+   "log": "projects/06a3e203495f/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 81
+  },
+  {
+   "log": "projects/138ab07725a3/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 82
+  },
+  {
+   "log": "projects/1d4445a74f9d/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 22
+  },
+  {
+   "log": "projects/372efada94cd/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 38
+  },
+  {
+   "log": "projects/3db6e664bfa6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 96
+  },
+  {
+   "log": "projects/70179e60b244/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 81
+  },
+  {
+   "log": "projects/716570d5d488/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 242
+  },
+  {
+   "log": "projects/81efb91a4b43/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 27
+  },
+  {
+   "log": "projects/861ffe38efa7/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 90
+  },
+  {
+   "log": "projects/8748f4be5399/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 31
+  },
+  {
+   "log": "projects/9a5b22899e0f/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 81
+  },
+  {
+   "log": "projects/_demo_draft/beecab6041ea/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 135
+  },
+  {
+   "log": "projects/_dev/00906924c2d2/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 127
+  },
+  {
+   "log": "projects/_dev/06a3e203495f/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 41
+  },
+  {
+   "log": "projects/_dev/138ab07725a3/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 10
+  },
+  {
+   "log": "projects/_dev/27be5cf4c7bc/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 189
+  },
+  {
+   "log": "projects/_dev/2c543175e85f/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 177
+  },
+  {
+   "log": "projects/_dev/3db6e664bfa6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 49
+  },
+  {
+   "log": "projects/_dev/70179e60b244/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 30
+  },
+  {
+   "log": "projects/_dev/716570d5d488/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 24
+  },
+  {
+   "log": "projects/_dev/861ffe38efa7/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 44
+  },
+  {
+   "log": "projects/_dev/8af59806d6b6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 44
+  },
+  {
+   "log": "projects/_dev/9a5b22899e0f/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 24
+  },
+  {
+   "log": "projects/_dev/b3eff299b8f0/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 33
+  },
+  {
+   "log": "projects/_dev/beecab6041ea/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_dev/c8e6779b79c6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 323
+  },
+  {
+   "log": "projects/_dev/cbf141ec3213/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 83
+  },
+  {
+   "log": "projects/_dev/ce6924032c7e/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 262
+  },
+  {
+   "log": "projects/_dev/dac08bcd9d7a/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 206
+  },
+  {
+   "log": "projects/_dev/fd6d87bdd397/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 47
+  },
+  {
+   "log": "projects/_dev_tf/8af59806d6b6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 60
+  },
+  {
+   "log": "projects/_dev_tf2/8af59806d6b6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 7
+  },
+  {
+   "log": "projects/_e09/blender_sintel_trailer/run0/cbf141ec3213/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 28
+  },
+  {
+   "log": "projects/_e09/blender_sintel_trailer/run1/cbf141ec3213/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 30
+  },
+  {
+   "log": "projects/_e09/blender_sintel_trailer/run2/cbf141ec3213/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 25
+  },
+  {
+   "log": "projects/_e09/nasa_GSFC_20170614_Eclipse_m12534_Plane/run0/8af59806d6b6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 13
+  },
+  {
+   "log": "projects/_e09/nasa_GSFC_20170614_Eclipse_m12534_Plane/run1/8af59806d6b6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 13
+  },
+  {
+   "log": "projects/_e09/nasa_GSFC_20170614_Eclipse_m12534_Plane/run2/8af59806d6b6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 13
+  },
+  {
+   "log": "projects/_e10/proj/ed26561ae9d7/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_eval/e04_translation/llm_calls.jsonl",
+   "new_tokenfactory_calls": 3104
+  },
+  {
+   "log": "projects/_eval/e05_easyread/llm_calls.jsonl",
+   "new_tokenfactory_calls": 162
+  },
+  {
+   "log": "projects/_fixture/ed26561ae9d7/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_local_real/fd6d87bdd397/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_m0/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_people/8af59806d6b6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_people/8af598scratc/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_people/cbf141ec3213/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_people/cbf141scratc/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_site/8af59806d6b6/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_site/cbf141ec3213/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 29
+  },
+  {
+   "log": "projects/_site/dac08bcd9d7a/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 106
+  },
+  {
+   "log": "projects/_site/ed26561ae9d7/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_studio_demo/cbf141ec3213/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_studio_demo/dac08bcd9d7a/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/c984aeee10bf/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 33
+  },
+  {
+   "log": "projects/d43b65f166b2/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 33
+  },
+  {
+   "log": "projects/e94ddb34c162/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 18
+  },
+  {
+   "log": "projects/ed26561ae9d7/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/efcaf43529ec/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 25
+  },
+  {
+   "log": "projects/f30cef10b3ab/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 23
+  },
+  {
+   "log": "projects/f8b3247da4e0/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 46
+  },
+  {
+   "log": "projects/fd6d87bdd397/logs/llm_calls.jsonl",
+   "new_tokenfactory_calls": 81
+  }
+ ],
+ "summary": {
+  "requests_answered": 3143,
+  "tokens_in": 2549365,
+  "tokens_out": 445053,
+  "tokens_total": 2994418,
+  "served_model_ids": {
+   "self-dploy/Gemma-4-31B-IT": 3143
+  },
+  "videos": 28,
+  "video_minutes": 32.8,
+  "video_groups": {
+   "attack_clips": 8,
+   "w3c_test": 10,
+   "dev_clips": 10
+  },
+  "no_answer_after_retries": 2639,
+  "answered_but_unusable": 4,
+  "cache_hits_no_request": 782,
+  "days": {
+   "2026-10-16": 2600,
+   "2026-10-17": 543
+  }
+ },
+ "error": null
+}
