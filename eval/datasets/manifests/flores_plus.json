@@ -3,7 +3,7 @@
  "revision": "e707e62e762a9e2faca3933aa315f4665cc3cd8f",
  "licence": "CC BY-SA 4.0 (gated)",
  "page": "https://huggingface.co/datasets/openlanguagedata/flores_plus",
- "fetched_at": "2026-10-17T12:28:48.635Z",
+ "fetched_at": "2026-10-17T18:54:53.373Z",
  "committed": false,
  "note": "data stays in data/flores/ (git-ignored)",
  "files": [
@@ -34,6 +34,28 @@
    "lang": "ita_Latn",
    "file": "data/flores/devtest/ita_Latn.jsonl",
    "sha256": "97f1d20558c0bc3dccd2f920c36ea08b4ad0b0d59c0e131f8b30f44f8dc4fd9f",
+   "sentences": 1012,
+   "ids": [
+    0,
+    1011
+   ]
+  },
+  {
+   "split": "devtest",
+   "lang": "spa_Latn",
+   "file": "data/flores/devtest/spa_Latn.jsonl",
+   "sha256": "df42db724eb1fb68787c7c7ca487855495464cf8e6a9a4d257c289154b0eff3b",
+   "sentences": 1012,
+   "ids": [
+    0,
+    1011
+   ]
+  },
+  {
+   "split": "devtest",
+   "lang": "fra_Latn",
+   "file": "data/flores/devtest/fra_Latn.jsonl",
+   "sha256": "86135d21020b70cde4fd0f71d137903e87bc18a219ab38d2f540573abe9b1862",
    "sentences": 1012,
    "ids": [
     0,

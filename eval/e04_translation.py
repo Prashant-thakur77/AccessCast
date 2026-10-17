@@ -47,12 +47,17 @@ from eval.common import Experiment, run_experiment
 
 EVAL_WORK = REPO_ROOT / "projects" / "_eval"  # git-ignored scratch (worker request files, LLM call logs)
 OUTPUTS = REPO_ROOT / "data" / "eval_outputs"  # git-ignored: texts we may not commit (FLORES+, W3C-derived)
-LANG_NAME = {"hi": "Hindi", "it": "Italian"}
+LANG_NAME = {"hi": "Hindi", "it": "Italian", "es": "Spanish", "fr": "French"}
 # IndicTrans2's remote model code imports transformers.onnx (removed in transformers 5), so the Hindi baseline runs
 # in its own worker env pinned to transformers 4 (workers/indic/pyproject.toml); same worker file, same protocol.
 INDIC_PYTHON = Path(os.environ.get("ACCESSCAST_INDIC_PYTHON", REPO_ROOT / "workers/indic/.venv/bin/python"))
-BASELINE_NAME = {"hi": "IndicTrans2 en-indic 1B", "it": "Opus-MT en-it"}
-FLORES_LANG = {"hi": "hin_Deva", "it": "ita_Latn"}
+BASELINE_NAME = {
+    "hi": "IndicTrans2 en-indic 1B",
+    "it": "Opus-MT en-it",
+    "es": "Opus-MT en-es",
+    "fr": "Opus-MT en-fr",
+}
+FLORES_LANG = {"hi": "hin_Deva", "it": "ita_Latn", "es": "spa_Latn", "fr": "fra_Latn"}
 # Dry-run sentences (wiring check only; written for this file, never scored as evidence).
 DRY_SENTENCES = [
     "Press the Tab key to move to the next link.",
@@ -301,6 +306,7 @@ def main() -> int:
         help="test = also run the in-domain W3C check (needs the prompt freeze)",
     )
     ap.add_argument("--langs", default="hi,it")
+    ap.add_argument("--tag", default="", help="evidence name suffix, e.g. es_fr → e04_translation_es_fr.json")
     ap.add_argument("--limit", type=int, default=0, help="first N FLORES+ sentences (0 = all)")
     ap.add_argument("--chunk", type=int, default=16, help="sentences per translate_batch call")
     ap.add_argument("--concurrency", type=int, default=8)
@@ -316,7 +322,7 @@ def main() -> int:
     langs = [x for x in args.langs.split(",") if x]
     stand_in = settings.worker_mode == "fake" and not args.real_metrics
     exp = Experiment(
-        "e04_translation",
+        "e04_translation" + (f"_{args.tag}" if args.tag else ""),
         args.split,
         config={
             "question": "Is Gemma 4 31B a good translator for Hindi and Italian?",

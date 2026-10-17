@@ -773,7 +773,7 @@ def results_more() -> str | None:
             "chrF++ (<pending: e4.hi.chrf_base> against <pending: e4.hi.chrf_gemma>; Gemma "
             "<pending: e4.hi.chrf_diff>, <pending: e4.hi.chrf_lo> to <pending: e4.hi.chrf_hi>). Gemma returned "
             "every sentence (<pending: e4.hi.never_aligned> missing in Hindi, <pending: e4.it.never_aligned> in "
-            "Italian)."
+            "Italian).\n\n  ![Gemma minus the baseline for each language and score, with 95% intervals](docs/charts/e4_translation.png)"
         )
     if (EV / "e05_easyread.json").exists():
         rows.append(

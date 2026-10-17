@@ -34,8 +34,10 @@ LABSE_MODEL = ("sentence-transformers/LaBSE", "836121a0533e5664b21c7aacc5d22951f
 BASELINES = {
     "hi": ("ai4bharat/indictrans2-en-indic-1B", "89cd0007fd7b9e0693a2fd4404d187e07dac79fd"),
     "it": ("Helsinki-NLP/opus-mt-en-it", "be5a254d936f1a8c8da080406ca582a6615e6658"),
+    "es": ("Helsinki-NLP/opus-mt-en-es", "5bc4493d463cf000c1f0b50f8d56886a392ed4ab"),
+    "fr": ("Helsinki-NLP/opus-mt-en-fr", "dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18"),
 }
-FLORES_CODE = {"hi": "hin_Deva", "it": "ita_Latn"}
+FLORES_CODE = {"hi": "hin_Deva", "it": "ita_Latn", "es": "spa_Latn", "fr": "fra_Latn"}
 
 
 def _versions(*pkgs: str) -> dict[str, str | None]:
