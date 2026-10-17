@@ -232,6 +232,14 @@ def main() -> int:
             ]
             vin = ["-f", "lavfi", "-i", f"color=c=0x0f1b33:s=1920x1080:r=30:d={dur:.2f}"]
             vf = ",".join(draws) or "null"
+        elif (
+            sc["kind"] == "image"
+        ):  # a chart from docs/charts, centred on the dark background above the captions
+            img = ROOT / sc["image"]
+            if not img.exists():
+                raise SystemExit(f"scene {k}: {sc['image']} missing (run make charts)")
+            vin = ["-loop", "1", "-framerate", "30", "-t", f"{dur:.2f}", "-i", str(img)]
+            vf = "scale=1600:800:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:60:color=0x0f1b33,fps=30"
         elif sc["kind"] == "motion":
             # a rendered motion scene (render_motion.mjs, transparent PNGs) over real footage, dimmed, or a plain
             # background; full frame, with the narration captions on top (motion layouts keep the bottom clear)

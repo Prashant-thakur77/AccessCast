@@ -734,6 +734,21 @@
    "display": [
     "$0.340"
    ]
+  },
+  {
+   "claim_id": "cited.quote.erika_wolf_date",
+   "text": "Erika Wolf's article 'Audio Description: What It Means to Me' appeared in the Braille Forum (American Council of the Blind) in February 2021.",
+   "value": "2021-02",
+   "unit": "date",
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://www.acb.org/node/4777",
+   "accessed": "2026-10-18",
+   "quote": "where I would leave the venue not having any inkling of what really took place within the production.",
+   "display": [
+    "February 2021"
+   ],
+   "note": "Issue month from the page (Braille Forum, February 2021); no day shown. Quoted in the demo video with her name and the source."
   }
  ],
  "unverified": [

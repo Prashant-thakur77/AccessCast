@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MOTION = {
     "p_upload": "The problem, over stock footage of a family watching TV (Pexels): how much video is uploaded",
     "p_blind": "The problem: people who are blind (stock footage of a blind man reading Braille; the picture fades to black)",
+    "q_blind": "A real person's words: Erika Wolf (American Council of the Blind, Braille Forum, <pending: cited.quote.erika_wolf_date>), over stock footage of a blind man walking (Pexels)",
     "p_deaf": "The problem: people with disabling hearing loss (stock footage of people signing)",
     "p_read": "The problem: adults who read at the lowest levels (stock footage of an older man reading his phone)",
     "p_cost": "Why most video is left out: the time and price of doing it by hand (stock footage of a video editor at night)",
@@ -51,6 +52,8 @@ def main() -> int:
     for sc in sb["scenes"]:
         if sc["kind"] == "motion":
             pic = MOTION.get(sc["scene"], sc["scene"])
+        elif sc["kind"] == "image":
+            pic = f"Chart: {sc['image']} (drawn from evidence by scripts/make_charts.py)"
         elif sc["kind"] == "card":
             pic = "Card: " + " / ".join(placeholders(x) for x in sc["lines"])
         else:

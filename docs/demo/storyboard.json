@@ -19,6 +19,14 @@
   },
   {
    "kind": "motion",
+   "scene": "q_blind",
+   "bg": "data/stock/pexels_8781653.mp4",
+   "bg_start": 3,
+   "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.12:saturation=0.8",
+   "narration": "Erika Wolf, writing for the American Council of the Blind, remembers leaving shows not having any inkling of what really took place."
+  },
+  {
+   "kind": "motion",
    "scene": "p_deaf",
    "narration": "{claim:cited.who.hearing_430m} live with disabling hearing loss. They need captions that also say what sounds.",
    "bg": "data/stock/pexels_6321257.mp4",
@@ -245,13 +253,8 @@
    "narration": "On ten W3C accessibility videos we never tuned on, Gemma alone kept every not in {claim:e5.neg_gemma_k} of {claim:e5.neg_gemma_n} easy-read captions. What AccessCast published kept {claim:e5.neg_ours_k} of {claim:e5.neg_ours_n}."
   },
   {
-   "kind": "card",
-   "lines": [
-    "Translation, {claim:e4.n} test sentences per language",
-    "Italian: Gemma beat Opus-MT on both scores",
-    "Hindi: Gemma won on one score, lost on the other"
-   ],
-   "size": 56,
+   "kind": "image",
+   "image": "docs/charts/e4_translation.png",
    "narration": "For translation, Gemma beat a standard Italian model on both of our scores. For Hindi it won on one score and lost on the other, and we report that loss."
   },
   {
