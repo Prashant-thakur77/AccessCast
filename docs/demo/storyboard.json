@@ -86,7 +86,7 @@
   {
    "kind": "motion",
    "scene": "split",
-   "narration": "This is AccessCast. One video, made into five: for people who can't see the screen, people who can't hear, people who want simpler words, and for Hindi and Italian speakers.",
+   "narration": "This is AccessCast. One video, made for every viewer: for people who can't see the screen, people who can't hear, people who want simpler words, and for people who speak Hindi, Italian, Spanish, French or Portuguese.",
    "music_switch": true
   },
   {
@@ -125,7 +125,7 @@
    "recording": "five_ways.webm",
    "mark": "hi",
    "min_seconds": 4,
-   "narration": "And in Hindi and Italian, each with its own voice. Listen.",
+   "narration": "And in Hindi, Italian, Spanish, French and Portuguese, each with its own voice. Listen.",
    "footage": 7.0
   },
   {
@@ -137,6 +137,24 @@
   {
    "kind": "recording",
    "recording": "ver_it.mp4",
+   "keep_audio": true,
+   "seconds": 5.4
+  },
+  {
+   "kind": "recording",
+   "recording": "ver_es.mp4",
+   "keep_audio": true,
+   "seconds": 5.4
+  },
+  {
+   "kind": "recording",
+   "recording": "ver_fr.mp4",
+   "keep_audio": true,
+   "seconds": 5.4
+  },
+  {
+   "kind": "recording",
+   "recording": "ver_pt.mp4",
    "keep_audio": true,
    "seconds": 5.4
   },
@@ -185,20 +203,6 @@
    "recording": "how.webm",
    "narration": "The line goes back to Gemma with the exact rule it broke. The new line: he looks at the camera. The code checks again, and it passes.",
    "mark": "s-repair",
-   "footage": 9.4
-  },
-  {
-   "kind": "recording",
-   "recording": "how.webm",
-   "narration": "A line that fits a pause is spoken in it. Where there is no pause, the picture holds.",
-   "mark": "s-fit",
-   "footage": 9.4
-  },
-  {
-   "kind": "recording",
-   "recording": "how.webm",
-   "narration": "Then a person decides. Every description line waits for a reviewer, and nothing is published until they approve it.",
-   "mark": "s-person",
    "footage": 9.4
   },
   {

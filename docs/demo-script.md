@@ -15,14 +15,17 @@ Generated from `docs/demo/storyboard.json` by `scripts/storyboard_to_script.py`;
 | Black screen, "The same video, with AccessCast." The extended description version's sound (machine draft, labelled). | (the clip's own sound, no narration) |
 | "Open your eyes." The extended render itself: Hubble Ultra Deep Field, each description line as text, "picture held" while it is read. | (the clip's own sound, no narration) |
 | Card: No pause to speak in? / The picture holds. | There was no pause in his speech, so AccessCast held the picture while the description was read. Gemma 4, running on AMD, wrote every word, and code checked it. |
-| 3D animation: one video card splits into five, each labelled with its audience | This is AccessCast. One video, made into five: for people who can't see the screen, people who can't hear, people who want simpler words, and for Hindi and Italian speakers. |
+| 3D animation: one video card splits into five, each labelled with its audience | This is AccessCast. One video, made for every viewer: for people who can't see the screen, people who can't hear, people who want simpler words, and for people who speak Hindi, Italian, Spanish, French or Portuguese. |
 | The live site's home page (step `page`) | On our site, every viewer picks what they need, and the same video plays for them. |
 | The live site's "Same clip, five ways" page on the Sintel trailer (labelled draft) (step `blind`) | If you can't see the screen, a voice describes what happens, in the pauses. |
 | The live site's "Same clip, five ways" page on the Sintel trailer (labelled draft) (step `deaf`) | If you can't hear, captions show what is said, and the sounds. |
 | The live site's "Same clip, five ways" page on the Sintel trailer (labelled draft) (step `easy`) | If reading is hard, the same lines, in simpler words. |
-| The live site's "Same clip, five ways" page on the Sintel trailer (labelled draft) (step `hi`) | And in Hindi and Italian, each with its own voice. Listen. |
+| The live site's "Same clip, five ways" page on the Sintel trailer (labelled draft) (step `hi`) | And in Hindi, Italian, Spanish, French and Portuguese, each with its own voice. Listen. |
 | The NASA clip's Hindi version: its own Hindi voice and subtitles (machine draft, labelled) | (the clip's own sound, no narration) |
 | The NASA clip's Italian version: its own Italian voice and subtitles (machine draft, labelled) | (the clip's own sound, no narration) |
+| The NASA clip's Spanish version: its own voice and subtitles (machine draft, labelled) | (the clip's own sound, no narration) |
+| The NASA clip's French version: its own voice and subtitles (machine draft, labelled) | (the clip's own sound, no narration) |
+| The NASA clip's Portuguese version: its own voice and subtitles (machine draft, labelled) | (the clip's own sound, no narration) |
 | How it works at a glance: seven steps light up in turn (Gemma steps marked AMD, the check marked code) | How does it work? Whisper listens. Gemma 4 31B, on AMD, looks at the frames and writes. Code checks every line, and Gemma repairs what fails. A person approves. Then all five versions are made. |
 | The live site's "How it works" page on the NASA clip, one step at a time (step `s-listen`) | Here is that NASA clip, step by step. Whisper writes down every word, and pins each one to the moment it is said. |
 | The live site's "How it works" page on the NASA clip, one step at a time (step `s-pauses`) | The code measures the pauses between the words. This clip is mostly talk, so there are only a few. |
@@ -30,8 +33,6 @@ Generated from `docs/demo/storyboard.json` by `scripts/storyboard_to_script.py`;
 | The live site's "How it works" page on the NASA clip, one step at a time (step `s-write`) | From that list alone, Gemma writes one line, inside a word budget: a man in a NASA polo shirt speaks to the camera. |
 | The live site's "How it works" page on the NASA clip, one step at a time (step `s-check`) | Code checks it, and stops it. A blind viewer can already hear him speak, so it wastes the pause. The model never decides whether its own line is good enough. |
 | The live site's "How it works" page on the NASA clip, one step at a time (step `s-repair`) | The line goes back to Gemma with the exact rule it broke. The new line: he looks at the camera. The code checks again, and it passes. |
-| The live site's "How it works" page on the NASA clip, one step at a time (step `s-fit`) | A line that fits a pause is spoken in it. Where there is no pause, the picture holds. |
-| The live site's "How it works" page on the NASA clip, one step at a time (step `s-person`) | Then a person decides. Every description line waits for a reviewer, and nothing is published until they approve it. |
 | The review app: frames Gemma saw, checks, repair history, keyboard approval | Reviewers work in our review app by keyboard alone, with the frames, the checks and every repair in front of them. |
 | AccessCast Studio: a video dropped in, every stage listed as it runs | Anyone can drop in their own video, and watch every step run. |
 | Animation: Gemma's real answer is stopped at the code-check gate for dropping a number, its repair passes to the viewer (both texts from the recorded attack test) | This is the rule at the heart of AccessCast: the model proposes, code decides. An answer that breaks a rule is sent back, with the reason. Only an answer that passes every check reaches a viewer. |
