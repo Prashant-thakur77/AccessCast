@@ -80,6 +80,19 @@ test("360 px wide: panels stack and nothing scrolls sideways", async ({ page, re
   expect(await axeViolations(page)).toEqual([]);
 });
 
+test("every language has its own filter, and a filter shows only that language's lines", async ({ page, request }) => {
+  const pid = await projectId(request);
+  await openProject(page, pid);
+  for (const [kind, label] of [["es", "Spanish"], ["fr", "French"], ["pt", "Portuguese"]]) {
+    const b = page.locator(`#kind-filters button[data-kind='${kind}']`);
+    await expect(b).toContainText(label);
+    await b.click();
+    await expect(b).toHaveAttribute("aria-pressed", "true");
+    const n = Number(((await b.textContent()) || "").match(/\((\d+)\)/)?.[1] ?? "0");
+    await expect(page.locator("#item-list button[data-id]")).toHaveCount(n);
+  }
+});
+
 test("a save that conflicts with another change shows 'Changed elsewhere; reloaded.'", async ({ page, request }) => {
   const pid = await projectId(request);
   await openProject(page, pid);

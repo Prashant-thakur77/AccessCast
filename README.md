@@ -134,7 +134,7 @@ The law already asks for this. The European Accessibility Act has applied since 
 | US public universities | ADA Title II deadline; large lecture archives; some already buy machine description |
 | EU e-commerce, banks and transport with video | European Accessibility Act |
 | Italian public bodies and private providers in scope | Stanca Law and D.Lgs. 82/2022 fines |
-| Broadcasters and OTT platforms in the EU, Italy and India | access-service rules; Hindi and Italian; unreleased content that can't leave the building, so on-premises open models matter |
+| Broadcasters and OTT platforms in the EU and India | access-service rules; Hindi, Italian, Spanish, French and Portuguese; unreleased content that can't leave the building, so on-premises open models matter |
 | MOOC and training platforms | reach: many viewers read at a low level or watch with the sound off |
 
 What description costs today (list prices, not our measurements): 3Play Media lists $4.25 a minute for AI description with a human spot check and $18 for a voice artist; the University of Michigan lists $0.90 a minute for machine description and $6.65 to $14.70 for human description. A human describer needs about 20 hours to script and voice a one-hour programme (Media Access Australia).
@@ -145,7 +145,7 @@ Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per fi
 
 - **First customer:** the accessibility office of a US public university. It has a deadline (ADA Title II applies to large public bodies from 26 April 2027), a large archive of lecture and outreach video with no description, and staff who can review lines but not write description from scratch for thousands of hours.
 - **What they buy:** a price per finished minute for every version, set below today's list prices for AI description, with the review done by their own staff in our review app; or a yearly licence to run it on their own servers, because the models are open and the video never has to leave the building.
-- **Who comes next:** broadcasters and streaming platforms in the EU, Italy and India, where the law names access services and where Hindi and Italian versions of the same video are worth more than one more English track.
+- **Who comes next:** broadcasters and streaming platforms in the EU and India, where the law names access services and where versions of the same video in their own languages are worth more than one more English track.
 - **Why the cost works:** the model work is small (about $0.0053 of Gemma per finished minute at a published list price, an estimate). What the customer really pays for is a person's review time, which is why the review app is built for speed: confidence ordering, keyboard-only review, and lines that already passed every check.
 
 ### How it differs from tools that already exist

@@ -32,6 +32,9 @@
     ["easy", "Easy-read", (i) => i.kind === "easy"],
     ["hi", "Hindi", (i) => i.lang === "hi"],
     ["it", "Italian", (i) => i.lang === "it"],
+    ["es", "Spanish", (i) => i.lang === "es"],
+    ["fr", "French", (i) => i.lang === "fr"],
+    ["pt", "Portuguese", (i) => i.lang === "pt"],
   ];
   const KIND_LABEL = {
     ad: "Description",
@@ -41,7 +44,7 @@
     subtitle: "Subtitles",
     voiceover: "Voice-over",
   };
-  const LANG_LABEL = { en: "English", hi: "Hindi", it: "Italian" };
+  const LANG_LABEL = { en: "English", hi: "Hindi", it: "Italian", es: "Spanish", fr: "French", pt: "Portuguese" };
   const TERM_LABEL = {
     grounding: "Grounding: share of nouns found in the facts",
     slack: "Room left in the pause",
