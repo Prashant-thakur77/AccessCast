@@ -1,0 +1,41 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "cost_estimate",
+ "split": "dev",
+ "passed": true,
+ "git_commit": "26209a3e2f96ad17993e881f484ec067b6949c9c",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-17T11:52:19.918Z",
+ "finished_at": "2026-10-17T11:52:19.922Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "tokens_from": "evidence/e14_cost.json",
+  "price_from": [
+   "cited.price.gemma4_31b_input_per_m",
+   "cited.price.gemma4_31b_output_per_m"
+  ],
+  "kind": "estimate at a published list price"
+ },
+ "checks": {
+  "inputs_present": true
+ },
+ "results": [],
+ "summary": {
+  "usd_per_finished_minute_gemma": 0.00531,
+  "usd_per_hour_of_video_gemma": 0.318,
+  "tokens_in_per_minute": 37133,
+  "tokens_out_per_minute": 4683
+ },
+ "error": null
+}

@@ -538,7 +538,9 @@
    ],
    "note": "From the 'New Service Level' tier table on the price list; the page also says 'Launch and Refine packages are English only.'",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.price.3play_studio_ext",
@@ -703,6 +705,40 @@
    "public_files": []
   },
   {
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://pricepertoken.com/pricing-page/model/google-gemma-4-31b-it",
+   "accessed": "2026-10-17",
+   "note": "Lowest listed provider (CoreWeave) on an aggregator page; not AMD Token Factory's price, which is in points, and not a price we paid.",
+   "claim_id": "cited.price.gemma4_31b_input_per_m",
+   "text": "A published list price for Gemma 4 31B input tokens is $0.100 per million (CoreWeave, via pricepertoken.com).",
+   "value": 0.1,
+   "unit": "usd_per_million_tokens",
+   "quote": "$0.100 per million input tokens",
+   "display": [
+    "$0.100"
+   ],
+   "evidence": [],
+   "public_files": []
+  },
+  {
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://pricepertoken.com/pricing-page/model/google-gemma-4-31b-it",
+   "accessed": "2026-10-17",
+   "note": "Lowest listed provider (CoreWeave) on an aggregator page; not AMD Token Factory's price, which is in points, and not a price we paid.",
+   "claim_id": "cited.price.gemma4_31b_output_per_m",
+   "text": "A published list price for Gemma 4 31B output tokens is $0.340 per million (CoreWeave, via pricepertoken.com).",
+   "value": 0.34,
+   "unit": "usd_per_million_tokens",
+   "quote": "$0.340 per million output tokens",
+   "display": [
+    "$0.340"
+   ],
+   "evidence": [],
+   "public_files": []
+  },
+  {
    "claim_id": "cited.price.umich_human_high",
    "text": "At the University of Michigan, human professional description costs up to $14.70 per minute (extended, 24-hour turnaround).",
    "value": 14.7,
@@ -801,6 +837,48 @@
    "note": "WHO fact sheet dated 10 February 2026.",
    "evidence": [],
    "public_files": []
+  },
+  {
+   "claim_id": "cost.usd_per_hour",
+   "text": "estimated Gemma cost per hour of video, all five versions, at a published list price",
+   "value": 0.318,
+   "unit": "USD",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/cost_estimate.json",
+     "sha256": "790a49f4ec568d22b57f8eba6816c6f39a20c8e93f151cf3e164102386daa99f",
+     "pointer": "/summary/usd_per_hour_of_video_gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "$0.32"
+   ]
+  },
+  {
+   "claim_id": "cost.usd_per_min",
+   "text": "estimated Gemma cost per finished minute, all five versions, at a published list price",
+   "value": 0.00531,
+   "unit": "USD",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/cost_estimate.json",
+     "sha256": "790a49f4ec568d22b57f8eba6816c6f39a20c8e93f151cf3e164102386daa99f",
+     "pointer": "/summary/usd_per_finished_minute_gemma"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "$0.0053"
+   ]
   },
   {
    "claim_id": "e09.plane_diff",
@@ -2942,7 +3020,9 @@
      "pointer": "/summary/total_leaks"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -3037,7 +3117,9 @@
      "pointer": "/summary/tokens_per_finished_minute"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "41,818"
    ]
@@ -3267,8 +3349,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "23"
@@ -3289,8 +3370,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "23"
@@ -3311,8 +3391,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "7"
@@ -3333,8 +3412,7 @@
     }
    ],
    "public_files": [
-    "README.md",
-    "docs/deck/deck.md"
+    "README.md"
    ],
    "display": [
     "7"
