@@ -30,7 +30,7 @@ section.on { display: block; }
 .src { position: absolute; left: 140px; top: 760px; font: 500 26px/1.3 Inter; color: #C9D3EA; }
 
 /* problem stats */
-.stat .big { font-size: 190px; color: var(--sun); }
+.stat .big { font-size: 160px; color: var(--sun); }
 .stat .mid { margin-top: 18px; max-width: 1500px; }
 
 /* 3D split */
@@ -90,7 +90,9 @@ section p { margin: 0 0 .25em; }
 
 .close .big { font-size: 170px; text-align: center; }
 /* readable text over real footage: dark on the text side, the people stay visible */
-.shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,12,30,.88) 0%, rgba(8,12,30,.72) 42%, rgba(8,12,30,.15) 75%, rgba(8,12,30,0) 100%); }
+.shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,12,30,.55) 0%, rgba(8,12,30,.25) 55%, rgba(8,12,30,0) 100%); }
+.shade ~ .box { left: 90px; right: auto; max-width: 900px; padding: 36px 48px 40px; border-radius: 30px; background: rgba(8,12,30,.84); box-shadow: 0 30px 60px rgba(0,0,0,.35); }
+.shade ~ .src { left: 90px; top: 790px; padding: 8px 16px; border-radius: 10px; background: rgba(8,12,30,.7); }
 .shade-bottom { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8,12,30,.85) 0%, rgba(8,12,30,.35) 45%, rgba(8,12,30,.55) 100%); }
 .box, .src, .links { z-index: 1; }
 .src { color: #E6E9F5; }
@@ -145,7 +147,7 @@ section p { margin: 0 0 .25em; }
     <p class="big y anim pop" style="--d:1.1s;--len:.9s">more than <span data-claim="cited.market.youtube_500h_per_min"></span></p>
     <p class="mid anim up" style="--d:2s">of new video.</p>
   </div>
-  <p class="src anim fade" style="--d:2.6s">YouTube, 2019, via Tubefilter</p>
+  <p class="src anim fade" style="--d:2.6s;top:96px">YouTube, 2019, via Tubefilter</p>
 </section>
 
 <section data-scene="p_blind" data-dur="8">

@@ -7,7 +7,7 @@
    "narration": "Every minute, more than {claim:cited.market.youtube_500h_per_min} of new video go up on YouTube. Most of it only works if you can see it, and hear it.",
    "bg": "data/stock/pexels_5813766.mp4",
    "bg_start": 2,
-   "bg_look": "eq=brightness=-0.05:saturation=0.9"
+   "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.05:saturation=0.9"
   },
   {
    "kind": "motion",
@@ -15,7 +15,7 @@
    "narration": "{claim:cited.gbd.blind_2020} people are blind. They need to hear what is on screen.",
    "bg": "data/stock/pexels_10140872.mp4",
    "bg_start": 6,
-   "bg_look": "eq=brightness=-0.05:saturation=0.9,fade=t=out:st=2.2:d=2.6"
+   "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.05:saturation=0.9,fade=t=out:st=2.2:d=2.6"
   },
   {
    "kind": "motion",
@@ -31,7 +31,7 @@
    "narration": "{claim:cited.oecd.piaac_lit_level1_oecd_avg} of adults read at the lowest levels. They need simpler words, at a slower pace. And many people need the video in their own language.",
    "bg": "data/stock/pexels_6306262.mp4",
    "bg_start": 0.5,
-   "bg_look": "eq=brightness=-0.05:saturation=0.9"
+   "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.05:saturation=0.9"
   },
   {
    "kind": "motion",
@@ -39,7 +39,7 @@
    "narration": "Doing this by hand takes about {claim:cited.market.maa_20_hours} of work for one hour of TV, and costs {claim:cited.price.3play_industry_range_low} to {claim:cited.price.3play_industry_range_high} a minute. So most video never gets it.",
    "bg": "data/stock/pexels_5092425.mp4",
    "bg_start": 1,
-   "bg_look": "eq=brightness=-0.05:saturation=0.9"
+   "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.05:saturation=0.9"
   },
   {
    "kind": "recording",
