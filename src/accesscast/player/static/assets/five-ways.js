@@ -89,7 +89,7 @@
     video.pause();
     setButtons();
     renderSteps();
-    $("who").textContent = done ? "That was all five." : "Stopped.";
+    $("who").textContent = done ? "That was every viewer." : "Stopped.";
     document.body.setAttribute("data-world", "paper");
     $("who-local").textContent = "";
     $("b-start").focus();
