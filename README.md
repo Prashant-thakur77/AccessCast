@@ -74,6 +74,8 @@ Token Factory had outages during our runs (it answered "no available workers" fo
 
 ## Reliability and the live attack
 
+On the live site, anyone can run our attack against Gemma 4 31B on AMD Token Factory, or type their own caption and watch the easy-read, Hindi and Italian versions being made and checked ([proof page](https://accesscast.vercel.app/proof.html)). Nothing typed there is stored.
+
 | Check | Result | Evidence |
 |---|---|---|
 | Soak test | Not run: it measures our own GPU server, and we had no droplet | — |
