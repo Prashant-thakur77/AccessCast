@@ -29,6 +29,11 @@ fi
 
 cd "$(dirname "$0")/../.."
 unset VIRTUAL_ENV
+# Start from a manual review (every line waits for a person), whatever policy built the fixture: the public demo
+# fixture is built with prototype-auto, which would leave nothing to review.
+rm -rf "$dest"/*/review
+uv run python -c 'import sys; from pathlib import Path; from accesscast.review.store import ReviewStore
+[ReviewStore(p).init_from_items() for p in Path(sys.argv[1]).iterdir() if (p / "items").is_dir()]' "$dest"
 export ACCESSCAST_WORKER_MODE=fake
 export ACCESSCAST_PROJECTS_DIR="$dest"
 exec uv run accesscast review --host 127.0.0.1 --port "$port"
