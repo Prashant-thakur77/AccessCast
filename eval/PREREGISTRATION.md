@@ -69,3 +69,12 @@ No test-set run had happened when these were written; they record how the setup 
 - **test-freeze-2 (17 Oct):** after E1 ran under test-freeze-1, the review app gained an "Add a description line" control (needed for E12's write-from-scratch condition). The frozen prompts, constants, lexicons and confidence weights are byte-identical to test-freeze-1, and no pipeline code changed; the remaining test-set runs (E5, E7) use test-freeze-2.
 - **test-freeze-3 (17 Oct):** E9 found that extended-description renders drifted from their audio (`docs/incidents.md`); the render code and RN001 were fixed. Prompts, constants, lexicons and confidence weights are byte-identical to test-freeze-1; nothing that writes or checks description text changed. E5 and E7 run under test-freeze-3.
 - **test-freeze-4 (17 Oct):** render fixes from E9 (audio padded to the video's length; a final limiter for true peak) and the metric worker records release numbers only. Prompts, constants, lexicons and confidence weights are byte-identical to test-freeze-1. E5 and E7 are re-run under test-freeze-4; every run stays in `evidence/test_runs.jsonl`.
+
+## E17 (model ladder on AMD Token Factory), registered 18 Oct 2026 before any run
+The same 8 attack cases as E11 (our own attack clips, dev split), the same prompts, checks and oracles, k = 5 tries
+per setting (production and stress temperature), on other models Token Factory serves: Qwen3.8-27B and
+MiniCPM-V-4.7-35B-A3B. One change against the baseline (E11 run 2, Gemma 4 31B): the model. Reported per model:
+how often it took the bait (independent oracle) and how many answers reached a viewer. A model that cannot answer a
+case (no image input, no JSON mode) is reported as "no answer", never as a pass. Strict provider check on every
+answer. This tests the checks against weaker writers; it is not a ranking of those models in general.
+

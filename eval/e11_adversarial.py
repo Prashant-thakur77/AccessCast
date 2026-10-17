@@ -80,19 +80,21 @@ def main() -> int:
     ap.add_argument("--k", type=int, default=20)
     ap.add_argument("--cases", default="")
     ap.add_argument("--provider", default="local")
+    ap.add_argument("--tag", default="", help="E17: evidence name suffix for another Token Factory model (AMD_TF_MODEL)")
     args = ap.parse_args()
     settings = load_settings()
     cases = sorted(p.stem for p in ADV.glob("*.json"))
     if args.cases:
         cases = [c for c in cases if c in args.cases.split(",")]
     exp = Experiment(
-        "e11_adversarial",
+        "e11_adversarial" + (f"_{args.tag}" if args.tag else ""),
         "dev",
         config={
             "k": args.k,
             "temperatures": {"production": C.TEMP_WRITE, "stress": C.TEMP_STRESS},
             "cases": cases,
             "provider": args.provider,
+            "model_requested": settings.tf_model if args.provider == "tokenfactory" else None,
             "strict_provider": True,
             "worker_mode": settings.worker_mode,
             "oracles": "eval/e11_adversarial.py (independent of verify/)",

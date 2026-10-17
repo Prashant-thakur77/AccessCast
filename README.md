@@ -32,6 +32,8 @@ With Gemma 4 31B on AMD Token Factory:
 | "हिन्दी" | Hindi subtitles, a Hindi voice-over in the same time slots as the original speech, and Hindi description. |
 | "Italiano" | Italian subtitles, an Italian voice-over and Italian description. |
 
+![How AccessCast works: the video is analysed on our computer; Gemma 4 31B on AMD Token Factory looks and writes; code plans and checks every line and sends failures back; a person approves; voices and rendering run on our computer; a render gate refuses while any line waits; viewers pick their version](docs/architecture.png)
+
 ![One real clip, NASA's Life in the Universe: speech, the few pauses, the lines spoken in pauses, and the many lines read while the picture holds](docs/charts/timeline_nasa.png)
 
 All five come from one analysis of the video (shots, scenes, every word with its timing, the pauses between words, sounds, on-screen text and what is visible), so they never disagree with each other. Profiles combine: a blind Hindi speaker gets the Hindi voice-over with Hindi description.

@@ -33,12 +33,7 @@ All five are built from one analysis, so they never disagree. Profiles combine.
 ---
 <!-- slide: how -->
 # How it works
-1. Listen: Whisper finds every word and pause, forced alignment times them, and a small audio classifier labels the sounds between words.
-2. Look: Gemma 4 31B lists what is visible, at temperature 0.
-3. Plan: code finds the pauses and gives each line a word budget.
-4. Write: Gemma writes only from the visible facts.
-5. Check: code checks every line. Gemma repairs. A person approves.
-6. Render: one MP4 per audience, loudness and timing checked.
+![What runs where: our computer listens; Gemma 4 31B on AMD Token Factory looks, writes, translates and repairs; code plans and checks every line; a person approves; a render gate refuses while any line waits](docs/architecture.png)
 
 ---
 <!-- slide: demo -->
@@ -60,23 +55,21 @@ All five are built from one analysis, so they never disagree. Profiles combine.
 - **Attack (our own attack clips):** Gemma's easy-read dropped "within 10 seconds" in 20 of 20 tries. The number check caught 20. Reached the viewer: 0.
 
 Gemma 4 31B on AMD Token Factory.
+![Easy-read captions that kept every negation: Gemma alone against AccessCast as published](docs/charts/e5_negations.png) ![Our attack cases: Gemma took the bait only on the number case, and no answer reached a viewer](docs/charts/e11_attacks.png)
 
 ---
 <!-- slide: more-results -->
 # More results
-- **Speech recognition (dev):** Whisper large-v3-turbo, 4.5% English word error rate; word timing within 339 ms at the 95th percentile after alignment (raw 480 ms).
-- **Easy-read (test):** published cues paced for slow reading: 106 of 114, against 57 of 121 original captions.
-- **Translation (FLORES+, 1012 sentences each):** Italian: Gemma beat Opus-MT on both scores (COMET 0.8898 against 0.8522). Hindi: Gemma higher on COMET, IndicTrans2 higher on chrF++.
+- **Translation (FLORES+, 1012 sentences each):** Gemma beat Opus-MT on Italian on both scores; Hindi is mixed (IndicTrans2 higher on chrF++).
 - **Accessibility:** player 25 of 25 tests, review app and Studio 7 of 7, axe-core included.
+![Translation: Gemma minus the baseline per language and score, with 95% intervals](docs/charts/e4_translation.png)
 
 ---
 <!-- slide: amd -->
 # Gemma 4 on AMD Token Factory
 - Every Gemma call: **Gemma 4 31B on AMD Token Factory**, strict model check on each answer.
 - From our logs: **3,162 requests** answered, **3.0 million tokens**, 28 videos (32.8 minutes).
-- Measured from our side: 17 generated tokens/s at the best concurrency, p95 13.9 s; 15 of 120 requests refused by our key's rate limit.
-- Cost basis: 41,818 Gemma tokens per finished minute, all five versions (dev set).
-- Whisper, the voices and the sound classifier run on our own computer. No MI300X numbers: we had no droplet.
+![Gemma requests answered by AMD Token Factory, by day](docs/charts/amd_usage.png) ![Gemma tokens of one finished minute, by version](docs/charts/e14_tokens.png)
 
 ---
 <!-- slide: reliability -->
