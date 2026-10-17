@@ -57,9 +57,15 @@ for (const scheme of ["light", "dark"] as const) {
 
     test("results: every number filled from the registry, charts described", async ({ page }) => {
       await page.goto("/results.html");
-      await expect(page.locator(".result-card")).toHaveCount(7);
+      await expect(page.locator(".result-card")).toHaveCount(10);
       await expect(page.locator("[data-claim]").first()).not.toHaveText("");
-      for (const img of await page.locator(".result-card img").all()) expect(await img.getAttribute("alt")).toBeTruthy();
+      // every number is registered by now: none may still read "Measuring"
+      await expect(page.locator("[data-claim]", { hasText: "Measuring" })).toHaveCount(0);
+      for (const img of await page.locator(".result-card img").all()) {
+        expect(await img.getAttribute("alt")).toBeTruthy();
+        await img.scrollIntoViewIfNeeded();
+        await expect.poll(() => img.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
+      }
       expect(await axeViolations(page)).toEqual([]);
     });
 
@@ -271,6 +277,12 @@ test("watch: ? opens the shortcut list, Escape closes it and returns focus", asy
   await page.locator("body").click({ position: { x: 5, y: 5 } });
   await page.keyboard.press("2");
   await expect(page.locator("#t-deaf")).toHaveAttribute("aria-pressed", "true");
+  // the last viewer in the order shown has a key too (8 = Português), unless its version is not in this video
+  const pt = page.locator("#t-pt");
+  if (await pt.isEnabled()) {
+    await page.keyboard.press("8");
+    await expect(pt).toHaveAttribute("aria-pressed", "true");
+  }
 });
 
 test("landing: the listener mascot is decorative and reacts to the description toggle", async ({ page }) => {

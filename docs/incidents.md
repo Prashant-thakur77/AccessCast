@@ -156,3 +156,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** Adding the new languages to the 3-minute NASA draft stalled for more than 7 minutes on one request: no new Gemma call, one open HTTPS connection to Token Factory.
 **Root cause.** Subtitle translation sent every caption of the video in one request. For a talk-heavy 3-minute clip that is about 40 lines, and at Token Factory's speed that night the answer took longer than the 180-second client timeout. The client retried the same oversized request (up to 10 times). After a call fails every retry, the circuit breaker stops Gemma calls for 30 minutes, so the rest of the run would have failed closed.
 **Fix.** At most 12 lines per translation request (`TRANSLATE_BATCH_MAX`), the same size voice-over already used, with a unit test. The run was stopped and restarted.
+
+## 2026-10-18 New languages were made but never reached review or render
+**Symptom.** After adding Spanish, French and Portuguese, the NASA draft's caption and voice-over stages wrote their lines (`items/subs.es.jsonl` and the rest) and the render exited 0, but it made no Spanish, French or Portuguese video.
+**Root cause.** The review store read a fixed list of item files that named only Hindi and Italian. The new lines were never loaded, so the render's version list (built from loaded lines) left those languages out. Nothing failed, because nothing asked for them. The DAPT export had the same fixed pair.
+**Fix.** The store's file list and the DAPT export are built from the language lists in `constants.py`, and a unit test checks that every translation language is loaded for review. The draft was re-rendered: 9 versions, including the 3 new languages.

@@ -729,7 +729,7 @@
       e.preventDefault(); $("c-captions").click(); announce(state.showCaptions ? "Captions on." : "Captions off.");
     } else if (k === "d" || k === "D") {
       e.preventDefault(); $("c-desctext").click(); announce(state.descText ? "Description text on." : "Description text off.");
-    } else if (/^[1-5]$/.test(k)) {
+    } else if (/^[1-8]$/.test(k)) {
       var b = $("t-" + PROFILES[Number(k) - 1]);
       if (b && !b.disabled) { e.preventDefault(); b.click(); }
     }

@@ -108,7 +108,8 @@ def export_site(settings: Settings, projects: Sequence[str], out: Path, *, allow
         )
     (out / "data").mkdir(exist_ok=True)
     write_json(out / "data" / "catalog.json", {"projects": catalog})
-    charts = REPO_ROOT / "docs" / "charts"  # drawn from evidence by scripts/make_charts.py; the Results page shows them
+    # drawn from evidence by scripts/make_charts.py; the Results page shows them
+    charts = REPO_ROOT / "docs" / "charts"
     if charts.is_dir():
         (out / "charts").mkdir(parents=True, exist_ok=True)
         for f in sorted(charts.glob("*.png")):
