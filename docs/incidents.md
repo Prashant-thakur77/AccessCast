@@ -136,3 +136,13 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** In the extended version of a NASA dev clip, the first description line is voiced from 0.1 to 3.1 s, but its text cue ran until 8.2 s. The second line is voiced from 4.2 to 6.4 s, but its cue was pushed to 8.2 to 8.4 s.
 **Root cause.** The extended track mapped each line's start and end from the source timeline. A line voiced while the picture holds has no source time inside its hold, so its end mapped to after every later hold. The overlap guard then pushed the next cue back.
 **Fix.** `write_vtt` takes a `span_of`. For lines voiced in a hold, the extended render passes the exact output window from its timeline rows. Unit tests cover both paths. All site drafts were re-rendered, and the cues now match the holds to the millisecond.
+
+## 2026-10-17 Captions said "10 ,000"
+**Symptom.** On the NASA dev clip, the caption read "There are nearly 10 ,000 galaxies".
+**Root cause.** Whisper returned "10,000" as two tokens, "10" and ",000". The caption builder joins words with spaces. Our number check already normalised this, so the check passed while the caption still looked wrong.
+**Fix.** Caption segmentation glues a ",000"-style token onto the number before it (`_glue_number_parts`, two tests). The NASA draft's captions, easy-read and subtitles were re-made with only those stages re-run. Its description lines were not touched.
+
+## 2026-10-17 Adding a long draft broke the site deploy
+**Symptom.** Vercel refused the deploy: "Total bundle size (361.64 MB) exceeds the maximum function size".
+**Root cause.** The live-attack function bundled the whole site directory, including every draft video. A 3-minute draft with six versions added about 150 MB.
+**Fix.** The function config excludes site media (`excludeFiles` in `site/vercel.json`). The function never reads them. The live attack was checked after the deploy and is still connected.

@@ -500,6 +500,79 @@ SPECS: list[Spec] = [
 ]
 
 
+def amd_specs() -> list[Spec]:
+    """How much model work ran on AMD Token Factory, counted from our own call logs (scripts/amd_usage.py)."""
+    f, n = "amd_usage.json", "none"
+    thousands: Callable[[Any], str] = lambda x: f"{int(x):,}"  # noqa: E731
+    return [
+        Spec(
+            "amd.requests",
+            f,
+            "/summary/requests_answered",
+            "Gemma 4 31B requests answered by AMD Token Factory",
+            "requests",
+            thousands,
+            n,
+        ),
+        Spec(
+            "amd.tokens",
+            f,
+            "/summary/tokens_total",
+            "tokens in those requests, as the server reported them",
+            "tokens",
+            thousands,
+            n,
+        ),
+        Spec(
+            "amd.tokens_millions",
+            f,
+            "/summary/tokens_total",
+            "tokens in those requests, in millions",
+            "tokens",
+            lambda x: f"{int(x) / 1e6:.1f} million",
+            n,
+        ),
+        Spec("amd.videos", f, "/summary/videos", "videos those requests worked on", "videos", str, n),
+        Spec(
+            "amd.video_minutes",
+            f,
+            "/summary/video_minutes",
+            "minutes of video those requests worked on",
+            "minutes",
+            lambda x: f"{float(x):.1f}",
+            n,
+        ),
+        Spec(
+            "amd.videos_w3c",
+            f,
+            "/summary/video_groups/w3c_test",
+            "of which W3C test videos",
+            "videos",
+            str,
+            n,
+        ),
+        Spec("amd.videos_dev", f, "/summary/video_groups/dev_clips", "of which dev clips", "videos", str, n),
+        Spec(
+            "amd.videos_attack",
+            f,
+            "/summary/video_groups/attack_clips",
+            "of which attack clips",
+            "videos",
+            str,
+            n,
+        ),
+        Spec(
+            "amd.no_answer",
+            f,
+            "/summary/no_answer_after_retries",
+            "calls Token Factory never answered, after every retry",
+            "calls",
+            thousands,
+            n,
+        ),
+    ]
+
+
 def signed(nd: int) -> Callable[[Any], str]:
     return lambda x: f"{float(x):+.{nd}f}".replace("-", "−")
 
@@ -727,7 +800,7 @@ def register() -> dict[str, Any]:
     reg_p = EV / "public-claims.json"
     reg = json.loads(reg_p.read_text())
     by_id = {c["claim_id"]: c for c in reg["claims"]}
-    for s in [*SPECS, *e11_specs(), *e4_specs()]:
+    for s in [*SPECS, *e11_specs(), *e4_specs(), *amd_specs()]:
         f = EV / s.path
         if not f.exists():
             continue

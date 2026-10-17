@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "5e04786c051903a9008b6c20d855165ee4cf4d54",
+ "git_commit": "6b5ab6953736edadc427e7da79909931b448c285",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-17T14:07:34.955Z",
- "finished_at": "2026-10-17T14:09:49.649Z",
+ "started_at": "2026-10-17T15:33:39.302Z",
+ "finished_at": "2026-10-17T15:35:48.869Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -93,6 +93,10 @@
      "status": "passed"
     },
     {
+     "title": "how it works: every step drawn from the project",
+     "status": "passed"
+    },
+    {
      "title": "proof",
      "status": "passed"
     },
@@ -113,6 +117,10 @@
      "status": "passed"
     },
     {
+     "title": "how it works: every step drawn from the project",
+     "status": "passed"
+    },
+    {
      "title": "proof",
      "status": "passed"
     },
@@ -125,8 +133,8 @@
      "status": "passed"
     }
    ],
-   "passed": 23,
-   "total": 23
+   "passed": 25,
+   "total": 25
   },
   {
    "suite": "review",
@@ -167,8 +175,8 @@
  ],
  "summary": {
   "player": {
-   "passed": 23,
-   "total": 23
+   "passed": 25,
+   "total": 25
   },
   "review": {
    "passed": 7,

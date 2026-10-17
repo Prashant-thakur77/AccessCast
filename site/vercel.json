@@ -31,7 +31,8 @@
   "functions": {
     "api/attack.py": {
       "maxDuration": 60,
-      "includeFiles": "api/_vendor/**"
+      "includeFiles": "api/_vendor/**",
+      "excludeFiles": "{p/**,assets/**,data/**,*.html,*.png,*.jpg,*.gif,*.mp4}"
     }
   }
 }

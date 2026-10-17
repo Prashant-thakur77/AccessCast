@@ -4,6 +4,7 @@ clause boundaries, 40 frames–6 s, cue start = first word's aligned start, [sou
 
 from __future__ import annotations
 
+import re
 from collections.abc import Sequence
 
 from accesscast import constants as C
@@ -58,13 +59,26 @@ def _merge_short(cues: list[list[Word]], min_ms: int, max_ms: int, duration_ms: 
     return out
 
 
+def _glue_number_parts(words: Sequence[Word]) -> list[Word]:
+    """Whisper can split "10,000" into "10" and ",000"; joined with a space, the caption read "10 ,000"."""
+    out: list[Word] = []
+    for w in sorted(words, key=lambda x: x.start_ms):
+        if out and re.match(r"^[,.]\d", w.w) and out[-1].w[-1:].isdigit():
+            out[-1] = out[-1].model_copy(
+                update={"w": out[-1].w + w.w, "end_ms": max(out[-1].end_ms, w.end_ms)}
+            )
+        else:
+            out.append(w)
+    return out
+
+
 def segment_sdh(
     words: Sequence[Word], sounds: Sequence[SoundEvent], fps: float, duration_ms: int
 ) -> list[Item]:
     cues: list[list[Word]] = []
     cur: list[Word] = []
     max_ms = int(C.CUE_MAX_S * 1000)
-    for w in sorted(words, key=lambda x: x.start_ms):
+    for w in _glue_number_parts(words):
         if cur:
             # ASR chunk boundaries (w.seg) are artificial: they stranded words like "of" in their own cue
             new_seg = w.speaker != cur[-1].speaker

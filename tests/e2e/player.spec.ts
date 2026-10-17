@@ -46,6 +46,15 @@ for (const scheme of ["light", "dark"] as const) {
       expect(await axeViolations(page)).toEqual([]);
     });
 
+    test("how it works: every step drawn from the project", async ({ page }) => {
+      await page.goto("/how.html");
+      await expect(page.locator(".how-step")).toHaveCount(9);
+      await expect(page.locator("#repairs > li").first()).toBeVisible();
+      await expect(page.locator("#tl-pauses .tl")).toHaveAttribute("role", "img");
+      await expect(page.locator("#outs a").first()).toBeVisible();
+      expect(await axeViolations(page)).toEqual([]);
+    });
+
     test("proof", async ({ page }) => {
       await page.goto("/proof.html");
       await expect(page.locator("#last-run")).not.toContainText("Loading");
@@ -94,7 +103,7 @@ test("disclosure banner is always visible for drafts", async ({ page }) => {
 
 test("no horizontal scroll at 360 px", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
-  for (const path of ["/index.html", "/watch.html?audience=judge,blind,easy", "/five-ways.html", "/proof.html"]) {
+  for (const path of ["/index.html", "/watch.html?audience=judge,blind,easy", "/five-ways.html", "/how.html", "/proof.html"]) {
     await page.goto(path);
     await page.waitForLoadState("networkidle");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
