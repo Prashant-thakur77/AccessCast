@@ -87,6 +87,9 @@ Token Factory had outages during our runs (it answered "no available workers" fo
 
   ![Gemma minus the baseline for each language and score, with 95% intervals](docs/charts/e4_translation.png)
 - **Easy-read (E5, 10 W3C videos never used for tuning).** Asked to simplify the captions, Gemma alone kept every "not", "never" and "no" in 105 of 114 cues; in the others the sentence lost its negation and so its meaning. The easy-read AccessCast published kept them in 114 of 114, and sent 7 of 121 cues to a person instead. Paced for slow reading (at most 130 words a minute): 106 of 114 published cues, against 57 of 121 original captions. These counts use a negation counter close to our own check, so a blind rating by people leads this experiment; it is still to come.
+- **Every language through the same checks (E18, our two site drafts, dev).** Translated subtitle and voice-over lines that passed every check on their own: Hindi 74 of 81, Italian 74 of 81, Spanish 73 of 81, French 70 of 81, Portuguese 76 of 81. The rest went to a person, not to viewers. The check that held the most lines was CC001 (reading speed). Evidence: evidence/e18_language_checks.json.
+
+  ![Lines per language that passed every check, and lines held for a person](docs/charts/e18_languages.png)
 - **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 27 of 27, review app and Studio 7 of 7. No blind tester has used it yet.
 - **Tests.** 188 of 188 unit and golden tests pass, in 69 files; they run 53% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
 <!-- results.more:end -->

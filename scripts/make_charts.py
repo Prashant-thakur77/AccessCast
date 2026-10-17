@@ -256,6 +256,16 @@ def e17_ladder() -> None:
     )
 
 
+RULE_WORDS = {  # plain words for docs/rules.md ids
+    "CC001": "reading speed",
+    "CC002": "line length",
+    "CC004": "on screen too briefly or too long",
+    "CC009": "a name or number changed",
+    "VO001": "voice longer than its slot",
+    "VO003": "a name or number changed",
+}
+
+
 def e18_languages() -> None:
     e = ev("e18_language_checks.json")
     if not e:
@@ -266,23 +276,26 @@ def e18_languages() -> None:
     for i, (_name, v) in enumerate(rows):
         pct = 100 * v["passed"] / v["lines"]
         ax.barh(i, pct, color=GREEN, height=0.55)
-        top = ", ".join(list(v["held_by_rule"])[:2]) or "none"
+        rules = list(v["held_by_rule"])
+        top = f" (most often: {RULE_WORDS.get(rules[0], rules[0])})" if rules else ""
         ax.text(
-            pct + 0.8,
+            1.5,
             i,
-            f"{v['passed']} of {v['lines']} · held for a person {v['held_for_a_person']} (mostly {top})",
+            f"{v['passed']} of {v['lines']} passed · {v['held_for_a_person']} held for a person{top}",
             va="center",
-            fontsize=10,
+            fontsize=10.5,
+            color="white",
+            fontweight="bold",
         )
     ax.set_yticks(range(len(rows)), [r[0] for r in rows])
     ax.invert_yaxis()
-    ax.set_xlim(0, 150)
+    ax.set_xlim(0, 100)
     ax.set_xlabel("subtitle and voice-over lines that passed every check (%)")
     finish(
         fig,
         ax,
         "Every language goes through the same checks",
-        f"Split: {e['split']} ({e['summary']['projects']} site drafts; CC001 = reading speed). Source: evidence/e18_language_checks.json",
+        f"Split: {e['split']} ({e['summary']['projects']} site drafts, machine drafts). Source: evidence/e18_language_checks.json",
         "e18_languages",
     )
 
@@ -347,6 +360,7 @@ if __name__ == "__main__":
         amd_usage,
         e13_serving,
         e17_ladder,
+        e18_languages,
         timeline,
     ):
         f()
