@@ -38,9 +38,6 @@ def fill(text: str, reg: dict[str, str]) -> str:
     return re.sub(r"\{claim:([\w.\-]+)\}", lambda m: reg[m.group(1)], text)
 
 
-CAPTION_BAND = 240  # px at the bottom of a recording scene for the burned-in narration captions
-
-
 NARRATION_SPEED = 1.1  # a little brisker than Kokoro's default: the whole video stays near five minutes
 LEAD_S, TAIL_S = (
     0.15,
@@ -288,10 +285,8 @@ def main() -> int:
             # last frame is held while the narration finishes, never the next thing the recorder did
             take = min(dur, float(sc.get("footage", dur)))
             vin = ["-ss", f"{max(0.0, start):.2f}", "-t", f"{take:.2f}", "-i", str(src)]
-            # the screen sits above a band that holds the narration captions, so they never cover the player's
-            # own captions or the text being shown (keep_audio scenes have no narration and use the full frame)
-            box = "1920:1080" if sc.get("keep_audio") else f"1920:{1080 - CAPTION_BAND}"
-            pad_y = "(oh-ih)/2" if sc.get("keep_audio") else "0"
+            # full frame; the recordings leave their bottom clear (zoomed out where the page has captions of its own)
+            box, pad_y = "1920:1080", "(oh-ih)/2"
             vf = (
                 f"scale={box}:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:{pad_y}:color=0x0f1b33,fps=30,"
                 f"tpad=stop_mode=clone:stop_duration={dur:.2f}"
@@ -303,7 +298,11 @@ def main() -> int:
             for j, line in enumerate(lines):  # one drawtext per line: this ffmpeg draws a newline as a glyph
                 tf = OUT / f"cap{k:02d}_{i:02d}_{j}.txt"
                 tf.write_text(line, encoding="utf-8")
-                y = f"h-{230 - 64 * j if len(lines) == 2 else 170}"
+                y = (
+                    f"{40 + 64 * j}"  # top, where the bottom of the screen shows what the narration is about
+                    if sc.get("captions_at") == "top"
+                    else f"h-{230 - 64 * j if len(lines) == 2 else 170}"
+                )
                 caps.append(
                     f"drawtext=fontfile={FONT}:textfile='{tf}':x=(w-text_w)/2:y={y}:fontsize=46:fontcolor=white:expansion=none:"
                     f"box=1:boxcolor=black@0.75:boxborderw=12:enable='between(t,{a:.2f},{b:.2f})'"

@@ -5,36 +5,41 @@
    "kind": "motion",
    "scene": "p_upload",
    "narration": "Every minute, more than {claim:cited.market.youtube_500h_per_min} of new video go up on YouTube. Most of it only works if you can see it, and hear it.",
-   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
-   "bg_start": 1
+   "bg": "data/stock/pexels_5813766.mp4",
+   "bg_start": 2,
+   "bg_look": "eq=brightness=-0.05:saturation=0.9"
   },
   {
    "kind": "motion",
    "scene": "p_blind",
    "narration": "{claim:cited.gbd.blind_2020} people are blind. They need to hear what is on screen.",
-   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
-   "bg_start": 8
+   "bg": "data/stock/pexels_10140872.mp4",
+   "bg_start": 6,
+   "bg_look": "eq=brightness=-0.05:saturation=0.9,fade=t=out:st=2.2:d=2.6"
   },
   {
    "kind": "motion",
    "scene": "p_deaf",
    "narration": "{claim:cited.who.hearing_430m} live with disabling hearing loss. They need captions that also say what sounds.",
-   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
-   "bg_start": 14
+   "bg": "data/stock/pexels_6321257.mp4",
+   "bg_start": 4,
+   "bg_look": "eq=brightness=-0.05:saturation=0.9"
   },
   {
    "kind": "motion",
    "scene": "p_read",
    "narration": "{claim:cited.oecd.piaac_lit_level1_oecd_avg} of adults read at the lowest levels. They need simpler words, at a slower pace. And many people need the video in their own language.",
-   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
-   "bg_start": 21
+   "bg": "data/stock/pexels_6306262.mp4",
+   "bg_start": 0.5,
+   "bg_look": "eq=brightness=-0.05:saturation=0.9"
   },
   {
    "kind": "motion",
    "scene": "p_cost",
    "narration": "Doing this by hand takes about {claim:cited.market.maa_20_hours} of work for one hour of TV, and costs {claim:cited.price.3play_industry_range_low} to {claim:cited.price.3play_industry_range_high} a minute. So most video never gets it.",
-   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
-   "bg_start": 28
+   "bg": "data/stock/pexels_5092425.mp4",
+   "bg_start": 1,
+   "bg_look": "eq=brightness=-0.05:saturation=0.9"
   },
   {
    "kind": "recording",
@@ -74,6 +79,13 @@
    "kind": "motion",
    "scene": "split",
    "narration": "This is AccessCast. One video, made into five: for people who can't see the screen, people who can't hear, people who want simpler words, and for Hindi and Italian speakers."
+  },
+  {
+   "kind": "recording",
+   "recording": "home.webm",
+   "mark": "page",
+   "footage": 11,
+   "narration": "On our site, every viewer picks what they need, and the same video plays for them."
   },
   {
    "kind": "recording",
@@ -184,7 +196,8 @@
    "kind": "recording",
    "recording": "decisions_drawer.webm",
    "narration": "Reviewers work in our review app by keyboard alone, with the frames, the checks and every repair in front of them.",
-   "start": 1
+   "start": 1,
+   "captions_at": "top"
   },
   {
    "kind": "recording",
@@ -193,9 +206,14 @@
    "start": 1
   },
   {
+   "kind": "motion",
+   "scene": "gate",
+   "narration": "This is the rule at the heart of AccessCast: the model proposes, code decides. An answer that breaks a rule is sent back, with the reason. Only an answer that passes every check reaches a viewer."
+  },
+  {
    "kind": "recording",
    "recording": "proof.webm",
-   "narration": "We also attack our own system. We ask Gemma to simplify: press the button three times within ten seconds. On our site, anyone can run this live.",
+   "narration": "We attack it on purpose. We ask Gemma to simplify: press the button three times within ten seconds. On our site, anyone can run this live.",
    "mark": "pressed",
    "offset": -0.3
   },
@@ -258,8 +276,9 @@
    "kind": "motion",
    "scene": "close",
    "narration": "AccessCast. Every viewer, the same video. Everything, including what didn't work, is in our repo.",
-   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
-   "bg_start": 22
+   "bg": "data/stock/pexels_5813766.mp4",
+   "bg_start": 12,
+   "bg_look": "eq=brightness=-0.05:saturation=0.9"
   }
  ]
 }
