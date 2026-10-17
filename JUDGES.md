@@ -5,7 +5,7 @@ The shortest route through the submission.
 ## Three-Minute Review
 1. Watch the demo video: <pending: video.url>
 2. Open the live player: https://accesscast.vercel.app/watch.html. Pick "I can't see the screen", then "Italiano".
-3. Open [`/proof.html`](https://accesscast.vercel.app/proof.html) and press **Run the attack**. It asks Gemma 4 31B on AMD Token Factory five times, live (usually under a minute), to simplify "press the button 3 times within 10 seconds", and shows each answer, the check that blocked it, and Gemma's repair. Below it is the recorded E11 run of 20 tries.
+3. Open [`/proof.html`](https://accesscast.vercel.app/proof.html) and press **Run the attack**. It asks Gemma 4 31B on AMD Token Factory five times, live (usually under a minute), to simplify "press the button 3 times within 10 seconds", and shows each answer, the check that blocked it, and Gemma's repair. Below it is the recorded E11 run of 20 tries. Then write your own sentence in **Try your own caption**: Gemma makes the easy-read, Hindi and Italian versions live on AMD, and the page shows which of our checks stopped any answer. Put a number, a "not" or a name in it.
 4. Open the three key evidence files: [`evidence/e01_verifier_ab.json`](evidence/), [`evidence/e13_serving_tokenfactory.json`](evidence/e13_serving_tokenfactory.json), [`evidence/e14_cost.json`](evidence/).
 5. Optional, no GPU: `make demo-fixture`, then open http://127.0.0.1:8080/?audience=judge
 
