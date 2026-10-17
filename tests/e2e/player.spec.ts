@@ -42,7 +42,7 @@ for (const scheme of ["light", "dark"] as const) {
 
     test("five ways", async ({ page }) => {
       await page.goto("/five-ways.html");
-      await expect(page.locator("#steps > li")).toHaveCount(7);
+      await expect(page.locator("#steps > li")).toHaveCount(8);
       expect(await axeViolations(page)).toEqual([]);
     });
 

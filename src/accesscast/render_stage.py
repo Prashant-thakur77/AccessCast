@@ -36,6 +36,7 @@ TRACK_LABELS = {
     "subs.it": ("subtitles", "it", "Italiano"),
     "subs.es": ("subtitles", "es", "Español"),
     "subs.fr": ("subtitles", "fr", "Français"),
+    "subs.pt": ("subtitles", "pt", "Português"),
     "desc.en": ("descriptions", "en", "Description (English)"),
     "desc.hi": ("descriptions", "hi", "Description (हिन्दी)"),
     "desc.it": ("descriptions", "it", "Description (Italiano)"),
@@ -54,6 +55,7 @@ AUDIENCE_VERSIONS: dict[str, dict[str, Any]] = {
     "it": {"label": "Italiano", "tracks": ["subs.it"]},
     "es": {"label": "Español", "tracks": ["subs.es"]},
     "fr": {"label": "Français", "tracks": ["subs.fr"]},
+    "pt": {"label": "Português", "tracks": ["subs.pt"]},
     "blind.hi": {"label": "हिन्दी + description", "tracks": ["desc.hi", "subs.hi"]},
     "blind.it": {"label": "Italiano + description", "tracks": ["desc.it", "subs.it"]},
 }
@@ -68,7 +70,7 @@ def project_versions(items: Mapping[str, Item]) -> list[str]:
     for v in AUDIENCE_VERSIONS:
         if v in ("blind.hi", "blind.it") and f"ad_translation.{v.split('.')[1]}" not in present:
             continue
-        if v in ("es", "fr") and f"subtitle.{v}" not in present:
+        if v in ("es", "fr", "pt") and f"subtitle.{v}" not in present:
             continue
         out.append(v)
     return out
@@ -202,6 +204,7 @@ def render_all(
         "subs.it": sel(ItemKind.SUBTITLE, "it"),
         "subs.es": sel(ItemKind.SUBTITLE, "es"),
         "subs.fr": sel(ItemKind.SUBTITLE, "fr"),
+        "subs.pt": sel(ItemKind.SUBTITLE, "pt"),
         "desc.en": timeline_items(sel(ItemKind.AD, "en"), extended_timeline=False),
         "desc.hi": timeline_items(sel(ItemKind.AD_TRANSLATION, "hi"), extended_timeline=False),
         "desc.it": timeline_items(sel(ItemKind.AD_TRANSLATION, "it"), extended_timeline=False),

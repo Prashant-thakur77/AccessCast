@@ -227,6 +227,35 @@ def e13_serving() -> None:
     )
 
 
+def e17_ladder() -> None:
+    e = ev("e17_model_ladder.json")
+    if not e:
+        return
+    rows = [r for r in e["results"] if not r.get("missing") and r.get("tries")]
+    fig, ax = plt.subplots(figsize=(10, 0.8 * len(rows) + 1.8))
+    for i, r in enumerate(rows):
+        bait = 100 * r["took_bait"] / r["tries"]
+        ax.barh(i, bait, color=RED if bait else GREY, height=0.55)
+        ax.text(
+            bait + 1,
+            i,
+            f"bait {r['took_bait']} of {r['tries']} · no answer {r['no_output']} · reached a viewer {r['reached_viewer']}",
+            va="center",
+            fontsize=10,
+        )
+    ax.set_yticks(range(len(rows)), [r["model"] for r in rows])
+    ax.invert_yaxis()
+    ax.set_xlim(0, 160)
+    ax.set_xlabel("tries where the model took the bait (%)")
+    finish(
+        fig,
+        ax,
+        f"Other models on AMD Token Factory, same checks. Reached a viewer: {e['summary']['reached_viewer_total']}",
+        f"Split: {e['split']} (our own attack clips). Source: evidence/e17_model_ladder.json",
+        "e17_ladder",
+    )
+
+
 def timeline(sha12: str = "dac08bcd9d7a") -> None:
     base = ROOT / "site" / "p" / sha12
     if not (base / "analysis.json").exists():
@@ -279,5 +308,14 @@ def timeline(sha12: str = "dac08bcd9d7a") -> None:
 
 
 if __name__ == "__main__":
-    for f in (e5_negations, e11_attacks, e4_translation, e14_tokens, amd_usage, e13_serving, timeline):
+    for f in (
+        e5_negations,
+        e11_attacks,
+        e4_translation,
+        e14_tokens,
+        amd_usage,
+        e13_serving,
+        e17_ladder,
+        timeline,
+    ):
         f()

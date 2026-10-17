@@ -190,11 +190,11 @@
     outs.textContent = "";
     [["blind", "blind.en", "For someone who can't see the screen"], ["extended", "blind_ext.en", "The same, with the picture held where there is no pause"],
      ["deaf", "deaf.en", "For someone who can't hear"], ["easy", "easy.en", "For someone who wants simpler words"],
-     ["hi", "hi", "हिन्दी"], ["it", "it", "Italiano"], ["es", "es", "Español"], ["fr", "fr", "Français"]].forEach(function (v) {
+     ["hi", "hi", "हिन्दी"], ["it", "it", "Italiano"], ["es", "es", "Español"], ["fr", "fr", "Français"], ["pt", "pt", "Português"]].forEach(function (v) {
       if (!idx.versions[v[1]]) return;
       var a = el("a", { href: "watch.html?audience=" + v[0] + "&p=" + res.project.sha12, text: v[2] });
       if (v[1] === "hi") a.setAttribute("lang", "hi");
-      if (["it", "es", "fr"].indexOf(v[1]) >= 0) a.setAttribute("lang", v[1]);
+      if (["it", "es", "fr", "pt"].indexOf(v[1]) >= 0) a.setAttribute("lang", v[1]);
       outs.appendChild(el("li", null, [a]));
     });
   }

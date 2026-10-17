@@ -20,6 +20,63 @@ _DEVANAGARI = re.compile(r"[ऀ-ॿ]")
 _LATIN = re.compile(r"[A-Za-zÀ-ÿ]")
 
 STOPWORDS: dict[str, frozenset[str]] = {
+    "pt": frozenset(
+        [
+            "o",
+            "a",
+            "os",
+            "as",
+            "um",
+            "uma",
+            "uns",
+            "umas",
+            "e",
+            "ou",
+            "mas",
+            "que",
+            "de",
+            "do",
+            "da",
+            "dos",
+            "das",
+            "em",
+            "no",
+            "na",
+            "nos",
+            "nas",
+            "com",
+            "por",
+            "para",
+            "é",
+            "são",
+            "está",
+            "estão",
+            "foi",
+            "ser",
+            "se",
+            "seu",
+            "sua",
+            "seus",
+            "suas",
+            "lhe",
+            "me",
+            "te",
+            "nos",
+            "este",
+            "esta",
+            "estes",
+            "estas",
+            "esse",
+            "essa",
+            "isso",
+            "aqui",
+            "ali",
+            "muito",
+            "mais",
+            "como",
+            "quando",
+        ]
+    ),
     # Spanish and French: common function words (ours, for the token-based checks on these languages)
     "es": frozenset(
         [
@@ -366,9 +423,29 @@ NEGATIONS: dict[str, frozenset[str]] = {
     "fr": frozenset(
         {"pas", "jamais", "rien", "aucun", "aucune", "sans", "ni", "nulle"}
     ),  # "ne" pairs with these
+    "pt": frozenset({"não", "nunca", "jamais", "nada", "nenhum", "nenhuma", "nem", "sem", "ninguém"}),
 }
 
 NUMBER_WORDS: dict[str, dict[str, int]] = {
+    "pt": {
+        "zero": 0,
+        "dois": 2,
+        "duas": 2,
+        "três": 3,
+        "quatro": 4,
+        "cinco": 5,
+        "seis": 6,
+        "sete": 7,
+        "oito": 8,
+        "nove": 9,
+        "dez": 10,
+        "onze": 11,
+        "doze": 12,
+        "vinte": 20,
+        "trinta": 30,
+        "quarenta": 40,
+        "cinquenta": 50,
+    },
     "es": {
         "cero": 0,
         "dos": 2,
@@ -638,6 +715,14 @@ def finite_past_verbs(text: str) -> list[str]:
 
 
 _SCALES: dict[str, dict[str, int]] = {
+    "pt": {
+        "cem": 100,
+        "mil": 1_000,
+        "milhão": 1_000_000,
+        "milhões": 1_000_000,
+        "bilhão": 1_000_000_000,
+        "bilhões": 1_000_000_000,
+    },
     "es": {"cien": 100, "mil": 1_000, "millón": 1_000_000, "millones": 1_000_000},
     "fr": {
         "cent": 100,

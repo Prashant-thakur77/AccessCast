@@ -1,4 +1,4 @@
-"""Fetch FLORES+ devtest for E4: eng_Latn, hin_Deva, ita_Latn, spa_Latn, fra_Latn (openlanguagedata/flores_plus, CC BY-SA 4.0, gated).
+"""Fetch FLORES+ devtest for E4: eng_Latn, hin_Deva, ita_Latn, spa_Latn, fra_Latn, por_Latn (openlanguagedata/flores_plus, CC BY-SA 4.0, gated).
 
 The data goes to data/flores/ (git-ignored) and is never committed (CLAUDE.md rule 8). Only the SHA-256 manifest
 eval/datasets/manifests/flores_plus.json is committed, so every E4 result is tied to exact files.
@@ -25,7 +25,7 @@ from accesscast.project import atomic_write_text, sha256_file
 
 REPO = "openlanguagedata/flores_plus"
 REVISION = "e707e62e762a9e2faca3933aa315f4665cc3cd8f"  # dataset commit, read from the HF API on 16 Oct 2026
-LANGS = ("eng_Latn", "hin_Deva", "ita_Latn", "spa_Latn", "fra_Latn")
+LANGS = ("eng_Latn", "hin_Deva", "ita_Latn", "spa_Latn", "fra_Latn", "por_Latn")
 OUT = REPO_ROOT / "data" / "flores"
 MANIFEST = REPO_ROOT / "eval" / "datasets" / "manifests" / "flores_plus.json"
 PAGE = f"https://huggingface.co/datasets/{REPO}"

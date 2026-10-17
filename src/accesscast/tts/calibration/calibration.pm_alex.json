@@ -1,0 +1,12 @@
+{
+  "voice": "pm_alex",
+  "lang": "pt",
+  "speed": 1.0,
+  "n": 60,
+  "intercept_s": -0.2739,
+  "s_per_word": 0.3628,
+  "wps_voice": 2.7567,
+  "resid_p95_s": 0.764,
+  "device": "cuda",
+  "wall_s": 12.81
+}
