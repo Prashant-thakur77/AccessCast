@@ -67,19 +67,27 @@ class Job:
     sha12: str
     video: Path
     log: Path
-    proc: subprocess.Popen[bytes]
+    proc: subprocess.Popen[bytes] | None  # None: a finished job read back from disk after a restart
     started: float = field(default_factory=time.time)
+    exit_code: int | None = None
+    finished: float | None = None
 
 
 def stage_states(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Latest state of each stage from the events log: waiting, running, done, skipped or failed."""
     last: dict[str, dict[str, Any]] = {}
+    skipped: dict[str, dict[str, Any]] = {}
     for e in events:
         st = e.get("stage")
         kind = e.get("event")
         if st is None or kind not in ("start", "done", "error", "skipped", "cached"):
             continue
-        last[st] = e
+        if kind == "start":
+            skipped.pop(st, None)
+        if kind == "skipped":
+            skipped[st] = e
+        # a stage that skipped still ends with "done": show it as not run, with the reason
+        last[st] = skipped[st] if kind == "done" and st in skipped else e
     out = []
     for stage, words in STAGE_WORDS:
         ev: dict[str, Any] | None = last.get(stage)
@@ -106,10 +114,54 @@ def add_studio(app: FastAPI, settings: Settings, provider: str) -> None:
     lock = threading.Lock()
     current: dict[str, Job] = {}
     root = settings.projects_dir / "_studio"
+    saved = root / "last_job.json"  # the last job survives a server restart (finished jobs only)
+
+    def save(j: Job) -> None:
+        root.mkdir(parents=True, exist_ok=True)
+        saved.write_text(
+            json.dumps(
+                {
+                    "id": j.id,
+                    "name": j.name,
+                    "sha12": j.sha12,
+                    "video": str(j.video),
+                    "log": str(j.log),
+                    "started": j.started,
+                    "exit_code": j.exit_code,
+                    "finished": j.finished,
+                }
+            )
+        )
+
+    def code_of(j: Job) -> int | None:
+        if j.proc is not None and j.exit_code is None:
+            c = j.proc.poll()
+            if c is not None:
+                j.exit_code, j.finished = c, time.time()
+                save(j)
+        return j.exit_code
+
+    if saved.exists():
+        try:
+            d = json.loads(saved.read_text())
+            if d.get("exit_code") is not None:
+                current["job"] = Job(
+                    id=d["id"],
+                    name=d["name"],
+                    sha12=d["sha12"],
+                    video=Path(d["video"]),
+                    log=Path(d["log"]),
+                    proc=None,
+                    started=d["started"],
+                    exit_code=d["exit_code"],
+                    finished=d.get("finished"),
+                )
+        except (ValueError, KeyError):
+            pass
 
     def running() -> Job | None:
         j = current.get("job")
-        return j if j is not None and j.proc.poll() is None else None
+        return j if j is not None and j.proc is not None and code_of(j) is None else None
 
     @app.post("/api/studio/jobs")
     async def start(request: Request, name: str = "video.mp4") -> JSONResponse:
@@ -154,6 +206,7 @@ def add_studio(app: FastAPI, settings: Settings, provider: str) -> None:
                 env=os.environ.copy(),
             )
             current["job"] = Job(id=sha[:12], name=safe, sha12=sha[:12], video=video, log=log, proc=proc)
+            save(current["job"])
         return JSONResponse({"id": sha[:12], "name": safe, "seconds": round(dur, 1)}, status_code=202)
 
     @app.get("/api/studio/jobs/current")
@@ -164,7 +217,7 @@ def add_studio(app: FastAPI, settings: Settings, provider: str) -> None:
         p = settings.projects_dir / j.sha12
         events = read_jsonl(p / "logs" / "events.jsonl")
         calls = read_jsonl(p / "logs" / "llm_calls.jsonl")
-        code = j.proc.poll()
+        code = code_of(j)
         lines = {}
         for f, label in ITEM_FILES.items():
             items = read_jsonl(p / "items" / f"{f}.jsonl")
@@ -184,7 +237,7 @@ def add_studio(app: FastAPI, settings: Settings, provider: str) -> None:
                 "project": j.sha12,
                 "status": "running" if code is None else ("done" if code == 0 else "failed"),
                 "exit_code": code,
-                "elapsed_s": round(time.time() - j.started, 1),
+                "elapsed_s": round((j.finished or time.time()) - j.started, 1),
                 "provider": provider,
                 "fake": settings.worker_mode == "fake",
                 "stages": stage_states(events),
