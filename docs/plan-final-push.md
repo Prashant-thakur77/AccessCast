@@ -64,8 +64,8 @@ Status of the phases above: A, B1–B3, C, E1, F1, F2, F4 done; B4/D1 (E4 es/fr/
   target about 5:00–5:30 with no silence over 1 s and no hard cut.
 - H8. Deck and lablab text refreshed from claims; `make check`, E16, claims-check, submission-check.
 
-- H9 (follow-up, after submission if time runs out). Review app: the list of lines as one Tab stop with arrow
-  keys (now every line is a Tab stop; with five languages a keyboard user passes many lines before the header).
+- H9. Review app: the list of lines is one Tab stop with arrow keys, Home and End (it was one Tab stop per line;
+  with five languages a keyboard user passed many lines before the header). Tested.
 
 ## Phase G — close
 - `make submission-check`, final claims-check, tag `act3-submission`, hand the user the upload checklist.
