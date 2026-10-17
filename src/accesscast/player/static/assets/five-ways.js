@@ -1,4 +1,4 @@
-/* "Same 20 seconds, five ways" (PLAN §13.4): play one segment once per audience version. */
+/* "Same clip, every viewer" (PLAN §13.4): play one segment once per audience version. */
 (function () {
   "use strict";
   var AC = window.AC, el = AC.el;
