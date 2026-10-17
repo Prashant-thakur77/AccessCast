@@ -51,6 +51,7 @@ const playingFrom = (p, t) =>
   );
 await segment("five_ways", async (p) => {
   await p.goto(`${SITE}/five-ways.html${PROJECT ? `?p=${PROJECT}` : ""}`);
+  await p.evaluate(() => { document.body.style.zoom = "0.8"; });  // the player and its captions clear the narration captions
   await pause(p, 2500);
   p.mark("page");
   await p.locator("#b-start").focus();
@@ -75,10 +76,24 @@ await segment("five_ways", async (p) => {
   }
 });
 
+// The home page: what a viewer sees first (hero, then the five ways in).
+await segment("home", async (p) => {
+  await p.goto(`${SITE}/index.html`);
+  await pause(p, 2500);
+  p.mark("page");
+  await pause(p, 3500);
+  await p.evaluate(() => window.scrollBy({ top: 650, behavior: "smooth" }));
+  await pause(p, 3000);
+  p.mark("scrolled");
+  await p.evaluate(() => window.scrollBy({ top: 650, behavior: "smooth" }));
+  await pause(p, 4000);
+});
+
 // How it works: one real clip, step by step (how.html), each step brought to the top and held for its narration.
 const HOW_P = process.env.HOW_PROJECT || "dac08bcd9d7a";
 await segment("how", async (p) => {
   await p.goto(`${SITE}/how.html?p=${HOW_P}`);
+  await p.evaluate(() => { document.body.style.zoom = "0.8"; });  // each step clears the narration captions
   await p.waitForFunction(() => document.querySelectorAll("#repairs > li").length > 0, null, { timeout: 30000 });
   await p.evaluate(() => Promise.all([...document.images].map((i) => (i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r))))));
   await pause(p, 1500);

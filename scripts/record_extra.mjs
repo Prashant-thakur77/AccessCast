@@ -23,6 +23,11 @@ async function segment(name, fn) {
 const pause = (p, ms) => p.waitForTimeout(ms);
 await segment("studio", async (p) => {
   await p.goto(`${REVIEW}/app/studio.html`);
+  await p.evaluate(() => {  // fill the frame: the Studio column is centred and enlarged for the recording
+    document.body.style.zoom = "1.35";
+    const m = document.querySelector("main"); m.style.marginLeft = "auto"; m.style.marginRight = "auto";
+    document.querySelector("header").style.maxWidth = "none";
+  });
   await pause(p, 3000);
   await p.locator("#run").scrollIntoViewIfNeeded();
   await pause(p, 6000);
@@ -32,6 +37,7 @@ await segment("studio", async (p) => {
 await segment("decisions_drawer", async (p) => {
   await p.goto(`${REVIEW}/app/index.html?p=${process.env.PROJECT}`);
   await p.locator("#workspace").waitFor();
+  await p.evaluate(() => { document.body.style.zoom = "0.85"; });  // the repair history clears the narration captions
   await pause(p, 1500);
   await p.locator(`[data-id="${process.env.ITEM}"]`).first().click();
   await pause(p, 2000);

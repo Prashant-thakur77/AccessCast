@@ -4,17 +4,18 @@ Generated from `docs/demo/storyboard.json` by `scripts/storyboard_to_script.py`;
 
 | Picture | Words (read aloud) |
 |---|---|
-| The problem, over NASA footage of the Hubble Ultra Deep Field (dimmed): how much video is uploaded | Every minute, more than 500 hours of new video go up on YouTube. Most of it only works if you can see it, and hear it. |
-| The problem: people who are blind | 43.3 million people are blind. They need to hear what is on screen. |
-| The problem: people with disabling hearing loss | 430 million live with disabling hearing loss. They need captions that also say what sounds. |
-| The problem: adults who read at the lowest levels | 26% of adults read at the lowest levels. They need simpler words, at a slower pace. And many people need the video in their own language. |
-| Why most video is left out: the time and price of doing it by hand | Doing this by hand takes about 20 hours of work for one hour of TV, and costs $15 to $75 a minute. So most video never gets it. |
+| The problem, over stock footage of a family watching TV (Pexels): how much video is uploaded | Every minute, more than 500 hours of new video go up on YouTube. Most of it only works if you can see it, and hear it. |
+| The problem: people who are blind (stock footage of a blind man reading Braille; the picture fades to black) | 43.3 million people are blind. They need to hear what is on screen. |
+| The problem: people with disabling hearing loss (stock footage of people signing) | 430 million live with disabling hearing loss. They need captions that also say what sounds. |
+| The problem: adults who read at the lowest levels (stock footage of an older man reading his phone) | 26% of adults read at the lowest levels. They need simpler words, at a slower pace. And many people need the video in their own language. |
+| Why most video is left out: the time and price of doing it by hand (stock footage of a video editor at night) | Doing this by hand takes about 20 hours of work for one hour of TV, and costs $15 to $75 a minute. So most video never gets it. |
 | Black screen, "Close your eyes." The NASA clip's own sound only. | (the clip's own sound, no narration) |
 | Card: "This is Hubble's famous photograph." / But what does it show? | He said: this is Hubble's famous photograph. But if you can't see the screen, you never find out what it shows. |
 | Black screen, "The same video, with AccessCast." The extended description version's sound (machine draft, labelled). | (the clip's own sound, no narration) |
 | "Open your eyes." The extended render itself: Hubble Ultra Deep Field, each description line as text, "picture held" while it is read. | (the clip's own sound, no narration) |
 | Card: No pause to speak in? / The picture holds. | There was no pause in his speech, so AccessCast held the picture while the description was read. Gemma 4, running on AMD, wrote every word, and code checked it. |
 | 3D animation: one video card splits into five, each labelled with its audience | This is AccessCast. One video, made into five: for people who can't see the screen, people who can't hear, people who want simpler words, and for Hindi and Italian speakers. |
+| The live site's home page (step `page`) | On our site, every viewer picks what they need, and the same video plays for them. |
 | The live site's "Same clip, five ways" page on the Sintel trailer (labelled draft) (step `blind`) | If you can't see the screen, a voice describes what happens, in the pauses. |
 | The live site's "Same clip, five ways" page on the Sintel trailer (labelled draft) (step `deaf`) | If you can't hear, captions show what is said, and the sounds. |
 | The live site's "Same clip, five ways" page on the Sintel trailer (labelled draft) (step `easy`) | If reading is hard, the same lines, in simpler words. |
@@ -32,7 +33,8 @@ Generated from `docs/demo/storyboard.json` by `scripts/storyboard_to_script.py`;
 | The live site's "How it works" page on the NASA clip, one step at a time (step `s-person`) | Then a person decides. Every description line waits for a reviewer, and nothing is published until they approve it. |
 | The review app: frames Gemma saw, checks, repair history, keyboard approval | Reviewers work in our review app by keyboard alone, with the frames, the checks and every repair in front of them. |
 | AccessCast Studio: a video dropped in, every stage listed as it runs | Anyone can drop in their own video, and watch every step run. |
-| The live site's proof page: "Run the attack" pressed live, then each try and the tally (step `pressed`) | We also attack our own system. We ask Gemma to simplify: press the button three times within ten seconds. On our site, anyone can run this live. |
+| Animation: Gemma's real answer is stopped at the code-check gate for dropping a number, its repair passes to the viewer (both texts from the recorded attack test) | This is the rule at the heart of AccessCast: the model proposes, code decides. An answer that breaks a rule is sent back, with the reason. Only an answer that passes every check reaches a viewer. |
+| The live site's proof page: "Run the attack" pressed live, then each try and the tally (step `pressed`) | We attack it on purpose. We ask Gemma to simplify: press the button three times within ten seconds. On our site, anyone can run this live. |
 | The live site's proof page: "Run the attack" pressed live, then each try and the tally (step `result`) | An answer that drops the ten seconds is blocked, and never reaches a viewer. In our recorded test, Gemma dropped it in 20 of 20 tries, and our checks blocked every one. |
 | The live site's proof page: a caption typed in "Try your own caption", then the three live versions and the checks (step `page`) | Or type your own caption, and watch it happen live. |
 | The live site's proof page: a caption typed in "Try your own caption", then the three live versions and the checks (step `result`) | Gemma, on AMD, made the easy-read, Hindi and Italian versions in about half a minute. Our number check stopped one Italian line, where Gemma had turned 5 pm into 17:00, and Gemma's repair passed. |
@@ -41,7 +43,7 @@ Generated from `docs/demo/storyboard.json` by `scripts/storyboard_to_script.py`;
 | Counters from our own call logs: Gemma requests answered by AMD Token Factory, tokens, videos; tokens and estimated cost per finished minute | Every Gemma call runs on AMD's Token Factory. Counted from our own logs: 3,162 requests and 3.0 million tokens, across 28 videos. One finished minute, in all five versions, costs about $0.0053 of Gemma, at a published list price. |
 | Three law dates: EU, India, US | The law already asks for this: in Europe since 28 June 2025, in India since 6 February 2026, and for US public universities from 26 April 2027. They pay per finished minute, and their own staff approve every line. |
 | Card: What didn't work / Our first test needed pauses. / These videos barely have any. | What didn't work: our first test measured description inside pauses, and our test videos have almost none. It could not show a difference, and we report it anyway. |
-| Closing line over NASA footage of Earth, with the links | AccessCast. Every viewer, the same video. Everything, including what didn't work, is in our repo. |
+| Closing line over stock footage of a family watching TV, with the links and footage credits | AccessCast. Every viewer, the same video. Everything, including what didn't work, is in our repo. |
 
 ## How it is made
 - Motion scenes: `docs/demo/motion/index.html`, rendered frame by frame with a transparent background (`scripts/render_motion.mjs`) and composited over real footage.
