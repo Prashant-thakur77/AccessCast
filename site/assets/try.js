@@ -16,7 +16,7 @@
     ER006: "a name or term was lost", ER007: "an abbreviation", ER010: "too many characters on a line",
     CC001: "too fast to read", CC002: "too many characters on a line", CC003: "too many lines", CC004: "on screen too briefly or too long",
     CC007: "the lines came back out of order", CC008: "not translated", CC009: "a number or name changed",
-    AD016: "the wrong language", VERIFIER_CRASH: "a check could not run (fails closed)"
+    AD016: "the wrong language", GEN001: "no usable answer", VERIFIER_CRASH: "a check could not run (fails closed)"
   };
   var api = null;
 
@@ -33,6 +33,9 @@
 
   function cueNodes(v, cues) {
     return cues.map(function (c) {
+      if (!c.gemma_wrote) {  // no answer in time (GEN001): the other findings only say the empty line lost the numbers
+        return el("div", { class: "try-cue" }, [el("p", { class: "try-bad", text: "Gemma gave no answer in time for this line, so it goes to a person. Nothing is published." })]);
+      }
       var lines = [el("p", null, [el("strong", { text: "Gemma wrote: " }), el("span", { lang: v.lang, text: c.gemma_wrote })])];
       if (c.blocked_by && c.blocked_by.length) {
         lines.push(el("p", { class: "try-bad", text: "Stopped by our checks: " + rules(c.blocked_by) + "." }));
@@ -75,7 +78,9 @@
       }).then(function (d) {
         var cues = Array.isArray(d.cues) ? d.cues : [];
         cues.forEach(function (c) { if (c.blocked_by && c.blocked_by.length) stopped++; });
-        var fresh = card(v, cueNodes(v, cues).concat([el("p", { class: "muted", text: "Served by " + (d.endpoint_label || "the live endpoint") + "." })]));
+        var body = cues.length ? cueNodes(v, cues)
+          : [el("p", { class: "try-bad", text: "Gemma did not answer in time, so nothing was made for this version. In the pipeline, this line would wait for a person." })];
+        var fresh = card(v, body.concat([el("p", { class: "muted", text: "Served by " + (d.endpoint_label || "the live endpoint") + "." })]));
         out.replaceChild(fresh, slots[v.key]);
         slots[v.key] = fresh;
       }).catch(function (err) {

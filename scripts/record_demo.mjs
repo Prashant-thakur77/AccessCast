@@ -182,4 +182,32 @@ await segment("proof", async (p) => {
   }
 });
 
+// Try your own caption (proof page): typed with the keyboard, made live on AMD, every answer checked.
+await segment("try", async (p) => {
+  await p.goto(`${SITE}/proof.html`);
+  await p.waitForFunction(() => !document.getElementById("b-try").disabled, null, { timeout: 30000 });
+  await p.evaluate(() => {
+    const h = document.getElementById("try-h");
+    window.scrollTo(0, h.getBoundingClientRect().top + window.scrollY - 12);
+  });
+  await pause(p, 1200);
+  p.mark("page");
+  await p.locator("#try-text").focus();
+  await p.keyboard.press("Control+A");
+  await p.keyboard.type(process.env.TRY_TEXT || "Do not open the door before 5 pm. Press the green button twice to call for help.", { delay: 35 });
+  p.mark("typed");
+  await p.locator("#b-try").focus({ preventScroll: true });
+  await p.keyboard.press("Enter");
+  p.mark("pressed");
+  await p.waitForFunction(() => /^Done|did not answer/.test(document.getElementById("try-status").textContent || ""), null, { timeout: 180000 });
+  p.mark("done");
+  await p.evaluate(() => {
+    const r = document.getElementById("try-status");
+    window.scrollTo({ top: r.getBoundingClientRect().top + window.scrollY - 20, behavior: "smooth" });
+  });
+  await pause(p, 1000);
+  p.mark("result");
+  await pause(p, 14000);
+});
+
 console.log(readdirSync(out).filter((f) => f.endsWith(".webm")).join("\n"));

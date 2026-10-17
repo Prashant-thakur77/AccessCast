@@ -32,6 +32,7 @@ RECORDING = {
     "how.webm": 'The live site\'s "How it works" page on the NASA clip, one step at a time',
     "decisions_drawer.webm": "The review app: frames Gemma saw, checks, repair history, keyboard approval",
     "studio.webm": "AccessCast Studio: a video dropped in, every stage listed as it runs",
+    "try.webm": "The live site's proof page: a caption typed in \"Try your own caption\", then the three live versions and the checks",
     "proof.webm": 'The live site\'s proof page: "Run the attack" pressed live, then each try and the tally',
 }
 

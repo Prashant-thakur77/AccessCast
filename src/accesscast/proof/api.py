@@ -243,7 +243,8 @@ def create_app() -> FastAPI:
 
         settings = load_settings()
         provider = "tokenfactory" if settings.tf_api_key and settings.tf_base_url else "local"
-        client = LlmClient(settings, provider=provider, strict_provider=True)
+        # the function stops at 120 s: one slow call fails closed (the line goes to a person) instead of timing out
+        client = LlmClient(settings, provider=provider, strict_provider=True, timeout_s=45, max_retries=0)
         ctx = VerifyContext(lang="en", words=words)
         end = words[-1].end_ms + 1500
         sdh = segment_sdh(words, [], 25.0, end)

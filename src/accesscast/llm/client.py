@@ -93,13 +93,18 @@ class LlmClient:
         strict_provider: bool = False,
         log_path: Path | None = None,
         fake_handler: FakeHandler | None = None,
+        timeout_s: float | None = None,
+        max_retries: int | None = None,
     ) -> None:
+        """`timeout_s` / `max_retries` override the pipeline's patient defaults for callers with a hard deadline
+        (the live site's function stops at 120 s): a slow call then fails closed sooner, it never passes."""
         self.settings = settings
+        self.max_retries = C.LLM_MAX_RETRIES if max_retries is None else max_retries
         self.provider = "fake" if settings.worker_mode == "fake" and provider != "fake_off" else provider
         self.strict = strict_provider
         self.log_path = log_path
         self.fake_handler = fake_handler
-        self._http = httpx.Client(timeout=C.LLM_TIMEOUT_S)
+        self._http = httpx.Client(timeout=C.LLM_TIMEOUT_S if timeout_s is None else timeout_s)
         self._down_until: dict[str, float] = {}
         self._limiters: dict[str, RateLimiter] = {
             "local": RateLimiter(64, 0),
@@ -272,7 +277,7 @@ class LlmClient:
                 f"{prov} marked down after a call failed every retry; not asking again until "
                 f"{down - time.monotonic():.0f} s from now"
             )
-        for attempt in range(1, C.LLM_MAX_RETRIES + 2):
+        for attempt in range(1, self.max_retries + 2):
             lim.wait_turn()
             try:
                 r = self._http.post(f"{base.rstrip('/')}/chat/completions", json=body, headers=headers)
@@ -331,9 +336,8 @@ class LlmClient:
         key = hashlib.sha256((prov + "\n" + canonical_json(body)).encode("utf-8")).hexdigest()
         return Path(root) / key[:2] / f"{key}.json"
 
-    @staticmethod
-    def _backoff(attempt: int, retry_after: str | None) -> None:
-        if attempt > C.LLM_MAX_RETRIES:
+    def _backoff(self, attempt: int, retry_after: str | None) -> None:
+        if attempt > self.max_retries:
             return
         delay = min(C.LLM_BACKOFF_MAX_S, 2.0**attempt) + random.uniform(0, 0.5)
         if retry_after:
