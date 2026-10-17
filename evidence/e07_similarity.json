@@ -3,11 +3,11 @@
  "experiment": "e07_similarity",
  "split": "test",
  "passed": false,
- "git_commit": "e0cb413db86d5eb973cd8b5513a5a9cf97d0d271",
+ "git_commit": "965ec597f3f00007a43a6f4662186667d628f1e8",
  "git_dirty": true,
- "freeze_tag": "test-freeze-3",
- "started_at": "2026-10-16T23:53:22.799Z",
- "finished_at": "2026-10-16T23:57:09.364Z",
+ "freeze_tag": "test-freeze-4",
+ "started_at": "2026-10-17T00:29:52.670Z",
+ "finished_at": "2026-10-17T00:33:24.131Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -228,7 +228,7 @@
    "system": "naive",
    "human_index": 7,
    "paired": true,
-   "bertscore_f1": 0.5329310894012451,
+   "bertscore_f1": 0.5329311490058899,
    "cider_d": 0.0,
    "judge_score": 2,
    "judge_error": null
@@ -238,7 +238,7 @@
    "system": "naive",
    "human_index": 8,
    "paired": true,
-   "bertscore_f1": 0.4460639953613281,
+   "bertscore_f1": 0.4460640251636505,
    "cider_d": 0.0,
    "judge_score": 1,
    "judge_error": null
@@ -614,7 +614,7 @@
    "system": "naive",
    "human_index": 0,
    "paired": true,
-   "bertscore_f1": 0.6680165529251099,
+   "bertscore_f1": 0.6014199256896973,
    "cider_d": 0.0,
    "judge_score": 3,
    "judge_error": null
@@ -1330,7 +1330,7 @@
    "system": "naive",
    "human_index": 4,
    "paired": true,
-   "bertscore_f1": 0.7221627831459045,
+   "bertscore_f1": 0.6631511449813843,
    "cider_d": 0.12836134918148256,
    "judge_score": 2,
    "judge_error": null
@@ -1666,10 +1666,10 @@
     },
     "bertscore_f1": {
      "n": 9,
-     "mean": 0.5453779465622373,
+     "mean": 0.5314214825630188,
      "median": 0.5171492099761963,
      "min": 0.3422645032405853,
-     "max": 0.7221627831459045
+     "max": 0.6867773532867432
     },
     "cider_d": {
      "n": 9,
@@ -1691,7 +1691,7 @@
   "naive_failed_calls": 0,
   "outputs": {
    "file": "data/eval_outputs/e07_similarity/pairs_test.jsonl",
-   "sha256": "e4b1eb58796aec374f707f41b8395a6e89768da0298b18ba882fc765d22255c1",
+   "sha256": "103b58aa345535ee6dae089056a1f88009e2dcf95859ca689184e4712ab4e434",
    "rows": 246,
    "committed": false
   },
@@ -1704,7 +1704,7 @@
     "versions": {
      "bert-score": "0.3.13",
      "transformers": "5.20.0",
-     "torch": "2.14.1+cu126"
+     "torch": "2.14.1"
     },
     "metric": "BERTScore"
    }
