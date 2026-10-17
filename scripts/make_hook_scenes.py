@@ -211,11 +211,16 @@ def main() -> int:
         str(OUT / "hook_open.mp4"),
     )
     # Hear the translated versions: the first spoken sentence of the Hindi and Italian renders, their own sound, the
-    # real subtitle track burned in (libass, so Devanagari is shaped), and a plain label. Same sentence in both.
+    # real subtitle track burned in (libass, so Devanagari is shaped), and a plain label. Same sentence in each.
     for lang, label, font, size in (
         ("hi", "HINDI VERSION: Hindi voice and subtitles", "Noto Serif Devanagari", 58),
         ("it", "ITALIAN VERSION: Italian voice and subtitles", "DejaVu Sans", 50),
+        ("es", "SPANISH VERSION: Spanish voice and subtitles", "DejaVu Sans", 50),
+        ("fr", "FRENCH VERSION: French voice and subtitles", "DejaVu Sans", 50),
+        ("pt", "PORTUGUESE VERSION: Portuguese voice and subtitles", "DejaVu Sans", 50),
     ):
+        if not (proj / "render" / f"{lang}.mp4").exists():
+            continue  # a language this project has not been rendered in
         a0, a1 = LANG_CLIP_S
         tf = OUT / f"ver_{lang}_label.txt"
         tf.write_text(label, encoding="utf-8")
@@ -253,7 +258,7 @@ def main() -> int:
             "2",
             str(OUT / f"ver_{lang}.mp4"),
         )
-    for n in ("hook_closed", "hook_ad", "hook_open", "ver_hi", "ver_it"):
+    for n in ("hook_closed", "hook_ad", "hook_open", "ver_hi", "ver_it", "ver_es", "ver_fr", "ver_pt"):
         print(OUT / f"{n}.mp4")
     return 0
 
