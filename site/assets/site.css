@@ -685,6 +685,9 @@ input[type="radio"], input[type="checkbox"] { width: 1.25rem; height: 1.25rem; m
 .tools { display: flex; flex-wrap: wrap; gap: 10px; }
 .video-frame { position: relative; background: #000; border-radius: var(--radius); overflow: hidden; }
 video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; }
+/* On a short laptop screen the whole picture, captions included, stays in view with the heading above it. */
+video { max-height: max(240px, calc(100vh - 170px)); }
+.video-frame { max-width: max(427px, calc((100vh - 170px) * 16 / 9)); }
 .now { font-weight: 650; font-size: 1.15rem; margin: 18px 0 4px; min-height: 1.5em; display: flex; align-items: center; gap: 10px; }
 .now::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--sun); flex: none; box-shadow: 0 0 0 2px var(--fg); }
 .now:empty::before { display: none; }

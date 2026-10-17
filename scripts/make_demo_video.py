@@ -73,8 +73,20 @@ def main() -> int:
             vf = ",".join(draws) or "null"
         else:
             src = OUT / sc["recording"]
-            vin = ["-ss", str(sc.get("start", 0)), "-t", f"{dur:.2f}", "-i", str(src)]
-            vf = "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,fps=30"
+            start = float(sc.get("start", 0))
+            if (
+                "mark" in sc
+            ):  # seconds into the recording, written by record_demo.mjs (<recording>.marks.json)
+                marks = json.loads((OUT / f"{Path(sc['recording']).stem}.marks.json").read_text())
+                if sc["mark"] not in marks:
+                    raise SystemExit(f"scene {k}: no mark {sc['mark']!r} in {sc['recording']} (re-record it)")
+                start = marks[sc["mark"]] + float(sc.get("offset", 0))
+            vin = ["-ss", f"{max(0.0, start):.2f}", "-t", f"{dur:.2f}", "-i", str(src)]
+            # if the footage runs out before the narration does, hold its last frame (never cut to black)
+            vf = (
+                "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,fps=30,"
+                f"tpad=stop_mode=clone:stop_duration={dur:.2f}"
+            )
         # burned-in captions of the narration, chunked to ≤ 42 chars × 2 lines across the scene
         chunks = textwrap.wrap(narr, 84) if narr else []
         caps = []
@@ -92,7 +104,9 @@ def main() -> int:
         vf = ",".join([vf, *caps]) if caps else vf
         ain = ["-i", str(wav)] if narr else ["-f", "lavfi", "-i", f"anullsrc=r=48000:cl=stereo:d={dur:.2f}"]
         amap = "1:a:0"
-        if sc.get("keep_audio"):  # the recording's own sound (e.g. the eyes-closed before/after), no narration
+        if sc.get(
+            "keep_audio"
+        ):  # the recording's own sound (e.g. the eyes-closed before/after), no narration
             ain, amap = [], "0:a:0"
         subprocess.run(
             [

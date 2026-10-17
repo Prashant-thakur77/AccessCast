@@ -1,7 +1,7 @@
 // Record the demo video's screen segments with Playwright (1920×1080, real keyboard input, no mouse tricks).
 // Usage: SITE=http://127.0.0.1:8080 REVIEW=http://127.0.0.1:8081 PROJECT=<sha12> node scripts/record_demo.mjs
 // Output: data/demo/<segment>.webm (git-ignored). scripts/make_demo_video.py assembles them with narration.
-import { mkdirSync, renameSync, readdirSync } from "node:fs";
+import { mkdirSync, renameSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "@playwright/test";
@@ -15,13 +15,21 @@ const PROJECT = process.env.PROJECT || "";
 const size = { width: 1280, height: 720 }; // recorded larger on screen, scaled to 1080p
 const video = { width: 1920, height: 1080 };
 
+const ONLY = (process.env.ONLY || "").split(",").filter(Boolean); // e.g. ONLY=five_ways,proof
+
 async function segment(name, fn) {
+  if (ONLY.length && !ONLY.includes(name)) return;
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: size, recordVideo: { dir: out, size } });
   const page = await ctx.newPage();
+  // Marks: seconds from the start of the recording, read by make_demo_video.py ("mark" in a storyboard scene).
+  const t0 = Date.now();
+  const marks = {};
+  page.mark = (label) => { marks[label] = (Date.now() - t0) / 1000; };
   try {
     await fn(page);
   } finally {
+    writeFileSync(resolve(out, `${name}.marks.json`), JSON.stringify(marks, null, 1));
     const v = page.video();
     await ctx.close();
     await browser.close();
@@ -32,18 +40,39 @@ async function segment(name, fn) {
 
 const pause = (p, ms) => p.waitForTimeout(ms);
 
-// 0:30–1:20 Same 20 seconds, five ways
+// Same clip, five ways: every version, each at its telling moment. The page plays the excerpt from its start for
+// each version; for the caption and subtitle versions we scrub to the first spoken line, as a viewer could.
+const SPOKEN_S = Number(process.env.FIVE_WAYS_SPOKEN_S || 37); // Sintel draft: first caption with words at 37.5 s
+const playingFrom = (p, t) =>
+  p.waitForFunction(
+    (t) => { const v = document.getElementById("video"); return v.readyState >= 3 && !v.paused && v.currentTime >= t; },
+    t,
+    { timeout: 30000 },
+  );
 await segment("five_ways", async (p) => {
   await p.goto(`${SITE}/five-ways.html${PROJECT ? `?p=${PROJECT}` : ""}`);
-  await pause(p, 1500);
-  await p.keyboard.press("Tab");
-  const start = p.getByRole("button", { name: /start|play/i }).first();
-  await start.focus();
+  await pause(p, 2500);
+  p.mark("page");
+  await p.locator("#b-start").focus();
   await p.keyboard.press("Enter");
-  await pause(p, 600);
-  await p.locator("#video").scrollIntoViewIfNeeded();  // keep the playing clip and its captions in view
-  await p.evaluate(() => window.scrollBy(0, -120));
-  await pause(p, 48000);
+  await p.evaluate(() => {  // the heading and the whole picture in view
+    const w = document.getElementById("who");
+    window.scrollTo(0, w.getBoundingClientRect().top + window.scrollY - 12);
+  });
+  const segStart = await p.evaluate(() => document.getElementById("video").currentTime);
+  await playingFrom(p, Math.max(0, segStart - 0.5));
+  p.mark("blind");
+  await pause(p, 8000);
+  for (const step of ["deaf", "easy", "hi", "it"]) {
+    await p.evaluate(() => document.getElementById("b-skip").focus({ preventScroll: true }));
+    await p.keyboard.press("Enter");
+    await pause(p, 300);
+    await playingFrom(p, 0);
+    await p.evaluate((t) => { document.getElementById("video").currentTime = t; }, SPOKEN_S);
+    await playingFrom(p, SPOKEN_S);
+    p.mark(step);
+    await pause(p, 7000);
+  }
 });
 
 // Picker: blind standard → extended → Italiano, with the decisions drawer
@@ -98,18 +127,39 @@ if (REVIEW) {
 await segment("proof", async (p) => {
   await p.goto(`${SITE}/proof.html`);
   await pause(p, 2500);
-  const run = p.getByRole("button", { name: /run the attack/i });
+  p.mark("page");
+  const run = p.locator("#b-attack");
   if (await run.isEnabled().catch(() => false)) {
-    await run.click();
-    await pause(p, 60000);
+    await p.evaluate(() => {
+      const h = document.getElementById("live-h");
+      window.scrollTo(0, h.getBoundingClientRect().top + window.scrollY - 12);
+    });
+    await run.focus({ preventScroll: true }).catch(() => run.focus());
+    await p.keyboard.press("Enter");
+    p.mark("pressed");
+    await p.waitForFunction(
+      () => /Done|did not answer/.test(document.getElementById("status").textContent || ""),
+      null,
+      { timeout: 120000 },
+    );
+    p.mark("done");
+    await pause(p, 1500);
+    await p.evaluate(() => {
+      const r = document.getElementById("live-result");
+      window.scrollTo(0, r.getBoundingClientRect().top + window.scrollY - 140);
+    });
+    p.mark("result");
+    await pause(p, 12000);
+    await p.mouse.wheel(0, 350);
+    await pause(p, 6000);
   } else {
-    await pause(p, 2500);
+    // the recorded run: the test, Gemma's answer, the check, and what the repair published
+    await p.locator("#last-h").scrollIntoViewIfNeeded();
+    p.mark("result");
+    await pause(p, 9000);
+    await p.mouse.wheel(0, 350);
+    await pause(p, 5000);
   }
-  // the recorded run: the test, Gemma's answer, the check, and what the repair published
-  await p.locator("#last-h").scrollIntoViewIfNeeded();
-  await pause(p, 9000);
-  await p.mouse.wheel(0, 350);
-  await pause(p, 5000);
 });
 
 console.log(readdirSync(out).filter((f) => f.endsWith(".webm")).join("\n"));
