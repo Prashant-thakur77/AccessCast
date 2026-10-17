@@ -3,11 +3,11 @@
  "experiment": "e05_easyread",
  "split": "test",
  "passed": true,
- "git_commit": "fccc2ecdede1e2ef258b69f296a88c0c0cbabe79",
+ "git_commit": "965ec597f3f00007a43a6f4662186667d628f1e8",
  "git_dirty": false,
- "freeze_tag": "test-freeze-3",
- "started_at": "2026-10-16T23:22:09.097Z",
- "finished_at": "2026-10-16T23:27:58.882Z",
+ "freeze_tag": "test-freeze-4",
+ "started_at": "2026-10-17T00:24:43.590Z",
+ "finished_at": "2026-10-17T00:29:49.023Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -91,8 +91,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6384705305099487,
-   "bertscore_accesscast": 0.6384705305099487
+   "bertscore_gemma_alone": 0.6384702324867249,
+   "bertscore_accesscast": 0.6384702324867249
   },
   {
    "video": "perspectives_captions",
@@ -101,8 +101,8 @@
    "published": true,
    "repairs": 3,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7086983919143677,
-   "bertscore_accesscast": 0.7569872140884399
+   "bertscore_gemma_alone": 0.6875389814376831,
+   "bertscore_accesscast": 0.7569870948791504
   },
   {
    "video": "perspectives_captions",
@@ -141,8 +141,8 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8778104782104492,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_gemma_alone": 0.8746325969696045,
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_contrast",
@@ -151,8 +151,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6932224035263062,
-   "bertscore_accesscast": 0.6932224035263062
+   "bertscore_gemma_alone": 0.6932224631309509,
+   "bertscore_accesscast": 0.6932224631309509
   },
   {
    "video": "perspectives_contrast",
@@ -161,8 +161,8 @@
    "published": true,
    "repairs": 2,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.644295871257782,
-   "bertscore_accesscast": 0.820222795009613
+   "bertscore_gemma_alone": 0.6414390802383423,
+   "bertscore_accesscast": 0.8202228546142578
   },
   {
    "video": "perspectives_contrast",
@@ -172,7 +172,7 @@
    "repairs": 1,
    "rules_failed": [],
    "bertscore_gemma_alone": 0.6886848211288452,
-   "bertscore_accesscast": 0.9028470516204834
+   "bertscore_accesscast": 0.9028469920158386
   },
   {
    "video": "perspectives_contrast",
@@ -191,18 +191,20 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8607523441314697,
-   "bertscore_accesscast": 0.8607523441314697
+   "bertscore_gemma_alone": 0.809021532535553,
+   "bertscore_accesscast": 0.809021532535553
   },
   {
    "video": "perspectives_contrast",
    "cue": "easy.en.0006",
    "dur_ms": 4920,
-   "published": true,
-   "repairs": 0,
-   "rules_failed": [],
-   "bertscore_gemma_alone": 0.7922117710113525,
-   "bertscore_accesscast": 0.7922117710113525
+   "published": false,
+   "repairs": 3,
+   "rules_failed": [
+    "ER001"
+   ],
+   "bertscore_gemma_alone": 0.8183267116546631,
+   "bertscore_accesscast": 0.8543843626976013
   },
   {
    "video": "perspectives_contrast",
@@ -211,8 +213,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7453932762145996,
-   "bertscore_accesscast": 0.7453932762145996
+   "bertscore_gemma_alone": 0.7014380097389221,
+   "bertscore_accesscast": 0.7014380097389221
   },
   {
    "video": "perspectives_contrast",
@@ -231,8 +233,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8393348455429077,
-   "bertscore_accesscast": 0.8393348455429077
+   "bertscore_gemma_alone": 0.8393347859382629,
+   "bertscore_accesscast": 0.8393347859382629
   },
   {
    "video": "perspectives_contrast",
@@ -241,8 +243,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7414668798446655,
-   "bertscore_accesscast": 0.7414668798446655
+   "bertscore_gemma_alone": 0.7414658665657043,
+   "bertscore_accesscast": 0.7414658665657043
   },
   {
    "video": "perspectives_contrast",
@@ -271,8 +273,8 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8588249683380127,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_gemma_alone": 0.8778104782104492,
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_controls",
@@ -281,8 +283,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8842079639434814,
-   "bertscore_accesscast": 0.8842079639434814
+   "bertscore_gemma_alone": 0.8842080235481262,
+   "bertscore_accesscast": 0.8842080235481262
   },
   {
    "video": "perspectives_controls",
@@ -301,8 +303,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.812666118144989,
-   "bertscore_accesscast": 0.812666118144989
+   "bertscore_gemma_alone": 0.8126660585403442,
+   "bertscore_accesscast": 0.8126660585403442
   },
   {
    "video": "perspectives_controls",
@@ -331,8 +333,8 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7812347412109375,
-   "bertscore_accesscast": 0.9353679418563843
+   "bertscore_gemma_alone": 0.7812346816062927,
+   "bertscore_accesscast": 0.9353678822517395
   },
   {
    "video": "perspectives_controls",
@@ -341,8 +343,8 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.9371682405471802,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_gemma_alone": 0.9172279238700867,
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_customizable",
@@ -351,8 +353,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7127318978309631,
-   "bertscore_accesscast": 0.7127318978309631
+   "bertscore_gemma_alone": 0.7127319574356079,
+   "bertscore_accesscast": 0.7127319574356079
   },
   {
    "video": "perspectives_customizable",
@@ -361,8 +363,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6854650378227234,
-   "bertscore_accesscast": 0.6854650378227234
+   "bertscore_gemma_alone": 0.8219625949859619,
+   "bertscore_accesscast": 0.8219625949859619
   },
   {
    "video": "perspectives_customizable",
@@ -371,8 +373,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7473480701446533,
-   "bertscore_accesscast": 0.7473480701446533
+   "bertscore_gemma_alone": 0.8093287348747253,
+   "bertscore_accesscast": 0.8093287348747253
   },
   {
    "video": "perspectives_customizable",
@@ -381,8 +383,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8629302382469177,
-   "bertscore_accesscast": 0.8629302382469177
+   "bertscore_gemma_alone": 0.7944467663764954,
+   "bertscore_accesscast": 0.7944467663764954
   },
   {
    "video": "perspectives_customizable",
@@ -411,28 +413,28 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8543251752853394,
-   "bertscore_accesscast": 0.8543251752853394
+   "bertscore_gemma_alone": 0.8521116971969604,
+   "bertscore_accesscast": 0.8521116971969604
   },
   {
    "video": "perspectives_customizable",
    "cue": "easy.en.0008",
    "dur_ms": 2540,
    "published": true,
-   "repairs": 2,
+   "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6242964267730713,
-   "bertscore_accesscast": 0.9079167246818542
+   "bertscore_gemma_alone": 0.715382993221283,
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_customizable",
    "cue": "easy.en.0009",
    "dur_ms": 4980,
    "published": true,
-   "repairs": 0,
+   "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 1.0000001192092896,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_gemma_alone": 0.9371681809425354,
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_keyboard",
@@ -451,11 +453,10 @@
    "published": false,
    "repairs": 3,
    "rules_failed": [
-    "ER001",
-    "ER005"
+    "ER001"
    ],
-   "bertscore_gemma_alone": 0.7550970315933228,
-   "bertscore_accesscast": 0.7776544690132141
+   "bertscore_gemma_alone": 0.7550968527793884,
+   "bertscore_accesscast": 0.8759328126907349
   },
   {
    "video": "perspectives_keyboard",
@@ -464,8 +465,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8754062056541443,
-   "bertscore_accesscast": 0.8754062056541443
+   "bertscore_gemma_alone": 0.8771677613258362,
+   "bertscore_accesscast": 0.8771677613258362
   },
   {
    "video": "perspectives_keyboard",
@@ -474,8 +475,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6830365061759949,
-   "bertscore_accesscast": 0.6830365061759949
+   "bertscore_gemma_alone": 0.7085734009742737,
+   "bertscore_accesscast": 0.7085734009742737
   },
   {
    "video": "perspectives_keyboard",
@@ -494,8 +495,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.747452974319458,
-   "bertscore_accesscast": 0.747452974319458
+   "bertscore_gemma_alone": 0.7474530935287476,
+   "bertscore_accesscast": 0.7474530935287476
   },
   {
    "video": "perspectives_keyboard",
@@ -504,8 +505,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.9234868288040161,
-   "bertscore_accesscast": 0.9234868288040161
+   "bertscore_gemma_alone": 0.9234869480133057,
+   "bertscore_accesscast": 0.9234869480133057
   },
   {
    "video": "perspectives_keyboard",
@@ -514,8 +515,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8791747093200684,
-   "bertscore_accesscast": 0.8791747093200684
+   "bertscore_gemma_alone": 0.8791745901107788,
+   "bertscore_accesscast": 0.8791745901107788
   },
   {
    "video": "perspectives_keyboard",
@@ -524,8 +525,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.886390209197998,
-   "bertscore_accesscast": 0.886390209197998
+   "bertscore_gemma_alone": 0.8863903284072876,
+   "bertscore_accesscast": 0.8863903284072876
   },
   {
    "video": "perspectives_keyboard",
@@ -534,8 +535,8 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7548285722732544,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_gemma_alone": 0.741126537322998,
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_layout",
@@ -574,8 +575,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7238621115684509,
-   "bertscore_accesscast": 0.7238621115684509
+   "bertscore_gemma_alone": 0.7238613367080688,
+   "bertscore_accesscast": 0.7238613367080688
   },
   {
    "video": "perspectives_layout",
@@ -594,8 +595,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8536379933357239,
-   "bertscore_accesscast": 0.8536379933357239
+   "bertscore_gemma_alone": 0.8536381721496582,
+   "bertscore_accesscast": 0.8536381721496582
   },
   {
    "video": "perspectives_layout",
@@ -614,7 +615,7 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.9244242310523987,
+   "bertscore_gemma_alone": 0.7497856020927429,
    "bertscore_accesscast": 1.0
   },
   {
@@ -624,8 +625,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6968740224838257,
-   "bertscore_accesscast": 0.6968740224838257
+   "bertscore_gemma_alone": 0.6968739032745361,
+   "bertscore_accesscast": 0.6968739032745361
   },
   {
    "video": "perspectives_layout",
@@ -644,8 +645,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8424438834190369,
-   "bertscore_accesscast": 0.8424438834190369
+   "bertscore_gemma_alone": 0.8424438238143921,
+   "bertscore_accesscast": 0.8424438238143921
   },
   {
    "video": "perspectives_layout",
@@ -654,8 +655,8 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7548285722732544,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_gemma_alone": 0.741126537322998,
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_notifications",
@@ -714,7 +715,7 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7215468287467957,
+   "bertscore_gemma_alone": 0.7215467095375061,
    "bertscore_accesscast": 1.0
   },
   {
@@ -724,8 +725,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8555699586868286,
-   "bertscore_accesscast": 0.8555699586868286
+   "bertscore_gemma_alone": 0.8555698990821838,
+   "bertscore_accesscast": 0.8555698990821838
   },
   {
    "video": "perspectives_notifications",
@@ -744,8 +745,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8799874782562256,
-   "bertscore_accesscast": 0.8799874782562256
+   "bertscore_gemma_alone": 0.7773168683052063,
+   "bertscore_accesscast": 0.7773168683052063
   },
   {
    "video": "perspectives_notifications",
@@ -774,8 +775,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7121854424476624,
-   "bertscore_accesscast": 0.7121854424476624
+   "bertscore_gemma_alone": 0.7143471240997314,
+   "bertscore_accesscast": 0.7143471240997314
   },
   {
    "video": "perspectives_notifications",
@@ -784,8 +785,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8798001408576965,
-   "bertscore_accesscast": 0.8798001408576965
+   "bertscore_gemma_alone": 0.8798002004623413,
+   "bertscore_accesscast": 0.8798002004623413
   },
   {
    "video": "perspectives_notifications",
@@ -795,7 +796,7 @@
    "repairs": 1,
    "rules_failed": [],
    "bertscore_gemma_alone": 0.7801907658576965,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_speech-recognition",
@@ -814,8 +815,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8935583829879761,
-   "bertscore_accesscast": 0.8935583829879761
+   "bertscore_gemma_alone": 0.802289605140686,
+   "bertscore_accesscast": 0.802289605140686
   },
   {
    "video": "perspectives_speech-recognition",
@@ -824,8 +825,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7681465744972229,
-   "bertscore_accesscast": 0.7681465744972229
+   "bertscore_gemma_alone": 0.7241377234458923,
+   "bertscore_accesscast": 0.7241377234458923
   },
   {
    "video": "perspectives_speech-recognition",
@@ -854,7 +855,7 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7036250233650208,
+   "bertscore_gemma_alone": 0.6704419255256653,
    "bertscore_accesscast": 1.0000001192092896
   },
   {
@@ -874,8 +875,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7894397377967834,
-   "bertscore_accesscast": 0.7894397377967834
+   "bertscore_gemma_alone": 0.7894402742385864,
+   "bertscore_accesscast": 0.7894402742385864
   },
   {
    "video": "perspectives_speech-recognition",
@@ -884,8 +885,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8031198978424072,
-   "bertscore_accesscast": 0.8031198978424072
+   "bertscore_gemma_alone": 0.803119957447052,
+   "bertscore_accesscast": 0.803119957447052
   },
   {
    "video": "perspectives_speech-recognition",
@@ -914,8 +915,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7715204358100891,
-   "bertscore_accesscast": 0.7715204358100891
+   "bertscore_gemma_alone": 0.7818157076835632,
+   "bertscore_accesscast": 0.7818157076835632
   },
   {
    "video": "perspectives_speech-recognition",
@@ -944,8 +945,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8183513879776001,
-   "bertscore_accesscast": 0.8183513879776001
+   "bertscore_gemma_alone": 0.7246996760368347,
+   "bertscore_accesscast": 0.7246996760368347
   },
   {
    "video": "perspectives_speech-recognition",
@@ -1026,8 +1027,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.887991189956665,
-   "bertscore_accesscast": 0.887991189956665
+   "bertscore_gemma_alone": 0.8879910707473755,
+   "bertscore_accesscast": 0.8879910707473755
   },
   {
    "video": "perspectives_text-to-speech",
@@ -1036,8 +1037,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7687146663665771,
-   "bertscore_accesscast": 0.7687146663665771
+   "bertscore_gemma_alone": 0.8167828917503357,
+   "bertscore_accesscast": 0.8167828917503357
   },
   {
    "video": "perspectives_text-to-speech",
@@ -1064,10 +1065,10 @@
    "cue": "easy.en.0005",
    "dur_ms": 3820,
    "published": true,
-   "repairs": 1,
+   "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.786653459072113,
-   "bertscore_accesscast": 0.8818321824073792
+   "bertscore_gemma_alone": 0.8005009293556213,
+   "bertscore_accesscast": 0.8005009293556213
   },
   {
    "video": "perspectives_text-to-speech",
@@ -1086,8 +1087,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.9120330214500427,
-   "bertscore_accesscast": 0.9120330214500427
+   "bertscore_gemma_alone": 0.9120334386825562,
+   "bertscore_accesscast": 0.9120334386825562
   },
   {
    "video": "perspectives_text-to-speech",
@@ -1096,8 +1097,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8240575194358826,
-   "bertscore_accesscast": 0.8240575194358826
+   "bertscore_gemma_alone": 0.8588690757751465,
+   "bertscore_accesscast": 0.8588690757751465
   },
   {
    "video": "perspectives_text-to-speech",
@@ -1114,10 +1115,10 @@
    "cue": "easy.en.0010",
    "dur_ms": 5040,
    "published": true,
-   "repairs": 1,
+   "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.9371682405471802,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_gemma_alone": 1.0,
+   "bertscore_accesscast": 1.0
   },
   {
    "video": "perspectives_understandable",
@@ -1136,8 +1137,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6920217871665955,
-   "bertscore_accesscast": 0.6920217871665955
+   "bertscore_gemma_alone": 0.5992031693458557,
+   "bertscore_accesscast": 0.5992031693458557
   },
   {
    "video": "perspectives_understandable",
@@ -1146,8 +1147,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.5833722352981567,
-   "bertscore_accesscast": 0.5833722352981567
+   "bertscore_gemma_alone": 0.5024428367614746,
+   "bertscore_accesscast": 0.5024428367614746
   },
   {
    "video": "perspectives_understandable",
@@ -1156,8 +1157,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.571577250957489,
-   "bertscore_accesscast": 0.571577250957489
+   "bertscore_gemma_alone": 0.7002873420715332,
+   "bertscore_accesscast": 0.7002873420715332
   },
   {
    "video": "perspectives_understandable",
@@ -1166,8 +1167,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6499789953231812,
-   "bertscore_accesscast": 0.6499789953231812
+   "bertscore_gemma_alone": 0.6055776476860046,
+   "bertscore_accesscast": 0.6055776476860046
   },
   {
    "video": "perspectives_understandable",
@@ -1176,18 +1177,18 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8062617182731628,
-   "bertscore_accesscast": 0.8062617182731628
+   "bertscore_gemma_alone": 0.8062615990638733,
+   "bertscore_accesscast": 0.8062615990638733
   },
   {
    "video": "perspectives_understandable",
    "cue": "easy.en.0007",
    "dur_ms": 2100,
    "published": true,
-   "repairs": 1,
+   "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.6660088300704956,
-   "bertscore_accesscast": 1.0
+   "bertscore_gemma_alone": 0.7240587472915649,
+   "bertscore_accesscast": 0.7240587472915649
   },
   {
    "video": "perspectives_understandable",
@@ -1206,8 +1207,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8005772233009338,
-   "bertscore_accesscast": 0.8005772233009338
+   "bertscore_gemma_alone": 0.8010147213935852,
+   "bertscore_accesscast": 0.8010147213935852
   },
   {
    "video": "perspectives_understandable",
@@ -1216,8 +1217,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.8406448364257812,
-   "bertscore_accesscast": 0.8406448364257812
+   "bertscore_gemma_alone": 0.7906471490859985,
+   "bertscore_accesscast": 0.7906471490859985
   },
   {
    "video": "perspectives_understandable",
@@ -1236,8 +1237,8 @@
    "published": true,
    "repairs": 0,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.5972886681556702,
-   "bertscore_accesscast": 0.5972886681556702
+   "bertscore_gemma_alone": 0.7025213837623596,
+   "bertscore_accesscast": 0.7025213837623596
   },
   {
    "video": "perspectives_understandable",
@@ -1246,7 +1247,7 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7648663520812988,
+   "bertscore_gemma_alone": 0.7648664712905884,
    "bertscore_accesscast": 0.937549889087677
   },
   {
@@ -1256,8 +1257,8 @@
    "published": true,
    "repairs": 1,
    "rules_failed": [],
-   "bertscore_gemma_alone": 0.7924674153327942,
-   "bertscore_accesscast": 1.0000001192092896
+   "bertscore_gemma_alone": 0.792467474937439,
+   "bertscore_accesscast": 1.0
   }
  ],
  "summary": {
@@ -1304,14 +1305,14 @@
     },
     "words_per_sentence": {
      "n": 116,
-     "mean": 5.543103448275862,
+     "mean": 5.577586206896552,
      "median": 5.0,
      "min": 1.0,
      "max": 10.0
     },
     "flesch_reading_ease_en": {
      "n": 116,
-     "mean": 82.82772167487687,
+     "mean": 83.37530172413794,
      "median": 87.94500000000002,
      "min": -21.809999999999945,
      "max": 119.19000000000003
@@ -1321,101 +1322,101 @@
      "n": 116
     },
     "negations_kept": {
-     "k": 104,
+     "k": 105,
      "n": 116
     },
     "bertscore_f1_vs_source": {
      "n": 116,
-     "mean": 0.7924908353336926,
-     "median": 0.796522319316864,
-     "min": 0.571577250957489,
-     "max": 1.0000001192092896
+     "mean": 0.7900346846416079,
+     "median": 0.7974738478660583,
+     "min": 0.5024428367614746,
+     "max": 1.0
     }
    },
    "accesscast_published": {
-    "cues": 115,
+    "cues": 114,
     "empty": 0,
     "at_or_under_130_wpm": {
      "k": 106,
-     "n": 115
+     "n": 114
     },
     "words_per_sentence": {
-     "n": 115,
-     "mean": 5.834782608695652,
+     "n": 114,
+     "mean": 5.842105263157895,
      "median": 6.0,
      "min": 1.0,
      "max": 10.0
     },
     "flesch_reading_ease_en": {
-     "n": 115,
-     "mean": 74.06254658385096,
-     "median": 77.90500000000002,
+     "n": 114,
+     "mean": 74.40010025062658,
+     "median": 82.85500000000002,
      "min": -52.039999999999964,
      "max": 119.19000000000003
     },
     "numbers_kept": {
-     "k": 115,
-     "n": 115
+     "k": 114,
+     "n": 114
     },
     "negations_kept": {
-     "k": 115,
-     "n": 115
+     "k": 114,
+     "n": 114
     },
     "bertscore_f1_vs_source": {
-     "n": 115,
-     "mean": 0.8373571706854779,
-     "median": 0.8288239240646362,
-     "min": 0.571577250957489,
+     "n": 114,
+     "mean": 0.8335792547778079,
+     "median": 0.8215246200561523,
+     "min": 0.5024428367614746,
      "max": 1.0000001192092896
     }
    },
    "gemma_alone_on_the_same_cues": {
-    "cues": 115,
+    "cues": 114,
     "empty": 0,
     "at_or_under_130_wpm": {
-     "k": 105,
-     "n": 115
+     "k": 104,
+     "n": 114
     },
     "words_per_sentence": {
-     "n": 115,
-     "mean": 5.547826086956522,
+     "n": 114,
+     "mean": 5.56140350877193,
      "median": 5.0,
      "min": 1.0,
      "max": 10.0
     },
     "flesch_reading_ease_en": {
-     "n": 115,
-     "mean": 82.82344099378885,
+     "n": 114,
+     "mean": 83.47719298245616,
      "median": 87.94500000000002,
      "min": -21.809999999999945,
      "max": 119.19000000000003
     },
     "numbers_kept": {
-     "k": 115,
-     "n": 115
+     "k": 114,
+     "n": 114
     },
     "negations_kept": {
-     "k": 104,
-     "n": 115
+     "k": 105,
+     "n": 114
     },
     "bertscore_f1_vs_source": {
-     "n": 115,
-     "mean": 0.7928159988444784,
-     "median": 0.8005772233009338,
-     "min": 0.571577250957489,
-     "max": 1.0000001192092896
+     "n": 114,
+     "mean": 0.7900929811753725,
+     "median": 0.7974738478660583,
+     "min": 0.5024428367614746,
+     "max": 1.0
     }
    }
   },
   "accesscast_routing": {
-   "published": 115,
-   "sent_to_person": 6,
+   "published": 114,
+   "sent_to_person": 7,
    "of": 121
   },
   "note": "LED BY THE BLIND HUMAN RATING. The automatic numbers are secondary and overlap with our own easy-read rules.",
   "outputs": {
    "file": "data/eval_outputs/e05_easyread/easy_test.jsonl",
-   "sha256": "57d099a0cda17869bfe70cfe4b5e024a92197c42bd0f18ca250c34b5e3d5b0eb",
+   "sha256": "fdee22a9bb8cd3a515666fd8a177bdd873cd28450d6b434f6695224239f48669",
    "rows": 121,
    "committed": false
   },
@@ -1436,7 +1437,7 @@
     "versions": {
      "bert-score": "0.3.13",
      "transformers": "5.20.0",
-     "torch": "2.14.1+cu126"
+     "torch": "2.14.1"
     },
     "metric": "BERTScore"
    }

@@ -2,3 +2,5 @@
 {"ts": "2026-10-16T22:04:44.009Z", "experiment": "e01_test_gap_census", "freeze_tag": "test-freeze-1", "git_commit": "52b9e97080146633353a7acaa0aa42fa80647296", "passed": true, "videos": null}
 {"ts": "2026-10-16T23:27:58.899Z", "experiment": "e05_easyread", "freeze_tag": "test-freeze-3", "git_commit": "fccc2ecdede1e2ef258b69f296a88c0c0cbabe79", "passed": true, "videos": null}
 {"ts": "2026-10-16T23:57:09.369Z", "experiment": "e07_similarity", "freeze_tag": "test-freeze-3", "git_commit": "e0cb413db86d5eb973cd8b5513a5a9cf97d0d271", "passed": false, "videos": null}
+{"ts": "2026-10-17T00:29:49.052Z", "experiment": "e05_easyread", "freeze_tag": "test-freeze-4", "git_commit": "965ec597f3f00007a43a6f4662186667d628f1e8", "passed": true, "videos": null}
+{"ts": "2026-10-17T00:33:24.158Z", "experiment": "e07_similarity", "freeze_tag": "test-freeze-4", "git_commit": "965ec597f3f00007a43a6f4662186667d628f1e8", "passed": false, "videos": null}
