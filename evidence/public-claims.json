@@ -3425,7 +3425,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "58.8"
@@ -3467,7 +3468,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "53.8"
@@ -3761,7 +3763,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "0.8522"
@@ -3803,7 +3806,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "0.8898"
@@ -3888,7 +3892,8 @@
    ],
    "public_files": [
     "README.md",
-    "docs/lablab.md"
+    "docs/lablab.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "1012"
