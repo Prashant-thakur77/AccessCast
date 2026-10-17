@@ -44,6 +44,15 @@ section.on { display: block; }
 @keyframes fan2 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(0, 40px, 40px) rotateY(0); } }
 @keyframes fan3 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(350px, 40px, -40px) rotateY(-12deg); } }
 @keyframes fan4 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(700px, 40px, -120px) rotateY(-24deg); } }
+/* split: two rows, the three needs on top, the five languages below */
+@keyframes rowA0 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(-430px,-120px,-60px) rotateY(14deg); } }
+@keyframes rowA1 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(0,-120px,20px) rotateY(0); } }
+@keyframes rowA2 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(430px,-120px,-60px) rotateY(-14deg); } }
+@keyframes rowB0 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(-760px,140px,-140px) rotateY(24deg) scale(.82); } }
+@keyframes rowB1 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(-380px,140px,-60px) rotateY(12deg) scale(.82); } }
+@keyframes rowB2 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(0,140px,0) scale(.82); } }
+@keyframes rowB3 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(380px,140px,-60px) rotateY(-12deg) scale(.82); } }
+@keyframes rowB4 { from { opacity: 0; transform: translate3d(0,-40px,0) scale(1.9); } 30% { opacity: 1; } to { opacity: 1; transform: translate3d(760px,140px,-140px) rotateY(-24deg) scale(.82); } }
 @keyframes spin { 0% { opacity: 0; transform: translateY(-40px) rotateY(-40deg) rotateX(10deg) scale(1.9); } 30% { opacity: 1; } 100% { opacity: 1; transform: translateY(-40px) rotateY(0) rotateX(0) scale(1.9); } }
 .hero { animation-name: spin, out; animation-duration: 1.6s, .5s; animation-delay: 0s, 1.9s; }
 .labcol { opacity: 0; animation-name: fade; }
@@ -202,15 +211,18 @@ section p { margin: 0 0 .25em; }
 <section data-scene="split" data-dur="9">
   <div class="title3d">
     <p class="big anim up" style="--d:.2s">AccessCast</p>
-    <p class="mid anim up" style="--d:.6s">One video. Five ways to watch.</p>
+    <p class="mid anim up" style="--d:.6s">One video. Every viewer.</p>
   </div>
   <div class="stage3d">
     <div class="card3d anim hero" style="background-image:url(../../../data/demo/motion/still_main.jpg)"></div>
-    <div class="card3d anim" style="animation-name:fan0;--d:1.8s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:2.9s;background:#FFD23F">Can't see the screen</div></div>
-    <div class="card3d anim" style="animation-name:fan1;--d:1.9s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:3.0s;background:#C9EBDC">Can't hear</div></div>
-    <div class="card3d anim" style="animation-name:fan2;--d:2.0s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:3.1s;background:#FFD9C2">Simpler words</div></div>
-    <div class="card3d anim" style="animation-name:fan3;--d:2.1s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="hi" style="--d:3.2s;background:#F9C74F">हिन्दी</div></div>
-    <div class="card3d anim" style="animation-name:fan4;--d:2.2s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="it" style="--d:3.3s;background:#BFDDF5">Italiano</div></div>
+    <div class="card3d anim" style="animation-name:rowA0;--d:1.6s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:2.7s;background:#FFD23F">Can't see the screen</div></div>
+    <div class="card3d anim" style="animation-name:rowA1;--d:1.7s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:2.8s;background:#C9EBDC">Can't hear</div></div>
+    <div class="card3d anim" style="animation-name:rowA2;--d:1.8s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" style="--d:2.9s;background:#FFD9C2">Simpler words</div></div>
+    <div class="card3d anim" style="animation-name:rowB0;--d:2.2s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="hi" style="--d:3.3s;background:#F9C74F">हिन्दी</div></div>
+    <div class="card3d anim" style="animation-name:rowB1;--d:2.3s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="it" style="--d:3.4s;background:#BFDDF5">Italiano</div></div>
+    <div class="card3d anim" style="animation-name:rowB2;--d:2.4s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="es" style="--d:3.5s;background:#F7B2BD">Español</div></div>
+    <div class="card3d anim" style="animation-name:rowB3;--d:2.5s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="fr" style="--d:3.6s;background:#CDB4F5">Français</div></div>
+    <div class="card3d anim" style="animation-name:rowB4;--d:2.6s;--len:1.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"><div class="lab anim labcol" lang="pt" style="--d:3.7s;background:#B8E0A8">Português</div></div>
   </div>
 </section>
 
@@ -226,7 +238,7 @@ section p { margin: 0 0 .25em; }
     <div class="node code anim up" style="--d:3.6s"><div class="n">4</div><div class="t">Check</div><div class="s">Code tests every line. The model never judges itself</div></div>
     <div class="node amd anim up" style="--d:4.7s"><div class="n">5</div><div class="t">Repair</div><div class="s"><b>Gemma</b> fixes what failed, told why</div></div>
     <div class="node anim up" style="--d:5.8s"><div class="n">6</div><div class="t">Approve</div><div class="s">A person approves every description line</div></div>
-    <div class="node anim up" style="--d:6.9s"><div class="n">7</div><div class="t">Five versions</div><div class="s">Voiced, captioned, translated, rendered</div></div>
+    <div class="node anim up" style="--d:6.9s"><div class="n">7</div><div class="t">Every version</div><div class="s">Voiced, captioned, translated, rendered</div></div>
   </div>
   <div class="token anim" style="animation-name:travel;animation-timing-function:linear;--d:.3s;--len:7.4s;background-image:url(../../../data/demo/motion/still_main.jpg)"></div>
   </div></div>

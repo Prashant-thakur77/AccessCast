@@ -99,6 +99,10 @@ def main() -> int:
                         )
                 elif r.get("status") == "ok":
                     status["cache_hit_no_request"] += 1
+                elif r.get("status") == "endpoint_error" and float(r.get("latency_s") or 0) < 1.0:
+                    # failed at once: our circuit breaker held it back after an earlier call failed every
+                    # retry, so it was never sent (a call that is sent and retried takes seconds)
+                    status["not_sent_circuit_open"] += 1
                 elif r.get("status") == "endpoint_error":
                     status["no_answer_after_retries"] += 1
                 else:
@@ -115,6 +119,7 @@ def main() -> int:
             "video_minutes": round(sum(videos.values()) / 60000, 1),
             "video_groups": dict(Counter(groups.values())),
             "no_answer_after_retries": status["no_answer_after_retries"],
+            "not_sent_circuit_open": status["not_sent_circuit_open"],
             "answered_but_unusable": sum(v for k, v in status.items() if k.startswith("answered_but_")),
             "cache_hits_no_request": status["cache_hit_no_request"],
             "days": dict(sorted(days.items())),

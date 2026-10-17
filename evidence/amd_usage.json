@@ -3,11 +3,11 @@
  "experiment": "amd_usage",
  "split": "none",
  "passed": true,
- "git_commit": "59fa8802ecc25f55e26ad8763f2334046a8bd23e",
+ "git_commit": "b35b8bb979856d1e217093dcaa1e001d55d2a899",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-17T15:39:21.986Z",
- "finished_at": "2026-10-17T15:39:22.136Z",
+ "started_at": "2026-10-17T20:07:28.315Z",
+ "finished_at": "2026-10-17T20:07:28.442Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -31,7 +31,7 @@
   "excludes": "the public site's live attack (logged server-side, not here); fake-mode calls"
  },
  "checks": {
-  "one_served_model": true,
+  "one_served_gemma_id": true,
   "some_requests": true
  },
  "results": [
@@ -53,7 +53,7 @@
   },
   {
    "log": "projects/3db6e664bfa6/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 96
+   "new_tokenfactory_calls": 116
   },
   {
    "log": "projects/70179e60b244/logs/llm_calls.jsonl",
@@ -61,7 +61,7 @@
   },
   {
    "log": "projects/716570d5d488/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 242
+   "new_tokenfactory_calls": 244
   },
   {
    "log": "projects/81efb91a4b43/logs/llm_calls.jsonl",
@@ -196,6 +196,14 @@
    "new_tokenfactory_calls": 3104
   },
   {
+   "log": "projects/_eval/e04_translation_es_fr/llm_calls.jsonl",
+   "new_tokenfactory_calls": 0
+  },
+  {
+   "log": "projects/_eval/e04_translation_es_fr_pt/llm_calls.jsonl",
+   "new_tokenfactory_calls": 37
+  },
+  {
    "log": "projects/_eval/e05_easyread/llm_calls.jsonl",
    "new_tokenfactory_calls": 162
   },
@@ -233,11 +241,11 @@
   },
   {
    "log": "projects/_site/cbf141ec3213/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 29
+   "new_tokenfactory_calls": 50
   },
   {
    "log": "projects/_site/dac08bcd9d7a/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 125
+   "new_tokenfactory_calls": 451
   },
   {
    "log": "projects/_site/ed26561ae9d7/logs/llm_calls.jsonl",
@@ -281,16 +289,16 @@
   },
   {
    "log": "projects/fd6d87bdd397/logs/llm_calls.jsonl",
-   "new_tokenfactory_calls": 81
+   "new_tokenfactory_calls": 86
   }
  ],
  "summary": {
-  "requests_answered": 3162,
-  "tokens_in": 2555832,
-  "tokens_out": 446570,
-  "tokens_total": 3002402,
+  "requests_answered": 3510,
+  "tokens_in": 2679373,
+  "tokens_out": 474024,
+  "tokens_total": 3153397,
   "served_model_ids": {
-   "self-dploy/Gemma-4-31B-IT": 3162
+   "self-dploy/Gemma-4-31B-IT": 3510
   },
   "videos": 28,
   "video_minutes": 32.8,
@@ -299,13 +307,22 @@
    "w3c_test": 10,
    "dev_clips": 10
   },
-  "no_answer_after_retries": 2639,
-  "answered_but_unusable": 4,
-  "cache_hits_no_request": 782,
+  "no_answer_after_retries": 20,
+  "not_sent_circuit_open": 2619,
+  "answered_but_unusable": 18,
+  "cache_hits_no_request": 818,
   "days": {
    "2026-10-16": 2600,
-   "2026-10-17": 562
-  }
+   "2026-10-17": 910
+  },
+  "other_models": {
+   "self-dploy/Qwen3.8-27B": {
+    "requests": 13,
+    "tokens": 14835
+   }
+  },
+  "requests_answered_all_models": 3523,
+  "tokens_total_all_models": 3168232
  },
  "error": null
 }
