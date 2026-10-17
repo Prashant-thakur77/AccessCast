@@ -28,6 +28,8 @@ RECORDING = {
     "hook_closed.mp4": 'Black screen, "Close your eyes." The NASA clip\'s own sound only.',
     "hook_ad.mp4": 'Black screen, "The same video, with AccessCast." The extended description version\'s sound (machine draft, labelled).',
     "hook_open.mp4": '"Open your eyes." The extended render itself: Hubble Ultra Deep Field, each description line as text, "picture held" while it is read.',
+    "ver_hi.mp4": "The NASA clip's Hindi version: its own Hindi voice and subtitles (machine draft, labelled)",
+    "ver_it.mp4": "The NASA clip's Italian version: its own Italian voice and subtitles (machine draft, labelled)",
     "five_ways.webm": 'The live site\'s "Same clip, five ways" page on the Sintel trailer (labelled draft)',
     "how.webm": 'The live site\'s "How it works" page on the NASA clip, one step at a time',
     "decisions_drawer.webm": "The review app: frames Gemma saw, checks, repair history, keyboard approval",
@@ -74,6 +76,8 @@ def main() -> int:
         "- Opening: `scripts/make_hook_scenes.py`, from the NASA clip's draft render and its extended timeline.",
         "- Screen recordings: `scripts/record_demo.mjs` against the live site (https://accesscast.vercel.app), with a "
         "time mark at each step so narration lines up with the picture.",
+        "- Editing: scenes crossfade; each narration line keeps only a short pause; a soft tone made with "
+        "ffmpeg (no music, so no licence) sits under the narration and fades out where a video's own sound plays.",
         "- Export: H.264, AAC, two-pass loudness to −16 LUFS.",
         "",
     ]
