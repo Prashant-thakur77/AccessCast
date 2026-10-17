@@ -13,7 +13,7 @@ from typing import Any
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[1]
 EV = ROOT / "evidence"
@@ -64,7 +64,7 @@ def e5_negations() -> None:
         kept = s["arms"][arm]["negations_kept"]  # the same pointers the claims registry uses
         rows.append((label, kept["k"], kept["n"], color))
     fig, ax = plt.subplots(figsize=(10, 3.2))
-    for i, (label, k, n, color) in enumerate(rows):
+    for i, (_label, k, n, color) in enumerate(rows):
         ax.barh(i, 100 * k / n, color=color, height=0.55)
         ax.text(100 * k / n + 0.6, i, f"{k} of {n}", va="center", fontweight="bold")
     ax.set_yticks(range(len(rows)), [r[0] for r in rows])
@@ -137,7 +137,7 @@ def e4_translation() -> None:
     if not rows:
         return
     fig, ax = plt.subplots(figsize=(10, 0.7 * len(rows) + 1.6))
-    for i, (label, d, lo, hi, base, _) in enumerate(rows):
+    for i, (_label, d, lo, hi, base, _) in enumerate(rows):
         color = GREEN if lo > 0 else RED if hi < 0 else GREY
         ax.errorbar(d, i, xerr=[[d - lo], [hi - d]], fmt="o", color=color, capsize=5, markersize=8, lw=2)
         ax.text(max(hi, 0) + 0.3, i, f"vs {base}", va="center", fontsize=10)
@@ -192,7 +192,7 @@ def amd_usage() -> None:
     days = s["days"]
     fig, ax = plt.subplots(figsize=(10, 3.4))
     ax.bar(list(days), list(days.values()), color=RED, width=0.5)
-    for i, (d, v) in enumerate(days.items()):
+    for i, (_d, v) in enumerate(days.items()):
         ax.text(i, v, f"{v:,}", ha="center", va="bottom", fontweight="bold")
     ax.set_ylabel("Gemma requests answered")
     finish(
@@ -251,8 +251,8 @@ def timeline(sha12: str = "dac08bcd9d7a") -> None:
     ax.set_ylim(0, 2.1)
     ax.set_yticks([0.5, 1.5], ["description", "sound"])
     ax.set_xlabel("seconds")
-    from matplotlib.patches import Patch
     from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
 
     ax.legend(
         handles=[
