@@ -1,6 +1,6 @@
 {
   "schema_version": "accesscast/report/v1",
-  "generated_at": "2026-10-17T11:56:34.225Z",
+  "generated_at": "2026-10-17T12:31:59.854Z",
   "input": {
     "sha256": "ed26561ae9d77a8094a2fbf2c4c292e0a9cc33dea091463269d1a68b35360d6c",
     "duration_ms": 20000,
@@ -60,7 +60,7 @@
     }
   ],
   "environment": {
-    "worker_mode": "fake"
+    "worker_mode": "real"
   },
   "stage_metrics": {
     "asr": {
@@ -179,7 +179,5 @@
     "review_seconds": 0.0,
     "overrides": 0
   },
-  "warnings": [
-    "fake worker mode: canned model outputs"
-  ]
+  "warnings": []
 }

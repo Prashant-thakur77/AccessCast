@@ -196,10 +196,13 @@ def build_reports(run: Run) -> dict[str, Any]:
     write_json(proj.p("reports", "cost.json"), cost(run, bench))
     from accesscast.render_stage import AUDIENCE_VERSIONS, TRACK_LABELS
 
+    meta_p = proj.p("meta.json")  # optional: a readable title and the licence credit the source requires
+    meta = read_json(meta_p) if meta_p.exists() else {}
     index = {
         "schema_version": "accesscast/index/v1",
         "sha12": info.sha12,
-        "title": info.source_name,
+        "title": meta.get("title") or info.source_name,
+        "credit": meta.get("credit"),
         "duration_ms": info.duration_ms,
         "human_reviewed": report["review"]["human_reviewed"],
         "synthetic_test_data": report["synthetic_test_data"],
