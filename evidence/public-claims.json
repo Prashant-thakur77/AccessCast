@@ -3562,7 +3562,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "45d968470cd0588d9e3ba51cab5867b8566ed82f80e9010960e9cd5bc12e3869",
+     "sha256": "4a8c7930f711436c538e86ee088e8375d66315e8fb362e8d49d3c31aca1af1bf",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3584,7 +3584,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "45d968470cd0588d9e3ba51cab5867b8566ed82f80e9010960e9cd5bc12e3869",
+     "sha256": "4a8c7930f711436c538e86ee088e8375d66315e8fb362e8d49d3c31aca1af1bf",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3606,7 +3606,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "45d968470cd0588d9e3ba51cab5867b8566ed82f80e9010960e9cd5bc12e3869",
+     "sha256": "4a8c7930f711436c538e86ee088e8375d66315e8fb362e8d49d3c31aca1af1bf",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3627,7 +3627,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "45d968470cd0588d9e3ba51cab5867b8566ed82f80e9010960e9cd5bc12e3869",
+     "sha256": "4a8c7930f711436c538e86ee088e8375d66315e8fb362e8d49d3c31aca1af1bf",
      "pointer": "/summary/review/total"
     }
    ],
