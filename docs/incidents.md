@@ -171,3 +171,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** The browser test for two reviewers saving the same line passed once, then failed twice in a row on the same server: the status line read "About 3.6 seconds. No problems found." instead of "Changed elsewhere; reloaded."
 **Root cause.** After a save conflict, the app reloads the line. The automatic checks then run on the reloaded text and announce their result in the same live region, a moment later. A screen reader user could hear the check result and never learn that their edit was not saved.
 **Fix.** After a conflict, check results still show on screen but do not replace the conflict message for 5 seconds. The test now passes 3 of 3 times on one server.
+
+## 2026-10-18 The music stopped dead 5.5 seconds before the end of the video
+**Symptom.** In the rebuilt demo video the sound dropped to digital silence at 5:19.8, under the closing credits, while the picture ran to 5:25. A silence check found it; nobody had to watch the whole video to notice.
+**Root cause.** Not found. Rendered on its own, every step of the music mix (two tracks, fades, the volume envelope, ducking under the narration) carried the music to the end. Mixed in the same ffmpeg graph as the picture crossfades, the ducked music ended early.
+**Fix.** The video is built in two passes: picture and narration first, then the music mixed in a sound-only pass, the way it worked in isolation. The silence check runs after every build.
