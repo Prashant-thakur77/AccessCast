@@ -750,6 +750,8 @@
       data.index = res.index; data.base = res.base; data.project = res.project; data.catalog = res.catalog;
       if (!data.index.versions || !Object.keys(data.index.versions).length) throw new Error("This video has no versions yet.");
       $("video-h").textContent = "Video: " + (data.index.title || data.project.title || data.project.sha12);
+      $("video-credit").textContent = data.index.credit ? "Source: " + data.index.credit : "";
+      $("video-credit").hidden = !data.index.credit;
       AC.renderDisclosure($("disclosure"), data.index);
       $("report-link").setAttribute("href", data.base + "report.json");
       if (data.catalog.length > 1) {

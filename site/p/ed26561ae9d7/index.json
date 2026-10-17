@@ -1,7 +1,8 @@
 {
   "schema_version": "accesscast/index/v1",
   "sha12": "ed26561ae9d7",
-  "title": "source.mp4",
+  "title": "Keyboard shortcuts (our 20-second synthetic test clip)",
+  "credit": "AccessCast test fixture: generated pictures and synthetic voices",
   "duration_ms": 20000,
   "human_reviewed": false,
   "synthetic_test_data": true,
