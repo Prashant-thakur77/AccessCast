@@ -193,7 +193,12 @@ def assemble(parts: list[tuple[Path, float, bool, bool]], raw: Path, batch: int 
         or "1"
     )
     switch = next((starts[k] for k, (_, _, _, sw) in enumerate(parts) if sw), t / 2)
-    n = len(chunks)
+    # picture and narration first; the music goes in a second, sound-only pass. Mixed in the same graph as the
+    # picture, the music stopped dead 5.5 s before the end (incidents.md, 18 Oct); the same graph without the
+    # picture mixes it to the end.
+    joined = OUT / "demo_joined.mov"
+    length = xfade_join(chunks, joined)
+    n = 1  # inputs of the music pass: 0 = the joined video, 1 and 2 = the two music files
     a_end = switch + 2.0
     pad = [
         f"[{n}:a]aformat=sample_rates=48000:channel_layouts=stereo,atrim=0:{a_end:.2f},volume={MUSIC_GAIN[0]},"
@@ -202,11 +207,41 @@ def assemble(parts: list[tuple[Path, float, bool, bool]], raw: Path, batch: int 
         f"afade=t=in:d=3,afade=t=out:st={max(0.0, t - switch - 3):.2f}:d=4.5,adelay={int((switch - 1.5) * 1000)}:all=1[mb]",
         f"[ma][mb]amix=inputs=2:duration=longest:normalize=0,apad=whole_dur={{LENGTH}},atrim=0:{{LENGTH}},"
         f"volume='{gain}':eval=frame[music]",
-        "{AUDIO}asplit=2[narr][key]",
+        "[0:a]aformat=sample_rates=48000:channel_layouts=stereo,asplit=2[narr][key]",
         "[music][key]sidechaincompress=threshold=0.03:ratio=5:attack=30:release=600:makeup=1[ducked]",
         "[narr][ducked]amix=inputs=2:duration=first:normalize=0[aout]",
     ]
-    xfade_join(chunks, raw, pad, "[aout]", list(MUSIC))
+    script = OUT / "music.filter"
+    script.write_text(";\n".join(x.replace("{LENGTH}", f"{length:.2f}") for x in pad))
+    subprocess.run(
+        [
+            "ffmpeg",
+            "-loglevel",
+            "error",
+            "-y",
+            "-i",
+            str(joined),
+            *[a for m in MUSIC for a in ("-i", str(m))],
+            "-filter_complex_script",
+            str(script),
+            "-map",
+            "0:v",
+            "-map",
+            "[aout]",
+            "-c:v",
+            "copy",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "256k",
+            "-ar",
+            "48000",
+            "-ac",
+            "2",
+            str(raw),
+        ],
+        check=True,
+    )
 
 
 def main() -> int:
