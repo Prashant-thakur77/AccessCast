@@ -61,7 +61,7 @@ Gemma 4 31B on AMD Token Factory.
 <!-- slide: more-results -->
 # More results
 - **Translation (FLORES+, 1012 sentences each):** Gemma beat Opus-MT on Italian on both scores; Hindi is mixed (IndicTrans2 higher on chrF++).
-- **Accessibility:** player 25 of 25 tests, review app and Studio 7 of 7, axe-core included.
+- **Accessibility:** player 27 of 27 tests, review app and Studio 7 of 7, axe-core included.
 ![Translation: Gemma minus the baseline per language and score, with 95% intervals](docs/charts/e4_translation.png)
 
 ---
@@ -77,7 +77,7 @@ Gemma 4 31B on AMD Token Factory.
 - Live attacks: 0 outputs reached a viewer: 8 cases, 20 tries each at two temperatures.
 - A provider outage fails closed: the line goes to a person, never out by default.
 - Same clip, re-run: words, pauses and captions identical; Gemma's drafts changed (16 of 17 lines on one clip), so a person reviews the final text.
-- Accessibility tests pass: player 25 of 25, review app and Studio 7 of 7.
+- Accessibility tests pass: player 27 of 27, review app and Studio 7 of 7.
 
 ---
 <!-- slide: business -->

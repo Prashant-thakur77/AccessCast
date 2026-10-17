@@ -108,6 +108,11 @@ def export_site(settings: Settings, projects: Sequence[str], out: Path, *, allow
         )
     (out / "data").mkdir(exist_ok=True)
     write_json(out / "data" / "catalog.json", {"projects": catalog})
+    charts = REPO_ROOT / "docs" / "charts"  # drawn from evidence by scripts/make_charts.py; the Results page shows them
+    if charts.is_dir():
+        (out / "charts").mkdir(parents=True, exist_ok=True)
+        for f in sorted(charts.glob("*.png")):
+            shutil.copyfile(f, out / "charts" / f.name)
     reg = REPO_ROOT / "evidence" / "public-claims.json"
     if reg.exists():  # the site shows only registered numbers; a missing claim renders as "Measuring"
         claims = json.loads(reg.read_text(encoding="utf-8"))["claims"]

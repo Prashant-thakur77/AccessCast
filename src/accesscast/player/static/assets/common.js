@@ -130,7 +130,7 @@
     ]);
     container.appendChild(el("div", { class: "foot-grid" }, [
       mark,
-      col("Pages", [["Home", "index.html"], ["Watch", "watch.html"], ["Every viewer", "five-ways.html"], ["How it works", "how.html"], ["Proof", "proof.html"]]),
+      col("Pages", [["Home", "index.html"], ["Watch", "watch.html"], ["Every viewer", "five-ways.html"], ["How it works", "how.html"], ["Results", "results.html"], ["Proof", "proof.html"]]),
       col("Project", [["Source code", REPO], ["Notes for judges", REPO + "/blob/main/JUDGES.md"], ["Licence", REPO + "/blob/main/LICENSE"],
         ["Models, voices and fonts", REPO + "/blob/main/MODEL_LICENSES.md"]])
     ]));
