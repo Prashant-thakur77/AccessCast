@@ -302,14 +302,19 @@ def create_app(settings: Settings) -> FastAPI:
 
     @app.post("/api/projects/{pid}/review/complete")
     def complete(pid: str) -> JSONResponse:
-        from accesscast.render_stage import AUDIENCE_VERSIONS
+        from accesscast.render_stage import project_versions
         from accesscast.review import gate
 
         p = proj(pid)
         store = ReviewStore(p.root)
+        items = store.merged()
         res = gate.evaluate(
-            store.merged(),
-            [v for v in AUDIENCE_VERSIONS if not v.startswith("blind.h") and not v.startswith("blind.i")],
+            items,
+            [
+                v
+                for v in project_versions(items)
+                if not v.startswith("blind.h") and not v.startswith("blind.i")
+            ],
             store.state_sha256(),
         )
         gate.write_validation(p.root, res)

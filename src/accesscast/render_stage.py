@@ -10,7 +10,7 @@ Two modes:
 from __future__ import annotations
 
 import shutil
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -57,6 +57,21 @@ AUDIENCE_VERSIONS: dict[str, dict[str, Any]] = {
     "blind.hi": {"label": "हिन्दी + description", "tracks": ["desc.hi", "subs.hi"]},
     "blind.it": {"label": "Italiano + description", "tracks": ["desc.it", "subs.it"]},
 }
+
+
+def project_versions(items: Mapping[str, Item]) -> list[str]:
+    """The audience versions a project has. Translated description needs approved English lines first, and Spanish
+    and French came after the first projects: a version whose stage never ran (no items at all) is left out. A stage
+    that ran and failed still wrote its lines (marked failed), so it is never left out and still blocks the gate."""
+    present = {f"{i.kind.value}.{i.lang}" for i in items.values()}
+    out = []
+    for v in AUDIENCE_VERSIONS:
+        if v in ("blind.hi", "blind.it") and f"ad_translation.{v.split('.')[1]}" not in present:
+            continue
+        if v in ("es", "fr") and f"subtitle.{v}" not in present:
+            continue
+        out.append(v)
+    return out
 
 
 def _clip_end(it: Item) -> int:
@@ -149,15 +164,8 @@ def render_all(
     info = run.info
     store = ReviewStore(proj.root)
     items = store.merged()
-    wanted = list(versions or AUDIENCE_VERSIONS)
-    # Only render versions whose items exist (hi/it description needs approved English lines first).
-    present = {f"{i.kind.value}.{i.lang}" for i in items.values()}
-    if "ad_translation.hi" not in present:
-        wanted = [v for v in wanted if v != "blind.hi"]
-    if "ad_translation.it" not in present:
-        wanted = [v for v in wanted if v != "blind.it"]
-    # Spanish and French came later: a project made before them has no such items and keeps its earlier versions
-    wanted = [v for v in wanted if v not in ("es", "fr") or f"subtitle.{v}" in present]
+    has = project_versions(items)
+    wanted = [v for v in (versions or AUDIENCE_VERSIONS) if v in has]
     res = run_gate(run, wanted)
     public = mode == "public"
     if public:
