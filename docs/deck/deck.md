@@ -11,7 +11,7 @@ Gemma 4 on AMD Token Factory · AMD Developer Hackathon ACT III · Create a New 
 - 43.3 million people are blind and 295 million have moderate to severe vision loss.
 - 430 million people need rehabilitation for disabling hearing loss.
 - 26% of adults read at or below the lowest literacy level.
-- The largest free archive of described video holds about 310 hours hours. YouTube received 500 hours hours a minute.
+- The largest free archive of described video holds about 310 hours. YouTube received 500 hours a minute.
 
 ---
 <!-- slide: law -->
@@ -33,7 +33,7 @@ All five are built from one analysis, so they never disagree. Profiles combine.
 ---
 <!-- slide: how -->
 # How it works
-1. Listen: Whisper words, forced alignment, Gemma 4 E4B cross-checks the transcript and labels sounds.
+1. Listen: Whisper finds every word and pause, forced alignment times them, and a small audio classifier labels the sounds between words.
 2. Look: Gemma 4 31B lists what is visible, at temperature 0.
 3. Plan: code finds the pauses and gives each line a word budget.
 4. Write: Gemma writes only from the visible facts.
@@ -61,7 +61,7 @@ Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 # More results
 - **Speech recognition (dev):** Whisper large-v3-turbo, 4.5% English word error rate; word timing off by 54 ms (median) after alignment.
 - **Easy-read (test):** published cues paced for slow reading: 106 of 114, against 57 of 121 original captions.
-- **Accessibility:** player 23 of 23 tests, review app and Studio 6 of 6, axe-core included.
+- **Accessibility:** player 23 of 23 tests, review app and Studio 7 of 7, axe-core included.
 
 ---
 <!-- slide: amd -->
@@ -77,7 +77,7 @@ Test set: 10 W3C videos never used for tuning. Gemma 4 31B on AMD Token Factory.
 - Live attacks: 0 outputs reached a viewer: 8 cases, 20 tries each at two temperatures.
 - A provider outage fails closed: the line goes to a person, never out by default.
 - Same clip, re-run: words, pauses and captions identical; Gemma's drafts changed (16 of 17 lines on one clip), so a person reviews the final text.
-- Accessibility tests pass: player 23 of 23, review app and Studio 6 of 6.
+- Accessibility tests pass: player 23 of 23, review app and Studio 7 of 7.
 
 ---
 <!-- slide: business -->

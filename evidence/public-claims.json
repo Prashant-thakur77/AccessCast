@@ -3267,7 +3267,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "23"
@@ -3288,7 +3289,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "23"
@@ -3309,7 +3311,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "7"
@@ -3330,7 +3333,8 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md"
    ],
    "display": [
     "7"
