@@ -48,7 +48,7 @@ All five come from one analysis of the video (shots, scenes, every word with its
 
 Gemma 4 31B does four jobs in every run, all on **AMD Token Factory**: it looks at the frames of each scene and lists what is visible, writes the description from that list only, rewrites captions as easy-read and translates them into Hindi and Italian, and repairs any line that fails a check, told exactly which check failed. Every answer is checked against the model name the server reports (`--strict-provider`), and the model never decides timing or whether a line is good enough: code does.
 
-**Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,162 Gemma 4 31B requests for us, 3,002,402 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. The live attack on our site adds more calls, which these logs do not include.
+**Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,510 Gemma 4 31B requests for us, 3,153,397 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. The live attack on our site adds more calls, which these logs do not include.
 
 ![Gemma 4 31B requests answered by AMD Token Factory, by day, from our own call logs](docs/charts/amd_usage.png)
 
@@ -63,9 +63,10 @@ Gemma 4 31B ran on AMD Token Factory, AMD's hosted endpoint. These numbers are m
 | Generated tokens per second seen by our client, best concurrency | 17 | `e13_serving_tokenfactory.json` |
 | p95 latency of a description request at that concurrency | 13.9 s | `e13_serving_tokenfactory.json` |
 | Gemma tokens per finished minute of video, the five versions we measured | 41,818 | `e14_cost.json` |
-| Gemma requests answered by AMD Token Factory, all our work | 3,162 | `amd_usage.json` |
-| Tokens in those requests | 3,002,402 | `amd_usage.json` |
-| Calls Token Factory never answered, after every retry (outages; each one failed closed) | 2,639 | `amd_usage.json` |
+| Gemma requests answered by AMD Token Factory, all our work | 3,510 | `amd_usage.json` |
+| Tokens in those requests | 3,153,397 | `amd_usage.json` |
+| Calls Token Factory never answered, after every retry (outages; each one failed closed) | 20 | `amd_usage.json` |
+| Calls our circuit breaker then held back without sending (each one failed closed) | 2,619 | `amd_usage.json` |
 
 We could not create an MI300X droplet: AMD Developer Cloud asks for a payment card, and we did not have one it accepts. So this page has no GPU memory, users-per-GPU or GPU-dollar numbers. The scripts to measure them on a droplet are in `deploy/` and `eval/`, unchanged.
 

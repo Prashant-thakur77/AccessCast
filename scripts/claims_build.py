@@ -596,6 +596,15 @@ def amd_specs() -> list[Spec]:
             thousands,
             n,
         ),
+        Spec(
+            "amd.not_sent",
+            f,
+            "/summary/not_sent_circuit_open",
+            "calls our circuit breaker held back without sending, after a call had failed every retry",
+            "calls",
+            thousands,
+            n,
+        ),
     ]
 
 

@@ -4,14 +4,14 @@
   {
    "claim_id": "amd.no_answer",
    "text": "calls Token Factory never answered, after every retry",
-   "value": 2639,
+   "value": 20,
    "unit": "calls",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/no_answer_after_retries"
     }
    ],
@@ -19,20 +19,41 @@
     "README.md"
    ],
    "display": [
-    "2,639"
+    "20"
+   ]
+  },
+  {
+   "claim_id": "amd.not_sent",
+   "text": "calls our circuit breaker held back without sending, after a call had failed every retry",
+   "value": 2619,
+   "unit": "calls",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
+     "pointer": "/summary/not_sent_circuit_open"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "2,619"
    ]
   },
   {
    "claim_id": "amd.requests",
    "text": "Gemma 4 31B requests answered by AMD Token Factory",
-   "value": 3162,
+   "value": 3510,
    "unit": "requests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/requests_answered"
     }
    ],
@@ -44,20 +65,39 @@
     "docs/lablab.md"
    ],
    "display": [
-    "3,162"
+    "3,510"
+   ]
+  },
+  {
+   "claim_id": "amd.requests_all",
+   "text": "requests AMD Token Factory answered for us, Gemma and the models E17 compared",
+   "value": 3523,
+   "unit": "requests",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
+     "pointer": "/summary/requests_answered_all_models"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "3,523"
    ]
   },
   {
    "claim_id": "amd.tokens",
    "text": "tokens in those requests, as the server reported them",
-   "value": 3002402,
+   "value": 3153397,
    "unit": "tokens",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/tokens_total"
     }
    ],
@@ -66,20 +106,39 @@
     "JUDGES.md"
    ],
    "display": [
-    "3,002,402"
+    "3,153,397"
    ]
   },
   {
-   "claim_id": "amd.tokens_millions",
-   "text": "tokens in those requests, in millions",
-   "value": 3002402,
+   "claim_id": "amd.tokens_all_millions",
+   "text": "tokens in all those requests, in millions",
+   "value": 3168232,
    "unit": "tokens",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
+     "pointer": "/summary/tokens_total_all_models"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "3.2 million"
+   ]
+  },
+  {
+   "claim_id": "amd.tokens_millions",
+   "text": "tokens in those requests, in millions",
+   "value": 3153397,
+   "unit": "tokens",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/amd_usage.json",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/tokens_total"
     }
    ],
@@ -89,7 +148,7 @@
     "docs/lablab.md"
    ],
    "display": [
-    "3.0 million"
+    "3.2 million"
    ]
   },
   {
@@ -102,7 +161,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/video_minutes"
     }
    ],
@@ -124,7 +183,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/videos"
     }
    ],
@@ -149,7 +208,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/video_groups/attack_clips"
     }
    ],
@@ -170,7 +229,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/video_groups/dev_clips"
     }
    ],
@@ -191,7 +250,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "30c9e72a9dc4c16fc1e4a80b9b86be4a6552fb55dae1e8ac0e5ab74095084359",
+     "sha256": "e6bd4e1d84ed5f6a546cf19e417d420d37d59fa367754dafa12f0432737828be",
      "pointer": "/summary/video_groups/w3c_test"
     }
    ],
