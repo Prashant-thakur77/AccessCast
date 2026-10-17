@@ -139,7 +139,7 @@ The law already asks for this. The European Accessibility Act has applied since 
 
 What description costs today (list prices, not our measurements): 3Play Media lists $4.25 a minute for AI description with a human spot check and $18 for a voice artist; the University of Michigan lists $0.90 a minute for machine description and $6.65 to $14.70 for human description. A human describer needs about 20 hours to script and voice a one-hour programme (Media Access Australia).
 
-Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per finished minute of video for the five versions we measured (dev set), and review time from E12. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, five audiences from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
+Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per finished minute of video for the five versions we measured (dev set), and review time from E12. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, every audience from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
 
 ### How it is sold
 
