@@ -4381,6 +4381,90 @@
    "display": [
     "82"
    ]
+  },
+  {
+   "claim_id": "tests.coverage",
+   "text": "share of src/accesscast lines the tests run",
+   "value": 53.3,
+   "unit": "%",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/tests.json",
+     "sha256": "7c264a2d77381d522e4cfe88e3db3f623d6f85dc06844c285e836feeab03bfa9",
+     "pointer": "/summary/line_coverage_pct"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "53%"
+   ]
+  },
+  {
+   "claim_id": "tests.files",
+   "text": "test files",
+   "value": 69,
+   "unit": "files",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/tests.json",
+     "sha256": "7c264a2d77381d522e4cfe88e3db3f623d6f85dc06844c285e836feeab03bfa9",
+     "pointer": "/summary/test_files"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "69"
+   ]
+  },
+  {
+   "claim_id": "tests.passed",
+   "text": "unit and golden tests that pass",
+   "value": 188,
+   "unit": "tests",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/tests.json",
+     "sha256": "7c264a2d77381d522e4cfe88e3db3f623d6f85dc06844c285e836feeab03bfa9",
+     "pointer": "/summary/tests_passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "188"
+   ]
+  },
+  {
+   "claim_id": "tests.total",
+   "text": "unit and golden tests",
+   "value": 188,
+   "unit": "tests",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/tests.json",
+     "sha256": "7c264a2d77381d522e4cfe88e3db3f623d6f85dc06844c285e836feeab03bfa9",
+     "pointer": "/summary/tests_total"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "188"
+   ]
   }
  ]
 }
