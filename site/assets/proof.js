@@ -16,6 +16,8 @@
   var $ = function (id) { return document.getElementById(id); };
   var LIVE_TIMEOUT_MS = 180000;
   var ENDPOINTS = { tokenfactory: "Gemma 4 31B on AMD Token Factory" };
+  var RULES = { ER004: "the number check (ER004)", ER005: "the negation check (ER005)", AD009: "the invented-name check (AD009)",
+    AD011: "the sound-word check (AD011)", AD018: "the instruction-on-screen check (AD018)", VERIFIER_CRASH: "a check that could not run (fails closed)" };
 
   function announce(msg) {
     var s = $("status");
@@ -66,7 +68,7 @@
       ol.appendChild(el("li", null, [
         el("p", null, [el("strong", { text: "Gemma wrote: " }), t.text]),
         el("p", { text: (t.failed ? "This answer broke the rule. " : "This answer was fine. ") +
-          (rules.length ? "Blocked by: " + rules.join(", ") + ". " : "Not blocked. ") +
+          (rules.length ? "Blocked by: " + rules.map(function (r) { return RULES[r] || r; }).join(", ") + ". " : "Not blocked. ") +
           (t.reached_viewer ? "It reached the viewer." : "It did not reach the viewer.") }),
         t.final && t.final !== t.text && !t.reached_viewer
           ? el("p", null, [el("strong", { text: "After the check, Gemma's repair: " }), t.final]) : null,

@@ -1,6 +1,6 @@
 {
   "schema_version": "accesscast/report/v1",
-  "generated_at": "2026-10-17T00:52:46.693Z",
+  "generated_at": "2026-10-17T00:56:18.913Z",
   "input": {
     "sha256": "ed26561ae9d77a8094a2fbf2c4c292e0a9cc33dea091463269d1a68b35360d6c",
     "duration_ms": 20000,
@@ -64,31 +64,31 @@
   },
   "stage_metrics": {
     "asr": {
-      "wall_s": 0.078,
+      "wall_s": 0.09,
       "fallbacks": []
     },
     "shots": {
-      "wall_s": 0.028,
+      "wall_s": 0.032,
       "fallbacks": []
     },
     "scenes": {
-      "wall_s": 0.024,
+      "wall_s": 0.029,
       "fallbacks": []
     },
     "asr_crosscheck": {
-      "wall_s": 0.453,
+      "wall_s": 0.504,
       "fallbacks": []
     },
     "sounds": {
-      "wall_s": 0.024,
+      "wall_s": 0.028,
       "fallbacks": []
     },
     "gaps": {
-      "wall_s": 0.023,
+      "wall_s": 0.027,
       "fallbacks": []
     },
     "evidence": {
-      "wall_s": 28.699,
+      "wall_s": 31.989,
       "fallbacks": []
     },
     "plan": {
@@ -96,43 +96,43 @@
       "fallbacks": []
     },
     "write": {
-      "wall_s": 0.014,
+      "wall_s": 0.016,
       "fallbacks": []
     },
     "verify_repair": {
-      "wall_s": 10.339,
+      "wall_s": 11.635,
       "fallbacks": []
     },
     "tts": {
-      "wall_s": 26.875,
+      "wall_s": 26.881,
       "fallbacks": []
     },
     "captions_sdh": {
-      "wall_s": 0.031,
+      "wall_s": 0.035,
       "fallbacks": []
     },
     "captions_easy": {
-      "wall_s": 5.866,
+      "wall_s": 6.639,
       "fallbacks": []
     },
     "subtitles_hi": {
-      "wall_s": 0.037,
+      "wall_s": 0.042,
       "fallbacks": []
     },
     "subtitles_it": {
-      "wall_s": 0.58,
+      "wall_s": 0.659,
       "fallbacks": []
     },
     "voiceover_hi": {
-      "wall_s": 48.208,
+      "wall_s": 48.214,
       "fallbacks": []
     },
     "voiceover_it": {
-      "wall_s": 46.697,
+      "wall_s": 46.702,
       "fallbacks": []
     },
     "speakers": {
-      "wall_s": 0.011,
+      "wall_s": 0.016,
       "fallbacks": []
     }
   },

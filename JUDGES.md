@@ -5,8 +5,8 @@ The shortest route through the submission.
 ## Three-Minute Review
 1. Watch the demo video: <pending: video.url>
 2. Open the live player: https://accesscast.vercel.app/watch.html. Pick "I can't see the screen", then "Italiano".
-3. Open `/proof.html` and press "Run the attack". Watch Gemma's line get blocked.
-4. Open the three key evidence files: [`evidence/e01_verifier_ab.json`](evidence/), [`evidence/e13_serving.json`](evidence/), [`evidence/e14_cost.json`](evidence/).
+3. Open [`/proof.html`](https://accesscast.vercel.app/proof.html): it shows a recorded run of 20 live Gemma tries in which Gemma dropped a number every time and our check caught every one. When the live endpoint is connected, "Run the attack" repeats it in front of you (about 20 seconds).
+4. Open the three key evidence files: [`evidence/e01_verifier_ab.json`](evidence/), [`evidence/e13_serving_tokenfactory.json`](evidence/e13_serving_tokenfactory.json), [`evidence/e14_cost.json`](evidence/).
 5. Optional, no GPU: `make demo-fixture`, then open http://127.0.0.1:8080/?audience=judge
 
 ## What To Inspect

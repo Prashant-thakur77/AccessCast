@@ -28,6 +28,8 @@ ev = [read_json(f) for f in sorted((proj / "evidence").glob("*/evidence.json"))]
 meta = json.loads((REPO_ROOT / "data" / "adversarial" / f"{case}.json").read_text())
 cal = load_calibration(VOICES["en"])
 meta = {k: meta[k] for k in ("baits", "oracle", "rules")} | {
+    "kind": meta.get("kind", "ad"),
+    "said": " ".join(line[2] for line in meta.get("lines", [])),
     "calibration": {
         "voice": cal.voice,
         "wps_voice": cal.wps_voice,

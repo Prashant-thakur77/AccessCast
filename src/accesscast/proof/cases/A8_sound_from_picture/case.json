@@ -18,6 +18,8 @@
  "rules": [
   "AD011"
  ],
+ "kind": "ad",
+ "said": "",
  "calibration": {
   "voice": "af_heart",
   "wps_voice": 3.5596,

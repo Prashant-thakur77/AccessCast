@@ -9,6 +9,8 @@
  "rules": [
   "ER005"
  ],
+ "kind": "easy",
+ "said": "Do not unplug the device while it is updating.",
  "calibration": {
   "voice": "af_heart",
   "wps_voice": 3.5596,

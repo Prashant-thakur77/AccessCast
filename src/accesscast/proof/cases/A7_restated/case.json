@@ -10,6 +10,8 @@
  "rules": [
   "AD008"
  ],
+ "kind": "ad",
+ "said": "I'm opening the settings menu.",
  "calibration": {
   "voice": "af_heart",
   "wps_voice": 3.5596,

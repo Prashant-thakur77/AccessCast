@@ -12,10 +12,12 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import secrets
 import threading
 import time
 from collections import defaultdict, deque
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
 
@@ -62,15 +64,31 @@ def load_case(case: str) -> tuple[VerifyContext, dict[str, Any], Calibration]:
     return ctx, meta, cal
 
 
-def oracle(meta: dict[str, Any], text: str) -> bool:
-    from importlib import import_module
+def _quoted_ok(text: str, phrase: str) -> bool:
+    low = text.lower()
+    if phrase not in low:
+        return True
+    framed = re.search(r"(on screen|reads|sullo schermo|स्क्रीन पर)\s*:", low)
+    quoted = re.search(r"[\"“'][^\"”']*" + re.escape(phrase) + r"[^\"”']*[\"”']", low)
+    return bool(framed or quoted)
 
-    try:  # same independent oracle as E11 when the eval package is present
-        return bool(import_module("eval.e11_adversarial").oracle(meta, text))
-    except ModuleNotFoundError:
-        low = f" {text.lower()} "
-        o = meta["oracle"]
-        return o["type"] == "contains" and any(p in low for p in o["any"])
+
+def oracle(meta: dict[str, Any], text: str) -> bool:
+    """True when the output shows the failure the case baits. The same independent text oracle as E11
+    (eval/e11_adversarial.py), kept here so the deployed API does not need the eval package; it never imports
+    our verifier rules."""
+    o = meta["oracle"]
+    low = f" {text.lower()} "
+    if o["type"] == "contains":
+        return any(p in low for p in o["any"])
+    if o["type"] == "unquoted":
+        return any(not _quoted_ok(text, p) for p in o["any"])
+    if o["type"] == "missing":
+        return any(not re.search(r"\b(" + alt + r")", low) for alt in o["all"])
+    if o["type"] == "latin_fraction":
+        letters = [c for c in text if c.isalpha()]
+        return bool(letters) and sum(1 for c in letters if c.isascii()) / len(letters) > o["max"]
+    return False  # "overlap" needs timing the proof API does not model: never claim a failure it cannot see
 
 
 def create_app() -> FastAPI:
@@ -110,49 +128,72 @@ def create_app() -> FastAPI:
         settings = load_settings()
         provider = "tokenfactory" if settings.tf_api_key and settings.tf_base_url else "local"
         client = LlmClient(settings, provider=provider, strict_provider=True)
-        plans = plan_description(list(ctx.gaps.values()), ctx.evidence, ctx.words, ctx.vad, cal)
-        plans = [p for p in plans if not p.extended][:1]
-        if not plans:
-            raise HTTPException(500, "case has no planned line")
-        tries = []
+        kind = meta.get("kind", "ad")
+        temp = C.TEMP_STRESS if meta.get("proof_temperature") == "stress" else None
         run_id = secrets.token_hex(4)
-        for k in range(n):
+        if kind == "ad":
+            plans = plan_description(list(ctx.gaps.values()), ctx.evidence, ctx.words, ctx.vad, cal)
+            plans = [p for p in plans if not p.extended][:1]
+            if not plans:
+                raise HTTPException(500, "case has no planned line")
+        else:
+            from accesscast.captions.segment import segment_sdh
+
+            sdh = segment_sdh(ctx.words, ctx.sounds, 25.0, 10**7)
+
+        def one(k: int) -> dict[str, Any]:
             label = f"proof:{run_id}:{k}"
-            opts = WriteOptions(
-                run_label=label,
-                project_seed=settings.project_seed,
-                temperature=C.TEMP_STRESS if meta.get("proof_temperature") == "stress" else None,
-                concurrency=1,
-            )
-            try:
+            if kind == "ad":
+                opts = WriteOptions(
+                    run_label=label, project_seed=settings.project_seed, temperature=temp, concurrency=1
+                )
                 drafts = write_drafts(client, plans, ctx.evidence, ctx, opts)
                 item = verify_and_repair(client, plans, drafts, ctx, opts)[0]
-            except Exception as e:
-                raise HTTPException(
-                    503,
-                    f"Gemma endpoint not reachable ({type(e).__name__}); showing the last "
-                    "recorded run instead",
-                ) from e
+            else:
+                from accesscast.schemas import ItemKind
+                from accesscast.write.text_versions import TextOptions, make_easy, make_subtitles
+
+                topts = TextOptions(run_label=label, project_seed=settings.project_seed, temperature=temp)
+                made = (
+                    make_easy(client, sdh, ctx, topts)
+                    if kind == "easy"
+                    else make_subtitles(client, sdh, "hi", ctx, topts)
+                )
+                item = next(i for i in made if i.kind in (ItemKind.EASY, ItemKind.SUBTITLE))
             published = item.status == ItemStatus.PENDING and not item.violations
             first = item.repair.history[0] if item.repair.history else None
-            tries.append(
-                {
-                    "try": k + 1,
-                    "text": item.draft,
-                    "failed": oracle(meta, item.draft),
-                    "blocked_by": first.rules if first else [],
-                    "final": item.text if published else None,
-                    "reached_viewer": bool(published and oracle(meta, item.text)),
-                    "repairs": item.repair.attempts,
-                    "stop_reason": item.repair.stop_reason,
-                }
-            )
+            draft = first.text if first else item.draft
+            return {
+                "try": k + 1,
+                "endpoint": provider,
+                "text": draft,
+                "failed": oracle(meta, draft),
+                "blocked_by": first.rules if first and first.rules else [],
+                "final": item.text if published else None,
+                "reached_viewer": bool(published and oracle(meta, item.text)),
+                "repairs": item.repair.attempts,
+                "stop_reason": item.repair.stop_reason,
+            }
+
+        try:
+            with ThreadPoolExecutor(max_workers=min(n, 5)) as ex:
+                tries = list(ex.map(one, range(n)))
+        except Exception as e:
+            raise HTTPException(
+                503,
+                f"Gemma endpoint not reachable ({type(e).__name__}); showing the last recorded run instead",
+            ) from e
         served = client.provider
         return {
             "case": case or default_case,
             "baits": meta.get("baits"),
+            "case_text": (f'The video says "{meta["said"]}" ' if meta.get("said") else "")
+            + str(meta.get("baits", ""))[:1].upper()
+            + str(meta.get("baits", ""))[1:]
+            + ".",
             "endpoint": served,
             "model": settings.local_model if served == "local" else "Gemma-4-31B-IT (Token Factory)",
+            "endpoint_label": "Gemma 4 31B on AMD Token Factory" if served == "tokenfactory" else served,
             "temperature": "stress (1.0)" if meta.get("proof_temperature") == "stress" else "production",
             "recorded_at": now_iso(),
             "tries": tries,
