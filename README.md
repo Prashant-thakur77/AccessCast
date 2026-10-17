@@ -13,7 +13,7 @@ Most online video has no audio description, and most of it has captions only in 
 | Who is watching | What they get |
 |---|---|
 | "I can't see the screen" | Spoken description placed in the pauses between dialogue, with the original sound dipped underneath. When the pauses are too short, an extended version holds a still frame while the description plays. A text description track is there for screen readers and braille displays. |
-| "I can't hear" | Captions for deaf and hard-of-hearing viewers: every word, speaker changes, and sounds like [door slams]. |
+| "I can't hear" | Captions for deaf and hard-of-hearing viewers: every word, timed to the speech, and the sounds between words, like [music] or [applause]. (Speaker-change marks are built and switch on once the speaker model's licence is accepted.) |
 | "Simpler words, please" | Easy-read captions with short sentences and one idea each. A "Give me time to read" mode pauses the video until you are ready. |
 | "हिन्दी" | Hindi subtitles, a Hindi voice-over in the same time slots as the original speech, and Hindi description. |
 | "Italiano" | Italian subtitles, an Italian voice-over and Italian description. |
