@@ -557,7 +557,9 @@
     S.check = r.data; S.checkText = text; S.checkState = "ready";
     renderCheck();
     const summary = summarize(r.data);
-    if (speak && summary !== S.lastSummary) announce(summary);
+    // after a conflict, keep "Changed elsewhere; reloaded." in the status for a few seconds: the check of the reloaded
+    // text still shows on screen, but must not replace that message before a screen reader has read it
+    if (speak && summary !== S.lastSummary && Date.now() >= (S.holdStatusUntil || 0)) announce(summary);
     S.lastSummary = summary;
     return r.data;
   }
@@ -597,6 +599,7 @@
       }
       putBackSeconds(id, secs);
       if (r.status === 409) {
+        S.holdStatusUntil = Date.now() + 5000;
         announce("Changed elsewhere; reloaded.");
         await reloadItems();
         if (id === S.selectedId) renderSaveLine("Changed elsewhere; reloaded.");

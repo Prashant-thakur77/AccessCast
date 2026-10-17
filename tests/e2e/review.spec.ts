@@ -34,8 +34,9 @@ async function axeViolations(page: Page) {
   }));
 }
 
-/** Press Tab until `target` has focus (keyboard only, no clicks). */
-async function tabTo(page: Page, target: Locator, max = 80) {
+/** Press Tab until `target` has focus (keyboard only, no clicks). Every line is a Tab stop, so with five languages
+ *  Tab passes many lines before it wraps to the header (follow-up H9 in docs/plan-final-push.md: one Tab stop). */
+async function tabTo(page: Page, target: Locator, max = 240) {
   for (let i = 0; i < max; i++) {
     await page.keyboard.press("Tab");
     if (await target.evaluate((el) => el === document.activeElement)) return;
