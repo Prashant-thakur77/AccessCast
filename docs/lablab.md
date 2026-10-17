@@ -8,7 +8,7 @@
 
 Most online video has no audio description, and many viewers can't use it as it is: people who can't see the screen, people who can't hear, people who need simpler words, and people who speak another language.
 
-AccessCast takes one video and makes a version for each of them. Blind and low-vision viewers hear description placed in the pauses between dialogue, and when the pauses are too short the video holds a still frame while the description plays. Deaf viewers get captions with speakers and sounds. Viewers who need simpler words get easy-read captions and a mode that waits for them to finish reading. Hindi and Italian speakers get subtitles, a voice-over and their own description. All five are made from one analysis of the video, so they never disagree.
+AccessCast takes one video and makes a version for each of them. Blind and low-vision viewers hear description placed in the pauses between dialogue, and when the pauses are too short the video holds a still frame while the description plays. Deaf viewers get captions with every word and the sounds between words. Viewers who need simpler words get easy-read captions and a mode that waits for them to finish reading. Hindi and Italian speakers get subtitles, a voice-over and their own description. All five are made from one analysis of the video, so they never disagree.
 
 Gemma 4 31B, served by AMD Token Factory, looks at the frames and writes, translates and repairs. Code checks every line against the real audio timeline, a word budget, and rules against invented names, unsupported claims, sounds and instructions hidden in on-screen text. Lines that fail go back to Gemma with the failed checks. A person approves every description line, and the server refuses to render while any line is waiting.
 
@@ -16,7 +16,7 @@ On 10 W3C accessibility videos never used for tuning (Gemma 4 31B on AMD Token F
 
 Every Gemma call runs on AMD Token Factory (Gemma-4-31B-IT), checked against the model the server reports. Measured from our side: 17 tokens/s at the best concurrency, p95 13.9 s, and 41,818 Gemma tokens per finished minute for all five versions.
 
-The European Accessibility Act has applied since 28 June 2025; India's OTT accessibility guidelines date from 6 February 2026; the US ADA Title II deadline for large public bodies is 26 April 2027. Most video still has no description. AccessCast makes reviewed versions practical for the rest: open models, five audiences from one analysis, and a person approves every description line.
+The European Accessibility Act has applied since 28 June 2025; India's OTT accessibility guidelines date from 6 February 2026; the US ADA Title II deadline for large public bodies is 26 April 2027. Most video still has no description. AccessCast makes reviewed versions practical for the rest: open models, five audiences from one analysis, and a person approves every description line. The model work is small: at a published list price for Gemma 4 31B, all five versions of one finished minute cost about $0.0053 of Gemma (an estimate), so what a customer pays for is review time. Our first customer is a US public university's accessibility office with an ADA deadline and years of undescribed video; broadcasters and streaming platforms in the EU, Italy and India come next.
 
 What didn't work: our pre-registered headline test (description inside pauses) could not separate the arms, because the test videos have only 6 usable pauses in 9.3 minutes; we report it instead of re-tuning.
 
