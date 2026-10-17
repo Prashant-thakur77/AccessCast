@@ -3683,6 +3683,311 @@
    ]
   },
   {
+   "claim_id": "e18.es.held",
+   "text": "Spanish lines held for a person",
+   "value": 8,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/es/held_for_a_person"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "8"
+   ]
+  },
+  {
+   "claim_id": "e18.es.lines",
+   "text": "Spanish subtitle and voice-over lines made",
+   "value": 81,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/es/lines"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "81"
+   ]
+  },
+  {
+   "claim_id": "e18.es.passed",
+   "text": "Spanish lines that passed every check",
+   "value": 73,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/es/passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "73"
+   ]
+  },
+  {
+   "claim_id": "e18.fr.held",
+   "text": "French lines held for a person",
+   "value": 11,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/fr/held_for_a_person"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "11"
+   ]
+  },
+  {
+   "claim_id": "e18.fr.lines",
+   "text": "French subtitle and voice-over lines made",
+   "value": 81,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/fr/lines"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "81"
+   ]
+  },
+  {
+   "claim_id": "e18.fr.passed",
+   "text": "French lines that passed every check",
+   "value": 70,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/fr/passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "70"
+   ]
+  },
+  {
+   "claim_id": "e18.hi.held",
+   "text": "Hindi lines held for a person",
+   "value": 7,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/hi/held_for_a_person"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "7"
+   ]
+  },
+  {
+   "claim_id": "e18.hi.lines",
+   "text": "Hindi subtitle and voice-over lines made",
+   "value": 81,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/hi/lines"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "81"
+   ]
+  },
+  {
+   "claim_id": "e18.hi.passed",
+   "text": "Hindi lines that passed every check",
+   "value": 74,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/hi/passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "74"
+   ]
+  },
+  {
+   "claim_id": "e18.it.held",
+   "text": "Italian lines held for a person",
+   "value": 7,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/it/held_for_a_person"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "7"
+   ]
+  },
+  {
+   "claim_id": "e18.it.lines",
+   "text": "Italian subtitle and voice-over lines made",
+   "value": 81,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/it/lines"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "81"
+   ]
+  },
+  {
+   "claim_id": "e18.it.passed",
+   "text": "Italian lines that passed every check",
+   "value": 74,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/it/passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "74"
+   ]
+  },
+  {
+   "claim_id": "e18.pt.held",
+   "text": "Portuguese lines held for a person",
+   "value": 5,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/pt/held_for_a_person"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "5"
+   ]
+  },
+  {
+   "claim_id": "e18.pt.lines",
+   "text": "Portuguese subtitle and voice-over lines made",
+   "value": 81,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/pt/lines"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "81"
+   ]
+  },
+  {
+   "claim_id": "e18.pt.passed",
+   "text": "Portuguese lines that passed every check",
+   "value": 76,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e18_language_checks.json",
+     "sha256": "1bf90abb561571ffe61ee528bfb97633a78d8a8935387bcece71d619e97c5ca1",
+     "pointer": "/summary/by_language/pt/passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "76"
+   ]
+  },
+  {
    "claim_id": "e4.hi.chrf_base",
    "text": "Hindi chrF++, IndicTrans2",
    "value": 58.80566603741543,

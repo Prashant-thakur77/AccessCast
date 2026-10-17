@@ -1034,6 +1034,8 @@ def register() -> dict[str, Any]:
         if not f.exists():
             continue
         doc = json.loads(f.read_text())
+        if doc.get("checks", {}).get("no_endpoint_errors") is False:
+            continue  # a run the provider failed (outage, rate limit) measured nothing about the model
         try:
             val = resolve_pointer(doc, s.pointer)
         except (KeyError, IndexError, ValueError):

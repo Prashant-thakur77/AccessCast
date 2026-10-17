@@ -1,0 +1,224 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e18_language_checks",
+ "split": "dev",
+ "passed": true,
+ "git_commit": "f3ba3247f6ec636426293788a3d35a1a8262f136",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-17T20:02:04.762Z",
+ "finished_at": "2026-10-17T20:02:04.776Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "projects": [
+   "cbf141ec3213",
+   "dac08bcd9d7a"
+  ],
+  "languages": [
+   "hi",
+   "it",
+   "es",
+   "fr",
+   "pt"
+  ]
+ },
+ "checks": {
+  "every_language_has_lines": true
+ },
+ "results": [
+  {
+   "project": "cbf141ec3213",
+   "lang": "hi",
+   "kind": "subs",
+   "file": "subs.hi.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "hi",
+   "kind": "vo",
+   "file": "vo.hi.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "hi",
+   "kind": "subs",
+   "file": "subs.hi.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "hi",
+   "kind": "vo",
+   "file": "vo.hi.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "it",
+   "kind": "subs",
+   "file": "subs.it.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "it",
+   "kind": "vo",
+   "file": "vo.it.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "it",
+   "kind": "subs",
+   "file": "subs.it.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "it",
+   "kind": "vo",
+   "file": "vo.it.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "es",
+   "kind": "subs",
+   "file": "subs.es.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "es",
+   "kind": "vo",
+   "file": "vo.es.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "es",
+   "kind": "subs",
+   "file": "subs.es.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "es",
+   "kind": "vo",
+   "file": "vo.es.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "fr",
+   "kind": "subs",
+   "file": "subs.fr.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "fr",
+   "kind": "vo",
+   "file": "vo.fr.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "fr",
+   "kind": "subs",
+   "file": "subs.fr.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "fr",
+   "kind": "vo",
+   "file": "vo.fr.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "pt",
+   "kind": "subs",
+   "file": "subs.pt.jsonl"
+  },
+  {
+   "project": "cbf141ec3213",
+   "lang": "pt",
+   "kind": "vo",
+   "file": "vo.pt.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "pt",
+   "kind": "subs",
+   "file": "subs.pt.jsonl"
+  },
+  {
+   "project": "dac08bcd9d7a",
+   "lang": "pt",
+   "kind": "vo",
+   "file": "vo.pt.jsonl"
+  }
+ ],
+ "summary": {
+  "by_language": {
+   "hi": {
+    "lines": 81,
+    "passed": 74,
+    "held_for_a_person": 7,
+    "held_by_rule": {
+     "VO001": 4,
+     "CC001": 2,
+     "CC004": 1,
+     "CC002": 1,
+     "CC009": 1,
+     "VO003": 1
+    }
+   },
+   "it": {
+    "lines": 81,
+    "passed": 74,
+    "held_for_a_person": 7,
+    "held_by_rule": {
+     "CC001": 4,
+     "CC009": 2,
+     "CC004": 1,
+     "CC002": 1,
+     "VO003": 1
+    }
+   },
+   "es": {
+    "lines": 81,
+    "passed": 73,
+    "held_for_a_person": 8,
+    "held_by_rule": {
+     "CC001": 5,
+     "CC004": 1,
+     "CC009": 1,
+     "VO003": 1
+    }
+   },
+   "fr": {
+    "lines": 81,
+    "passed": 70,
+    "held_for_a_person": 11,
+    "held_by_rule": {
+     "CC001": 8,
+     "CC004": 1,
+     "CC009": 1,
+     "VO003": 1
+    }
+   },
+   "pt": {
+    "lines": 81,
+    "passed": 76,
+    "held_for_a_person": 5,
+    "held_by_rule": {
+     "CC001": 3,
+     "CC004": 1,
+     "CC009": 1,
+     "VO003": 1
+    }
+   }
+  },
+  "projects": 2
+ },
+ "error": null
+}

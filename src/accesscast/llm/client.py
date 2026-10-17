@@ -178,6 +178,7 @@ class LlmClient:
         served = ""
         tin = tout = 0
         attempts = 0
+        error = ""
         try:
             with lim.sem:
                 if prov == "fake":
@@ -206,8 +207,9 @@ class LlmClient:
         except LlmOutputError:
             status = "bad_json"
             raise
-        except ModelEndpointError:
+        except ModelEndpointError as e:
             status = "endpoint_error"
+            error = str(e)[:200]  # why: rate limit, outage or timeout (never a key; messages carry no headers)
             raise
         finally:
             self._log(
@@ -228,6 +230,7 @@ class LlmClient:
                     "n_images": len(req.images),
                     "has_audio": req.audio is not None,
                     "output_head": raw[: C.LLM_LOG_TRUNCATE],
+                    **({"error": error} if error else {}),
                 }
             )
 
