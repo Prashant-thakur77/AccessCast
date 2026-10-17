@@ -48,7 +48,7 @@ Every first draft failed at least one of our checks (arm B sent all of them to a
 ### Other results
 <!-- results.more:start -->
 - **Speech recognition (E15, dev set).** We chose Whisper large-v3-turbo: its English word error rate was 4.5% on 100 FLEURS clips, against 4.3% for the larger large-v3 (Hindi 32.4%, Italian 3.0%). After forced alignment, word boundaries were off by 54 ms at the median and 339 ms at the 95th percentile (raw Whisper: 480 ms), on 224 word boundaries of our synthetic clips, so description keeps 340 ms clear of speech. Large-v3 could not produce word timings within our computer's memory, so it was not a candidate.
-- **Easy-read (E5, 10 W3C videos never used for tuning).** Asked to simplify the captions, Gemma alone kept every "not", "never" and "no" in 104 of 115 cues; in the others the sentence lost its negation and so its meaning. The easy-read AccessCast published kept them in 115 of 115, and sent 6 of 121 cues to a person instead. Paced for slow reading (at most 130 words a minute): 106 of 115 published cues, against 57 of 121 original captions. These counts use a negation counter close to our own check, so a blind rating by people leads this experiment; it is still to come.
+- **Easy-read (E5, 10 W3C videos never used for tuning).** Asked to simplify the captions, Gemma alone kept every "not", "never" and "no" in 105 of 114 cues; in the others the sentence lost its negation and so its meaning. The easy-read AccessCast published kept them in 114 of 114, and sent 7 of 121 cues to a person instead. Paced for slow reading (at most 130 words a minute): 106 of 114 published cues, against 57 of 121 original captions. These counts use a negation counter close to our own check, so a blind rating by people leads this experiment; it is still to come.
 - **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 23 of 23, review app and Studio 6 of 6. No blind tester has used it yet.
 <!-- results.more:end -->
 
@@ -126,6 +126,7 @@ Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per fi
 ## What didn't work
 
 - **Description in the pauses (E1)** did not separate Gemma alone from Gemma with checks on the test set, because these videos have almost no pauses (see Results). We report it as pre-registered and did not re-tune.
+- **Closeness to W3C's human description (E7)** could not be measured for the same reason: only 3 of 82 human description cues had one of our in-pause lines nearby to compare against.
 - **Gemma never took the bait in 6 of our 8 attack cases** (E11), so for those cases the checks were never exercised live. The one case it failed every time (dropping a number in easy-read) was caught every time.
 - **Hindi speech recognition is weak:** 32.4% word error rate on FLEURS, against 4.5% for English. Hindi subtitles start from the English transcript, so this does not reach them, but Hindi source videos would suffer.
 - **Our first voice timing was wrong.** Lines inside their word budget still overran their pause; we refitted on dev lines and added a margin (D-024).

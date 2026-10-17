@@ -214,6 +214,22 @@ SPECS: list[Spec] = [
         "lines",
     ),
     Spec(
+        "e7.paired_k",
+        "e07_similarity.json",
+        "/summary/timing_agreement/accesscast/k",
+        "W3C human description cues paired with an AccessCast line (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
+        "e7.paired_n",
+        "e07_similarity.json",
+        "/summary/timing_agreement/accesscast/n",
+        "W3C human description cues (test)",
+        "cues",
+        split="test",
+    ),
+    Spec(
         "e1.census_pauses",
         "e01_test_gap_census.json",
         "/summary/pauses",
