@@ -1,4 +1,4 @@
-/* "Same 20 seconds, five ways" (PLAN §13.4): play one segment once per audience version. */
+/* "Same clip, every viewer" (PLAN §13.4): play one segment once per audience version. */
 (function () {
   "use strict";
   var AC = window.AC, el = AC.el;
@@ -10,7 +10,10 @@
     { key: "deaf.en", who: "For someone who can't hear", role: "sdh", world: "deaf" },
     { key: "easy.en", who: "For someone who wants simpler words", role: "easy", world: "easy" },
     { key: "hi", who: "For someone who speaks Hindi", local: "हिन्दी बोलने वालों के लिए", lang: "hi", role: "subs", world: "hi" },
-    { key: "it", who: "For someone who speaks Italian", local: "Per chi parla italiano", lang: "it", role: "subs", world: "it" }
+    { key: "it", who: "For someone who speaks Italian", local: "Per chi parla italiano", lang: "it", role: "subs", world: "it" },
+    { key: "es", who: "For someone who speaks Spanish", local: "Para quien habla español", lang: "es", role: "subs", world: "es" },
+    { key: "fr", who: "For someone who speaks French", local: "Pour qui parle français", lang: "fr", role: "subs", world: "fr" },
+    { key: "pt", who: "For someone who speaks Portuguese", local: "Para quem fala português", lang: "pt", role: "subs", world: "pt" }
   ];
   var DEFAULT_SEGMENT_MS = 20000; /* PLAN §13.4: a 20-second segment; index.json "segment_ms" overrides it. */
 
@@ -86,7 +89,7 @@
     video.pause();
     setButtons();
     renderSteps();
-    $("who").textContent = done ? "That was all five." : "Stopped.";
+    $("who").textContent = done ? "That was every viewer." : "Stopped.";
     document.body.setAttribute("data-world", "paper");
     $("who-local").textContent = "";
     $("b-start").focus();

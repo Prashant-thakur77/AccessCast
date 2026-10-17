@@ -9,7 +9,10 @@
   var VERSIONS = [
     { key: "easy", title: "Easy-read", lang: "en" },
     { key: "hi", title: "हिन्दी", lang: "hi" },
-    { key: "it", title: "Italiano", lang: "it" }
+    { key: "it", title: "Italiano", lang: "it" },
+    { key: "es", title: "Español", lang: "es" },
+    { key: "fr", title: "Français", lang: "fr" },
+    { key: "pt", title: "Português", lang: "pt" }
   ];
   var RULES = {
     ER001: "too fast to read", ER002: "a sentence is too long", ER004: "a number changed", ER005: "a \"not\" was lost or added",
@@ -62,7 +65,7 @@
       slots[v.key] = card(v, [el("p", { class: "muted", text: "Asking Gemma…" })]);
       out.appendChild(slots[v.key]);
     });
-    say("Asking Gemma on AMD Token Factory for three versions. This can take a minute or two.");
+    say("Asking Gemma on AMD Token Factory for five languages and easy-read. This can take a minute or two.");
     var done = 0, stopped = 0, failed = 0;
     Promise.all(VERSIONS.map(function (v) {
       var ctrl = typeof AbortController === "function" ? new AbortController() : null;

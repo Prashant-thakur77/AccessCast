@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add("js");</script>
 <title>Watch: AccessCast player</title>
-<meta name="description" content="One video, made for different viewers: audio description, captions, easy-read captions, Hindi and Italian.">
+<meta name="description" content="One video, made for different viewers: audio description, captions, easy-read captions, and Hindi, Italian, Spanish, French and Portuguese.">
 <link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
@@ -17,8 +17,9 @@
   <nav aria-label="Pages">
     <ul>
       <li><a href="watch.html" aria-current="page">Watch</a></li>
-      <li><a href="five-ways.html">Five ways</a></li>
+      <li><a href="five-ways.html">Every viewer</a></li>
       <li><a href="how.html">How it works</a></li>
+      <li><a href="results.html">Results</a></li>
       <li><a href="proof.html">Proof</a></li>
     </ul>
   </nav>
@@ -26,9 +27,10 @@
 
 <main id="main" class="wrap">
   <div id="judge-banner" class="banner banner-judge" hidden>
-    <p><strong>Judges, start here.</strong> See the same clip made five ways on
-      <a href="five-ways.html">Five ways</a>. See our checks run against a hard case on the
-      <a href="proof.html">Proof page</a>. Below, open any line to see what the models decided.</p>
+    <p><strong>Judges, start here.</strong> See the same clip made for each viewer on
+      <a href="five-ways.html">Every viewer</a>, and how it was made on <a href="how.html">How it works</a>.
+      Run our attack live, or try your own caption, on the <a href="proof.html">Proof page</a>.
+      Below, open any line to see what the models decided.</p>
   </div>
   <div id="load-error" class="error" role="alert" hidden></div>
 
@@ -78,6 +80,24 @@
           <span class="g" aria-hidden="true">It</span><span class="t">Italiano</span>
         </button>
         <p class="note" id="n-it"></p>
+      </div>
+      <div class="profile">
+        <button type="button" class="aud-toggle w-es" id="t-es" data-profile="es" lang="es" aria-pressed="false" aria-describedby="n-es">
+          <span class="g" aria-hidden="true">Es</span><span class="t">Español</span>
+        </button>
+        <p class="note" id="n-es"></p>
+      </div>
+      <div class="profile">
+        <button type="button" class="aud-toggle w-fr" id="t-fr" data-profile="fr" lang="fr" aria-pressed="false" aria-describedby="n-fr">
+          <span class="g" aria-hidden="true">Fr</span><span class="t">Français</span>
+        </button>
+        <p class="note" id="n-fr"></p>
+      </div>
+      <div class="profile">
+        <button type="button" class="aud-toggle w-pt" id="t-pt" data-profile="pt" lang="pt" aria-pressed="false" aria-describedby="n-pt">
+          <span class="g" aria-hidden="true">Pt</span><span class="t">Português</span>
+        </button>
+        <p class="note" id="n-pt"></p>
       </div>
     </div>
   </section>
@@ -171,7 +191,7 @@
     <dt><kbd>J</kbd> <kbd>L</kbd></dt><dd>Back or forward 5 seconds</dd>
     <dt><kbd>C</kbd></dt><dd>Captions on or off</dd>
     <dt><kbd>D</kbd></dt><dd>Description text on or off</dd>
-    <dt><kbd>1</kbd> to <kbd>5</kbd></dt><dd>Pick or unpick a viewer, in the order shown</dd>
+    <dt><kbd>1</kbd> to <kbd>8</kbd></dt><dd>Pick or unpick a viewer, in the order shown</dd>
     <dt><kbd>?</kbd></dt><dd>Open this list</dd>
   </dl>
   <label class="choice"><input type="checkbox" id="c-keys"> Use single-key shortcuts</label>

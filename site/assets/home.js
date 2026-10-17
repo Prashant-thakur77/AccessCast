@@ -359,10 +359,10 @@
 
   /* =================== Results and law rows (data/claims.json) =================== */
   var RESULTS = [
-    { label: "Lines that fit their pause", sub: "Gemma 4 with our checks and Gemma repair.", of: ["e1.fit_c", "e1.lines_planned"] },
-    { label: "Gemma 4 alone", sub: "The baseline: the same plan, with no checks and no repair.", of: ["e1.fit_a", "e1.lines_planned"] },
+    { label: "Easy-read captions that kept every \"not\"", sub: "What AccessCast published, on W3C test videos never used for tuning.", of: ["e5.neg_ours_k", "e5.neg_ours_n"] },
+    { label: "Gemma 4 alone", sub: "The same captions, simplified with no checks: some lost their \"not\".", of: ["e5.neg_gemma_k", "e5.neg_gemma_n"] },
     { label: "Attacks that reached a viewer", sub: "Hard cases we gave Gemma on purpose, asked many times.", one: "e11.total_leaks" },
-    { label: "Gemma tokens per finished minute", sub: "All five versions, Gemma 4 31B on AMD Token Factory. A person's review time comes on top.", one: "e14.tokens_per_minute" },
+    { label: "Gemma tokens per finished minute", sub: "The five versions we measured, Gemma 4 31B on AMD Token Factory. A person's review time comes on top.", one: "e14.tokens_per_minute" },
     { label: "Accessibility tests passed", sub: "Player pages, keyboard and axe-core checks.", of: ["e16.player_passed", "e16.player_total"] }
   ];
   var LAW = [

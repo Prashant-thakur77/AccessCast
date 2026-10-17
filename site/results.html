@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");</script>
+<title>Results: what we measured</title>
+<meta name="description" content="What AccessCast measured, with the data split and the evidence file for each result. Every number comes from our evidence files.">
+<link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-world="paper">
+<a class="skip-link" href="#main">Skip to the main content</a>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="15"/><circle cx="21" cy="11" r="5"/></svg>AccessCast</a>
+  <nav aria-label="Pages">
+    <ul>
+      <li><a href="watch.html">Watch</a></li>
+      <li><a href="five-ways.html">Every viewer</a></li>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="results.html" aria-current="page">Results</a></li>
+      <li><a href="proof.html">Proof</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+  <div class="page-head">
+    <p class="micro">What we measured</p>
+    <h1 class="display l">Results.</h1>
+    <p class="lede">Every number on this page comes from an evidence file in our repository. Each result says which data it used.</p>
+  </div>
+
+  <ol class="results-list">
+    <li class="result-card" aria-labelledby="r-neg">
+      <h2 id="r-neg" class="display m">A dropped "not" flips the meaning</h2>
+      <p class="how-say">Asked to simplify captions, Gemma alone kept every "not", "never" and "no" in <b data-claim="e5.neg_gemma_k"></b> of <b data-claim="e5.neg_gemma_n"></b>. What AccessCast published kept <b data-claim="e5.neg_ours_k"></b> of <b data-claim="e5.neg_ours_n"></b>.</p>
+      <img src="charts/e5_negations.png" alt="Bar chart: easy-read captions that kept every negation, Gemma alone against AccessCast as published." loading="lazy">
+      <p class="muted">Data: 10 W3C accessibility videos never used for tuning. Evidence: evidence/e05_easyread.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-att">
+      <h2 id="r-att" class="display m">We attacked our own system</h2>
+      <p class="how-say">Across our attack cases, answers that reached a viewer: <b data-claim="e11.total_leaks"></b>. Gemma dropped a time limit in <b data-claim="e11.A5_number.production.gemma_failed"></b> of <b data-claim="e11.A5_number.production.tries"></b> tries; the number check blocked every one.</p>
+      <img src="charts/e11_attacks.png" alt="Bar chart of the attack cases: how many tries, how often Gemma took the bait, and how many answers reached a viewer." loading="lazy">
+      <p class="muted">Data: our own attack clips (not the test set). Evidence: evidence/e11_adversarial.json. <a href="proof.html">Run it live</a>.</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-ladder">
+      <h2 id="r-ladder" class="display m">Other models, same checks</h2>
+      <p class="how-say">We ran the same attacks with other models on AMD Token Factory writing. Lines that took the bait: Gemma 4 31B <b data-claim="e17.gemma.bait"></b> of <b data-claim="e17.gemma.tries"></b>, Qwen3.8-27B <b data-claim="e17.qwen.bait"></b> of <b data-claim="e17.qwen.tries"></b>, MiniCPM-V-4.7 <b data-claim="e17.minicpm.bait"></b> of <b data-claim="e17.minicpm.tries"></b>. Empty first drafts: <b data-claim="e17.gemma.no_output"></b>, <b data-claim="e17.qwen.no_output"></b> and <b data-claim="e17.minicpm.no_output"></b>. Answers that reached a viewer: <b data-claim="e17.gemma.reached"></b>, <b data-claim="e17.qwen.reached"></b> and <b data-claim="e17.minicpm.reached"></b>.</p>
+      <img src="charts/e17_ladder.png" alt="Bar chart per model: share of attack lines where the model took the bait, with counts of lines with no answer and answers that reached a viewer." loading="lazy">
+      <p class="muted">Data: our own attack clips (not the test set). Gemma ran 20 tries per setting, the others 5. A first draft that was not valid JSON counts as empty and goes back for repair. Evidence: evidence/e17_model_ladder.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-langs">
+      <h2 id="r-langs" class="display m">Every language through the same checks</h2>
+      <p class="how-say">Translated subtitle and voice-over lines that passed every check on their own: Hindi <b data-claim="e18.hi.passed"></b> of <b data-claim="e18.hi.lines"></b>, Italian <b data-claim="e18.it.passed"></b> of <b data-claim="e18.it.lines"></b>, Spanish <b data-claim="e18.es.passed"></b> of <b data-claim="e18.es.lines"></b>, French <b data-claim="e18.fr.passed"></b> of <b data-claim="e18.fr.lines"></b>, Portuguese <b data-claim="e18.pt.passed"></b> of <b data-claim="e18.pt.lines"></b>. The rest wait for a person.</p>
+      <img src="charts/e18_languages.png" alt="Stacked bars per language: lines that passed every check and lines held for a person, with the rules that held them." loading="lazy">
+      <p class="muted">Data: our two site drafts (dev), machine drafts not yet reviewed. Evidence: evidence/e18_language_checks.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-tr">
+      <h2 id="r-tr" class="display m">Translation against specialist models</h2>
+      <p class="how-say">Gemma 4 31B scored higher than the specialist model on COMET in all five languages. On chrF++, which counts word overlap with one human translation, it was higher for Italian, about the same for Spanish, and lower for Hindi, French and Portuguese. We report those losses.</p>
+      <img src="charts/e4_translation.png" alt="Chart of Gemma minus the baseline for each language and score, with 95 percent intervals; green where Gemma is better, red where the baseline is better." loading="lazy">
+      <p class="muted">Data: FLORES+ devtest, <span data-claim="e4.n"></span> sentences per language. Evidence: evidence/e04_translation.json and evidence/e04_translation_es_fr_pt.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-amd">
+      <h2 id="r-amd" class="display m">On AMD Token Factory</h2>
+      <p class="how-say">Counted from our own logs: <b data-claim="amd.requests"></b> Gemma 4 31B requests answered, <b data-claim="amd.tokens"></b> tokens, across <b data-claim="amd.videos"></b> videos.</p>
+      <img src="charts/amd_usage.png" alt="Bar chart of Gemma requests answered by AMD Token Factory, by day." loading="lazy">
+      <p class="muted">Evidence: evidence/amd_usage.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-cost">
+      <h2 id="r-cost" class="display m">What one minute costs</h2>
+      <p class="how-say"><b data-claim="e14.tokens_per_minute"></b> Gemma tokens per finished minute for the five versions we measured: about <b data-claim="cost.usd_per_min"></b> at a published list price (an estimate), plus a person's review time.</p>
+      <img src="charts/e14_tokens.png" alt="Stacked bar of Gemma tokens per finished minute, split by version." loading="lazy">
+      <p class="muted">Data: our dev videos. Evidence: evidence/e14_cost.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-speed">
+      <h2 id="r-speed" class="display m">Speed seen from our side</h2>
+      <p class="how-say"><b data-claim="e13.best_tokens_per_s"></b> generated tokens a second at the best concurrency; requests over our key's rate limit were refused, never answered wrongly.</p>
+      <img src="charts/e13_serving.png" alt="Bar chart of median and 95th percentile seconds per request at one and four requests at a time." loading="lazy">
+      <p class="muted">Evidence: evidence/e13_serving_tokenfactory.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-tests">
+      <h2 id="r-tests" class="display m">Tests, so it keeps working</h2>
+      <p class="how-say"><b data-claim="tests.passed"></b> of <b data-claim="tests.total"></b> unit and golden tests pass, in <b data-claim="tests.files"></b> files, running <b data-claim="tests.coverage"></b> of our core code. Browser tests with keyboard-only runs and axe-core scans: player <b data-claim="e16.player_passed"></b> of <b data-claim="e16.player_total"></b>, review app and Studio <b data-claim="e16.review_passed"></b> of <b data-claim="e16.review_total"></b>.</p>
+      <p class="muted">Evidence: evidence/tests.json and evidence/e16_ui_a11y.json</p>
+    </li>
+    <li class="result-card" aria-labelledby="r-tl">
+      <h2 id="r-tl" class="display m">One real clip, where the description goes</h2>
+      <p class="how-say">A talk-heavy clip has few pauses, so most description is read while the picture holds.</p>
+      <img src="charts/timeline_nasa.png" alt="Timeline of NASA's Life in the Universe: speech, the few pauses, lines spoken in pauses and lines read while the picture holds." loading="lazy">
+      <p class="muted">Machine draft, not yet reviewed. <a href="how.html">See it step by step</a>.</p>
+    </li>
+  </ol>
+</main>
+
+<footer class="site"><div class="wrap" id="footer"></div></footer>
+<script src="assets/common.js"></script>
+<script src="assets/results.js"></script>
+</body>
+</html>

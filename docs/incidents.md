@@ -176,3 +176,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** In the rebuilt demo video the sound dropped to digital silence at 5:19.8, under the closing credits, while the picture ran to 5:25. A silence check found it; nobody had to watch the whole video to notice.
 **Root cause.** Not found. Rendered on its own, every step of the music mix (two tracks, fades, the volume envelope, ducking under the narration) carried the music to the end. Mixed in the same ffmpeg graph as the picture crossfades, the ducked music ended early.
 **Fix.** The video is built in two passes: picture and narration first, then the music mixed in a sound-only pass, the way it worked in isolation. The silence check runs after every build.
+
+## 2026-10-18 The live Try box could not check Spanish, French or Portuguese
+**Symptom.** On the live site, a Spanish Try request came back with `VERIFIER_CRASH: cc008_untranslated: LookupError`. The line failed closed and went to a person, so nothing wrong was shown, but the untranslated check never ran.
+**Root cause.** To fit Vercel's 250 MB function limit, the bundle keeps only the word-frequency lists it needs. That list named English, Hindi and Italian, so the untranslated check had no Spanish, French or Portuguese word list on the live function. On our computer every list is installed, so the unit tests passed.
+**Fix.** The bundle keeps the word lists for every language. A new live check (`scripts/live_check.py`, run at the end of every deploy) loads every page and chart, and makes one Try request per version, failing on any crashed check. After the fix: 6 of 6 versions answered, no crashed check (`evidence/live_check.json`).
