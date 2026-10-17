@@ -2,7 +2,7 @@
 
 **Title:** AccessCast: one video, five ways to watch
 
-**Short description:** <pending: e1.headline>
+**Short description:** One video, five versions: AccessCast uses Gemma 4 31B on AMD Token Factory to write audio description, captions, easy-read, Hindi and Italian versions, checks every line in code, and a person approves what the public hears.
 
 **Long description:**
 
