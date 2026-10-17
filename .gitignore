@@ -48,3 +48,4 @@ eval/labels/*_key.json
 !site/p/**
 .vercel/
 site/.vercel/
+site/api/_vendor/
