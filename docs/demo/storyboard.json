@@ -78,7 +78,8 @@
   {
    "kind": "motion",
    "scene": "split",
-   "narration": "This is AccessCast. One video, made into five: for people who can't see the screen, people who can't hear, people who want simpler words, and for Hindi and Italian speakers."
+   "narration": "This is AccessCast. One video, made into five: for people who can't see the screen, people who can't hear, people who want simpler words, and for Hindi and Italian speakers.",
+   "music_switch": true
   },
   {
    "kind": "recording",
@@ -264,18 +265,9 @@
    "narration": "The law already asks for this: in Europe since {claim:cited.law.eaa_apply_date}, in India since {claim:cited.law.india_mib_ott_date}, and for US public universities from {claim:cited.law.ada_title2_large_date}. They pay per finished minute, and their own staff approve every line."
   },
   {
-   "kind": "card",
-   "lines": [
-    "What didn't work",
-    "Our first test needed pauses.",
-    "These videos barely have any."
-   ],
-   "narration": "What didn't work: our first test measured description inside pauses, and our test videos have almost none. It could not show a difference, and we report it anyway."
-  },
-  {
    "kind": "motion",
    "scene": "close",
-   "narration": "AccessCast. Every viewer, the same video. Everything, including what didn't work, is in our repo.",
+   "narration": "AccessCast. Every viewer, the same video.",
    "bg": "data/stock/pexels_5813766.mp4",
    "bg_start": 12,
    "bg_look": "eq=brightness=-0.05:saturation=0.9"
