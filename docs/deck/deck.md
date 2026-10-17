@@ -1,7 +1,7 @@
 <!-- slide: title -->
 # AccessCast
 ## One video. Five ways to watch.
-One video, five versions: AccessCast uses Gemma 4 31B on AMD Token Factory to write audio description, captions, easy-read, Hindi and Italian versions, checks every line in code, and a person approves what the public hears.
+Blind, deaf, slow-reading, Hindi and Italian viewers each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.
 
 Gemma 4 on AMD Token Factory · AMD Developer Hackathon ACT III · Create a New Kind of Experience
 

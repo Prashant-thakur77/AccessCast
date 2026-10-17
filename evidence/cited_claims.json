@@ -704,6 +704,36 @@
    "accessed": "2026-10-16",
    "quote": "Submissions must be original and MIT-compliant.",
    "display": []
+  },
+  {
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://pricepertoken.com/pricing-page/model/google-gemma-4-31b-it",
+   "accessed": "2026-10-17",
+   "note": "Lowest listed provider (CoreWeave) on an aggregator page; not AMD Token Factory's price, which is in points, and not a price we paid.",
+   "claim_id": "cited.price.gemma4_31b_input_per_m",
+   "text": "A published list price for Gemma 4 31B input tokens is $0.100 per million (CoreWeave, via pricepertoken.com).",
+   "value": 0.1,
+   "unit": "usd_per_million_tokens",
+   "quote": "$0.100 per million input tokens",
+   "display": [
+    "$0.100"
+   ]
+  },
+  {
+   "status": "cited",
+   "split": "none",
+   "source_url": "https://pricepertoken.com/pricing-page/model/google-gemma-4-31b-it",
+   "accessed": "2026-10-17",
+   "note": "Lowest listed provider (CoreWeave) on an aggregator page; not AMD Token Factory's price, which is in points, and not a price we paid.",
+   "claim_id": "cited.price.gemma4_31b_output_per_m",
+   "text": "A published list price for Gemma 4 31B output tokens is $0.340 per million (CoreWeave, via pricepertoken.com).",
+   "value": 0.34,
+   "unit": "usd_per_million_tokens",
+   "quote": "$0.340 per million output tokens",
+   "display": [
+    "$0.340"
+   ]
   }
  ],
  "unverified": [

@@ -230,6 +230,22 @@ SPECS: list[Spec] = [
         split="test",
     ),
     Spec(
+        "cost.usd_per_min",
+        "cost_estimate.json",
+        "/summary/usd_per_finished_minute_gemma",
+        "estimated Gemma cost per finished minute, all five versions, at a published list price",
+        "USD",
+        fmt=lambda x: f"${float(x):.4f}",
+    ),
+    Spec(
+        "cost.usd_per_hour",
+        "cost_estimate.json",
+        "/summary/usd_per_hour_of_video_gemma",
+        "estimated Gemma cost per hour of video, all five versions, at a published list price",
+        "USD",
+        fmt=lambda x: f"${float(x):.2f}",
+    ),
+    Spec(
         "e1.census_pauses",
         "e01_test_gap_census.json",
         "/summary/pauses",
