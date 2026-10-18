@@ -1,4 +1,4 @@
-/* AccessCast site: one design system for every page (docs/design/brief.md).
+/* AccessCast site: one design system for every page (docs/decisions.md D-020).
  * Self-hosted OFL fonts (MODEL_LICENSES.md "Fonts"); no external requests.
  * Every text/background pair below was checked for WCAG AA (normal text >= 4.5:1, large text and UI >= 3:1).
  * Motion uses transform and opacity, and all of it is switched off under prefers-reduced-motion. */
