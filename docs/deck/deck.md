@@ -64,6 +64,7 @@ Gemma 4 31B on AMD Token Factory.
 # More results
 - **Translation (FLORES+, 1012 sentences each):** Gemma higher than the specialist model on COMET in all five languages; on chrF++ higher for Italian, no clear difference for Spanish, lower for Hindi, French and Portuguese.
 - **Every language, same checks (2 site drafts):** lines that passed on their own: Hindi 74 of 81, Italian 74 of 81, Spanish 73 of 81, French 70 of 81, Portuguese 76 of 81. The rest wait for a person.
+- **Still pictures on AMD (E19, dev):** Gemma's first line was stopped by a rule for 6 of 21; after repair 21 of 21 passed every rule.
 ![Translation: Gemma minus the baseline per language and score, with 95% intervals](docs/charts/e4_translation.png) ![Lines per language that passed every check](docs/charts/e18_languages.png)
 
 ---

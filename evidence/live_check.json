@@ -3,11 +3,11 @@
  "experiment": "live_check",
  "split": "none",
  "passed": true,
- "git_commit": "f81fae71c0a8bcb1858eb48e8b769339e9768c3d",
+ "git_commit": "334e594d14e3b115def58eedb322620ba221b87a",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-18T06:56:02.113Z",
- "finished_at": "2026-10-18T06:57:57.597Z",
+ "started_at": "2026-10-18T07:11:58.570Z",
+ "finished_at": "2026-10-18T07:14:11.272Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -159,22 +159,21 @@
     null
    ],
    "rules": [
-    "AD001",
     "AD007"
    ],
    "evidence_problem": null
   },
   {
-   "build": "f81fae7",
-   "expected": "f81fae7"
+   "build": "334e594",
+   "expected": "334e594"
   }
  ],
  "summary": {
   "missing": [],
   "crashed": [],
   "unanswered": [],
-  "live_commit": "f81fae7",
-  "local_commit": "f81fae7"
+  "live_commit": "334e594",
+  "local_commit": "334e594"
  },
  "error": null
 }

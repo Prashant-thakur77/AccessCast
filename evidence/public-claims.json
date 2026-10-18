@@ -4423,7 +4423,9 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md",
+    "docs/lablab.md"
    ],
    "display": [
     "6"
@@ -4465,7 +4467,9 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md",
+    "docs/lablab.md"
    ],
    "display": [
     "21"
@@ -4505,7 +4509,9 @@
     }
    ],
    "public_files": [
-    "README.md"
+    "README.md",
+    "docs/deck/deck.md",
+    "docs/lablab.md"
    ],
    "display": [
     "21"
