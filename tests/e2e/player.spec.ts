@@ -341,7 +341,7 @@ test("proof: describe a picture sends a shrunk JPEG and shows only what the endp
   await expect(out).toContainText("A hooded figure walks through deep snow.");
   await expect(out).toContainText("a name nobody said or showed (AD009)");
   await expect(out).toContainText("Gemma's repair, which passed");
-  await expect(page.locator("#desc-status")).toContainText("Done.");
+  await expect(page.locator("#desc-status")).toContainText("Done. Gemma listed 1 thing it could see; our checks stopped its first line, and the repair passed.");
   expect(sent.startsWith("data:image/jpeg;base64,")).toBe(true);
   expect(sent.length).toBeLessThan(2_000_000);  // shrunk in the browser before sending
   expect(await axeViolations(page)).toEqual([]);

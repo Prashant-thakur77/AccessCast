@@ -93,8 +93,11 @@
     card.appendChild(el("p", { class: "muted", text: "Served by " + (d.endpoint_label || "the live endpoint") + "." }));
     out.appendChild(card);
     var stopped = lines.filter(function (l) { return l.gemma_wrote && l.blocked_by && l.blocked_by.length; }).length;
+    var things = facts.length + (facts.length === 1 ? " thing" : " things");
     if (!facts.length) say(d.evidence_problem || "Gemma could not list what is in the picture. Nothing was written.");
-    else say("Done. Gemma listed " + facts.length + " things it could see" + (lines.length ? "; our checks stopped " + stopped + " of its lines" : "") + ". The results are below.");
+    else if (!lines.length) say("Gemma listed " + things + " it could see, but no line was written in time. The results are below.");
+    else if (!stopped && lines[0].published) say("Done. Gemma listed " + things + " it could see, and its line passed every check. The results are below.");
+    else say("Done. Gemma listed " + things + " it could see; our checks stopped its first line" + (lines[0].published ? ", and the repair passed" : ", so it goes to a person") + ". The results are below.");
   }
 
   $("desc-form").addEventListener("submit", function (ev) {

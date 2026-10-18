@@ -3,11 +3,11 @@
  "experiment": "live_check",
  "split": "none",
  "passed": true,
- "git_commit": "aad2ad8d755b0c5f3516b8d6ecd6d0b48b244f50",
+ "git_commit": "f1690f0626f7e81666737909833c0e4ef4193c18",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-18T04:25:32.263Z",
- "finished_at": "2026-10-18T04:27:10.908Z",
+ "started_at": "2026-10-18T05:19:29.668Z",
+ "finished_at": "2026-10-18T05:21:26.554Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -148,6 +148,17 @@
    "published": [
     "Não aperte o botão\nvermelho antes das 5 pm."
    ]
+  },
+  {
+   "describe": "nasa-eclipse.jpg",
+   "sample_status": 200,
+   "status": 200,
+   "facts": 4,
+   "lines": [
+    "A green and white globe sits inside a white orbit with a grey sphere at the top."
+   ],
+   "rules": [],
+   "evidence_problem": null
   }
  ],
  "summary": {

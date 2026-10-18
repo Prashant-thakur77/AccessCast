@@ -53,6 +53,29 @@
     <div id="try-result" class="try-grid"></div>
   </section>
 
+  <section class="proof-sec" aria-labelledby="desc-h">
+    <h2 id="desc-h" class="display m">Describe a picture</h2>
+    <p class="lede">Choose a picture. Gemma 4 31B on AMD Token Factory lists what it can see, then writes one description line, as if the picture stayed on screen for a short silent pause. Our description rules check the line, and Gemma repairs what fails. Your picture is sent once and never stored.</p>
+    <form id="desc-form" class="try-form">
+      <label for="desc-file">Your picture (JPEG, PNG or WebP)</label>
+      <input id="desc-file" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="desc-help">
+      <p id="desc-help" class="muted">No picture to hand? Use one of ours:</p>
+      <div class="desc-samples" role="group" aria-labelledby="desc-help">
+        <button type="button" class="pill small ghost" data-sample="assets/samples/sintel-snow.jpg" data-name="a frame from the Sintel trailer">Sintel: a figure in the snow</button>
+        <button type="button" class="pill small ghost" data-sample="assets/samples/nasa-speaker.jpg" data-name="a frame from NASA's Life in the Universe">NASA: a speaker</button>
+        <button type="button" class="pill small ghost" data-sample="assets/samples/nasa-eclipse.jpg" data-name="a frame from NASA's solar eclipse animation">NASA: a slide with a question</button>
+      </div>
+      <p class="muted small">Samples: Sintel © Blender Foundation | www.sintel.org, CC BY 3.0; NASA video courtesy NASA.</p>
+      <figure id="desc-figure" class="desc-figure" hidden>
+        <img id="desc-preview" alt="">
+        <figcaption id="desc-caption" class="muted small"></figcaption>
+      </figure>
+      <button type="submit" id="b-desc" class="pill big" disabled>Describe it <span class="dot" aria-hidden="true"></span></button>
+    </form>
+    <p id="desc-status" class="now" role="status" aria-live="polite"></p>
+    <div id="desc-result" class="try-grid"></div>
+  </section>
+
   <section class="proof-sec" aria-labelledby="last-h">
     <h2 id="last-h" class="display m">Last recorded run</h2>
     <div id="last-run"><p>Loading…</p></div>
@@ -64,5 +87,6 @@
 <script src="assets/motion.js"></script>
 <script src="assets/proof.js"></script>
 <script src="assets/try.js"></script>
+<script src="assets/describe.js"></script>
 </body>
 </html>

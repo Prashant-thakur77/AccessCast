@@ -121,9 +121,9 @@ await shot("try", async (p) => {
 await shot("describe", async (p) => {
   await p.goto(`${LIVE}/proof.html`);
   await p.waitForTimeout(2000);
-  await p.getByRole("button", { name: "NASA: a slide with a question" }).click();
+  await p.getByRole("button", { name: process.env.SAMPLE || "NASA: a slide with a question" }).click();
   await p.locator("#b-desc").click({ timeout: 30000 });
-  await p.waitForFunction(() => /^(Done|The live)/.test(document.getElementById("desc-status").textContent || ""), null, { timeout: 180000 });
+  await p.waitForFunction(() => /^(Done|The live|AMD|Gemma)/.test(document.getElementById("desc-status").textContent || ""), null, { timeout: 180000 });
   await p.waitForTimeout(1000);
   const box = await p.evaluate(() => {
     const r = (s) => { const b = document.querySelector(s).getBoundingClientRect(); return { x: b.x + scrollX, y: b.y + scrollY, w: b.width, h: b.height }; };
