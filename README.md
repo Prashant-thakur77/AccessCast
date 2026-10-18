@@ -56,7 +56,7 @@ Deck: <pending: deck.url> ·
 | Translated lines passing every check on their own | Hindi 74 of 81 · Italian 74 of 81 · Spanish 73 of 81 · French 70 of 81 · Portuguese 76 of 81 | the rest wait for a person | our two site drafts (dev) | [`e18_language_checks.json`](evidence/e18_language_checks.json) |
 | Model work on AMD | 3,730 Gemma 4 31B requests, 3.5 million tokens, 28 videos | every answer checked against the served model | all our runs | [`amd_usage.json`](evidence/amd_usage.json) |
 | Cost of the model work | 41,818 Gemma tokens per finished minute, about $0.0053 at a published list price (an estimate) | AI description with a human spot check: $4.25 a minute (3Play Media list price) | dev videos | [`e14_cost.json`](evidence/e14_cost.json) |
-| Tests | 190 of 190 unit and golden tests; browser tests with axe-core: player 27 of 27, review app 9 of 9 | — | — | [`tests.json`](evidence/tests.json), [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| Tests | 215 of 215 unit and golden tests; browser tests with axe-core: player 28 of 28, review app 9 of 9 | — | — | [`tests.json`](evidence/tests.json), [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | Rules that check every line | 53 rules, each with its source standard | — | — | [`docs/rules.md`](docs/rules.md) |
 
 ## The problem
@@ -209,8 +209,8 @@ A line that fails goes back to Gemma with the failed checks, up to three times; 
 - **Other models on AMD Token Factory (E17, our own attack clips, dev).** The same attacks and the same checks, with a different model writing: Gemma 4 31B took the bait in 40 of 400 lines (no usable first draft for 0; reached a viewer: 0); Qwen3.8-27B took the bait in 0 of 100 lines (no usable first draft for 63; reached a viewer: 0); MiniCPM-V-4.7-35B-A3B took the bait in 1 of 100 lines (no usable first draft for 0; reached a viewer: 0). With every model, no attack answer reached a viewer. The other two models seldom took these baits, so this run tested our checks less than Gemma's did. An empty first draft (an answer that was not valid JSON) goes back for repair like any failed line. Gemma ran 20 tries per setting, the others 5. Evidence: evidence/e17_model_ladder.json.
 
   ![Per model: lines that took the bait and answers that reached a viewer](docs/charts/e17_ladder.png)
-- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 27 of 27, review app and Studio 9 of 9. No blind tester has used it yet.
-- **Tests.** 190 of 190 unit and golden tests pass, in 70 files; they run 53% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
+- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 28 of 28, review app and Studio 9 of 9. No blind tester has used it yet.
+- **Tests.** 215 of 215 unit and golden tests pass, in 74 files; they run 78% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
 <!-- results.more:end -->
 
 <!-- e11.table:start -->
@@ -247,7 +247,7 @@ Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before an
 | E13 | Serving speed seen from our side | dev requests replayed | 17 tokens a second, p95 13.9 s | [`e13_serving_tokenfactory.json`](evidence/e13_serving_tokenfactory.json) |
 | E14 | What does a finished minute cost? | dev videos | 41,818 Gemma tokens per minute, about $0.0053 at list price (estimate) | [`e14_cost.json`](evidence/e14_cost.json) |
 | E15 | Which speech recognizer, and how exact are word times? | FLEURS, synthetic clips | English word error rate 4.5% (large-v3-turbo) against 4.3% (large-v3); boundaries p95 339 ms after alignment | [`e15_asr.json`](evidence/e15_asr.json) |
-| E16 | Are our own pages accessible? | our pages | Player 27 of 27, review app 9 of 9 keyboard and axe-core tests | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| E16 | Are our own pages accessible? | our pages | Player 28 of 28, review app 9 of 9 keyboard and axe-core tests | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | E17 | Do the checks hold with other models writing? | our attack clips | Reached a viewer: 0, 0 and 0 | [`e17_model_ladder.json`](evidence/e17_model_ladder.json) |
 | E18 | Does every language pass the same checks? | our two site drafts | Lines passing on their own, per language, in [At a glance](#at-a-glance) | [`e18_language_checks.json`](evidence/e18_language_checks.json) |
 
@@ -257,13 +257,13 @@ Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before an
 
 | Check | Result | Evidence |
 |---|---|---|
-| Unit and golden tests | 190 of 190 pass, in 70 files; they run 53% of the lines in `src/accesscast` | [`tests.json`](evidence/tests.json) |
-| Browser tests (Playwright, keyboard only, axe-core in light and dark) | player 27 of 27, review app and Studio 9 of 9 | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| Unit and golden tests | 215 of 215 pass, in 74 files; they run 78% of the lines in `src/accesscast` | [`tests.json`](evidence/tests.json) |
+| Browser tests (Playwright, keyboard only, axe-core in light and dark) | player 28 of 28, review app and Studio 9 of 9 | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | Live site after every deploy | every page and chart loads; one Try request per version and one picture answer with no crashed check | [`live_check.json`](evidence/live_check.json) |
 | Every public number | registered, hashed and re-read from its evidence file by `make claims-check` in CI | [`public-claims.json`](evidence/public-claims.json) |
 | Same input, same output (dev) | word timings identical in 3/3 runs, and so were the pauses and captions; Gemma's drafts were not (16 of 17 lines changed on one clip) | [`e09_determinism.json`](evidence/e09_determinism.json) |
 | Live attacks on Gemma (8 cases, production and stress temperatures) | attack answers that reached a viewer: 0 | [`e11_adversarial.json`](evidence/e11_adversarial.json) |
-| Failures written down | 33 dated incidents, each with symptom, root cause and fix | [`docs/incidents.md`](docs/incidents.md) |
+| Failures written down | 34 dated incidents, each with symptom, root cause and fix | [`docs/incidents.md`](docs/incidents.md) |
 | Fail closed | a timeout, malformed answer, outage or unknown language blocks the line and sends it to a person; nothing passes by default | [`docs/rules.md`](docs/rules.md) |
 
 One example from the incident log: our determinism test found that the same description line came out a few milliseconds longer in one run than in the next, because the voice model draws random noise. Each line is now seeded from its own text, and the test reports the largest remaining difference instead of assuming there is none.

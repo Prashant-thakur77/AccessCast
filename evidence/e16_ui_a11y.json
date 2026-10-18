@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "7108d989fa29662528ebb975d796767466c67bbe",
+ "git_commit": "f45b795397314ed327dde4256e3fc9420b16c63a",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-17T21:36:32.249Z",
- "finished_at": "2026-10-17T21:38:49.108Z",
+ "started_at": "2026-10-18T05:15:34.462Z",
+ "finished_at": "2026-10-18T05:17:55.384Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -85,6 +85,10 @@
      "status": "passed"
     },
     {
+     "title": "proof: describe a picture sends a shrunk JPEG and shows only what the endpoint returned",
+     "status": "passed"
+    },
+    {
      "title": "player: picker and drawer open",
      "status": "passed"
     },
@@ -141,8 +145,8 @@
      "status": "passed"
     }
    ],
-   "passed": 27,
-   "total": 27
+   "passed": 28,
+   "total": 28
   },
   {
    "suite": "review",
@@ -191,8 +195,8 @@
  ],
  "summary": {
   "player": {
-   "passed": 27,
-   "total": 27
+   "passed": 28,
+   "total": 28
   },
   "review": {
    "passed": 9,

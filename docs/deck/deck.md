@@ -38,8 +38,9 @@ Every version is built from one analysis, so they never disagree. A viewer can c
 
 ---
 <!-- slide: demo -->
-# See it working
-![AccessCast Studio after a real run: every step done, 29 Gemma calls answered, lines per version waiting for review](docs/media/studio.png) ![The proof page: Gemma dropped the time limit in 20 of 20 tries, our checks blocked all 20, and Gemma's repair put it back](docs/media/proof.png)
+# See it working, live on AMD
+On the live site, Gemma 4 31B on AMD Token Factory writes while you watch, and our checks test every line: **run the attack**, **try your own caption**, or **describe your own picture**. Nothing you type or upload is stored.
+![The Try box: one sentence in easy-read and five languages; the number check stopped the Italian, French and Portuguese lines and Gemma's repairs passed](docs/media/try.png) ![How it works on a real clip: rule AD011 stopped the draft "speaks to the camera", and Gemma's repair passed every check](docs/media/how.png)
 
 ---
 <!-- slide: quality -->
@@ -78,7 +79,7 @@ Gemma 4 31B on AMD Token Factory.
 - Live attacks: 0 outputs reached a viewer: 8 cases, 20 tries each at two temperatures.
 - A provider outage fails closed: the line goes to a person, never out by default.
 - Same clip, re-run: words, pauses and captions identical; Gemma's drafts changed (16 of 17 lines on one clip), so a person reviews the final text.
-- Tests: 190 of 190 unit and golden tests pass; browser tests with axe-core: player 27 of 27, review app and Studio 9 of 9.
+- Tests: 215 of 215 unit and golden tests pass; browser tests with axe-core: player 28 of 28, review app and Studio 9 of 9.
 - Other models on Token Factory writing the same attacks (E17): answers that reached a viewer, 0 for Qwen3.8-27B and 0 for MiniCPM-V-4.7-35B-A3B.
 
 ---

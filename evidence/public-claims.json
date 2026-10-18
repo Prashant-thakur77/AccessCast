@@ -11,7 +11,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/no_answer_after_retries"
     }
    ],
@@ -32,7 +32,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/not_sent_circuit_open"
     }
    ],
@@ -53,7 +53,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/requests_answered"
     }
    ],
@@ -78,7 +78,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/requests_answered_all_models"
     }
    ],
@@ -99,7 +99,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/tokens_total"
     }
    ],
@@ -121,7 +121,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/tokens_total_all_models"
     }
    ],
@@ -142,7 +142,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/tokens_total"
     }
    ],
@@ -166,7 +166,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/video_minutes"
     }
    ],
@@ -188,7 +188,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/videos"
     }
    ],
@@ -213,7 +213,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/video_groups/attack_clips"
     }
    ],
@@ -234,7 +234,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/video_groups/dev_clips"
     }
    ],
@@ -255,7 +255,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "ce9e679f8caaaf9cfbc9158d897c732ba973d88e9019e6b88a490c694cc48348",
+     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
      "pointer": "/summary/video_groups/w3c_test"
     }
    ],
@@ -3745,14 +3745,14 @@
   {
    "claim_id": "e16.player_passed",
    "text": "player accessibility tests passed (Playwright + axe-core)",
-   "value": 27,
+   "value": 28,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "01f9b115bdb8047719b892f550b052bf1c5bf45a0c8732221f7811e1ca49524f",
+     "sha256": "e84bca9539464e088e81cb7ebaebe5a3ecf11479fb3a0afd717b926c6ce4b409",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3761,20 +3761,20 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "27"
+    "28"
    ]
   },
   {
    "claim_id": "e16.player_total",
    "text": "player accessibility tests run",
-   "value": 27,
+   "value": 28,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "01f9b115bdb8047719b892f550b052bf1c5bf45a0c8732221f7811e1ca49524f",
+     "sha256": "e84bca9539464e088e81cb7ebaebe5a3ecf11479fb3a0afd717b926c6ce4b409",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3783,7 +3783,7 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "27"
+    "28"
    ]
   },
   {
@@ -3796,7 +3796,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "01f9b115bdb8047719b892f550b052bf1c5bf45a0c8732221f7811e1ca49524f",
+     "sha256": "e84bca9539464e088e81cb7ebaebe5a3ecf11479fb3a0afd717b926c6ce4b409",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3818,7 +3818,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "01f9b115bdb8047719b892f550b052bf1c5bf45a0c8732221f7811e1ca49524f",
+     "sha256": "e84bca9539464e088e81cb7ebaebe5a3ecf11479fb3a0afd717b926c6ce4b409",
      "pointer": "/summary/review/total"
     }
    ],
@@ -5796,7 +5796,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/charts"
     }
    ],
@@ -5815,7 +5815,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/experiments_planned"
     }
    ],
@@ -5836,7 +5836,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/experiments_run"
     }
    ],
@@ -5850,14 +5850,14 @@
   {
    "claim_id": "repo.incidents",
    "text": "dated incidents in docs/incidents.md",
-   "value": 33,
+   "value": 34,
    "unit": "incidents",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/incidents"
     }
    ],
@@ -5865,7 +5865,7 @@
     "README.md"
    ],
    "display": [
-    "33"
+    "34"
    ]
   },
   {
@@ -5878,7 +5878,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/languages_total"
     }
    ],
@@ -5897,7 +5897,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/site_pages"
     }
    ],
@@ -5916,7 +5916,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/prompts"
     }
    ],
@@ -5928,20 +5928,20 @@
   {
    "claim_id": "repo.python_lines",
    "text": "lines of Python in src/accesscast",
-   "value": 11795,
+   "value": 11987,
    "unit": "lines",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/python_lines_src"
     }
    ],
    "public_files": [],
    "display": [
-    "11,795"
+    "11,987"
    ]
   },
   {
@@ -5954,7 +5954,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/rules_by_family/AD"
     }
    ],
@@ -5975,7 +5975,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/rules_by_family/CC"
     }
    ],
@@ -5996,7 +5996,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/rules_by_family/ER"
     }
    ],
@@ -6017,7 +6017,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/rules_by_family/RN"
     }
    ],
@@ -6038,7 +6038,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/rules_total"
     }
    ],
@@ -6059,7 +6059,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/rules_by_family/VO"
     }
    ],
@@ -6080,7 +6080,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/pipeline_stages"
     }
    ],
@@ -6101,7 +6101,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/translation_languages"
     }
    ],
@@ -6120,7 +6120,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
      "pointer": "/summary/viewer_versions"
     }
    ],
@@ -6132,14 +6132,14 @@
   {
    "claim_id": "tests.coverage",
    "text": "share of src/accesscast lines the tests run",
-   "value": 53.3,
+   "value": 78.0,
    "unit": "%",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "73921a73822d7a1450aa184e8984eb27921e9f432eeebca9409ec39c88b814d0",
+     "sha256": "5a28a3cac4b44a9f74f8f32124850e23ee5cb114aaf64f8b00f3b8ff2126c0c8",
      "pointer": "/summary/line_coverage_pct"
     }
    ],
@@ -6147,20 +6147,20 @@
     "README.md"
    ],
    "display": [
-    "53%"
+    "78%"
    ]
   },
   {
    "claim_id": "tests.files",
    "text": "test files",
-   "value": 70,
+   "value": 74,
    "unit": "files",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "73921a73822d7a1450aa184e8984eb27921e9f432eeebca9409ec39c88b814d0",
+     "sha256": "5a28a3cac4b44a9f74f8f32124850e23ee5cb114aaf64f8b00f3b8ff2126c0c8",
      "pointer": "/summary/test_files"
     }
    ],
@@ -6168,20 +6168,20 @@
     "README.md"
    ],
    "display": [
-    "70"
+    "74"
    ]
   },
   {
    "claim_id": "tests.passed",
    "text": "unit and golden tests that pass",
-   "value": 190,
+   "value": 215,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "73921a73822d7a1450aa184e8984eb27921e9f432eeebca9409ec39c88b814d0",
+     "sha256": "5a28a3cac4b44a9f74f8f32124850e23ee5cb114aaf64f8b00f3b8ff2126c0c8",
      "pointer": "/summary/tests_passed"
     }
    ],
@@ -6190,20 +6190,20 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "190"
+    "215"
    ]
   },
   {
    "claim_id": "tests.total",
    "text": "unit and golden tests",
-   "value": 190,
+   "value": 215,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "73921a73822d7a1450aa184e8984eb27921e9f432eeebca9409ec39c88b814d0",
+     "sha256": "5a28a3cac4b44a9f74f8f32124850e23ee5cb114aaf64f8b00f3b8ff2126c0c8",
      "pointer": "/summary/tests_total"
     }
    ],
@@ -6212,7 +6212,7 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "190"
+    "215"
    ]
   }
  ]
