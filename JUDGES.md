@@ -3,7 +3,7 @@
 The shortest route through the submission.
 
 ## Three-Minute Review
-1. Watch the demo video: <pending: video.url>
+1. Watch the demo video (linked on the submission page).
 2. Open the live player: https://accesscast.vercel.app/watch.html. Pick "I can't see the screen", then "Italiano". Below the video, open **Read it as text** to see the whole version as one list of what is said and described, with downloads.
 3. Open [`/proof.html`](https://accesscast.vercel.app/proof.html) and press **Run the attack**. It asks Gemma 4 31B on AMD Token Factory five times, live (usually under a minute), to simplify "press the button 3 times within 10 seconds", and shows each answer, the check that blocked it, and Gemma's repair. Below it is the recorded E11 run of 20 tries. Then write your own sentence in **Try your own caption**: Gemma makes the easy-read, Hindi, Italian, Spanish, French and Portuguese versions live on AMD, and the page shows which of our checks stopped any answer. Put a number, a "not" or a name in it. Then, under **Describe a picture**, press a sample (or choose your own picture): Gemma lists what it sees, writes one description line, and the page shows which of our rules stopped it and the repair. Nothing you upload is stored.
 4. Open [`/results.html`](https://accesscast.vercel.app/results.html): every result as a chart, with its data split and the evidence file it comes from, and a cost estimator (type your minutes of video). The key files: [`evidence/e05_easyread.json`](evidence/e05_easyread.json), [`evidence/e11_adversarial.json`](evidence/e11_adversarial.json), [`evidence/e14_cost.json`](evidence/e14_cost.json).
@@ -31,7 +31,7 @@ These labels do not pre-award points; judges keep full scoring authority.
 | Criterion | What we did | Fastest proof |
 |---|---|---|
 | Application of Technology | Gemma 4 31B sees, writes, translates and repairs, served by AMD Token Factory; code checks every line | README "Gemma 4 on AMD" |
-| Presentation | Plain-words demo video; live player that never sleeps | <pending: video.url> |
+| Presentation | Plain-words demo video; live player that never sleeps | demo video on the submission page; https://accesscast.vercel.app |
 | Business Value | Named buyers and legal deadlines; GPU cost plus measured review time | README "Who pays" |
 | Originality | Checks tied to the real audio timeline; every version from one analysis; extended description only when needed | `docs/rules.md` |
 

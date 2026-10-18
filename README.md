@@ -6,8 +6,7 @@
 
 <p align="center">
 <a href="https://accesscast.vercel.app/?audience=judge"><b>▶ Live site</b></a> ·
-Demo video: <pending: video.url> ·
-Deck: <pending: deck.url> ·
+<a href="docs/deck/deck.pdf">Deck (PDF)</a> ·
 <a href="JUDGES.md">3-minute judge guide</a> ·
 <a href="https://accesscast.vercel.app/results.html">Results page</a> ·
 <a href="https://accesscast.vercel.app/proof.html">Run our attack live</a> ·
@@ -179,7 +178,7 @@ We did not get an MI300X droplet, so this page has no GPU-memory, users-per-GPU 
 
 ## How quality is controlled
 
-Gemma first lists what is visible in a scene (temperature 0), then writes description only from that list. Code then checks every line against [`docs/rules.md`](docs/rules.md), where each rule names the standard or prior work it comes from (DCMP, Netflix, Ofcom, Inclusion Europe, WCAG, ACB, and earlier hackathon entries).
+Gemma first lists what is visible in a scene (temperature 0), then writes description only from that list. Code then checks every line against [`docs/rules.md`](docs/rules.md), where each rule names the standard it comes from (DCMP, Netflix, Ofcom, Inclusion Europe, WCAG, ACB).
 
 | Family | Rules | What they catch (examples) |
 |---|---|---|
