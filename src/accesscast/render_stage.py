@@ -66,8 +66,13 @@ def project_versions(items: Mapping[str, Item]) -> list[str]:
     and French came after the first projects: a version whose stage never ran (no items at all) is left out. A stage
     that ran and failed still wrote its lines (marked failed), so it is never left out and still blocks the gate."""
     present = {f"{i.kind.value}.{i.lang}" for i in items.values()}
+    # a video with no speech (captions are only sound tags such as [music]) has nothing to simplify or translate:
+    # its easy-read and language versions are left out rather than blocking review as if a stage had failed
+    spoken = any(i.kind == ItemKind.SDH and "sound_tag" not in i.flags for i in items.values())
     out = []
     for v in AUDIENCE_VERSIONS:
+        if not spoken and v in ("easy.en", *C.TRANSLATION_LANGS):
+            continue
         if v in ("blind.hi", "blind.it") and f"ad_translation.{v.split('.')[1]}" not in present:
             continue
         if v in ("es", "fr", "pt") and f"subtitle.{v}" not in present:
