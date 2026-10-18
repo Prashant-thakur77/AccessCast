@@ -310,3 +310,39 @@ test("landing: the listener mascot is decorative and reacts to the description t
   await expect(wm).toHaveAttribute("data-bubble", "caption");
   await expect(wm).toHaveAttribute("data-phones", "faded");
 });
+
+test("proof: describe a picture sends a shrunk JPEG and shows only what the endpoint returned", async ({ page }) => {
+  let sent = "";
+  await page.route("**/data/proof_config.json", (r) => r.fulfill({ json: { api_base: "http://127.0.0.1:8090" } }));
+  await page.route("**/api/describe", async (r) => {
+    sent = (r.request().postDataJSON() as { image: string }).image;
+    await r.fulfill({
+      json: {
+        facts: [{ fid: "F001", text: "A hooded figure walks through deep snow." }],
+        evidence_ok: true,
+        evidence_problem: null,
+        lines: [{
+          gemma_wrote: "Sintel walks through the snow.", blocked_by: ["AD009"],
+          published: "A hooded figure walks through deep snow.", to_person: false, repairs: 1, budget_words: 17, findings: [],
+        }],
+        pause_ms: 8000, endpoint_label: "Gemma 4 31B on AMD Token Factory", recorded_at: "2026-10-18T05:00:00Z",
+      },
+    });
+  });
+  await page.goto("/proof.html");
+  const go = page.locator("#b-desc");
+  await expect(go).toBeDisabled();  // nothing to send yet
+  await page.getByRole("button", { name: "Sintel: a figure in the snow" }).click();
+  await expect(page.locator("#desc-preview")).toHaveAttribute("alt", /Sintel/);
+  await expect(go).toBeEnabled();
+  await go.click();
+  const out = page.locator("#desc-result");
+  await expect(out).toContainText("What Gemma saw");
+  await expect(out).toContainText("A hooded figure walks through deep snow.");
+  await expect(out).toContainText("a name nobody said or showed (AD009)");
+  await expect(out).toContainText("Gemma's repair, which passed");
+  await expect(page.locator("#desc-status")).toContainText("Done.");
+  expect(sent.startsWith("data:image/jpeg;base64,")).toBe(true);
+  expect(sent.length).toBeLessThan(2_000_000);  // shrunk in the browser before sending
+  expect(await axeViolations(page)).toEqual([]);
+});

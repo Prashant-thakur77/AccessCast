@@ -306,3 +306,19 @@ TRY_MAX_CHARS = (
 TRY_MAX_WORDS = 45  # ours: same reason
 TRY_MS_PER_WORD = 400  # ours: 150 words a minute, an ordinary speaking pace (the rate used to time the text)
 TRY_PER_HOUR = 30  # ours: per address (three requests per try, one per version: 10 tries), so a few visitors cannot spend the key's daily budget
+# "Describe a picture" on the public proof page (POST /api/describe): one still picture, shown as if for a pause.
+DESCRIBE_MAX_BYTES = 1_500_000  # ours: the page sends a JPEG at most 1024 px wide (about 200 kB); far under Vercel's body limit
+DESCRIBE_TYPES = (
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+)  # what the page's canvas produces and Gemma accepts
+DESCRIBE_PAUSE_MS = 8000  # ours: the picture is described as if it stayed on screen for an 8 s silent pause
+DESCRIBE_MAX_REPAIRS = (
+    2  # ours: 3 repairs could pass the 120 s function limit; a line still failing goes to a person
+)
+DESCRIBE_DEADLINE_S = 105  # ours: answer before the 120 s function limit, with room to send the reply
+DESCRIBE_MIN_WRITE_S = (
+    20  # ours: below this, a line would likely run out of time; it goes to a person instead
+)
+DESCRIBE_PER_HOUR = 12  # ours: per address; each run is 2 to 4 Gemma calls, one of them with an image

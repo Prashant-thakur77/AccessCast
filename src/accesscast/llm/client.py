@@ -142,7 +142,8 @@ class LlmClient:
     @staticmethod
     def _image_part(path: Path) -> dict[str, Any]:
         b64 = base64.b64encode(path.read_bytes()).decode("ascii")
-        return {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}}
+        mime = {".png": "image/png", ".webp": "image/webp"}.get(path.suffix.lower(), "image/jpeg")
+        return {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}}
 
     @staticmethod
     def _audio_part(path: Path) -> dict[str, Any]:

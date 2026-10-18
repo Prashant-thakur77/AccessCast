@@ -72,5 +72,12 @@ E18, E4 es/fr/pt (Gemma higher on COMET in all five languages; chrF++ lower for 
 tests 190/190, E16 27/27 and 9/9, live check 6 of 6 versions, video 5:25 with no silence, deck and site deployed.
 Left for the person: upload the video and deck, send their links and the team names.
 
+## Phase I — iteration 3 (10:00–14:30 IST, 18 Oct)
+- I1. "Describe a picture", live (D-030): `/api/describe`, the proof page section with three samples, unit tests
+  (validation, fail closed, deadline, rate limit, a full fake run), an e2e test (shrunk JPEG, only returned text
+  shown, axe clean), the live check covers it. Done when the live check passes after deploy.
+- I2. Tests for the scripts' pure parts (claims wording, E17 tally, AMD counting, test-file names) to raise coverage.
+- I3. Final refresh: evidence, claims, charts, deck, README, lablab text, deploy, live check; tag when the links come.
+
 ## Phase G — close
 - `make submission-check`, final claims-check, tag `act3-submission`, hand the user the upload checklist.

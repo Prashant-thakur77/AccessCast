@@ -6,6 +6,9 @@
 - Runs N tries (default 10) against the live Gemma endpoint — Token Factory first if configured, else the droplet —
   each with a fresh seed; reports per try what Gemma wrote, whether the case's oracle says it failed (the same
   independent oracle E11 uses), which rules blocked it, and whether anything reached the viewer.
+- /api/describe takes one still picture from a visitor: Gemma 4 31B lists what is visible, the planner gives one
+  line for an 8-second silent pause, Gemma writes it, and our description rules check it, with repairs, exactly as
+  the pipeline does. The picture lives in a temporary file for the length of the request and is never stored.
 - Holds the key server-side; the browser never sees it. Rate-limited per IP. Never fakes a run: if no endpoint
   answers, it returns 503 and the page shows the last recorded run with its date.
 """
@@ -31,7 +34,7 @@ from accesscast.config import load_settings
 from accesscast.events import now_iso
 from accesscast.llm.client import LlmClient
 from accesscast.project import read_json
-from accesscast.schemas import Gaps, ItemStatus, SceneEvidence, Scenes, Sounds, Vad, Word, Words
+from accesscast.schemas import Gap, Gaps, ItemStatus, Scene, SceneEvidence, Scenes, Sounds, Vad, Word, Words
 from accesscast.verify.base import VerifyContext
 from accesscast.write.plan_ad import Calibration, plan_description
 from accesscast.write.write_ad import WriteOptions, verify_and_repair, write_drafts
@@ -118,6 +121,49 @@ def words_from_text(text: str) -> list[Word]:
         out.append(Word(i=i, w=w, start_ms=t, end_ms=t + C.TRY_MS_PER_WORD - 40))
         t += C.TRY_MS_PER_WORD + (300 if w.endswith((".", "?", "!")) else 0)
     return out
+
+
+_DATA_URL = re.compile(r"^data:(image/[a-z+]+);base64,([A-Za-z0-9+/=\s]+)$")
+_MAGIC = {"image/jpeg": b"\xff\xd8\xff", "image/png": b"\x89PNG", "image/webp": b"RIFF"}
+
+
+def decode_image(data_url: str) -> tuple[str, bytes]:
+    """A visitor's picture as (media type, bytes). Only a base64 data URL of a JPEG, PNG or WebP within the size
+    limit, whose bytes really start like that type, is accepted (fail closed: nothing is sent to Gemma)."""
+    import base64
+    import binascii
+
+    m = _DATA_URL.match(data_url.strip()) if data_url else None
+    if not m or m.group(1) not in C.DESCRIBE_TYPES:
+        raise HTTPException(422, "Send one JPEG, PNG or WebP picture.")
+    if len(m.group(2)) > C.DESCRIBE_MAX_BYTES * 4 // 3 + 4:
+        raise HTTPException(413, "That picture is too large. The page shrinks pictures before sending them.")
+    try:
+        raw = base64.b64decode(m.group(2), validate=False)
+    except (binascii.Error, ValueError) as e:
+        raise HTTPException(422, "That picture could not be read.") from e
+    if not raw or len(raw) > C.DESCRIBE_MAX_BYTES or not raw.startswith(_MAGIC[m.group(1)]):
+        raise HTTPException(422, "That picture could not be read.")
+    return m.group(1), raw
+
+
+def picture_context(ev: SceneEvidence) -> tuple[VerifyContext, Gap]:
+    """The verify context for one still picture: one scene, one silent pause of DESCRIBE_PAUSE_MS, no speech."""
+    end = C.DESCRIBE_PAUSE_MS
+    gap = Gap(gap_id="G001", start_ms=0, end_ms=end, len_ms=end, scene_id=ev.scene_id)
+    allowed = {p for c in ev.characters if c.name for p in c.name.split()}
+    ctx = VerifyContext(
+        lang="en",
+        words=[],
+        vad=[],
+        gaps={gap.gap_id: gap},
+        scenes=Scenes(scenes=[Scene(scene_id=ev.scene_id, start_ms=0, end_ms=end, shots=["SH001"])]),
+        evidence={ev.scene_id: ev},
+        sounds=[],
+        guard_ms=C.GUARD_MS,
+        allowed_names=frozenset(allowed),
+    )
+    return ctx, gap
 
 
 def create_app() -> FastAPI:
@@ -290,6 +336,91 @@ def create_app() -> FastAPI:
             "recorded_at": now_iso(),
             "version": result["version"],
             "cues": result["cues"],
+        }
+
+    @app.post("/api/describe")
+    async def describe(request: Request) -> dict[str, Any]:
+        """A visitor's own picture: Gemma lists what is visible, then writes one description line for a silent pause;
+        our description rules check it and Gemma repairs what fails, as in the pipeline. Shows the facts, Gemma's first
+        line, what blocked it, and what would be published. The picture is never stored."""
+        import tempfile
+
+        _allow("describe:" + _ip(request), C.DESCRIBE_PER_HOUR)
+        try:
+            body = await request.json()
+        except ValueError as e:
+            raise HTTPException(400, 'send JSON: {"image": "data:image/jpeg;base64,..."}') from e
+        mime, raw = decode_image(str((body or {}).get("image", "")))
+        from accesscast.write.evidence import evidence_from_frames
+
+        settings = load_settings()
+        provider = "tokenfactory" if settings.tf_api_key and settings.tf_base_url else "local"
+        t0 = time.monotonic()
+        # the function stops at 120 s: the picture call may retry once; writing gets what is left (see below)
+        client = LlmClient(settings, provider=provider, strict_provider=True, timeout_s=45, max_retries=1)
+        # the English description voice, as in the attack cases
+        cal = Calibration(**read_json(CASES / "A1_no_pause" / "case.json")["calibration"])
+        scene = Scene(scene_id="SC001", start_ms=0, end_ms=C.DESCRIBE_PAUSE_MS, shots=["SH001"])
+        run_id = secrets.token_hex(4)
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / ("f00" + {"image/jpeg": ".jpg", "image/png": ".png"}.get(mime, ".webp"))
+                path.write_bytes(raw)
+                ev = evidence_from_frames(client, scene, 0, [path], [C.DESCRIBE_PAUSE_MS // 2])
+        except Exception as e:
+            raise HTTPException(
+                503, f"Gemma endpoint not reachable ({type(e).__name__}). Nothing was run."
+            ) from e
+        facts = [{"fid": f.fid, "text": f.text} for f in (ev.visible_facts if ev.status == "ok" else [])]
+        lines: list[dict[str, Any]] = []
+        left = C.DESCRIBE_DEADLINE_S - (time.monotonic() - t0)
+        note = None
+        if ev.status == "ok" and facts and left < C.DESCRIBE_MIN_WRITE_S:
+            note = "Gemma took too long to look at the picture, so no line was written in time: it goes to a person."
+        elif ev.status == "ok" and facts:
+            ctx, gap = picture_context(ev)
+            ctx.wps_voice = cal.wps_voice
+            plans = plan_description([gap], ctx.evidence, [], [], cal)[:1]  # one line: the time limit
+            # one write and as many repairs as fit: a slow endpoint gets fewer, longer calls, not many short ones
+            per_call = max(15.0, min(30.0, left / 2))
+            writer = LlmClient(
+                settings, provider=provider, strict_provider=True, timeout_s=per_call, max_retries=0
+            )
+            opts = WriteOptions(
+                run_label=f"describe:{run_id}",
+                project_seed=settings.project_seed,
+                max_repairs=max(0, min(C.DESCRIBE_MAX_REPAIRS, int(left // per_call) - 1)),
+            )
+            try:
+                drafts = write_drafts(writer, plans, ctx.evidence, ctx, opts)
+                items = verify_and_repair(writer, plans, drafts, ctx, opts)
+            except Exception as e:
+                raise HTTPException(503, f"Gemma endpoint not reachable ({type(e).__name__}).") from e
+            for item, plan in zip(items, plans, strict=False):
+                first = item.repair.history[0] if item.repair.history else None
+                published = item.status == ItemStatus.PENDING and not item.violations
+                lines.append(
+                    {
+                        "gemma_wrote": first.text if first else item.draft,
+                        "blocked_by": first.rules if first and first.rules else [],
+                        "published": item.text if published else None,
+                        "to_person": not published,
+                        "repairs": item.repair.attempts,
+                        "budget_words": plan.budget.words_max,
+                        "findings": [{"rule": f.rule, "observed": f.observed} for f in item.violations][:6],
+                    }
+                )
+        return {
+            "facts": facts,
+            "evidence_ok": ev.status == "ok",
+            "evidence_problem": None if ev.status == "ok" else (ev.warnings or ["no answer"])[0][:200],
+            "lines": lines,
+            "note": note,
+            "pause_ms": C.DESCRIBE_PAUSE_MS,
+            "endpoint_label": "Gemma 4 31B on AMD Token Factory"
+            if client.provider == "tokenfactory"
+            else client.provider,
+            "recorded_at": now_iso(),
         }
 
     return app

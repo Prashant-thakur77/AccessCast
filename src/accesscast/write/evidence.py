@@ -218,10 +218,26 @@ def gather_evidence(
     if use_ocr:
         for i, p in enumerate(paths):
             ocr_lines += [(i, t, c) for t, c in ocr_frame(p)]
+    return evidence_from_frames(client, scene, scene_index, paths, times, transcript, cast, ocr_lines)
+
+
+def evidence_from_frames(
+    client: LlmClient,
+    scene: Scene,
+    scene_index: int,
+    paths: Sequence[Path],
+    times: Sequence[int],
+    transcript: str = "",
+    cast: Sequence[Character] = (),
+    ocr_lines: Sequence[tuple[int, str, float]] = (),
+) -> SceneEvidence:
+    """Gemma lists what is visible in these frames (temperature 0); code checks the answer (`check_evidence`) and
+    asks once more with the problems it found. Used by the pipeline and by the live picture API. Fails closed:
+    after two tries the scene is `evidence_failed`, and nothing is written from it."""
     ocr_text = " ".join(t for _, t, _ in ocr_lines)
     payload = {
         "scene_index": scene_index,
-        "frame_times_ms": times,
+        "frame_times_ms": list(times),
         "dialogue": transcript,
         "cast": [{"cid": c.cid, "appearance": c.appearance, "name": c.name} for c in cast],
         "max_facts": C.max_facts((scene.end_ms - scene.start_ms) / 1000),
@@ -231,7 +247,11 @@ def gather_evidence(
         try:
             resp = client.call(
                 LlmRequest(
-                    "evidence", payload, seed=0, images=paths, label=f"evidence:{scene.scene_id}:{attempt}"
+                    "evidence",
+                    payload,
+                    seed=0,
+                    images=list(paths),
+                    label=f"evidence:{scene.scene_id}:{attempt}",
                 )
             )
             ev, errors, _ = check_evidence(resp.obj, scene, len(paths), transcript, ocr_text)
@@ -245,11 +265,11 @@ def gather_evidence(
             last_err = "; ".join(errors)
             payload = {**payload, "_previous_problems": errors}
             continue
-        ev = merge_ocr(ev, ocr_lines)
+        ev = merge_ocr(ev, list(ocr_lines))
         return ev.model_copy(
             update={
                 "frames": [p.name for p in paths],
-                "frame_ms": times,
+                "frame_ms": list(times),
                 "model": ModelRef(
                     name="google/gemma-4-31B-it",
                     endpoint=resp.provider,
@@ -264,7 +284,7 @@ def gather_evidence(
     return SceneEvidence(
         scene_id=scene.scene_id,
         frames=[p.name for p in paths],
-        frame_ms=times,
+        frame_ms=list(times),
         status="evidence_failed",
         warnings=[f"evidence failed after 2 tries: {last_err[:200]}"],
     )

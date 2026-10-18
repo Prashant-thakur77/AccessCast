@@ -1,8 +1,8 @@
 """After a deploy: does the live site work for every viewer? Fails (exit 7) on any missing page or chart, any Try
 request that does not answer, or any check that crashed instead of running (VERIFIER_CRASH), in any language.
 
-Writes evidence/live_check.json always, including when something fails. Six Gemma calls on Token Factory, one at a
-time (our key's rate limit), through the public Try API exactly as a visitor's browser makes them.
+Writes evidence/live_check.json always, including when something fails. Six Try requests and one picture through
+the public APIs, one at a time (our key's rate limit), exactly as a visitor's browser makes them.
 
 Usage: python scripts/live_check.py [https://accesscast.vercel.app]
 """
@@ -70,6 +70,32 @@ def main() -> int:
                 else:
                     unanswered.append(v)
                 e.results.append(row)
+            # one sample picture through the live picture API: it must answer, and no check may crash; a provider
+            # outage that fails closed (no facts, nothing published) is the correct behaviour, recorded as such
+            import base64
+
+            img = c.get(f"{base}/assets/samples/nasa-eclipse.jpg")
+            picture: dict[str, object] = {"describe": "nasa-eclipse.jpg", "sample_status": img.status_code}
+            if img.status_code == 200:
+                url = "data:image/jpeg;base64," + base64.b64encode(img.content).decode()
+                r = c.post(f"{base}/api/describe", json={"image": url})
+                picture["status"] = r.status_code
+                if r.status_code == 200:
+                    d = r.json()
+                    rules = sorted({f["rule"] for ln in d.get("lines", []) for f in ln.get("findings", [])})
+                    picture.update(
+                        facts=len(d.get("facts", [])),
+                        lines=[ln.get("published") for ln in d.get("lines", [])],
+                        rules=rules,
+                        evidence_problem=d.get("evidence_problem"),
+                    )
+                    if "VERIFIER_CRASH" in rules:
+                        crashed.append("describe")
+                else:
+                    unanswered.append("describe")
+            else:
+                missing.append("assets/samples/nasa-eclipse.jpg")
+            e.results.append(picture)
         e.summary = {"missing": missing, "crashed": crashed, "unanswered": unanswered}
         e.checks["every_page_and_chart"] = not missing
         e.checks["no_check_crashed"] = not crashed

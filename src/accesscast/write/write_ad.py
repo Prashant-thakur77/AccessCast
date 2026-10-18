@@ -54,6 +54,7 @@ class WriteOptions:
     concurrency: int = field(
         default_factory=lambda: int(os.environ.get("ACCESSCAST_CONCURRENCY", "16"))
     )  # E2 V0 = 1
+    max_repairs: int = C.REPAIR_MAX_ATTEMPTS  # the live picture API uses fewer to stay inside its time limit
 
 
 def _model_ref(resp: LlmResponse, seed: int | None) -> ModelRef:
@@ -229,7 +230,9 @@ def verify_and_repair(
                     "flags": [*item.flags, "checks_off"],
                 }
             )
-        out = run_repair_loop(item.draft, item.fact_ids, verify, revise, enabled=opts.repair)
+        out = run_repair_loop(
+            item.draft, item.fact_ids, verify, revise, enabled=opts.repair, max_attempts=opts.max_repairs
+        )
         res = out.final_result or verify(out.text, out.fact_ids)
         final = out.text if out.attempts else None
         status = ItemStatus.PENDING if out.ok else ItemStatus.NEEDS_REVISION

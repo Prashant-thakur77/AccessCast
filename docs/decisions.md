@@ -186,3 +186,15 @@ and Italian. **Measurement.** Adding the languages edits the translation prompt'
 E4's Hindi and Italian results were measured with the earlier text. Spanish, French and Portuguese get their own E4
 run (FLORES+ devtest against Opus-MT); until it runs, no quality number is stated for them.
 
+
+## D-030 (18 Oct 2026): "Describe a picture", live on the proof page
+A visitor's still picture goes through the real description path with Gemma 4 31B on AMD Token Factory: Gemma lists
+what is visible (`evidence_from_frames`, the same function the pipeline uses), the planner gives one line for an
+8-second silent pause, Gemma writes it, and the description rules check it, with repairs. Limits keep it inside the
+120 s function: the picture call may retry once, writing gets the time left (fewer, longer calls when the endpoint is
+slow), and with too little time left no line is written and the page says the line goes to a person. The browser
+shrinks the picture to at most 1024 px; the server accepts only a JPEG, PNG or WebP whose bytes match its type, up to
+1.5 MB, keeps it in a temporary file for the request, and never stores it. Three sample pictures (Sintel, NASA) let a
+judge try it without their own. First live runs (18 Oct): on the eclipse slide Gemma's line broke AD001 and AD007
+(over the pause and the word budget) and the repair passed; Token Factory also returned HTTP 500 and timeouts that
+morning, which the retry and the deadline now absorb.
