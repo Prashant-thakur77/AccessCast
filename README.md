@@ -405,4 +405,4 @@ More detail: [`JUDGES.md`](JUDGES.md) (a 3-minute route), [`docs/rules.md`](docs
 
 ## Team
 
-<pending: team.names>
+CoffeAndCode
