@@ -317,6 +317,7 @@ DESCRIBE_PAUSE_MS = 8000  # ours: the picture is described as if it stayed on sc
 DESCRIBE_MAX_REPAIRS = (
     2  # ours: 3 repairs could pass the 120 s function limit; a line still failing goes to a person
 )
+DESCRIBE_EVIDENCE_BUDGET_S = 65  # ours: the picture step stops waiting here, leaving time to write a line
 DESCRIBE_DEADLINE_S = 105  # ours: answer before the 120 s function limit, with room to send the reply
 DESCRIBE_MIN_WRITE_S = (
     20  # ours: below this, a line would likely run out of time; it goes to a person instead

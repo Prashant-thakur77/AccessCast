@@ -198,6 +198,34 @@ await segment("proof", async (p) => {
 });
 
 // Try your own caption (proof page): typed with the keyboard, made live on AMD, every answer checked.
+// Describe a picture: a sample picture, Gemma on AMD looks and writes one line, our rules check it (live endpoint).
+await segment("describe", async (p) => {
+  await p.goto(`${SITE}/proof.html`);
+  await p.evaluate(() => { document.body.style.zoom = "0.9"; });
+  await p.evaluate(() => {
+    const h = document.getElementById("desc-h");
+    window.scrollTo(0, h.getBoundingClientRect().top + window.scrollY - 12);
+  });
+  await pause(p, 1200);
+  p.mark("page");
+  const sample = p.getByRole("button", { name: process.env.DESCRIBE_SAMPLE || "Sintel: a figure in the snow" });
+  await sample.focus();
+  await p.keyboard.press("Enter");
+  await p.waitForFunction(() => !document.getElementById("b-desc").disabled, null, { timeout: 30000 });
+  await p.locator("#b-desc").focus({ preventScroll: true });
+  await p.keyboard.press("Enter");
+  p.mark("pressed");
+  await p.waitForFunction(() => /^(Done|Gemma|AMD|The live)/.test(document.getElementById("desc-status").textContent || ""), null, { timeout: 180000 });
+  p.mark("done");
+  await p.evaluate(() => {
+    const r = document.getElementById("desc-figure");
+    window.scrollTo({ top: r.getBoundingClientRect().top + window.scrollY - 12, behavior: "smooth" });
+  });
+  await pause(p, 1000);
+  p.mark("result");
+  await pause(p, 12000);
+});
+
 await segment("try", async (p) => {
   await p.goto(`${SITE}/proof.html`);
   await p.waitForFunction(() => !document.getElementById("b-try").disabled, null, { timeout: 30000 });

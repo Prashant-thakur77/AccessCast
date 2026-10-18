@@ -19,10 +19,12 @@ import json
 import os
 import re
 import secrets
+import shutil
 import threading
 import time
 from collections import defaultdict, deque
 from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import TimeoutError as FutureTimeout
 from pathlib import Path
 from typing import Any
 
@@ -376,15 +378,30 @@ def create_app() -> FastAPI:
         cal = Calibration(**read_json(CASES / "A1_no_pause" / "case.json")["calibration"])
         scene = Scene(scene_id="SC001", start_ms=0, end_ms=C.DESCRIBE_PAUSE_MS, shots=["SH001"])
         run_id = secrets.token_hex(4)
+        # each phase runs with a hard time budget: a slow endpoint, a retry or a re-ask cannot carry the request past
+        # the function's limit; when a budget runs out the visitor gets the plain answer and nothing is published
+        pool = ThreadPoolExecutor(max_workers=1)
+        tmp = tempfile.mkdtemp()
+        path = Path(tmp) / ("f00" + {"image/jpeg": ".jpg", "image/png": ".png"}.get(mime, ".webp"))
+        path.write_bytes(raw)
         try:
-            with tempfile.TemporaryDirectory() as tmp:
-                path = Path(tmp) / ("f00" + {"image/jpeg": ".jpg", "image/png": ".png"}.get(mime, ".webp"))
-                path.write_bytes(raw)
-                ev = evidence_from_frames(client, scene, 0, [path], [C.DESCRIBE_PAUSE_MS // 2])
+            ev = pool.submit(
+                evidence_from_frames, client, scene, 0, [path], [C.DESCRIBE_PAUSE_MS // 2]
+            ).result(timeout=C.DESCRIBE_EVIDENCE_BUDGET_S)
+        except FutureTimeout:
+            ev = SceneEvidence(
+                scene_id=scene.scene_id,
+                frames=[],
+                frame_ms=[],
+                status="evidence_failed",
+                warnings=["timed out: no answer within the picture budget"],
+            )
         except Exception as e:
             raise HTTPException(
                 503, f"Gemma endpoint not reachable ({type(e).__name__}). Nothing was run."
             ) from e
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)  # the picture is deleted as soon as Gemma has looked at it
         facts = [{"fid": f.fid, "text": f.text} for f in (ev.visible_facts if ev.status == "ok" else [])]
         lines: list[dict[str, Any]] = []
         left = C.DESCRIBE_DEADLINE_S - (time.monotonic() - t0)
@@ -405,9 +422,17 @@ def create_app() -> FastAPI:
                 project_seed=settings.project_seed,
                 max_repairs=max(0, min(C.DESCRIBE_MAX_REPAIRS, int(left // per_call) - 1)),
             )
+
+            def write_and_check() -> list[Any]:
+                return verify_and_repair(
+                    writer, plans, write_drafts(writer, plans, ctx.evidence, ctx, opts), ctx, opts
+                )
+
+            items: list[Any] = []
             try:
-                drafts = write_drafts(writer, plans, ctx.evidence, ctx, opts)
-                items = verify_and_repair(writer, plans, drafts, ctx, opts)
+                items = pool.submit(write_and_check).result(timeout=max(1.0, left - 3))
+            except FutureTimeout:
+                note = "Gemma did not finish the line in time, so it goes to a person. Nothing is published."
             except Exception as e:
                 raise HTTPException(503, f"Gemma endpoint not reachable ({type(e).__name__}).") from e
             for item, plan in zip(items, plans, strict=False):
@@ -424,6 +449,7 @@ def create_app() -> FastAPI:
                         "findings": [{"rule": f.rule, "observed": f.observed} for f in item.violations][:6],
                     }
                 )
+        pool.shutdown(wait=False)  # a call still running finishes in the background; its answer is not used
         return {
             "facts": facts,
             "evidence_ok": ev.status == "ok",

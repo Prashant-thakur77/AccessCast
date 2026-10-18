@@ -113,3 +113,22 @@ def test_too_little_time_left_means_no_line_and_a_plain_reason(
     body = app_client.post("/api/describe", json={"image": data_url(JPEG)}).json()
     assert body["facts"] and body["lines"] == []
     assert "goes to a person" in body["note"]
+
+
+def test_a_stalled_model_still_gets_a_quick_plain_answer(
+    app_client: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import time
+
+    from accesscast.write import evidence
+
+    def stall(*a: object, **k: object) -> None:
+        time.sleep(2)
+
+    monkeypatch.setattr(evidence, "evidence_from_frames", stall)
+    monkeypatch.setattr(C, "DESCRIBE_EVIDENCE_BUDGET_S", 0.2)
+    t0 = time.monotonic()
+    body = app_client.post("/api/describe", json={"image": data_url(JPEG)}).json()
+    assert time.monotonic() - t0 < 1.5  # answered when the budget ran out, not when the model came back
+    assert body["facts"] == [] and body["lines"] == []
+    assert "did not answer in time" in body["evidence_problem"]

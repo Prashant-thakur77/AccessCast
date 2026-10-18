@@ -186,3 +186,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** The live check after deploying "Describe a picture" got HTTP 500 from `/api/describe`, while the same code answered locally.
 **Root cause.** The live API runs from a pruned bundle without Pillow or soundfile (they are not needed to call Gemma). The picture API reuses the pipeline's evidence code, and that module imported Pillow and the video-ingest module at the top, so the function failed on import. Locally every library is installed, so no unit test saw it.
 **Fix.** Those imports now happen inside the two functions that read video frames, which the live API never calls. A new unit test imports the live API with Pillow, soundfile and torch blocked, as in the bundle. The live check after every deploy caught this, which is why it exists.
+
+## 2026-10-18 The live picture API ran past the function's time limit
+**Symptom.** While recording the demo, "Describe a picture" answered HTTP 504 after 120 seconds instead of a result or a plain "did not answer in time".
+**Root cause.** The deadline was checked only after the picture step. That step can take far longer than one call: a slow answer, a retry, a re-ask for valid JSON, and a second attempt after a bad answer each add a call. On a slow morning they added up past Vercel's 120-second limit, so the platform cut the request instead of our code answering.
+**Fix.** Each phase now runs with a hard time budget (the picture step stops waiting after 65 s; writing gets what is left before 105 s). When a budget runs out, the visitor gets the plain message and nothing is published; a unit test stalls the model and checks the answer still comes back at once. The picture is deleted as soon as the picture step ends.
