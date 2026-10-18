@@ -22,8 +22,10 @@ What didn't work: our pre-registered headline test (description inside pauses) c
 
 Live demo: https://accesscast.vercel.app/?audience=judge · Code: https://github.com/Prashant-thakur77/AccessCast · Judge guide: https://github.com/Prashant-thakur77/AccessCast/blob/main/JUDGES.md · Demo video: <pending: video.url>
 
-**Track:** Create a New Kind of Experience
+**Track:** Track 4, Create a New Kind of Experience (by partner Vibe Generation). It is the only track brief AccessCast fits; the other three (industry, health, commerce) are judged on their own briefs.
 
-**Technologies:** AMD Token Factory, Gemma, Hugging Face. Tick AMD Developer Cloud only if the organisers confirm Token Factory counts as part of it. (Do not select Evolus. Do not tick MI300X, ROCm or vLLM: we did not run them ourselves.)
+**Partner prize:** Google (Gemma): every model call is Gemma 4 31B. Not Evolus (we do not build on Evolus).
+
+**Technology tags:** Token Factory, Gemma, AMD Developer Cloud. The event FAQ says the event is hosted on notebooks.amd.com/tokenfactory and needs only a Token Factory key, so Token Factory is the event's AMD platform. (Do not tick AMD ROCm, MI300X or vLLM: we did not run them ourselves.)
 
 **Cover image:** `docs/cover.png` (1920×1080). **Slide deck:** `docs/deck/deck.pdf`. **Demo platform:** Web. **App URL:** https://accesscast.vercel.app
