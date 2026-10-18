@@ -6300,6 +6300,129 @@
    ]
   },
   {
+   "claim_id": "review.eclipse.approved",
+   "text": "lines a person approved",
+   "value": 11,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/review_8af59806d6b6.json",
+     "sha256": "3e84e19251788627fd2950faa4386f1ba7920e9ccaf9902824422f5fe2cc4cde",
+     "pointer": "/summary/approved_by_person"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "JUDGES.md"
+   ],
+   "display": [
+    "11"
+   ]
+  },
+  {
+   "claim_id": "review.eclipse.by_person",
+   "text": "lines decided by a person",
+   "value": 12,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/review_8af59806d6b6.json",
+     "sha256": "3e84e19251788627fd2950faa4386f1ba7920e9ccaf9902824422f5fe2cc4cde",
+     "pointer": "/summary/decided_by_person"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "12"
+   ]
+  },
+  {
+   "claim_id": "review.eclipse.edited",
+   "text": "lines whose text a person changed",
+   "value": 0,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/review_8af59806d6b6.json",
+     "sha256": "3e84e19251788627fd2950faa4386f1ba7920e9ccaf9902824422f5fe2cc4cde",
+     "pointer": "/summary/text_edited_by_person"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "0"
+   ]
+  },
+  {
+   "claim_id": "review.eclipse.lines",
+   "text": "lines in the reviewed eclipse animation",
+   "value": 12,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/review_8af59806d6b6.json",
+     "sha256": "3e84e19251788627fd2950faa4386f1ba7920e9ccaf9902824422f5fe2cc4cde",
+     "pointer": "/summary/lines"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "JUDGES.md"
+   ],
+   "display": [
+    "12"
+   ]
+  },
+  {
+   "claim_id": "review.eclipse.rejected",
+   "text": "lines a person rejected",
+   "value": 1,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/review_8af59806d6b6.json",
+     "sha256": "3e84e19251788627fd2950faa4386f1ba7920e9ccaf9902824422f5fe2cc4cde",
+     "pointer": "/summary/rejected_by_person"
+    }
+   ],
+   "public_files": [
+    "README.md",
+    "JUDGES.md"
+   ],
+   "display": [
+    "1"
+   ]
+  },
+  {
+   "claim_id": "review.eclipse.reviewers",
+   "text": "people who reviewed it",
+   "value": 1,
+   "unit": "people",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/review_8af59806d6b6.json",
+     "sha256": "3e84e19251788627fd2950faa4386f1ba7920e9ccaf9902824422f5fe2cc4cde",
+     "pointer": "/summary/reviewers"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "1"
+   ]
+  },
+  {
    "claim_id": "tests.coverage",
    "text": "share of src/accesscast lines the tests run",
    "value": 78.0,

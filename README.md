@@ -349,7 +349,7 @@ Every first draft failed at least one of our checks (arm B sent all of them to a
 | Claim | Real | Simplified or not done |
 |---|---|---|
 | Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
-| Human review | Nothing renders while a description or easy-read line waits for a person (the server refuses) | The site shows labelled machine drafts; our reviewers are not professional describers; the timed review study (E12) has not run |
+| Human review | Nothing renders while a description or easy-read line waits for a person (the server refuses). On the site, the NASA eclipse animation is reviewed by a person: 11 of 12 lines approved, 1 rejected (an on-screen text line), no text changed ([`review_8af59806d6b6.json`](evidence/review_8af59806d6b6.json)) | The other two site videos are labelled machine drafts. One of us reviewed one short clip; we are not professional describers, and the timed review study (E12) has not run |
 | Review tool for blind reviewers | Keyboard only, live announcements, browser tests with axe-core pass | Not yet tested by a blind reviewer |
 | Five languages | Each language's subtitles and voice-over pass the same number, name and language checks | No native-speaker spot checks yet; Spanish, French and Portuguese were added last |
 | Where it ran | Gemma 4 31B on AMD Token Factory | Whisper, the aligner, the voices and the metric models ran on our own computer; each evidence file records the device |

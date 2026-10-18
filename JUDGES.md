@@ -12,6 +12,7 @@ The shortest route through the submission.
 ## What To Inspect
 - The "What the models decided" drawer on any video: the frames Gemma saw, the pause each line had to fit, Gemma's first draft, the checks that failed, each repair, and who approved it.
 - A public render refused because no person has approved the lines yet, next to the labelled draft the same project is allowed (`evidence/gallery/refused_public_render.json`).
+- The NASA eclipse animation on the site, reviewed by a person: 11 of 12 lines approved and 1 rejected, so it plays without the draft label, and its drawer shows who approved each line ([`evidence/review_8af59806d6b6.json`](evidence/review_8af59806d6b6.json)). The other two site videos are labelled drafts.
 - The review app, keyboard only (`make review`).
 - [`evidence/public-claims.json`](evidence/public-claims.json) and `make claims-check`.
 

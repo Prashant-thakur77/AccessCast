@@ -1,0 +1,166 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "review_8af59806d6b6",
+ "split": "dev",
+ "passed": true,
+ "git_commit": "a9ea7d8d04d2d50790addb0bf8edaecebae50f71",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-18T08:21:56.333Z",
+ "finished_at": "2026-10-18T08:21:56.363Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "question": "What did a person decide when reviewing this project, and does the public render carry it?",
+  "project": "8af59806d6b6",
+  "source": "review/state.json, review/review_history.jsonl, reports/render.json (the review app's files)",
+  "quick_signoff_s": 2.0
+ },
+ "checks": {
+  "every_line_decided_by_a_person": true,
+  "public_render_carries_the_review": true,
+  "render_files_match_report": true
+ },
+ "results": [
+  {
+   "item": "ad.en.0001",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "A small grey moon moves along a white circular orbit around a green and blue Earth, casting a dark shadow across it.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 9.0
+  },
+  {
+   "item": "ad.en.0002",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "The view shifts to a 3D perspective.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 1.0
+  },
+  {
+   "item": "ad.en.0003",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "The moon is above the red line, and its shadow passes above the Earth.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 1.0
+  },
+  {
+   "item": "ad.en.0004",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "The moon is below the red line, and its shadow passes below the Earth.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 2.0
+  },
+  {
+   "item": "ad.en.0005",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "The moon's shadow passes directly across the Earth.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 0.0
+  },
+  {
+   "item": "ad.en.0006",
+   "kind": "ad",
+   "status": "rejected",
+   "decided_by_person": true,
+   "text": "On screen: \"NASA HELIOPHYSICS\"",
+   "text_edited_by_person": false,
+   "seconds_on_line": 111.0
+  },
+  {
+   "item": "ad.en.0007",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "A dark circular body partially obscures a bright light source.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 0.0
+  },
+  {
+   "item": "ad.en.0008",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "The dark circular body completely covers the light source.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 0.0
+  },
+  {
+   "item": "ad.en.0009",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "NASA Goddard logo appears.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 0.0
+  },
+  {
+   "item": "ad.en.0010",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "The screen fades to black.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 0.0
+  },
+  {
+   "item": "ad.en.0011",
+   "kind": "ad",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "A satellite floats.",
+   "text_edited_by_person": false,
+   "seconds_on_line": 0.0
+  },
+  {
+   "item": "sdh.en.0001",
+   "kind": "sdh",
+   "status": "approved",
+   "decided_by_person": true,
+   "text": "[music]",
+   "text_edited_by_person": false,
+   "seconds_on_line": 2.0
+  }
+ ],
+ "summary": {
+  "lines": 12,
+  "decided_by_person": 12,
+  "approved_by_person": 11,
+  "rejected_by_person": 1,
+  "text_edited_by_person": 0,
+  "reviewers": 1,
+  "decisions_by_person": 13,
+  "seconds_first_to_last_decision": 446,
+  "quick_signoffs": 8,
+  "public_render": {
+   "mode": "public",
+   "watermark": false,
+   "human_reviewed": true,
+   "versions": [
+    "blind.en",
+    "blind_ext.en",
+    "deaf.en"
+   ],
+   "files_match_report": true
+  }
+ },
+ "error": null
+}

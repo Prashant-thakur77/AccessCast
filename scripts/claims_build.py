@@ -639,6 +639,21 @@ def e19_specs() -> list[Spec]:
     return out
 
 
+def review_specs() -> list[Spec]:
+    """The person's review of the NASA eclipse animation on the site (scripts/review_record.py): one reviewer, one
+    clip, a record of decisions, not a measurement of review time (E12 has not run)."""
+    f = "review_8af59806d6b6.json"
+    rows = [
+        ("review.eclipse.lines", "/summary/lines", "lines in the reviewed eclipse animation", "lines"),
+        ("review.eclipse.by_person", "/summary/decided_by_person", "lines decided by a person", "lines"),
+        ("review.eclipse.approved", "/summary/approved_by_person", "lines a person approved", "lines"),
+        ("review.eclipse.rejected", "/summary/rejected_by_person", "lines a person rejected", "lines"),
+        ("review.eclipse.edited", "/summary/text_edited_by_person", "lines whose text a person changed", "lines"),
+        ("review.eclipse.reviewers", "/summary/reviewers", "people who reviewed it", "people"),
+    ]
+    return [Spec(cid, f, ptr, text, unit) for cid, ptr, text, unit in rows]
+
+
 def repo_specs() -> list[Spec]:
     """Counts about the project itself, read from the code and the repo (scripts/repo_stats.py)."""
     f, n = "repo_stats.json", "none"
@@ -1187,6 +1202,7 @@ def register() -> dict[str, Any]:
         *e17_specs(),
         *repo_specs(),
         *e19_specs(),
+        *review_specs(),
     ]:
         f = EV / s.path
         if not f.exists():
