@@ -91,7 +91,10 @@
       if (available(p)) { b.disabled = false; n.textContent = ""; }
       else {
         b.disabled = true;
-        n.textContent = "Not available for this video yet.";
+        // a video with no speech has no words to simplify or translate: say why, not "yet"
+        n.textContent = !data.noSpeech ? "Not available for this video yet."
+          : p === "easy" ? "This video has no speech to simplify."
+          : LANGS.indexOf(p) >= 0 ? "This video has no speech to translate." : "Not available for this video yet.";
         state.profiles = state.profiles.filter(function (x) { return x !== p; });
       }
     });
@@ -768,6 +771,10 @@
       }
       renderAvailability();
       syncPickerUI();
+      AC.fetchOptionalJSON(data.base + "analysis.json").then(function (an) {
+        data.noSpeech = !!(an && Array.isArray(an.speech) && !an.speech.length);
+        if (data.noSpeech) renderAvailability();
+      }, function () { /* the notes keep their plain "not yet" */ });
       return AC.fetchJSON(data.base + "decisions.json").then(function (d) { data.decisions = d; }, function (err) {
         data.decisionsError = err.message;
       });

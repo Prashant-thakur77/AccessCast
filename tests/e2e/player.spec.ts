@@ -387,3 +387,18 @@ test("landing: every live feature is one click away", async ({ page }) => {
   await expect(page.getByRole("link", { name: "Describe your own picture" })).toHaveAttribute("href", "proof.html#desc-h");
   await expect(page.getByRole("link", { name: "What would your videos cost?" })).toHaveAttribute("href", "results.html#r-calc");
 });
+
+test("watch: a video with no speech says why it has no easy-read or language version", async ({ page }) => {
+  await page.route("**/p/*/analysis.json", (r) => r.fulfill({ json: { duration_ms: 20000, speech: [], gaps: [], scenes: [] } }));
+  await page.route("**/p/*/index.json", async (r) => {
+    const idx = await (await r.fetch()).json();
+    for (const k of Object.keys(idx.versions)) if (!/^(blind|blind_ext|deaf)\.en$/.test(k)) delete idx.versions[k];
+    await r.fulfill({ json: idx });
+  });
+  await page.goto("/watch.html?audience=blind");
+  await expect(status(page)).toContainText("Now playing");
+  await expect(page.locator("#n-easy")).toHaveText("This video has no speech to simplify.");
+  await expect(page.locator("#n-it")).toHaveText("This video has no speech to translate.");
+  await expect(page.locator("#t-easy")).toBeDisabled();
+  expect(await axeViolations(page)).toEqual([]);
+});
