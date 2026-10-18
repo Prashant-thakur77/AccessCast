@@ -3,11 +3,11 @@
  "experiment": "live_check",
  "split": "none",
  "passed": true,
- "git_commit": "3e5a1c70d4b8c5a74d08dad54c4aa4ba6e6eabf9",
+ "git_commit": "d5d667620a5d40a61544f0b08183f9b92853ce23",
  "git_dirty": false,
  "freeze_tag": null,
- "started_at": "2026-10-18T08:24:22.474Z",
- "finished_at": "2026-10-18T08:25:59.579Z",
+ "started_at": "2026-10-18T08:48:31.614Z",
+ "finished_at": "2026-10-18T08:50:35.620Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -105,9 +105,13 @@
   {
    "try": "easy",
    "status": 200,
-   "rules": [],
+   "rules": [
+    "ER004",
+    "ER005",
+    "GEN001"
+   ],
    "published": [
-    "Do not press the red button before 5 pm."
+    null
    ]
   },
   {
@@ -154,24 +158,24 @@
    "describe": "nasa-eclipse.jpg",
    "sample_status": 200,
    "status": 200,
-   "facts": 4,
+   "facts": 5,
    "lines": [
-    "A green and white sphere sits inside a white circle with a grey sphere at the top."
+    "A green and white globe sits inside a large white orbital circle. A white arrow points left."
    ],
    "rules": [],
    "evidence_problem": null
   },
   {
-   "build": "3e5a1c7",
-   "expected": "3e5a1c7"
+   "build": "d5d6676",
+   "expected": "d5d6676"
   }
  ],
  "summary": {
   "missing": [],
   "crashed": [],
   "unanswered": [],
-  "live_commit": "3e5a1c7",
-  "local_commit": "3e5a1c7"
+  "live_commit": "d5d6676",
+  "local_commit": "d5d6676"
  },
  "error": null
 }
