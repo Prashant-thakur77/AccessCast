@@ -3745,14 +3745,14 @@
   {
    "claim_id": "e16.player_passed",
    "text": "player accessibility tests passed (Playwright + axe-core)",
-   "value": 31,
+   "value": 32,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "f8e4f0962b2ac45f60b59fb558289f5352a877f387fe5ada54454bfee078431b",
+     "sha256": "6e537e5705dc46b477fcddbb339a47bcb2b251b0d11f1ca5ae4907be73a5bcc3",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3761,20 +3761,20 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "31"
+    "32"
    ]
   },
   {
    "claim_id": "e16.player_total",
    "text": "player accessibility tests run",
-   "value": 31,
+   "value": 32,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "f8e4f0962b2ac45f60b59fb558289f5352a877f387fe5ada54454bfee078431b",
+     "sha256": "6e537e5705dc46b477fcddbb339a47bcb2b251b0d11f1ca5ae4907be73a5bcc3",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3783,7 +3783,7 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "31"
+    "32"
    ]
   },
   {
@@ -3796,7 +3796,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "f8e4f0962b2ac45f60b59fb558289f5352a877f387fe5ada54454bfee078431b",
+     "sha256": "6e537e5705dc46b477fcddbb339a47bcb2b251b0d11f1ca5ae4907be73a5bcc3",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3818,7 +3818,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "f8e4f0962b2ac45f60b59fb558289f5352a877f387fe5ada54454bfee078431b",
+     "sha256": "6e537e5705dc46b477fcddbb339a47bcb2b251b0d11f1ca5ae4907be73a5bcc3",
      "pointer": "/summary/review/total"
     }
    ],
@@ -6425,14 +6425,14 @@
   {
    "claim_id": "tests.coverage",
    "text": "share of src/accesscast lines the tests run",
-   "value": 78.0,
+   "value": 78.1,
    "unit": "%",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "2f7c44b9de17597e92ed5ae969ce1ee112edc9a41977050b8327afd34e2317d6",
+     "sha256": "f1bbdc086f98c5b82a66a117204f344281f75bb1c01c60a738ca962987befd25",
      "pointer": "/summary/line_coverage_pct"
     }
    ],
@@ -6446,14 +6446,14 @@
   {
    "claim_id": "tests.files",
    "text": "test files",
-   "value": 74,
+   "value": 75,
    "unit": "files",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "2f7c44b9de17597e92ed5ae969ce1ee112edc9a41977050b8327afd34e2317d6",
+     "sha256": "f1bbdc086f98c5b82a66a117204f344281f75bb1c01c60a738ca962987befd25",
      "pointer": "/summary/test_files"
     }
    ],
@@ -6461,20 +6461,20 @@
     "README.md"
    ],
    "display": [
-    "74"
+    "75"
    ]
   },
   {
    "claim_id": "tests.passed",
    "text": "unit and golden tests that pass",
-   "value": 216,
+   "value": 220,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "2f7c44b9de17597e92ed5ae969ce1ee112edc9a41977050b8327afd34e2317d6",
+     "sha256": "f1bbdc086f98c5b82a66a117204f344281f75bb1c01c60a738ca962987befd25",
      "pointer": "/summary/tests_passed"
     }
    ],
@@ -6483,20 +6483,20 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "216"
+    "220"
    ]
   },
   {
    "claim_id": "tests.total",
    "text": "unit and golden tests",
-   "value": 216,
+   "value": 220,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "2f7c44b9de17597e92ed5ae969ce1ee112edc9a41977050b8327afd34e2317d6",
+     "sha256": "f1bbdc086f98c5b82a66a117204f344281f75bb1c01c60a738ca962987befd25",
      "pointer": "/summary/tests_total"
     }
    ],
@@ -6505,7 +6505,7 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "216"
+    "220"
    ]
   }
  ]

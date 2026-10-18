@@ -3,11 +3,11 @@
  "experiment": "live_check",
  "split": "none",
  "passed": true,
- "git_commit": "2b9cccfac5af02f6abf09b903927c600413ce246",
- "git_dirty": true,
+ "git_commit": "3e5a1c70d4b8c5a74d08dad54c4aa4ba6e6eabf9",
+ "git_dirty": false,
  "freeze_tag": null,
- "started_at": "2026-10-18T07:23:00.716Z",
- "finished_at": "2026-10-18T07:25:54.646Z",
+ "started_at": "2026-10-18T08:24:22.474Z",
+ "finished_at": "2026-10-18T08:25:59.579Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -105,13 +105,9 @@
   {
    "try": "easy",
    "status": 200,
-   "rules": [
-    "ER004",
-    "ER005",
-    "GEN001"
-   ],
+   "rules": [],
    "published": [
-    null
+    "Do not press the red button before 5 pm."
    ]
   },
   {
@@ -149,13 +145,9 @@
   {
    "try": "pt",
    "status": 200,
-   "rules": [
-    "CC007",
-    "CC009",
-    "GEN001"
-   ],
+   "rules": [],
    "published": [
-    null
+    "Não aperte o botão\nvermelho antes das 5 pm."
    ]
   },
   {
@@ -164,22 +156,22 @@
    "status": 200,
    "facts": 4,
    "lines": [
-    "A green and white sphere is centered in a white orbit with a grey sphere above."
+    "A green and white sphere sits inside a white circle with a grey sphere at the top."
    ],
    "rules": [],
    "evidence_problem": null
   },
   {
-   "build": "2b9cccf",
-   "expected": "2b9cccf"
+   "build": "3e5a1c7",
+   "expected": "3e5a1c7"
   }
  ],
  "summary": {
   "missing": [],
   "crashed": [],
   "unanswered": [],
-  "live_commit": "2b9cccf",
-  "local_commit": "2b9cccf"
+  "live_commit": "3e5a1c7",
+  "local_commit": "3e5a1c7"
  },
  "error": null
 }

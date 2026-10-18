@@ -307,6 +307,9 @@ TRY_MAX_WORDS = 45  # ours: same reason
 TRY_MS_PER_WORD = 400  # ours: 150 words a minute, an ordinary speaking pace (the rate used to time the text)
 TRY_PER_HOUR = 30  # ours: per address (three requests per try, one per version: 10 tries), so a few visitors cannot spend the key's daily budget
 # "Describe a picture" on the public proof page (POST /api/describe): one still picture, shown as if for a pause.
+POSTER_AT = (
+    0.4  # site poster frame, as a share of the video's length (our choice; checked by eye on the site videos)
+)
 DESCRIBE_MAX_BYTES = 1_500_000  # ours: the page sends a JPEG at most 1024 px wide (about 200 kB); far under Vercel's body limit
 DESCRIBE_TYPES = (
     "image/jpeg",

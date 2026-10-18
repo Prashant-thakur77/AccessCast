@@ -100,6 +100,7 @@
     setButtons();
     AC.loadProject().then(function (res) {
       data.index = res.index; data.base = res.base;
+      if (data.index.poster) video.setAttribute("poster", data.base + data.index.poster);
       AC.renderDisclosure($("disclosure"), data.index);
       seg = readSegment(data.index);
       $("segment").textContent = "Clip: " + (data.index.title || res.project.sha12) + ", from " + AC.fmtTime(seg.start) + " to " + AC.fmtTime(seg.end) + ".";

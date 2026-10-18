@@ -69,9 +69,13 @@
 
   /* ---------- status announcements ---------- */
   function announce(msg) {
-    var s = $("status");
+    var s = $("status"), vn = $("version-note");
     s.textContent = "";
-    window.setTimeout(function () { s.textContent = msg; }, 30);
+    window.setTimeout(function () {
+      s.textContent = msg;
+      // the note line keeps the notes on screen after other messages; while the status already says them, hide it
+      vn.hidden = !!vn.textContent && msg.indexOf(vn.textContent) >= 0;
+    }, 30);
   }
 
   /* ---------- availability ---------- */
@@ -254,6 +258,7 @@
     if (plan.showRole) { var t = AC.findTrack(vObj, plan.showRole); showName = t ? t.name : null; }
     current.notes = plan.notes;
     $("version-note").textContent = plan.notes.join(" ");
+    $("version-note").hidden = false;
     if (plan.key === current.key) {
       current.showName = showName;
       applyTrackModes();
@@ -758,6 +763,7 @@
       data.index = res.index; data.base = res.base; data.project = res.project; data.catalog = res.catalog;
       if (!data.index.versions || !Object.keys(data.index.versions).length) throw new Error("This video has no versions yet.");
       $("video-h").textContent = "Video: " + (data.index.title || data.project.title || data.project.sha12);
+      if (data.index.poster) $("video").setAttribute("poster", data.base + data.index.poster);
       $("video-credit").textContent = data.index.credit ? "Source: " + data.index.credit : "";
       $("video-credit").hidden = !data.index.credit;
       AC.renderDisclosure($("disclosure"), data.index);

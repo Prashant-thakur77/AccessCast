@@ -12,6 +12,7 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+from accesscast import constants as C
 from accesscast.config import REPO_ROOT, Settings
 from accesscast.errors import UsageError
 from accesscast.project import read_json, write_json
@@ -71,6 +72,14 @@ def export_site(settings: Settings, projects: Sequence[str], out: Path, *, allow
                 ]
                 write_json(dst / (v["source_to_output"].replace(".jsonl", ".json")), rows)
                 v["source_to_output"] = v["source_to_output"].replace(".jsonl", ".json")
+        # a still for the player before the video plays (an empty black box reads as broken)
+        from accesscast.media.ingest import extract_frame
+
+        still = idx["versions"].get("deaf.en") or next(iter(idx["versions"].values()))
+        extract_frame(
+            root / still["file"], int(idx["duration_ms"] * C.POSTER_AT), dst / "poster.jpg", px=1280
+        )
+        idx["poster"] = "poster.jpg"
         dec = read_json(root / "reports" / "decisions.json")
         for item in dec["items"]:
             for fr in item.get("frames", []):

@@ -69,9 +69,13 @@
 
   /* ---------- status announcements ---------- */
   function announce(msg) {
-    var s = $("status");
+    var s = $("status"), vn = $("version-note");
     s.textContent = "";
-    window.setTimeout(function () { s.textContent = msg; }, 30);
+    window.setTimeout(function () {
+      s.textContent = msg;
+      // the note line keeps the notes on screen after other messages; while the status already says them, hide it
+      vn.hidden = !!vn.textContent && msg.indexOf(vn.textContent) >= 0;
+    }, 30);
   }
 
   /* ---------- availability ---------- */
@@ -91,7 +95,10 @@
       if (available(p)) { b.disabled = false; n.textContent = ""; }
       else {
         b.disabled = true;
-        n.textContent = "Not available for this video yet.";
+        // a video with no speech has no words to simplify or translate: say why, not "yet"
+        n.textContent = !data.noSpeech ? "Not available for this video yet."
+          : p === "easy" ? "This video has no speech to simplify."
+          : LANGS.indexOf(p) >= 0 ? "This video has no speech to translate." : "Not available for this video yet.";
         state.profiles = state.profiles.filter(function (x) { return x !== p; });
       }
     });
@@ -251,6 +258,7 @@
     if (plan.showRole) { var t = AC.findTrack(vObj, plan.showRole); showName = t ? t.name : null; }
     current.notes = plan.notes;
     $("version-note").textContent = plan.notes.join(" ");
+    $("version-note").hidden = false;
     if (plan.key === current.key) {
       current.showName = showName;
       applyTrackModes();
@@ -755,6 +763,7 @@
       data.index = res.index; data.base = res.base; data.project = res.project; data.catalog = res.catalog;
       if (!data.index.versions || !Object.keys(data.index.versions).length) throw new Error("This video has no versions yet.");
       $("video-h").textContent = "Video: " + (data.index.title || data.project.title || data.project.sha12);
+      if (data.index.poster) $("video").setAttribute("poster", data.base + data.index.poster);
       $("video-credit").textContent = data.index.credit ? "Source: " + data.index.credit : "";
       $("video-credit").hidden = !data.index.credit;
       AC.renderDisclosure($("disclosure"), data.index);
@@ -768,6 +777,10 @@
       }
       renderAvailability();
       syncPickerUI();
+      AC.fetchOptionalJSON(data.base + "analysis.json").then(function (an) {
+        data.noSpeech = !!(an && Array.isArray(an.speech) && !an.speech.length);
+        if (data.noSpeech) renderAvailability();
+      }, function () { /* the notes keep their plain "not yet" */ });
       return AC.fetchJSON(data.base + "decisions.json").then(function (d) { data.decisions = d; }, function (err) {
         data.decisionsError = err.message;
       });

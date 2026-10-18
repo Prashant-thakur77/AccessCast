@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "b4a3273bbc72149fcbebadecdb5baafa7a982956",
- "git_dirty": false,
+ "git_commit": "8fc728845137327200bde20eae19d3566ea65677",
+ "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-18T07:19:07.606Z",
- "finished_at": "2026-10-18T07:21:34.808Z",
+ "started_at": "2026-10-18T08:44:09.574Z",
+ "finished_at": "2026-10-18T08:46:37.584Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -101,6 +101,10 @@
      "status": "passed"
     },
     {
+     "title": "watch: a video with no speech says why it has no easy-read or language version",
+     "status": "passed"
+    },
+    {
      "title": "player: picker and drawer open",
      "status": "passed"
     },
@@ -157,8 +161,8 @@
      "status": "passed"
     }
    ],
-   "passed": 31,
-   "total": 31
+   "passed": 32,
+   "total": 32
   },
   {
    "suite": "review",
@@ -207,8 +211,8 @@
  ],
  "summary": {
   "player": {
-   "passed": 31,
-   "total": 31
+   "passed": 32,
+   "total": 32
   },
   "review": {
    "passed": 9,
