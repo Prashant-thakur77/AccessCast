@@ -18,6 +18,7 @@ Endpoints (PLAN §12.4):
 from __future__ import annotations
 
 import os
+import traceback
 from pathlib import Path
 from typing import Any
 
@@ -338,6 +339,15 @@ def create_app(settings: Settings) -> FastAPI:
             package(run)
         except PermissionError as e:
             return JSONResponse({"error": "refused", "detail": str(e)}, status_code=409)
+        except Exception as e:  # fail closed, in plain words; the full trace goes to the server log
+            traceback.print_exc()
+            return JSONResponse(
+                {
+                    "error": "render_failed",
+                    "detail": f"the render stopped with an error ({type(e).__name__}). Nothing new was published.",
+                },
+                status_code=500,
+            )
         return JSONResponse(
             {
                 "ok": all(v["ok"] for v in summary["versions"].values()),

@@ -9,8 +9,10 @@ Two modes:
 
 from __future__ import annotations
 
+import fcntl
 import shutil
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -162,11 +164,39 @@ def run_gate(run: Run, versions: Sequence[str]) -> gate.GateResult:
     return res
 
 
+class RenderBusy(PermissionError):
+    """Refused: another render of this project is running. Renders share the project's working sound files, so a
+    second one at the same time would read files the first is replacing."""
+
+
+@contextmanager
+def _render_lock(root: Path) -> Iterator[None]:
+    path = root / "render" / ".lock"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w") as fh:
+        try:
+            fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise RenderBusy(
+                "another render of this project is running; wait for it to finish, then try again"
+            ) from None
+        try:
+            yield
+        finally:
+            fcntl.flock(fh, fcntl.LOCK_UN)
+
+
 def render_all(
     run: Run, *, mode: str = "draft", versions: Sequence[str] | None = None, target_lufs: float = C.LUFS_WEB
 ) -> dict[str, Any]:
+    """Render every version the gate allows. One render per project at a time; a second is refused (RenderBusy)."""
     if mode not in ("draft", "public"):
         raise ValueError("mode must be draft or public")
+    with _render_lock(run.project.root):
+        return _render_all(run, mode=mode, versions=versions, target_lufs=target_lufs)
+
+
+def _render_all(run: Run, *, mode: str, versions: Sequence[str] | None, target_lufs: float) -> dict[str, Any]:
     proj = run.project
     info = run.info
     store = ReviewStore(proj.root)
