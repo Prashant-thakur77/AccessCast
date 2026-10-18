@@ -81,7 +81,7 @@
     if (facts.length) {
       seen.appendChild(el("ol", { class: "desc-facts" }, facts.map(function (f) { return el("li", { text: f.text }); })));
     } else {
-      seen.appendChild(el("p", { class: "try-bad", text: "No usable list of what is visible (" + (d.evidence_problem || "no answer") + "). Nothing is written from it: the scene goes to a person." }));
+      seen.appendChild(el("p", { class: "try-bad", text: (d.evidence_problem || "Gemma could not list what is in the picture.") + " In the pipeline, this scene would go to a person." }));
     }
     out.appendChild(seen);
     var lines = Array.isArray(d.lines) ? d.lines : [];
@@ -92,8 +92,9 @@
     else card.appendChild(el("p", { class: "try-bad", text: d.note || "No line was written, so nothing is published." }));
     card.appendChild(el("p", { class: "muted", text: "Served by " + (d.endpoint_label || "the live endpoint") + "." }));
     out.appendChild(card);
-    var stopped = lines.filter(function (l) { return l.blocked_by && l.blocked_by.length; }).length;
-    say("Done. Gemma listed " + facts.length + " things it could see" + (lines.length ? "; our checks stopped " + stopped + " of its lines" : "") + ". The results are below.");
+    var stopped = lines.filter(function (l) { return l.gemma_wrote && l.blocked_by && l.blocked_by.length; }).length;
+    if (!facts.length) say(d.evidence_problem || "Gemma could not list what is in the picture. Nothing was written.");
+    else say("Done. Gemma listed " + facts.length + " things it could see" + (lines.length ? "; our checks stopped " + stopped + " of its lines" : "") + ". The results are below.");
   }
 
   $("desc-form").addEventListener("submit", function (ev) {

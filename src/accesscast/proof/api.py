@@ -147,6 +147,20 @@ def decode_image(data_url: str) -> tuple[str, bytes]:
     return m.group(1), raw
 
 
+def plain_problem(detail: str) -> str:
+    """The reason the picture got no list of facts, in words a visitor can act on (the raw text stays in
+    `evidence_detail`)."""
+    d = detail.lower()
+    if any(
+        k in d
+        for k in ("timed out", "timeout", "marked down", "http 5", "failed after retries", "no available")
+    ):
+        return "AMD Token Factory did not answer in time. Nothing was written. Please try again in a minute."
+    if "malformed" in d or "json" in d or "invalid" in d:
+        return "Gemma's answer about the picture could not be used. Nothing was written from it."
+    return "Gemma could not list what is in the picture. Nothing was written from it."
+
+
 def picture_context(ev: SceneEvidence) -> tuple[VerifyContext, Gap]:
     """The verify context for one still picture: one scene, one silent pause of DESCRIBE_PAUSE_MS, no speech."""
     end = C.DESCRIBE_PAUSE_MS
@@ -357,7 +371,7 @@ def create_app() -> FastAPI:
         provider = "tokenfactory" if settings.tf_api_key and settings.tf_base_url else "local"
         t0 = time.monotonic()
         # the function stops at 120 s: the picture call may retry once; writing gets what is left (see below)
-        client = LlmClient(settings, provider=provider, strict_provider=True, timeout_s=45, max_retries=1)
+        client = LlmClient(settings, provider=provider, strict_provider=True, timeout_s=38, max_retries=1)
         # the English description voice, as in the attack cases
         cal = Calibration(**read_json(CASES / "A1_no_pause" / "case.json")["calibration"])
         scene = Scene(scene_id="SC001", start_ms=0, end_ms=C.DESCRIBE_PAUSE_MS, shots=["SH001"])
@@ -413,7 +427,10 @@ def create_app() -> FastAPI:
         return {
             "facts": facts,
             "evidence_ok": ev.status == "ok",
-            "evidence_problem": None if ev.status == "ok" else (ev.warnings or ["no answer"])[0][:200],
+            "evidence_problem": None
+            if ev.status == "ok"
+            else plain_problem((ev.warnings or ["no answer"])[0]),
+            "evidence_detail": None if ev.status == "ok" else (ev.warnings or ["no answer"])[0][:200],
             "lines": lines,
             "note": note,
             "pause_ms": C.DESCRIBE_PAUSE_MS,

@@ -117,4 +117,20 @@ await shot("try", async (p) => {
   await res.screenshot({ path: `${out}/try.png` });
 }, { width: 1440, height: 1200 });
 
+// "Describe a picture" on the deployed site: one sample picture, Gemma on AMD looks and writes, our rules check it.
+await shot("describe", async (p) => {
+  await p.goto(`${LIVE}/proof.html`);
+  await p.waitForTimeout(2000);
+  await p.getByRole("button", { name: "NASA: a slide with a question" }).click();
+  await p.locator("#b-desc").click({ timeout: 30000 });
+  await p.waitForFunction(() => /^(Done|The live)/.test(document.getElementById("desc-status").textContent || ""), null, { timeout: 180000 });
+  await p.waitForTimeout(1000);
+  const box = await p.evaluate(() => {
+    const r = (s) => { const b = document.querySelector(s).getBoundingClientRect(); return { x: b.x + scrollX, y: b.y + scrollY, w: b.width, h: b.height }; };
+    return { a: r("#desc-figure"), b: r("#desc-result") };
+  });
+  const { a, b } = box;
+  await p.screenshot({ path: `${out}/describe.png`, fullPage: true, clip: { x: Math.min(a.x, b.x) - 12, y: a.y - 12, width: Math.max(a.w, b.w) + 24, height: b.y + b.h - a.y + 24 } });
+}, { width: 1280, height: 1000 });
+
 await browser.close();

@@ -82,7 +82,20 @@ def test_no_answer_from_the_model_means_nothing_is_published(app_client: TestCli
     assert r.status_code == 200
     body = r.json()
     assert body["evidence_ok"] is False and body["facts"] == [] and body["lines"] == []
-    assert body["evidence_problem"]
+    assert body["evidence_problem"] and "Nothing was written" in body["evidence_problem"]  # plain words
+
+
+@pytest.mark.parametrize(
+    ("detail", "says"),
+    [
+        ("tokenfactory failed after retries: The read operation timed out", "did not answer in time"),
+        ("tokenfactory marked down after a call failed every retry", "did not answer in time"),
+        ("malformed evidence: KeyError: 'visible_facts'", "could not be used"),
+        ("frame index out of range", "could not list"),
+    ],
+)
+def test_a_failure_is_explained_in_plain_words(detail: str, says: str) -> None:
+    assert says in api.plain_problem(detail)
 
 
 def test_each_address_has_an_hourly_limit(app_client: TestClient) -> None:
