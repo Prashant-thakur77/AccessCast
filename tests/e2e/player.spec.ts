@@ -57,7 +57,7 @@ for (const scheme of ["light", "dark"] as const) {
 
     test("results: every number filled from the registry, charts described", async ({ page }) => {
       await page.goto("/results.html");
-      await expect(page.locator(".result-card")).toHaveCount(11);
+      await expect(page.locator(".result-card")).toHaveCount(12);
       await expect(page.locator("[data-claim]").first()).not.toHaveText("");
       // every number is registered by now: none may still read "Measuring"
       await expect(page.locator("[data-claim]", { hasText: "Measuring" })).toHaveCount(0);

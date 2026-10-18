@@ -4,14 +4,14 @@
   {
    "claim_id": "amd.no_answer",
    "text": "calls Token Factory never answered, after every retry",
-   "value": 20,
+   "value": 22,
    "unit": "calls",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/no_answer_after_retries"
     }
    ],
@@ -19,20 +19,20 @@
     "README.md"
    ],
    "display": [
-    "20"
+    "22"
    ]
   },
   {
    "claim_id": "amd.not_sent",
    "text": "calls our circuit breaker held back without sending, after a call had failed every retry",
-   "value": 2619,
+   "value": 2621,
    "unit": "calls",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/not_sent_circuit_open"
     }
    ],
@@ -40,20 +40,20 @@
     "README.md"
    ],
    "display": [
-    "2,619"
+    "2,621"
    ]
   },
   {
    "claim_id": "amd.requests",
    "text": "Gemma 4 31B requests answered by AMD Token Factory",
-   "value": 3730,
+   "value": 3825,
    "unit": "requests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/requests_answered"
     }
    ],
@@ -65,20 +65,20 @@
     "docs/lablab.md"
    ],
    "display": [
-    "3,730"
+    "3,825"
    ]
   },
   {
    "claim_id": "amd.requests_all",
    "text": "requests AMD Token Factory answered for us, Gemma and the models E17 compared",
-   "value": 3955,
+   "value": 4050,
    "unit": "requests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/requests_answered_all_models"
     }
    ],
@@ -86,20 +86,20 @@
     "README.md"
    ],
    "display": [
-    "3,955"
+    "4,050"
    ]
   },
   {
    "claim_id": "amd.tokens",
    "text": "tokens in those requests, as the server reported them",
-   "value": 3482078,
+   "value": 3564063,
    "unit": "tokens",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/tokens_total"
     }
    ],
@@ -108,20 +108,20 @@
     "JUDGES.md"
    ],
    "display": [
-    "3,482,078"
+    "3,564,063"
    ]
   },
   {
    "claim_id": "amd.tokens_all_millions",
    "text": "tokens in all those requests, in millions",
-   "value": 3660272,
+   "value": 3742257,
    "unit": "tokens",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/tokens_total_all_models"
     }
    ],
@@ -135,14 +135,14 @@
   {
    "claim_id": "amd.tokens_millions",
    "text": "tokens in those requests, in millions",
-   "value": 3482078,
+   "value": 3564063,
    "unit": "tokens",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/tokens_total"
     }
    ],
@@ -153,7 +153,7 @@
     "README.md"
    ],
    "display": [
-    "3.5 million"
+    "3.6 million"
    ]
   },
   {
@@ -166,7 +166,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/video_minutes"
     }
    ],
@@ -188,7 +188,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/videos"
     }
    ],
@@ -213,7 +213,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/video_groups/attack_clips"
     }
    ],
@@ -234,7 +234,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/video_groups/dev_clips"
     }
    ],
@@ -255,7 +255,7 @@
    "evidence": [
     {
      "path": "evidence/amd_usage.json",
-     "sha256": "fdae4bc5e518b6c0d3a4699af96d0a2d8f9a3206252f0d588327453aef391568",
+     "sha256": "eb0eff254ce332a9d5b536ec4a62890c64a4590ca19e6bdda459e7fc5dd831a7",
      "pointer": "/summary/video_groups/w3c_test"
     }
    ],
@@ -3745,14 +3745,14 @@
   {
    "claim_id": "e16.player_passed",
    "text": "player accessibility tests passed (Playwright + axe-core)",
-   "value": 28,
+   "value": 30,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "e84bca9539464e088e81cb7ebaebe5a3ecf11479fb3a0afd717b926c6ce4b409",
+     "sha256": "116e44c6fffee7b590a9e792174f8c6abe66f57347cd1e5c35e4a860a084129c",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3761,20 +3761,20 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "28"
+    "30"
    ]
   },
   {
    "claim_id": "e16.player_total",
    "text": "player accessibility tests run",
-   "value": 28,
+   "value": 30,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "e84bca9539464e088e81cb7ebaebe5a3ecf11479fb3a0afd717b926c6ce4b409",
+     "sha256": "116e44c6fffee7b590a9e792174f8c6abe66f57347cd1e5c35e4a860a084129c",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3783,7 +3783,7 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "28"
+    "30"
    ]
   },
   {
@@ -3796,7 +3796,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "e84bca9539464e088e81cb7ebaebe5a3ecf11479fb3a0afd717b926c6ce4b409",
+     "sha256": "116e44c6fffee7b590a9e792174f8c6abe66f57347cd1e5c35e4a860a084129c",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3818,7 +3818,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "e84bca9539464e088e81cb7ebaebe5a3ecf11479fb3a0afd717b926c6ce4b409",
+     "sha256": "116e44c6fffee7b590a9e792174f8c6abe66f57347cd1e5c35e4a860a084129c",
      "pointer": "/summary/review/total"
     }
    ],
@@ -4387,6 +4387,170 @@
    ],
    "display": [
     "76"
+   ]
+  },
+  {
+   "claim_id": "e19.after_repair",
+   "text": "lines that passed after repair",
+   "value": 6,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e19_pictures.json",
+     "sha256": "1f8621ff8978c9ab0d82081f000f3dd940189f3f91f89921364e957517ff5c21",
+     "pointer": "/summary/published_after_repair"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "6"
+   ]
+  },
+  {
+   "claim_id": "e19.first_broke",
+   "text": "first lines that broke at least one rule",
+   "value": 6,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e19_pictures.json",
+     "sha256": "1f8621ff8978c9ab0d82081f000f3dd940189f3f91f89921364e957517ff5c21",
+     "pointer": "/summary/first_line_broke_a_rule"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "6"
+   ]
+  },
+  {
+   "claim_id": "e19.first_passed",
+   "text": "first lines that passed every rule",
+   "value": 15,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e19_pictures.json",
+     "sha256": "1f8621ff8978c9ab0d82081f000f3dd940189f3f91f89921364e957517ff5c21",
+     "pointer": "/summary/first_line_passed"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "15"
+   ]
+  },
+  {
+   "claim_id": "e19.lines",
+   "text": "pictures that got a description line",
+   "value": 21,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e19_pictures.json",
+     "sha256": "1f8621ff8978c9ab0d82081f000f3dd940189f3f91f89921364e957517ff5c21",
+     "pointer": "/summary/lines"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "21"
+   ]
+  },
+  {
+   "claim_id": "e19.pictures",
+   "text": "dev pictures described (one per scene)",
+   "value": 22,
+   "unit": "pictures",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e19_pictures.json",
+     "sha256": "1f8621ff8978c9ab0d82081f000f3dd940189f3f91f89921364e957517ff5c21",
+     "pointer": "/summary/pictures"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "22"
+   ]
+  },
+  {
+   "claim_id": "e19.published",
+   "text": "lines that passed every rule in the end",
+   "value": 21,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e19_pictures.json",
+     "sha256": "1f8621ff8978c9ab0d82081f000f3dd940189f3f91f89921364e957517ff5c21",
+     "pointer": "/summary/published_total"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "21"
+   ]
+  },
+  {
+   "claim_id": "e19.seconds",
+   "text": "median seconds per picture",
+   "value": 18.2,
+   "unit": "s",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e19_pictures.json",
+     "sha256": "1f8621ff8978c9ab0d82081f000f3dd940189f3f91f89921364e957517ff5c21",
+     "pointer": "/summary/seconds_median"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "18 s"
+   ]
+  },
+  {
+   "claim_id": "e19.to_person",
+   "text": "lines left for a person",
+   "value": 0,
+   "unit": "lines",
+   "status": "measured",
+   "split": "dev",
+   "evidence": [
+    {
+     "path": "evidence/e19_pictures.json",
+     "sha256": "1f8621ff8978c9ab0d82081f000f3dd940189f3f91f89921364e957517ff5c21",
+     "pointer": "/summary/left_for_a_person"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "0"
    ]
   },
   {
@@ -5789,33 +5953,33 @@
   {
    "claim_id": "repo.charts",
    "text": "charts drawn from evidence",
-   "value": 9,
+   "value": 10,
    "unit": "charts",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/charts"
     }
    ],
    "public_files": [],
    "display": [
-    "9"
+    "10"
    ]
   },
   {
    "claim_id": "repo.experiments_planned",
-   "text": "experiments planned (E1–E18)",
-   "value": 18,
+   "text": "experiments planned (E1–E19)",
+   "value": 19,
    "unit": "experiments",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/experiments_planned"
     }
    ],
@@ -5823,20 +5987,20 @@
     "README.md"
    ],
    "display": [
-    "18"
+    "19"
    ]
   },
   {
    "claim_id": "repo.experiments_run",
    "text": "experiments with an evidence file",
-   "value": 12,
+   "value": 13,
    "unit": "experiments",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/experiments_run"
     }
    ],
@@ -5844,20 +6008,20 @@
     "README.md"
    ],
    "display": [
-    "12"
+    "13"
    ]
   },
   {
    "claim_id": "repo.incidents",
    "text": "dated incidents in docs/incidents.md",
-   "value": 34,
+   "value": 36,
    "unit": "incidents",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/incidents"
     }
    ],
@@ -5865,7 +6029,7 @@
     "README.md"
    ],
    "display": [
-    "34"
+    "36"
    ]
   },
   {
@@ -5878,7 +6042,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/languages_total"
     }
    ],
@@ -5897,7 +6061,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/site_pages"
     }
    ],
@@ -5916,7 +6080,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/prompts"
     }
    ],
@@ -5928,20 +6092,20 @@
   {
    "claim_id": "repo.python_lines",
    "text": "lines of Python in src/accesscast",
-   "value": 11987,
+   "value": 12014,
    "unit": "lines",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/python_lines_src"
     }
    ],
    "public_files": [],
    "display": [
-    "11,987"
+    "12,014"
    ]
   },
   {
@@ -5954,7 +6118,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/rules_by_family/AD"
     }
    ],
@@ -5975,7 +6139,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/rules_by_family/CC"
     }
    ],
@@ -5996,7 +6160,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/rules_by_family/ER"
     }
    ],
@@ -6017,7 +6181,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/rules_by_family/RN"
     }
    ],
@@ -6038,7 +6202,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/rules_total"
     }
    ],
@@ -6059,7 +6223,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/rules_by_family/VO"
     }
    ],
@@ -6080,7 +6244,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/pipeline_stages"
     }
    ],
@@ -6101,7 +6265,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/translation_languages"
     }
    ],
@@ -6120,7 +6284,7 @@
    "evidence": [
     {
      "path": "evidence/repo_stats.json",
-     "sha256": "f771c40d83cad86d820358a6070469f8c3554a9b5a10852e83182f6b77f73c15",
+     "sha256": "1f81f160a80444cbb3a8b263e3d297050cd629890c23e0852a4ef5c4a64dcc5b",
      "pointer": "/summary/viewer_versions"
     }
    ],
@@ -6139,7 +6303,7 @@
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "5a28a3cac4b44a9f74f8f32124850e23ee5cb114aaf64f8b00f3b8ff2126c0c8",
+     "sha256": "2f7c44b9de17597e92ed5ae969ce1ee112edc9a41977050b8327afd34e2317d6",
      "pointer": "/summary/line_coverage_pct"
     }
    ],
@@ -6160,7 +6324,7 @@
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "5a28a3cac4b44a9f74f8f32124850e23ee5cb114aaf64f8b00f3b8ff2126c0c8",
+     "sha256": "2f7c44b9de17597e92ed5ae969ce1ee112edc9a41977050b8327afd34e2317d6",
      "pointer": "/summary/test_files"
     }
    ],
@@ -6174,14 +6338,14 @@
   {
    "claim_id": "tests.passed",
    "text": "unit and golden tests that pass",
-   "value": 215,
+   "value": 216,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "5a28a3cac4b44a9f74f8f32124850e23ee5cb114aaf64f8b00f3b8ff2126c0c8",
+     "sha256": "2f7c44b9de17597e92ed5ae969ce1ee112edc9a41977050b8327afd34e2317d6",
      "pointer": "/summary/tests_passed"
     }
    ],
@@ -6190,20 +6354,20 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "215"
+    "216"
    ]
   },
   {
    "claim_id": "tests.total",
    "text": "unit and golden tests",
-   "value": 215,
+   "value": 216,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/tests.json",
-     "sha256": "5a28a3cac4b44a9f74f8f32124850e23ee5cb114aaf64f8b00f3b8ff2126c0c8",
+     "sha256": "2f7c44b9de17597e92ed5ae969ce1ee112edc9a41977050b8327afd34e2317d6",
      "pointer": "/summary/tests_total"
     }
    ],
@@ -6212,7 +6376,7 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "215"
+    "216"
    ]
   }
  ]

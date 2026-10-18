@@ -1,0 +1,389 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "e19_pictures",
+ "split": "dev",
+ "passed": false,
+ "git_commit": "43dc8f57f0d8e28c847df168b484e40ff05ca8b9",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-18T06:59:05.895Z",
+ "finished_at": "2026-10-18T07:02:39.670Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "question": "How often does Gemma's first description of a still picture break a rule, and does repair fix it?",
+  "pictures": [
+   "projects/_site/cbf141ec3213/evidence/SC001/f03.jpg",
+   "projects/_site/cbf141ec3213/evidence/SC002/f02.jpg",
+   "projects/_site/cbf141ec3213/evidence/SC003/f03.jpg",
+   "projects/_site/cbf141ec3213/evidence/SC004/f02.jpg",
+   "projects/_site/cbf141ec3213/evidence/SC005/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC001/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC002/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC003/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC004/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC005/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC006/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC007/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC008/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC009/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC010/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC011/f03.jpg",
+   "projects/_site/dac08bcd9d7a/evidence/SC012/f02.jpg",
+   "projects/_site/8af59806d6b6/evidence/SC001/f03.jpg",
+   "projects/_site/8af59806d6b6/evidence/SC002/f02.jpg",
+   "projects/_site/8af59806d6b6/evidence/SC003/f02.jpg",
+   "projects/_site/8af59806d6b6/evidence/SC004/f02.jpg",
+   "projects/_site/8af59806d6b6/evidence/SC005/f03.jpg"
+  ],
+  "provider": "tokenfactory",
+  "strict_provider": true,
+  "pause_ms": 8000,
+  "max_repairs": 3,
+  "path": "proof.api.picture_context + write.evidence.evidence_from_frames + plan_description + write_drafts + verify_and_repair (the live API's code, without its time limit)"
+ },
+ "checks": {
+  "every_picture_has_a_row": true,
+  "no_endpoint_errors": false
+ },
+ "results": [
+  {
+   "picture": "projects/_site/cbf141ec3213/evidence/SC001/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A person stands in a thick fog, holding a long staff.",
+    "Jagged rock formations are visible through the mist in the background."
+   ],
+   "first_line": "A person with dark hair in weathered clothing stands in thick fog, holding a long staff.",
+   "first_rules": [],
+   "published": "A person with dark hair in weathered clothing stands in thick fog, holding a long staff.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 42.5
+  },
+  {
+   "picture": "projects/_site/cbf141ec3213/evidence/SC002/f02.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A person in tactical gear is seen from the chest up, partially obscured by snow or fog.",
+    "The background consists of a white, snowy terrain with dark, jagged rock formations."
+   ],
+   "first_line": "A person in tactical gear is seen from the chest up, partially obscured by snow.",
+   "first_rules": [],
+   "published": "A person in tactical gear is seen from the chest up, partially obscured by snow.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 42.9
+  },
+  {
+   "picture": "projects/_site/cbf141ec3213/evidence/SC003/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A person in a red head covering is crouched in a narrow alleyway.",
+    "The alleyway is flanked by old buildings with stone and wooden walls.",
+    "Debris and loose stones are scattered across the ground.",
+    "A wooden door is visible on the left side of the alley."
+   ],
+   "first_line": "A person in a red head covering crouches in a narrow alleyway.",
+   "first_rules": [],
+   "published": "A person in a red head covering crouches in a narrow alleyway.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 46.6
+  },
+  {
+   "picture": "projects/_site/cbf141ec3213/evidence/SC004/f02.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A woman with red hair looks upward with a slight smile.",
+    "The background consists of orange-glowing ruins and rubble.",
+    "The woman has a tattoo on her left arm."
+   ],
+   "first_line": "A woman with red hair looks upward with a slight smile.",
+   "first_rules": [],
+   "published": "A woman with red hair looks upward with a slight smile.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 10.8
+  },
+  {
+   "picture": "projects/_site/cbf141ec3213/evidence/SC005/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "Rolling sand dunes stretch across the horizon.",
+    "A small, dark figure is visible in the distance between the dunes."
+   ],
+   "first_line": "Rolling sand dunes stretch across the horizon. A small, dark figure is visible in the distance.",
+   "first_rules": [],
+   "published": "Rolling sand dunes stretch across the horizon. A small, dark figure is visible in the distance.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 9.3
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC001/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A vast field of stars and distant galaxies of various sizes and colors is set against a black background."
+   ],
+   "first_line": "A vast field of stars and distant galaxies against a black background.",
+   "first_rules": [],
+   "published": "A vast field of stars and distant galaxies against a black background.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 7.6
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC002/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "Numerous distant galaxies and stars of varying sizes and colors appear against a black background.",
+    "Several yellowish-orange elliptical galaxies are scattered across the field of view.",
+    "Small, white, point-like stars and faint smudges of light fill the void."
+   ],
+   "first_line": "Numerous distant galaxies and stars of varying sizes and colors against a black background.",
+   "first_rules": [],
+   "published": "Numerous distant galaxies and stars of varying sizes and colors against a black background.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 15.0
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC003/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A man in a navy blue polo shirt is speaking and gesturing with his hands.",
+    "The man's shirt has a NASA logo on the left chest area."
+   ],
+   "first_line": "A man in a navy blue polo shirt speaks and gestures with his hands.",
+   "first_rules": [
+    "AD011"
+   ],
+   "published": "A man in a navy blue polo shirt gestures with his hands.",
+   "repairs": 1,
+   "still_failing": [],
+   "seconds": 23.3
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC004/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A man in a navy blue NASA polo shirt is speaking and gesturing with his hands.",
+    "The man has his eyes partially closed and his mouth open as he speaks.",
+    "A circular NASA logo is visible on the left side of the man's chest."
+   ],
+   "first_line": "A man in a navy blue NASA polo shirt speaks and gestures with his hands.",
+   "first_rules": [
+    "AD011"
+   ],
+   "published": "A man in a navy blue NASA polo shirt gestures with his hands.",
+   "repairs": 1,
+   "still_failing": [],
+   "seconds": 23.7
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC005/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "Green hills and dense trees cover the landscape.",
+    "A thick layer of white and grey clouds fills the sky.",
+    "Trees frame the left and right sides of the view."
+   ],
+   "first_line": "Green hills and dense trees cover the landscape.",
+   "first_rules": [],
+   "published": "Green hills and dense trees cover the landscape.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 9.0
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC006/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A large flock of birds forms a dense, shifting cloud in the sky.",
+    "A calm lake reflects the blue and white tones of the sky.",
+    "A dark line of trees borders the far side of the water.",
+    "Two small ducks float on the surface of the water in the lower left."
+   ],
+   "first_line": "A large flock of birds forms a dense, shifting cloud in the sky.",
+   "first_rules": [],
+   "published": "A large flock of birds forms a dense, shifting cloud in the sky.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 28.9
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC007/f03.jpg",
+   "evidence_ok": false,
+   "facts": [],
+   "evidence_problem": "evidence failed after 2 tries: tokenfactory marked down after a call failed every retry; not asking again until 1800 s from now",
+   "seconds": 25.6
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC008/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A dark, reddish-brown rocky terrain stretches toward a hazy horizon.",
+    "A thick layer of white and tan clouds or dust drifts across the bottom of the frame.",
+    "The sky is a deep black, transitioning to a thin band of reddish-pink light at the horizon."
+   ],
+   "first_line": "A dark, reddish-brown rocky terrain stretches toward a hazy horizon.",
+   "first_rules": [],
+   "published": "A dark, reddish-brown rocky terrain stretches toward a hazy horizon.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 34.8
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC009/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "The curved horizon of Earth is visible against a dark blue space background.",
+    "White clouds cover a large portion of the Earth's surface."
+   ],
+   "first_line": "The curved horizon of Earth is visible against a dark blue space background.",
+   "first_rules": [],
+   "published": "The curved horizon of Earth is visible against a dark blue space background.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 11.5
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC010/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A bright yellow sun is at the center of several concentric orbital rings.",
+    "The orbital rings are colored red, green, and blue from the center outward.",
+    "Small dark spheres representing planets are positioned along the orbital rings.",
+    "The background is a black starfield."
+   ],
+   "first_line": "A bright yellow sun is at the center of concentric orbital rings with small dark planets.",
+   "first_rules": [
+    "AD011"
+   ],
+   "published": "A bright yellow sun is at the center of concentric orbital circles with small dark planets.",
+   "repairs": 1,
+   "still_failing": [],
+   "seconds": 26.4
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC011/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A large, cratered grey planetary body occupies the left side of the frame.",
+    "The background is black with scattered small white stars."
+   ],
+   "first_line": "A large, cratered grey planetary body occupies the left side of the frame.",
+   "first_rules": [],
+   "published": "A large, cratered grey planetary body occupies the left side of the frame.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 10.2
+  },
+  {
+   "picture": "projects/_site/dac08bcd9d7a/evidence/SC012/f02.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A bright yellow sun with radiating light beams is on the left.",
+    "A blue and green planet resembling Earth is on the right.",
+    "The background is a dark star-filled void."
+   ],
+   "first_line": "A bright yellow sun is on the left, and a blue and green planet is on the right.",
+   "first_rules": [
+    "AD007"
+   ],
+   "published": "A bright yellow sun is on the left, and a blue and green planet on the right.",
+   "repairs": 1,
+   "still_failing": [],
+   "seconds": 19.2
+  },
+  {
+   "picture": "projects/_site/8af59806d6b6/evidence/SC001/f03.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A green and blue globe representing Earth is centered in the frame.",
+    "A small grey sphere representing the moon is positioned to the left of Earth.",
+    "A white elliptical line orbits around the Earth.",
+    "A red horizontal line passes through the center of the Earth.",
+    "A dark shadow extends from the Earth and moon toward the right side of the frame."
+   ],
+   "first_line": "A green and blue Earth with a small grey moon to the left. A white elliptical line orbits Earth. On screen: \"not to scale\"",
+   "first_rules": [
+    "AD001",
+    "AD007"
+   ],
+   "published": "A green and blue Earth with a small grey moon to the left and a white orbit.",
+   "repairs": 1,
+   "still_failing": [],
+   "seconds": 90.7
+  },
+  {
+   "picture": "projects/_site/8af59806d6b6/evidence/SC002/f02.jpg",
+   "evidence_ok": false,
+   "facts": [],
+   "evidence_problem": "evidence failed after 2 tries: no visible facts",
+   "seconds": 8.1
+  },
+  {
+   "picture": "projects/_site/8af59806d6b6/evidence/SC003/f02.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "A bright light emerges from behind a dark, spherical celestial body."
+   ],
+   "first_line": "A bright light emerges from behind a dark, spherical celestial body.",
+   "first_rules": [],
+   "published": "A bright light emerges from behind a dark, spherical celestial body.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 10.3
+  },
+  {
+   "picture": "projects/_site/8af59806d6b6/evidence/SC004/f02.jpg",
+   "evidence_ok": true,
+   "facts": [
+    "The text \"NASA HELIOPHYSICS\" is centered on a black background.",
+    "A glowing yellow crescent shape and a white light burst separate the words \"NASA\" and \"HELIOPHYSICS\"."
+   ],
+   "first_line": "On screen: \"NASA HELIOPHYSICS\" on a black background.",
+   "first_rules": [],
+   "published": "On screen: \"NASA HELIOPHYSICS\" on a black background.",
+   "repairs": 0,
+   "still_failing": [],
+   "seconds": 25.5
+  },
+  {
+   "picture": "projects/_site/8af59806d6b6/evidence/SC005/f03.jpg",
+   "evidence_ok": false,
+   "facts": [],
+   "evidence_problem": "evidence failed after 2 tries: tokenfactory marked down after a call failed every retry; not asking again until 1800 s from now",
+   "seconds": 19.6
+  }
+ ],
+ "summary": {
+  "pictures": 22,
+  "evidence_ok": 19,
+  "lines": 19,
+  "first_line_broke_a_rule": 5,
+  "first_line_passed": 14,
+  "rules_on_first_lines": {
+   "AD011": 3,
+   "AD007": 2,
+   "AD001": 1
+  },
+  "published_after_repair": 5,
+  "published_total": 19,
+  "left_for_a_person": 0,
+  "seconds_median": 21.5,
+  "seconds_max": 90.7
+ },
+ "error": null
+}

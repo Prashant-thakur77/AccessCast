@@ -70,7 +70,7 @@ Gemma 4 31B on AMD Token Factory.
 <!-- slide: amd -->
 # Gemma 4 on AMD Token Factory
 - Every Gemma call: **Gemma 4 31B on AMD Token Factory**, strict model check on each answer.
-- From our logs: **3,730 requests** answered, **3.5 million tokens**, 28 videos (32.8 minutes).
+- From our logs: **3,825 requests** answered, **3.6 million tokens**, 28 videos (32.8 minutes).
 ![Gemma requests answered by AMD Token Factory, by day](docs/charts/amd_usage.png) ![Gemma tokens of one finished minute, by version](docs/charts/e14_tokens.png)
 
 ---
@@ -79,7 +79,7 @@ Gemma 4 31B on AMD Token Factory.
 - Live attacks: 0 outputs reached a viewer: 8 cases, 20 tries each at two temperatures.
 - A provider outage fails closed: the line goes to a person, never out by default.
 - Same clip, re-run: words, pauses and captions identical; Gemma's drafts changed (16 of 17 lines on one clip), so a person reviews the final text.
-- Tests: 215 of 215 unit and golden tests pass; browser tests with axe-core: player 28 of 28, review app and Studio 9 of 9.
+- Tests: 216 of 216 unit and golden tests pass; browser tests with axe-core: player 30 of 30, review app and Studio 9 of 9.
 - Other models on Token Factory writing the same attacks (E17): answers that reached a viewer, 0 for Qwen3.8-27B and 0 for MiniCPM-V-4.7-35B-A3B.
 
 ---

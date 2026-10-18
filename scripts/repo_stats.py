@@ -22,7 +22,7 @@ FAMILIES = {
     "VO": "voice-over",
     "RN": "render",
 }
-PLANNED = [f"e{n:02d}" for n in range(1, 19)]  # E1–E18 in PLAN.md and eval/PREREGISTRATION.md
+PLANNED = [f"e{n:02d}" for n in range(1, 20)]  # E1–E18 in PLAN.md, E19 in eval/PREREGISTRATION.md
 
 
 def main() -> int:

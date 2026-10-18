@@ -54,9 +54,9 @@ Deck: <pending: deck.url> ·
 | Same attacks, other models writing | Reached a viewer: 0 (Qwen3.8-27B) and 0 (MiniCPM-V-4.7-35B-A3B) | Gemma 4 31B: 0 | our attack clips (dev) | [`e17_model_ladder.json`](evidence/e17_model_ladder.json) |
 | Translation quality (COMET) | Gemma 4 31B higher in all five languages | IndicTrans2 (Hindi), Opus-MT (Italian, Spanish, French, Portuguese) | FLORES+ devtest, 1012 sentences each | [`e04_translation.json`](evidence/e04_translation.json), [`e04_translation_es_fr_pt.json`](evidence/e04_translation_es_fr_pt.json) |
 | Translated lines passing every check on their own | Hindi 74 of 81 · Italian 74 of 81 · Spanish 73 of 81 · French 70 of 81 · Portuguese 76 of 81 | the rest wait for a person | our two site drafts (dev) | [`e18_language_checks.json`](evidence/e18_language_checks.json) |
-| Model work on AMD | 3,730 Gemma 4 31B requests, 3.5 million tokens, 28 videos | every answer checked against the served model | all our runs | [`amd_usage.json`](evidence/amd_usage.json) |
+| Model work on AMD | 3,825 Gemma 4 31B requests, 3.6 million tokens, 28 videos | every answer checked against the served model | all our runs | [`amd_usage.json`](evidence/amd_usage.json) |
 | Cost of the model work | 41,818 Gemma tokens per finished minute, about $0.0053 at a published list price (an estimate) | AI description with a human spot check: $4.25 a minute (3Play Media list price) | dev videos | [`e14_cost.json`](evidence/e14_cost.json) |
-| Tests | 215 of 215 unit and golden tests, running 78% of our core code; browser tests with axe-core: player 28 of 28, review app 9 of 9 | — | — | [`tests.json`](evidence/tests.json), [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| Tests | 216 of 216 unit and golden tests, running 78% of our core code; browser tests with axe-core: player 30 of 30, review app 9 of 9 | — | — | [`tests.json`](evidence/tests.json), [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | Rules that check every line | 53 rules, each with its source standard | — | — | [`docs/rules.md`](docs/rules.md) |
 
 ## The problem
@@ -147,17 +147,17 @@ After the stages: a person reviews in the keyboard-first review app; the server-
 
 Gemma 4 31B does every vision, writing, translation and repair job, all on **AMD Token Factory**: it looks at the frames of each scene and lists what is visible, writes the description from that list only, rewrites captions as easy-read, translates into five languages, and repairs any line that fails a check, told exactly which check failed. Every answer is checked against the model name the server reports (`--strict-provider`).
 
-**Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,730 Gemma 4 31B requests for us, 3,482,078 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. With the two other Token Factory models we compared in E17, Token Factory answered 3,955 requests for us (3.7 million tokens). The live attack and Try box on our site add more calls, which these logs do not include.
+**Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,825 Gemma 4 31B requests for us, 3,564,063 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. With the two other Token Factory models we compared in E17, Token Factory answered 4,050 requests for us (3.7 million tokens). The live attack and Try box on our site add more calls, which these logs do not include.
 
 | What we measured on AMD Token Factory | Value | Evidence |
 |---|---|---|
-| Gemma 4 31B requests answered, all our work | 3,730 | `amd_usage.json` |
-| Tokens in those requests | 3,482,078 | `amd_usage.json` |
+| Gemma 4 31B requests answered, all our work | 3,825 | `amd_usage.json` |
+| Tokens in those requests | 3,564,063 | `amd_usage.json` |
 | Generated tokens per second seen by our client, best concurrency | 17 | `e13_serving_tokenfactory.json` |
 | p95 latency of a description request at that concurrency | 13.9 s | `e13_serving_tokenfactory.json` |
 | Gemma tokens per finished minute of video, the five versions we measured | 41,818 | `e14_cost.json` |
-| Calls Token Factory never answered after every retry (each one failed closed) | 20 | `amd_usage.json` |
-| Calls our circuit breaker then held back without sending (each one failed closed) | 2,619 | `amd_usage.json` |
+| Calls Token Factory never answered after every retry (each one failed closed) | 22 | `amd_usage.json` |
+| Calls our circuit breaker then held back without sending (each one failed closed) | 2,621 | `amd_usage.json` |
 
 ![Gemma 4 31B requests answered by AMD Token Factory, by day, from our own call logs](docs/charts/amd_usage.png)
 
@@ -210,8 +210,11 @@ A line that fails goes back to Gemma with the failed checks, up to three times; 
 - **Other models on AMD Token Factory (E17, our own attack clips, dev).** The same attacks and the same checks, with a different model writing: Gemma 4 31B took the bait in 40 of 400 lines (no usable first draft for 0; reached a viewer: 0); Qwen3.8-27B took the bait in 0 of 100 lines (no usable first draft for 63; reached a viewer: 0); MiniCPM-V-4.7-35B-A3B took the bait in 1 of 100 lines (no usable first draft for 0; reached a viewer: 0). With every model, no attack answer reached a viewer. The other two models seldom took these baits, so this run tested our checks less than Gemma's did. An empty first draft (an answer that was not valid JSON) goes back for repair like any failed line. Gemma ran 20 tries per setting, the others 5. Evidence: evidence/e17_model_ladder.json.
 
   ![Per model: lines that took the bait and answers that reached a viewer](docs/charts/e17_ladder.png)
-- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 28 of 28, review app and Studio 9 of 9. No blind tester has used it yet.
-- **Tests.** 215 of 215 unit and golden tests pass, in 74 files; they run 78% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
+- **Describing still pictures (E19, one frame per scene of our three dev videos).** The live picture API's code path, with the full repair budget: Gemma's first line broke at least one of our rules for 6 of 21 pictures, and passed for 15. The rule that stopped first lines most often was AD011 (it describes a sound or speech). After repair, 21 of 21 lines passed every rule and 0 went to a person. Median 18 s per picture on AMD Token Factory, as our client saw it. The rules are ours, so this measures how often the loop has work to do, not a quality score. Evidence: evidence/e19_pictures.json.
+
+  ![Which rules stopped Gemma's first line on each picture, and how many lines passed after repair](docs/charts/e19_pictures.png)
+- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 30 of 30, review app and Studio 9 of 9. No blind tester has used it yet.
+- **Tests.** 216 of 216 unit and golden tests pass, in 74 files; they run 78% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
 <!-- results.more:end -->
 
 <!-- e11.table:start -->
@@ -229,7 +232,7 @@ A line that fails goes back to Gemma with the failed checks, up to three times; 
 
 ## Every experiment
 
-Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before any test run; each one changes one thing against a named baseline and writes its evidence file even when its checks fail. 12 of 18 planned experiments have run; the rest need our own GPU server or people, and say so.
+Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before any test run; each one changes one thing against a named baseline and writes its evidence file even when its checks fail. 13 of 19 planned experiments have run; the rest need our own GPU server or people, and say so.
 
 | # | Question | Data | Result | Evidence |
 |---|---|---|---|---|
@@ -248,9 +251,10 @@ Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before an
 | E13 | Serving speed seen from our side | dev requests replayed | 17 tokens a second, p95 13.9 s | [`e13_serving_tokenfactory.json`](evidence/e13_serving_tokenfactory.json) |
 | E14 | What does a finished minute cost? | dev videos | 41,818 Gemma tokens per minute, about $0.0053 at list price (estimate) | [`e14_cost.json`](evidence/e14_cost.json) |
 | E15 | Which speech recognizer, and how exact are word times? | FLEURS, synthetic clips | English word error rate 4.5% (large-v3-turbo) against 4.3% (large-v3); boundaries p95 339 ms after alignment | [`e15_asr.json`](evidence/e15_asr.json) |
-| E16 | Are our own pages accessible? | our pages | Player 28 of 28, review app 9 of 9 keyboard and axe-core tests | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| E16 | Are our own pages accessible? | our pages | Player 30 of 30, review app 9 of 9 keyboard and axe-core tests | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | E17 | Do the checks hold with other models writing? | our attack clips | Reached a viewer: 0, 0 and 0 | [`e17_model_ladder.json`](evidence/e17_model_ladder.json) |
 | E18 | Does every language pass the same checks? | our two site drafts | Lines passing on their own, per language, in [At a glance](#at-a-glance) | [`e18_language_checks.json`](evidence/e18_language_checks.json) |
+| E19 | How often does Gemma's first description of a still picture break a rule, and does repair fix it? | one frame per scene of our three dev videos | First line broke a rule for 6 of 21; 21 passed every rule in the end | [`e19_pictures.json`](evidence/e19_pictures.json) |
 
 "Test set" means the 10 W3C WAI "Web Accessibility Perspectives" videos, which were never used for tuning: the speech recognizer, prompts, thresholds and every other setting were chosen on our dev set, and prompts were frozen at a git tag before the first test run. Gemma may have seen these public videos in pretraining, so we say "never used for tuning", not "never seen".
 
@@ -258,13 +262,13 @@ Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before an
 
 | Check | Result | Evidence |
 |---|---|---|
-| Unit and golden tests | 215 of 215 pass, in 74 files; they run 78% of the lines in `src/accesscast` | [`tests.json`](evidence/tests.json) |
-| Browser tests (Playwright, keyboard only, axe-core in light and dark) | player 28 of 28, review app and Studio 9 of 9 | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| Unit and golden tests | 216 of 216 pass, in 74 files; they run 78% of the lines in `src/accesscast` | [`tests.json`](evidence/tests.json) |
+| Browser tests (Playwright, keyboard only, axe-core in light and dark) | player 30 of 30, review app and Studio 9 of 9 | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | Live site after every deploy | every page and chart loads; one Try request per version and one picture answer with no crashed check | [`live_check.json`](evidence/live_check.json) |
 | Every public number | registered, hashed and re-read from its evidence file by `make claims-check` in CI | [`public-claims.json`](evidence/public-claims.json) |
 | Same input, same output (dev) | word timings identical in 3/3 runs, and so were the pauses and captions; Gemma's drafts were not (16 of 17 lines changed on one clip) | [`e09_determinism.json`](evidence/e09_determinism.json) |
 | Live attacks on Gemma (8 cases, production and stress temperatures) | attack answers that reached a viewer: 0 | [`e11_adversarial.json`](evidence/e11_adversarial.json) |
-| Failures written down | 34 dated incidents, each with symptom, root cause and fix | [`docs/incidents.md`](docs/incidents.md) |
+| Failures written down | 36 dated incidents, each with symptom, root cause and fix | [`docs/incidents.md`](docs/incidents.md) |
 | Fail closed | a timeout, malformed answer, outage or unknown language blocks the line and sends it to a person; nothing passes by default | [`docs/rules.md`](docs/rules.md) |
 
 One example from the incident log: our determinism test found that the same description line came out a few milliseconds longer in one run than in the next, because the voice model draws random noise. Each line is now seeded from its own text, and the test reports the largest remaining difference instead of assuming there is none.
@@ -375,7 +379,7 @@ make export-site                     # copy reviewed projects into site/
 **Experiments and checks:**
 
 ```bash
-make e01 … make e18        # each writes evidence/eNN_*.json, even when its checks fail
+make e01 … make e19        # each writes evidence/eNN_*.json, even when its checks fail
 make charts                # docs/charts/*.png, drawn only from evidence/
 make test-stats            # evidence/tests.json
 make test-e2e              # Playwright + axe-core
@@ -402,7 +406,7 @@ src/accesscast/
   player/        the public site (player, every viewer, how it works, results, proof)
   proof/         the live attack and Try API
 workers/         GPU and model workers (Whisper, alignment, TTS, metrics), each in its own environment
-eval/            experiments E1–E18, the pre-registration, dataset manifests
+eval/            experiments E1–E19, the pre-registration, dataset manifests
 evidence/        every measured result as JSON, plus public-claims.json
 scripts/         charts, claims, video, deck, screenshots, deploy, live check
 tests/           unit, golden and Playwright tests

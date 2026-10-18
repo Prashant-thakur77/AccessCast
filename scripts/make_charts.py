@@ -14,6 +14,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 
 ROOT = Path(__file__).resolve().parents[1]
 EV = ROOT / "evidence"
@@ -261,6 +262,15 @@ def e17_ladder() -> None:
 
 
 RULE_WORDS = {  # plain words for docs/rules.md ids
+    "AD001": "too long for the pause",
+    "AD007": "over the word budget",
+    "AD009": "a name nobody said or showed",
+    "AD010": "a claim the picture does not support",
+    "AD011": "describes a sound or speech",
+    "AD012": "not grounded in what Gemma saw",
+    "AD014": "commentary, not description",
+    "AD017": "an emotion the picture does not show",
+    "AD019": "empty or filler",
     "CC001": "reading speed",
     "CC002": "line length",
     "CC004": "on screen too briefly or too long",
@@ -301,6 +311,32 @@ def e18_languages() -> None:
         "Every language goes through the same checks",
         f"Split: {e['split']} ({e['summary']['projects']} site drafts, machine drafts). Source: evidence/e18_language_checks.json",
         "e18_languages",
+    )
+
+
+def e19_pictures() -> None:
+    e = ev("e19_pictures.json")
+    if not e or not e.get("checks", {}).get("no_endpoint_errors"):
+        return
+    s = e["summary"]
+    rules = s.get("rules_on_first_lines") or {}
+    rows = [(f"{RULE_WORDS.get(k, k)} ({k})", v) for k, v in rules.items()] or [("no rule fired", 0)]
+    fig, ax = plt.subplots(figsize=(10, 0.6 * len(rows) + 1.9))
+    for i, (_label, n) in enumerate(rows):
+        ax.barh(i, n, color=RED, height=0.55)
+        ax.text(n + 0.1, i, str(n), va="center", fontsize=11)
+    ax.set_yticks(range(len(rows)), [r[0] for r in rows])
+    ax.invert_yaxis()
+    ax.set_xlim(0, max([v for _, v in rows] + [1]) * 1.25)
+    ax.set_xlabel("first lines stopped by this rule")
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # lines are counted, never fractions
+    finish(
+        fig,
+        ax,
+        f"Still pictures on AMD: first line stopped {s['first_line_broke_a_rule']} of {s['lines']}\n"
+        f"after repair, {s['published_total']} of {s['lines']} passed every rule",
+        f"Split: {e['split']} (one frame per scene of 3 dev videos). Source: evidence/e19_pictures.json",
+        "e19_pictures",
     )
 
 
@@ -365,6 +401,7 @@ if __name__ == "__main__":
         e13_serving,
         e17_ladder,
         e18_languages,
+        e19_pictures,
         timeline,
     ):
         f()

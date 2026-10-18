@@ -57,6 +57,12 @@
       <img src="charts/e18_languages.png" alt="Stacked bars per language: lines that passed every check and lines held for a person, with the rules that held them." loading="lazy">
       <p class="muted">Data: our two site drafts (dev), machine drafts not yet reviewed. Evidence: evidence/e18_language_checks.json</p>
     </li>
+    <li class="result-card" aria-labelledby="r-pics">
+      <h2 id="r-pics" class="display m">Describing still pictures</h2>
+      <p class="how-say">One frame per scene of our dev videos, through the same code as "Describe a picture": Gemma's first line broke at least one of our rules for <b data-claim="e19.first_broke"></b> of <b data-claim="e19.lines"></b> pictures. In the end <b data-claim="e19.published"></b> of <b data-claim="e19.lines"></b> lines passed every rule, and <b data-claim="e19.to_person"></b> went to a person. Median <b data-claim="e19.seconds"></b> per picture on AMD Token Factory.</p>
+      <img src="charts/e19_pictures.png" alt="Bar chart: which of our rules stopped Gemma's first description line, and how many lines passed in the end." loading="lazy">
+      <p class="muted">Data: our three dev videos (not the test set). The rules are ours, so this shows how often the check-and-repair loop has work to do, not a quality score. Evidence: evidence/e19_pictures.json</p>
+    </li>
     <li class="result-card" aria-labelledby="r-tr">
       <h2 id="r-tr" class="display m">Translation against specialist models</h2>
       <p class="how-say">Gemma 4 31B scored higher than the specialist model on COMET in all five languages. On chrF++, which counts word overlap with one human translation, it was higher for Italian, about the same for Spanish, and lower for Hindi, French and Portuguese. We report those losses.</p>

@@ -40,7 +40,7 @@ Generated from `docs/demo/storyboard.json` by `scripts/storyboard_to_script.py`;
 | describe.webm (step `result`) | Or give it any picture: Gemma lists what it sees, writes one line, and our rules check it. |
 | Bars: easy-read captions that kept every negation, Gemma alone against AccessCast as published | On ten W3C videos we never tuned on, Gemma alone kept every not in 105 of 114 easy-read captions. AccessCast published 114 of 114. |
 | res_tr | Against specialist translators, Gemma won on one of two scores in all five languages, and lost on the other for three. We report that. |
-| Counters from our own call logs: Gemma requests answered by AMD Token Factory, tokens, videos; tokens and estimated cost per finished minute | Every Gemma call runs on AMD's Token Factory: 3,730 requests and 3.5 million tokens, from our own logs. A finished minute of the five versions we measured costs about $0.0053 of Gemma, at list price. |
+| Counters from our own call logs: Gemma requests answered by AMD Token Factory, tokens, videos; tokens and estimated cost per finished minute | Every Gemma call runs on AMD's Token Factory: 3,825 requests and 3.6 million tokens, from our own logs. A finished minute of the five versions we measured costs about $0.0053 of Gemma, at list price. |
 | Three law dates: EU, India, US | The law already asks for this: in Europe since 28 June 2025, in India since 6 February 2026, and for US public universities from 26 April 2027. |
 | Closing line over stock footage of a family watching TV, with the links and footage credits | AccessCast. Every viewer, the same video. |
 

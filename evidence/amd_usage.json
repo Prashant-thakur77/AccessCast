@@ -3,11 +3,11 @@
  "experiment": "amd_usage",
  "split": "none",
  "passed": true,
- "git_commit": "f45b795397314ed327dde4256e3fc9420b16c63a",
+ "git_commit": "43dc8f57f0d8e28c847df168b484e40ff05ca8b9",
  "git_dirty": true,
  "freeze_tag": null,
- "started_at": "2026-10-18T05:18:01.521Z",
- "finished_at": "2026-10-18T05:18:01.826Z",
+ "started_at": "2026-10-18T07:07:19.941Z",
+ "finished_at": "2026-10-18T07:07:20.302Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -208,6 +208,10 @@
    "new_tokenfactory_calls": 162
   },
   {
+   "log": "projects/_eval/e19_pictures/llm_calls.jsonl",
+   "new_tokenfactory_calls": 99
+  },
+  {
    "log": "projects/_fixture/ed26561ae9d7/logs/llm_calls.jsonl",
    "new_tokenfactory_calls": 0
   },
@@ -293,12 +297,12 @@
   }
  ],
  "summary": {
-  "requests_answered": 3730,
-  "tokens_in": 2873134,
-  "tokens_out": 608944,
-  "tokens_total": 3482078,
+  "requests_answered": 3825,
+  "tokens_in": 2944867,
+  "tokens_out": 619196,
+  "tokens_total": 3564063,
   "served_model_ids": {
-   "self-dploy/Gemma-4-31B-IT": 3730
+   "self-dploy/Gemma-4-31B-IT": 3825
   },
   "videos": 28,
   "video_minutes": 32.8,
@@ -307,13 +311,14 @@
    "w3c_test": 10,
    "dev_clips": 10
   },
-  "no_answer_after_retries": 20,
-  "not_sent_circuit_open": 2619,
+  "no_answer_after_retries": 22,
+  "not_sent_circuit_open": 2621,
   "answered_but_unusable": 62,
   "cache_hits_no_request": 818,
   "days": {
    "2026-10-16": 2600,
-   "2026-10-17": 1130
+   "2026-10-17": 1130,
+   "2026-10-18": 95
   },
   "other_models": {
    "self-dploy/MiniCPM-V-4.7-35B-A3B": {
@@ -325,8 +330,8 @@
     "tokens": 98952
    }
   },
-  "requests_answered_all_models": 3955,
-  "tokens_total_all_models": 3660272
+  "requests_answered_all_models": 4050,
+  "tokens_total_all_models": 3742257
  },
  "error": null
 }

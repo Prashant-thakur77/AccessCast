@@ -608,6 +608,37 @@ def amd_specs() -> list[Spec]:
     ]
 
 
+def e19_specs() -> list[Spec]:
+    """E19 (dev): still pictures described on AMD Token Factory through the live API's code path."""
+    f = "e19_pictures.json"
+    rows = [
+        ("e19.pictures", "/summary/pictures", "dev pictures described (one per scene)", "pictures"),
+        ("e19.lines", "/summary/lines", "pictures that got a description line", "lines"),
+        (
+            "e19.first_broke",
+            "/summary/first_line_broke_a_rule",
+            "first lines that broke at least one rule",
+            "lines",
+        ),
+        ("e19.first_passed", "/summary/first_line_passed", "first lines that passed every rule", "lines"),
+        ("e19.after_repair", "/summary/published_after_repair", "lines that passed after repair", "lines"),
+        ("e19.published", "/summary/published_total", "lines that passed every rule in the end", "lines"),
+        ("e19.to_person", "/summary/left_for_a_person", "lines left for a person", "lines"),
+    ]
+    out = [Spec(cid, f, ptr, text, unit) for cid, ptr, text, unit in rows]
+    out.append(
+        Spec(
+            "e19.seconds",
+            f,
+            "/summary/seconds_median",
+            "median seconds per picture",
+            "s",
+            lambda x: f"{float(x):.0f} s",
+        )
+    )
+    return out
+
+
 def repo_specs() -> list[Spec]:
     """Counts about the project itself, read from the code and the repo (scripts/repo_stats.py)."""
     f, n = "repo_stats.json", "none"
@@ -632,7 +663,7 @@ def repo_specs() -> list[Spec]:
         (
             "repo.experiments_planned",
             "/summary/experiments_planned",
-            "experiments planned (E1–E18)",
+            "experiments planned (E1–E19)",
             "experiments",
         ),
         (
@@ -961,6 +992,9 @@ def results_more() -> str | None:
     e17 = e17_row()
     if e17:
         rows.append(e17)
+    e19 = e19_row()
+    if e19:
+        rows.append(e19)
     if (EV / "e16_ui_a11y.json").exists():
         rows.append(
             "- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player "
@@ -1019,6 +1053,30 @@ def e4_more_languages() -> str | None:
     )
 
 
+def e19_row() -> str | None:
+    f = EV / "e19_pictures.json"
+    if not f.exists() or not json.loads(f.read_text()).get("checks", {}).get("no_endpoint_errors"):
+        return None
+    rules = json.loads(f.read_text())["summary"].get("rules_on_first_lines") or {}
+    top = next(iter(rules), None)
+    why = (
+        f" The rule that stopped first lines most often was {top} ({RULE_WORDS[top]})."
+        if top in RULE_WORDS
+        else ""
+    )
+    return (
+        "- **Describing still pictures (E19, one frame per scene of our three dev videos).** The live picture API's "
+        "code path, with the full repair budget: Gemma's first line broke at least one of our rules for "
+        "<pending: e19.first_broke> of <pending: e19.lines> pictures, and passed for <pending: e19.first_passed>."
+        + why
+        + " After repair, <pending: e19.published> of <pending: e19.lines> lines passed every rule and "
+        "<pending: e19.to_person> went to a person. Median <pending: e19.seconds> per picture on AMD Token Factory, "
+        "as our client saw it. The rules are ours, so this measures how often the loop has work to do, not a quality "
+        "score. Evidence: evidence/e19_pictures.json.\n\n  ![Which rules stopped Gemma's first line on each picture, "
+        "and how many lines passed after repair](docs/charts/e19_pictures.png)"
+    )
+
+
 def _e17_caveat(by_model: dict[str, dict[str, int]]) -> str:
     """Said when the other models seldom took the bait: then the run tested the checks less than Gemma's did."""
     gemma = by_model.get("Gemma-4-31B-IT", {})
@@ -1058,6 +1116,15 @@ def e17_row() -> str | None:
 
 
 RULE_WORDS = {
+    "AD001": "too long for the pause",
+    "AD007": "over the word budget",
+    "AD009": "a name nobody said or showed",
+    "AD010": "a claim the picture does not support",
+    "AD011": "it describes a sound or speech",
+    "AD012": "words not grounded in what Gemma saw",
+    "AD014": "commentary instead of description",
+    "AD017": "an emotion the picture does not show",
+    "AD019": "empty or filler",
     "CC001": "reading speed",
     "CC002": "line length",
     "CC009": "a name or number changed",
@@ -1119,6 +1186,7 @@ def register() -> dict[str, Any]:
         *e18_specs(),
         *e17_specs(),
         *repo_specs(),
+        *e19_specs(),
     ]:
         f = EV / s.path
         if not f.exists():

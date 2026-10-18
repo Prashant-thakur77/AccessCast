@@ -78,3 +78,16 @@ how often it took the bait (independent oracle) and how many answers reached a v
 case (no image input, no JSON mode) is reported as "no answer", never as a pass. Strict provider check on every
 answer. This tests the checks against weaker writers; it is not a ranking of those models in general.
 
+
+## E19 (describing still pictures on AMD Token Factory), registered 18 Oct 2026 before any run
+Data: one frame per scene of our three dev videos on the site (Sintel trailer, NASA "Life in the Universe", NASA
+eclipse animation; dev split, never the W3C test videos). Same code path as the live "Describe a picture" API
+(Gemma 4 31B lists what is visible, the planner gives one line for an 8-second silent pause, Gemma writes it, the
+description rules check it), with the pipeline's full repair budget instead of the live API's time limit. Reported:
+pictures with a usable list of facts; first lines that broke at least one rule (k of N) and which rules; lines
+published after repair; lines left for a person; seconds per picture as our client saw them. No quality score of
+the descriptions is claimed: the rules are ours, so this measures how often the check-and-repair loop has work to
+do and how often it finishes it.
+Amendment, 18 Oct 2026, before the scored run: the first run (kept as `evidence/e19_pictures_run1.json`) had two
+pictures with no answer because Token Factory failed, not the model. As in E11, a picture hit by a provider outage
+is now redone (at most twice, after a pause) and is never scored as a model result; the number of redos is reported.
