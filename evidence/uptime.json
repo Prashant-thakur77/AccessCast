@@ -255,12 +255,27 @@
      "ms": 254
     }
    ]
+  },
+  {
+   "ts": "2026-10-18T09:46:48+00:00",
+   "checks": [
+    {
+     "url": "https://accesscast.vercel.app/",
+     "status": 200,
+     "ms": 226
+    },
+    {
+     "url": "https://accesscast.vercel.app/data/catalog.json",
+     "status": 200,
+     "ms": 79
+    }
+   ]
   }
  ],
  "summary": {
-  "samples": 17,
-  "all_ok": 17,
+  "samples": 18,
+  "all_ok": 18,
   "first": "2026-10-15T21:29:56+00:00",
-  "last": "2026-10-18T05:23:26+00:00"
+  "last": "2026-10-18T09:46:48+00:00"
  }
 }
