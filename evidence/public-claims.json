@@ -3745,14 +3745,14 @@
   {
    "claim_id": "e16.player_passed",
    "text": "player accessibility tests passed (Playwright + axe-core)",
-   "value": 30,
+   "value": 31,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "116e44c6fffee7b590a9e792174f8c6abe66f57347cd1e5c35e4a860a084129c",
+     "sha256": "f8e4f0962b2ac45f60b59fb558289f5352a877f387fe5ada54454bfee078431b",
      "pointer": "/summary/player/passed"
     }
    ],
@@ -3761,20 +3761,20 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "30"
+    "31"
    ]
   },
   {
    "claim_id": "e16.player_total",
    "text": "player accessibility tests run",
-   "value": 30,
+   "value": 31,
    "unit": "tests",
    "status": "measured",
    "split": "none",
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "116e44c6fffee7b590a9e792174f8c6abe66f57347cd1e5c35e4a860a084129c",
+     "sha256": "f8e4f0962b2ac45f60b59fb558289f5352a877f387fe5ada54454bfee078431b",
      "pointer": "/summary/player/total"
     }
    ],
@@ -3783,7 +3783,7 @@
     "docs/deck/deck.md"
    ],
    "display": [
-    "30"
+    "31"
    ]
   },
   {
@@ -3796,7 +3796,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "116e44c6fffee7b590a9e792174f8c6abe66f57347cd1e5c35e4a860a084129c",
+     "sha256": "f8e4f0962b2ac45f60b59fb558289f5352a877f387fe5ada54454bfee078431b",
      "pointer": "/summary/review/passed"
     }
    ],
@@ -3818,7 +3818,7 @@
    "evidence": [
     {
      "path": "evidence/e16_ui_a11y.json",
-     "sha256": "116e44c6fffee7b590a9e792174f8c6abe66f57347cd1e5c35e4a860a084129c",
+     "sha256": "f8e4f0962b2ac45f60b59fb558289f5352a877f387fe5ada54454bfee078431b",
      "pointer": "/summary/review/total"
     }
    ],

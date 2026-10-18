@@ -56,7 +56,7 @@ Deck: <pending: deck.url> ·
 | Translated lines passing every check on their own | Hindi 74 of 81 · Italian 74 of 81 · Spanish 73 of 81 · French 70 of 81 · Portuguese 76 of 81 | the rest wait for a person | our two site drafts (dev) | [`e18_language_checks.json`](evidence/e18_language_checks.json) |
 | Model work on AMD | 3,825 Gemma 4 31B requests, 3.6 million tokens, 28 videos | every answer checked against the served model | all our runs | [`amd_usage.json`](evidence/amd_usage.json) |
 | Cost of the model work | 41,818 Gemma tokens per finished minute, about $0.0053 at a published list price (an estimate) | AI description with a human spot check: $4.25 a minute (3Play Media list price) | dev videos | [`e14_cost.json`](evidence/e14_cost.json) |
-| Tests | 216 of 216 unit and golden tests, running 78% of our core code; browser tests with axe-core: player 30 of 30, review app 9 of 9 | — | — | [`tests.json`](evidence/tests.json), [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| Tests | 216 of 216 unit and golden tests, running 78% of our core code; browser tests with axe-core: player 31 of 31, review app 9 of 9 | — | — | [`tests.json`](evidence/tests.json), [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | Rules that check every line | 53 rules, each with its source standard | — | — | [`docs/rules.md`](docs/rules.md) |
 
 ## The problem
@@ -213,7 +213,7 @@ A line that fails goes back to Gemma with the failed checks, up to three times; 
 - **Describing still pictures (E19, one frame per scene of our three dev videos).** The live picture API's code path, with the full repair budget: Gemma's first line broke at least one of our rules for 6 of 21 pictures, and passed for 15. The rule that stopped first lines most often was AD011 (it describes a sound or speech). After repair, 21 of 21 lines passed every rule and 0 went to a person. Median 18 s per picture on AMD Token Factory, as our client saw it. The rules are ours, so this measures how often the loop has work to do, not a quality score. Evidence: evidence/e19_pictures.json.
 
   ![Which rules stopped Gemma's first line on each picture, and how many lines passed after repair](docs/charts/e19_pictures.png)
-- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 30 of 30, review app and Studio 9 of 9. No blind tester has used it yet.
+- **Accessibility (E16).** Automatic tests with keyboard-only runs and axe-core scans pass: player 31 of 31, review app and Studio 9 of 9. No blind tester has used it yet.
 - **Tests.** 216 of 216 unit and golden tests pass, in 74 files; they run 78% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
 <!-- results.more:end -->
 
@@ -251,7 +251,7 @@ Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before an
 | E13 | Serving speed seen from our side | dev requests replayed | 17 tokens a second, p95 13.9 s | [`e13_serving_tokenfactory.json`](evidence/e13_serving_tokenfactory.json) |
 | E14 | What does a finished minute cost? | dev videos | 41,818 Gemma tokens per minute, about $0.0053 at list price (estimate) | [`e14_cost.json`](evidence/e14_cost.json) |
 | E15 | Which speech recognizer, and how exact are word times? | FLEURS, synthetic clips | English word error rate 4.5% (large-v3-turbo) against 4.3% (large-v3); boundaries p95 339 ms after alignment | [`e15_asr.json`](evidence/e15_asr.json) |
-| E16 | Are our own pages accessible? | our pages | Player 30 of 30, review app 9 of 9 keyboard and axe-core tests | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| E16 | Are our own pages accessible? | our pages | Player 31 of 31, review app 9 of 9 keyboard and axe-core tests | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | E17 | Do the checks hold with other models writing? | our attack clips | Reached a viewer: 0, 0 and 0 | [`e17_model_ladder.json`](evidence/e17_model_ladder.json) |
 | E18 | Does every language pass the same checks? | our two site drafts | Lines passing on their own, per language, in [At a glance](#at-a-glance) | [`e18_language_checks.json`](evidence/e18_language_checks.json) |
 | E19 | How often does Gemma's first description of a still picture break a rule, and does repair fix it? | one frame per scene of our three dev videos | First line broke a rule for 6 of 21; 21 passed every rule in the end | [`e19_pictures.json`](evidence/e19_pictures.json) |
@@ -263,7 +263,7 @@ Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before an
 | Check | Result | Evidence |
 |---|---|---|
 | Unit and golden tests | 216 of 216 pass, in 74 files; they run 78% of the lines in `src/accesscast` | [`tests.json`](evidence/tests.json) |
-| Browser tests (Playwright, keyboard only, axe-core in light and dark) | player 30 of 30, review app and Studio 9 of 9 | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| Browser tests (Playwright, keyboard only, axe-core in light and dark) | player 31 of 31, review app and Studio 9 of 9 | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
 | Live site after every deploy | every page and chart loads; one Try request per version and one picture answer with no crashed check | [`live_check.json`](evidence/live_check.json) |
 | Every public number | registered, hashed and re-read from its evidence file by `make claims-check` in CI | [`public-claims.json`](evidence/public-claims.json) |
 | Same input, same output (dev) | word timings identical in 3/3 runs, and so were the pauses and captions; Gemma's drafts were not (16 of 17 lines changed on one clip) | [`e09_determinism.json`](evidence/e09_determinism.json) |

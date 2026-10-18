@@ -3,11 +3,11 @@
  "experiment": "e16_ui_a11y",
  "split": "none",
  "passed": true,
- "git_commit": "43dc8f57f0d8e28c847df168b484e40ff05ca8b9",
- "git_dirty": true,
+ "git_commit": "b4a3273bbc72149fcbebadecdb5baafa7a982956",
+ "git_dirty": false,
  "freeze_tag": null,
- "started_at": "2026-10-18T07:07:58.061Z",
- "finished_at": "2026-10-18T07:10:21.398Z",
+ "started_at": "2026-10-18T07:19:07.606Z",
+ "finished_at": "2026-10-18T07:21:34.808Z",
  "environment": {
   "python": "3.12.13",
   "host": "prashant-Dell-G15-5530",
@@ -97,6 +97,10 @@
      "status": "passed"
     },
     {
+     "title": "landing: every live feature is one click away",
+     "status": "passed"
+    },
+    {
      "title": "player: picker and drawer open",
      "status": "passed"
     },
@@ -153,8 +157,8 @@
      "status": "passed"
     }
    ],
-   "passed": 30,
-   "total": 30
+   "passed": 31,
+   "total": 31
   },
   {
    "suite": "review",
@@ -203,8 +207,8 @@
  ],
  "summary": {
   "player": {
-   "passed": 30,
-   "total": 30
+   "passed": 31,
+   "total": 31
   },
   "review": {
    "passed": 9,
