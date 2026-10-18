@@ -10,7 +10,8 @@ Demo video: <pending: video.url> ·
 Deck: <pending: deck.url> ·
 <a href="JUDGES.md">3-minute judge guide</a> ·
 <a href="https://accesscast.vercel.app/results.html">Results page</a> ·
-<a href="https://accesscast.vercel.app/proof.html">Run our attack live</a>
+<a href="https://accesscast.vercel.app/proof.html">Run our attack live</a> ·
+<a href="https://accesscast.vercel.app/proof.html#desc-h">Describe your own picture</a>
 </p>
 
 <p align="center">
@@ -163,6 +164,8 @@ Gemma 4 31B does every vision, writing, translation and repair job, all on **AMD
 
 ![Latency and tokens per second seen from our side at one and four requests at a time](docs/charts/e13_serving.png)
 
+**Live on the site, on AMD, with the same checks.** Three things on the [proof page](https://accesscast.vercel.app/proof.html) call Gemma 4 31B on AMD Token Factory while you watch, and nothing typed or uploaded is stored: **Run the attack** (Gemma is baited to drop a time limit; our number check stops it), **Try your own caption** (easy-read and five languages, each line checked), and **Describe a picture** (Gemma lists what it sees in your picture, writes one description line for a silent pause, and our description rules check it, with repairs; [`docs/decisions.md`](docs/decisions.md) D-030). After every deploy, `scripts/live_check.py` runs all of them and fails on any crashed check ([`live_check.json`](evidence/live_check.json)).
+
 These numbers are measured from our side of the connection, so they include the network and Token Factory's queue. Speed-test requests that failed are counted in the evidence file: 15 of 120, every one refused by the rate limit on our key, not a model error.
 
 | Part | Where it ran |
@@ -256,7 +259,7 @@ Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before an
 |---|---|---|
 | Unit and golden tests | 190 of 190 pass, in 70 files; they run 53% of the lines in `src/accesscast` | [`tests.json`](evidence/tests.json) |
 | Browser tests (Playwright, keyboard only, axe-core in light and dark) | player 27 of 27, review app and Studio 9 of 9 | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
-| Live site after every deploy | every page and chart loads; one Try request per version answers with no crashed check | [`live_check.json`](evidence/live_check.json) |
+| Live site after every deploy | every page and chart loads; one Try request per version and one picture answer with no crashed check | [`live_check.json`](evidence/live_check.json) |
 | Every public number | registered, hashed and re-read from its evidence file by `make claims-check` in CI | [`public-claims.json`](evidence/public-claims.json) |
 | Same input, same output (dev) | word timings identical in 3/3 runs, and so were the pauses and captions; Gemma's drafts were not (16 of 17 lines changed on one clip) | [`e09_determinism.json`](evidence/e09_determinism.json) |
 | Live attacks on Gemma (8 cases, production and stress temperatures) | attack answers that reached a viewer: 0 | [`e11_adversarial.json`](evidence/e11_adversarial.json) |
