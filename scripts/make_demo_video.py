@@ -38,7 +38,7 @@ def fill(text: str, reg: dict[str, str]) -> str:
     return re.sub(r"\{claim:([\w.\-]+)\}", lambda m: reg[m.group(1)], text)
 
 
-NARRATION_SPEED = 1.13  # a little brisker than Kokoro's default: the whole video stays near five minutes
+NARRATION_SPEED = 1.2  # brisker than Kokoro's default: the whole video stays under four and a half minutes
 LEAD_S, TAIL_S = (
     0.15,
     0.35,
@@ -91,10 +91,10 @@ MUSIC = (
     ROOT / "data" / "music" / "Inspired.mp3",
 )
 MUSIC_GAIN = (
-    1.0,
-    0.18,
-)  # measured short-term loudness about −28 and −13 LUFS: both brought to about −28 before mixing (4 dB under
-#   the first mix, which viewers found too loud against the narration)
+    0.32,
+    0.057,
+)  # measured short-term loudness about −28 and −13 LUFS: both brought to about −38 before mixing, a quiet bed well
+#   under the narration (viewers found the first two mixes, 14 dB and 10 dB louder than this, too loud)
 
 
 def xfade_join(

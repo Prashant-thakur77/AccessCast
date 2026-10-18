@@ -4,7 +4,7 @@
   {
    "kind": "motion",
    "scene": "p_upload",
-   "narration": "Every minute, more than {claim:cited.market.youtube_500h_per_min} of new video go up on YouTube. Most of it only works if you can see it, and hear it.",
+   "narration": "Every minute, more than {claim:cited.market.youtube_500h_per_min} of new video go up on YouTube. Most of it only works if you can see and hear it.",
    "bg": "data/stock/pexels_5813766.mp4",
    "bg_start": 2,
    "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.05:saturation=0.9"
@@ -36,7 +36,7 @@
   {
    "kind": "motion",
    "scene": "p_read",
-   "narration": "{claim:cited.oecd.piaac_lit_level1_oecd_avg} of adults read at the lowest levels. They need simpler words, at a slower pace. And many people need the video in their own language.",
+   "narration": "{claim:cited.oecd.piaac_lit_level1_oecd_avg} of adults read at the lowest levels. They need simpler words. And many people need their own language.",
    "bg": "data/stock/pexels_6306262.mp4",
    "bg_start": 0.5,
    "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.05:saturation=0.9"
@@ -44,7 +44,7 @@
   {
    "kind": "motion",
    "scene": "p_cost",
-   "narration": "Doing this by hand takes about {claim:cited.market.maa_20_hours} of work for one hour of TV, and costs {claim:cited.price.3play_industry_range_low} to {claim:cited.price.3play_industry_range_high} a minute. So most video never gets it.",
+   "narration": "Doing this by hand takes about {claim:cited.market.maa_20_hours} for one hour of TV, at {claim:cited.price.3play_industry_range_low} to {claim:cited.price.3play_industry_range_high} a minute. So most video never gets it.",
    "bg": "data/stock/pexels_5092425.mp4",
    "bg_start": 1,
    "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.05:saturation=0.9"
@@ -52,7 +52,7 @@
   {
    "kind": "motion",
    "scene": "example",
-   "narration": "Let's see it on a real video. This is a NASA talk about the Hubble telescope. First, close your eyes, and hear it the way a blind viewer does.",
+   "narration": "Let's see a real NASA talk about the Hubble telescope. First, close your eyes, and listen like a blind viewer.",
    "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
    "bg_start": 2,
    "bg_look": "eq=brightness=-0.15:saturation=0.9"
@@ -89,12 +89,12 @@
     "No pause to speak in?",
     "The picture holds."
    ],
-   "narration": "There was no pause in his speech, so AccessCast held the picture while the description was read. Gemma 4, running on AMD, wrote every word, and code checked it."
+   "narration": "No pause in his speech, so AccessCast held the picture while the description played. Gemma 4 on AMD wrote it, and code checked it."
   },
   {
    "kind": "motion",
    "scene": "split",
-   "narration": "This is AccessCast. One video, made for every viewer: for people who can't see the screen, people who can't hear, people who want simpler words, and for people who speak Hindi, Italian, Spanish, French or Portuguese.",
+   "narration": "This is AccessCast. One video for every viewer: people who can't see, can't hear, or need simpler words, and people who speak Hindi, Italian, Spanish, French or Portuguese.",
    "music_switch": true
   },
   {
@@ -169,122 +169,95 @@
   {
    "kind": "motion",
    "scene": "pipeline",
-   "narration": "How does it work? Whisper listens. Gemma 4 31B, on AMD, looks at the frames and writes. Code checks every line, and Gemma repairs what fails. A person approves. Then every version is made."
+   "narration": "How does it work? Whisper listens. Gemma 4 31B, on AMD, looks and writes. Code checks every line, Gemma repairs what fails, and a person approves."
   },
   {
    "kind": "recording",
    "recording": "how.webm",
-   "narration": "Here is that NASA clip, step by step. Whisper writes down every word, and pins each one to the moment it is said.",
-   "mark": "s-listen",
-   "footage": 9.4
-  },
-  {
-   "kind": "recording",
-   "recording": "how.webm",
-   "narration": "The code measures the pauses between the words. This clip is mostly talk, so there are only a few.",
-   "mark": "s-pauses",
-   "footage": 9.4
-  },
-  {
-   "kind": "recording",
-   "recording": "how.webm",
-   "narration": "Gemma looks at still frames from each scene, and lists only what it can see.",
+   "narration": "On that NASA clip, Gemma looks at frames from each scene, and lists only what it can see.",
    "mark": "s-look",
    "footage": 9.4
   },
   {
    "kind": "recording",
    "recording": "how.webm",
-   "narration": "From that list alone, Gemma writes one line, inside a word budget: a man in a NASA polo shirt speaks to the camera.",
+   "narration": "From that list alone, it writes one line inside a word budget: a man in a NASA polo shirt speaks to the camera.",
    "mark": "s-write",
    "footage": 9.4
   },
   {
    "kind": "recording",
    "recording": "how.webm",
-   "narration": "Code checks it, and stops it. A blind viewer can already hear him speak, so it wastes the pause. The model never decides whether its own line is good enough.",
+   "narration": "Code stops it: a blind viewer already hears him speak, so it wastes the pause. The model never judges its own line.",
    "mark": "s-check",
    "footage": 9.4
   },
   {
    "kind": "recording",
    "recording": "how.webm",
-   "narration": "The line goes back to Gemma with the exact rule it broke. The new line: he looks at the camera. The code checks again, and it passes.",
+   "narration": "It goes back to Gemma with the rule it broke. The new line, he looks at the camera, passes.",
    "mark": "s-repair",
    "footage": 9.4
   },
   {
    "kind": "recording",
    "recording": "decisions_drawer.webm",
-   "narration": "Reviewers work in our review app by keyboard alone, with the frames, the checks and every repair in front of them.",
+   "narration": "Every line keeps its record for the reviewer: the frames, the checks and every repair.",
    "start": 1,
    "captions_at": "top"
   },
   {
-   "kind": "recording",
-   "recording": "studio.webm",
-   "narration": "Anyone can drop in their own video, and watch every step run.",
-   "start": 1
-  },
-  {
    "kind": "motion",
    "scene": "gate",
-   "narration": "This is the rule at the heart of AccessCast: the model proposes, code decides. An answer that breaks a rule is sent back, with the reason. Only an answer that passes every check reaches a viewer."
+   "narration": "The rule at the heart of AccessCast: the model proposes, code decides. Only an answer that passes every check reaches a viewer."
   },
   {
    "kind": "recording",
    "recording": "proof.webm",
-   "narration": "We attack it on purpose. We ask Gemma to simplify: press the button three times within ten seconds. On our site, anyone can run this live.",
+   "narration": "We attack it on purpose: simplify, press the button three times within ten seconds. Anyone can run this live.",
    "mark": "pressed",
    "offset": -0.3
   },
   {
    "kind": "recording",
    "recording": "proof.webm",
-   "narration": "An answer that drops the ten seconds is blocked, and never reaches a viewer. In our recorded test, Gemma dropped it in {claim:e11.A5_number.production.gemma_failed} of {claim:e11.A5_number.production.tries} tries, and our checks blocked every one.",
+   "narration": "An answer that drops the ten seconds is blocked. In our recorded test, Gemma dropped it in {claim:e11.A5_number.production.gemma_failed} of {claim:e11.A5_number.production.tries} tries, and our checks blocked every one.",
    "mark": "result"
-  },
-  {
-   "kind": "recording",
-   "recording": "try.webm",
-   "narration": "Or type your own caption, and watch it happen live.",
-   "mark": "page",
-   "footage": 3.2
   },
   {
    "kind": "recording",
    "recording": "try.webm",
    "mark": "result",
    "footage": 14,
-   "narration": "In about half a minute, Gemma on AMD made the easy-read, Hindi and Italian versions. Our number check stopped one Italian line that turned 5 pm into 17:00, and the repair passed.",
+   "narration": "Or type your own caption. Our number check stopped an Italian line that turned 5 pm into 17:00, and the repair passed.",
    "_narration_matches": "the try.webm recorded on 17 Oct 2026 (Italian line stopped by CC009, repaired). Re-check this sentence if try.webm is re-recorded."
   },
   {
    "kind": "recording",
    "recording": "describe.webm",
    "mark": "result",
-   "narration": "Or give it any picture. Gemma, on AMD, lists what it sees and writes one line, and our rules check that line before anyone hears it.",
+   "narration": "Or give it any picture: Gemma lists what it sees, writes one line, and our rules check it.",
    "captions_at": "top"
   },
   {
    "kind": "motion",
    "scene": "res_neg",
-   "narration": "On ten W3C accessibility videos we never tuned on, Gemma alone kept every not in {claim:e5.neg_gemma_k} of {claim:e5.neg_gemma_n} easy-read captions. What AccessCast published kept {claim:e5.neg_ours_k} of {claim:e5.neg_ours_n}."
+   "narration": "On ten W3C videos we never tuned on, Gemma alone kept every not in {claim:e5.neg_gemma_k} of {claim:e5.neg_gemma_n} easy-read captions. AccessCast published {claim:e5.neg_ours_k} of {claim:e5.neg_ours_n}."
   },
   {
    "kind": "motion",
    "scene": "res_tr",
-   "narration": "Against specialist translation models, Gemma won on one of our two scores in all five languages. On the other score it lost for Hindi, French and Portuguese, and we report that."
+   "narration": "Against specialist translators, Gemma won on one of two scores in all five languages, and lost on the other for three. We report that."
   },
   {
    "kind": "motion",
    "scene": "amd",
-   "narration": "Every Gemma call runs on AMD's Token Factory. From our own logs: {claim:amd.requests} requests and {claim:amd.tokens_millions} tokens, across {claim:amd.videos} videos. One finished minute of the five versions we measured costs about {claim:cost.usd_per_min} of Gemma, at list price."
+   "narration": "Every Gemma call runs on AMD's Token Factory: {claim:amd.requests} requests and {claim:amd.tokens_millions} tokens, from our own logs. A finished minute of the five versions we measured costs about {claim:cost.usd_per_min} of Gemma, at list price."
   },
   {
    "kind": "motion",
    "scene": "laws",
-   "narration": "The law already asks for this: in Europe since {claim:cited.law.eaa_apply_date}, in India since {claim:cited.law.india_mib_ott_date}, and for US public universities from {claim:cited.law.ada_title2_large_date}. They pay per finished minute, and their own staff approve every line."
+   "narration": "The law already asks for this: in Europe since {claim:cited.law.eaa_apply_date}, in India since {claim:cited.law.india_mib_ott_date}, and for US public universities from {claim:cited.law.ada_title2_large_date}."
   },
   {
    "kind": "motion",
@@ -293,7 +266,7 @@
    "bg": "data/stock/pexels_5813766.mp4",
    "bg_start": 12,
    "bg_look": "eq=brightness=-0.05:saturation=0.9",
-   "min_seconds": 8
+   "min_seconds": 6
   }
  ]
 }
