@@ -140,31 +140,31 @@
    "kind": "recording",
    "recording": "ver_hi.mp4",
    "keep_audio": true,
-   "seconds": 5.4
+   "seconds": 5.0
   },
   {
    "kind": "recording",
    "recording": "ver_it.mp4",
    "keep_audio": true,
-   "seconds": 5.4
+   "seconds": 5.0
   },
   {
    "kind": "recording",
    "recording": "ver_es.mp4",
    "keep_audio": true,
-   "seconds": 5.4
+   "seconds": 5.0
   },
   {
    "kind": "recording",
    "recording": "ver_fr.mp4",
    "keep_audio": true,
-   "seconds": 5.4
+   "seconds": 5.0
   },
   {
    "kind": "recording",
    "recording": "ver_pt.mp4",
    "keep_audio": true,
-   "seconds": 5.4
+   "seconds": 5.0
   },
   {
    "kind": "motion",
@@ -266,7 +266,7 @@
    "bg": "data/stock/pexels_5813766.mp4",
    "bg_start": 12,
    "bg_look": "eq=brightness=-0.05:saturation=0.9",
-   "min_seconds": 6
+   "min_seconds": 5
   }
  ]
 }

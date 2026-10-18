@@ -25,8 +25,8 @@ AD_S = 16.0  # extended output: both opening description lines, then the same fi
 OPEN_S = 8.5  # extended output: the two held descriptions with the picture
 LANG_CLIP_S = (
     1.2,
-    6.6,
-)  # the first sentence ("This is Hubble Telescope's famous photograph..."), voiced in hi and it
+    6.2,
+)  # the first sentence ("This is Hubble Telescope's famous photograph..."), voiced in every language; every voice ends by 5.0 s
 
 
 def ff(*args: str) -> None:
