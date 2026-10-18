@@ -379,3 +379,11 @@ test("results: the cost estimator multiplies registered prices, and refuses nons
   await expect(page.locator("#calc-rows tr")).toHaveCount(0);
   expect(await axeViolations(page)).toEqual([]);
 });
+
+test("landing: every live feature is one click away", async ({ page }) => {
+  await page.goto("/index.html");
+  const links = page.getByRole("list", { name: "Try it live on AMD" }).getByRole("link");
+  await expect(links).toHaveCount(4);
+  await expect(page.getByRole("link", { name: "Describe your own picture" })).toHaveAttribute("href", "proof.html#desc-h");
+  await expect(page.getByRole("link", { name: "What would your videos cost?" })).toHaveAttribute("href", "results.html#r-calc");
+});
