@@ -252,6 +252,12 @@
    "_narration_matches": "the try.webm recorded on 17 Oct 2026 (Italian line stopped by CC009, repaired). Re-check this sentence if try.webm is re-recorded."
   },
   {
+   "kind": "recording",
+   "recording": "describe.webm",
+   "mark": "result",
+   "narration": "Or give it any picture. Gemma, on AMD, lists what it sees and writes one line, and our rules check that line before anyone hears it."
+  },
+  {
    "kind": "motion",
    "scene": "res_neg",
    "narration": "On ten W3C accessibility videos we never tuned on, Gemma alone kept every not in {claim:e5.neg_gemma_k} of {claim:e5.neg_gemma_n} easy-read captions. What AccessCast published kept {claim:e5.neg_ours_k} of {claim:e5.neg_ours_n}."
