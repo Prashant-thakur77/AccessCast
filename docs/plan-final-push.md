@@ -83,5 +83,18 @@ Left for the person: upload the video and deck, send their links and the team na
   (tests 215 of 215, line coverage 78% with the golden end-to-end run); video has a live picture scene; I3 done except
   the links and team names, which only the team can give.
 
+## Phase J — self-score and the last site features (12:10–14:30 IST, 18 Oct)
+Self-score against the rubric (ours, before judging): Application of Technology 4/5 (Gemma 4 31B on AMD for every
+vision, writing, translation and repair call, live on the site; no own MI300X), Presentation 4/5 (video under 4:30,
+detailed README; the site had no text form of a video), Business Value 3.5/5 (no buyer could see their own cost; E12
+review time not measured), Originality 4/5.
+- J1. "Read it as text" on the player: the version being played as one time-ordered list of what is said and
+  described, from that version's own tracks, with downloads (video, every track, the text). For screen readers and
+  braille displays, and for an accessibility office's records. Tested.
+- J2. Cost estimator on the Results page: minutes × registered per-minute figures (our measured Gemma cost, labelled
+  an estimate; cited list prices), review time stated as extra and unmeasured. Tested (exact totals, refuses nonsense,
+  axe clean).
+- J3. Deploy, live check, evidence (tests, E16), README and JUDGES mention both.
+
 ## Phase G — close
 - `make submission-check`, final claims-check, tag `act3-submission`, hand the user the upload checklist.

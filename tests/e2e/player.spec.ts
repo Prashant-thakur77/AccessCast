@@ -57,7 +57,7 @@ for (const scheme of ["light", "dark"] as const) {
 
     test("results: every number filled from the registry, charts described", async ({ page }) => {
       await page.goto("/results.html");
-      await expect(page.locator(".result-card")).toHaveCount(10);
+      await expect(page.locator(".result-card")).toHaveCount(11);
       await expect(page.locator("[data-claim]").first()).not.toHaveText("");
       // every number is registered by now: none may still read "Measuring"
       await expect(page.locator("[data-claim]", { hasText: "Measuring" })).toHaveCount(0);
@@ -344,5 +344,38 @@ test("proof: describe a picture sends a shrunk JPEG and shows only what the endp
   await expect(page.locator("#desc-status")).toContainText("Done. Gemma listed 1 thing it could see; our checks stopped its first line, and the repair passed.");
   expect(sent.startsWith("data:image/jpeg;base64,")).toBe(true);
   expect(sent.length).toBeLessThan(2_000_000);  // shrunk in the browser before sending
+  expect(await axeViolations(page)).toEqual([]);
+});
+
+test("watch: read it as text lists what is said and described, from the version's own tracks, with downloads", async ({ page }) => {
+  await page.goto("/watch.html?audience=blind");
+  await expect(status(page)).toContainText("Now playing");
+  const toggle = page.locator("#text-toggle");
+  await toggle.focus();
+  await page.keyboard.press("Enter");
+  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  await expect(page.locator("#text-status")).toContainText("lines from");
+  const lines = page.locator("#text-lines li");
+  expect(await lines.count()).toBeGreaterThan(1);
+  await expect(page.locator("#text-lines .who", { hasText: "Description:" }).first()).toBeVisible();
+  await expect(page.locator("#text-lines .who", { hasText: "Said:" }).first()).toBeVisible();
+  const links = page.locator("#text-downloads a");
+  await expect(links.filter({ hasText: "(MP4)" })).toHaveCount(1);
+  expect(await links.filter({ hasText: "(WebVTT)" }).count()).toBeGreaterThan(0);
+  await expect(links.filter({ hasText: "This text (.txt)" })).toHaveCount(1);
+  expect(await axeViolations(page)).toEqual([]);
+});
+
+test("results: the cost estimator multiplies registered prices, and refuses nonsense", async ({ page }) => {
+  await page.goto("/results.html");
+  const input = page.locator("#calc-min");
+  await input.fill("100");
+  await expect(page.locator("#calc-out")).toContainText("For 100 minutes");
+  const ours = page.locator("#calc-rows tr.ours");
+  await expect(ours).toContainText("$0.53");  // $0.0053 a minute (registered) × 100
+  await expect(page.locator("#calc-rows")).toContainText("$425");  // $4.25 list price × 100
+  await input.fill("-3");
+  await expect(page.locator("#calc-out")).toContainText("Type a whole number");
+  await expect(page.locator("#calc-rows tr")).toHaveCount(0);
   expect(await axeViolations(page)).toEqual([]);
 });

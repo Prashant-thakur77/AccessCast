@@ -75,6 +75,21 @@
       <img src="charts/e14_tokens.png" alt="Stacked bar of Gemma tokens per finished minute, split by version." loading="lazy">
       <p class="muted">Data: our dev videos. Evidence: evidence/e14_cost.json</p>
     </li>
+    <li class="result-card" aria-labelledby="r-calc">
+      <h2 id="r-calc" class="display m">What would your videos cost?</h2>
+      <p class="how-say">Type how many minutes of video you have. We multiply by the Gemma tokens we measured per finished minute and a published Gemma 4 31B list price, and set it next to published list prices for description. Every price here is a list price; ours is an estimate.</p>
+      <form id="calc-form" class="try-form" novalidate>
+        <label for="calc-min">Minutes of video</label>
+        <input id="calc-min" name="minutes" type="number" min="1" max="1000000" step="1" value="600" inputmode="numeric" aria-describedby="calc-help">
+        <p id="calc-help" class="muted">For example, 600 minutes is ten hours of lectures.</p>
+      </form>
+      <p id="calc-out" class="now" role="status" aria-live="polite"></p>
+      <table class="calc-table" aria-labelledby="r-calc">
+        <thead><tr><th scope="col">What</th><th scope="col">Per minute</th><th scope="col">For your minutes</th></tr></thead>
+        <tbody id="calc-rows"></tbody>
+      </table>
+      <p class="muted">Ours is the Gemma model work only, for the five versions we measured (description, captions, easy-read, Hindi, Italian), at a published list price. A person's review time comes on top and is not measured yet. Not a quote. Sources: evidence/e14_cost.json and the cited list prices in evidence/cited_claims.json.</p>
+    </li>
     <li class="result-card" aria-labelledby="r-speed">
       <h2 id="r-speed" class="display m">Speed seen from our side</h2>
       <p class="how-say"><b data-claim="e13.best_tokens_per_s"></b> generated tokens a second at the best concurrency; requests over our key's rate limit were refused, never answered wrongly.</p>
@@ -98,5 +113,6 @@
 <footer class="site"><div class="wrap" id="footer"></div></footer>
 <script src="assets/common.js"></script>
 <script src="assets/results.js"></script>
+<script src="assets/calc.js"></script>
 </body>
 </html>

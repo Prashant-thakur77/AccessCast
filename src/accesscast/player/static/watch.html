@@ -163,6 +163,16 @@
     <div id="desc-visible" class="desc-text" hidden></div>
   </section>
 
+  <section class="drawer" aria-labelledby="text-h">
+    <h2 id="text-h"><button type="button" class="drawer-toggle" id="text-toggle" aria-expanded="false" aria-controls="text-body">Read it as text</button></h2>
+    <div id="text-body" hidden>
+      <p>Everything this version says and describes, in time order: for reading, a screen reader or a braille display.</p>
+      <ul id="text-downloads" class="downloads" aria-label="Downloads"></ul>
+      <p id="text-status" class="muted" aria-live="polite"></p>
+      <ol id="text-lines" class="text-lines"></ol>
+    </div>
+  </section>
+
   <section class="drawer" aria-labelledby="drawer-h">
     <h2 id="drawer-h"><button type="button" class="drawer-toggle" id="drawer-toggle" aria-expanded="false" aria-controls="drawer-body">What the models decided</button></h2>
     <div id="drawer-body" hidden>
@@ -205,5 +215,6 @@
 <script src="assets/common.js"></script>
 <script src="assets/motion.js"></script>
 <script src="assets/player.js"></script>
+<script src="assets/textversion.js"></script>
 </body>
 </html>
