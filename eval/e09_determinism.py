@@ -1,7 +1,7 @@
 """E9: same input, same output? 5 fresh-process runs on 2 dev clips, separate project dirs (no cache sharing).
 
 Reports, per artefact, how many runs match run 1 byte-for-byte, and how many description lines differ. The claim
-is worded exactly as measured (AudioSight saw greedy outputs differ across replicas; we measure, not assume).
+is worded exactly as measured (we measure, not assume).
 Usage: python -m eval.e09_determinism [--runs 5] [--clips nasa_GSFC_...,fixture20]
 """
 

@@ -1,9 +1,3 @@
-# The alignment-safe batch translation (numbered segments, {id, snippet, translation}, snippet check,
-# batch halving N → N/2 → … → 1, then single retries) follows src/text_translator.py from
-# video-voice-translator (https://github.com/icuic/video-voice-translator), MIT License,
-# Copyright (c) 2025 Video Voice Translator Contributors. Rewritten for AccessCast with English prompts,
-# our LLM client and fail-closed behaviour: a segment that never aligns is `needs_revision`, never
-# silently left in English.
 """S10/S11 text versions: easy-read, hi/it subtitles, hi/it voice-over scripts, hi/it description."""
 
 from __future__ import annotations

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Start Gemma 4 31B (port 8000) then E4B (port 8001) with vLLM on ROCm, bound to 127.0.0.1 only.
-# Health loop shape from ProteinLoop's scripts/amd_notebook_setup_vllm.sh (MIT, (c) 2026 Anibal Perez).
 # Usage: IMAGE=<image> bash deploy/serve_gemma.sh   (default: first image in deploy/versions.lock that works)
 set -euo pipefail
 cd "$(dirname "$0")/.."

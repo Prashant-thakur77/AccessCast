@@ -17,8 +17,8 @@ We are building it to win AMD Developer Hackathon ACT III (lablab.ai), track "Cr
 5. **One change per experiment.** Every comparison names its baseline and changes exactly one thing. If two things changed, it is two experiments.
 6. **No silent fallbacks.** No silent CPU fallback (`--require-rocm`), no silent model or provider switch (`--strict-provider` in all evals and benchmarks), no silent truncation of text, no silent fallback to English.
 7. **Originality and licences.** Our code is MIT. (Changed 16 Oct 2026 on the team's instruction; see `docs/decisions.md` D-001.)
-   - **Reuse code from MIT, Apache-2.0, BSD and similarly permissive repos directly** when that is faster or better, including other hackathon entries (AudioSight, StudioMI300, video-voice-translator, Katha, ProteinLoop, Rivet, PolicyCut, SignalForge, ageBand). Keep the original licence and copyright header on every reused file or block, add each reuse to `THIRD_PARTY_NOTICES.md`, and for Apache-2.0 code also carry its NOTICE content.
-   - **GemmaClip** ("All rights reserved") and **CacheForge** (no LICENSE file): read and learn from them, but write our own code. This is copyright law, not a preference.
+   - **Reuse code from MIT, Apache-2.0, BSD and similarly permissive repos directly** when that is faster or better, including other hackathon entries (earlier projects). Keep the original licence and copyright header on every reused file or block, add each reuse to `THIRD_PARTY_NOTICES.md`, and for Apache-2.0 code also carry its NOTICE content.
+   - **an earlier project** ("All rights reserved") and **an earlier project** (no LICENSE file): read and learn from them, but write our own code. This is copyright law, not a preference.
    - Libraries installed as dependencies are used normally under their licences.
    - No non-commercial models, weights or voices (no XTTS-v2, no F5-TTS weights). Piper's code is GPL-3.0: only ever as a separate CLI process, never imported. Every model, voice, dataset, clip and font goes in `MODEL_LICENSES.md` with its licence and link before it is used.
 8. **Secrets and media.** Keys live only in `.env` (git-ignored; `.env.example` lists names only). Never log keys, tokens or image bytes. Never commit W3C videos, FLORES+ data or any media we may not redistribute; commit manifests with SHA-256 instead. **W3C-derived outputs** (our versions of W3C videos) are never committed, never copied into `site/`, and never excerpted in the demo video, unless W3C confirms in writing that this is allowed.
@@ -101,10 +101,10 @@ ACCESSCAST_PROJECT_SEED=20261018
 - Every prompt returns a top-level JSON object (wrap lists as `{"items": [...]}`); JSON-object mode rejects bare arrays.
 - Constants live in `constants.py`, each with a comment naming its source (e.g. `CPS_MAX_EN_SDH = 20  # Netflix English TTSG`).
 - Verifier rules are small pure functions returning `Finding`s with observed vs threshold; one test file per rule with a passing and a failing fixture; every rule listed in `docs/rules.md` with its source.
-- Seeds: `derive_seed(project_seed, label) = int(sha256(f"{project_seed}:{label}").hexdigest()[:8], 16)`.
+- Seeds: `derive_seed(project_seed, label) = int(sha256(f"{project_seed}:{label}").hexdigest[:8], 16)`.
 - Exit codes: 0 ok, 2 usage, 3 config, 4 missing dependency, 5 model endpoint, 6 out of memory, 7 validation failed, 8 media/TTS, 10 partial, 130 interrupted.
 - Logs: `logs/events.jsonl` per project (`{"stage","ts","event",...}`); `logs/llm_calls.jsonl` per call (§14.3 of the plan).
-- GPU timing: `torch.cuda.reset_peak_memory_stats()` → `torch.cuda.synchronize()` → `perf_counter()` → work → `synchronize()` → record `max_memory_allocated()`. Put it in `bench/stage_timer.py` and use it for every GPU stage.
+- GPU timing: `torch.cuda.reset_peak_memory_stats` → `torch.cuda.synchronize` → `perf_counter` → work → `synchronize` → record `max_memory_allocated`. Put it in `bench/stage_timer.py` and use it for every GPU stage.
 - Prompts are files in `src/accesscast/llm/prompts/`; never inline prompt text in Python.
 - No new dependency without adding its licence to `MODEL_LICENSES.md` or `THIRD_PARTY_NOTICES.md`.
 
@@ -153,14 +153,14 @@ Every eval and benchmark writes one JSON file, **always, including when its chec
 - The FP8 Gemma checkpoint listed by vLLM is for NVIDIA Hopper/Blackwell, not AMD.
 - ffmpeg `loudnorm` defaults to I = −24; always set `I` explicitly (−23 broadcast, −16 web).
 - CUDA `flash_attn` wheels don't work on ROCm; don't install them.
-- Kokoro fetched a spaCy model mid-run in Rivet's project; pre-fetch everything in `make setup`. Kokoro needs `espeak-ng`.
-- In AudioSight, six server workers replaying the same request produced very different outputs (52 vs 16 facts), and an ASR batch of 8 shifted forced-alignment timestamps. Measure determinism instead of assuming it; keep ASR batches small and re-test timestamps after any batching change.
+- Kokoro fetched a spaCy model mid-run in an earlier project's project; pre-fetch everything in `make setup`. Kokoro needs `espeak-ng`.
+- In an earlier project, six server workers replaying the same request produced very different outputs (52 vs 16 facts), and an ASR batch of 8 shifted forced-alignment timestamps. Measure determinism instead of assuming it; keep ASR batches small and re-test timestamps after any batching change.
 - Whisper's word timestamps from transformers are not forced-aligned. Re-align (`PLAN.md` §9 S2) and measure boundary error on the hand-labelled dev clip before trusting the gap map.
 - `tpad` only pads the end of a stream: extended description needs per-segment trim + pad + concat. `sidechaincompress` doesn't give a fixed dip: duck with a `volume` envelope at the known anchor times.
 - vLLM sends usage stats by default: set `VLLM_NO_USAGE_STATS=1` and `DO_NOT_TRACK=1` in every container.
 - Gemma 4 E4B returns no timestamps for audio, and the server takes one audio clip per prompt: one sound-event window per request.
-- vLLM compile-cache collisions across different actions (AudioSight): use separate cache namespaces per server.
-- Thinking mode made AudioSight 3.5× slower with worse output; keep thinking off unless an experiment shows otherwise.
+- vLLM compile-cache collisions across different actions (an earlier project): use separate cache namespaces per server.
+- Thinking mode made an earlier project 3.5× slower with worse output; keep thinking off unless an experiment shows otherwise.
 - Browser support for switching audio tracks inside one file is limited: ship one MP4 per audience version.
 - Only one `<track>` per kind + srclang + label: give each track a distinct label.
 - Chatterbox adds an inaudible watermark: disclose it in `MODEL_LICENSES.md` and the player.

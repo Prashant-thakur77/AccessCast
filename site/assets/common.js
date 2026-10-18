@@ -192,7 +192,7 @@
     return out;
   }
 
-  /* source_to_output mapping (AudioSight timeline rows). */
+  /* source_to_output mapping. */
   function sourceToOutput(rows, srcMs) {
     if (!rows || !rows.length) return srcMs;
     var ins = rows.filter(function (r) { return r.type === "insertion"; });

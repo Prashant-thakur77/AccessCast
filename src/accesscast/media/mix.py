@@ -153,7 +153,7 @@ def mix_extended(
 ) -> list[dict[str, object]]:
     """Expanded timeline: the source pauses (silence) at each insertion point while the clip plays.
 
-    Returns the source_to_output rows (AudioSight timeline format). Standard clips are remapped. With `fps`, every
+    Returns the source_to_output rows. Standard clips are remapped. With `fps`, every
     cut point and every hold is snapped to the source's frame grid (cut to the nearest frame, hold rounded up to
     whole frames), because the video can only cut and hold whole frames: off-grid times let the picture drift from
     the description audio by up to a frame per hold (E9: 120 ms on one dev clip, refused by RN001).

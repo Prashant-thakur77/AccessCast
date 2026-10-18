@@ -21,16 +21,16 @@ ASR_SAMPLE_RATE = 16_000  # Whisper input rate (openai/whisper model card)
 PROXY_HEIGHT = 480  # PLAN §9 S0: proxy480.mp4
 
 # ---------------------------------------------------------------- shots and scenes (S1)
-# Thresholds re-implemented from AudioSight's README/design description (Apache-2.0), PLAN §9 S1.
-SCENE_CROP_TOP_FRACTION = 0.62  # AudioSight: compare top 62% of frame (ignores burned-in subtitles)
-SCENE_W_DHASH = 0.45  # AudioSight similarity weight for dHash
-SCENE_W_HIST = 0.55  # AudioSight similarity weight for H/S histogram correlation
-SCENE_MERGE_DIALOGUE = 0.82  # AudioSight: merge when dialogue continues
-SCENE_MERGE_IDENTICAL = 0.92  # AudioSight: near-identical visuals
-SCENE_SPLIT_BELOW = 0.45  # AudioSight: split when no dialogue bridge
-SCENE_DIALOGUE_BRIDGE_MS = 1_200  # AudioSight: words within 1,200 ms across the cut
-SCENE_MIN_S = 6.0  # AudioSight scene clamp
-SCENE_MAX_S = 45.0  # AudioSight scene clamp
+# Scene thresholds, PLAN §9 S1.
+SCENE_CROP_TOP_FRACTION = 0.62  # compare top 62% of frame (ignores burned-in subtitles)
+SCENE_W_DHASH = 0.45  # similarity weight for dHash
+SCENE_W_HIST = 0.55  # similarity weight for H/S histogram correlation
+SCENE_MERGE_DIALOGUE = 0.82  # merge when dialogue continues
+SCENE_MERGE_IDENTICAL = 0.92  # near-identical visuals
+SCENE_SPLIT_BELOW = 0.45  # split when no dialogue bridge
+SCENE_DIALOGUE_BRIDGE_MS = 1_200  # words within 1,200 ms across the cut
+SCENE_MIN_S = 6.0  # scene clamp
+SCENE_MAX_S = 45.0  # scene clamp
 
 # ---------------------------------------------------------------- gaps (S4)
 ASR_MODEL = "openai/whisper-large-v3-turbo"  # E15 dev-set decision (evidence/e15_asr.json)
@@ -45,7 +45,7 @@ ASR_CHUNK_S = 30.0  # Gemma 4 audio input limit: 30 s per clip (Gemma 4 model ca
 # ---------------------------------------------------------------- sounds (S3)
 SOUND_WINDOW_MAX_S = 5.0  # PLAN §9 S3
 SOUND_MIN_REGION_S = 1.0  # PLAN §9 S3
-SOUND_RMS_SILENCE = 0.01  # GemmaClip's silence gate idea (re-implemented), PLAN §9 S3
+SOUND_RMS_SILENCE = 0.01  # silence gate, PLAN §9 S3
 # Sound labels without Gemma 4 E4B (D-021): MIT/ast-finetuned-audioset-10-10-0.4593 (AST, BSD-3-Clause) on AudioSet
 # classes, mapped to our closed vocabulary. Speech-like classes become "unknown", which the gap map treats as speech.
 SOUND_AST_MODEL = "MIT/ast-finetuned-audioset-10-10-0.4593"
@@ -148,7 +148,7 @@ SOUND_VOCAB: tuple[str, ...] = (
 )  # PLAN §9 S3 closed vocabulary
 
 # ---------------------------------------------------------------- evidence (S5)
-EVIDENCE_ANCHORS: tuple[float, ...] = (0.05, 0.35, 0.65, 0.95)  # GemmaClip frame-anchor idea, PLAN §9 S5
+EVIDENCE_ANCHORS: tuple[float, ...] = (0.05, 0.35, 0.65, 0.95)  # frame anchors, PLAN §9 S5
 EVIDENCE_HIGH_CHANGE_FRAMES = 2  # PLAN §9 S5
 EVIDENCE_FRAME_PX = 512  # PLAN §9 S5
 VISION_SOFT_TOKENS = 140  # PLAN §9 S5 (E2 V3 compares 280 vs 140)
@@ -174,33 +174,33 @@ AD_LINE_HORIZON_MS = (
 AD_EXT_MIN_BREAK_MS = (
     150  # dev-tuned: shortest pause between two words where extended description may hold the video
 )
-AD_PAD_BEFORE_MS = 150  # AudioSight pads; PLAN §9 S7
-AD_PAD_AFTER_MS = 150  # AudioSight pads; PLAN §9 S7
+AD_PAD_BEFORE_MS = 150  # pads; PLAN §9 S7
+AD_PAD_AFTER_MS = 150  # pads; PLAN §9 S7
 AD_WORDS_MIN = 2  # PLAN §9 S7 clamp
 AD_MIN_USEFUL_WORDS = 3  # our setting: a pause too short for 3 words is not used (dev-tuned)
 AD_WORDS_MAX = 40  # PLAN §9 S7 clamp
 AD_MAX_WORDS_PER_LINE = 25  # PLAN §9 S7
 AD_BREATH_MS = 400  # PLAN §9 S7: breath between two lines in a long gap
-AD_BATCH_GAPS = 8  # AudioSight batched 8 per request; PLAN §9 S7
+AD_BATCH_GAPS = 8  # 8 per request; PLAN §9 S7
 WPS_VOICE_DEFAULT = 2.6  # placeholder until tts/calibrate.py measures the voice; never published
 DETAIL_LEVELS: dict[str, dict[str, float]] = {
     # priority cut-off (lower = more important; 1 = on-screen text ... 5 = finer detail) and rate factor
     "brief": {"max_priority": 2, "rate": 0.9},
     "standard": {"max_priority": 4, "rate": 1.0},
     "detailed": {"max_priority": 5, "rate": 1.0},
-}  # AudioSight's sparse/standard/detailed idea; PLAN §9 S6
+}  # sparse/standard/detailed; PLAN §9 S6
 
 # ---------------------------------------------------------------- temperatures and seeds
 TEMP_EVIDENCE = 0.0  # PLAN §14.7
 TEMP_SCENE_JUDGE = 0.0  # PLAN §14.7
 TEMP_WRITE = 0.3  # PLAN §9 S7
-TEMP_REPAIR = 0.2  # ProteinLoop's repair setting; PLAN §11.1
+TEMP_REPAIR = 0.2  # repair setting; PLAN §11.1
 TEMP_STRESS = 1.0  # PLAN §17 labelled stress setting
-REPAIR_MAX_ATTEMPTS = 3  # ProteinLoop; PLAN §11.1
+REPAIR_MAX_ATTEMPTS = 3  # PLAN §11.1
 PROJECT_SEED_DEFAULT = 20261018  # CLAUDE.md §5
 
 # ---------------------------------------------------------------- AD rules (PLAN §10.2)
-AD_NEAR_WORD_MS = 100  # AudioSight near-word warning
+AD_NEAR_WORD_MS = 100  # near-word warning
 AD_RESTATE_NGRAM = 4  # PLAN §10.2 AD008
 AD_RESTATE_WINDOW_MS = 10_000  # PLAN §10.2 AD008
 AD_RESTATE_JACCARD = 0.5  # PLAN §10.2 AD008
@@ -241,7 +241,7 @@ UNTRANSLATED_ENGLISH_FRACTION = 0.5  # PLAN §10.4 CC008
 SDH_AUTO_APPROVE_CONFIDENCE = 0.6  # PLAN §11.3
 
 # ---------------------------------------------------------------- voice-over (PLAN §10.5)
-VO_TEMPO_MAX = 1.15  # PLAN §9 S11 (video-voice-translator's 2.0x is too fast)
+VO_TEMPO_MAX = 1.15  # PLAN §9 S11
 VO_TOO_SHORT_FRACTION = 0.5  # PLAN §10.5 VO004
 VO_DIP_DB = 12.0  # PLAN §9 S11: original dipped -12 dB under voice-over
 VO_TAIL_MS = 1_500  # our setting: a voice-over may run up to 1.5 s into the following silence
@@ -259,8 +259,8 @@ TRUE_PEAK_MAX = -1.0  # PLAN §10.6 RN003 (dBTP)
 RENDER_DURATION_TOL_MS = 40  # PLAN §10.6 RN001
 AV_SYNC_TOL_MS = 40  # PLAN §10.6 RN005
 RENDER_OVERLAP_TOL_MS = 50  # PLAN §10.6 RN008
-EXT_PAD_MS = 150  # AudioSight expanded timeline pads
-EXT_FADE_MS = 10  # AudioSight expanded timeline fades
+EXT_PAD_MS = 150  # expanded timeline pads
+EXT_FADE_MS = 10  # expanded timeline fades
 
 # ---------------------------------------------------------------- confidence (PLAN §11.2; dev-tuned)
 CONF_SLACK_FULL_MS = 600  # min(1, slack / 600 ms)
@@ -271,7 +271,7 @@ CONF_WARNING_PENALTY = 0.05
 
 # ---------------------------------------------------------------- review (PLAN §12)
 REVIEW_IDLE_S = 60  # idle > 60 s excluded from review timer
-REVIEW_DEBOUNCE_MS = 550  # PolicyCut's debounce
+REVIEW_DEBOUNCE_MS = 550  # review save debounce
 REVIEW_CONTEXT_S = 2.0  # "Play in context (±2 s)"
 
 # ---------------------------------------------------------------- LLM client (PLAN §14.3)
@@ -284,7 +284,7 @@ LLM_BACKOFF_MAX_S = (
     120.0  # with 10 retries a call waits out an outage of about 15 minutes before failing closed
 )
 LLM_RETRY_STATUS: tuple[int, ...] = (429, 500, 502, 503, 504)
-LLM_LOG_TRUNCATE = 300  # GemmaClip's diagnostics rule idea: truncate text in logs
+LLM_LOG_TRUNCATE = 300  # truncate text in logs
 GPU_HOURLY_COST_USD = 2.59  # AMD Developer Cloud MI300X on-demand price, cited.amd.devcloud_mi300x_hourly (16 Oct 2026); replaced by the billed rate
 
 # ---------------------------------------------------------------- languages

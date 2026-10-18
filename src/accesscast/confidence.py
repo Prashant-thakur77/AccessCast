@@ -1,7 +1,4 @@
 """Confidence computed in code from measured signals (PLAN §11.2). Never asked of the model.
-
-The pattern of refusing model-reported confidence follows ageBand's validators
-(https://github.com/asishbose/ageBand, Apache-2.0); this file is our own formula.
 """
 
 from __future__ import annotations

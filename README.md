@@ -43,7 +43,7 @@ Deck: <pending: deck.url> ·
 
 ## Contents
 
-[At a glance](#at-a-glance) · [The problem](#the-problem) · [What each viewer gets](#what-each-viewer-gets) · [See it](#see-it) · [How it works](#how-it-works) · [Every stage](#every-stage-of-the-pipeline) · [Gemma 4 on AMD](#gemma-4-on-amd) · [Quality control](#how-quality-is-controlled) · [Results](#results) · [All experiments](#every-experiment) · [Tests and reliability](#tests-and-reliability) · [Comparison](#how-it-compares) · [Who pays](#who-pays) · [What didn't work](#what-didnt-work) · [Honest scope](#honest-scope) · [Reproduce](#reproduce) · [Repository map](#repository-map) · [Technology](#technology-and-licences) · [Team](#team)
+[At a glance](#at-a-glance) · [The problem](#the-problem) · [What each viewer gets](#what-each-viewer-gets) · [See it](#see-it) · [How it works](#how-it-works) · [Every stage](#every-stage-of-the-pipeline) · [Gemma 4 on AMD](#gemma-4-on-amd) · [Quality control](#how-quality-is-controlled) · [Results](#results) · [All experiments](#every-experiment) · [Tests and reliability](#tests-and-reliability) · [Who pays](#who-pays) · [What didn't work](#what-didnt-work) · [Honest scope](#honest-scope) · [Reproduce](#reproduce) · [Repository map](#repository-map) · [Technology](#technology-and-licences) · [Team](#team)
 
 ## At a glance
 
@@ -273,36 +273,6 @@ Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before an
 
 One example from the incident log: our determinism test found that the same description line came out a few milliseconds longer in one run than in the next, because the voice model draws random noise. Each line is now seeded from its own text, and the test reports the largest remaining difference instead of assuming there is none.
 
-## How it compares
-
-| | AccessCast | [ViddyScribe](https://ocadu.ca/news/new-ai-tool-ocad-u-alum-makes-videos-accessible-people-low-vision) | [YouDescribe](https://www.ski.org/news/youdescribe-launches-two-new-describer-interfaces-for-gaad-2026/) |
-|---|---|---|---|
-| Description placed in natural pauses | yes, checked in code against measured word timings | yes | — |
-| Extended description when there is no room | yes, only where needed | — | — |
-| Easy-read captions and a "give me time to read" mode | yes | — | — |
-| Voice-over in Hindi, Italian, Spanish, French and Portuguese from the same analysis | yes | many languages | — |
-| Code checks meaning (numbers, "not", invented names, instructions on screen) | yes, every line | — | — |
-| A person approves every description line; the server refuses to publish otherwise | yes | — | volunteers review AI drafts |
-| Open models that can run on the customer's own servers | yes (Gemma 4) | — | — |
-
-"—" means we found no public statement either way, not that the feature is absent.
-
-**What description costs today** (published list prices, not our measurements):
-
-| Option | Price per minute |
-|---|---|
-| 3Play Media, AI script and voice, English only ("Launch") | $1.25 |
-| 3Play Media, AI description with a human spot check ("Refine") | $4.25 |
-| 3Play Media, synthesized-speech description | $9 |
-| 3Play Media, voice artist | $18 |
-| University of Michigan, machine description | $0.90 |
-| University of Michigan, human description | $6.65 to $14.70 |
-| **AccessCast, Gemma work for the five versions we measured** | **about $0.0053** (an estimate at a published Gemma 4 31B list price, from 41,818 measured tokens a minute), plus a person's review time |
-
-AI-only services are cheap too, so price is not our pitch. Our difference is extended description, every audience from one analysis, checks on meaning, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
-
-**Prior work.** AudioSight (2nd place, AMD DevMaster Multimodal) writes audio description with Qwen on a Radeon GPU and pauses the source at every insertion. ViddyScribe adds description with freeze frames. AutoAD-Zero is a training-free research method that also writes from evidence first. AccessCast differs in four ways: it fits description inside the dialogue pauses and checks the timing in code against aligned words, it uses extended description only where the pauses are too short, it makes every audience version from one analysis, and it puts a person and a server-side render gate between the model and the viewer. Commercial services (3Play Media, Verbit, Accedo, Visonic) offer AI description too; Visonic already offers Hindi and Italian, so languages alone are not our difference. Ideas and code we built on are credited with their licences in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
-
 ## Who pays
 
 The law already asks for this. The European Accessibility Act has applied since 28 June 2025 to services that give access to audiovisual media, and it names audio description and subtitles for deaf and hard-of-hearing viewers among the access services they must carry. Italy's transposition sets fines from €5,000 to €40,000. India's guidelines for OTT platforms, issued on 6 February 2026, give platforms 36 months to add accessibility features to their content. In the US, the ADA Title II web rule (WCAG 2.1 AA, which includes audio description) applies to large public bodies, including public universities, from 26 April 2027.
@@ -429,7 +399,7 @@ deploy/          MI300X droplet bootstrap and Gemma serving
 | COMET, chrF++ (sacrebleu), IndicTrans2, Opus-MT | translation evaluation and baselines | see [`MODEL_LICENSES.md`](MODEL_LICENSES.md) |
 | Vercel | static site and the live proof API | hosting |
 
-Our code is MIT ([`LICENSE`](LICENSE)). Reused code keeps its original licence header ([`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)). Every model, voice, dataset, clip, music track and font is listed with its licence in [`MODEL_LICENSES.md`](MODEL_LICENSES.md). Test videos: W3C WAI [Web Accessibility Perspectives](https://www.w3.org/WAI/perspective-videos/) (linked as their terms ask; our versions of them are never published). Dev clips: NASA (courtesy NASA), Prelinger Archives (public domain), Sintel (© copyright Blender Foundation | www.sintel.org) and Big Buck Bunny ((c) copyright 2008, Blender Foundation / www.bigbuckbunny.org).
+Our code is MIT ([`LICENSE`](LICENSE)). Dependency licences are listed in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). Every model, voice, dataset, clip, music track and font is listed with its licence in [`MODEL_LICENSES.md`](MODEL_LICENSES.md). Test videos: W3C WAI [Web Accessibility Perspectives](https://www.w3.org/WAI/perspective-videos/) (linked as their terms ask; our versions of them are never published). Dev clips: NASA (courtesy NASA), Prelinger Archives (public domain), Sintel (© copyright Blender Foundation | www.sintel.org) and Big Buck Bunny ((c) copyright 2008, Blender Foundation / www.bigbuckbunny.org).
 
 More detail: [`JUDGES.md`](JUDGES.md) (a 3-minute route), [`docs/rules.md`](docs/rules.md) (every rule and its source), [`docs/decisions.md`](docs/decisions.md) (every design decision), [`docs/incidents.md`](docs/incidents.md) (every bug, root cause and fix), [`docs/compliance-matrix.md`](docs/compliance-matrix.md) (requirements and where the proof is), [`PLAN.md`](PLAN.md) (the original plan).
 

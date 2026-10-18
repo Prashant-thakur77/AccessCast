@@ -1,7 +1,6 @@
 """TTS worker: Kokoro-82M (Apache-2.0). Actions: synth (batch of lines → wav files), calibrate.
 
-Kokoro language codes and the hi/it voices (h/hf_alpha, i/if_sara) follow Katha's katha/config.py
-(https://github.com/N-45div/Katha), MIT License, Copyright (c) 2026 N DIVIJ.
+Kokoro language codes and the hi/it voices (h/hf_alpha, i/if_sara) are listed below.
 """
 
 from __future__ import annotations

@@ -1,7 +1,7 @@
 """S9 text to speech via the TTS worker, with a content-addressed cache (PLAN §9 S9).
 
-Cache key = SHA-256 of (text, voice, speed, engine revision): the speed multiplier is part of the key
-(AudioSight left it out). If no worker environment exists (CI, fake mode without `make setup`), a
+Cache key = SHA-256 of (text, voice, speed, engine revision): the speed multiplier is part of the key.
+If no worker environment exists (CI, fake mode without `make setup`), a
 placeholder tone of the estimated duration is written and the item is flagged `placeholder_tts`.
 """
 
@@ -43,7 +43,7 @@ VOICES = {
     "es": "ef_dora",
     "fr": "ff_siwis",
     "pt": "pf_dora",
-}  # Kokoro voice ids (Katha's map, MIT)
+}  # Kokoro voice ids
 VOICEOVER_VOICES = {
     "hi": "hm_omega",
     "it": "im_nicola",

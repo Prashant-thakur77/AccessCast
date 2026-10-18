@@ -36,7 +36,7 @@ def atomic_write(path: str, obj: Any) -> None:
 
 
 def device(require_rocm: bool) -> str:
-    """--require-rocm: fail unless torch sees an AMD GPU through HIP (PolicyCut only checked CUDA)."""
+    """--require-rocm: fail unless torch sees an AMD GPU through HIP."""
     import torch
 
     if torch.cuda.is_available() and getattr(torch.version, "hip", None):
@@ -56,7 +56,7 @@ def device(require_rocm: bool) -> str:
 
 @contextmanager
 def stage_timer(name: str, record: dict[str, Any]):
-    """Synchronized GPU timing (CLAUDE.md §6; shape from PolicyCut's stage_metrics, MIT)."""
+    """Synchronized GPU timing (CLAUDE.md §6)."""
     import torch
 
     gpu = torch.cuda.is_available()

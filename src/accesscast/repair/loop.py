@@ -1,6 +1,3 @@
-# The verifier → feedback → revise loop follows the shape of ProteinLoop's
-# sim/proteinloop_sim/gemma_repair.py (https://github.com/Anarpego/ProteinLoop),
-# MIT License, Copyright (c) 2026 Anibal Perez. Rewritten for AccessCast items; prompt text is our own.
 """Repair loop (PLAN §11.1): verify → feedback → Gemma revises (≤3) → never promote a failure."""
 
 from __future__ import annotations

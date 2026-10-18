@@ -1,5 +1,3 @@
-# derive_seed follows Rivet's rivet/pipeline/seeds.py
-# (https://github.com/damishafe/Rivet), MIT License, Copyright (c) 2026 Enoch Idowu.
 """Per-item seeds (CLAUDE.md §6)."""
 
 from __future__ import annotations

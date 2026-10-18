@@ -1,7 +1,3 @@
-# Idea from Rivet's rivet/telemetry/network_guard.py (https://github.com/damishafe/Rivet), MIT License,
-# Copyright (c) 2026 Enoch Idowu. Rewritten: Rivet patched only connect/create_connection; this guard also
-# covers connect_ex, sendto (UDP) and getaddrinfo (DNS), allows only literal loopback addresses, and counts
-# every blocked attempt.
 """Python-level offline guard (PLAN §14.6). Install in the core process and, via sitecustomize, in workers."""
 
 from __future__ import annotations

@@ -1,8 +1,3 @@
-# Store contract (expected_revision → 409, review_history.jsonl, exports_stale) follows PolicyCut's
-# policycut/api/events.py and policycut/core/storage.py (https://github.com/xiaodouzi666/Radeon-hackathon-2026-07,
-# policycut/ folder), MIT License, Copyright (c) 2026 PolicyCut Team. Rewritten for AccessCast: the revision
-# check and the write happen under one lock (PolicyCut's had a check-then-write race), history write
-# failures raise instead of being swallowed, and the server returns its own revision to the client.
 """S12 review state: review/state.json + review/review_history.jsonl."""
 
 from __future__ import annotations
@@ -218,7 +213,7 @@ class ReviewStore:
     def mark_exported(self, state_sha: str) -> None:
         with self.lock:
             if self.state_sha256() != state_sha:
-                return  # edits during the render: stay stale (PolicyCut cleared it unconditionally)
+                return  # edits during the render: stay stale
             st = self.state()
             st["exports_stale"] = False
             self._save_state(st)

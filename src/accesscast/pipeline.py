@@ -875,7 +875,7 @@ def stage_review_init(run: Run) -> dict[str, int]:
     if auto:
         store.auto_approve(auto, "PLAN §11.3 routing: every rule passed")
     if run.settings.review_policy == "prototype-auto":
-        # Drafts only: stamp human_reviewed=false and watermark (AudioSight's draft mode).
+        # Drafts only: stamp human_reviewed=false and watermark.
         rest = [i.id for i in store.merged().values() if i.status == ItemStatus.PENDING]
         store.auto_approve(rest, "prototype-auto draft policy (NOT reviewed by a person)")
     counts: dict[str, int] = {}

@@ -1,6 +1,6 @@
 """Phrase lists for the description and easy-read rules (our own lists; frozen with the prompts).
 
-Claim types follow the categories GemmaClip forbids (motive, relationship, destination, occupation,
+Claim types cover (motive, relationship, destination, occupation,
 off-screen events, deadlines), re-implemented as our own phrase lists in en/hi/it.
 """
 

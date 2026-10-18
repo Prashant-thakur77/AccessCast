@@ -1,8 +1,3 @@
-# Scene-merge similarity (top-62% crop, 9x8 dHash, H/S histogram correlation, 0.45/0.55 weights,
-# 0.82/0.92/0.45 decisions, 1,200 ms dialogue bridge) follows AudioSight's src/audiosight/clustering.py
-# (https://github.com/austin1997/AudioSight), Apache License 2.0, Copyright 2026 AudioSight contributors.
-# Re-written for AccessCast with PIL/numpy (no OpenCV in the core process). Changes: frames are read by
-# ffmpeg at exact timestamps from the proxy; "previous word" uses end time; 0.92 is a named constant.
 """S1 scenes: merge shots into scenes with deterministic rules, Gemma only for undecided boundaries."""
 
 from __future__ import annotations
@@ -154,7 +149,7 @@ def build_scenes(
 
 
 def _clamp(scenes: list[Scene]) -> list[Scene]:
-    """Split scenes longer than SCENE_MAX_S evenly (AudioSight clamps 6–45 s; short scenes are kept,
+    """Split scenes longer than SCENE_MAX_S evenly (short scenes are kept,
     because merging across a real cut would mix two settings in one evidence call)."""
     out: list[Scene] = []
     for s in scenes:

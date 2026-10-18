@@ -103,7 +103,7 @@ def write_validation(root: Path, res: GateResult) -> Path:
 
 
 def check_fresh(root: Path, store: ReviewStore) -> dict[str, Any]:
-    """Render refuses a stale or failed validation (AudioSight's rule)."""
+    """Render refuses a stale or failed validation."""
     p = root / "reports" / "validation.json"
     if not p.exists():
         raise PermissionError("no validation; run the gate first")

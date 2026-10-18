@@ -5,7 +5,7 @@ Actions:
   vad         {audio} → {segments}
 
 Chunks are cut at the lowest-energy 20 ms frame within ±2 s of each 30 s mark so no word is split.
-Batch size is pinned (default 1) and recorded: AudioSight found batching shifted aligned timestamps.
+Batch size is pinned (default 1) and recorded: batching can shift aligned timestamps.
 Word probabilities are not extracted from Whisper here (recorded as null → 1.0); ASR uncertainty comes from
 the independent Gemma E4B cross-check (S2b).
 """

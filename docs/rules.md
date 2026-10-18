@@ -10,17 +10,17 @@ Each rule is a small pure function in `src/accesscast/verify/` with a passing an
 
 | Rule | Severity | Check | Source |
 |---|---|---|---|
-| AD001 `GAP_OVERFLOW` | error | voice + 300 ms > pause end − anchor (estimated from the measured voice rate before TTS; re-run on the measured clip after TTS) | AudioSight pads; our timing model |
-| AD002 `ANCHOR_INSIDE_DIALOGUE_WORD` | error | a word has start < anchor < end | AudioSight |
-| AD003 `ANCHOR_NEAR_DIALOGUE_WORD` | warning | anchor within 100 ms of a word edge | AudioSight |
+| AD001 `GAP_OVERFLOW` | error | voice + 300 ms > pause end − anchor (estimated from the measured voice rate before TTS; re-run on the measured clip after TTS) | an earlier project pads; our timing model |
+| AD002 `ANCHOR_INSIDE_DIALOGUE_WORD` | error | a word has start < anchor < end | an earlier project |
+| AD003 `ANCHOR_NEAR_DIALOGUE_WORD` | warning | anchor within 100 ms of a word edge | an earlier project |
 | AD004 `OVERLAPS_SPEECH` | error | the voice span overlaps any padded speech span (words ∪ VAD, padded by `guard_ms`) | ours |
 | AD005 `ANCHOR_FAR_FROM_EVENT` | error | anchor outside [event start − 2.0 s, event end + 1.0 s]; or the line cites a fact id that does not exist | W3C WAI "at or just before the visual" |
-| AD006 `NON_MONOTONIC_OR_OVERLAPPING_AD` | error | two description voices overlap, or ids are out of time order | AudioSight |
-| AD007 `WORD_BUDGET_EXCEEDED` | error | words > `words_max` (never truncated) | AudioSight (theirs only warned) |
-| AD008 `RESTATES_DIALOGUE` | error | shares a lemmatised 4-word phrase with dialogue within ±10 s, or content-word Jaccard > 0.5 | AudioSight; DCMP; Ofcom 4.8 |
-| AD009 `INVENTED_NAME` | error | a proper noun that is not an allowed name (direct address, self-introduction, on-screen text) and not in the line's own facts *(weaker for hi/it)* | AudioSight; Netflix; Ofcom 4.9 |
-| AD010 `UNSUPPORTED_CLAIM` | error | motive, relationship, destination, occupation, off-screen, deadline or certainty phrases not in the facts | GemmaClip's claim types, our own lexicon (en/hi/it) |
-| AD011 `SOUND_IN_DESCRIPTION` | error | sound, speech or music words (outside quoted on-screen text) | GemmaClip's audio-claim idea |
+| AD006 `NON_MONOTONIC_OR_OVERLAPPING_AD` | error | two description voices overlap, or ids are out of time order | an earlier project |
+| AD007 `WORD_BUDGET_EXCEEDED` | error | words > `words_max` (never truncated) | an earlier project (theirs only warned) |
+| AD008 `RESTATES_DIALOGUE` | error | shares a lemmatised 4-word phrase with dialogue within ±10 s, or content-word Jaccard > 0.5 | an earlier project; DCMP; Ofcom 4.8 |
+| AD009 `INVENTED_NAME` | error | a proper noun that is not an allowed name (direct address, self-introduction, on-screen text) and not in the line's own facts *(weaker for hi/it)* | an earlier project; Netflix; Ofcom 4.9 |
+| AD010 `UNSUPPORTED_CLAIM` | error | motive, relationship, destination, occupation, off-screen, deadline or certainty phrases not in the facts | an earlier project's claim types, our own lexicon (en/hi/it) |
+| AD011 `SOUND_IN_DESCRIPTION` | error | sound, speech or music words (outside quoted on-screen text) | an earlier project's audio-claim idea |
 | AD012 `NOT_GROUNDED` | error if > 1/3 of nouns unsupported, else warning | each noun appears in the facts, on-screen text, cast or setting (with a small synonym list) *(weaker for hi/it)* | ours |
 | AD013 `ONSCREEN_TEXT_NOT_READ` | warning | a title or slide of ≥ 3 words that OCR confirmed is not read by any line in the scene | DCMP; W3C WAI |
 | AD014 `COMMENTARY` | warning | "we see", "the camera", "seems to", "appears to" | ACB; DCMP |
@@ -58,10 +58,10 @@ Extended-description lines (inserted while the video holds a frame) skip AD001�
 | CC004 `DURATION` | error | < 40 frames or > 6 s | DCMP Captioning Key |
 | CC005 `SYNC` | error | cue start > 100 ms from its first word | our setting, modelled on EN 301 549 7.1.2 |
 | CC006 `NOT_VERBATIM` | error (automatic cues only) | cue words ≠ aligned words | DCMP |
-| CC007 `SEGMENT_MISALIGNED` | error | translation ids or snippets do not match the batch | video-voice-translator |
+| CC007 `SEGMENT_MISALIGNED` | error | translation ids or snippets do not match the batch | an earlier project |
 | CC008 `UNTRANSLATED` | error | same as the English, or mostly English/Latin script | QuestBridge's lesson |
 | CC009 `NUMBER_OR_NAME_CHANGED` | error | numbers differ; Italian, Spanish, French or Portuguese loses a name | ours |
-| CC010 `MISSING_GLYPH` | error | the caption font cannot draw a character | Rivet A11 |
+| CC010 `MISSING_GLYPH` | error | the caption font cannot draw a character | an earlier project A11 |
 | CC011 `CONTRAST` | error (burned-in only) | contrast < 4.5:1 | WCAG 1.4.3 (not used yet: we ship text tracks, not burned-in captions) |
 
 ## Voice-over (`voiceover`) — PLAN §10.5

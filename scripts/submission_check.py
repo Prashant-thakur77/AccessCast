@@ -1,5 +1,3 @@
-# Structure (required files, secret scan, licence rows, size limits) follows Rivet's cli/submission_command.py
-# (https://github.com/damishafe/Rivet), MIT License, Copyright (c) 2026 Enoch Idowu. Rewritten for AccessCast.
 """make submission-check: everything in PLAN §18.6. Exit 0 only if every check passes."""
 
 from __future__ import annotations

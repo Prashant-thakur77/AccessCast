@@ -1,8 +1,8 @@
 """E8: does it run for hours without leaking? Dev set in a loop; VRAM every 10 s via amd-smi.
 
 Pass = 0 failed jobs and VRAM growth ≈ 0 (last-hour median vs first-hour median within 2%). On AMD Developer
-Cloud MI300X (a virtual function) utilisation, power and temperature read zero; only VRAM is live (CacheForge's
-finding) — we record VRAM only and say why.
+Cloud MI300X (a virtual function) utilisation, power and temperature read zero; only VRAM is live — we
+record VRAM only and say why.
 Usage: python -m eval.e08_soak --hours 4 [--concurrency 2]
 """
 

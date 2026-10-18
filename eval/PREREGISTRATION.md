@@ -31,7 +31,7 @@ This file is committed before the first run on the test set. It fixes the hypoth
 3. If C − A > 0 but the coverage guard fails: the same sentence, followed by ", while covering `x`% of the human description positions against `y`% without checks".
 4. If C − A ≤ 0 (Gemma alone already fits as well): E1 is reported as a negative result in "What didn't work", with its numbers. The headline then moves to the first of these that has a clean measured result, in this order: E12 (person-minutes per finished minute, reviewing vs writing from scratch), E6 (questions answered from dialogue + our description vs dialogue only), E3 (smaller Gemma with checks vs Gemma 31B without).
 
-The ProteinLoop framing is used in the README in every case: "`a` of `L` lines fitted on Gemma's first try; with checks and repair, `b`; the other `L − b` went to a person." We never headline "0 overlaps published", because that is true by construction once checks block bad lines.
+The an earlier project framing is used in the README in every case: "`a` of `L` lines fitted on Gemma's first try; with checks and repair, `b`; the other `L − b` went to a person." We never headline "0 overlaps published", because that is true by construction once checks block bad lines.
 
 ## E3 (bigger model)
 **Hypothesis:** a smaller Gemma 4 (26B-A4B or E4B) with AccessCast's checks fits more lines than Gemma 4 31B with no checks. Metric: E1's measure. A model is chosen for deployment on the dev set. The test set is run once after the freeze, and the result is reported as "a deployment decision, not a universal ranking".

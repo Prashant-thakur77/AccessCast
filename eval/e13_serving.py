@@ -1,14 +1,13 @@
 """E13: how many requests can one MI300X serve? (PLAN §15.3, §16.2)
 
 Replays REAL description and repair requests recorded on the dev set (ACCESSCAST_RECORD_REPLAY=dir during a dev
-run) against the local vLLM server at concurrency 1/4/8/16/32/64. The /metrics scraping method follows ageBand's
-scripts/benchmark_roster.py (Apache-2.0, https://github.com/asishbose/ageBand); changes: every concurrency level
+run) against the local vLLM server at concurrency 1/4/8/16/32/64. Every concurrency level
 fires the whole request set (not one request per slot), the first pass is a discarded warm-up, each level is
 repeated ≥3 times (median, min, max), metrics are parsed by name and label set, and both the old
 `gpu_cache_usage_perc` and newer `kv_cache_usage_perc` names are read.
 
 Prefix cache on/off is a server setting: run once per server configuration with --label, each arm on a disjoint
-request subset (CacheForge's idea), and compare the two evidence files.
+request subset, and compare the two evidence files.
 
 Usage: python -m eval.e13_serving --replay logs/replay --label prefix_on [--levels 1,4,8,16,32,64] [--repeats 3]
 """

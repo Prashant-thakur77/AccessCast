@@ -78,7 +78,7 @@ Prize amounts, partner prizes, the stacking rule, the brief's bullet list and th
 **Stacking rule from the page:** a team can win "main challenge prize, one partner prize, or both partner prizes". Our combination is the AMD track prize plus the Google Gemma prize. Do not tag the project for Evolus.
 
 ### 1.3 How we win
-Past winners had one memorable number that beat a named baseline, measured in a clean comparison on data the system was never tuned on, plus a demo that stayed awake and a pitch non-technical judges could follow. AccessCast's headline uses the ProteinLoop pattern applied to time. **Hypothesis (to be measured in E1, not assumed):** Gemma 4 writing from the same plan with no checks puts some description lines on top of dialogue or past the end of their pause; AccessCast's timing checks plus Gemma repair raise the number of lines that fit, at the same coverage, measured independently of the checks. Around that number we show the experience changing live for five audiences, the checks catching Gemma live, a person approving lines in a review tool, and a full AMD performance ladder.
+Past winners had one memorable number that beat a named baseline, measured in a clean comparison on data the system was never tuned on, plus a demo that stayed awake and a pitch non-technical judges could follow. AccessCast's headline uses the an earlier project pattern applied to time. **Hypothesis (to be measured in E1, not assumed):** Gemma 4 writing from the same plan with no checks puts some description lines on top of dialogue or past the end of their pause; AccessCast's timing checks plus Gemma repair raise the number of lines that fit, at the same coverage, measured independently of the checks. Around that number we show the experience changing live for five audiences, the checks catching Gemma live, a person approving lines in a review tool, and a full AMD performance ladder.
 
 **Headline template** (one sentence, one number, one named baseline; fill only from `evidence/`, never type a number by hand):
 > "On 10 W3C accessibility videos never used for tuning, AccessCast's timing checks and Gemma repair raised description lines that fit the pauses in dialogue from `<a>` of `<L>` (Gemma 4 with the same plan and no checks) to `<b>` of `<L>`."
@@ -95,7 +95,7 @@ Pitch the value as **coverage**, not savings: most video has no description at a
 About 30 projects were submitted when we last checked. Read by title and description:
 - **Health:** Clearsheet (discharge sheets in the patient's language; Gemma 3 27B on an MI300X drafts and "code checks every number"), ClearCare (prescriptions in 10 languages; "doses are never re-worded by AI"), a doctor-centred clinic workflow.
 - **Industry:** MURPHY (fuzzing operating procedures), MachineSage, LineGuard, FactoryPilot, ForgeSight, TestTrace Guard, SayAgain (radio read-backs), compressor-fault and gas-sensor projects, a voice interface for telemetry, Chirak (LoRA fine-tuning).
-- **Commerce:** T2V Text-to-Vision (DeepSeek on Token Factory; 63.6% vs 74.1% on ImageNet), DossierMind, SortSmart, SupplyWatch, Vyson FiscalRAG, a review reader using "an open Google model on an AMD GPU".
+- **Commerce:** T2V Text-to-Vision (DeepSeek on Token Factory; 63.6% vs 74.1% on ImageNet), an earlier project, SortSmart, SupplyWatch, Vyson FiscalRAG, a review reader using "an open Google model on an AMD GPU".
 - **Agents and security:** KeyShield, NOAI+ (Gemma 4 via Token Factory), OpenForge, DocuSwarm, CivicOps, an LLM-gateway incident triage, an agent-guard project.
 - **Experience:** only QuestBridge (Minecraft quest localisation; Qwen3-4B on a Ryzen CPU; four live requests reported) reads like an experience entry.
 
@@ -104,7 +104,7 @@ About 30 projects were submitted when we last checked. Read by title and descrip
 2. **"Model plus code checker" is now common** (Clearsheet, ClearCare, SupplyWatch). It is table stakes, not originality. Our originality has to come from what nobody else has: a verifier tied to the real audio timeline (dialogue gaps measured from aligned words), five audience versions from one analysis, extended description when the gaps are too short, and a review tool designed for blind reviewers (claim "tested by a blind reviewer" only if one actually tests it).
 3. **Gemma competition:** at least Clearsheet, NOAI+, SayAgain and the review reader use Gemma. Ours uses more of Gemma 4 (vision, audio input, writing, translation, repair) and serves it ourselves on ROCm with measured numbers. That is the Google prize angle.
 4. **Numbers are table stakes too** (T2V, Clearsheet). A number alone won't win; a number on data never used for tuning, against a respected baseline, plus a clear human story, will.
-5. **Prior art judges may know:** AudioSight (DevMaster Multimodal 2nd) generates audio description with Qwen on a Radeon GPU, and ViddyScribe (Gemini API competition) does AI description with freeze frames. Name both in the README and say plainly how we differ (section 21.1). Honesty here scores; hiding it would cost us.
+5. **Prior art judges may know:** an earlier project (DevMaster Multimodal 2nd) generates audio description with Qwen on a Radeon GPU, and an earlier project (Gemini API competition) does AI description with freeze frames. Name both in the README and say plainly how we differ (section 21.1). Honesty here scores; hiding it would cost us.
 
 Re-check the submission list again just before submitting. If a strong accessible-media entry appears, sharpen the differences in section 21.1 rather than changing the idea.
 
@@ -212,17 +212,17 @@ These come from the Winning Numbers Playbook. Every one is a hard requirement. `
 Token Factory (Gemma-4-31B-IT, if listed) is a second Gemma endpoint for overflow and for the always-on "try a short clip" path. Eval runs must record which endpoint served each call and must never switch endpoints silently (§14.3).
 
 ### 6.2 Principles (each one comes from a winner or a judge comment)
-1. **The model proposes, code decides.** Gemma never decides timing, never decides whether a line is acceptable, and never reports its own confidence. Code measures (ProteinLoop, Rivet, ageBand).
-2. **Fail closed.** A parse error, a timeout, a missing model, an unknown language: the item is blocked and goes to review. Nothing passes by default. (StudioMI300's critic scored a parse error as 10/10; never do that.)
-3. **Evidence first, words second.** Gemma first lists what is visible (temperature 0), then writes only from that list (GemmaClip idea, AudioSight rules).
+1. **The model proposes, code decides.** Gemma never decides timing, never decides whether a line is acceptable, and never reports its own confidence. Code measures (earlier projects).
+2. **Fail closed.** A parse error, a timeout, a missing model, an unknown language: the item is blocked and goes to review. Nothing passes by default. (an earlier project's critic scored a parse error as 10/10; never do that.)
+3. **Evidence first, words second.** Gemma first lists what is visible (temperature 0), then writes only from that list (an earlier project idea, an earlier project rules).
 4. **One analysis, many versions.** Every audience version is built from the same words, gaps, scenes and evidence, so they cannot contradict each other.
-5. **Every stage is a file.** Each stage reads files and writes files, content-addressed and resumable (AudioSight). Any stage can be re-run alone. Judges can open every intermediate file.
+5. **Every stage is a file.** Each stage reads files and writes files, content-addressed and resumable (an earlier project). Any stage can be re-run alone. Judges can open every intermediate file.
 6. **Every number from a script.** Benchmarks and evals write JSON into `evidence/`; docs quote only those files (Ten Places, REPOMIND).
-7. **No silent fallbacks.** No silent CPU fallback (`--require-rocm`, PolicyCut), no silent model swap, no silent truncation of text (AudioSight's `NARRATION_TEXT_TOO_LONG` is a warning, not a cut).
-8. **A person approves what the public hears.** Public renders require `human_reviewed: true` (AudioSight report stamp, PolicyCut server gate, ACB 2025 guidance).
+7. **No silent fallbacks.** No silent CPU fallback (`--require-rocmNARRATION_TEXT_TOO_LONG` is a warning, not a cut).
+8. **A person approves what the public hears.** Public renders require `human_reviewed: true` (an earlier project report stamp, an earlier project server gate, ACB 2025 guidance).
 
 ### 6.3 Processes
-- `accesscast` CLI (Python 3.12, `uv`) runs stages. The core process never imports torch (AudioSight's isolation idea): GPU work runs in worker processes, so a crash or OOM in one model cannot corrupt project state.
+- `accesscast` CLI (Python 3.12, `uv`) runs stages. The core process never imports torch (an earlier project's isolation idea): GPU work runs in worker processes, so a crash or OOM in one model cannot corrupt project state.
 - Workers: `asr` (Whisper + forced alignment), `tts` (Kokoro/Chatterbox), `metrics` (COMET, BERTScore), `ocr` (Tesseract, CPU). LLM calls go over HTTP to vLLM, never in-process.
 - Workers run in one of two modes: **one-shot** (start, load, process a JSON request file, exit) and **resident** (a long-lived daemon on a local Unix socket that keeps its model loaded). Ladder step V0 uses one-shot; "all models resident" (V4, §16.1) means resident workers plus the two vLLM servers.
 - `review` server: FastAPI + server-rendered HTML + small vanilla JS (no build step needed). Same server serves the private review app and can export the static player site.
@@ -289,7 +289,7 @@ projects/<sha12>/
 
 ## 8. Data model
 
-All schemas are pydantic models in `schemas.py`, exported as JSON Schema into `docs/schemas/` (SignalForge keeps contracts as schemas; judges like it).
+All schemas are pydantic models in `schemas.py`, exported as JSON Schema into `docs/schemas/` (an earlier project keeps contracts as schemas; judges like it).
 
 ### 8.1 Word, gap, scene
 ```jsonc
@@ -343,9 +343,9 @@ All schemas are pydantic models in `schemas.py`, exported as JSON Schema into `d
 ```
 
 ### 8.4 Reports
-- `report.json` — audit (Rivet/PolicyCut shape): `schema_version`, `generated_at`, `input{sha256,duration_ms}`, `outputs[{version,sha256,duration_ms}]`, `models[{name,rev,licence}]`, `environment{gpu,rocm,vllm,torch,driver}`, `stage_metrics{stage:{wall_s,peak_vram_mb,fallbacks[]}}`, `checks[{rule,observed,threshold,passed}]`, `counts{items_by_status}`, `review{state_sha256,human_reviewed,reviewers,review_seconds}`, `warnings[]`. No absolute paths, no secrets.
+- `report.jsonschema_version`, `generated_at`, `input{sha256,duration_ms}`, `outputs[{version,sha256,duration_ms}]`, `models[{name,rev,licence}]`, `environment{gpu,rocm,vllm,torch,driver}`, `stage_metrics{stage:{wall_s,peak_vram_mb,fallbacks[]}}`, `checks[{rule,observed,threshold,passed}]`, `counts{items_by_status}`, `review{state_sha256,human_reviewed,reviewers,review_seconds}`, `warnings[]`. No absolute paths, no secrets.
 - `decisions.json` — per item: what Gemma was shown, what it wrote, which rules fired, repairs, final text, who approved. Feeds the player's "What the models decided" drawer.
-- `benchmark.json` — per stage: wall seconds, GPU seconds, peak VRAM, tokens in/out, requests, p50/p95 latency (Katha/PolicyCut shape).
+- `benchmark.json` — per stage: wall seconds, GPU seconds, peak VRAM, tokens in/out, requests, p50/p95 latency (earlier projects shape).
 - `cost.json` — dollars per finished minute per version and for the bundle (§16.3).
 
 ---
@@ -355,26 +355,26 @@ All schemas are pydantic models in `schemas.py`, exported as JSON Schema into `d
 Each stage lists: input → output, tools, the exact rules, the failure behaviour, and where the idea came from. Defaults live in `constants.py`, each with a comment naming its source.
 
 ### S0 Ingest and probe
-- `ffprobe` → duration, fps, streams. Reject files with no video or no audio stream with a clear error (exit code 8, AudioSight's media/TTS code).
+- `ffprobe` → duration, fps, streams. Reject files with no video or no audio stream with a clear error (exit code 8, an earlier project's media/TTS code).
 - Normalise: `master48k.wav` (48 kHz stereo float), `asr16k.wav` (16 kHz mono), `proxy480.mp4` (480 px, constant frame rate) for shot detection and frames.
-- `project.json` records the source SHA-256 and the version of every tool and model (Rivet's manifest idea).
+- `project.json` records the source SHA-256 and the version of every tool and model (an earlier project's manifest idea).
 
 ### S1 Shots and scenes
 - Shots: PySceneDetect 0.7.2 (`scenedetect-headless`), `AdaptiveDetector`, on the proxy.
-- Scenes: merge shots with AudioSight's deterministic rules, **re-implemented from the description** (its code is Apache-2.0; we write our own):
+- Scenes: merge shots with an earlier project's deterministic rules, **re-implemented from the description** (its code is Apache-2.0; we write our own):
   - compare only the top 62% of the frame (ignores burned-in subtitles)
   - similarity = 0.45 × dHash similarity (9×8 grayscale, 64 bits) + 0.55 × H/S histogram correlation mapped to (corr+1)/2
   - ≥ 0.82 and dialogue continues across the cut (words within 1,200 ms) → merge, `VISUALLY_SIMILAR_DIALOGUE_CONTINUES`
   - ≥ 0.92 → merge, `NEAR_IDENTICAL_VISUALS`
   - ≤ 0.45 and no dialogue bridge → split
   - otherwise → `REQUIRES_SEMANTIC_JUDGMENT`: ask Gemma 4 31B with 4 frames from the 3 s on each side plus the dialogue around the cut; JSON `{same_scene, reason}`; invalid JSON → split with warning `VL_BOUNDARY_FALLBACK_SPLIT`.
-- Scene length clamp 6–45 s (AudioSight); longer scenes split at the largest visual change.
+- Scene length clamp 6–45 s (an earlier project); longer scenes split at the largest visual change.
 
 ### S2 Words (timing source) and ASR cross-check
-- Whisper `openai/whisper-large-v3` via transformers on ROCm PyTorch, `return_timestamps="word"`. Cut chunks at the lowest-energy point near each 30 s mark so no word is split (AudioSight). Record the per-word probability.
+- Whisper `openai/whisper-large-v3` via transformers on ROCm PyTorch, `return_timestamps="word"`. Cut chunks at the lowest-energy point near each 30 s mark so no word is split (an earlier project). Record the per-word probability.
   - `whisper-large-v3-turbo` is the fast option; E15 decides which one we use, on **FLEURS English and dev clips only** (never the test set).
   - faster-whisper/WhisperX on ROCm are stretch options only (CTranslate2 ROCm wheels are new; WhisperX documents only CUDA/CPU).
-- **Forced alignment:** Whisper's word timestamps are not forced-aligned, and the gap map and every timing rule depend on them. Re-align words with a wav2vec2 CTC aligner (`torchaudio.functional.forced_align`; WhisperX's default aligners are `WAV2VEC2_ASR_BASE_960H` for English, `VOXPOPULI_ASR_BASE_10K_IT` for Italian, `theainerd/Wav2Vec2-large-xlsr-hindi` for Hindi; check each licence). AudioSight treated its aligned times as "authoritative". Measure the boundary error of both (raw Whisper vs aligned) against one hand-labelled dev clip and set `guard_ms` from the measured error (E15).
+- **Forced alignment:** Whisper's word timestamps are not forced-aligned, and the gap map and every timing rule depend on them. Re-align words with a wav2vec2 CTC aligner (`torchaudio.functional.forced_align`; WhisperX's default aligners are `WAV2VEC2_ASR_BASE_960H` for English, `VOXPOPULI_ASR_BASE_10K_IT` for Italian, `theainerd/Wav2Vec2-large-xlsr-hindiguard_ms` from the measured error (E15).
 - Silero VAD on CPU → speech segments; used with the words to build the gap map.
 - **ASR cross-check with Gemma 4 E4B ("Gemma listens"):** send each 30 s chunk to E4B with the model card's ASR prompt ("Transcribe the following speech segment in {LANGUAGE} into {LANGUAGE} text."). Compute WER between Whisper and Gemma per chunk with `jiwer`. Chunks with disagreement above 15% WER mark their caption items `asr_disagreement` and lower their confidence. Two independent ASRs disagreeing is a signal no single model can give about itself.
 - Optional diarization: `pyannote/speaker-diarization-community-1` (gated, CC-BY-4.0; ROCm untested) → speaker labels for SDH.
@@ -383,7 +383,7 @@ Each stage lists: input → output, tools, the exact rules, the failure behaviou
 - Regions without speech (VAD complement) of at least 1 s, cut into windows of up to 5 s, **one window per request** (E4B gives no timestamps and the server allows one audio clip per prompt, so labels must map to exactly one window).
 - Gemma 4 E4B returns, for that window, labels from a **closed vocabulary** (`music`, `music_with_lyrics`, `applause`, `laughter`, `door`, `knock`, `phone`, `footsteps`, `typing`, `engine`, `alarm`, `crowd`, `silence`, `other`). Code rejects anything outside the vocabulary.
 - Merge identical adjacent windows; SDH tags are `[music]`, `[applause]`, etc. `music_with_lyrics` is treated as dialogue for gaps ("Treat lyrics like dialogue", Netflix AD guide).
-- Energy gate before the call: RMS < 0.01 → `silence` without a model call (GemmaClip's threshold).
+- Energy gate before the call: RMS < 0.01 → `silence` without a model call (an earlier project's threshold).
 
 ### S4 Gap map
 - Speech = union of (Whisper word spans) and (VAD speech), each padded by `guard_ms` = 120 ms.
@@ -392,12 +392,12 @@ Each stage lists: input → output, tools, the exact rules, the failure behaviou
 - The gap map is a pure function of `words.json`, `vad.json` and `sounds.json`; unit tests cover overlapping words, VAD-only speech, and gaps at the start and end.
 
 ### S5 Visual evidence
-- Frames per scene: anchors at 0.05, 0.35, 0.65 and 0.95 of the scene, plus 2 high-change frames at least max(0.5 s, 0.08 × scene length) from the others (GemmaClip's idea, re-implemented), plus one frame at the start of each gap in the scene. 512 px JPEG.
+- Frames per scene: anchors at 0.05, 0.35, 0.65 and 0.95 of the scene, plus 2 high-change frames at least max(0.5 s, 0.08 × scene length) from the others (an earlier project's idea, re-implemented), plus one frame at the start of each gap in the scene. 512 px JPEG.
 - On-screen text, independently: Tesseract (`eng`, `hin`, `ita`) on each frame. Text Gemma reports that Tesseract also finds gets `ocr_agrees: true`. High-confidence Tesseract text that Gemma missed becomes evidence warning `EV001 OCR_TEXT_MISSED_BY_GEMMA` and is added to the scene's on-screen text with `source: "ocr"`.
 - Gemma 4 31B evidence call: temperature 0.0, `response_format: json_object`, thinking off, frames at `max_soft_tokens` 140 (E2 checks 280 vs 140). The prompt includes the scene's dialogue marked "DIALOGUE: do not restate" and the running cast list (`C####` ids with appearance) from earlier scenes.
 - Code checks on the evidence (no repair here; failures re-ask once, then mark the scene `evidence_failed` and send its gaps to review):
   - every `frames` index exists
-  - each visible fact is one sentence (AudioSight: "exactly one distinct observation")
+  - each visible fact is one sentence (an earlier project: "exactly one distinct observation")
   - fact count ≤ max(3, min(64, round(scene_seconds × 1.2)))
   - a character `name` is allowed only with `name_source` in {`direct_address`, `self_introduction`, `on_screen_text`} **and** the name string appears in the transcript or OCR text; otherwise the name is set to null and a warning is logged.
 
@@ -405,14 +405,14 @@ Each stage lists: input → output, tools, the exact rules, the failure behaviou
 - Priority order for what to describe (DCMP "Prioritized", Ofcom 4.8): on-screen text central to understanding (titles, slides, signs) → change of location/scene → a new character's appearance → key actions → finer detail if time allows.
 - Assign facts to gaps in time order: a fact can go in the gap just before or during its visual event (W3C WAI: "at or just before the visual"). Window: anchor within [event start − 2.0 s, event end + 1.0 s].
 - A fact marked important with no gap in its window becomes an **extended-description candidate**, inserted at the next end of a speech segment (a sentence boundary, never inside a word).
-- Do not fill every pause ("Do not try to fill every pause", DCMP): a gap is used only if it has an unassigned fact above the detail level's priority cut-off. The detail level (Brief / Standard / Detailed) sets that cut-off and the words-per-second rate (AudioSight's sparse/standard/detailed levels).
+- Do not fill every pause ("Do not try to fill every pause", DCMP): a gap is used only if it has an unassigned fact above the detail level's priority cut-off. The detail level (Brief / Standard / Detailed) sets that cut-off and the words-per-second rate (an earlier project's sparse/standard/detailed levels).
 
 ### S7 Write the description (Gemma 4 31B)
-- Batches of up to 8 gaps per request with one shared system prompt (good for prefix caching; AudioSight batched 8 per request).
+- Batches of up to 8 gaps per request with one shared system prompt (good for prefix caching; an earlier project batched 8 per request).
 - Input per gap: the allowed facts (ids and text), on-screen text, gap length, the word budget, the dialogue just before and after (marked "do not restate"), the cast list.
 - Rules in the prompt (all also enforced in code in S8): present tense, active voice, third person, objective, no "we see", no inferred motives/relationships/destinations/occupations, no off-screen events, no sounds, never restate dialogue, never invent a name, on-screen text introduced as "On screen: …" or "A sign reads: …", use only the facts listed.
 - Output JSON, always an object at the top level (JSON-object mode rejects a bare array): `{"items":[{"gap_id","text","fact_ids"}]}`. Prefer vLLM structured output (`response_format: {"type":"json_schema", ...}` with `minItems = maxItems = N`) when the server supports it; otherwise `json_object` plus pydantic validation. Temperature 0.3, thinking off.
-- Seeds: `derive_seed(project_seed, f"{item_id}:{run_label}")` (Rivet's idea). `run_label` changes per repeated run (E1's 3 seeds, E11's K tries), so repeats are real repeats. The stage cache key includes the seed, prompt SHA-256, sampling settings and the server-reported model id, so a repeat can never be served from cache.
+- Seeds: `derive_seed(project_seed, f"{item_id}:{run_label}")` (an earlier project's idea). `run_label` changes per repeated run (E1's 3 seeds, E11's K tries), so repeats are real repeats. The stage cache key includes the seed, prompt SHA-256, sampling settings and the server-reported model id, so a repeat can never be served from cache.
 - **Word budget:** time available = gap end − anchor − 150 ms − 150 ms (an anchor may start after the gap begins). `words_max = clamp(floor(available_s × wps_voice) − 1, 2, 40)`, where `wps_voice` is measured for each voice and speed by `tts/calibrate.py` (synthesize 60 sentences of known length; fit duration = a + b × words; store per voice). The research figure for filmic description is about 179 wpm (≈3 words/s); we use our measured rate, not that figure.
 - Gaps that are too long get one line, not a paragraph: at most `max_words_per_line` = 25; split into two lines with a 400 ms breath between them if needed.
 
@@ -422,9 +422,9 @@ See §10 (rules) and §11 (repair, confidence, routing). Every item leaves S8 wi
 ### S9 Text to speech
 - English description voice: Kokoro-82M `af_heart` (Apache-2.0, grade A). A voice different from the speakers in the video (W3C WAI: a distinct, neutral voice).
 - Hindi and Italian: Chatterbox Multilingual V3 (MIT; adds an imperceptible watermark, which we disclose) as first choice; Kokoro `hf_alpha` / `if_sara` (grade C) or Indic Parler-TTS (Hindi) as fallbacks. Voice check: time a 1-minute script on ROCm as soon as the droplet is up; record results in `docs/decisions.md`.
-- Cache key: SHA-256 of (text, voice, speed, model revision). The speed multiplier is part of the key (AudioSight left it out; we don't).
+- Cache key: SHA-256 of (text, voice, speed, model revision). The speed multiplier is part of the key (an earlier project left it out; we don't).
 - After synthesis, S8's timing rule `AD001` re-runs on the **measured** clip duration.
-- Pre-fetch every TTS asset (Kokoro voices, misaki/espeak data, spaCy models) at install time so the offline run has 0 outbound calls (Rivet's bug #7: Kokoro fetched a spaCy model mid-run).
+- Pre-fetch every TTS asset (Kokoro voices, misaki/espeak data, spaCy models) at install time so the offline run has 0 outbound calls (an earlier project's bug #7: Kokoro fetched a spaCy model mid-run).
 
 ### S10 Captions
 - **SDH (rules only, no LLM):** segment aligned words into cues: ≤42 characters per line, ≤2 lines, ≤20 characters per second, break at punctuation and between clauses, duration between 40 frames (≈1.33 s at 30 fps) and 6 s (DCMP Captioning Key), cue start within 100 ms of its first word (our setting, modelled on EN 301 549 7.1.2, which requires players to keep captions within 100 ms of their timestamps). Add `[sound]` tags from S3 and speaker labels on speaker change.
@@ -432,10 +432,10 @@ See §10 (rules) and §11 (repair, confidence, routing). Every item leaves S8 wi
   - Rules-only cues that pass every rule with confidence ≥ 0.6 get status `auto_approved` (§11.3).
   - The SDH text is also the **"no simplification" reference** in E5.
 - **Easy-read (Gemma 4 31B):** rewrite each group of SDH cues (a speech segment) into plain language under constraints: ≤130 words per minute over the segment's time span, ≤12 words per sentence, one idea per sentence, digits for numbers, no abbreviations, keep every number, negation and name. Verify with §10.3, repair, then retime across the segment. When the text cannot fit at 130 wpm, the cue is flagged `needs_pause` and the player's "Give me time to read" mode holds it.
-- **Subtitles hi/it (Gemma 4 31B):** translate SDH cue groups using the alignment-safe batch pattern from video-voice-translator (MIT): number each segment, demand exactly N objects `{id, snippet, translation}` where `snippet` is the first 10 characters of the source, check ids and snippets, halve the batch on failure (N → N/2 → … → 1), then 3 single retries; if all fail, keep the item `needs_revision` (never silently keep English). Per-language limits: Hindi 22 cps (subtitles) / 25 (SDH); Italian 17 / 20 (Netflix guides). Gemma is told the time slot so it can shorten while translating.
+- **Subtitles hi/it (Gemma 4 31B):** translate SDH cue groups using the alignment-safe batch pattern from an earlier project (MIT): number each segment, demand exactly N objects `{id, snippet, translation}` where `snippet` is the first 10 characters of the source, check ids and snippets, halve the batch on failure (N → N/2 → … → 1), then 3 single retries; if all fail, keep the item `needs_revision` (never silently keep English). Per-language limits: Hindi 22 cps (subtitles) / 25 (SDH); Italian 17 / 20 (Netflix guides). Gemma is told the time slot so it can shorten while translating.
 
 ### S11 Hindi and Italian voice-over and description
-- **Voice-over:** for each speech segment, Gemma translates for speech (natural spoken style, fits the slot). TTS in the target language. The original voice is dipped (−12 dB under the voice-over, not removed), like UN-style voice-over. Slot rule: TTS duration ≤ slot; a tempo change up to 1.15× is allowed; more than that is a violation to repair by shortening the text. video-voice-translator sped clips up to 2.0×, which is too fast to follow; we don't.
+- **Voice-over:** for each speech segment, Gemma translates for speech (natural spoken style, fits the slot). TTS in the target language. The original voice is dipped (−12 dB under the voice-over, not removed), like UN-style voice-over. Slot rule: TTS duration ≤ slot; a tempo change up to 1.15× is allowed; more than that is a violation to repair by shortening the text. an earlier project sped clips up to 2.0×, which is too fast to follow; we don't.
 - **Description in hi/it:** translate the **approved** English description lines (meaning already approved by a person), re-check the word and time budget with the hi/it voice's measured rate, show the reviewer a back-translation. Lines that no longer fit go to extended description or back to Gemma to shorten.
 
 ### S12 Human review → §12
@@ -444,11 +444,11 @@ See §10 (rules) and §11 (repair, confidence, routing). Every item leaves S8 wi
 
 ### S14 Render each audience version
 - **Standard description mix:** place each TTS clip at its anchor (`adelay`). Because every anchor and duration is known, duck the original with a deterministic gain envelope (ffmpeg `volume` with `eval=frame` and an expression that ramps down before each clip and back up after it) rather than `sidechaincompress`, whose gain reduction depends on level and won't give a fixed dip. Dip 9 dB by default (Netflix: 6–12 dB; transitions ≤5 s; we ramp over 300 ms). Mix, then loudness-normalise: −23 LUFS for the broadcast export (EBU R 128) and −16 LUFS for the web player; always set `I` explicitly (ffmpeg's default is −24). Two-pass `loudnorm` (measure, then apply with `measured_*` and `linear=true`).
-- **Extended description:** split the source at each insertion point into segments (`trim`/`atrim` with `setpts`/`asetpts`), extend the end of each segment with a frozen frame (`tpad=stop_mode=clone:stop_duration=<d>`) and the matching silence (`apad`), lay 150 ms silence + description + 150 ms silence (10 ms fades) over the pause, then `concat` all segments and re-encode (AudioSight's expanded timeline). `tpad` alone only pads the end of a stream, so per-segment processing is required. Write `source_to_output.<version>.jsonl` mapping both timelines, and remap every caption track through it.
+- **Extended description:** split the source at each insertion point into segments (`trim`/`atrim` with `setpts`/`asetpts`), extend the end of each segment with a frozen frame (`tpad=stop_mode=clone:stop_duration=<d>`) and the matching silence (`apad`), lay 150 ms silence + description + 150 ms silence (10 ms fades) over the pause, then `concattpad` alone only pads the end of a stream, so per-segment processing is required. Write `source_to_output.<version>.jsonl` mapping both timelines, and remap every caption track through it.
 - **Voice-over versions** hi/it: original dipped, voice-over placed per slot, description mixed as above.
 - **Tracks (WebVTT):** `sdh.en.vtt`, `easy.en.vtt`, `subs.hi.vtt`, `subs.it.vtt`, `desc.en.vtt` / `desc.hi.vtt` / `desc.it.vtt` (text description for screen readers; `kind="descriptions"`), plus remapped copies for extended versions. Each track has a distinct label (MDN: only one track per kind+srclang+label).
 - **Exports (P2):** W3C DAPT TTML (Dubbing and Audio description Profiles of TTML2, Candidate Recommendation Draft 26 Jun 2026) with script types `originalTranscript`, `translatedTranscript`, `asRecorded`; a "standards-native" bonus for broadcasters.
-- Render checks: §10.6. A render that fails any check is not written to `render/`; the project moves to `needs_repair` (Rivet).
+- Render checks: §10.6. A render that fails any check is not written to `render/`; the project moves to `needs_repair` (an earlier project).
 
 ### S15 Package
 `report.json`, `decisions.json`, `benchmark.json`, `cost.json`, all tracks, all versions, and an `index.json` the player reads. `accesscast export-site` copies approved, reviewed projects into `site/`.
@@ -475,25 +475,25 @@ class VerificationResult:
     violations: list[Finding]    # errors
     warnings: list[Finding]
 ```
-- Pure functions of (item, analysis files). No network, no model calls (except the advisory rules marked **advisory**, which never block; Rivet's A08 pattern).
+- Pure functions of (item, analysis files). No network, no model calls (except the advisory rules marked **advisory**, which never block; an earlier project's A08 pattern).
 - Every rule has a unit test with a passing and a failing fixture, and a line in `docs/rules.md` with its source.
 - Any exception inside a rule = an error finding `VERIFIER_CRASH` on that item (fail closed).
-- Every finding shows observed vs threshold (Rivet's "mean pixel difference of 9.3 against a threshold of 40").
+- Every finding shows observed vs threshold (an earlier project's "mean pixel difference of 9.3 against a threshold of 40").
 
 ### 10.2 Description lines (`ad`, `ad_translation`)
 | Rule | Severity | Check | Source |
 |---|---|---|---|
-| AD001 `GAP_OVERFLOW` | error | measured TTS duration + 150 ms + 150 ms > slot length (before TTS: estimated from `wps_voice`) | AudioSight pads; our timing model |
-| AD002 `ANCHOR_INSIDE_DIALOGUE_WORD` | error | any word has start < anchor < end | AudioSight |
-| AD003 `ANCHOR_NEAR_DIALOGUE_WORD` | warning | \|anchor − nearest word edge\| < 100 ms | AudioSight |
+| AD001 `GAP_OVERFLOW` | error | measured TTS duration + 150 ms + 150 ms > slot length (before TTS: estimated from `wps_voice`) | an earlier project pads; our timing model |
+| AD002 `ANCHOR_INSIDE_DIALOGUE_WORD` | error | any word has start < anchor < end | an earlier project |
+| AD003 `ANCHOR_NEAR_DIALOGUE_WORD` | warning | \|anchor − nearest word edge\| < 100 ms | an earlier project |
 | AD004 `OVERLAPS_SPEECH` | error | the clip's span [anchor, anchor + duration] overlaps any padded speech span (words ∪ VAD) | ours (the property E1 measures independently) |
 | AD005 `ANCHOR_FAR_FROM_EVENT` | error | anchor outside [event start − 2.0 s, event end + 1.0 s] for its facts | W3C WAI "at or just before the visual" |
-| AD006 `NON_MONOTONIC_OR_OVERLAPPING_AD` | error | two description clips overlap, or ids are out of time order | AudioSight |
-| AD007 `WORD_BUDGET_EXCEEDED` | error | word count > `words_max` (never truncated) | AudioSight `NARRATION_TEXT_TOO_LONG` (ours blocks) |
-| AD008 `RESTATES_DIALOGUE` | error | shares any 4-gram (lemmatised, stop-words kept) with dialogue within ±10 s, or token Jaccard > 0.5 | AudioSight rule; DCMP/Ofcom 4.8 |
-| AD009 `INVENTED_NAME` | error | a proper noun (spaCy PROPN/PERSON) not in the allowed-name set (names from direct address, self-introduction, OCR text) | AudioSight "Never invent a name"; Netflix; Ofcom 4.9 |
-| AD010 `UNSUPPORTED_CLAIM` | error | matches the claim lexicon: motive ("because", "in order to", "wants to", "decides"), relationship ("his wife", "her son", "friend", "boss"), destination ("heads to the …"), occupation not on screen ("a doctor"), off-screen events, deadlines | GemmaClip's claim types (re-implemented as our own lexicon in en/hi/it) |
-| AD011 `SOUND_IN_DESCRIPTION` | error | mentions sound, speech, music or noise words | GemmaClip's audio-claim list; description is for what can't be heard |
+| AD006 `NON_MONOTONIC_OR_OVERLAPPING_AD` | error | two description clips overlap, or ids are out of time order | an earlier project |
+| AD007 `WORD_BUDGET_EXCEEDED` | error | word count > `words_maxNARRATION_TEXT_TOO_LONG` (ours blocks) |
+| AD008 `RESTATES_DIALOGUE` | error | shares any 4-gram (lemmatised, stop-words kept) with dialogue within ±10 s, or token Jaccard > 0.5 | an earlier project rule; DCMP/Ofcom 4.8 |
+| AD009 `INVENTED_NAME` | error | a proper noun (spaCy PROPN/PERSON) not in the allowed-name set (names from direct address, self-introduction, OCR text) | an earlier project "Never invent a name"; Netflix; Ofcom 4.9 |
+| AD010 `UNSUPPORTED_CLAIM` | error | matches the claim lexicon: motive ("because", "in order to", "wants to", "decides"), relationship ("his wife", "her son", "friend", "boss"), destination ("heads to the …"), occupation not on screen ("a doctor"), off-screen events, deadlines | an earlier project's claim types (re-implemented as our own lexicon in en/hi/it) |
+| AD011 `SOUND_IN_DESCRIPTION` | error | mentions sound, speech, music or noise words | an earlier project's audio-claim list; description is for what can't be heard |
 | AD012 `NOT_GROUNDED` | error if > 1/3 of content nouns are unsupported, warning if any | each content noun (lemma) must appear in the listed facts, on-screen text or cast appearance (with a small synonym list) | ours |
 | AD013 `ONSCREEN_TEXT_NOT_READ` | warning | high-confidence OCR text (≥ 3 words, title/slide kind) in the scene that no line reads, while a gap was available | DCMP, W3C WAI |
 | AD014 `COMMENTARY` | warning | "we see", "we can see", "the camera", "the viewer", "seems to", "appears to" | ACB, DCMP objectivity |
@@ -528,11 +528,11 @@ class VerificationResult:
 | CC004 `DURATION` | error | < 40 frames or > 6 s | DCMP Captioning Key |
 | CC005 `SYNC` | error | cue start more than 100 ms from its first word's aligned start | our setting, modelled on EN 301 549 7.1.2 (a player rule: captions within 100 ms of their timestamps) |
 | CC006 `NOT_VERBATIM` | error for automatic SDH cues; skipped for reviewer edits (logged) | normalised cue words ≠ aligned words for the span | DCMP: verbatim where required, editing allowed for readability |
-| CC007 `SEGMENT_MISALIGNED` | error | translation ids or snippets don't match the source batch | video-voice-translator |
+| CC007 `SEGMENT_MISALIGNED` | error | translation ids or snippets don't match the source batch | an earlier project |
 | CC008 `UNTRANSLATED` | error | output equals input, or > 50% of tokens are English in a hi/it track | QuestBridge's "unchanged-English rejections" |
 | CC009 `NUMBER_OR_NAME_CHANGED` | error | numbers or names differ from the source (transliteration table allowed for Hindi) | ours |
-| CC010 `MISSING_GLYPH` | error | a character the caption font cannot draw | Rivet A11 (their Mandarin rendered as boxes) |
-| CC011 `CONTRAST` | error (burned-in only) | text-to-background contrast < 4.5:1 on the actual frame | Rivet A10; WCAG 1.4.3 |
+| CC010 `MISSING_GLYPH` | error | a character the caption font cannot draw | an earlier project A11 (their Mandarin rendered as boxes) |
+| CC011 `CONTRAST` | error (burned-in only) | text-to-background contrast < 4.5:1 on the actual frame | an earlier project A10; WCAG 1.4.3 |
 
 ### 10.5 Voice-over lines (`voiceover`)
 | Rule | Severity | Check |
@@ -558,7 +558,7 @@ class VerificationResult:
 
 ## 11. Repair loop, confidence and routing
 
-### 11.1 Repair loop (ProteinLoop pattern, adapted)
+### 11.1 Repair loop (an earlier project pattern, adapted)
 ```
 attempt 0: Gemma draft → verify
   ok → status "pending" (waits for a person)
@@ -582,10 +582,10 @@ attempt 0: Gemma draft → verify
 ```
 - Request: temperature 0.2, `response_format: json_object` (top-level object), `chat_template_kwargs: {"enable_thinking": false}`, seed `derive_seed(project_seed, f"{item_id}:{run_label}:repair:{k}")`.
 - Stop reasons (logged per item): `safe_initial_proposal`, `safe_model_revision`, `repair_limit_reached`, `revision_generation_failed`, `non_repairable`.
-- Never promote an item that failed. The fallback is a person, not a deterministic text (ProteinLoop's fallback was a safe policy; ours is the review queue).
+- Never promote an item that failed. The fallback is a person, not a deterministic text (an earlier project's fallback was a safe policy; ours is the review queue).
 
 ### 11.2 Confidence (computed in code, never asked of the model)
-ageBand: "Confidence is NEVER taken from the LLM output." AudioSight hard-coded 0.75; don't.
+an earlier project: "Confidence is NEVER taken from the LLM output." an earlier project hard-coded 0.75; don't.
 ```
 confidence = clip01( 1.0
    × grounding            # share of content nouns found in facts/OCR/cast (AD012)
@@ -606,13 +606,13 @@ confidence = clip01( 1.0
 | Subtitles and voice-over lines (hi/it) | Items with CC009/VO003, back-translation drift, or picked in the random spot-check sample | Yes, if every rule passes and the item wasn't sampled |
 - Confidence orders the queue (lowest first) and pre-opens the low-confidence items.
 - The report counts approvals by type (person / auto), and public wording follows the table: "every description and easy-read line was approved by a person; captions and translations passed automatic checks, with `<n>` spot-checked by people".
-- Draft mode (`--review-policy prototype-auto`, AudioSight's name): auto-approves passing items for previews only; output is stamped `human_reviewed: false` and watermarked; `export-site` refuses it.
+- Draft mode (`--review-policy prototype-autohuman_reviewed: false` and watermarked; `export-site` refuses it.
 
 ---
 
 ## 12. Human review app and the render gate
 
-### 12.1 Layout (PolicyCut's pattern, re-implemented; PolicyCut is MIT)
+### 12.1 Layout (an earlier project's pattern, re-implemented; an earlier project is MIT)
 - **Left:** item list with filter tabs All / Pending / Needs revision / Approved / Rejected, counts, and a pending badge. Sorted by time; "Jump to lowest confidence" button.
 - **Centre:** the video with the evidence frames for the selected item; a timeline below with lanes: **Words** (each word a box), **Gaps**, **Description**, **Captions**, **Voice-over**. Description bars are coloured by status (pending amber `#f5a623`, approved green `#3fb950`, rejected grey `#6b7280`); manual items get a dashed outline.
 - **Right:** the item's draft and an editable final text; the budget meter ("9 of 10 words, 3.7 of 4.1 s"); violations and warnings with observed vs threshold in plain words; the facts it used; confidence and its terms; repair history (draft → each revision); buttons: **Approve**, **Reject**, **Needs revision**, **Play in context (±2 s)**, **Hear it** (TTS of the current text with re-measured fit).
@@ -627,16 +627,16 @@ Space play/pause · `,`/`.` one frame back/forward · `[`/`]` previous/next item
 - "Hear it in context" plays 2 s of original audio, the description, then 2 s after, so timing can be judged by ear.
 - E16 runs axe-core in Playwright on the review app and the player: target 0 violations; plus a keyboard-only end-to-end test that reviews a whole project.
 
-### 12.4 Store contract (PolicyCut's, extended)
+### 12.4 Store contract (an earlier project's, extended)
 - `review/state.json` holds every item's status, final text and `revision`. Every write sends `expected_revision`; a mismatch returns 409 and the view reloads ("Changed elsewhere; reloaded.").
 - Every change appends to `review/review_history.jsonl` (who, when, item, before, after, reason) and sets `exports_stale: true`.
 - Endpoints: `GET /projects/{id}/items`, `PATCH /projects/{id}/items/{item_id}`, `POST /projects/{id}/items` (manual line), `POST /projects/{id}/review/complete`, `POST /projects/{id}/render`.
 - Edits saved optimistically, debounced 550 ms.
 - The review timer: `review_seconds` per item and per project (active time with the item open, idle > 60 s excluded). E12 uses it.
 
-### 12.5 Render gate (server-side, not a browser `confirm()`)
+### 12.5 Render gate (server-side, not a browser `confirm`)
 - `POST /render` returns 409 while any item in the requested versions is `pending` or `needs_revision`. `approved` and `auto_approved` items render; `rejected` items don't.
-- The gate writes `reports/validation.json` bound to SHA-256 of `review/state.json`; `render` refuses a stale validation (AudioSight).
+- The gate writes `reports/validation.json` bound to SHA-256 of `review/state.json`; `render` refuses a stale validation (an earlier project).
 - The output's `report.json` carries `human_reviewed: true`, reviewer ids, override count and review seconds.
 
 ---
@@ -661,9 +661,9 @@ A page that plays one 20-second segment as each audience experiences it, one aft
 
 ### 13.5 Proof page (`/proof`)
 - **"Run the attack"** (§17): runs N tries (default 10, fresh seed each, at the stress temperature, labelled) of the attack case with the highest Gemma failure rate in E11, against the live Gemma endpoint, and shows each try: what Gemma wrote, which rule blocked it, and the tally "Gemma failed k of N, blocked k, reached the viewer 0". One try would usually show Gemma passing, so never run just one.
-- Endpoint: whichever Gemma endpoint is up, Token Factory first if it lists Gemma 4 (always on, no droplet billing), the droplet otherwise; the page names the endpoint that served each try. If neither is reachable, it says so and shows the last recorded run with its date and evidence file; it never fakes a live run (ProteinLoop's one-click proof was deterministic; ours calls Gemma, and says when it can't).
+- Endpoint: whichever Gemma endpoint is up, Token Factory first if it lists Gemma 4 (always on, no droplet billing), the droplet otherwise; the page names the endpoint that served each try. If neither is reachable, it says so and shows the last recorded run with its date and evidence file; it never fakes a live run (an earlier project's one-click proof was deterministic; ours calls Gemma, and says when it can't).
 - The browser never holds a key. A small API server holds it, accepts only the fixed attack cases (no free-form prompts), and rate-limits per IP.
-- A verified render next to a refused one (Rivet's gallery): the refused render's report shows which item was still pending.
+- A verified render next to a refused one (an earlier project's gallery): the refused render's report shows which item was still pending.
 - Live numbers from `evidence/` with links to the files.
 
 ### 13.6 "Try your own clip" (P2)
@@ -701,7 +701,7 @@ Memory figures marked *computed* are parameters × 2 bytes (BF16), not measureme
 **Droplet:** AMD Developer Cloud, MI300X ×1 ($1.99/hour; 192 GB HBM3, 20 vCPU, 240 GB RAM), "vLLM Quick Start" image, SSH-key access. Payment method required; **a powered-off droplet still bills**: snapshot, then destroy.
 
 **Images to try, in this order** (record which one worked in `docs/decisions.md`; pin by digest in `deploy/versions.lock`):
-1. `vllm/vllm-openai-rocm:gemma4` (AMD's Gemma 4 Day 0 post; used by ProteinLoop)
+1. `vllm/vllm-openai-rocm:gemma4` (AMD's Gemma 4 Day 0 post; used by an earlier project)
 2. `rocm/vllm:rocm10.1.0_ubuntu24.04_py3.14-pytorch_2.13.0_vllm-0.29.0` (AMD's newest listed; check it serves Gemma 4 and audio)
 3. `vllm/vllm-openai-rocm` nightly (check the `latest` tag exists before pulling)
 4. pip: `uv venv --python 3.12 && uv pip install vllm --pre --extra-index-url https://wheels.vllm.ai/rocm/nightly/rocm721 --upgrade` (the recipe requires Python 3.12, ROCm 7.2.1 and glibc ≥ 2.35 on the host)
@@ -725,12 +725,12 @@ docker run -d --name g4-e4b <same flags> <IMAGE> --model google/gemma-4-E4B-it -
 ```
 - Gemma 4's mixed head sizes force the Triton attention backend; decode may be slow. Get throughput from concurrency (E13) and measure before tuning.
 - `VLLM_ROCM_USE_AITER=1` is AMD's master switch for AITER kernels: an E2 ladder step, not a default, until measured.
-- Health loop (ProteinLoop): `curl -fsS --max-time 10 http://127.0.0.1:8000/v1/models | grep -q gemma-4-31b`, up to 480 tries × 5 s (first ROCm compile can take a long time).
+- Health loop (an earlier project): `curl -fsS --max-time 10 http://127.0.0.1:8000/v1/models | grep -q gemma-4-31b`, up to 480 tries × 5 s (first ROCm compile can take a long time).
 - **Bind to 127.0.0.1.** Docker port mapping bypasses UFW on these droplets. Reach vLLM from your laptop with `ssh -L 8000:127.0.0.1:8000 -L 8001:127.0.0.1:8001 root@<ip>`. Never expose an open Gemma endpoint to the internet; the proof page goes through our own server with a key and rate limit.
-- No silent CPU offload: never pass `--cpu-offload-gb` (default 0) and, if the installed vLLM still has `--swap-space`, set it to 0 (AudioSight). `doctor` reads the server's startup log and fails if any offload is active. `--require-rocm` on our workers fails if `torch.cuda.is_available()` is false or the device isn't an AMD GPU (PolicyCut).
+- No silent CPU offload: never pass `--cpu-offload-gb` (default 0) and, if the installed vLLM still has `--swap-spacedoctor` reads the server's startup log and fails if any offload is active. `--require-rocm` on our workers fails if `torch.cuda.is_available` is false or the device isn't an AMD GPU (an earlier project).
 - Every container gets `-e VLLM_NO_USAGE_STATS=1 -e DO_NOT_TRACK=1` (vLLM sends usage stats by default), and `-e HF_HUB_OFFLINE=1` once weights are cached.
 - E3 needs other models on the GPU (26B-A4B ≈50 GB; E4B with images enabled). Run E3 with its own server configuration, one model at a time, never next to the production pair.
-- Telemetry: AMD Developer Cloud MI300X instances are virtual functions that report zero for utilisation, power and temperature; only VRAM reads live (CacheForge's finding). Report VRAM and say why the rest is missing.
+- Telemetry: AMD Developer Cloud MI300X instances are virtual functions that report zero for utilisation, power and temperature; only VRAM reads live (an earlier project's finding). Report VRAM and say why the rest is missing.
 
 ### 14.3 LLM client (`llm/client.py`)
 - OpenAI-compatible `POST /v1/chat/completions` over `httpx`. Providers: `local` (vLLM through the SSH tunnel) and `tokenfactory` (`AMD_TF_BASE_URL`, `AMD_TF_API_KEY`).
@@ -738,7 +738,7 @@ docker run -d --name g4-e4b <same flags> <IMAGE> --model google/gemma-4-E4B-it -
 - Per-provider semaphore and requests-per-minute limiter (configurable). Retries on timeout, 429, 500, 502, 503, 504 with exponential backoff + jitter, at most 3. Malformed JSON: one retry with "Return valid JSON only.", then the item fails closed.
 - Structured output: every prompt returns a top-level JSON **object** (JSON-object mode rejects a bare array; wrap lists as `{"items": [...]}`). Prefer `response_format: {"type": "json_schema", "json_schema": {...}}` when the server supports it; otherwise `json_object`.
 - JSON extraction: last balanced object (handles code fences), then pydantic validation.
-- Log every call to `logs/llm_calls.jsonl`: provider, model id **as returned by the server**, prompt id and SHA-256, temperature, seed, tokens in/out, latency, status. Never log keys or image bytes; truncate text fields to 300 characters (GemmaClip's diagnostics rule).
+- Log every call to `logs/llm_calls.jsonl`: provider, model id **as returned by the server**, prompt id and SHA-256, temperature, seed, tokens in/out, latency, status. Never log keys or image bytes; truncate text fields to 300 characters (an earlier project's diagnostics rule).
 - `--strict-provider` (used by every eval and benchmark): fail if the requested provider is unavailable; never fall back.
 - Images: base64 `image_url` data URLs. Audio: the vLLM Gemma 4 recipe's `audio_url` content part (verify the exact request shape against the running server and pin it in a test).
 
@@ -753,18 +753,18 @@ docker run -d --name g4-e4b <same flags> <IMAGE> --model google/gemma-4-E4B-it -
 - Record time per second of audio on ROCm for each engine (RTF) in `benchmark.json`.
 
 ### 14.6 Offline mode (`guard/network.py`)
-- Python layer: patch `socket.socket.connect`, `connect_ex`, `sendto`, `socket.create_connection` and `socket.getaddrinfo`; allow only loopback; count and record every blocked attempt. Install it in the core process **and in every worker** (a `sitecustomize` hook on the workers' path). Rivet's guard missed `getaddrinfo`, `connect_ex` and UDP; ours covers them.
+- Python layer: patch `socket.socket.connect`, `connect_ex`, `sendto`, `socket.create_connection` and `socket.getaddrinfo`; allow only loopback; count and record every blocked attempt. Install it in the core process **and in every worker** (a `sitecustomize` hook on the workers' path). an earlier project's guard missed `getaddrinfo`, `connect_ex` and UDP; ours covers them.
 - Host layer (catches native binaries like ffmpeg, tesseract and espeak, and the Docker containers): run E10 **entirely on the droplet**, pipeline and vLLM on the same machine talking over loopback, with an `iptables`/`nftables` rule that counts (and drops) every outbound packet not on `lo`. No SSH tunnel during the run (an SSH session's own traffic is excluded by rule and listed in the report).
 - `make offline-demo`: `HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 VLLM_NO_USAGE_STATS=1 DO_NOT_TRACK=1`, both guard layers on, full pipeline on a dev clip; writes `evidence/e10_offline.json` with `python_blocked_attempts` and `host_outbound_packets` (both must be 0) and the output hashes.
 
 ### 14.7 Determinism controls
 - Temperature 0 for evidence and scene judging; fixed per-item seeds for writing and repair; `--generation-config vllm` so a checkpoint's generation config does not override our sampling.
-- Identical requests can still give different greedy output on different server replicas or batch mixes (AudioSight: six workers replaying one request produced 52 facts on one and 16 on another). So determinism is **measured** (E9), not assumed, and the claim is worded exactly as measured.
-- Stage cache keys include the seed, prompt SHA-256, sampling settings and the server-reported model id (Rivet included the seed), so deliberate repeats are never served from cache.
+- Identical requests can still give different greedy output on different server replicas or batch mixes (an earlier project: six workers replaying one request produced 52 facts on one and 16 on another). So determinism is **measured** (E9), not assumed, and the claim is worded exactly as measured.
+- Stage cache keys include the seed, prompt SHA-256, sampling settings and the server-reported model id (an earlier project included the seed), so deliberate repeats are never served from cache.
 
 ### 14.8 `accesscast doctor`
 - `doctor`: checks ffmpeg/ffprobe, espeak-ng, tesseract languages, Python packages, HF token, disk space, both vLLM endpoints (`/v1/models`), Token Factory key, ROCm device name.
-- `doctor --deep --json`: loads each model once, runs one inference, records peak VRAM and time (AudioSight). Output goes to `evidence/doctor.json` and fills the memory table (§16.1).
+- `doctor --deep --jsonevidence/doctor.json` and fills the memory table (§16.1).
 
 ---
 
@@ -813,7 +813,7 @@ Every experiment changes exactly one thing, names its baseline, writes `evidence
 | E10 | Fully offline? | network guard on | — | 1 dev clip | outbound attempts (must be 0); output equal to the online run |
 | E11 | Does the guard catch the real model live? | — (attack suite) | Gemma alone | §17 clips | per case: Gemma failures out of K tries; blocked out of failures; leaks (must be 0) |
 | E12 | How much person-time does it save? | review AccessCast's queue vs write from scratch | writing description from scratch in the same tool (manual mode), timed | dev: minutes M1 and M2; **crossed design:** person 1 reviews M1 and writes M2 from scratch, person 2 writes M1 and reviews M2 | minutes of work per finished minute; blind preference between the outputs; AUROC of confidence vs "reviewer changed the text" (small sample, say so). Published estimates (≈20–30 min per finished minute) shown separately and labelled |
-| E13 | How many requests can one MI300X serve? | concurrency 1/4/8/16/32/64; prefix cache on/off | concurrency 1; prefix cache off | replayed real description and repair requests (dev) | p50/p95 latency, success, tokens/s (delta of `vllm:generation_tokens_total` from `/metrics`, ageBand's method), $ per 1,000 lines at $1.99/hour, users per GPU as defined in §16.2 |
+| E13 | How many requests can one MI300X serve? | concurrency 1/4/8/16/32/64; prefix cache on/off | concurrency 1; prefix cache off | replayed real description and repair requests (dev) | p50/p95 latency, success, tokens/s (delta of `vllm:generation_tokens_total` from `/metrics`, an earlier project's method), $ per 1,000 lines at $1.99/hour, users per GPU as defined in §16.2 |
 | E14 | What does each experience cost? | — | list prices (labelled) | dev batch; test batch after freeze | §16.3 |
 | E15 | Which ASR, and how accurate are word boundaries? | ASR model; forced alignment on/off | Whisper large-v3 vs large-v3-turbo vs Gemma 4 E4B | **FLEURS (en, hi, it) and dev clips** for the decision; one hand-labelled dev clip for boundary error; W3C captions only after the freeze, to report | WER/CER (`jiwer`), timestamps available?, real-time factor, word-boundary error in ms (median, p95) with and without forced alignment → sets `guard_ms` |
 | E16 | Are our own pages accessible? | — | — | review app + player | axe-core violations (target 0); keyboard-only e2e pass; screen-reader smoke test by a person (recorded) |
@@ -831,9 +831,9 @@ Every experiment changes exactly one thing, names its baseline, writes `evidence
    - A person, blind to the arm (lines shuffled across arms), marks invented names, unsupported claims and restated dialogue on every line.
 4. **Coverage guard:** a check that blocks lines could "win" by saying less. Report lines published per arm and the share of W3C human description positions that have one of our lines within ±3 s. Headline on lines that fit **at equal coverage**; if C's coverage falls more than 10 points below A's, the headline must say so.
 5. Run 3 seeds (distinct `run_label`s, so no cache hits). Report k/N per seed and pooled, with a bootstrap 95% interval clustered by video (10,000 resamples). With 10 videos, say "on `<L>` lines from 10 videos", not "significant".
-6. ProteinLoop framing for the README: "`<a>` of `<L>` lines fitted on Gemma's first try; with checks and repair, `<b>`; the other `<L−b>` went to a person." Don't headline "0 overlaps published": that is true by construction once checks block bad lines.
+6. an earlier project framing for the README: "`<a>` of `<L>` lines fitted on Gemma's first try; with checks and repair, `<b>`; the other `<L−b>` went to a person." Don't headline "0 overlaps published": that is true by construction once checks block bad lines.
 
-#### E2 ladder steps (StudioMI300's format; keep failed steps in the table)
+#### E2 ladder steps (an earlier project's format; keep failed steps in the table)
 | Step | Change |
 |---|---|
 | V0 | vLLM servers already running; worker models resident; one request at a time; vision 280 tokens; no prefix caching (`--no-enable-prefix-caching`) |
@@ -843,8 +843,8 @@ Every experiment changes exactly one thing, names its baseline, writes `evidence
 | V4 | `VLLM_ROCM_USE_AITER=1` |
 | V5 | FP8 KV cache (`--kv-cache-dtype fp8`) |
 | V6 | MTP speculative decoding with `google/gemma-4-31B-it-assistant` (may need a nightly; failure is a published negative result) |
-- **Model reload cost is measured separately, not baked into V0** (that would make the ladder look better than it is): one row comparing one-shot workers that load per stage against resident workers (Rivet measured 24% for this). The vLLM servers' first ROCm compile time is reported on its own line too.
-- Adopt a step only if it gains ≥5% on the dev set with the quality guard held (AudioSight's adoption rule). Discard the first run as warm-up, alternate arms, report the median of ≥3 runs with min/max (Rivet's benchmark hygiene).
+- **Model reload cost is measured separately, not baked into V0** (that would make the ladder look better than it is): one row comparing one-shot workers that load per stage against resident workers (an earlier project measured 24% for this). The vLLM servers' first ROCm compile time is reported on its own line too.
+- Adopt a step only if it gains ≥5% on the dev set with the quality guard held (an earlier project's adoption rule). Discard the first run as warm-up, alternate arms, report the median of ≥3 runs with min/max (an earlier project's benchmark hygiene).
 
 ### 15.4 Statistics rules
 - Always give counts (k/N) next to percentages. Give n, median, min/max for timings.
@@ -858,7 +858,7 @@ Every experiment changes exactly one thing, names its baseline, writes `evidence
 4. A baseline translator beating Gemma on COMET for one language (E4), and what we did about it.
 5. No validated Hindi readability formula available, so Hindi easy-read is checked only by sentence length and rate.
 6. Extended description makes the video longer (report % added); a CHI 2024 survey found that even a 30-second extension can double the time a blind viewer spends on a video.
-7. Thinking mode on vs off for description quality and time (AudioSight found 1,623 s vs 461 s with worse item counts; check for Gemma).
+7. Thinking mode on vs off for description quality and time (an earlier project found 1,623 s vs 461 s with worse item counts; check for Gemma).
 8. Whatever the soak or determinism runs show that is not perfect.
 
 ---
@@ -892,14 +892,14 @@ Statement for the README, only if the total needed is above 80 GB: "All models s
 ### 16.4 Reliability
 - E8 soak: run the dev set in a loop for at least 4 hours (longer if the budget allows). Pass = 0 failed jobs, VRAM growth ≈0. Plot VRAM over time for the README.
 - E9 determinism and E10 offline as in §15.3.
-- Fail-closed tests (`tests/e2e/test_fail_closed.py`): kill vLLM mid-job → the job stops with items blocked and resumes cleanly; Token Factory 429s → backoff then success; TTS crash → item blocked; malformed Gemma JSON → item blocked; unknown language → refuse (Katha silently fell back to English; we don't).
-- SignalForge-style result lines for the README: "Gemma endpoint lost mid-run → 0 unreviewed lines published, job resumed from the last stage".
+- Fail-closed tests (`tests/e2e/test_fail_closed.py`): kill vLLM mid-job → the job stops with items blocked and resumes cleanly; Token Factory 429s → backoff then success; TTS crash → item blocked; malformed Gemma JSON → item blocked; unknown language → refuse (an earlier project silently fell back to English; we don't).
+- an earlier project-style result lines for the README: "Gemma endpoint lost mid-run → 0 unreviewed lines published, job resumed from the last stage".
 
 ---
 
 ## 17. Adversarial cases shown live
 
-ageBand's "guard held" came from a deterministic mode; in its live Gemma run the guard did not override the model. Ours must block **the real model's output in the same run**. Each case runs K = 20 times live at the production temperature, plus 20 at temperature 1.0 as a labelled stress setting, each try with its own seed (`run_label = "e11:<case>:<try>"`), so the tries are genuinely different.
+an earlier project's "guard held" came from a deterministic mode; in its live Gemma run the guard did not override the model. Ours must block **the real model's output in the same run**. Each case runs K = 20 times live at the production temperature, plus 20 at temperature 1.0 as a labelled stress setting, each try with its own seed (`run_label = "e11:<case>:<try>"`), so the tries are genuinely different.
 
 The table below lists what we **expect** Gemma might do. Which case goes in the demo video and on the proof page is chosen from E11's measured failure rates, after E11 runs; the script never claims a failure before it has been measured.
 
@@ -935,7 +935,7 @@ The table below lists what we **expect** Gemma might do. Which case goes in the 
 7. **What runs on AMD:** MI300X, ROCm, vLLM and image digests, the memory table (§16.1), what runs on Token Factory.
 8. **How quality is controlled:** checks (rule count by kind, examples with observed vs threshold), Gemma repair, the person, the render gate, disclosure.
 9. **What didn't work:** the negative results (§15.5) with numbers.
-10. **Honest scope — what's real vs simplified** (Rivet's honesty table):
+10. **Honest scope — what's real vs simplified** (an earlier project's honesty table):
 
    | Claim | Real | Simplified / not done |
    |---|---|---|
@@ -946,12 +946,12 @@ The table below lists what we **expect** Gemma might do. Which case goes in the 
    | "Usefulness" (E6) | LLM proxy | not a study with blind viewers |
    | … | … | … |
 11. **Prior work and how we differ** (§21.1), and the ideas we built on (credited, re-implemented).
-12. **Bugs that taught us something** (Rivet's section): from `docs/incidents.md` (Symptom / Root cause / Fix).
+12. **Bugs that taught us something** (an earlier project's section): from `docs/incidents.md` (Symptom / Root cause / Fix).
 13. **Reproduce:** droplet bootstrap, `make serve-gemma`, `make e01` … `make e16`, `make submission-check`.
 14. **Licences and credits:** our MIT code; `MODEL_LICENSES.md`; W3C page links (required by their terms); Blender credits; NASA credit; Prelinger.
 15. **Team.**
 
-### 18.3 JUDGES.md (SignalForge's structure)
+### 18.3 JUDGES.md (an earlier project's structure)
 ```
 # AccessCast Judge Guide
 The shortest route through the submission.
@@ -977,7 +977,7 @@ The shortest route through the submission.
 ## Reproduce
 ## Honest Scope
 ```
-End the file with hidden `<!-- evidence-claim: <claim_id> -->` comments tying sections to claims (SignalForge).
+End the file with hidden `<!-- evidence-claim: <claim_id> -->` comments tying sections to claims (an earlier project).
 
 ### 18.4 Claims registry (`evidence/public-claims.json`)
 ```json
@@ -993,10 +993,10 @@ End the file with hidden `<!-- evidence-claim: <claim_id> -->` comments tying se
 - `make claims-check`: recompute every SHA-256; read the value at each pointer; fail if any value differs; scan every public file for numbers and fail on any number that is neither a claim value nor on a short allow-list (versions, standard thresholds like "42 characters"); fail on any leftover `<pending:` placeholder.
 
 ### 18.5 Other judge-facing files
-- `docs/compliance-matrix.md`: submission requirements and track brief, each with its proof (SignalForge's "navigation aid, not a scoring claim").
+- `docs/compliance-matrix.md`: submission requirements and track brief, each with its proof (an earlier project's "navigation aid, not a scoring claim").
 - `docs/architecture.svg`: the §6.1 picture, drawn properly.
 - `evidence/gallery/`: a published render with its report next to a refused one (report shows the pending item), plus 10-second before/after audio clips.
-- `docs/incidents.md`: dated Symptom / Root cause / Fix entries, ending with "Known limitations (still open)" (StudioMI300).
+- `docs/incidents.md`: dated Symptom / Root cause / Fix entries, ending with "Known limitations (still open)" (an earlier project).
 
 ### 18.6 `make submission-check`
 Fails unless: README line 1 has only claim-backed numbers; every §5 must-have has its evidence file (names as in §5, two-digit `eNN_`); claims-check passes (including no `<pending:` placeholders); no W3C-derived media in `site/` or git; `MODEL_LICENSES.md` lists every model, voice, dataset, clip and font in `project.json` files; no secrets (regex for keys, tokens, `rc-` keys, `.env`); no media we may not redistribute is committed; `site/` builds and the live URL returns 200; deck PDF, cover image and demo-video link exist; the lablab text in `docs/lablab.md` passes claims-check.
@@ -1050,7 +1050,7 @@ Every number on a slide is a claim in the registry; the deck source is scanned b
 - Ask the organisers when judging happens (§25) and keep the GPU endpoint up for those windows if the budget allows.
 
 ### 19.6 Repo hygiene
-Public repo; MIT `LICENSE`; `THIRD_PARTY_NOTICES.md`; no W3C media committed (fetched by script); Blender clips only with credit; no secrets; release tag `act3-submission` pointing at the submitted commit; demo video and deck also attached to the GitHub release (SignalForge kept them in releases, not on `main`).
+Public repo; MIT `LICENSE`; `THIRD_PARTY_NOTICES.md`; no W3C media committed (fetched by script); Blender clips only with credit; no secrets; release tag `act3-submissionmain`).
 
 ### 19.7 Consistency pass (last step before submitting)
 Page, README, JUDGES.md, deck and video must show the same numbers. `make claims-check` covers text; check the video's on-screen numbers by hand against `public-claims.json`. Chaos Economy's page claimed better format compliance than its 120B rival while its own README showed 92% vs 100%; don't repeat that.
@@ -1106,51 +1106,51 @@ Page, README, JUDGES.md, deck and video must show the same numbers. `make claims
 ### 21.1 Prior art and how AccessCast differs (put this in the README)
 | Prior work | What it does | How AccessCast differs |
 |---|---|---|
-| **AudioSight** (DevMaster Multimodal 2nd; Apache-2.0) | Qwen on a Radeon GPU writes description; output pauses the source at every insertion (output +14.7% longer on Sintel); zh/en; review YAML | Fits description **inside** dialogue pauses with a timing verifier, uses extended description only when needed; five audiences from one pass; Gemma 4 on MI300X; Hindi and Italian; review app with a render gate; evaluated against human description on W3C videos never used for tuning |
-| **ViddyScribe** (Gemini API Developer Competition, Best Web app) | Gemini-based description with freeze frames | Open models on our own GPU (on-premises possible); deterministic verifier; human review gate; multiple audiences |
-| **AutoAD-Zero** (ACCV 2024) | Training-free two-stage description using clip duration as a length hint (CIDEr 17.7 on CMD-AD) | Same two-stage idea (evidence → script), but timing is measured from aligned words and enforced by code; plus captions and languages |
+| **an earlier project** (DevMaster Multimodal 2nd; Apache-2.0) | Qwen on a Radeon GPU writes description; output pauses the source at every insertion (output +14.7% longer on Sintel); zh/en; review YAML | Fits description **inside** dialogue pauses with a timing verifier, uses extended description only when needed; five audiences from one pass; Gemma 4 on MI300X; Hindi and Italian; review app with a render gate; evaluated against human description on W3C videos never used for tuning |
+| **an earlier project** (Gemini API Developer Competition, Best Web app) | Gemini-based description with freeze frames | Open models on our own GPU (on-premises possible); deterministic verifier; human review gate; multiple audiences |
+| **an earlier project** (ACCV 2024) | Training-free two-stage description using clip duration as a length hint (CIDEr 17.7 on CMD-AD) | Same two-stage idea (evidence → script), but timing is measured from aligned words and enforced by code; plus captions and languages |
 | 3Play, Verbit, Accedo, Visonic | Commercial description, some AI | Extended description + five audiences + review workflow + open models on-premises; Visonic already offers Hindi and Italian, so languages alone are not our difference |
 
 ### 21.2 Repos: take / don't take
-**Reuse policy (changed 16 Oct 2026 on the team's instruction; `docs/decisions.md` D-001):** code from MIT, Apache-2.0, BSD and similarly permissive repos, including other hackathon entries, may be reused directly when that is faster or better. Each reused file or block keeps its original licence and copyright header, is listed in `THIRD_PARTY_NOTICES.md`, and Apache-2.0 reuse also carries the upstream NOTICE content. GemmaClip ("All rights reserved") and CacheForge (no LICENSE file) stay ideas-only: we read them and write our own code. Prompt text is always our own (prompts are part of what the freeze protects). Libraries we install as dependencies (vLLM, PySceneDetect, Kokoro…) are used normally under their licences. "Take" in the table below means either an idea we re-implement or code we reuse with its header; `THIRD_PARTY_NOTICES.md` says which.
+**Reuse policy (changed 16 Oct 2026 on the team's instruction; `docs/decisions.md` D-001):** code from MIT, Apache-2.0, BSD and similarly permissive repos, including other hackathon entries, may be reused directly when that is faster or better. Each reused file or block keeps its original licence and copyright header, is listed in `THIRD_PARTY_NOTICES.mdTHIRD_PARTY_NOTICES.md` says which.
 
 | Repo (licence) | Take (as ideas, re-implemented) | Don't take | Plan section |
 |---|---|---|---|
-| **AudioSight** (Apache-2.0) | Anchor rules (`ANCHOR_INSIDE_DIALOGUE_WORD`, near-word 100 ms warning, monotonic anchors); scene-merge thresholds (62% crop, 0.45·dHash + 0.55·histogram, 0.82/0.92/0.45, 1,200 ms bridge); forced-aligned words as the timing source; length budget formula and "warn, never truncate"; expanded-timeline extended mode (150/150 ms pads, 10 ms fades, `source_to_output` map); review file bound to SHA-256 and `human_reviewed` stamp; process isolation (core never imports torch); fake worker mode; `doctor --deep`; adoption thresholds | Hard-coded confidence 0.75; `atempo` speed-up 3.0 default; single-gain loudness without `loudnorm`; its prompts | §9 S1, S2, S4, S7, S14; §10.2; §12.5 |
-| **GemmaClip** ("All rights reserved") | **Ideas only:** evidence-then-caption; temperature 0 for evidence; claim types to forbid; frame anchors 0.05/0.35/0.65/0.95 plus 2 high-change frames; audio RMS silence gate; partial acceptance with targeted repair; outcome labels | Any code or prompt text | §9 S3, S5; §10.2 |
-| **StudioMI300** (MIT; README badge says Apache) | Ablation ladder table with failed steps kept; sequential model residency notes; `incidents.md` format; critic label vocabulary idea | The critic that fails open (parse error = 10/10); README claims not in code (loudnorm) | §15.3 E2; §18.5 |
-| **video-voice-translator** (MIT) | Alignment-safe batch translation (numbered segments, `{id, snippet, translation}`, batch halving, 3 single retries); per-step stats JSON/CSV; ASR settings as a reference | 2.0× speed-up of dubbed clips; overlap averaging bug; CUDA-only assumptions; cloud LLM | §9 S10, S11 |
-| **Katha** (MIT) | `Benchmark` stage timer (reset peak memory, perf_counter, `benchmark.json`); `free_vram()`; Kokoro voice map for hi/it | Silent fallback to English for unknown languages; README features not in code | §14.1, §16 |
-| **ProteinLoop** (MIT) | Verifier → feedback JSON → Gemma repair (≤3, temperature 0.2, JSON mode, thinking off) → never promote failures; vLLM ROCm serving settings and `/v1/models` health loop; an evaluation script that exits non-zero when checks fail; one-click proof page | Writing evidence only when all checks pass (we always write it, with `passed`, so negative results survive); its prompt wording; `curl -k` / `GIT_SSL_NO_VERIFY`; a "proof" that doesn't call the model | §11.1, §14.2, §13.5 |
-| **Rivet** (MIT) | Audit gate that refuses bad exports with observed vs threshold; owner stage per check; model residency; offline socket guard (extended to getaddrinfo/connect_ex/UDP); `derive_seed`; content-addressed stage cache; warm-up discard and alternating arms; honesty table; "bugs that taught something"; verified vs tampered gallery; `make submission-check` | Advisory checks presented as gates; count arithmetic that doesn't add up | §10, §14.6, §16.4, §18 |
-| **PolicyCut** (MIT) | Review UI layout, colours, keyboard map, "Play context ±2 s", "Jump to lowest confidence"; `expected_revision` + 409; `review_history.jsonl`; `exports_stale`; server-side render refusal; `audit.json` shape; `--require-rocm`; synchronized GPU timing | A browser-only soft gate; no undo | §12 |
-| **SignalForge** (Apache-2.0) | `JUDGES.md` structure; compliance matrix; claim registry with SHA-256; soak test with zero VRAM growth; fail-closed evidence lines; model-selection table wording | — | §18 |
-| **ageBand** (Apache-2.0) | Confidence computed in code; serving sweep method (p50/p95, tokens/s from `/metrics`, $/1k at $1.99/hour); adversarial demo framing | Claiming "guard held" from a deterministic mode; docs that say PENDING next to real numbers | §11.2, §15.3 E13, §17 |
-| **CacheForge** (no LICENSE file; `Cargo.toml` says MIT → ideas only) | Clean A/B where only one setting changes; disjoint request sets per arm; 4-column delta tables with caveats; Dev Cloud sensor caveat | — | §15.3 E13, §14.2 |
+| **an earlier project** (Apache-2.0) | Anchor rules (`ANCHOR_INSIDE_DIALOGUE_WORD`, near-word 100 ms warning, monotonic anchors); scene-merge thresholds (62% crop, 0.45·dHash + 0.55·histogram, 0.82/0.92/0.45, 1,200 ms bridge); forced-aligned words as the timing source; length budget formula and "warn, never truncate"; expanded-timeline extended mode (150/150 ms pads, 10 ms fades, `source_to_output` map); review file bound to SHA-256 and `human_reviewed` stamp; process isolation (core never imports torch); fake worker mode; `doctor --deep`; adoption thresholds | Hard-coded confidence 0.75; `atempo` speed-up 3.0 default; single-gain loudness without `loudnorm`; its prompts | §9 S1, S2, S4, S7, S14; §10.2; §12.5 |
+| **an earlier project** ("All rights reserved") | **Ideas only:** evidence-then-caption; temperature 0 for evidence; claim types to forbid; frame anchors 0.05/0.35/0.65/0.95 plus 2 high-change frames; audio RMS silence gate; partial acceptance with targeted repair; outcome labels | Any code or prompt text | §9 S3, S5; §10.2 |
+| **an earlier project** (MIT; README badge says Apache) | Ablation ladder table with failed steps kept; sequential model residency notes; `incidents.md` format; critic label vocabulary idea | The critic that fails open (parse error = 10/10); README claims not in code (loudnorm) | §15.3 E2; §18.5 |
+| **an earlier project** (MIT) | Alignment-safe batch translation (numbered segments, `{id, snippet, translation}`, batch halving, 3 single retries); per-step stats JSON/CSV; ASR settings as a reference | 2.0× speed-up of dubbed clips; overlap averaging bug; CUDA-only assumptions; cloud LLM | §9 S10, S11 |
+| **an earlier project** (MIT) | `Benchmark` stage timer (reset peak memory, perf_counter, `benchmark.json`); `free_vram`; Kokoro voice map for hi/it | Silent fallback to English for unknown languages; README features not in code | §14.1, §16 |
+| **an earlier project** (MIT) | Verifier → feedback JSON → Gemma repair (≤3, temperature 0.2, JSON mode, thinking off) → never promote failures; vLLM ROCm serving settings and `/v1/models` health loop; an evaluation script that exits non-zero when checks fail; one-click proof page | Writing evidence only when all checks pass (we always write it, with `passed`, so negative results survive); its prompt wording; `curl -k` / `GIT_SSL_NO_VERIFY`; a "proof" that doesn't call the model | §11.1, §14.2, §13.5 |
+| **an earlier project** (MIT) | Audit gate that refuses bad exports with observed vs threshold; owner stage per check; model residency; offline socket guard (extended to getaddrinfo/connect_ex/UDP); `derive_seed`; content-addressed stage cache; warm-up discard and alternating arms; honesty table; "bugs that taught something"; verified vs tampered gallery; `make submission-check` | Advisory checks presented as gates; count arithmetic that doesn't add up | §10, §14.6, §16.4, §18 |
+| **an earlier project** (MIT) | Review UI layout, colours, keyboard map, "Play context ±2 s", "Jump to lowest confidence"; `expected_revision` + 409; `review_history.jsonl`; `exports_stale`; server-side render refusal; `audit.json` shape; `--require-rocm`; synchronized GPU timing | A browser-only soft gate; no undo | §12 |
+| **an earlier project** (Apache-2.0) | `JUDGES.md` structure; compliance matrix; claim registry with SHA-256; soak test with zero VRAM growth; fail-closed evidence lines; model-selection table wording | — | §18 |
+| **an earlier project** (Apache-2.0) | Confidence computed in code; serving sweep method (p50/p95, tokens/s from `/metrics`, $/1k at $1.99/hour); adversarial demo framing | Claiming "guard held" from a deterministic mode; docs that say PENDING next to real numbers | §11.2, §15.3 E13, §17 |
+| **an earlier project** (no LICENSE file; `Cargo.toml` says MIT → ideas only) | Clean A/B where only one setting changes; disjoint request sets per arm; 4-column delta tables with caveats; Dev Cloud sensor caveat | — | §15.3 E13, §14.2 |
 
 ### 21.3 Winners' lessons we apply (and what not to copy)
 | Winner | Lesson | Where we apply it | Don't copy |
 |---|---|---|---|
-| ProteinLoop (ACT II, likely Gemma prize) | 2/20 safe first answers → 20/20 after verifier feedback, with Gemma on vLLM ROCm | E1 headline framing | A proof page that doesn't call the model |
+| an earlier project (ACT II, likely Gemma prize) | 2/20 safe first answers → 20/20 after verifier feedback, with Gemma on vLLM ROCm | E1 headline framing | A proof page that doesn't call the model |
 | Ten Places (AI Infra Summit, two firsts) | 183/200 on unseen tables; worst case (27/50) reported; latency ladder; every number from a script | §15, §5 | — |
 | REPOMIND (ACT I 1st) | Every number personally measured; published that a faster backend broke 137/144 outputs | §15.5, claims registry | — |
 | BrainConnect (ACT I 1st) | Unseen hospitals; refused to pad numbers | test set | **A sleeping demo (docked)**; "4.5× faster than an A100" with no method |
 | AtlasOps (ACT I finalist) | Ladder 54% → 68% → 82% | E1 arms A→B→C | **A pitch too technical (docked)**; a "~25 minutes for an engineer" baseline that wasn't measured |
-| StudioMI300 (ACT I finalist) | 25.9 → 10.4 min per clip, step by step, failed steps kept | E2 | A critic that fails open |
+| an earlier project (ACT I finalist) | 25.9 → 10.4 min per clip, step by step, failed steps kept | E2 | A critic that fails open |
 | AgentReady (ACT I medal) | "Both models fit on one MI300X" vs an 80 GB H100 | §16.1 (by memory accounting) | — |
 | Chaos Economy (ACT I champion) | A small model beating a much bigger one | E3 (smaller Gemma + checks vs 31B alone) | Page and README disagreeing (92% vs 100%) |
 | CatalystMD (ACT I 1st medal) | Beat the current standard (an approved drug) | E7 vs W3C's human description | Presenting a proxy (docking scores) without saying it is a proxy; we label E6 as an LLM proxy |
 | Strike Lab (ACT I runner-up) | A clear speed-up story | E2 | A CPU time "observed by the user" rather than measured |
-| CacheForge (ACT II) | Cleanest A/B: only routing policy changed; disjoint request sets | E13 | A page number marked "not measured" in its own README |
-| AgeBand (ACT II) | tok/s, $ per 1,000, p95 on one MI300X; adversarial demo | E13, §17 | "Guard held" from a deterministic mode, not the live model |
+| an earlier project (ACT II) | Cleanest A/B: only routing policy changed; disjoint request sets | E13 | A page number marked "not measured" in its own README |
+| an earlier project (ACT II) | tok/s, $ per 1,000, p95 on one MI300X; adversarial demo | E13, §17 | "Guard held" from a deterministic mode, not the live model |
 | OyeHoye (ACT II) | Plain code first, model last | SDH captions are rules-only; gaps and timing are code | — |
 | yassai (ACT II) | Unseen adversarial variants, against its own earlier model | E11 | — |
 | CCTV Intelligence (ACT II Unicorn 1st) and other Track 3 winners | Won on product and pitch ("Think startup pitch, not benchmark run") | §3, §13, §19 | — |
-| SignalForge (DevMaster 1st) | Measured model choice; 5 h 28 min soak, zero memory growth; JUDGES.md | E3, E8, §18 | — |
+| an earlier project (DevMaster 1st) | Measured model choice; 5 h 28 min soak, zero memory growth; JUDGES.md | E3, E8, §18 | — |
 | Aetheris Blackbox (DevMaster 2nd) | Runtime comparison on the **same model file** (vs Ollama/llama.cpp) | E2/E13 compare configurations of the same Gemma checkpoint | — |
 | E-Sentinel (DevMaster 3rd) | Rules-only baseline; 105 human-labelled held-out cases | blind human labels in E1 and E5 | — |
-| Rivet (DevMaster Multimodal 1st) | 90/90 audit checks; 0 network calls offline; identical output across 11 runs | §10, E9, E10 | Check counts that don't add up |
-| AudioSight (DevMaster Multimodal 2nd) | Batching −24% per stage; correctness checked next to speed | E2 quality guard | Visible-facts count as the only quality measure |
+| an earlier project (DevMaster Multimodal 1st) | 90/90 audit checks; 0 network calls offline; identical output across 11 runs | §10, E9, E10 | Check counts that don't add up |
+| an earlier project (DevMaster Multimodal 2nd) | Batching −24% per stage; correctness checked next to speed | E2 quality guard | Visible-facts count as the only quality measure |
 | Native PhysX on RDNA3 (DevMaster Physical 1st) | Correctness checks on both platforms next to the speed number | E2 quality guard | — |
 | RoboNativeManipulation (DevMaster Physical 2nd) | Beat published baselines; an upstream PR merged | E4/E7 published baselines; optional: upstream a fix we find (e.g. a vLLM ROCm or Gemma recipe issue) | — |
 | Video2Motion (DevMaster Physical 3rd) | A do-nothing baseline makes a number readable | E6 "dialogue only" arm; E7 naive captioner | Testing on the training motion |
@@ -1253,17 +1253,17 @@ Priority labels decide the order, not whether something gets built: **P0** = nee
 - ACT II: https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-ii
 
 **Reference repos**
-- AudioSight https://github.com/austin1997/AudioSight (demo https://github.com/austin1997/Radeon-hackathon-2026-07/blob/main/demo.mp4)
-- GemmaClip https://github.com/ArmmyC/GemmaClip
-- StudioMI300 https://github.com/bladedevoff/studiomi300
-- video-voice-translator https://github.com/icuic/video-voice-translator
-- Katha https://github.com/N-45div/Katha
-- ProteinLoop https://github.com/Anarpego/ProteinLoop
-- Rivet https://github.com/damishafe/Rivet
-- PolicyCut https://github.com/AMD-DEV-CONTEST/Radeon-hackathon-2026-07/pull/255
-- SignalForge https://github.com/rvbernucci/signalforge
-- ageBand https://github.com/asishbose/ageBand
-- CacheForge https://github.com/lucheeseng827/amd-hackathon
+- an earlier project (demo
+- an earlier project
+- an earlier project
+- an earlier project
+- an earlier project
+- an earlier project
+- an earlier project
+- an earlier project
+- an earlier project
+- an earlier project
+- an earlier project https://github.com/lucheeseng827/amd-hackathon
 
 **Models and serving**
 - Gemma 4 model card https://ai.google.dev/gemma/docs/core/model_card_4 · releases https://ai.google.dev/gemma/docs/releases · E4B card https://huggingface.co/google/gemma-4-E4B-it
@@ -1298,13 +1298,12 @@ Priority labels decide the order, not whether something gets built: **P0** = nee
 
 **Market and population**
 - 3Play prices https://www.3playmedia.com/Pricing-List/ · cost blog https://www.3playmedia.com/blog/how-much-does-audio-description-cost/
-- University of Michigan https://teamdynamix.umich.edu/TDClient/30/Portal/KB/ArticleDet?ID=13962 · Accedo https://ad.compose.accedo.tv/ · Verbit https://verbit.ai/audio-description · Visonic https://www.capterra.com/p/10038266/Visonic-AI/ · ViddyScribe https://ai.google.dev/competition/projects/viddyscribe
+- University of Michigan https://teamdynamix.umich.edu/TDClient/30/Portal/KB/ArticleDet?ID=13962 · Accedo https://ad.compose.accedo.tv/ · Verbit https://verbit.ai/audio-description · Visonic https://www.capterra.com/p/10038266/Visonic-AI/ · an earlier project https://ai.google.dev/competition/projects/an earlier project
 - Media Access Australia paper https://www.infrastructure.gov.au/sites/default/files/appendix-8-media-access-australia-background-paper.docx
 - WHO vision https://who.int/en/news-room/fact-sheets/detail/blindness-and-visual-impairment · WHO hearing https://www.who.int/News-Room/Fact-Sheets/Detail/Deafness-and-Hearing-Loss · OECD PIAAC https://www.cso.ie/en/releasesandpublications/ep/p-piaac/programmefortheinternationalassessmentofadultcompetenciespiaac2023/internationalcomparison
 - YouDescribe archive https://www.ski.org/sites/default/files/publications/you_described_we_archived_-_preprint.pdf · CHI'24 survey https://arxiv.org/pdf/2403.10792
 
 **Evaluation**
 - W3C WAI perspective videos https://www.w3.org/WAI/perspective-videos/ · subtitles/description files https://www.w3.org/WAI/about/translating/resources/subtitles/ · use terms https://w3.org/WAI/about/using-wai-material
-- ADQA https://arxiv.org/html/2510.00808v1 · AutoAD-Zero https://arxiv.org/html/2407.15850v2 · AutoAD III https://arxiv.org/pdf/2404.14412 · VideoA11y https://arxiv.org/html/2502.20480v1
 - jiwer https://pypi.org/project/jiwer/ · textstat https://pypi.org/project/textstat/ · bert-score https://github.com/Tiiiger/bert_score · pycocoevalcap https://pypi.org/project/pycocoevalcap/
 - Blender: https://peach.blender.org/about · https://durian.blender.org/sharing/ · NASA https://www.nasa.gov/multimedia/guidelines/index.html

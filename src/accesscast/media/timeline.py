@@ -1,27 +1,22 @@
-# Copyright 2026 AudioSight contributors
-#
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
-# compliance with the License. You may obtain a copy of the License at
-#     http://www.apache.org/licenses/LICENSE-2.0
-# Unless required by applicable law or agreed to in writing, software distributed under the License is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and limitations under the License.
-#
-# Source: https://github.com/austin1997/AudioSight src/audiosight/timeline.py (commit 5c708f6).
-# Modified by AccessCast contributors, 2026: sample rate is a module constant set to 48 kHz (AccessCast's
-# master rate) instead of AudioSight's constant; added `remap_ms` helper. Logic otherwise unchanged.
-"""Expanded timeline for extended description: insertions, source_to_output and output_to_source."""
+"""Expanded timeline for extended description (PLAN §9 S7).
+
+The source plays in pieces; at each description anchor the output holds the picture for the description (with
+padding before and after). The timeline is a list of rows, one per piece, each with source and output positions
+in samples and in milliseconds, so any source time can be mapped to the output and back.
+"""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any
 
-SAMPLE_RATE = 48_000
+SAMPLE_RATE = 48_000  # the render's master rate
 
 
 @dataclass(frozen=True, slots=True)
 class Insertion:
+    """One held-picture description: where it goes in the source and how long it lasts."""
+
     narration_id: str
     anchor_sample: int
     speech_samples: int
@@ -30,7 +25,7 @@ class Insertion:
 
     @property
     def total_samples(self) -> int:
-        return self.pre_samples + self.speech_samples + self.post_samples
+        return self.speech_samples + self.pre_samples + self.post_samples
 
 
 def ms_to_samples(milliseconds: int) -> int:
@@ -41,93 +36,81 @@ def samples_to_ms(samples: int) -> int:
     return round(samples * 1000 / SAMPLE_RATE)
 
 
+def _source_row(src_from: int, src_to: int, out_from: int) -> dict[str, Any]:
+    out_to = out_from + (src_to - src_from)
+    return {
+        "type": "source",
+        "source_start_sample": src_from,
+        "source_end_sample": src_to,
+        "output_start_sample": out_from,
+        "output_end_sample": out_to,
+        "source_start_ms": samples_to_ms(src_from),
+        "source_end_ms": samples_to_ms(src_to),
+        "output_start_ms": samples_to_ms(out_from),
+        "output_end_ms": samples_to_ms(out_to),
+    }
+
+
+def _insertion_row(ins: Insertion, out_from: int) -> dict[str, Any]:
+    out_to = out_from + ins.total_samples
+    padding = ins.pre_samples + ins.post_samples
+    return {
+        "type": "insertion",
+        "narration_id": ins.narration_id,
+        "source_anchor_sample": ins.anchor_sample,
+        "source_anchor_ms": samples_to_ms(ins.anchor_sample),
+        "output_start_sample": out_from,
+        "output_end_sample": out_to,
+        "output_start_ms": samples_to_ms(out_from),
+        "output_end_ms": samples_to_ms(out_to),
+        "speech_duration_samples": ins.speech_samples,
+        "speech_duration_ms": samples_to_ms(ins.speech_samples),
+        "padding_duration_samples": padding,
+        "padding_duration_ms": samples_to_ms(padding),
+    }
+
+
 def build_timeline(source_samples: int, insertions: list[Insertion]) -> list[dict[str, Any]]:
-    ordered = sorted(insertions, key=lambda item: (item.anchor_sample, item.narration_id))
-    if any(item.anchor_sample < 0 or item.anchor_sample > source_samples for item in ordered):
-        raise ValueError("Insertion anchor is outside the source timeline.")
+    """Rows in output order. Fails closed on an anchor outside the source."""
+    bad = [i.narration_id for i in insertions if not 0 <= i.anchor_sample <= source_samples]
+    if bad:
+        raise ValueError(f"Insertion anchor is outside the source timeline: {', '.join(bad)}")
     rows: list[dict[str, Any]] = []
-    source_cursor = 0
-    output_cursor = 0
-    for item in ordered:
-        if item.anchor_sample > source_cursor:
-            length = item.anchor_sample - source_cursor
-            rows.append(
-                {
-                    "type": "source",
-                    "source_start_sample": source_cursor,
-                    "source_end_sample": item.anchor_sample,
-                    "output_start_sample": output_cursor,
-                    "output_end_sample": output_cursor + length,
-                    "source_start_ms": samples_to_ms(source_cursor),
-                    "source_end_ms": samples_to_ms(item.anchor_sample),
-                    "output_start_ms": samples_to_ms(output_cursor),
-                    "output_end_ms": samples_to_ms(output_cursor + length),
-                }
-            )
-            source_cursor = item.anchor_sample
-            output_cursor += length
-        end = output_cursor + item.total_samples
-        rows.append(
-            {
-                "type": "insertion",
-                "narration_id": item.narration_id,
-                "source_anchor_sample": item.anchor_sample,
-                "source_anchor_ms": samples_to_ms(item.anchor_sample),
-                "output_start_sample": output_cursor,
-                "output_end_sample": end,
-                "output_start_ms": samples_to_ms(output_cursor),
-                "output_end_ms": samples_to_ms(end),
-                "speech_duration_samples": item.speech_samples,
-                "speech_duration_ms": samples_to_ms(item.speech_samples),
-                "padding_duration_samples": item.pre_samples + item.post_samples,
-                "padding_duration_ms": samples_to_ms(item.pre_samples + item.post_samples),
-            }
-        )
-        output_cursor = end
-    if source_cursor < source_samples:
-        length = source_samples - source_cursor
-        rows.append(
-            {
-                "type": "source",
-                "source_start_sample": source_cursor,
-                "source_end_sample": source_samples,
-                "output_start_sample": output_cursor,
-                "output_end_sample": output_cursor + length,
-                "source_start_ms": samples_to_ms(source_cursor),
-                "source_end_ms": samples_to_ms(source_samples),
-                "output_start_ms": samples_to_ms(output_cursor),
-                "output_end_ms": samples_to_ms(output_cursor + length),
-            }
-        )
+    played = 0  # source samples already placed
+    out = 0  # output samples already placed
+    for ins in sorted(insertions, key=lambda i: (i.anchor_sample, i.narration_id)):
+        if ins.anchor_sample > played:
+            rows.append(_source_row(played, ins.anchor_sample, out))
+            out += ins.anchor_sample - played
+            played = ins.anchor_sample
+        rows.append(_insertion_row(ins, out))
+        out += ins.total_samples
+    if played < source_samples:
+        rows.append(_source_row(played, source_samples, out))
     return rows
 
 
 def source_to_output(rows: list[dict[str, Any]], source_sample: int) -> int:
-    for row in rows:
-        if row["type"] != "source":
-            continue
-        if row["source_start_sample"] <= source_sample <= row["source_end_sample"]:
-            return int(row["output_start_sample"]) + source_sample - int(row["source_start_sample"])
-    anchors = [row for row in rows if row["type"] == "insertion"]
-    if source_sample == 0 and anchors:
-        return 0
+    """Output sample where a source sample plays (the first matching piece, so a cut point maps before the hold)."""
+    for r in rows:
+        if r["type"] == "source" and r["source_start_sample"] <= source_sample <= r["source_end_sample"]:
+            return int(r["output_start_sample"]) + source_sample - int(r["source_start_sample"])
+    if source_sample == 0 and any(r["type"] == "insertion" for r in rows):
+        return 0  # a description at the very start: the source begins after it, but time zero is still zero
     raise ValueError("Source sample is outside mapping.")
 
 
 def output_to_source(rows: list[dict[str, Any]], output_sample: int) -> tuple[int, str | None]:
-    for row in rows:
-        if not (row["output_start_sample"] <= output_sample <= row["output_end_sample"]):
-            continue
-        if row["type"] == "source":
-            return (
-                row["source_start_sample"] + output_sample - row["output_start_sample"],
-                None,
-            )
-        return row["source_anchor_sample"], str(row["narration_id"])
+    """Source sample shown at an output sample, and the description id while the picture is held."""
+    for r in rows:
+        if r["output_start_sample"] <= output_sample <= r["output_end_sample"]:
+            if r["type"] == "insertion":
+                return int(r["source_anchor_sample"]), str(r["narration_id"])
+            return int(r["source_start_sample"]) + output_sample - int(r["output_start_sample"]), None
     raise ValueError("Output sample is outside mapping.")
 
 
 def remap_ms(rows: list[dict[str, Any]], source_ms: int) -> int:
-    """Map a source time in ms to the output timeline (AccessCast addition)."""
-    src = min(max(0, ms_to_samples(source_ms)), int(rows[-1].get("source_end_sample", 0)) if rows else 0)
-    return samples_to_ms(source_to_output(rows, src))
+    """A source time in ms on the output timeline (clamped to the source's length)."""
+    end = int(rows[-1].get("source_end_sample", 0)) if rows else 0
+    return samples_to_ms(source_to_output(rows, min(max(0, ms_to_samples(source_ms)), end)))
