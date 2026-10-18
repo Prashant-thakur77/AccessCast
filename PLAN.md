@@ -1,13 +1,19 @@
 # AccessCast: build plan for AMD Developer Hackathon ACT III
 
+> **Status, 18 Oct 2026.** This is the plan written before the build. What was built and measured is in
+> [`README.md`](README.md) and the site's [Results page](https://accesscast.vercel.app/results.html); every change
+> to this plan is logged in [`docs/decisions.md`](docs/decisions.md). The main changes: Gemma 4 31B runs on
+> **AMD Token Factory** rather than on our own MI300X droplet (D-021); the languages grew from Hindi and Italian to
+> Hindi, Italian, Spanish, French and Portuguese (D-029); experiments that need our own GPU server (E2, E3, E8, E10)
+> were not run, and the README says so.
+
 > One video in. A version made for each viewer out: audio description fitted into the pauses in dialogue (with extended description when the pauses are too short), deaf-friendly captions, easy-read captions, and Hindi and Italian versions. Gemma 4 on an AMD Instinct MI300X does the seeing, listening, writing and translating. Code checks every line it writes, Gemma repairs what fails, and a person approves what the viewer hears.
 
 This file is the source of truth for **what** to build and **why**. `CLAUDE.md` says **how** to work in this repo. Read both before writing code. When this plan and the code disagree, fix one of them in the same commit.
 
-Research behind this plan (collected 14–16 Oct 2026; every fact links to its source in section 26):
-- Past winners: "AMD Developer Hackathon ACT III: What Has Won Before" and its two appendices (Google Drive folder "AMD ACT III Hackathon Research").
-- Must-haves: "AMD ACT III: Winning Numbers Playbook" (https://docs.google.com/document/d/1jb63yiYFx-DVLkA1datLIEN-jbJEEf18MQwbvaCGcpg/edit).
-- Deep reads of 11 winning repos, the AMD/Gemma/ROCm stack, and the accessibility domain (standards, law, prices, datasets).
+Research behind this plan (collected 14–16 Oct 2026; every fact links to its source in section 26): earlier
+hackathon entries and their public repos, the AMD/Gemma/ROCm stack, and the accessibility domain (standards, law,
+prices, datasets).
 
 ---
 
@@ -1245,8 +1251,6 @@ Priority labels decide the order, not whether something gets built: **P0** = nee
 **Event and winners**
 - ACT III: https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii
 - ACT II: https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-ii
-- Research folder (winners docs and playbook): https://drive.google.com/drive/folders/1xdal59GwU6hBRsVysIp-m3J3an7SujA0
-- Winning Numbers Playbook: https://docs.google.com/document/d/1jb63yiYFx-DVLkA1datLIEN-jbJEEf18MQwbvaCGcpg/edit
 
 **Reference repos**
 - AudioSight https://github.com/austin1997/AudioSight (demo https://github.com/austin1997/Radeon-hackathon-2026-07/blob/main/demo.mp4)

@@ -149,7 +149,8 @@
    "public_files": [
     "docs/demo-script.md",
     "docs/deck/deck.md",
-    "docs/lablab.md"
+    "docs/lablab.md",
+    "README.md"
    ],
    "display": [
     "3.5 million"
@@ -439,7 +440,8 @@
    "note": "Bourne et al., 'Trends in prevalence of blindness and distance and near vision impairment over 30 years', Lancet Glob Health 2021;9:e130-43. Abstract text read via Europe PMC (PMC7820390). PLAN said 43.9 million; the paper says 43.3 million.",
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -457,7 +459,9 @@
    ],
    "note": "Same paper as cited.gbd.blind_2020; abstract read via Europe PMC (PMC7820390).",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.law.ada_title2_large_date",
@@ -475,7 +479,8 @@
    "note": "Interim final rule, published and effective 20 April 2026, with a request for comments. No later Federal Register action on this rule found as of 16 Oct 2026 (API search).",
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -510,7 +515,8 @@
    "note": "Directive (EU) 2019/882, Article 31(2). EUR-Lex and legislation.gov.uk blocked automated fetches (HTTP 202 challenge); text read from the EUR-Lex mirror https://lawplayer.com/eu/act/32019L0882. Re-check on EUR-Lex in a browser before submitting.",
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -543,7 +549,9 @@
    ],
    "note": "PDF text wraps as 'thirty-/six' across a line break. Para 5.1: first Accessibility Conformance Report also due after 36 months, then quarterly. Para 3.1 uses 'shall strive' for audio description. 'About February 2029' is derived (6 Feb 2026 + 36 months), not stated.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.law.india_mib_ott_date",
@@ -561,7 +569,8 @@
    "note": "Title: 'Guidelines for Accessibility of Content on platforms of Publishers of Online Curated Content (OTT Platforms) for Persons with Hearing and Visual Impairment'. Covers OTT publishers only, not broadcasting.",
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -578,7 +587,9 @@
     "€40,000"
    ],
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.law.italy_dlgs82_fine_min",
@@ -595,7 +606,9 @@
    ],
    "note": "Art. 24 'Sanzioni', para. 1 (official Normattiva text). Applies to economic operators breaching Arts. 3, 6(1-8), 8(1-7), 9(1-4), 10 and 12(1-4). Secondary confirmation: Portolano Cavallo newsletter.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.market.acb_tts_cost_saving",
@@ -628,7 +641,8 @@
    "note": "Media Access Australia, 'Audio Description Background Paper', September 2010. The live URL timed out; read from the Wayback Machine copy of 16 May 2025 (web.archive.org/web/20250516151549/...).",
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -646,7 +660,9 @@
    ],
    "note": "Secondary: 3Play attributes it to Ofcom (linked as 'Ofcom'). The original Ofcom report was not checked; always say 'Ofcom, via 3Play'.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.market.youdescribe_hours",
@@ -663,7 +679,9 @@
    ],
    "note": "Paper: 'You Described, We Archived: A Rich Audio Description Dataset' (J. on Technology and Persons with Disabilities, 2023), data 2013-2022. The paper does not call it 'the largest free archive'; don't say that without another source.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.market.youdescribe_videos",
@@ -697,7 +715,8 @@
    "note": "Secondary source (Tubefilter, 7 May 2019) reporting YouTube's statement; YouTube's own press page (blog.youtube/press) no longer shows the figure.",
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -733,7 +752,8 @@
    "note": "Published by Ireland's Central Statistics Office (CSO) from the OECD PIAAC 2023 data. The OECD's own Italy country note returned HTTP 403 to automated fetches.",
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -751,7 +771,8 @@
    ],
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -769,7 +790,8 @@
    ],
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -787,7 +809,9 @@
    ],
    "note": "Same price for standard and extended.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.price.3play_refine_ext",
@@ -820,7 +844,9 @@
    ],
    "note": "From the 'New Service Level' tier table on the price list; the page also says 'Launch and Refine packages are English only.'",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.price.3play_studio_ext",
@@ -884,7 +910,9 @@
     "$9"
    ],
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.price.3play_voice_artist_ext",
@@ -917,7 +945,9 @@
    ],
    "note": "This table is still on the live price list next to the newer tiers; PLAN calls it 'legacy', the page does not.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.price.accedo_pro_overage",
@@ -1033,7 +1063,9 @@
    ],
    "note": "The $6.65-14.70 range spans standard 5-day to extended 24-hour rush; extended at the normal 5-day turnaround is $10.78.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.price.umich_human_low",
@@ -1049,7 +1081,9 @@
     "$6.65"
    ],
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.price.umich_machine_ext",
@@ -1082,7 +1116,9 @@
    ],
    "note": "Page writes '$0.9'.",
    "evidence": [],
-   "public_files": []
+   "public_files": [
+    "README.md"
+   ]
   },
   {
    "claim_id": "cited.quote.erika_wolf_date",
@@ -1119,7 +1155,8 @@
    "note": "WHO fact sheet dated 3 March 2026.",
    "evidence": [],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ]
   },
   {
@@ -1174,7 +1211,8 @@
    ],
    "public_files": [
     "docs/lablab.md",
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ],
    "display": [
     "$0.0053"
@@ -1251,7 +1289,9 @@
      "pointer": "/summary/clips/blender_sintel_trailer/differing_description_lines_per_run/0"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "16"
    ]
@@ -1270,7 +1310,9 @@
      "pointer": "/summary/clips/blender_sintel_trailer/description_lines"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "17"
    ]
@@ -1308,7 +1350,9 @@
      "pointer": "/summary/clips/nasa_GSFC_20170614_Eclipse_m12534_Plane/identical_to_run1/words"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "3/3"
    ]
@@ -1327,7 +1371,9 @@
      "pointer": "/summary/video_minutes"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "9.3"
    ]
@@ -1346,7 +1392,9 @@
      "pointer": "/summary/videos_with_no_pause"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "5"
    ]
@@ -1365,7 +1413,9 @@
      "pointer": "/summary/pause_seconds"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "10.5"
    ]
@@ -1384,7 +1434,9 @@
      "pointer": "/summary/pauses"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1479,7 +1531,9 @@
      "pointer": "/summary/pooled/A/lines_fit"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -1498,7 +1552,9 @@
      "pointer": "/summary/pooled/B/lines_fit"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -1517,7 +1573,9 @@
      "pointer": "/summary/pooled/C/lines_fit"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -1536,7 +1594,9 @@
      "pointer": "/summary/pooled/A/lines_fit_energy"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1555,7 +1615,9 @@
      "pointer": "/summary/pooled/C/lines_fit_energy"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1574,7 +1636,9 @@
      "pointer": "/summary/pooled/A/lines_planned"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1593,7 +1657,9 @@
      "pointer": "/summary/pooled/A/lines_published"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1612,7 +1678,9 @@
      "pointer": "/summary/pooled/B/lines_published"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -1631,7 +1699,9 @@
      "pointer": "/summary/pooled/C/lines_published"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1650,7 +1720,9 @@
      "pointer": "/summary/pooled/B/sent_to_person"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "6"
    ]
@@ -1669,7 +1741,9 @@
      "pointer": "/summary/pooled/C/sent_to_person"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -3322,7 +3396,9 @@
      "pointer": "/summary/total_leaks"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "0"
    ]
@@ -3341,7 +3417,9 @@
      "pointer": "/summary/best/p95_s"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "13.9 s"
    ]
@@ -3360,7 +3438,9 @@
      "pointer": "/summary/best/tokens_per_s"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "17"
    ]
@@ -3379,7 +3459,9 @@
      "pointer": "/summary/failed"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "15"
    ]
@@ -3398,7 +3480,9 @@
      "pointer": "/summary/requests"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "120"
    ]
@@ -3418,7 +3502,8 @@
     }
    ],
    "public_files": [
-    "docs/demo-script.md"
+    "docs/demo-script.md",
+    "README.md"
    ],
    "display": [
     "41,818"
@@ -5673,7 +5758,9 @@
      "pointer": "/summary/timing_agreement/accesscast/k"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "3"
    ]
@@ -5692,9 +5779,354 @@
      "pointer": "/summary/timing_agreement/accesscast/n"
     }
    ],
-   "public_files": [],
+   "public_files": [
+    "README.md"
+   ],
    "display": [
     "82"
+   ]
+  },
+  {
+   "claim_id": "repo.charts",
+   "text": "charts drawn from evidence",
+   "value": 9,
+   "unit": "charts",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/charts"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "9"
+   ]
+  },
+  {
+   "claim_id": "repo.experiments_planned",
+   "text": "experiments planned (E1–E18)",
+   "value": 18,
+   "unit": "experiments",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/experiments_planned"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "18"
+   ]
+  },
+  {
+   "claim_id": "repo.experiments_run",
+   "text": "experiments with an evidence file",
+   "value": 12,
+   "unit": "experiments",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/experiments_run"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "12"
+   ]
+  },
+  {
+   "claim_id": "repo.incidents",
+   "text": "dated incidents in docs/incidents.md",
+   "value": 33,
+   "unit": "incidents",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/incidents"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "33"
+   ]
+  },
+  {
+   "claim_id": "repo.languages",
+   "text": "languages, English included",
+   "value": 6,
+   "unit": "languages",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/languages_total"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "6"
+   ]
+  },
+  {
+   "claim_id": "repo.pages",
+   "text": "pages on the site",
+   "value": 6,
+   "unit": "pages",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/site_pages"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "6"
+   ]
+  },
+  {
+   "claim_id": "repo.prompts",
+   "text": "prompt files",
+   "value": 15,
+   "unit": "prompts",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/prompts"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "15"
+   ]
+  },
+  {
+   "claim_id": "repo.python_lines",
+   "text": "lines of Python in src/accesscast",
+   "value": 11795,
+   "unit": "lines",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/python_lines_src"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "11,795"
+   ]
+  },
+  {
+   "claim_id": "repo.rules_ad",
+   "text": "description rules",
+   "value": 20,
+   "unit": "rules",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/rules_by_family/AD"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "20"
+   ]
+  },
+  {
+   "claim_id": "repo.rules_cc",
+   "text": "caption and subtitle rules",
+   "value": 11,
+   "unit": "rules",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/rules_by_family/CC"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "11"
+   ]
+  },
+  {
+   "claim_id": "repo.rules_er",
+   "text": "easy-read rules",
+   "value": 10,
+   "unit": "rules",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/rules_by_family/ER"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "10"
+   ]
+  },
+  {
+   "claim_id": "repo.rules_rn",
+   "text": "render rules",
+   "value": 8,
+   "unit": "rules",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/rules_by_family/RN"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "8"
+   ]
+  },
+  {
+   "claim_id": "repo.rules_total",
+   "text": "check rules in docs/rules.md",
+   "value": 53,
+   "unit": "rules",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/rules_total"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "53"
+   ]
+  },
+  {
+   "claim_id": "repo.rules_vo",
+   "text": "voice-over rules",
+   "value": 4,
+   "unit": "rules",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/rules_by_family/VO"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "4"
+   ]
+  },
+  {
+   "claim_id": "repo.stages",
+   "text": "pipeline stages",
+   "value": 26,
+   "unit": "stages",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/pipeline_stages"
+    }
+   ],
+   "public_files": [
+    "README.md"
+   ],
+   "display": [
+    "26"
+   ]
+  },
+  {
+   "claim_id": "repo.translation_languages",
+   "text": "languages we translate into",
+   "value": 5,
+   "unit": "languages",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/translation_languages"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "5"
+   ]
+  },
+  {
+   "claim_id": "repo.versions",
+   "text": "versions a project can render",
+   "value": 11,
+   "unit": "versions",
+   "status": "measured",
+   "split": "none",
+   "evidence": [
+    {
+     "path": "evidence/repo_stats.json",
+     "sha256": "48cd501efe0248767fcdd1f03547c05585ad294b7ec45429d74aaa98c207812a",
+     "pointer": "/summary/viewer_versions"
+    }
+   ],
+   "public_files": [],
+   "display": [
+    "11"
    ]
   },
   {

@@ -116,6 +116,14 @@
   {
    "value": 95,
    "reason": "confidence level of the pre-registered bootstrap interval ('95% interval')"
+  },
+  {
+   "value": 2019,
+   "why": "year of a cited source (GBD 2019, YouTube 2019, OECD Survey of Adult Skills 2023)"
+  },
+  {
+   "value": 2023,
+   "why": "year of a cited source (GBD 2019, YouTube 2019, OECD Survey of Adult Skills 2023)"
   }
  ]
 }

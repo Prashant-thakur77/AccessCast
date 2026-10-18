@@ -608,6 +608,58 @@ def amd_specs() -> list[Spec]:
     ]
 
 
+def repo_specs() -> list[Spec]:
+    """Counts about the project itself, read from the code and the repo (scripts/repo_stats.py)."""
+    f, n = "repo_stats.json", "none"
+    thousands: Callable[[Any], str] = lambda x: f"{int(x):,}"  # noqa: E731
+    rows = [
+        ("repo.rules_total", "/summary/rules_total", "check rules in docs/rules.md", "rules"),
+        ("repo.rules_ad", "/summary/rules_by_family/AD", "description rules", "rules"),
+        ("repo.rules_er", "/summary/rules_by_family/ER", "easy-read rules", "rules"),
+        ("repo.rules_cc", "/summary/rules_by_family/CC", "caption and subtitle rules", "rules"),
+        ("repo.rules_vo", "/summary/rules_by_family/VO", "voice-over rules", "rules"),
+        ("repo.rules_rn", "/summary/rules_by_family/RN", "render rules", "rules"),
+        ("repo.stages", "/summary/pipeline_stages", "pipeline stages", "stages"),
+        ("repo.versions", "/summary/viewer_versions", "versions a project can render", "versions"),
+        ("repo.languages", "/summary/languages_total", "languages, English included", "languages"),
+        (
+            "repo.translation_languages",
+            "/summary/translation_languages",
+            "languages we translate into",
+            "languages",
+        ),
+        ("repo.prompts", "/summary/prompts", "prompt files", "prompts"),
+        (
+            "repo.experiments_planned",
+            "/summary/experiments_planned",
+            "experiments planned (E1–E18)",
+            "experiments",
+        ),
+        (
+            "repo.experiments_run",
+            "/summary/experiments_run",
+            "experiments with an evidence file",
+            "experiments",
+        ),
+        ("repo.incidents", "/summary/incidents", "dated incidents in docs/incidents.md", "incidents"),
+        ("repo.charts", "/summary/charts", "charts drawn from evidence", "charts"),
+        ("repo.pages", "/summary/site_pages", "pages on the site", "pages"),
+    ]
+    out = [Spec(cid, f, ptr, text, unit, str, n) for cid, ptr, text, unit in rows]
+    out.append(
+        Spec(
+            "repo.python_lines",
+            f,
+            "/summary/python_lines_src",
+            "lines of Python in src/accesscast",
+            "lines",
+            thousands,
+            n,
+        )
+    )
+    return out
+
+
 def tests_specs() -> list[Spec]:
     """Unit and golden tests and their line coverage, from one pytest run (scripts/test_stats.py)."""
     f, n = "tests.json", "none"
@@ -1058,7 +1110,16 @@ def register() -> dict[str, Any]:
     reg_p = EV / "public-claims.json"
     reg = json.loads(reg_p.read_text())
     by_id = {c["claim_id"]: c for c in reg["claims"]}
-    for s in [*SPECS, *e11_specs(), *e4_specs(), *amd_specs(), *tests_specs(), *e18_specs(), *e17_specs()]:
+    for s in [
+        *SPECS,
+        *e11_specs(),
+        *e4_specs(),
+        *amd_specs(),
+        *tests_specs(),
+        *e18_specs(),
+        *e17_specs(),
+        *repo_specs(),
+    ]:
         f = EV / s.path
         if not f.exists():
             continue

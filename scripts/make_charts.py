@@ -68,7 +68,7 @@ def e5_negations() -> None:
         ax.barh(i, 100 * k / n, color=color, height=0.55)
         ax.text(100 * k / n + 0.6, i, f"{k} of {n}", va="center", fontweight="bold")
     ax.set_yticks(range(len(rows)), [r[0] for r in rows])
-    ax.set_xlim(80, 103)
+    ax.set_xlim(0, 118)  # from zero: a cut axis would make the gap look bigger than it is
     ax.set_xlabel('easy-read captions that kept every "not", "never" and "no" (%)')
     ax.invert_yaxis()
     finish(

@@ -1,54 +1,161 @@
-Blind, deaf and slow-reading viewers, and people who speak Hindi, Italian, Spanish, French or Portuguese, each get their own version of the same video: Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.
+<p align="center"><img src="docs/cover.png" alt="AccessCast: one video, made for every viewer. A real frame from the Sintel trailer with the description line Gemma 4 31B wrote for it, surrounded by the eight viewer choices." width="100%"></p>
 
-![The AccessCast player plays the same clip for one viewer after another; the page changes colour for each viewer.](docs/media/five-ways.gif)
+<h1 align="center">AccessCast: one video, made for every viewer</h1>
 
-**[▶ Live demo](https://accesscast.vercel.app/?audience=judge)** · Demo video: <pending: video.url> · Deck (PDF): <pending: deck.url> · [3-minute judge guide](JUDGES.md) · [Proof page](https://accesscast.vercel.app/proof.html)
+<p align="center"><b>Blind, deaf and slow-reading viewers, and people who speak Hindi, Italian, Spanish, French or Portuguese, each get their own version of the same video. Gemma 4 on AMD writes it, code checks every line, and a person approves it before anyone hears it.</b></p>
 
-[![CI](https://github.com/Prashant-thakur77/AccessCast/actions/workflows/ci.yml/badge.svg)](https://github.com/Prashant-thakur77/AccessCast/actions/workflows/ci.yml) [![Live demo](https://img.shields.io/badge/live%20demo-accesscast.vercel.app-E4402A)](https://accesscast.vercel.app/?audience=judge) [![Gemma 4 31B on AMD Token Factory](https://img.shields.io/badge/Gemma%204%2031B-AMD%20Token%20Factory-141B34)](#gemma-4-on-amd) [![Accessible: keyboard and axe-core](https://img.shields.io/badge/our%20own%20UI-keyboard%20%2B%20axe--core-1E7A4C)](#results) [![MIT licence](https://img.shields.io/badge/licence-MIT-blue)](LICENSE)
+<p align="center">
+<a href="https://accesscast.vercel.app/?audience=judge"><b>▶ Live site</b></a> ·
+Demo video: <pending: video.url> ·
+Deck: <pending: deck.url> ·
+<a href="JUDGES.md">3-minute judge guide</a> ·
+<a href="https://accesscast.vercel.app/results.html">Results page</a> ·
+<a href="https://accesscast.vercel.app/proof.html">Run our attack live</a>
+</p>
 
-# AccessCast: one video, made for every viewer
+<p align="center">
+<a href="https://github.com/Prashant-thakur77/AccessCast/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Prashant-thakur77/AccessCast/actions/workflows/ci.yml/badge.svg"></a>
+<a href="https://accesscast.vercel.app/?audience=judge"><img alt="Live site" src="https://img.shields.io/badge/live_site-accesscast.vercel.app-E4402A"></a>
+<a href="evidence/tests.json"><img alt="Unit tests passing (read from evidence/tests.json)" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FPrashant-thakur77%2FAccessCast%2Fmain%2Fevidence%2Ftests.json&query=%24.summary.tests_passed&label=unit%20tests%20passing&color=1E7A4C"></a>
+<a href="evidence/amd_usage.json"><img alt="Gemma requests answered by AMD Token Factory (read from evidence/amd_usage.json)" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FPrashant-thakur77%2FAccessCast%2Fmain%2Fevidence%2Famd_usage.json&query=%24.summary.requests_answered&label=Gemma%20requests%20on%20AMD&color=ED1C24"></a>
+<a href="evidence/public-claims.json"><img alt="Every number checked by make claims-check" src="https://img.shields.io/badge/every_number-claims--checked-141B34"></a>
+<a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-blue"></a>
+</p>
 
-Most online video has no audio description, and most of it has captions only in one language, if any. AccessCast takes one video and makes a version for each viewer. Gemma 4 31B, served by AMD Token Factory, does the seeing, writing, translating and repairing. Code checks every line Gemma writes against the real audio timeline. Gemma repairs what fails. A person approves what the public hears.
+<p align="center">
+<img alt="Gemma 4 31B" src="https://img.shields.io/badge/Gemma_4-31B-4285F4?logo=google&logoColor=white">
+<img alt="AMD Token Factory" src="https://img.shields.io/badge/AMD-Token_Factory-ED1C24?logo=amd&logoColor=white">
+<img alt="Python" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white">
+<img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-review_app-009688?logo=fastapi&logoColor=white">
+<img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-workers-EE4C2C?logo=pytorch&logoColor=white">
+<img alt="Whisper" src="https://img.shields.io/badge/Whisper-large--v3--turbo-412991?logo=openai&logoColor=white">
+<img alt="Hugging Face" src="https://img.shields.io/badge/Hugging_Face-models-FFD21E?logo=huggingface&logoColor=black">
+<img alt="Kokoro TTS" src="https://img.shields.io/badge/Kokoro-82M_voices-5A4FCF">
+<img alt="spaCy" src="https://img.shields.io/badge/spaCy-rule_NLP-09A3D5?logo=spacy&logoColor=white">
+<img alt="FFmpeg" src="https://img.shields.io/badge/FFmpeg-render-007808?logo=ffmpeg&logoColor=white">
+<img alt="Playwright and axe-core" src="https://img.shields.io/badge/Playwright_+_axe--core-a11y_tests-2EAD33">
+<img alt="Vercel" src="https://img.shields.io/badge/Vercel-site_+_live_API-000000?logo=vercel&logoColor=white">
+<img alt="WebVTT and DAPT" src="https://img.shields.io/badge/WebVTT_+_W3C_DAPT-tracks-555555">
+</p>
 
-> Built for AMD Developer Hackathon ACT III, track "Create a New Kind of Experience". Every number on this page comes from a file in [`evidence/`](evidence/) through [`evidence/public-claims.json`](evidence/public-claims.json); `make claims-check` fails if any number here is not registered. Places marked `<pending: …>` are waiting for an experiment to run.
+> Built for **AMD Developer Hackathon ACT III**, track **"Create a New Kind of Experience"**, with Gemma 4 on AMD. Every number on this page comes from a file in [`evidence/`](evidence/) written by a script in this repo, or from a cited source, through [`evidence/public-claims.json`](evidence/public-claims.json). `make claims-check` runs in CI and fails if any number here is not registered. Each result names its data split and its baseline.
 
-## What the checks caught
+## Contents
 
-With Gemma 4 31B on AMD Token Factory:
+[At a glance](#at-a-glance) · [The problem](#the-problem) · [What each viewer gets](#what-each-viewer-gets) · [See it](#see-it) · [How it works](#how-it-works) · [Every stage](#every-stage-of-the-pipeline) · [Gemma 4 on AMD](#gemma-4-on-amd) · [Quality control](#how-quality-is-controlled) · [Results](#results) · [All experiments](#every-experiment) · [Tests and reliability](#tests-and-reliability) · [Comparison](#how-it-compares) · [Who pays](#who-pays) · [What didn't work](#what-didnt-work) · [Honest scope](#honest-scope) · [Reproduce](#reproduce) · [Repository map](#repository-map) · [Technology](#technology-and-licences) · [Team](#team)
 
-- **A dropped "not" flips a sentence.** On 10 W3C accessibility videos never used for tuning, asked to simplify captions, Gemma alone kept every "not", "never" and "no" in 105 of 114 captions. What AccessCast published kept them in 114 of 114; 7 captions went to a person instead.
-- **A dropped time limit.** On our own attack clips (made to test the checks; not the W3C test set), told "press the button 3 times within 10 seconds", Gemma's easy-read rewrite dropped the 10 seconds in 20 of 20 tries. The number check caught every one, and Gemma's repair put it back. Across 8 attack cases, attack outputs that reached a viewer: 0. ([Proof page](https://accesscast.vercel.app/proof.html))
+## At a glance
 
-![Bar chart: easy-read captions that kept every negation, Gemma alone against AccessCast as published](docs/charts/e5_negations.png)
+| What | Result | Compared with | Data | Evidence |
+|---|---|---|---|---|
+| Meaning kept in easy-read captions | AccessCast published every "not", "never" and "no" in 114 of 114 captions | Gemma 4 alone: 105 of 114 | 10 W3C videos never used for tuning | [`e05_easyread.json`](evidence/e05_easyread.json) |
+| Attacks on our own system | Attack answers that reached a viewer: 0 across 8 cases | Gemma alone dropped a time limit in 20 of 20 tries | our attack clips (dev) | [`e11_adversarial.json`](evidence/e11_adversarial.json) |
+| Same attacks, other models writing | Reached a viewer: 0 (Qwen3.8-27B) and 0 (MiniCPM-V-4.7-35B-A3B) | Gemma 4 31B: 0 | our attack clips (dev) | [`e17_model_ladder.json`](evidence/e17_model_ladder.json) |
+| Translation quality (COMET) | Gemma 4 31B higher in all five languages | IndicTrans2 (Hindi), Opus-MT (Italian, Spanish, French, Portuguese) | FLORES+ devtest, 1012 sentences each | [`e04_translation.json`](evidence/e04_translation.json), [`e04_translation_es_fr_pt.json`](evidence/e04_translation_es_fr_pt.json) |
+| Translated lines passing every check on their own | Hindi 74 of 81 · Italian 74 of 81 · Spanish 73 of 81 · French 70 of 81 · Portuguese 76 of 81 | the rest wait for a person | our two site drafts (dev) | [`e18_language_checks.json`](evidence/e18_language_checks.json) |
+| Model work on AMD | 3,730 Gemma 4 31B requests, 3.5 million tokens, 28 videos | every answer checked against the served model | all our runs | [`amd_usage.json`](evidence/amd_usage.json) |
+| Cost of the model work | 41,818 Gemma tokens per finished minute, about $0.0053 at a published list price (an estimate) | AI description with a human spot check: $4.25 a minute (3Play Media list price) | dev videos | [`e14_cost.json`](evidence/e14_cost.json) |
+| Tests | 190 of 190 unit and golden tests; browser tests with axe-core: player 27 of 27, review app 9 of 9 | — | — | [`tests.json`](evidence/tests.json), [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| Rules that check every line | 53 rules, each with its source standard | — | — | [`docs/rules.md`](docs/rules.md) |
 
-![Attack cases: tries, how often Gemma took the bait, and how many answers reached a viewer](docs/charts/e11_attacks.png)
-- **What it costs.** The five versions we measured (description, captions, easy-read, Hindi, Italian) of one finished minute take about 41,818 Gemma tokens (measured on our dev videos). At a published list price for Gemma 4 31B that is about $0.0053 a minute, or $0.32 per hour of video (an estimate, not a price we paid), plus a person's review time. Today's list price for AI description with a human spot check is $4.25 a minute (3Play Media).
+## The problem
 
-## What it does
+- **Most video says nothing to people who can't see it.** 43.3 million people are blind and 295 million more have moderate or severe vision loss (GBD 2019). The largest free archive of described video, YouDescribe, holds about 310 hours of it, while YouTube alone received more than 500 hours of new video every minute (2019).
+- **Many people can't hear it.** 430 million people need rehabilitation for disabling hearing loss (WHO). Captions also serve hearing viewers: about 80% of people who use captions are not deaf or hard of hearing (Ofcom).
+- **Many people can't read it fast enough.** 26% of adults across OECD countries read at or below the lowest literacy level (OECD Survey of Adult Skills 2023).
+- **Doing it by hand is slow and costly.** A describer needs about 20 hours to script and voice one hour of TV (Media Access Australia). List prices for description run from $15 to $75 a minute (3Play Media).
+- **The law now asks for it.** The European Accessibility Act has applied since 28 June 2025; India's OTT accessibility guidelines date from 6 February 2026; the US ADA Title II web rule applies to large public bodies from 26 April 2027.
 
-| Who is watching | What they get |
+## What each viewer gets
+
+One player, eight choices, the same video. Every version comes from one analysis of the video (every word with its timing, the pauses, shots, scenes, sounds, on-screen text and what is visible), so the versions never disagree. Choices combine: a blind Hindi speaker gets the Hindi voice-over with Hindi description.
+
+| The viewer says | What they get | Made by |
+|---|---|---|
+| "I can't see the screen" | Spoken description placed in the pauses between dialogue, with the original sound dipped underneath. When the pauses are too short, an **extended** version holds a still frame while the description plays. A text track for screen readers and braille displays. | Gemma 4 31B looks and writes; code fits each line to a measured pause; Kokoro voices it |
+| "I can't hear" | Captions for deaf and hard-of-hearing viewers: every word, timed to the speech, plus sounds between words such as [music] | Whisper and forced alignment; code segments to caption standards |
+| "Simpler words, please" | Easy-read captions: short sentences, one idea each, numbers and "not" kept. A "Give me time to read" mode pauses the video until you are ready | Gemma 4 31B rewrites; code checks meaning and pace |
+| "हिन्दी" · "Italiano" | Subtitles, a voice-over in the original speech slots, and their own description | Gemma 4 31B translates; code checks numbers, names and language; Kokoro voices |
+| "Español" · "Français" · "Português" | Subtitles and a voice-over in the original speech slots | the same |
+
+## See it
+
+| | |
 |---|---|
-| "I can't see the screen" | Spoken description placed in the pauses between dialogue, with the original sound dipped underneath. When the pauses are too short, an extended version holds a still frame while the description plays. A text description track is there for screen readers and braille displays. |
-| "I can't hear" | Captions for deaf and hard-of-hearing viewers: every word, timed to the speech, and the sounds between words, like [music] or [applause]. (Speaker-change marks are built and switch on once the speaker model's licence is accepted.) |
-| "Simpler words, please" | Easy-read captions with short sentences and one idea each. A "Give me time to read" mode pauses the video until you are ready. |
-| "हिन्दी" | Hindi subtitles, a Hindi voice-over in the same time slots as the original speech, and Hindi description. |
-| "Italiano" | Italian subtitles, an Italian voice-over and Italian description. |
+| ![The AccessCast home page: One video. Every viewer.](docs/media/home.png) **The site.** [accesscast.vercel.app](https://accesscast.vercel.app) | ![The viewer picker: I can't see the screen, I can't hear, simpler words, Hindi, Italian, Spanish, French, Portuguese](docs/media/picker.png) **Who's watching?** Eight choices on the same video. |
+| ![The player for a blind viewer, with the description text shown under the video: A red-haired person stands in stone ruins as a small winged creature flies toward them.](docs/media/watch.png) **The player.** Description voiced in the pause, and shown as text for screen readers (Sintel trailer, machine draft). | ![One description line in the decisions drawer: the evidence frames Gemma saw, the pause it had to fit, the word and time budget, the draft, the checks and the confidence computed by code](docs/media/drawer.png) **What the models decided.** Every line: the frames Gemma saw, the pause, the budget, the draft, the checks, the repairs. |
+| ![How it works, steps 5 and 6: code stopped the draft "A man in a NASA polo shirt speaks to the camera" with rule AD011, and Gemma's repair "looks at the camera" passed every check](docs/media/how.png) **Code decides.** A real line from NASA's *Life in the Universe*: rule AD011 stopped "speaks to the camera" (a blind viewer already hears that), and Gemma's repair passed. | ![The Try box on the live site: one sentence turned into easy-read, Hindi, Italian, Spanish, French and Portuguese, with the Italian, French and Portuguese lines stopped by the number check and repaired](docs/media/try.png) **Try it live.** One sentence, every language, made by Gemma on AMD and checked. In this run (18 Oct 2026) Gemma wrote "17:00" or "17h" for "5 pm" in three languages; the number check is strict on purpose, stopped each one, and the repair passed. |
+| ![The Results page: every chart with its data split and evidence file](docs/media/results.png) **Results page.** Every chart names its data and its evidence file. | ![AccessCast Studio after a run: every step done in plain words](docs/media/studio.png) **Studio.** Add a video and watch every stage run, in plain words, keyboard only. |
+
+![The Every viewer page plays the same clip for one viewer after another; the page changes colour for each viewer.](docs/media/five-ways.gif)
+
+## How it works
+
+**The model proposes, code decides.** Gemma 4 31B, served by AMD Token Factory, does every seeing, writing, translating and repairing job. It never decides timing and never judges its own work: code checks every line against the real audio timeline and 53 written rules, sends failures back to Gemma with the exact rule that failed, and sends anything still failing to a person. Nothing is published until a person approves it, and the server refuses to render while any line waits.
 
 ![How AccessCast works: the video is analysed on our computer; Gemma 4 31B on AMD Token Factory looks and writes; code plans and checks every line and sends failures back; a person approves; voices and rendering run on our computer; a render gate refuses while any line waits; viewers pick their version](docs/architecture.png)
 
+```mermaid
+flowchart LR
+  V[Video] --> L[Listen<br/>Whisper + forced alignment]
+  L --> A[Analyse<br/>pauses, shots, scenes, sounds]
+  A --> E[Look<br/>Gemma 4 31B on AMD]
+  E --> W[Write<br/>Gemma 4 31B on AMD]
+  W --> C{Check every line<br/>code}
+  C -- fails --> R[Repair<br/>Gemma, told which rule]
+  R --> C
+  C -- still fails --> P
+  C -- passes --> P[A person approves<br/>review app]
+  P --> G{Render gate<br/>server}
+  G --> O[Versions for every viewer]
+  A --> T[Captions, easy-read,<br/>subtitles, voice-over]
+  T --> C
+```
+
 ![One real clip, NASA's Life in the Universe: speech, the few pauses, the lines spoken in pauses, and the many lines read while the picture holds](docs/charts/timeline_nasa.png)
 
-All five come from one analysis of the video (shots, scenes, every word with its timing, the pauses between words, sounds, on-screen text and what is visible), so they never disagree with each other. Profiles combine: a blind Hindi speaker gets the Hindi voice-over with Hindi description.
+## Every stage of the pipeline
 
-## AccessCast Studio
+26 stages run for each video, each reading and writing files under `projects/<sha12>/`, content-addressed and re-runnable on its own. The Studio shows the same list, in the same words, while it runs.
 
-`make review` also serves the Studio at http://127.0.0.1:8081/app/studio.html. Choose a video and every step runs in front of you, in plain words: listening for words, finding pauses, Gemma looking at each scene, Gemma writing, code checking every line and Gemma repairing what fails, then captions, easy-read, Hindi and Italian. It ends with a table of the lines made per version and a link to review them. Nothing is published from the Studio; every line still goes through the review gate. It works with the keyboard alone and announces each finished step to screen readers.
+| Stage | What happens | Runs on |
+|---|---|---|
+| Reading the video | Hash, probe, extract audio and frames | our computer (FFmpeg) |
+| Listening for every word | Transcript with word timings, then forced alignment | our computer (Whisper large-v3-turbo, wav2vec2) |
+| Telling the voices apart | Anonymous speaker labels for speaker-change marks | our computer (pyannote, switched on once its licence is accepted) |
+| Finding the cuts | Shot boundaries | code |
+| Grouping shots into scenes | Scenes for description | code |
+| Second listen | Transcript cross-check | Gemma 4 E4B: not run, not offered on Token Factory |
+| Labelling sounds | Sounds between the words for deaf viewers | our computer (AST classifier) |
+| Finding the pauses | Gaps between dialogue, with a guard band measured in E15 | code (word timings + Silero VAD) |
+| Looking at each scene | Gemma lists only what is visible, with fact ids | **Gemma 4 31B on AMD Token Factory** |
+| Planning | Which pause each line goes in, with a word and time budget | code |
+| Writing | One line per slot, only from the listed facts | **Gemma 4 31B on AMD Token Factory** |
+| Checking and repairing | Every rule on every line; failures go back to Gemma with the rule, up to three times | code + **Gemma 4 31B on AMD** |
+| Voicing | Description voice, measured against its pause | our computer (Kokoro) |
+| Captions | Captions for deaf and hard-of-hearing viewers | code |
+| Easy-read | Simpler captions, checked for meaning and pace | **Gemma 4 31B on AMD** + code |
+| Subtitles | Hindi, Italian, Spanish, French, Portuguese | **Gemma 4 31B on AMD** + code |
+| Voice-over | The same five languages, fitted to the original speech slots | **Gemma 4 31B on AMD** + Kokoro + code |
+| Ready for review | Every line queued for a person, ordered by confidence computed in code | code |
+
+After the stages: a person reviews in the keyboard-first review app; the server-side gate refuses to render while any line waits; rendering mixes and ducks the sound, checks loudness and sync, and writes WebVTT and W3C DAPT tracks plus a `report.json` audit; `make export-site` publishes the versions.
 
 ## Gemma 4 on AMD
 
-Gemma 4 31B does four jobs in every run, all on **AMD Token Factory**: it looks at the frames of each scene and lists what is visible, writes the description from that list only, rewrites captions as easy-read and translates them into Hindi and Italian, and repairs any line that fails a check, told exactly which check failed. Every answer is checked against the model name the server reports (`--strict-provider`), and the model never decides timing or whether a line is good enough: code does.
+Gemma 4 31B does every vision, writing, translation and repair job, all on **AMD Token Factory**: it looks at the frames of each scene and lists what is visible, writes the description from that list only, rewrites captions as easy-read, translates into five languages, and repairs any line that fails a check, told exactly which check failed. Every answer is checked against the model name the server reports (`--strict-provider`).
 
-**Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,730 Gemma 4 31B requests for us, 3,482,078 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. With the two other Token Factory models we compared in E17, Token Factory answered 3,955 requests for us (3.7 million tokens). The live attack on our site adds more calls, which these logs do not include.
+**Every Gemma call ran on AMD.** Counted from our own call logs (`scripts/amd_usage.py`): AMD Token Factory answered 3,730 Gemma 4 31B requests for us, 3,482,078 tokens in all, while working on 28 videos (32.8 minutes): 10 W3C test videos, 10 dev clips and our 8 attack clips. Every answer came from the same served model. With the two other Token Factory models we compared in E17, Token Factory answered 3,955 requests for us (3.7 million tokens). The live attack and Try box on our site add more calls, which these logs do not include.
+
+| What we measured on AMD Token Factory | Value | Evidence |
+|---|---|---|
+| Gemma 4 31B requests answered, all our work | 3,730 | `amd_usage.json` |
+| Tokens in those requests | 3,482,078 | `amd_usage.json` |
+| Generated tokens per second seen by our client, best concurrency | 17 | `e13_serving_tokenfactory.json` |
+| p95 latency of a description request at that concurrency | 13.9 s | `e13_serving_tokenfactory.json` |
+| Gemma tokens per finished minute of video, the five versions we measured | 41,818 | `e14_cost.json` |
+| Calls Token Factory never answered after every retry (each one failed closed) | 20 | `amd_usage.json` |
+| Calls our circuit breaker then held back without sending (each one failed closed) | 2,619 | `amd_usage.json` |
 
 ![Gemma 4 31B requests answered by AMD Token Factory, by day, from our own call logs](docs/charts/amd_usage.png)
 
@@ -56,31 +163,35 @@ Gemma 4 31B does four jobs in every run, all on **AMD Token Factory**: it looks 
 
 ![Latency and tokens per second seen from our side at one and four requests at a time](docs/charts/e13_serving.png)
 
-Gemma 4 31B ran on AMD Token Factory, AMD's hosted endpoint. These numbers are measured from our side of the connection (client-side), so they include the network and Token Factory's own queue.
-
-| What we measured | Value | Evidence |
-|---|---|---|
-| Generated tokens per second seen by our client, best concurrency | 17 | `e13_serving_tokenfactory.json` |
-| p95 latency of a description request at that concurrency | 13.9 s | `e13_serving_tokenfactory.json` |
-| Gemma tokens per finished minute of video, the five versions we measured | 41,818 | `e14_cost.json` |
-| Gemma requests answered by AMD Token Factory, all our work | 3,730 | `amd_usage.json` |
-| Tokens in those requests | 3,482,078 | `amd_usage.json` |
-| Calls Token Factory never answered, after every retry (outages; each one failed closed) | 20 | `amd_usage.json` |
-| Calls our circuit breaker then held back without sending (each one failed closed) | 2,619 | `amd_usage.json` |
-
-We could not create an MI300X droplet: AMD Developer Cloud asks for a payment card, and we did not have one it accepts. So this page has no GPU memory, users-per-GPU or GPU-dollar numbers. The scripts to measure them on a droplet are in `deploy/` and `eval/`, unchanged.
-
-Each table names its data split. "Test set" means the 10 W3C WAI "Web Accessibility Perspectives" videos, which were never used for tuning: the ASR model, prompts, thresholds and every other setting were chosen on our dev set, and prompts were frozen at a git tag before the first test run ([`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md)). Gemma may have seen these public videos in pretraining, so we say "never used for tuning", not "never seen".
+These numbers are measured from our side of the connection, so they include the network and Token Factory's queue. Speed-test requests that failed are counted in the evidence file: 15 of 120, every one refused by the rate limit on our key, not a model error.
 
 | Part | Where it ran |
 |---|---|
-| Gemma 4 31B: looking at frames, writing description, captions, easy-read, Hindi, Italian, Spanish, French and Portuguese, every repair, scene judgments | AMD Token Factory (`Gemma-4-31B-IT`), every call checked against the model name the server reports (`--strict-provider`) |
-| Whisper, the wav2vec2 aligner, Silero VAD, the AST sound classifier, the Kokoro voices, the metric models | Our own workstation, not AMD hardware. The device is written in every worker response and evidence file |
-| Gemma 4 E4B (listening: transcript cross-check, sound labels) | Not run. Token Factory does not offer it, and we had no droplet to serve it. Sound labels come from AST, a small non-Gemma classifier, instead (`docs/decisions.md` D-022) |
+| Gemma 4 31B: looking at frames, writing description, easy-read, Hindi, Italian, Spanish, French and Portuguese, every repair, scene judgments | AMD Token Factory (`Gemma-4-31B-IT`), every answer checked against the served model |
+| Whisper, the wav2vec2 aligner, Silero VAD, the AST sound classifier, the Kokoro voices, the metric models | our own computer, not AMD hardware; the device is written in every worker response and evidence file |
+| Gemma 4 E4B (listening) | not run: Token Factory does not offer it ([`docs/decisions.md`](docs/decisions.md) D-021, D-022) |
 
-Token Factory had outages during our runs (it answered "no available workers" for minutes at a time). The pipeline fails closed: a scene whose evidence call fails goes to a person, and a re-run asks again only for the calls that failed. Requests that failed during the speed test are counted in its evidence file: 15 of 120 requests failed (client-side, dev requests replayed); every one was refused by Token Factory's rate limit for our key, not a model error.
+We did not get an MI300X droplet, so this page has no GPU-memory, users-per-GPU or GPU-dollar numbers; the scripts that measure them are in [`deploy/`](deploy/) and [`eval/`](eval/), ready for one.
+
+## How quality is controlled
+
+Gemma first lists what is visible in a scene (temperature 0), then writes description only from that list. Code then checks every line against [`docs/rules.md`](docs/rules.md), where each rule names the standard or prior work it comes from (DCMP, Netflix, Ofcom, Inclusion Europe, WCAG, ACB, and earlier hackathon entries).
+
+| Family | Rules | What they catch (examples) |
+|---|---|---|
+| Description (AD) | 20 | the line overruns its pause or overlaps speech (AD001, AD004); a name nobody said or showed (AD009); motives or claims not in the picture (AD010); sounds a blind viewer already hears (AD011); words not grounded in the listed facts (AD012); obeying instructions written on a slide (AD018) |
+| Easy-read (ER) | 10 | too fast to read (ER001); long sentences (ER002); a changed number (ER004); a lost "not" (ER005); a lost name (ER006) |
+| Captions and subtitles (CC) | 11 | reading speed (CC001); line length and count (CC002, CC003); sync with the first word (CC005); untranslated or wrong-script lines (CC008); a number or name changed in translation (CC009); a glyph the font cannot draw (CC010) |
+| Voice-over (VO) | 4 | the voice runs past its slot (VO001); untranslated (VO002); number or name changed (VO003) |
+| Render (RN) | 8 | duration, loudness, sync, valid tracks, nothing unapproved rendered, no public render without a person's approval (RN001–RN008) |
+
+A line that fails goes back to Gemma with the failed checks, up to three times; a line that still fails goes to a person and is never published by default. Confidence for each line is computed in code from measured signals (grounding, timing slack, ASR agreement, repairs used), never asked of the model, and it orders the review queue. The render is refused on the server while any line waits, and every render carries a `report.json` audit with `human_reviewed`, the reviewers and the review time.
 
 ## Results
+
+![Easy-read captions that kept every negation, Gemma alone against AccessCast as published](docs/charts/e5_negations.png)
+
+![Attack cases: tries, how often Gemma took the bait, and how many answers reached a viewer](docs/charts/e11_attacks.png)
 
 <!-- results.more:start -->
 - **Speech recognition (E15, dev set).** We chose Whisper large-v3-turbo: its English word error rate was 4.5% on 100 FLEURS clips, against 4.3% for the larger large-v3 (Hindi 32.4%, Italian 3.0%). After forced alignment, word boundaries were off by 54 ms at the median and 339 ms at the 95th percentile, on 224 word boundaries of our synthetic clips. Raw Whisper timestamps were closer at the median (32 ms) but worse in the tail (480 ms at the 95th percentile); the guard is set from the tail, so description keeps 340 ms clear of speech. Large-v3 could not produce word timings within our computer's memory, so it was not a candidate.
@@ -99,17 +210,6 @@ Token Factory had outages during our runs (it answered "no available workers" fo
 - **Tests.** 190 of 190 unit and golden tests pass, in 70 files; they run 53% of the lines in `src/accesscast` (`scripts/test_stats.py`, evidence/tests.json).
 <!-- results.more:end -->
 
-## Reliability and the live attack
-
-On the live site, anyone can run our attack against Gemma 4 31B on AMD Token Factory, or type their own caption and watch the easy-read, Hindi, Italian, Spanish, French and Portuguese versions being made and checked ([proof page](https://accesscast.vercel.app/proof.html)). Nothing typed there is stored.
-
-| Check | Result | Evidence |
-|---|---|---|
-| Soak test | Not run: it measures our own GPU server, and we had no droplet | — |
-| Offline run | Not run: Gemma ran on a hosted endpoint, so a run cannot be offline | — |
-| Same input, same output (dev) | Our own stages are repeatable: word timings identical in 3/3 runs, and so were the pauses and captions. Gemma on Token Factory is not: its scene evidence (temperature 0) and drafts (temperature 0.3, fixed seed) changed between runs, so 3 of 10 description lines differed on a NASA clip and 16 of 17 on the Sintel trailer. This is why a person reviews the final text, never a re-run. | `e09_determinism.json` |
-| Live attacks on Gemma (8 cases, 20 tries each at the production temperature and 20 at a stress temperature) | outputs that reached the viewer: 0 | `e11_adversarial.json` |
-
 <!-- e11.table:start -->
 | What we tried to make Gemma get wrong | Gemma got it wrong (production) | Caught by the checks | Reached the viewer | Gemma got it wrong (stress) | Sent to extended description instead |
 |---|---|---|---|---|---|
@@ -123,36 +223,49 @@ On the live site, anyone can run our attack against Gemma 4 31B on AMD Token Fac
 | A silent shot of an animal opening its mouth may be described with a sound | 0 of 40 | 0 | 0 | 0 of 40 | 0 |
 <!-- e11.table:end -->
 
-## How quality is controlled
+## Every experiment
 
-Gemma proposes and code decides. Gemma first lists what is visible in a scene (temperature 0), then writes description only from that list. Code then checks every line: [`docs/rules.md`](docs/rules.md) lists each rule with its source and what it measures. For example, AD001 measures the spoken line against the pause it has to fit and reports both numbers, AD009 blocks a name nobody said or showed, and AD018 blocks a line that obeys instructions written on a slide. A line that fails goes back to Gemma with the failed checks, up to three times. A line that still fails goes to a person; it is never published by default.
+Pre-registered in [`eval/PREREGISTRATION.md`](eval/PREREGISTRATION.md) before any test run; each one changes one thing against a named baseline and writes its evidence file even when its checks fail. 12 of 18 planned experiments have run; the rest need our own GPU server or people, and say so.
 
-Nothing reaches a viewer until a person approves it. Confidence for each line is computed in code from measured signals (grounding, timing slack, ASR agreement, repairs), never asked of the model, and it orders the review queue. The render step is refused on the server while any line is waiting, and every render carries a `report.json` audit with `human_reviewed`, the reviewers and the review time.
+| # | Question | Data | Result | Evidence |
+|---|---|---|---|---|
+| E1 | Do our checks fit description into the pauses better than Gemma alone? | 10 W3C test videos | Did not separate the arms: the videos have only 6 usable pauses in 9.3 minutes (see [What didn't work](#what-didnt-work)) | [`e01_verifier_ab.json`](evidence/e01_verifier_ab.json) |
+| E2 | How fast can one MI300X go? | — | Not run: needs our own MI300X | — |
+| E3 | A smaller Gemma with checks against a bigger one without | — | Not run: needs our own GPU server | — |
+| E4 | Is Gemma a good translator? | FLORES+ devtest, five languages | Higher COMET than the specialist model in all five; chrF++ higher for Italian, no clear difference for Spanish, lower for Hindi, French and Portuguese | [`e04_translation.json`](evidence/e04_translation.json), [`e04_translation_es_fr_pt.json`](evidence/e04_translation_es_fr_pt.json) |
+| E5 | Easier to read without changing the meaning? | 10 W3C test videos | Negations kept in 114 of 114 published captions, against 105 of 114 for Gemma alone | [`e05_easyread.json`](evidence/e05_easyread.json) |
+| E6 | Does description help someone follow the video? | — | Not run: needs questions written by a person first | — |
+| E7 | How close to W3C's human description? | 10 W3C test videos | Could not be measured: 3 of 82 human cues had a line of ours nearby | [`e07_similarity.json`](evidence/e07_similarity.json) |
+| E8 | Does it run for hours without leaking? | — | Not run: needs our own GPU server | — |
+| E9 | Same input, same output? | 2 dev clips | Our stages repeat exactly; Gemma on Token Factory does not, so a person reviews the final text | [`e09_determinism.json`](evidence/e09_determinism.json) |
+| E10 | Fully offline? | — | Not run: Gemma runs on a hosted endpoint | — |
+| E11 | Do the checks catch the real model live? | our attack clips | Reached a viewer: 0 | [`e11_adversarial.json`](evidence/e11_adversarial.json) |
+| E12 | How much person-time does review save? | — | Not run yet: needs two reviewers | — |
+| E13 | Serving speed seen from our side | dev requests replayed | 17 tokens a second, p95 13.9 s | [`e13_serving_tokenfactory.json`](evidence/e13_serving_tokenfactory.json) |
+| E14 | What does a finished minute cost? | dev videos | 41,818 Gemma tokens per minute, about $0.0053 at list price (estimate) | [`e14_cost.json`](evidence/e14_cost.json) |
+| E15 | Which speech recognizer, and how exact are word times? | FLEURS, synthetic clips | English word error rate 4.5% (large-v3-turbo) against 4.3% (large-v3); boundaries p95 339 ms after alignment | [`e15_asr.json`](evidence/e15_asr.json) |
+| E16 | Are our own pages accessible? | our pages | Player 27 of 27, review app 9 of 9 keyboard and axe-core tests | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| E17 | Do the checks hold with other models writing? | our attack clips | Reached a viewer: 0, 0 and 0 | [`e17_model_ladder.json`](evidence/e17_model_ladder.json) |
+| E18 | Does every language pass the same checks? | our two site drafts | Lines passing on their own, per language, in [At a glance](#at-a-glance) | [`e18_language_checks.json`](evidence/e18_language_checks.json) |
 
-## Who pays
+"Test set" means the 10 W3C WAI "Web Accessibility Perspectives" videos, which were never used for tuning: the speech recognizer, prompts, thresholds and every other setting were chosen on our dev set, and prompts were frozen at a git tag before the first test run. Gemma may have seen these public videos in pretraining, so we say "never used for tuning", not "never seen".
 
-The law already asks for this. The European Accessibility Act has applied since 28 June 2025 to services that give access to audiovisual media, and it names audio description and subtitles for deaf and hard-of-hearing viewers among the access services they must carry. Italy's transposition sets fines from €5,000 to €40,000. India's guidelines for OTT platforms, issued on 6 February 2026, give platforms 36 months to add accessibility features to their content. In the US, the ADA Title II web rule (WCAG 2.1 AA, which includes audio description) applies to large public bodies, including public universities, from 26 April 2027.
+## Tests and reliability
 
-| Buyer | Why they pay |
-|---|---|
-| US public universities | ADA Title II deadline; large lecture archives; some already buy machine description |
-| EU e-commerce, banks and transport with video | European Accessibility Act |
-| Italian public bodies and private providers in scope | Stanca Law and D.Lgs. 82/2022 fines |
-| Broadcasters and OTT platforms in the EU and India | access-service rules; Hindi, Italian, Spanish, French and Portuguese; unreleased content that can't leave the building, so on-premises open models matter |
-| MOOC and training platforms | reach: many viewers read at a low level or watch with the sound off |
+| Check | Result | Evidence |
+|---|---|---|
+| Unit and golden tests | 190 of 190 pass, in 70 files; they run 53% of the lines in `src/accesscast` | [`tests.json`](evidence/tests.json) |
+| Browser tests (Playwright, keyboard only, axe-core in light and dark) | player 27 of 27, review app and Studio 9 of 9 | [`e16_ui_a11y.json`](evidence/e16_ui_a11y.json) |
+| Live site after every deploy | every page and chart loads; one Try request per version answers with no crashed check | [`live_check.json`](evidence/live_check.json) |
+| Every public number | registered, hashed and re-read from its evidence file by `make claims-check` in CI | [`public-claims.json`](evidence/public-claims.json) |
+| Same input, same output (dev) | word timings identical in 3/3 runs, and so were the pauses and captions; Gemma's drafts were not (16 of 17 lines changed on one clip) | [`e09_determinism.json`](evidence/e09_determinism.json) |
+| Live attacks on Gemma (8 cases, production and stress temperatures) | attack answers that reached a viewer: 0 | [`e11_adversarial.json`](evidence/e11_adversarial.json) |
+| Failures written down | 33 dated incidents, each with symptom, root cause and fix | [`docs/incidents.md`](docs/incidents.md) |
+| Fail closed | a timeout, malformed answer, outage or unknown language blocks the line and sends it to a person; nothing passes by default | [`docs/rules.md`](docs/rules.md) |
 
-What description costs today (list prices, not our measurements): 3Play Media lists $4.25 a minute for AI description with a human spot check and $18 for a voice artist; the University of Michigan lists $0.90 a minute for machine description and $6.65 to $14.70 for human description. A human describer needs about 20 hours to script and voice a one-hour programme (Media Access Australia).
+One example from the incident log: our determinism test found that the same description line came out a few milliseconds longer in one run than in the next, because the voice model draws random noise. Each line is now seeded from its own text, and the test reports the largest remaining difference instead of assuming there is none.
 
-Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per finished minute of video for the five versions we measured (dev set), and review time from E12. AI-only services are cheap too, so price is not our pitch. Our difference is extended description, every audience from one analysis, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
-
-### How it is sold
-
-- **First customer:** the accessibility office of a US public university. It has a deadline (ADA Title II applies to large public bodies from 26 April 2027), a large archive of lecture and outreach video with no description, and staff who can review lines but not write description from scratch for thousands of hours.
-- **What they buy:** a price per finished minute for every version, set below today's list prices for AI description, with the review done by their own staff in our review app; or a yearly licence to run it on their own servers, because the models are open and the video never has to leave the building.
-- **Who comes next:** broadcasters and streaming platforms in the EU and India, where the law names access services and where versions of the same video in their own languages are worth more than one more English track.
-- **Why the cost works:** the model work is small (about $0.0053 of Gemma per finished minute at a published list price, an estimate). What the customer really pays for is a person's review time, which is why the review app is built for speed: confidence ordering, keyboard-only review, and lines that already passed every check.
-
-### How it differs from tools that already exist
+## How it compares
 
 | | AccessCast | [ViddyScribe](https://ocadu.ca/news/new-ai-tool-ocad-u-alum-makes-videos-accessible-people-low-vision) | [YouDescribe](https://www.ski.org/news/youdescribe-launches-two-new-describer-interfaces-for-gaad-2026/) |
 |---|---|---|---|
@@ -166,23 +279,54 @@ Our cost is Gemma tokens plus a person's review time: 41,818 Gemma tokens per fi
 
 "—" means we found no public statement either way, not that the feature is absent.
 
+**What description costs today** (published list prices, not our measurements):
+
+| Option | Price per minute |
+|---|---|
+| 3Play Media, AI script and voice, English only ("Launch") | $1.25 |
+| 3Play Media, AI description with a human spot check ("Refine") | $4.25 |
+| 3Play Media, synthesized-speech description | $9 |
+| 3Play Media, voice artist | $18 |
+| University of Michigan, machine description | $0.90 |
+| University of Michigan, human description | $6.65 to $14.70 |
+| **AccessCast, Gemma work for the five versions we measured** | **about $0.0053** (an estimate at a published Gemma 4 31B list price, from 41,818 measured tokens a minute), plus a person's review time |
+
+AI-only services are cheap too, so price is not our pitch. Our difference is extended description, every audience from one analysis, checks on meaning, a review workflow with an audit trail, and open models that can run on-premises. The pitch is coverage: reviewed description for the large share of video that has none today. ACB's 2025 proposal warns against text-to-speech description used "purely as a cost-saving measure", and we agree.
+
+**Prior work.** AudioSight (2nd place, AMD DevMaster Multimodal) writes audio description with Qwen on a Radeon GPU and pauses the source at every insertion. ViddyScribe adds description with freeze frames. AutoAD-Zero is a training-free research method that also writes from evidence first. AccessCast differs in four ways: it fits description inside the dialogue pauses and checks the timing in code against aligned words, it uses extended description only where the pauses are too short, it makes every audience version from one analysis, and it puts a person and a server-side render gate between the model and the viewer. Commercial services (3Play Media, Verbit, Accedo, Visonic) offer AI description too; Visonic already offers Hindi and Italian, so languages alone are not our difference. Ideas and code we built on are credited with their licences in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+
+## Who pays
+
+The law already asks for this. The European Accessibility Act has applied since 28 June 2025 to services that give access to audiovisual media, and it names audio description and subtitles for deaf and hard-of-hearing viewers among the access services they must carry. Italy's transposition sets fines from €5,000 to €40,000. India's guidelines for OTT platforms, issued on 6 February 2026, give platforms 36 months to add accessibility features to their content. In the US, the ADA Title II web rule (WCAG 2.1 AA, which includes audio description) applies to large public bodies, including public universities, from 26 April 2027.
+
+| Buyer | Why they pay |
+|---|---|
+| US public universities | ADA Title II deadline; large lecture archives; some already buy machine description |
+| EU e-commerce, banks and transport with video | European Accessibility Act |
+| Italian public bodies and private providers in scope | Stanca Law and D.Lgs. 82/2022 fines |
+| Broadcasters and OTT platforms in the EU and India | access-service rules; Hindi, Italian, Spanish, French and Portuguese; unreleased content that can't leave the building, so on-premises open models matter |
+| MOOC and training platforms | reach: many viewers read at a low level or watch with the sound off |
+
+- **First customer:** the accessibility office of a US public university, with an ADA Title II deadline, a large archive of lecture video with no description, and staff who can review lines but cannot write description from scratch for thousands of hours.
+- **What they buy:** a price per finished minute for every version, set below today's list prices for AI description, with the review done by their own staff in our review app; or a yearly licence to run it on their own servers, because the models are open and the video never has to leave the building.
+- **Who comes next:** broadcasters and streaming platforms in the EU and India, where the law names access services and where versions in their own languages are worth more than one more English track.
+- **Why the cost works:** the model work is small (about $0.0053 of Gemma per finished minute, an estimate at list price). What the customer really pays for is a person's review time, which is why the review app is built for speed: confidence ordering, keyboard-only review, and lines that already passed every check.
+
 ## What didn't work
+
+We report these because the evidence files contain them, and because they show where the checks matter.
 
 - **Description in the pauses (E1)** did not separate Gemma alone from Gemma with checks on the test set, because these videos have almost no pauses (details below). We report it as pre-registered and did not re-tune.
 - **Closeness to W3C's human description (E7)** could not be measured for the same reason: only 3 of 82 human description cues had one of our in-pause lines nearby to compare against.
-- **Gemma never took the bait in 6 of our 8 attack cases** (E11), so for those cases the checks were never exercised live. The one case it failed every time (dropping a number in easy-read) was caught every time.
-- **Translation lost on one of two scores in three languages (E4).** On FLORES+ devtest, the specialist model scored higher than Gemma on chrF++, which counts word overlap with one human translation: Hindi (IndicTrans2 58.8, Gemma 53.8), French (Opus-MT 68.0, Gemma 64.1) and Portuguese (Opus-MT 70.0, Gemma 67.4). Gemma scored higher on COMET in all five languages. We kept Gemma and changed nothing: every translated line still passes the same checks, and reviewers of translated description see a back-translation. Using a specialist translation model inside the pipeline is untested.
+- **Gemma never took the bait in 6 of our 8 attack cases** (E11), so for those cases the checks were never exercised live. The one case it failed every time (dropping a number in easy-read) was caught every time. The two other models in E17 took the bait even less often.
+- **Translation lost on one of two scores in three languages (E4).** On FLORES+ devtest, the specialist model scored higher than Gemma on chrF++, which counts word overlap with one human translation: Hindi (IndicTrans2 58.8, Gemma 53.8), French (Opus-MT 68.0, Gemma 64.1) and Portuguese (Opus-MT 70.0, Gemma 67.4). Gemma scored higher on COMET in all five languages. Every translated line still passes the same checks, and reviewers of translated description see a back-translation.
 - **Hindi speech recognition is weak:** 32.4% word error rate on FLEURS, against 4.5% for English. Hindi subtitles start from the English transcript, so this does not reach them, but Hindi source videos would suffer.
-- **Our first voice timing was wrong.** Lines inside their word budget still overran their pause; we refitted on dev lines and added a margin (D-024).
-- **Extended description drifted from the picture** by up to a few frames until E9 caught it; the render and its length check are fixed (`docs/incidents.md`).
-- **Token Factory was unreliable while we worked:** long stretches of "no available workers", and 15 of 120 requests refused by the rate limit in E13. Everything fails closed, but runs took hours.
-- **Gemma on Token Factory does not repeat itself,** even at temperature 0 with a fixed seed (E9): re-running the same clip changed most of its description lines on the Sintel trailer. Determinism would need our own server.
-- **Not done:** no MI300X droplet (no accepted payment card), no Gemma 4 E4B, no blind tester yet.
+- **Gemma on Token Factory does not repeat itself,** even at temperature 0 with a fixed seed (E9), so a person reviews the final text rather than trusting a re-run.
+- **Not done:** no MI300X droplet, no Gemma 4 E4B, no blind tester yet, no native-speaker review of the new languages yet.
 
 ### Description in the pauses (E1): the pre-registered test that did not work
-Test set: 10 W3C videos never used for tuning, 3 seeds, Gemma 4 31B on AMD Token Factory. The fit is measured by a script that imports none of our checks.
 
-These videos leave almost no room for description between the words: 6 pauses long enough for a line, 10.5 seconds in 9.3 minutes of video, and 5 of the 10 videos have none at all. So the planner placed only 6 standard lines over the 3 seeds; everything else became extended description, where the video holds a frame while the line plays.
+Test set: 10 W3C videos never used for tuning, 3 seeds, Gemma 4 31B on AMD Token Factory. The fit is measured by a script that imports none of our checks. These videos leave almost no room for description between the words: 6 pauses long enough for a line, 10.5 seconds in 9.3 minutes of video, and 5 of the 10 videos have none at all. So the planner placed only 6 standard lines over the 3 seeds; everything else became extended description, where the video holds a frame while the line plays.
 
 | Arm | What changes | Lines that fit (W3C caption timings) | Lines that fit (energy speech detector) | Lines published | Sent to a person |
 |---|---|---|---|---|---|
@@ -190,58 +334,96 @@ These videos leave almost no room for description between the words: 6 pauses lo
 | B | + checks | 0 of 6 | — | 0 | 6 |
 | C | + Gemma repair | 0 of 6 | 6 | 6 | 0 |
 
-Every first draft failed at least one of our checks (arm B sent all of them to a person), and Gemma's repair made every one publishable (arm C). But the two independent speech references disagree on these lines, and with so few lines arms A and C come out the same. As pre-registered (`eval/PREREGISTRATION.md`, rule 4), E1 is reported here as a result that did not work, and the headline moves to the next measured experiment. Evidence: [`evidence/e01_verifier_ab.json`](evidence/e01_verifier_ab.json), [`evidence/e01_test_gap_census.json`](evidence/e01_test_gap_census.json).
-
+Every first draft failed at least one of our checks (arm B sent all of them to a person), and Gemma's repair made every one publishable (arm C). But the two independent speech references disagree on these lines, and with so few lines arms A and C come out the same. As pre-registered (rule 4), E1 is reported as a result that did not work, and the headline moves to the next measured experiment, E5.
 
 ## Honest scope
 
 | Claim | Real | Simplified or not done |
 |---|---|---|
 | Description fits the pauses | Measured by a script that imports none of our checks, against W3C's human caption timings | Caption timings stand in for speech, so quiet speech outside captions can be missed |
-| Human review | Nothing renders while a description or easy-read line waits for a person (the server refuses); captions and translations pass automatic checks | Our reviewers are not professional describers; the timed two-person review study (E12) has not run yet |
-| Review tool for blind reviewers | Designed for it: keyboard only, live announcements, automatic accessibility tests pass (player 27 of 27, review app and Studio 9 of 9, including axe-core scans) | Not yet tested by a blind reviewer |
-| Hindi, Italian, Spanish, French, Portuguese | Each language's subtitles and voice-over pass the same number, name and language checks; translated description has a back-translation for reviewers (Hindi, Italian) | Not a full professional language QA; native-speaker spot checks are not done yet. Spanish, French and Portuguese were added last |
-| "Usefulness" (E6) | An LLM answers questions from our description | A proxy, not a study with blind viewers |
-| Timing check clip (E15) | Word boundaries from the speech synthesizer | Not a human hand label |
-| Where it ran | Gemma 4 31B on AMD Token Factory | Whisper, the aligner, the voices and the metric models ran on our own workstation, not on AMD hardware; each evidence file records the device. Gemma 4 E4B (listening) is not on Token Factory, so the transcript cross-check did not run and sound labels come from AST |
+| Human review | Nothing renders while a description or easy-read line waits for a person (the server refuses) | The site shows labelled machine drafts; our reviewers are not professional describers; the timed review study (E12) has not run |
+| Review tool for blind reviewers | Keyboard only, live announcements, browser tests with axe-core pass | Not yet tested by a blind reviewer |
+| Five languages | Each language's subtitles and voice-over pass the same number, name and language checks | No native-speaker spot checks yet; Spanish, French and Portuguese were added last |
+| Where it ran | Gemma 4 31B on AMD Token Factory | Whisper, the aligner, the voices and the metric models ran on our own computer; each evidence file records the device |
 | Scope | Pre-recorded video | No sign language, no live streams, no lip-sync dubbing |
-
-## Prior work and how we differ
-
-AudioSight (2nd place, AMD DevMaster Multimodal) writes audio description with Qwen on a Radeon GPU and pauses the source at every insertion. ViddyScribe (Gemini API Developer Competition) adds description with freeze frames. AutoAD-Zero is a training-free research method that also writes from evidence first. AccessCast differs in four ways: it fits description inside the dialogue pauses and checks the timing in code against aligned words, it uses extended description only where the pauses are too short, it makes five audience versions from one analysis, and it puts a person and a server-side render gate between the model and the viewer. Commercial services (3Play Media, Verbit, Accedo, Visonic) offer AI description too; Visonic already offers Hindi and Italian, so languages alone are not our difference.
-
-We reused or built on ideas from earlier hackathon winners; [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) lists each one with its licence.
-
-## Bugs that taught us something
-
-Dated entries with symptom, root cause and fix are in [`docs/incidents.md`](docs/incidents.md). One example: our determinism test found that the same description line came out a few milliseconds longer in one run than in the next, because the TTS vocoder draws random noise. Each line is now seeded from its own text, and the test reports the largest remaining difference instead of assuming there is none.
 
 ## Reproduce
 
-```bash
-make setup && make check            # tests, lint, types
-bash deploy/droplet_bootstrap.sh    # only if you have a droplet: a fresh MI300X "vLLM Quick Start" droplet: images, Gemma, workers, weights
-make doctor                         # writes evidence/doctor.json
-make run VIDEO=path/to/video.mp4    # all stages into projects/<sha12>/
-make review                         # approve lines, keyboard first; Studio (add a video, watch each step) at /app/studio.html
-make render PROJECT=<sha12>         # refuses while anything is pending
-make e01 … make e16                 # each experiment writes evidence/eNN_*.json, even when it fails
-make submission-check
-```
-
-### Without a GPU
+**Without a GPU, in about a minute** (fake mode: canned model outputs, said on screen; it shows the pipeline, the checks, the review gate and the player, not model quality):
 
 ```bash
-make setup          # Python env, worker env, voices and models pre-fetched
-make demo-fixture   # whole pipeline in fake mode on our 20-second clip, then serves the player
+make setup          # Python env, worker env, voices and NLP assets pre-fetched for offline runs
+make demo-fixture   # whole pipeline on our 20-second synthetic clip, then serves the player
 # open http://127.0.0.1:8080/?audience=judge
 ```
 
-Fake mode uses canned model outputs and says so on screen. It shows the pipeline, the checks, the review gate and the player. It is not evidence of model quality. The 20-second clip is ours: generated visuals and two Kokoro voices.
+**With Gemma 4 31B on AMD Token Factory:**
 
-## Licences and credits
+```bash
+cp .env.example .env                 # set AMD_TF_BASE_URL and AMD_TF_API_KEY (never committed)
+make setup && make check             # ruff, mypy, unit tests
+make run VIDEO=path/to/video.mp4     # every stage into projects/<sha12>/
+make review                          # review app on 127.0.0.1:8081, keyboard first; Studio at /app/studio.html
+make render PROJECT=<sha12>          # refused while any line waits for a person
+make export-site                     # copy reviewed projects into site/
+```
 
-Our code is MIT ([LICENSE](LICENSE)). Reused code keeps its original licence header; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Models, voices, datasets and clips are listed with their licences in [MODEL_LICENSES.md](MODEL_LICENSES.md). Test videos: W3C WAI [Web Accessibility Perspectives](https://www.w3.org/WAI/perspective-videos/) (linked as their terms ask; our versions of them are never published). Dev clips: NASA (courtesy NASA), Prelinger Archives (public domain), Sintel (© copyright Blender Foundation | www.sintel.org) and Big Buck Bunny ((c) copyright 2008, Blender Foundation / www.bigbuckbunny.org).
+**Experiments and checks:**
+
+```bash
+make e01 … make e18        # each writes evidence/eNN_*.json, even when its checks fail
+make charts                # docs/charts/*.png, drawn only from evidence/
+make test-stats            # evidence/tests.json
+make test-e2e              # Playwright + axe-core
+make claims-check          # every public number against its evidence file
+make submission-check      # everything the submission needs
+```
+
+**On your own MI300X:** `bash deploy/droplet_bootstrap.sh` takes a fresh "vLLM Quick Start" droplet to a serving state (vLLM bound to `127.0.0.1`, reached through an SSH tunnel); `make doctor` writes `evidence/doctor.json`.
+
+## Repository map
+
+```text
+src/accesscast/
+  analysis/      shots, scenes, pauses, sound labels
+  captions/      caption segmentation, WebVTT, W3C DAPT
+  llm/           Token Factory client (strict provider, rate limits, circuit breaker) and prompt files
+  write/         description planning, writing, easy-read, translation, voice-over text
+  verify/        every rule in docs/rules.md, one pure function each
+  repair/        sending failed lines back to Gemma with the failed rules
+  confidence.py  confidence from measured signals, never asked of the model
+  review/        review app, Studio, server-side render gate
+  tts/           voices and voice calibration
+  render_stage.py, media/   mixing, ducking, extended description, loudness
+  player/        the public site (player, every viewer, how it works, results, proof)
+  proof/         the live attack and Try API
+workers/         GPU and model workers (Whisper, alignment, TTS, metrics), each in its own environment
+eval/            experiments E1–E18, the pre-registration, dataset manifests
+evidence/        every measured result as JSON, plus public-claims.json
+scripts/         charts, claims, video, deck, screenshots, deploy, live check
+tests/           unit, golden and Playwright tests
+docs/            rules, decisions, incidents, deck, charts, media, schemas
+deploy/          MI300X droplet bootstrap and Gemma serving
+```
+
+## Technology and licences
+
+| Technology | Used for | Licence |
+|---|---|---|
+| Gemma 4 31B (`google/gemma-4-31B-it`) on AMD Token Factory | seeing, writing, easy-read, translation, repair | Apache-2.0 |
+| Whisper large-v3-turbo, wav2vec2 forced alignment, Silero VAD | words and their timing, speech detection | MIT |
+| AST audio classifier | sound labels for captions | see [`MODEL_LICENSES.md`](MODEL_LICENSES.md) |
+| Kokoro-82M | description and voice-over voices in six languages | Apache-2.0 |
+| spaCy, wordfreq, textstat | rule NLP, word frequency, readability | MIT / Apache-2.0 / MIT |
+| FFmpeg | mixing, ducking, extended description, loudness | LGPL/GPL (called as a separate program) |
+| FastAPI, pydantic | review app, Studio, live API | MIT |
+| Playwright, axe-core | browser and accessibility tests | Apache-2.0, MPL-2.0 |
+| COMET, chrF++ (sacrebleu), IndicTrans2, Opus-MT | translation evaluation and baselines | see [`MODEL_LICENSES.md`](MODEL_LICENSES.md) |
+| Vercel | static site and the live proof API | hosting |
+
+Our code is MIT ([`LICENSE`](LICENSE)). Reused code keeps its original licence header ([`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)). Every model, voice, dataset, clip, music track and font is listed with its licence in [`MODEL_LICENSES.md`](MODEL_LICENSES.md). Test videos: W3C WAI [Web Accessibility Perspectives](https://www.w3.org/WAI/perspective-videos/) (linked as their terms ask; our versions of them are never published). Dev clips: NASA (courtesy NASA), Prelinger Archives (public domain), Sintel (© copyright Blender Foundation | www.sintel.org) and Big Buck Bunny ((c) copyright 2008, Blender Foundation / www.bigbuckbunny.org).
+
+More detail: [`JUDGES.md`](JUDGES.md) (a 3-minute route), [`docs/rules.md`](docs/rules.md) (every rule and its source), [`docs/decisions.md`](docs/decisions.md) (every design decision), [`docs/incidents.md`](docs/incidents.md) (every bug, root cause and fix), [`docs/compliance-matrix.md`](docs/compliance-matrix.md) (requirements and where the proof is), [`PLAN.md`](PLAN.md) (the original plan).
 
 ## Team
 

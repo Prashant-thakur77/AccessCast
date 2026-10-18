@@ -8,7 +8,7 @@ EXP = $(UV) run python -m eval.$(1)
 
 .PHONY: setup check lint typecheck test test-stats test-e2e demo-fixture serve-gemma tunnel doctor run review render \
         export-site freeze-prompts offline-demo claims-check submission-check schemas fixture calibrate \
-        e01 e02 e03 e04 e05 e06 e07 e08 e09 e10 e11 e12 e13 e14 e15 e16
+        e01 e02 e03 e04 e05 e06 e07 e08 e09 e10 e11 e12 e13 e14 e15 e16 e17 e18 charts
 
 setup:  ## uv sync, worker env, pre-fetched TTS/NLP assets, node deps
 	$(UV) sync --all-extras
@@ -85,6 +85,12 @@ offline-demo:  ## on the droplet, as root: both guard layers
 
 e01 e02 e03 e04 e05 e06 e07 e08 e09 e10 e11 e12 e13 e14 e15 e16:
 	$(UV) run python -m eval.run $@
+
+e17:  ## model ladder summary; each model's run first: AMD_TF_MODEL=<model> uv run python -m eval.e11_adversarial --provider tokenfactory --k 5 --tag <tag>
+	$(UV) run python -m eval.e17_model_ladder qwen38_27b minicpmv47
+
+e18:  ## every language through the same checks, on the site drafts
+	ACCESSCAST_PROJECTS_DIR=projects/_site $(UV) run python -m eval.e18_language_checks cbf141ec3213 dac08bcd9d7a
 
 test-stats:  ## unit + golden test counts and line coverage → evidence/tests.json
 	$(UV) run python scripts/test_stats.py

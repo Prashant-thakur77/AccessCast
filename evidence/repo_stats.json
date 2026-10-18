@@ -1,0 +1,132 @@
+{
+ "schema": "accesscast/evidence/v1",
+ "experiment": "repo_stats",
+ "split": "none",
+ "passed": true,
+ "git_commit": "aad2ad8d755b0c5f3516b8d6ecd6d0b48b244f50",
+ "git_dirty": true,
+ "freeze_tag": null,
+ "started_at": "2026-10-18T04:29:28.935Z",
+ "finished_at": "2026-10-18T04:29:29.149Z",
+ "environment": {
+  "python": "3.12.13",
+  "host": "prashant-Dell-G15-5530",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "gpu": null,
+  "worker_device": "cpu",
+  "versions_lock": {
+   "image": "vllm/vllm-openai-rocm:gemma4",
+   "digest": "<pending: recorded on first droplet run>"
+  }
+ },
+ "config": {
+  "source": "code, docs/rules.md, evidence/, docs/"
+ },
+ "checks": {
+  "rules_found": true,
+  "stages_found": true
+ },
+ "results": [
+  {
+   "rule_ids": [
+    "AD001",
+    "AD002",
+    "AD003",
+    "AD004",
+    "AD005",
+    "AD006",
+    "AD007",
+    "AD008",
+    "AD009",
+    "AD010",
+    "AD011",
+    "AD012",
+    "AD013",
+    "AD014",
+    "AD015",
+    "AD016",
+    "AD017",
+    "AD018",
+    "AD019",
+    "AD020",
+    "CC001",
+    "CC002",
+    "CC003",
+    "CC004",
+    "CC005",
+    "CC006",
+    "CC007",
+    "CC008",
+    "CC009",
+    "CC010",
+    "CC011",
+    "ER001",
+    "ER002",
+    "ER003",
+    "ER004",
+    "ER005",
+    "ER006",
+    "ER007",
+    "ER008",
+    "ER009",
+    "ER010",
+    "RN001",
+    "RN002",
+    "RN003",
+    "RN004",
+    "RN005",
+    "RN006",
+    "RN007",
+    "RN008",
+    "VO001",
+    "VO002",
+    "VO003",
+    "VO004"
+   ],
+   "experiments_with_evidence": [
+    "e01",
+    "e04",
+    "e05",
+    "e07",
+    "e09",
+    "e11",
+    "e13",
+    "e14",
+    "e15",
+    "e16",
+    "e17",
+    "e18"
+   ],
+   "pages": [
+    "five-ways.html",
+    "how.html",
+    "index.html",
+    "proof.html",
+    "results.html",
+    "watch.html"
+   ]
+  }
+ ],
+ "summary": {
+  "rules_total": 53,
+  "rules_by_family": {
+   "AD": 20,
+   "ER": 10,
+   "CC": 11,
+   "VO": 4,
+   "RN": 8
+  },
+  "pipeline_stages": 26,
+  "viewer_versions": 11,
+  "languages_total": 6,
+  "translation_languages": 5,
+  "prompts": 15,
+  "experiments_planned": 18,
+  "experiments_run": 12,
+  "incidents": 33,
+  "charts": 9,
+  "site_pages": 6,
+  "python_lines_src": 11795
+ },
+ "error": null
+}

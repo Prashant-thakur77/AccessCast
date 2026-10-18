@@ -3,7 +3,8 @@
 # the proof page's recorded E11 run, the rule examples, and the live proof API function (D-028).
 set -euo pipefail
 cd "$(dirname "$0")/.."
-PROJECTS="${SITE_PROJECTS:-projects/_fixture}"; IDS="${SITE_IDS:-ed26561ae9d7}"; DRAFTS="${SITE_ALLOW_DRAFTS:---allow-drafts}"
+# the public site shows real Gemma output only: the synthetic fake-mode fixture stays in the local demo and tests
+PROJECTS="${SITE_PROJECTS:-projects/_site}"; IDS="${SITE_IDS:-cbf141ec3213,dac08bcd9d7a,8af59806d6b6}"; DRAFTS="${SITE_ALLOW_DRAFTS:---allow-drafts}"
 ACCESSCAST_PROJECTS_DIR="$PROJECTS" uv run accesscast export-site --projects "$IDS" $DRAFTS
 uv run python scripts/build_proof_record.py
 uv run python scripts/build_rule_examples.py >/dev/null
