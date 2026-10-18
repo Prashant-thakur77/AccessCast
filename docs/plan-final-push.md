@@ -95,6 +95,13 @@ review time not measured), Originality 4/5.
   an estimate; cited list prices), review time stated as extra and unmeasured. Tested (exact totals, refuses nonsense,
   axe clean).
 - J3. Deploy, live check, evidence (tests, E16), README and JUDGES mention both.
+- J4. E19 (pre-registered, dev): still pictures through the live picture code on Token Factory. Run 1 hit two
+  provider outages (kept); the scored run redoes outages as E11 does: first line stopped 6 of 21, all 21 passed
+  after repair, median 18 s. Chart, claims, README, Results card, deck, lablab.
+- J5. Deploy safety: a deploy that fails quietly now stops the script, and the live check fails unless the live site
+  serves this commit (`data/build.json`).
+- J6. Home page: one-click links to every live feature. Video re-rendered so its AMD numbers match the evidence.
+- Status 13:00 IST: done except the links and team names from the person.
 
 ## Phase G — close
 - `make submission-check`, final claims-check, tag `act3-submission`, hand the user the upload checklist.
