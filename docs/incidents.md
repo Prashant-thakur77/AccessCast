@@ -191,3 +191,8 @@ With transformers 4.57 it then loaded but crashed in generation: its code indexe
 **Symptom.** While recording the demo, "Describe a picture" answered HTTP 504 after 120 seconds instead of a result or a plain "did not answer in time".
 **Root cause.** The deadline was checked only after the picture step. That step can take far longer than one call: a slow answer, a retry, a re-ask for valid JSON, and a second attempt after a bad answer each add a call. On a slow morning they added up past Vercel's 120-second limit, so the platform cut the request instead of our code answering.
 **Fix.** Each phase now runs with a hard time budget (the picture step stops waiting after 65 s; writing gets what is left before 105 s). When a budget runs out, the visitor gets the plain message and nothing is published; a unit test stalls the model and checks the answer still comes back at once. The picture is deleted as soon as the picture step ends.
+
+## 2026-10-18 A deploy failed quietly and the live check still passed
+**Symptom.** After adding "Read it as text" and the cost estimator, the deploy script finished and the live check passed, but the live site still served the previous pages: the new script files answered 404.
+**Root cause.** The deploy script filtered Vercel's output down to a few lines, and that run printed none of them, so the failure was hidden. The live check only asked whether pages, charts and the live APIs worked; the old site passed all of that.
+**Fix.** The deploy keeps Vercel's full output (`logs/vercel.log`) and stops with an error unless Vercel reports the deployment ready. Each deploy writes `data/build.json` with its git commit, and the live check now fails unless the live site serves the commit being checked.

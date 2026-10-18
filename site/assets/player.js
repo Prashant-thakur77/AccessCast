@@ -292,6 +292,8 @@
       }, { once: true });
       updateHoldLoop();
       renderDrawer();
+      // other parts of the page (the text version) follow the version being played
+      document.dispatchEvent(new CustomEvent("ac:version", { detail: { key: key, version: v, base: data.base, name: AC.versionName(key, data.index) } }));
       announce("Now playing: " + AC.versionName(key, data.index) + ". " + (notes || []).concat(extra).join(" "));
     });
   }
