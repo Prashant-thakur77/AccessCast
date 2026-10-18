@@ -13,13 +13,11 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from PIL import Image
 
 from accesscast import constants as C
 from accesscast.confidence import reject_model_confidence
 from accesscast.errors import LlmOutputError, ModelEndpointError
 from accesscast.llm.client import LlmClient, LlmRequest
-from accesscast.media.ingest import extract_frame
 from accesscast.schemas import (
     Character,
     Gap,
@@ -63,6 +61,10 @@ def frame_times(scene: Scene, gaps: Sequence[Gap], video: Path | None) -> list[i
 
 
 def _tiny(video: Path, t_ms: int) -> np.ndarray:
+    from PIL import Image  # not needed by the live picture API (its bundle has no Pillow)
+
+    from accesscast.media.ingest import extract_frame
+
     tmp = Path(str(video) + f".tiny{t_ms}.jpg")
     extract_frame(video, t_ms, tmp, px=64)
     try:
@@ -211,6 +213,8 @@ def gather_evidence(
     *,
     use_ocr: bool,
 ) -> SceneEvidence:
+    from accesscast.media.ingest import extract_frame  # video tools: the pipeline only, not the live API
+
     times = frame_times(scene, gaps, video)
     paths = [extract_frame(video, t, out_dir / f"f{i:02d}.jpg") for i, t in enumerate(times)]
     transcript = " ".join(w.w for w in words if scene.start_ms <= w.start_ms < scene.end_ms)
