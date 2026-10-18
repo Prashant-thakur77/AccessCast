@@ -78,6 +78,10 @@ Left for the person: upload the video and deck, send their links and the team na
   shown, axe clean), the live check covers it. Done when the live check passes after deploy.
 - I2. Tests for the scripts' pure parts (claims wording, E17 tally, AMD counting, test-file names) to raise coverage.
 - I3. Final refresh: evidence, claims, charts, deck, README, lablab text, deploy, live check; tag when the links come.
+- Status 11:20 IST: I1 done (live on the site; three real runs passed, one stopped by AD007 and repaired; two
+  incidents found by the live check and fixed: a missing library in the bundle, a 504 past the time limit); I2 done
+  (tests 215 of 215, line coverage 78% with the golden end-to-end run); video has a live picture scene; I3 done except
+  the links and team names, which only the team can give.
 
 ## Phase G — close
 - `make submission-check`, final claims-check, tag `act3-submission`, hand the user the upload checklist.

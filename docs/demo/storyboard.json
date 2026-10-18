@@ -255,7 +255,8 @@
    "kind": "recording",
    "recording": "describe.webm",
    "mark": "result",
-   "narration": "Or give it any picture. Gemma, on AMD, lists what it sees and writes one line, and our rules check that line before anyone hears it."
+   "narration": "Or give it any picture. Gemma, on AMD, lists what it sees and writes one line, and our rules check that line before anyone hears it.",
+   "captions_at": "top"
   },
   {
    "kind": "motion",
