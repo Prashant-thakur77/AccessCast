@@ -11,5 +11,9 @@ uv run python scripts/build_rule_examples.py >/dev/null
 printf '{"api_base": "https://accesscast.vercel.app"}\n' > site/data/proof_config.json
 [ -d site/api/_vendor ] || bash scripts/build_vercel_api.sh
 rsync -a --delete --exclude "__pycache__" --exclude "player/static" --exclude "review/static" src/accesscast site/api/_vendor/
-(cd site && vercel deploy --prod --yes 2>&1 | grep -E "Aliased|readyState|Error" )
+# which commit is live: the live check compares it with this checkout, so a deploy that silently failed shows up
+printf '{"commit": "%s", "built_at": "%s"}\n' "$(git rev-parse --short HEAD)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > site/data/build.json
+(cd site && vercel deploy --prod --yes > ../logs/vercel.log 2>&1) || true
+grep -E "Aliased|readyState" logs/vercel.log || true
+grep -q '"readyState": "READY"' logs/vercel.log || { echo "VERCEL DEPLOY FAILED: see logs/vercel.log"; tail -n 20 logs/vercel.log; exit 1; }
 uv run python scripts/live_check.py || echo "LIVE CHECK FAILED (evidence/live_check.json)"

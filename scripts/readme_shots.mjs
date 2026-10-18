@@ -133,4 +133,26 @@ await shot("describe", async (p) => {
   await p.screenshot({ path: `${out}/describe.png`, fullPage: true, clip: { x: Math.min(a.x, b.x) - 12, y: a.y - 12, width: Math.max(a.w, b.w) + 24, height: b.y + b.h - a.y + 24 } });
 }, { width: 1280, height: 1000 });
 
+// Read it as text: the NASA draft for a blind viewer, as one time-ordered list with downloads.
+await shot("textversion", async (p) => {
+  await p.goto(`${SITE}/watch.html?p=dac08bcd9d7a&audience=blind`);
+  await p.waitForTimeout(2500);
+  await p.locator("#text-toggle").click();
+  await p.waitForFunction(() => /lines from/.test(document.getElementById("text-status").textContent || ""), null, { timeout: 30000 });
+  const box = await p.evaluate(() => {
+    const b = document.getElementById("text-body").getBoundingClientRect();
+    return { x: b.x + scrollX, y: b.y + scrollY, w: b.width };
+  });
+  await p.screenshot({ path: `${out}/textversion.png`, fullPage: true, clip: { x: box.x - 12, y: box.y - 110, width: box.w + 24, height: 690 } });
+}, { width: 1280, height: 900 });
+
+// The cost estimator on the Results page, for 600 minutes.
+await shot("calc", async (p) => {
+  await p.goto(`${SITE}/results.html`);
+  await p.waitForTimeout(1500);
+  await p.locator("#calc-min").fill("600");
+  await p.waitForTimeout(800);
+  await p.locator("li.result-card", { has: p.locator("#r-calc") }).screenshot({ path: `${out}/calc.png` });
+}, { width: 1280, height: 900 });
+
 await browser.close();

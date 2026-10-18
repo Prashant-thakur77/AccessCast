@@ -96,7 +96,23 @@ def main() -> int:
             else:
                 missing.append("assets/samples/nasa-eclipse.jpg")
             e.results.append(picture)
-        e.summary = {"missing": missing, "crashed": crashed, "unanswered": unanswered}
+            # is the live site this checkout? (a deploy that failed quietly would otherwise pass every check above)
+            import subprocess
+
+            want = subprocess.run(
+                ["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=ROOT
+            ).stdout.strip()
+            b = c.get(f"{base}/data/build.json")
+            live = b.json().get("commit") if b.status_code == 200 else None
+            e.results.append({"build": live, "expected": want})
+        e.summary = {
+            "missing": missing,
+            "crashed": crashed,
+            "unanswered": unanswered,
+            "live_commit": live,
+            "local_commit": want,
+        }
+        e.checks["live_is_this_commit"] = bool(live) and live == want
         e.checks["every_page_and_chart"] = not missing
         e.checks["no_check_crashed"] = not crashed
         e.checks["every_version_answered"] = not unanswered
