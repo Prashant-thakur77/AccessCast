@@ -10,6 +10,7 @@ Generated from `docs/demo/storyboard.json` by `scripts/storyboard_to_script.py`;
 | The problem: people with disabling hearing loss (stock footage of people signing) | 430 million live with disabling hearing loss. They need captions that also say what sounds. |
 | The problem: adults who read at the lowest levels (stock footage of an older man reading his phone) | 26% of adults read at the lowest levels. They need simpler words, at a slower pace. And many people need the video in their own language. |
 | Why most video is left out: the time and price of doing it by hand (stock footage of a video editor at night) | Doing this by hand takes about 20 hours of work for one hour of TV, and costs $15 to $75 a minute. So most video never gets it. |
+| example | Let's see it on a real video. This is a NASA talk about the Hubble telescope. First, close your eyes, and hear it the way a blind viewer does. |
 | Black screen, "Close your eyes." The NASA clip's own sound only. | (the clip's own sound, no narration) |
 | Card: "This is Hubble's famous photograph." / But what does it show? | He said: this is Hubble's famous photograph. But if you can't see the screen, you never find out what it shows. |
 | Black screen, "The same video, with AccessCast." The extended description version's sound (machine draft, labelled). | (the clip's own sound, no narration) |

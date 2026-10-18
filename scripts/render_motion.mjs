@@ -12,7 +12,7 @@ const FPS = 30;
 const claims = Object.fromEntries(
   JSON.parse(readFileSync(resolve(root, "evidence/public-claims.json"), "utf8")).claims.map((c) => [c.claim_id, c]),
 );
-const all = ["p_upload", "p_blind", "q_blind", "p_deaf", "p_read", "p_cost", "split", "pipeline", "gate", "amd", "res_neg", "res_tr", "laws", "close"];
+const all = ["p_upload", "p_blind", "q_blind", "p_deaf", "p_read", "p_cost", "example", "split", "pipeline", "gate", "amd", "res_neg", "res_tr", "laws", "close"];
 const scenes = process.argv.slice(2).length ? process.argv.slice(2) : all;
 
 const browser = await chromium.launch();

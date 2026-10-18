@@ -50,6 +50,14 @@
    "bg_look": "scale=2400:1350,crop=1920:1080:0:135,eq=brightness=-0.05:saturation=0.9"
   },
   {
+   "kind": "motion",
+   "scene": "example",
+   "narration": "Let's see it on a real video. This is a NASA talk about the Hubble telescope. First, close your eyes, and hear it the way a blind viewer does.",
+   "bg": "projects/_site/dac08bcd9d7a/media/source.mp4",
+   "bg_start": 2,
+   "bg_look": "eq=brightness=-0.15:saturation=0.9"
+  },
+  {
    "kind": "recording",
    "recording": "hook_closed.mp4",
    "keep_audio": true,

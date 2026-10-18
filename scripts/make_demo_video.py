@@ -91,9 +91,10 @@ MUSIC = (
     ROOT / "data" / "music" / "Inspired.mp3",
 )
 MUSIC_GAIN = (
-    1.6,
-    0.28,
-)  # measured short-term loudness about −28 and −13 LUFS: both brought to about −24 before mixing
+    1.0,
+    0.18,
+)  # measured short-term loudness about −28 and −13 LUFS: both brought to about −28 before mixing (4 dB under
+#   the first mix, which viewers found too loud against the narration)
 
 
 def xfade_join(
