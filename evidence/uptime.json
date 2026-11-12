@@ -2040,12 +2040,27 @@
      "ms": 99
     }
    ]
+  },
+  {
+   "ts": "2026-11-12T22:01:49+00:00",
+   "checks": [
+    {
+     "url": "https://accesscast.vercel.app/",
+     "status": "HTTPError",
+     "ms": 803
+    },
+    {
+     "url": "https://accesscast.vercel.app/data/catalog.json",
+     "status": "HTTPError",
+     "ms": 43
+    }
+   ]
   }
  ],
  "summary": {
-  "samples": 136,
+  "samples": 137,
   "all_ok": 118,
   "first": "2026-10-15T21:29:56+00:00",
-  "last": "2026-11-12T15:52:57+00:00"
+  "last": "2026-11-12T22:01:49+00:00"
  }
 }
